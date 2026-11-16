@@ -6,3 +6,5 @@ n ss 27C: 550 sweeps in 36.3s -> /home/user/spectra/data/lut/sky130_nfet_ss_27.n
 p ss 27C: 550 sweeps in 38.8s -> /home/user/spectra/data/lut/sky130_pfet_ss_27.npz
 n sf 27C: 550 sweeps in 38.4s -> /home/user/spectra/data/lut/sky130_nfet_sf_27.npz
 p sf 27C: 550 sweeps in 36.9s -> /home/user/spectra/data/lut/sky130_pfet_sf_27.npz
+n fs 27C: 550 sweeps in 37.0s -> /home/user/spectra/data/lut/sky130_nfet_fs_27.npz
+p fs 27C: 550 sweeps in 39.2s -> /home/user/spectra/data/lut/sky130_pfet_fs_27.npz

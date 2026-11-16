@@ -1,0 +1,1 @@
+{"t": 1794847554.5699637, "tag": "smoke", "run_tag": "t0", "model": "claude-haiku-5-5", "seconds": 7.58, "input_tokens": 1358, "output_tokens": 14, "cost_usd": 0.00027840000000000005, "reported_models": ["claude-haiku-5-5"]}
