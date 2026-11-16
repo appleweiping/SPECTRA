@@ -1,56 +1,57 @@
-* Minimal SKY130 library for SPECTRA: 1.8V nfet/pfet only (from google/skywater-pdk-libs-sky130_fd_pr, Apache-2.0)
+* Minimal SKY130 library for SPECTRA: 1.8V nfet/pfet + pnp_05v5 W3p40L3p40
+* Extracted from google/skywater-pdk-libs-sky130_fd_pr (Apache-2.0). Corner params copied verbatim.
 .lib tt
 .option scale=1.0u
 .include "models/parameters/lod.spice"
 .param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
-.param mc_mm_switch=0 mc_pr_switch=0
-.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=9.9543e-1 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0204e+0 sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult=9.8286e-01 sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult=9.8954e-01 dkispp5x=1.0046e+00 dkbfpp5x=1.1288e+00 dknfpp5x=1.0009e+00 dkisepp5x=0.745
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.pm3.spice"
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__tt.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.include "cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice"
 .endl tt
 .lib ff
 .option scale=1.0u
 .include "models/parameters/lod.spice"
 .param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
-.param mc_mm_switch=0 mc_pr_switch=0
-.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=8.4039e-1 sky130_fd_pr__nfet_01v8__pjunction_mult=8.6147e-1 sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult=8.4794e-01 sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult=9.3896e-01 dkispp5x=1.2104e+00 dkbfpp5x=1.7922e+00 dknfpp5x=1.0009e+00 dkisepp5x=6.4618e-01
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__ff.pm3.spice"
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__ff.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.include "cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice"
 .endl ff
 .lib ss
 .option scale=1.0u
 .include "models/parameters/lod.spice"
 .param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
-.param mc_mm_switch=0 mc_pr_switch=0
-.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.1505e+0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.1793e+0 sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult=1.1178e+00 sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult=1.0401e+00 dkispp5x=7.8658e-01 dkbfpp5x=4.6158e-01 dknfpp5x=1.0009e+00 dkisepp5x=0.745
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__ss.pm3.spice"
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__ss.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.include "cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice"
 .endl ss
 .lib sf
 .option scale=1.0u
 .include "models/parameters/lod.spice"
 .param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
-.param mc_mm_switch=0 mc_pr_switch=0
-.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=0.7739 sky130_fd_pr__nfet_01v8__pjunction_mult=0.79336 sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult=7.9012e-01 sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult=9.1728e-01 dkispp5x=1.0046e+00 dkbfpp5x=1.1288e+00 dknfpp5x=1.0009e+00 dkisepp5x=0.745
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__sf.pm3.spice"
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__sf.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.include "cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice"
 .endl sf
 .lib fs
 .option scale=1.0u
 .include "models/parameters/lod.spice"
 .param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
-.param mc_mm_switch=0 mc_pr_switch=0
-.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.2169e+0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.2474e+0 sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult=1.1756e+00 sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult=1.0618e+00 dkispp5x=1.0046e+00 dkbfpp5x=1.1288e+00 dknfpp5x=1.0009e+00 dkisepp5x=0.745
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__fs.pm3.spice"
 .include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__fs.corner.spice"
 .include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.include "cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice"
 .endl fs
