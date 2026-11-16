@@ -1,0 +1,1 @@
+{"case": "app_inv_2", "task": "opamp_app-00", "template": "app_inv", "truth": "M4", "class": "mirror_ratio", "failing": ["vout_offset"], "rule": ["M5", "M2", "M4"], "raw": ["M4", "M3", "M1"], "raw_cost": 0.0011402, "spectra": ["M4", "M3", "M2"], "spectra_cost": 0.0020164}

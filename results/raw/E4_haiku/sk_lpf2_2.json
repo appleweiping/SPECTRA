@@ -1,0 +1,1 @@
+{"case": "sk_lpf2_2", "task": "filter-00", "template": "sk_lpf2", "truth": "R1", "class": "resistor_value", "failing": ["fc"], "rule": ["M5", "R1", "C2"], "raw": ["R1", "R2", "C2"], "raw_cost": 0.0021374, "spectra": ["C2", "R1", "C1"], "spectra_cost": 0.0064876}

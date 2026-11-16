@@ -1,0 +1,1 @@
+{"case": "cs_pload_2", "task": "amp-01", "template": "cs_pload", "truth": "M4", "class": "bias_starve", "failing": ["gain_db", "gbw", "vout_dc"], "rule": ["M1", "M2", "M5"], "raw": ["M1", "M4", "M2"], "raw_cost": 0.0024744, "spectra": ["M1", "M2", "M3"], "spectra_cost": 0.0021846400000000003}

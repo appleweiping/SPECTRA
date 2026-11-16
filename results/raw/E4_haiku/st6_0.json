@@ -1,0 +1,1 @@
+{"case": "st6_0", "task": "schmitt-00", "template": "st6", "truth": "M1", "class": "miswire_gate", "failing": ["hysteresis", "power_avg"], "rule": ["M3", "M1", "M2"], "raw": ["M3", "M6", "M7"], "raw_cost": 0.0036999000000000003, "spectra": ["M3", "M1", "M6"], "spectra_cost": 0.0021504999999999996}

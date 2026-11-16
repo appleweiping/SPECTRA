@@ -1,0 +1,1 @@
+{"case": "cm_simple_0", "task": "cmirror-00", "template": "cm_simple", "truth": "M2", "class": "undersize_W", "failing": ["iout_err_pct"], "rule": ["M2", "M1"], "raw": ["M2", "M1"], "raw_cost": 0.000951, "spectra": ["M2", "M1", "vdd"], "spectra_cost": 0.0009729000000000001}

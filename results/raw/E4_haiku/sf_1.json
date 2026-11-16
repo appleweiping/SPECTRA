@@ -1,0 +1,1 @@
+{"case": "sf_1", "task": "amp-02", "template": "sf", "truth": "M2", "class": "bias_starve", "failing": ["f3db", "gbw"], "rule": ["M2", "M3", "M1"], "raw": ["M1", "M2", "M3"], "raw_cost": 0.0011664, "spectra": ["M3", "M2", "M1"], "spectra_cost": 0.0032608}

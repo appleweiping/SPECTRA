@@ -1,0 +1,1 @@
+{"case": "app_integ_4", "task": "opamp_app-03", "template": "app_integ", "truth": "M5", "class": "mirror_ratio", "failing": ["power", "f_unity"], "rule": ["M5", "R1", "Cf"], "raw": ["M5", "M6", "M8"], "raw_cost": 0.0024433000000000002, "spectra": ["R1", "M5", "Cf"], "spectra_cost": 0.0051337}

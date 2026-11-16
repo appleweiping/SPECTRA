@@ -1,0 +1,16 @@
+\begin{table*}[t]
+\centering
+\caption{Main results on SPECTRA-Bench (3 seeds; success = independent re-verification at TT, or on all 45 PVT conditions for robust tasks). Calls/Sims: medians over successful runs; \$/run: mean LLM cost.}
+\label{tab:main}
+\small
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+Method & Success (\%) [95\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\star$ & Sims$^\star$ & \$/run \\
+\midrule
+\textbf{SPECTRA} & 98 [94,100] & 100 & 100 & 100 & 100 & 95 & 2.0 & 2.0 & 0.40 \\
+SPECTRA-min (1 call + intent CMA-ES) & 90 [77,100] & 67 & 100 & 89 & 100 & 90 & 2.0 & 1.0 & 0.26 \\
+AnalogCoder-style~\cite{lai2025analogcoder} & 92 [78,100] & 100 & 100 & 67 & 100 & 100 & 1.0 & 1.0 & 0.33 \\
+Gen+TPE (AnalogCoder-Pro-style)~\cite{lai2026analogcoderpro} & 90 [73,100] & 100 & 100 & 100 & 33 & 86 & 1.0 & 7.0 & 0.14 \\
+\bottomrule
+\end{tabular}
+\end{table*}

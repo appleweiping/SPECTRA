@@ -1,0 +1,1 @@
+{"case": "fcasc_5", "task": "opamp-04", "template": "fcasc", "truth": "Mb6", "class": "undersize_W", "failing": ["slew"], "rule": ["M5", "M11", "M10"], "raw": ["Mb6", "Mb5", "M8"], "raw_cost": 0.0028639, "spectra": ["Mb2", "M5", "M4"], "spectra_cost": 0.0088447}

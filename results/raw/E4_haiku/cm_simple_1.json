@@ -1,0 +1,1 @@
+{"case": "cm_simple_1", "task": "cmirror-00", "template": "cm_simple", "truth": "M2", "class": "mirror_ratio", "failing": ["iout_err_pct", "rout"], "rule": ["M2", "M1"], "raw": ["M2", "M1"], "raw_cost": 0.0011075, "spectra": ["M2", "M1"], "spectra_cost": 0.0009759}

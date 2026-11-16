@@ -1,0 +1,1 @@
+{"case": "cs_pload_4", "task": "amp-01", "template": "cs_pload", "truth": "M2", "class": "mirror_ratio", "failing": ["gain_db", "vout_dc"], "rule": ["M2", "M1", "M5"], "raw": ["M2", "M3", "M1"], "raw_cost": 0.00114842, "spectra": ["M2", "M3", "M1"], "spectra_cost": 0.00113401}

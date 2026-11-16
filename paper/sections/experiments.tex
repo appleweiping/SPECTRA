@@ -17,7 +17,20 @@
 
 \subsection{Diagnosis Accuracy under Fault Injection}
 \label{sec:fault}
-% RESULTS-FAULT
+We inject single faults of seven classes into the reference designs of the certified tasks (undersized width,
+too-short channel, wrong mirror ratio, collapsed compensation capacitor, starved bias device, miswired gate, wrong
+resistor) and keep the \FaultN{} cases that violate at least one specification. Three diagnosers rank the
+corrupted element: a rule-only diagnoser that scores elements by operating-region flags and element-level
+sensitivities (no LLM), and the LLM given either the netlist with the specification table (the feedback used by
+AnalogCoder-style agents) or the netlist with SPECTRA's diagnosis. Table~\ref{tab:fault} shows that the LLM is
+far better than the rules (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{} top-1) and that, for the strongest model,
+SPECTRA's evidence does not raise top-1 localisation overall (\FaultDiagTopOne{}) but helps on faults whose
+signature is in the operating point---mirror ratios and short channels---and raises top-3 accuracy to
+\FaultDiagTopThree{}. \FaultHaikuSentence{} More evidence is therefore not automatically better: a long
+structured report can distract a smaller model. We consequently treat the diagnosis as an input to the repair
+\emph{decision} (refine vs.\ edit), whose end-to-end value is measured by the ablation in
+Section~\ref{sec:ablation}, not as a stand-alone localiser.
+\IfFileExists{tables/fault.tex}{\input{tables/fault}}{}
 
 \subsection{Backbone Scaling and Cost}
 \label{sec:scaling}

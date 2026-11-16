@@ -1,0 +1,1 @@
+{"case": "cs_pload_0", "task": "amp-01", "template": "cs_pload", "truth": "M2", "class": "undersize_W", "failing": ["gain_db", "gbw", "vout_dc"], "rule": ["M1", "M2", "M4"], "raw": ["M2", "M3", "M4"], "raw_cost": 0.002035, "spectra": ["M1", "M2", "M3"], "spectra_cost": 0.0018816}

@@ -1,0 +1,1 @@
+{"case": "cs_diode_3", "task": "amp-00", "template": "cs_diode", "truth": "M1", "class": "miswire_gate", "failing": ["gain_db", "f3db", "gbw"], "rule": ["M1", "M2"], "raw": ["M1", "M2"], "raw_cost": 0.00089214, "spectra": ["M1", "M2", "vin/ibias port wiring (no device-level fault)"], "spectra_cost": 0.0009827500000000001}

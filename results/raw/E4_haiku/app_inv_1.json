@@ -1,0 +1,1 @@
+{"case": "app_inv_1", "task": "opamp_app-00", "template": "app_inv", "truth": "M2", "class": "miswire_gate", "failing": ["vout_offset"], "rule": ["M5", "M6", "M2"], "raw": ["M2", "M8", "M7"], "raw_cost": 0.0013748, "spectra": ["M6", "M8", "M5"], "spectra_cost": 0.0020038}

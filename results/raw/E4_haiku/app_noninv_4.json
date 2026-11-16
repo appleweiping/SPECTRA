@@ -1,0 +1,1 @@
+{"case": "app_noninv_4", "task": "opamp_app-01", "template": "app_noninv", "truth": "Rg", "class": "resistor_value", "failing": ["a1"], "rule": ["M5", "Rf", "Rg"], "raw": ["Rg", "Rf", "Cc"], "raw_cost": 0.001612, "spectra": ["Rg", "Rf", "M5"], "spectra_cost": 0.0030216}
