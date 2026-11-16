@@ -43,3 +43,10 @@ iteration and fix prompts, API reminder appended to program errors, exception bu
 forbidden list narrowed to real escape vectors, scalar PARAMS accepted as fixed values. All E1 results of SPECTRA and
 SPECTRA-min obtained before the fix were deleted and re-run so that E1 uses a single method version; baseline results
 (direct, genbo) were unaffected by the change and kept.
+
+## 2026-11-16 23:05 E1 throughput and protocol
+E1 was CPU-bound (4 cores; load average up to 27 with five concurrent experiment processes). Secondary jobs (E5,
+E4 extension, control-task runs) were paused (SIGSTOP) and E1 restarted with (i) a machine-wide limit of 5 concurrent
+ngspice processes (flock slots) and (ii) the seed protocol: SPECTRA and the AnalogCoder-style agent 3 seeds, the
+simulation-heavy Gen+TPE and SPECTRA-min 2 seeds (analysis uses seeds 0-1 for these two even where a third seed
+had completed). Restarting loses no LLM work: responses are cached per (run tag, call index).
