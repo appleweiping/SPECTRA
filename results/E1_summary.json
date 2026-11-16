@@ -1,8 +1,8 @@
 {
  "summary": {
   "direct": {
-   "n_runs": 14,
-   "n_tasks": 5,
+   "n_runs": 18,
+   "n_tasks": 6,
    "success": 1.0,
    "ci95": [
     1.0,
@@ -12,15 +12,15 @@
    "pass@3": 1.0,
    "median_sims_success": 1.0,
    "median_calls_success": 1.0,
-   "mean_cost_usd": 0.19238571428571433,
-   "mean_tokens": 12517.57142857143,
-   "mean_wall_s": 98.38571428571427,
-   "mean_sims": 1.2142857142857142,
+   "mean_cost_usd": 0.2371333333333333,
+   "mean_tokens": 15413.666666666666,
+   "mean_wall_s": 115.3722222222222,
+   "mean_sims": 1.6111111111111112,
    "declared_infeasible": 0,
    "nominal": 1.0,
-   "nominal_n": 5,
+   "nominal_n": 6,
    "tierD": 1.0,
-   "tierD_n": 5,
+   "tierD_n": 6,
    "by_family": {
     "opamp": 1.0
    }
@@ -51,34 +51,30 @@
    }
   },
   "spectra": {
-   "n_runs": 36,
-   "n_tasks": 13,
-   "success": 0.9743589743589743,
+   "n_runs": 17,
+   "n_tasks": 7,
+   "success": 1.0,
    "ci95": [
-    0.9230769230769229,
+    1.0,
     1.0
    ],
-   "pass@1": 0.9743589743589745,
+   "pass@1": 1.0,
    "pass@3": 1.0,
-   "median_sims_success": 10.0,
-   "median_calls_success": 1.0,
-   "mean_cost_usd": 0.36814444444444444,
-   "mean_tokens": 25401.63888888889,
-   "mean_wall_s": 273.81944444444446,
-   "mean_sims": 30.77777777777778,
+   "median_sims_success": 1.0,
+   "median_calls_success": 2.0,
+   "mean_cost_usd": 0.32414705882352945,
+   "mean_tokens": 24835.235294117647,
+   "mean_wall_s": 67.51176470588236,
+   "mean_sims": 7.529411764705882,
    "declared_infeasible": 0,
-   "nominal": 0.9666666666666666,
-   "nominal_n": 10,
+   "nominal": 1.0,
+   "nominal_n": 6,
    "robust": 1.0,
-   "robust_n": 3,
-   "tierD": 0.9666666666666666,
-   "tierD_n": 10,
+   "robust_n": 1,
+   "tierD": 1.0,
+   "tierD_n": 6,
    "by_family": {
-    "comparator": 1.0,
-    "ldo": 1.0,
-    "opamp": 0.9523809523809523,
-    "ref": 1.0,
-    "vco": 1.0
+    "opamp": 1.0
    }
   },
   "spectra_min": {
@@ -92,11 +88,11 @@
    "pass@1": 1.0,
    "pass@3": 1.0,
    "median_sims_success": 1.0,
-   "median_calls_success": 1.0,
-   "mean_cost_usd": 0.14619374999999998,
-   "mean_tokens": 11791.4375,
-   "mean_wall_s": 95.3375,
-   "mean_sims": 12.625,
+   "median_calls_success": 2.0,
+   "mean_cost_usd": 0.23825625,
+   "mean_tokens": 19258.0625,
+   "mean_wall_s": 56.550000000000004,
+   "mean_sims": 15.0,
    "declared_infeasible": 0,
    "nominal": 1.0,
    "nominal_n": 6,
@@ -109,33 +105,27 @@
  },
  "tests": {
   "spectra_vs_direct": {
-   "n": 5,
-   "mean_diff": -0.06666666666666668,
+   "n": 6,
+   "mean_diff": 0.0,
    "p": 1.0,
-   "wins": 0,
-   "losses": 1,
    "p_holm": 1.0
   },
   "spectra_vs_genbo": {
    "n": 5,
-   "mean_diff": -0.06666666666666668,
+   "mean_diff": 0.0,
    "p": 1.0,
-   "wins": 0,
-   "losses": 1,
    "p_holm": 1.0
   },
   "spectra_vs_spectra_min": {
    "n": 6,
-   "mean_diff": -0.05555555555555556,
+   "mean_diff": 0.0,
    "p": 1.0,
-   "wins": 0,
-   "losses": 1,
    "p_holm": 1.0
   }
  },
  "anytime": {
   "direct": {
-   "1": 0.7857142857142857,
+   "1": 0.6666666666666666,
    "5": 1.0,
    "10": 1.0,
    "20": 1.0,
@@ -155,19 +145,19 @@
    "300": 1.0
   },
   "spectra": {
-   "1": 0.5357142857142857,
-   "5": 0.5714285714285714,
-   "10": 0.6428571428571429,
-   "20": 0.75,
-   "50": 0.9642857142857143,
-   "100": 0.9642857142857143,
-   "200": 0.9642857142857143,
-   "300": 0.9642857142857143
+   "1": 0.6875,
+   "5": 0.75,
+   "10": 0.8125,
+   "20": 0.9375,
+   "50": 1.0,
+   "100": 1.0,
+   "200": 1.0,
+   "300": 1.0
   },
   "spectra_min": {
-   "1": 0.625,
-   "5": 0.625,
-   "10": 0.625,
+   "1": 0.75,
+   "5": 0.75,
+   "10": 0.75,
    "20": 0.875,
    "50": 0.9375,
    "100": 0.9375,

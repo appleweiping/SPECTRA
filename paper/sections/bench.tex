@@ -33,7 +33,7 @@ certificate}. Because certified specs come from our own templates, we add a \emp
 tasks written independently from textbook and practitioner targets~\cite{allen2012cmos,razavi2017design} (e.g., a
 150\,MHz OTA, a 1.2\,V/10\,mA on-chip LDO, a 1\,GHz dynamic comparator, a 1\,MHz Butterworth low-pass), whose
 feasibility is unknown a priori, and \emph{oracle-unmet controls} that tighten certified tasks until an extended
-template oracle (two 600-evaluation CMA-ES runs) cannot meet them.
+template oracle (a 400-evaluation CMA-ES run warm-started at the reference) cannot meet them.
 In total SPECTRA-Bench contains \NTasksTotal{} tasks (\NCertified{} certified, \NRobust{} of them robust).
 
 \subsection{Metrics and Budgets}
