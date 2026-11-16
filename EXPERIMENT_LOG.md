@@ -34,3 +34,12 @@ including the amplifier task whose family has no such metric (an inverting CS/ca
 unsatisfiable; the logged `budget_exhausted` outcomes for it are artefacts. Re-checking the returned netlists against the
 task's real specs (scripts in this log entry) gives 2/2 for both methods. The production builder adds `polarity_ok`
 only to the op-amp family (EXTRA_SPECS), so SPECTRA-Bench is unaffected.
+
+## 2026-11-16 20:05 Harness fix during E1 (designer tier)
+A SPECTRA run (D03 seed 1) spent all 12 calls without a single simulation: the iteration prompt did not repeat the
+design-program API (stateless calls), so after a broken first program the model lost track of `lut.size`; the sandbox
+also lacked common exception builtins and the forbidden-construct regex rejected `__init__`. Fixes: API doc in the
+iteration and fix prompts, API reminder appended to program errors, exception builtins and class definitions allowed,
+forbidden list narrowed to real escape vectors, scalar PARAMS accepted as fixed values. All E1 results of SPECTRA and
+SPECTRA-min obtained before the fix were deleted and re-run so that E1 uses a single method version; baseline results
+(direct, genbo) were unaffected by the change and kept.
