@@ -1,0 +1,1 @@
+{"case": "casc_amp_0", "task": "amp-04", "template": "casc_amp", "truth": "M6", "class": "undersize_W", "failing": ["gain_db", "gbw", "vout_dc"], "rule": ["M1", "M2", "M9"], "raw": ["M6", "M4", "M1"], "raw_cost": 0.038652000000000006, "spectra": ["M4", "M1", "M5"], "spectra_cost": 0.058716000000000004}

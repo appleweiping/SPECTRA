@@ -1,0 +1,1 @@
+{"case": "app_sum_2", "task": "opamp_app-02", "template": "app_sum", "truth": "R2", "class": "resistor_value", "failing": ["a2"], "rule": ["M5", "Rf", "R2"], "raw": ["R2", "Rf", "R1"], "raw_cost": 0.028747999999999996, "spectra": ["R2", "Rf", "M5"], "spectra_cost": 0.039884}

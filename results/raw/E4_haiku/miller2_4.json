@@ -1,0 +1,1 @@
+{"case": "miller2_4", "task": "opamp-01", "template": "miller2", "truth": "M5", "class": "mirror_ratio", "failing": ["pm"], "rule": ["Rz", "M6", "M5"], "raw": ["Cc", "M7", "Rz"], "raw_cost": 0.0017891, "spectra": ["Rz", "M5", "M6"], "spectra_cost": 0.0032286}

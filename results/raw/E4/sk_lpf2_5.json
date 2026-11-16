@@ -1,0 +1,1 @@
+{"case": "sk_lpf2_5", "task": "filter-00", "template": "sk_lpf2", "truth": "M2", "class": "miswire_gate", "failing": ["fc", "atten_db", "peaking_db"], "rule": ["M5", "M3", "Cc"], "raw": ["M2", "R2", "C2"], "raw_cost": 0.034516000000000005, "spectra": ["M2", "M5", "M1"], "spectra_cost": 0.044596}

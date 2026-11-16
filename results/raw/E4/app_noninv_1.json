@@ -1,0 +1,1 @@
+{"case": "app_noninv_1", "task": "opamp_app-01", "template": "app_noninv", "truth": "M8", "class": "bias_starve", "failing": ["bw"], "rule": ["M5", "M8", "M6"], "raw": ["M8", "Cc", "M5"], "raw_cost": 0.039884, "spectra": ["M8", "M5", "M6"], "spectra_cost": 0.043772000000000005}

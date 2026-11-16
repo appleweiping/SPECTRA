@@ -1,0 +1,1 @@
+{"case": "miller2_3", "task": "opamp-01", "template": "miller2", "truth": "M5", "class": "undersize_W", "failing": ["ugbw", "slew"], "rule": ["M6", "M4", "M3"], "raw": ["M5", "M6", "Cc"], "raw_cost": 0.034812, "spectra": ["M5", "M6", "Cc"], "spectra_cost": 0.042055999999999996}

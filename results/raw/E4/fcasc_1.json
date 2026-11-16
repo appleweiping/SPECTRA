@@ -1,0 +1,1 @@
+{"case": "fcasc_1", "task": "opamp-04", "template": "fcasc", "truth": "Mb1", "class": "bias_starve", "failing": ["gain_db", "ugbw", "pm", "swing", "slew"], "rule": ["M5", "M8", "M1"], "raw": ["Mb1", "M5", "Mb2"], "raw_cost": 0.059088, "spectra": ["M5", "M3", "M0"], "spectra_cost": 0.059572}

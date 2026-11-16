@@ -1,0 +1,1 @@
+{"case": "sk_lpf3_5", "task": "filter-04", "template": "sk_lpf3", "truth": "M5", "class": "bias_starve", "failing": ["fc", "peaking_db", "atten_db"], "rule": ["M5", "M3", "M4"], "raw": ["Cc", "M5", "C1"], "raw_cost": 0.05301839999999999, "spectra": ["M5", "Cc", "M6"], "spectra_cost": 0.026212600000000003}

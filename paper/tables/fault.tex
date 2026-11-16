@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Fault localisation accuracy (top-1/top-3, \%) by injected fault class: rule-only diagnoser vs.\ LLM given the netlist and spec table (raw) or the SPECTRA diagnosis.}
+\label{tab:fault}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Fault class & $n$ & Rules & Opus+raw & Opus+diag. \\
+\midrule
+Undersized $W$ & 29 & 41/62 & 69/90 & 66/90 \\
+Short $L$ & 10 & 20/70 & 60/90 & 80/90 \\
+Mirror ratio & 21 & 38/67 & 81/86 & 90/95 \\
+Comp.\ cap & 2 & 0/0 & 50/50 & 50/100 \\
+Bias starved & 26 & 42/58 & 73/88 & 62/81 \\
+Miswired gate & 23 & 57/87 & 100/100 & 96/100 \\
+Resistor value & 9 & 0/78 & 56/78 & 44/89 \\
+\midrule
+All & 120 & 38/68 & 76/89 & 74/91 \\
+\bottomrule
+\end{tabular}
+\end{table}

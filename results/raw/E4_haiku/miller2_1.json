@@ -1,0 +1,1 @@
+{"case": "miller2_1", "task": "opamp-01", "template": "miller2", "truth": "Cc", "class": "comp_cap", "failing": ["pm"], "rule": ["M2", "M3", "M1"], "raw": ["Cc", "Rz", "M7"], "raw_cost": 0.0014259000000000001, "spectra": ["Cc", "M7", "M3"], "spectra_cost": 0.0041791}

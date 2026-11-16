@@ -1,0 +1,1 @@
+{"case": "cm_psrc_5", "task": "cmirror-02", "template": "cm_psrc", "truth": "M1", "class": "miswire_gate", "failing": ["iout_err_pct", "v_compliance"], "rule": ["M1", "M4", "M2"], "raw": ["M1", "M2", "M4"], "raw_cost": 0.031383999999999995, "spectra": ["M1", "M2", "M3"], "spectra_cost": 0.031259999999999996}

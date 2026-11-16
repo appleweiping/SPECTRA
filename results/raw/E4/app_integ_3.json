@@ -1,0 +1,1 @@
+{"case": "app_integ_3", "task": "opamp_app-03", "template": "app_integ", "truth": "M7", "class": "undersize_W", "failing": ["vout_offset", "f_unity"], "rule": ["M5", "R1", "M3"], "raw": ["R1", "Cf", "M7"], "raw_cost": 0.048924, "spectra": ["R1", "Cf", "M7"], "spectra_cost": 0.089252}

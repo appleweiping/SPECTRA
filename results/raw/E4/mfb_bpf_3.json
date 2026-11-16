@@ -1,0 +1,1 @@
+{"case": "mfb_bpf_3", "task": "filter-02", "template": "mfb_bpf", "truth": "Rd2", "class": "resistor_value", "failing": ["f0"], "rule": ["M5", "Rd1", "Rd2"], "raw": ["Rd1", "Rd2", "Cd"], "raw_cost": 0.052980000000000006, "spectra": ["Rd1", "Rd2", "R3"], "spectra_cost": 0.058572}

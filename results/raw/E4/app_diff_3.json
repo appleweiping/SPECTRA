@@ -1,0 +1,1 @@
+{"case": "app_diff_3", "task": "opamp_app-06", "template": "app_diff", "truth": "R4", "class": "resistor_value", "failing": ["bw", "a2"], "rule": ["M5", "R4", "R3"], "raw": ["R4", "R3", "Rf"], "raw_cost": 0.034984, "spectra": ["R4", "R3", "M5"], "spectra_cost": 0.045888}

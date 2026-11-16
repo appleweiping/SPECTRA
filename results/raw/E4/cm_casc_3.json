@@ -1,0 +1,1 @@
+{"case": "cm_casc_3", "task": "cmirror-01", "template": "cm_casc", "truth": "M2", "class": "undersize_W", "failing": ["iout_err_pct"], "rule": ["M4", "M2", "M1"], "raw": ["M2", "M1", "M4"], "raw_cost": 0.030331999999999998, "spectra": ["M2", "M1", "M4"], "spectra_cost": 0.033472}

@@ -1,0 +1,1 @@
+{"case": "app_sum_3", "task": "opamp_app-02", "template": "app_sum", "truth": "M6", "class": "short_L", "failing": ["a1", "a2"], "rule": ["Rf", "M4", "M2"], "raw": ["Rf", "M7", "M6"], "raw_cost": 0.043804, "spectra": ["M6", "M8", "Rf"], "spectra_cost": 0.062968}

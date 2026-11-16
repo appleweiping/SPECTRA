@@ -1,0 +1,1 @@
+{"case": "sk_lpf3_4", "task": "filter-04", "template": "sk_lpf3", "truth": "M4", "class": "mirror_ratio", "failing": ["fc", "atten_db"], "rule": ["M5", "R0", "C2"], "raw": ["R2", "C2", "C1"], "raw_cost": 0.08554, "spectra": ["M4", "M5", "M3"], "spectra_cost": 0.058575999999999996}

@@ -1,0 +1,1 @@
+{"case": "ota5t_2", "task": "opamp-00", "template": "ota5t", "truth": "M3", "class": "undersize_W", "failing": ["pm"], "rule": ["M5", "M4", "M3"], "raw": ["M3", "M4", "M1"], "raw_cost": 0.03538, "spectra": ["M3", "M4", "M1"], "spectra_cost": 0.044996}

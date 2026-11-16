@@ -1,0 +1,1 @@
+{"case": "fcasc_3", "task": "opamp-04", "template": "fcasc", "truth": "M7", "class": "mirror_ratio", "failing": ["pm"], "rule": ["M5", "M3", "M7"], "raw": ["M7", "Mb5", "M8"], "raw_cost": 0.0017707, "spectra": ["M7", "M6", "M3"], "spectra_cost": 0.005511199999999999}

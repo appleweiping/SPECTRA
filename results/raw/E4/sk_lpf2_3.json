@@ -1,0 +1,1 @@
+{"case": "sk_lpf2_3", "task": "filter-00", "template": "sk_lpf2", "truth": "M5", "class": "short_L", "failing": ["fc", "peaking_db"], "rule": ["M5", "R2", "C2"], "raw": ["Cc", "M5", "R2"], "raw_cost": 0.069156, "spectra": ["M5", "R2", "C1"], "spectra_cost": 0.08710000000000001}

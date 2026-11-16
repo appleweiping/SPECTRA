@@ -1,0 +1,1 @@
+{"case": "cm_wide_2", "task": "cmirror-03", "template": "cm_wide", "truth": "M1", "class": "undersize_W", "failing": ["iout_err_pct", "v_compliance", "rout"], "rule": ["M1", "M2", "M3"], "raw": ["M1", "M2", "R1"], "raw_cost": 0.03568, "spectra": ["M1", "M2", "R1"], "spectra_cost": 0.039592}

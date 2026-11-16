@@ -1,0 +1,1 @@
+{"case": "ota5t_4", "task": "opamp-00", "template": "ota5t", "truth": "M5", "class": "bias_starve", "failing": ["ugbw", "settle"], "rule": ["M5", "M6", "M4"], "raw": ["M5", "M6", "M1"], "raw_cost": 0.0028103, "spectra": ["M5", "M6", "M4"], "spectra_cost": 0.00329855}

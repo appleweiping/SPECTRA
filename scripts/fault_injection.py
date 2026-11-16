@@ -18,7 +18,6 @@ from spectra.sim.evaluate import evaluate, region_report, spec_key
 from spectra.agent import diagnose, llm
 
 OUT = ROOT / "results" / "raw" / "E4"
-OUT.mkdir(parents=True, exist_ok=True)
 CLASSES = ["undersize_W", "short_L", "mirror_ratio", "comp_cap", "bias_starve", "miswire_gate", "resistor_value"]
 
 
@@ -120,13 +119,17 @@ Reply with a ```json block {{"ranking": ["<most likely element name>", "<2nd>", 
 
 
 def main(n_per_template=6, seed=0, model="opus"):
-    rng = random.Random(seed)
+    import zlib
+    global OUT
+    OUT = ROOT / "results" / "raw" / ("E4" if model == "opus" else f"E4_{model}")
+    OUT.mkdir(parents=True, exist_ok=True)
     tasks = [json.loads(l) for l in open(ROOT / "data" / "bench" / "tasks.jsonl")]
     seen, cases = set(), []
     for t in tasks:
         if t.get("robust") or t["ref"]["template"] in seen:
             continue
         seen.add(t["ref"]["template"])
+        rng = random.Random(seed * 1000 + zlib.crc32(t["ref"]["template"].encode()))
         net = T[t["ref"]["template"]]["build"](t["ref"]["x"])
         made = 0
         for attempt in range(40):
@@ -141,12 +144,12 @@ def main(n_per_template=6, seed=0, model="opus"):
             if ev.status != "ok" or ev.passed:
                 continue
             failing = [s["metric"] for s in t["specs"] if not ev.checks["tt_27C_1.8V"][spec_key(s)][1]]
-            cases.append((t, ckt, name, cls, ev, failing)); made += 1
+            cases.append((t, ckt, name, cls, ev, failing, f"{t['ref']['template']}_{made}")); made += 1
     print(len(cases), "fault cases", flush=True)
 
     def run_case(i):
-        t, ckt, name, cls, ev, failing = cases[i]
-        fp = OUT / f"case{i:03d}.json"
+        t, ckt, name, cls, ev, failing, key = cases[i]
+        fp = OUT / f"{key}.json"
         if fp.exists():
             return json.loads(fp.read_text())
         sens = element_sensitivity(t, ckt, failing)
@@ -155,19 +158,19 @@ def main(n_per_template=6, seed=0, model="opus"):
         rep = diagnose.report(t, ev, None, None)
         st = diagnose.sensitivity_text(sens, failing).replace("intent variables", "element sizes/values").replace("+10%", "+20%")
         spectra_ev = rep + ("\n\n" + st if st else "")
-        res = {"case": i, "task": t["id"], "template": t["ref"]["template"], "truth": name, "class": cls,
+        res = {"case": key, "task": t["id"], "template": t["ref"]["template"], "truth": name, "class": cls,
                "failing": failing, "rule": rule[:3]}
         for arm, evid in (("raw", raw_ev), ("spectra", spectra_ev)):
             r = llm.call(PROMPT.format(nl=t["nl_spec"], net=ckt.to_text(), evidence=evid),
                          "You are an expert analog IC designer debugging a circuit.", model=model,
-                         run_tag=f"E4|{i}|{arm}", tag=f"E4:{arm}")
+                         run_tag=f"E4|{key}|{arm}", tag=f"E4:{arm}")
             js = llm.extract_json(r["text"]) or {}
             res[arm] = [str(x) for x in (js.get("ranking") or [])][:3]
             res[arm + "_cost"] = r["cost_usd"]
         fp.write_text(json.dumps(res))
         return res
 
-    with ThreadPoolExecutor(4) as ex:
+    with ThreadPoolExecutor(6) as ex:
         results = list(ex.map(run_case, range(len(cases))))
     summ = {}
     for arm in ("rule", "raw", "spectra"):
@@ -180,9 +183,10 @@ def main(n_per_template=6, seed=0, model="opus"):
             if rr:
                 summ[arm][cls] = {"n": len(rr), "top1": sum(norm(r[arm][:1]) == [r["truth"].lower()] for r in rr) / len(rr),
                                   "top3": sum(r["truth"].lower() in norm(r[arm][:3]) for r in rr) / len(rr)}
-    (ROOT / "results" / "E4_summary.json").write_text(json.dumps(summ, indent=1))
+    summ["n_cases"] = len(results)
+    (ROOT / "results" / ("E4_summary.json" if model == "opus" else f"E4_{model}_summary.json")).write_text(json.dumps(summ, indent=1))
     print(json.dumps(summ, indent=1))
 
 
 if __name__ == "__main__":
-    main()
+    main(model=sys.argv[1] if len(sys.argv) > 1 else "opus")

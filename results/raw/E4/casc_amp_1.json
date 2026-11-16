@@ -1,0 +1,1 @@
+{"case": "casc_amp_1", "task": "amp-04", "template": "casc_amp", "truth": "M7", "class": "mirror_ratio", "failing": ["gain_db", "power", "vout_dc"], "rule": ["M11", "M4", "M3"], "raw": ["M4", "M7", "M1"], "raw_cost": 0.064084, "spectra": ["M7", "M8", "M4"], "spectra_cost": 0.09152}

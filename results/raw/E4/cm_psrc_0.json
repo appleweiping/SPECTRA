@@ -1,0 +1,1 @@
+{"case": "cm_psrc_0", "task": "cmirror-02", "template": "cm_psrc", "truth": "M4", "class": "undersize_W", "failing": ["iout_err_pct"], "rule": ["M4", "M2", "M3"], "raw": ["M3", "M4", "M2"], "raw_cost": 0.030032, "spectra": ["M3", "M4", "M2"], "spectra_cost": 0.037632}

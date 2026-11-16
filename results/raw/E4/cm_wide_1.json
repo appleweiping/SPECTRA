@@ -1,0 +1,1 @@
+{"case": "cm_wide_1", "task": "cmirror-03", "template": "cm_wide", "truth": "M1", "class": "miswire_gate", "failing": ["iout_err_pct"], "rule": ["M1", "M2", "M3"], "raw": ["M1", "M2", "R1"], "raw_cost": 0.035732, "spectra": ["M1", "M2", "R1"], "spectra_cost": 0.03512}

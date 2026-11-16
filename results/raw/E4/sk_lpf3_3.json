@@ -1,0 +1,1 @@
+{"case": "sk_lpf3_3", "task": "filter-04", "template": "sk_lpf3", "truth": "R0", "class": "resistor_value", "failing": ["fc", "peaking_db", "atten_db"], "rule": ["M5", "R1", "M1"], "raw": ["Cc", "Rz", "M7"], "raw_cost": 0.104016, "spectra": ["C0", "R0", "C2"], "spectra_cost": 0.07628399999999999}

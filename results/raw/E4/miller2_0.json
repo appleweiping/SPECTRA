@@ -1,0 +1,1 @@
+{"case": "miller2_0", "task": "opamp-01", "template": "miller2", "truth": "M4", "class": "short_L", "failing": ["gain_db", "ugbw", "slew"], "rule": ["M1", "M3", "M4"], "raw": ["M4", "M5", "M3"], "raw_cost": 0.034816, "spectra": ["M4", "M3", "M2"], "spectra_cost": 0.047296000000000005}

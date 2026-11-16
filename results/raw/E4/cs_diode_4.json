@@ -1,0 +1,1 @@
+{"case": "cs_diode_4", "task": "amp-00", "template": "cs_diode", "truth": "M1", "class": "undersize_W", "failing": ["f3db", "gbw"], "rule": ["M1", "M2"], "raw": ["M1", "M2"], "raw_cost": 0.04048, "spectra": ["M1", "M2", "M1_L"], "spectra_cost": 0.037724}

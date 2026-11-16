@@ -1,0 +1,1 @@
+{"case": "mfb_bpf_2", "task": "filter-02", "template": "mfb_bpf", "truth": "M8", "class": "bias_starve", "failing": ["f0"], "rule": ["M5", "M2", "M4"], "raw": ["Cc", "Rz", "M7"], "raw_cost": 0.046135999999999996, "spectra": ["M5", "Cc", "M8"], "spectra_cost": 0.071108}

@@ -1,0 +1,1 @@
+{"case": "casc_amp_3", "task": "amp-04", "template": "casc_amp", "truth": "Rpc", "class": "resistor_value", "failing": ["gain_db", "gbw", "vout_dc"], "rule": ["M4", "M1", "M6"], "raw": ["M4", "M1", "M5"], "raw_cost": 0.049968, "spectra": ["M4", "M1", "M5"], "spectra_cost": 0.050956}

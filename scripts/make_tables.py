@@ -72,18 +72,25 @@ def ablation_table(exp_main="E1", exp_abl="E2", out="ablation.tex"):
 
 def fault_table(out="fault.tex"):
     s = json.loads((ROOT / "results/E4_summary.json").read_text())
+    hp = ROOT / "results/E4_haiku_summary.json"
+    h = json.loads(hp.read_text()) if hp.exists() else None
     classes = [c for c in s["rule"] if c not in ("top1", "top3")]
     nice = {"undersize_W": "Undersized $W$", "short_L": "Short $L$", "mirror_ratio": "Mirror ratio", "comp_cap": "Comp.\\ cap",
             "bias_starve": "Bias starved", "miswire_gate": "Miswired gate", "resistor_value": "Resistor value"}
+    def cell(d, a, c=None):
+        x = d[a] if c is None else d[a].get(c)
+        return "--" if not x else f"{f(x['top1'])}/{f(x['top3'])}"
+    arms = [(s, "rule"), (s, "raw"), (s, "spectra")] + ([(h, "raw"), (h, "spectra")] if h else [])
     rows = []
     for c in classes:
-        n = s["rule"][c]["n"]
-        rows.append(f"{nice.get(c, c)} & {n} & " + " & ".join(f"{f(s[a][c]['top1'])}/{f(s[a][c]['top3'])}" for a in ("rule", "raw", "spectra")) + " \\\\")
+        rows.append(f"{nice.get(c, c)} & {s['rule'][c]['n']} & " + " & ".join(cell(d, a, c) for d, a in arms) + " \\\\")
     rows.append("\\midrule")
-    rows.append("All & " + str(sum(s['rule'][c]['n'] for c in classes)) + " & " + " & ".join(f"{f(s[a]['top1'])}/{f(s[a]['top3'])}" for a in ("rule", "raw", "spectra")) + " \\\\")
-    tex = ("\\begin{table}[t]\n\\centering\n\\caption{Fault localisation accuracy (top-1/top-3, \\%) by injected fault class.}\n"
-           "\\label{tab:fault}\n\\scriptsize\n\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}lcccc@{}}\n\\toprule\n"
-           "Fault class & $n$ & Rules only & LLM + raw & LLM + SPECTRA diag. \\\\\n\\midrule\n" + "\n".join(rows) +
-           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+    rows.append("All & " + str(sum(s['rule'][c]['n'] for c in classes)) + " & " + " & ".join(cell(d, a) for d, a in arms) + " \\\\")
+    head = "Fault class & $n$ & Rules & Opus+raw & Opus+diag." + (" & Haiku+raw & Haiku+diag." if h else "")
+    cols = "lc" + "c" * len(arms)
+    tex = ("\\begin{table}[t]\n\\centering\n\\caption{Fault localisation accuracy (top-1/top-3, \\%) by injected fault class: "
+           "rule-only diagnoser vs.\\ LLM given the netlist and spec table (raw) or the SPECTRA diagnosis.}\n"
+           "\\label{tab:fault}\n\\scriptsize\n\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}" + cols + "@{}}\n\\toprule\n"
+           + head + " \\\\\n\\midrule\n" + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
     (TAB / out).write_text(tex)
     print(tex)

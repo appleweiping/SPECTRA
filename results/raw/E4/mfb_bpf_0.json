@@ -1,0 +1,1 @@
+{"case": "mfb_bpf_0", "task": "filter-02", "template": "mfb_bpf", "truth": "M3", "class": "undersize_W", "failing": ["f0"], "rule": ["M5", "M1", "C2"], "raw": ["C1", "C2", "R3"], "raw_cost": 0.065516, "spectra": ["M3", "M4", "M5"], "spectra_cost": 0.057572}

@@ -1,0 +1,1 @@
+{"case": "app_diff_4", "task": "opamp_app-06", "template": "app_diff", "truth": "M6", "class": "short_L", "failing": ["bw"], "rule": ["M1", "M2", "M3"], "raw": ["M6", "Cc", "M5"], "raw_cost": 0.039776000000000006, "spectra": ["M6", "M5", "M8"], "spectra_cost": 0.047292}

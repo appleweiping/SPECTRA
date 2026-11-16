@@ -1,0 +1,1 @@
+{"case": "sf_5", "task": "amp-02", "template": "sf", "truth": "M3", "class": "undersize_W", "failing": ["power"], "rule": ["M2", "M3", "M1"], "raw": ["M2", "M3", "M1"], "raw_cost": 0.031396, "spectra": ["M2", "M3", "M1"], "spectra_cost": 0.03542000000000001}

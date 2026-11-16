@@ -1,0 +1,1 @@
+{"case": "app_integ_5", "task": "opamp_app-03", "template": "app_integ", "truth": "M8", "class": "bias_starve", "failing": ["f_unity", "slope_db_dec"], "rule": ["R1", "Cf", "M8"], "raw": ["M8", "Cf", "R1"], "raw_cost": 0.0442532, "spectra": ["M8", "Cf", "R1"], "spectra_cost": 0.045708200000000004}

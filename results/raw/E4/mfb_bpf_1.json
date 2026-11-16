@@ -1,0 +1,1 @@
+{"case": "mfb_bpf_1", "task": "filter-02", "template": "mfb_bpf", "truth": "M4", "class": "mirror_ratio", "failing": ["f0"], "rule": ["M5", "C2", "R3"], "raw": ["M4", "Cc", "M5"], "raw_cost": 0.04922, "spectra": ["M4", "M5", "Cc"], "spectra_cost": 0.060648}
