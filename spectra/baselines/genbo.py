@@ -40,7 +40,7 @@ def _fill(net, x):
     return re.sub(r"\{(\w+)\}", rep, net)
 
 
-def run_genbo(task, model="opus", seed=0, budget=None, rounds=3, method="genbo", optimizer="tpe"):
+def run_genbo(task, model="opus", seed=0, budget=None, rounds=3, method="genbo", optimizer="tpe", adaptive_pvt=False):
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     ctx = Ctx(task=task, model=model, seed=seed, method=method)
@@ -101,6 +101,11 @@ def run_genbo(task, model="opus", seed=0, budget=None, rounds=3, method="genbo",
                 if evP.passed:
                     status, final = "success", best[1]
                     break
+                if adaptive_pvt and evP.status == "ok":
+                    from ..sim.evaluate import cond_name
+                    worst = sorted(PVT, key=lambda c: -sum(v[2] for v in evP.checks[cond_name(c)].values()))
+                    conds = list(conds) + [c for c in worst[:2] if c not in conds]
+                    conds = conds[:8]
                 fb = "Passes tt/ss125/ff-40 but fails full PVT:\n" + "\n".join(
                     f"- {cn}: " + "; ".join(f"{k}={diagnose.fmt(v[0])}" for k, v in chk.items() if not v[1])
                     for cn, chk in evP.checks.items() if not all(v[1] for v in chk.values()))

@@ -36,6 +36,16 @@ def make_runner(method, model):
         return lambda task, seed: run_direct(task, model=model, seed=seed, budget=budget_for(task))
     if method == "genbo":
         return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task))
+    if method == "genbo_full":     # fairness variant: regenerate until calls run out + adaptive PVT corners
+        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task), rounds=12,
+                                            method="genbo_full", adaptive_pvt=True)
+    if method == "direct_noknow":
+        def _dn(task, seed):
+            import spectra.agent.common as C
+            orig = C.KNOWLEDGE
+            return run_direct(task, model=model, seed=seed, budget=budget_for(task), method="direct_noknow",
+                              knowledge_override="(none provided)")
+        return _dn
     if method == "genbo_cmaes":
         return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task), optimizer="cmaes",
                                             method="genbo_cmaes")

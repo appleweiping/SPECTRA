@@ -29,11 +29,13 @@ def _feedback(task, ev, evP=None):
     return fb
 
 
-def run_direct(task, model="opus", seed=0, budget=None, method="direct"):
+def run_direct(task, model="opus", seed=0, budget=None, method="direct", knowledge_override=None):
     ctx = Ctx(task=task, model=model, seed=seed, method=method)
     if budget:
         ctx.budget = budget
     t = task_texts(task)
+    if knowledge_override is not None:
+        t["knowledge"] = knowledge_override
     text = ctx.ask(DIRECT_PLAN.format(**t), SYSTEM_DIRECT, "plan")
     status, final = "budget_exhausted", None
     it = 0

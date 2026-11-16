@@ -23,10 +23,13 @@ methodology~\cite{jespers2017gmid}: the LLM reasons about \emph{what} each devic
 deterministically. Programs run in an isolated subprocess; widths are split into fingers of at most
 $5\,\mu$m before compilation to SKY130 instances.
 
-The self-prediction is the key design choice. A two-stage op-amp program written by the agent predicted
-68.7\,dB / 33.4\,MHz / 62$^\circ$ for gain/UGBW/PM and simulated at 69.6\,dB / 28.6\,MHz / 66$^\circ$; when the
-two disagree, the discrepancy tells the LLM that its \emph{model of the circuit} is wrong, which is more
-informative than a failing number.
+The self-prediction is the key design choice: when prediction and simulation disagree, the discrepancy tells the
+LLM that its \emph{model of the circuit} is wrong, which is more informative than a failing number. Across the
+\NPrograms{} final programs written by the agent in our main experiment, the predictions of first-order quantities
+are close to re-simulation---median error \PredPower{} for power, \PredUGBW{} for UGBW (\PredUGBWwithin{} within
+25\%), \PredGain{} for gain and \PredPM{} for phase margin---while second-order effects are not: CMRR and PSRR are
+off by \PredCMRR{} and \PredPSRR{}, slew rate by \PredSlew{} and settling by \PredSettle{}. These are exactly the
+quantities that simulation-in-the-loop refinement must close.
 
 \subsection{Static Checks}
 Before any simulation, the netlist is parsed into a canonical form and checked by an electrical-rule checker:
@@ -60,7 +63,8 @@ but no search budget; refinement costs simulations but no LLM call.
 bound ratio exceeds 4), warm-started at the current point with $\sigma_0=0.15$ and population
 $\max(8, 4+\lfloor 3\ln n\rfloor)$, in chunks of 80 simulations. Each candidate is produced by re-executing the
 program, so matching, mirror ratios and bias relations encoded by the LLM are preserved by construction; the
-search space is typically 3--5$\times$ smaller than the raw $W/L$ space. The objective is the normalised violation
+programs expose a median of \IntentVars{} free intent variables for netlists with \RawVars{} raw sizing variables,
+and every point of the intent space is a coherent bias plan rather than an arbitrary width vector. The objective is the normalised violation
 \begin{equation}
   \mathcal{V}(x)=\max_{c\in\mathcal{C}}\sum_{s\in\mathcal{S}}\min\!\big(2,\,v_s(m_{s,c}(x))\big),
   \label{eq:viol}

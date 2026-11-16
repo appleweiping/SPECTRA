@@ -15,7 +15,7 @@ RAW = ROOT / "results" / "raw"
 
 
 # E1 protocol: SPECTRA and AnalogCoder-style use seeds 0-2; the simulation-heavy Gen+TPE and SPECTRA-min use 0-1
-SEED_FILTER = {"E1": {"genbo": {"s0", "s1"}, "spectra_min": {"s0", "s1"}}}
+SEED_FILTER = {}   # all completed seeds are used (per-task means)
 
 
 def load(exp, methods=None):
@@ -130,6 +130,38 @@ def anytime(runs, methods, budgets=(1, 5, 10, 20, 50, 100, 200, 300)):
     return curves
 
 
+def common_tasks(runs, methods):
+    sets = [{r["task"] for r in runs if r["method"] == m} for m in methods]
+    sets = [x for x in sets if x]
+    return set.intersection(*sets) if sets else set()
+
+
+def primary(r):
+    """Pre-registered primary endpoint: near-frontier tasks (certified T3) and every PVT-robust task."""
+    return r["robust"] or str(r["tier"]) == "3"
+
+
+def exact_tests(runs, a, b):
+    """Per-task paired comparison: exact two-sided sign test on tasks with different success rates, and a paired
+    permutation test (10^5 sign flips) on the mean per-task difference."""
+    from scipy.stats import binomtest
+    ta, tb = defaultdict(list), defaultdict(list)
+    for r in runs:
+        if r["method"] == a: ta[r["task"]].append(r["success"])
+        if r["method"] == b: tb[r["task"]].append(r["success"])
+    common = sorted(set(ta) & set(tb))
+    d = np.array([np.mean(ta[t]) - np.mean(tb[t]) for t in common])
+    wins, losses = int((d > 0).sum()), int((d < 0).sum())
+    p_sign = binomtest(wins, wins + losses, 0.5).pvalue if wins + losses else 1.0
+    rng = np.random.default_rng(0)
+    obs = d.mean() if len(d) else 0.0
+    flips = rng.choice([-1, 1], size=(100000, len(d))) if len(d) else np.zeros((1, 0))
+    perm = (flips * d).mean(1) if len(d) else np.zeros(1)
+    p_perm = float((np.abs(perm) >= abs(obs) - 1e-12).mean())
+    return {"n_tasks": len(common), "mean_diff": float(obs), "wins": wins, "losses": losses,
+            "p_sign": float(p_sign), "p_perm": p_perm}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--exp", required=True)
@@ -139,16 +171,30 @@ def main():
     methods = a.methods.split(",") if a.methods else None
     runs = load(a.exp, methods)
     methods = methods or sorted({r["method"] for r in runs})
-    summ = summarize(runs, methods)
+    feas = [r for r in runs if not r.get("infeasible")]
+    ct = common_tasks(feas, methods)
+    runs_c = [r for r in feas if r["task"] in ct]
+    summ = summarize(runs_c, methods)
+    prim = [r for r in runs_c if primary(r)]
+    summ_primary = summarize(prim, methods)
     tests = {}
     for m in methods:
         if m != a.baseline and a.baseline in methods:
-            tests[f"{a.baseline}_vs_{m}"] = paired(runs, a.baseline, m)
+            tests[f"{a.baseline}_vs_{m}"] = paired(runs_c, a.baseline, m)
     # Holm correction
     ps = sorted(((v["p"], k) for k, v in tests.items()))
     for i, (p, k) in enumerate(ps):
         tests[k]["p_holm"] = min(1.0, p * (len(ps) - i))
-    res = {"summary": summ, "tests": tests, "anytime": anytime(runs, methods)}
+    exact = {}
+    for m in methods:
+        if m != a.baseline and a.baseline in methods:
+            exact[f"{a.baseline}_vs_{m}"] = {"all": exact_tests(runs_c, a.baseline, m),
+                                             "primary": exact_tests(prim, a.baseline, m)}
+    ps = sorted(((v["primary"]["p_perm"], k) for k, v in exact.items()))
+    for i, (p, k) in enumerate(ps):
+        exact[k]["primary"]["p_perm_holm"] = min(1.0, p * (len(ps) - i))
+    res = {"common_tasks": len(ct), "summary": summ, "primary": summ_primary, "primary_n_tasks": len({r["task"] for r in prim}),
+           "tests": tests, "exact": exact, "anytime": anytime(runs_c, methods)}
     (ROOT / "results" / f"{a.exp}_summary.json").write_text(json.dumps(res, indent=1))
     print(f"{'method':22s} {'n':>4s} {'succ':>6s} {'95%CI':>15s} {'nom':>6s} {'rob':>6s} {'T1':>5s} {'T2':>5s} {'T3':>5s} {'D':>5s} {'sims*':>6s} {'calls*':>6s} {'$':>6s}")
     for m, d in summ.items():
@@ -156,8 +202,11 @@ def main():
         print(f"{m:22s} {d['n_runs']:4d} {d['success']:6.3f} [{d['ci95'][0]:.2f},{d['ci95'][1]:.2f}] {f('nominal'):>6s} "
               f"{f('robust'):>6s} {f('tier1'):>5s} {f('tier2'):>5s} {f('tier3'):>5s} {f('tierD'):>5s} "
               f"{str(d['median_sims_success']):>6s} {str(d['median_calls_success']):>6s} {d['mean_cost_usd']:6.2f}")
-    for k, v in tests.items():
-        print(k, v)
+    print("common tasks:", len(ct), " primary (T3 + robust) tasks:", res["primary_n_tasks"])
+    for m, d in summ_primary.items():
+        print(f"  PRIMARY {m:20s} succ={d['success']:.3f} CI=[{d['ci95'][0]:.2f},{d['ci95'][1]:.2f}] n_runs={d['n_runs']}")
+    for k, v in exact.items():
+        print(k, "primary:", v["primary"], " all:", v["all"])
 
 
 if __name__ == "__main__":

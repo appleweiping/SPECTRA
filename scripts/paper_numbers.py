@@ -15,7 +15,7 @@ def main():
     out["NRobust"] = str(sum(t.get("robust", False) for t in bench))
     out["NDesigner"] = str(len(des))
     out["NControls"] = str(len(ctl))
-    out["NTasksTotal"] = str(len(bench) + len(des) + len(ctl))
+    out["NTasksTotal"] = str(len(bench) + len(des))      # controls (v0) withdrawn after review round 1
     from spectra.bench.templates import T
     out["NTemplates"] = str(len(T))
     n = 0
@@ -37,7 +37,19 @@ def main():
                 out[key + "Calls"] = f"{d['median_calls_success']:.0f}" if d.get("median_calls_success") is not None else "--"
                 out[key + "Sims"] = f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"
                 out[key + "Nruns"] = str(d["n_runs"])
-        t = json.loads(e1.read_text())["tests"]
+        full = json.loads(e1.read_text())
+        out["NCommon"] = str(full.get("common_tasks", "--")); out["NPrimaryTasks"] = str(full.get("primary_n_tasks", "--"))
+        for m, key in [("spectra", "Spectra"), ("direct", "Direct"), ("genbo", "Genbo"), ("spectra_min", "SpectraMin")]:
+            if m in full.get("primary", {}):
+                pd = full["primary"][m]
+                out[key + "Prim"] = pct(pd["success"])
+                out[key + "PrimCI"] = f"[{100 * pd['ci95'][0]:.0f},{100 * pd['ci95'][1]:.0f}]"
+        for k, v in full.get("exact", {}).items():
+            nm = "".join(w.capitalize() for w in k.replace("spectra_vs_", "").split("_"))
+            pr = v["primary"]
+            out["Prim" + nm + "P"] = f"{pr.get('p_perm_holm', pr['p_perm']):.2g}"
+            out["Prim" + nm + "WL"] = f"{pr['wins']}/{pr['losses']}"
+        t = full["tests"]
         for k, v in t.items():
             nm = "Test" + "".join(w.capitalize() for w in k.replace("spectra_vs_", "").split("_"))
             out[nm + "P"] = f"{v.get('p_holm', v['p']):.3g}"
@@ -57,6 +69,33 @@ def main():
                                      f"{pct(d['raw']['top1'])} (raw) to {pct(d['spectra']['top1'])}.")
     else:
         out["FaultHaikuSentence"] = ""
+    pa = ROOT / "results/E1_spectra_prediction_accuracy.json"
+    if pa.exists():
+        d = json.loads(pa.read_text()); mm = d["metrics"]
+        out["NPrograms"] = str(d["n_programs"])
+        out["IntentVars"] = f"{d['intent_vars_median']:.0f}"; out["RawVars"] = f"{d['raw_vars_median']:.0f}"
+        out["RawOverIntent"] = f"{d['raw_over_intent_median']:.1f}"
+        g = lambda k, f: (f(mm[k]) if k in mm else "--")
+        out["PredPower"] = g("power", lambda v: f"{v['median_ratio_err_pct']:.0f}\\%")
+        out["PredUGBW"] = g("ugbw", lambda v: f"{v['median_ratio_err_pct']:.0f}\\%")
+        out["PredUGBWwithin"] = g("ugbw", lambda v: f"{100 * v['within_25pct']:.0f}\\%")
+        out["PredGain"] = g("gain_db", lambda v: f"{v['median_abs_err']:.1f}\\,dB")
+        out["PredPM"] = g("pm", lambda v: f"{v['median_abs_err']:.1f}$^\\circ$")
+        out["PredSwing"] = g("swing", lambda v: f"{v['median_ratio_err_pct']:.0f}\\%")
+        out["PredCMRR"] = g("cmrr_db", lambda v: f"{v['median_abs_err']:.1f}\\,dB")
+        out["PredPSRR"] = g("psrr_db", lambda v: f"{v['median_abs_err']:.1f}\\,dB")
+        out["PredSlew"] = g("slew", lambda v: f"{v['median_ratio_err_pct']:.0f}\\%")
+        out["PredSettle"] = g("settle", lambda v: f"{v['median_ratio_err_pct']:.0f}\\%")
+        out["PredNoise"] = g("noise_1k", lambda v: f"{v['median_ratio_err_pct']:.0f}\\%")
+    tv = ROOT / "results/pilot/testbench_validation.json"
+    if tv.exists():
+        d = json.loads(tv.read_text())["integrator"]
+        out["TBIntegSim"] = f"{d['f_unity_sim'] / 1e3:.1f}\\,kHz"; out["TBIntegIdeal"] = f"{d['f_unity_ideal'] / 1e3:.1f}\\,kHz"
+    hard = [t for t in bench if t.get("robust") or str(t.get("tier")) == "3"]
+    out["NHard"] = str(len(hard)); out["NFrontier"] = str(sum(1 for t in hard if t["ref"].get("frontier_refined")))
+    out["NTOne"] = str(sum(1 for t in bench if str(t.get("tier")) == "1" and not t.get("robust")))
+    out["NTTwo"] = str(sum(1 for t in bench if str(t.get("tier")) == "2" and not t.get("robust")))
+    out["NTThree"] = str(sum(1 for t in bench if str(t.get("tier")) == "3" and not t.get("robust")))
     sub = ROOT / "data/bench/subset_E2.jsonl"
     out["NSubset"] = str(sum(1 for _ in open(sub))) if sub.exists() else "--"
     for k in ("AblationText", "PVTText", "ScalingText"):

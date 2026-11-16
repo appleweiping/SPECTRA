@@ -81,7 +81,10 @@ def discrepancy(task, ev, pred, cond=None, tol=0.25):
         if k.endswith("_db") or k in ("pm",):
             if abs(pv - sv) > (6 if k != "pm" else 10):
                 out.append(f"- {k}: predicted {fmt(pv)} vs simulated {fmt(sv)} (diff {sv - pv:+.1f})")
-        elif sv != 0 and abs(pv / sv - 1) > tol:
+        elif pv == 0 or sv == 0:
+            if pv != sv:
+                out.append(f"- {k}: predicted {fmt(pv)} vs simulated {fmt(sv)}")
+        elif abs(pv / sv - 1) > tol:
             out.append(f"- {k}: predicted {fmt(pv)} vs simulated {fmt(sv)} (ratio sim/pred {sv / pv:.2f})")
     if not out:
         return "Program predictions agree with simulation (within tolerance)."

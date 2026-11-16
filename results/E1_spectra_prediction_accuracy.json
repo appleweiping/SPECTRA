@@ -1,0 +1,98 @@
+{
+ "n_programs": 78,
+ "intent_vars_median": 10.0,
+ "raw_vars_median": 18.0,
+ "raw_over_intent_median": 1.8,
+ "metrics": {
+  "power": {
+   "n": 71,
+   "median_ratio_err_pct": 3.01373290749658,
+   "within_25pct": 1.0
+  },
+  "gain_db": {
+   "n": 54,
+   "median_abs_err": 1.345835948019058,
+   "unit": "dB"
+  },
+  "pm": {
+   "n": 54,
+   "median_abs_err": 3.615491564654093,
+   "unit": "deg"
+  },
+  "ugbw": {
+   "n": 53,
+   "median_ratio_err_pct": 8.1420152854893,
+   "within_25pct": 0.9245283018867925
+  },
+  "slew": {
+   "n": 36,
+   "median_ratio_err_pct": 27.954412501078572,
+   "within_25pct": 0.4722222222222222
+  },
+  "swing": {
+   "n": 30,
+   "median_ratio_err_pct": 10.319519043370251,
+   "within_25pct": 0.9666666666666667
+  },
+  "psrr_db": {
+   "n": 24,
+   "median_abs_err": 7.235761611826476,
+   "unit": "dB"
+  },
+  "noise_1k": {
+   "n": 23,
+   "median_ratio_err_pct": 19.01040334385602,
+   "within_25pct": 0.5652173913043478
+  },
+  "settle": {
+   "n": 18,
+   "median_ratio_err_pct": 34.502350649588486,
+   "within_25pct": 0.4444444444444444
+  },
+  "cmrr_db": {
+   "n": 18,
+   "median_abs_err": 7.86242900223214,
+   "unit": "dB"
+  },
+  "zt_dbohm": {
+   "n": 18,
+   "median_abs_err": 0.011211229471520312,
+   "unit": "dB"
+  },
+  "f3db": {
+   "n": 18,
+   "median_ratio_err_pct": 18.992893578208793,
+   "within_25pct": 0.5555555555555556
+  },
+  "in_noise_1m": {
+   "n": 18,
+   "median_ratio_err_pct": 12.208639784893883,
+   "within_25pct": 0.8333333333333334
+  },
+  "vout_dc": {
+   "n": 18,
+   "median_ratio_err_pct": 1.0266350147533743,
+   "within_25pct": 1.0
+  },
+  "vout_err_pct": {
+   "n": 5,
+   "median_ratio_err_pct": 105.56277397567455,
+   "within_25pct": 0.2
+  },
+  "psrr_1k": {
+   "n": 5,
+   "median_abs_err": 7.083649203134414,
+   "unit": "dB"
+  },
+  "iq": {
+   "n": 5,
+   "median_ratio_err_pct": 3.699902464471294,
+   "within_25pct": 1.0
+  },
+  "undershoot": {
+   "n": 5,
+   "median_ratio_err_pct": 80.2747161813131,
+   "within_25pct": 0.0
+  }
+ }
+}

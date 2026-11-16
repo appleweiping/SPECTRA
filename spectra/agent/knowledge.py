@@ -1,4 +1,4 @@
-"""Shared interface/PDK descriptions (given to ALL methods) and SPECTRA-only topology knowledge cards."""
+"""Shared interface/PDK descriptions and topology knowledge cards (all given to ALL LLM methods)."""
 
 PDK_SHEET = """PDK: SkyWater SKY130, 1.8 V core devices only, simulated with ngspice (BSIM4), nominal VDD = 1.8 V, 27 C.
 Devices you may use inside the DUT (canonical netlist syntax, sizes in micrometres):
@@ -64,7 +64,7 @@ plus AC. IREF flows from VDD INTO `ibias`. Load CL. Measured: low-frequency sign
 closed-loop bandwidth, output DC offset from 0.9 V, power; for integrators the unity-gain frequency and slope.""",
 }
 
-# SPECTRA-only: compact topology knowledge cards (design intent, trade-offs, analytic models)
+# Topology knowledge cards (shared by ALL LLM methods: SPECTRA and baselines; design intent, trade-offs, analytic models)
 KNOWLEDGE = {
     "opamp": """Topology cards (analytic models in terms of gm, gds; use LUT gm/Id design):
 [5T-OTA] diff pair + mirror load. A0=gm1/(gds2+gds4); GBW=gm1/(2*pi*CL); single dominant pole -> PM~90 deg if mirror pole
