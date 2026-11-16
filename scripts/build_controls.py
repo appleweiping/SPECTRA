@@ -27,7 +27,7 @@ def tighten(s):
         s["value"] = round(v / 2, 2)
     return s
 
-def main(n=10):
+def main(n=6):
     tasks = [json.loads(l) for l in open(ROOT / "data/bench/tasks.jsonl")]
     pick, fams = [], set()
     for t in sorted(tasks, key=lambda t: (-int(t["tier"]), t["id"])):

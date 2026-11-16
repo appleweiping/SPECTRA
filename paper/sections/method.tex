@@ -42,9 +42,9 @@ Raw simulator output is converted into four pieces of evidence:
 ($V_{DS}-V_{dsat}<50$\,mV), triode, weak inversion or off, with $I_D$, $g_m/I_D$, $g_m/g_{ds}$ and the
 $V_{DS}-V_{dsat}$ margin;
 (iii) \emph{prediction--simulation discrepancies} beyond 25\% (6\,dB, 10$^\circ$);
-(iv) \emph{finite-difference sensitivities} of every failing metric to up to eight intent variables (+10\%
+(iv) when the design is close to feasible, \emph{finite-difference sensitivities} of every failing metric to up to eight intent variables (+10\%
 perturbations, one simulation each, charged to the budget).
-A small family-specific rule base (about 20 rules) turns this evidence into hypotheses that link failing specs to
+A small rule base (17 rules: four region rules and 13 family-specific ones) turns this evidence into hypotheses that link failing specs to
 devices or nodes, e.g., ``M5 in triode ($V_{DS}=0.14<V_{dsat}=0.21$): tail source starved of headroom'' or
 ``output DC at a rail: second-stage currents unbalanced''.
 
