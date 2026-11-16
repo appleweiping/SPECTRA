@@ -1,0 +1,17 @@
+n tt -40C: 550 sweeps in 85.2s -> /home/user/spectra/data/lut/sky130_nfet_tt_-40.npz
+p tt -40C: 550 sweeps in 88.5s -> /home/user/spectra/data/lut/sky130_pfet_tt_-40.npz
+n ff -40C: 550 sweeps in 109.0s -> /home/user/spectra/data/lut/sky130_nfet_ff_-40.npz
+p ff -40C: 550 sweeps in 126.9s -> /home/user/spectra/data/lut/sky130_pfet_ff_-40.npz
+n ss -40C: 550 sweeps in 130.8s -> /home/user/spectra/data/lut/sky130_nfet_ss_-40.npz
+p ss -40C: 550 sweeps in 133.4s -> /home/user/spectra/data/lut/sky130_pfet_ss_-40.npz
+n sf -40C: 550 sweeps in 132.1s -> /home/user/spectra/data/lut/sky130_nfet_sf_-40.npz
+p sf -40C: 550 sweeps in 151.7s -> /home/user/spectra/data/lut/sky130_pfet_sf_-40.npz
+n fs -40C: 550 sweeps in 178.2s -> /home/user/spectra/data/lut/sky130_nfet_fs_-40.npz
+p fs -40C: 550 sweeps in 165.5s -> /home/user/spectra/data/lut/sky130_pfet_fs_-40.npz
+n tt 125C: 550 sweeps in 158.5s -> /home/user/spectra/data/lut/sky130_nfet_tt_125.npz
+p tt 125C: 550 sweeps in 209.8s -> /home/user/spectra/data/lut/sky130_pfet_tt_125.npz
+n ff 125C: 550 sweeps in 214.4s -> /home/user/spectra/data/lut/sky130_nfet_ff_125.npz
+p ff 125C: 550 sweeps in 213.3s -> /home/user/spectra/data/lut/sky130_pfet_ff_125.npz
+n ss 125C: 550 sweeps in 196.8s -> /home/user/spectra/data/lut/sky130_nfet_ss_125.npz
+p ss 125C: 550 sweeps in 206.1s -> /home/user/spectra/data/lut/sky130_pfet_ss_125.npz
+n sf 125C: 550 sweeps in 218.5s -> /home/user/spectra/data/lut/sky130_nfet_sf_125.npz

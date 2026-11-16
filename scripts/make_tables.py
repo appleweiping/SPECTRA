@@ -39,3 +39,51 @@ def main_table(exp="E1", methods=None, out="main.tex", caption="", label="tab:ma
 
 if __name__ == "__main__":
     main_table(*(sys.argv[1:2] or ["E1"]))
+
+
+def ablation_table(exp_main="E1", exp_abl="E2", out="ablation.tex"):
+    """Ablations on the E2 subset: SPECTRA/SPECTRA-min/baselines restricted to subset tasks + E2 variants."""
+    from scripts.analyze import load, cluster_boot
+    import numpy as np
+    sub = {json.loads(l)["id"] for l in open(ROOT / "data/bench/subset_E2.jsonl")}
+    runs = [r for r in load(exp_main) + load(exp_abl) if r["task"] in sub]
+    order = ["spectra", "spectra_nodiag", "spectra_nointent", "spectra_norefine", "spectra_min", "genbo", "genbo_cmaes", "direct"]
+    rows = []
+    for m in order:
+        rs = [r for r in runs if r["method"] == m]
+        if not rs:
+            continue
+        s, lo, hi = cluster_boot(rs)
+        nom = cluster_boot([r for r in rs if not r["robust"]])[0]
+        rob = cluster_boot([r for r in rs if r["robust"]])[0]
+        succ = [r for r in rs if r["success"]]
+        calls = np.median([r["calls"] for r in succ]) if succ else None
+        sims = np.median([r["sims"] for r in succ]) if succ else None
+        cost = np.mean([r["cost"] for r in rs])
+        rows.append(f"{LABEL.get(m, m)} & {f(s)} [{f(lo)},{f(hi)}] & {f(nom)} & {f(rob)} & {f(calls, False)} & {f(sims, False)} & {cost:.2f} \\\\")
+    tex = ("\\begin{table}[t]\n\\centering\n\\caption{Ablations on the stratified subset (" + str(len(sub)) +
+           " tasks, 3 seeds). Calls/sims: medians over successful runs.}\n\\label{tab:ablation}\n\\scriptsize\n"
+           "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lcccccc@{}}\n\\toprule\n"
+           "Variant & Succ.\\,(\\%) [CI] & Nom. & Rob. & Calls & Sims & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
+           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+    (TAB / out).write_text(tex)
+    print(tex)
+
+
+def fault_table(out="fault.tex"):
+    s = json.loads((ROOT / "results/E4_summary.json").read_text())
+    classes = [c for c in s["rule"] if c not in ("top1", "top3")]
+    nice = {"undersize_W": "Undersized $W$", "short_L": "Short $L$", "mirror_ratio": "Mirror ratio", "comp_cap": "Comp.\\ cap",
+            "bias_starve": "Bias starved", "miswire_gate": "Miswired gate", "resistor_value": "Resistor value"}
+    rows = []
+    for c in classes:
+        n = s["rule"][c]["n"]
+        rows.append(f"{nice.get(c, c)} & {n} & " + " & ".join(f"{f(s[a][c]['top1'])}/{f(s[a][c]['top3'])}" for a in ("rule", "raw", "spectra")) + " \\\\")
+    rows.append("\\midrule")
+    rows.append("All & " + str(sum(s['rule'][c]['n'] for c in classes)) + " & " + " & ".join(f"{f(s[a]['top1'])}/{f(s[a]['top3'])}" for a in ("rule", "raw", "spectra")) + " \\\\")
+    tex = ("\\begin{table}[t]\n\\centering\n\\caption{Fault localisation accuracy (top-1/top-3, \\%) by injected fault class.}\n"
+           "\\label{tab:fault}\n\\scriptsize\n\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}lcccc@{}}\n\\toprule\n"
+           "Fault class & $n$ & Rules only & LLM + raw & LLM + SPECTRA diag. \\\\\n\\midrule\n" + "\n".join(rows) +
+           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+    (TAB / out).write_text(tex)
+    print(tex)

@@ -64,3 +64,31 @@ if __name__ == "__main__":
     ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo", "genbo_cmaes"]
     tier_bars(exp, ms, f"{exp}_tiers.pdf"); anytime(exp, ms, f"{exp}_anytime.pdf")
     print("ok")
+
+
+def family_heatmap(exp, methods, out):
+    """Per-family success (rows: methods, cols: families); sequential single-hue blue, values annotated."""
+    runs = load(exp, methods)
+    fams = ["opamp", "amp", "tia", "cmirror", "ldo", "ref", "comparator", "latch", "vco", "filter", "schmitt", "opamp_app"]
+    short = ["OpAmp", "Amp", "TIA", "Mirror", "LDO", "Ref", "Comp", "Latch", "VCO", "Filter", "Schmitt", "App"]
+    M = np.full((len(methods), len(fams)), np.nan)
+    for i, m in enumerate(methods):
+        for j, fa in enumerate(fams):
+            rs = [r for r in runs if r["method"] == m and r["family"] == fa]
+            if rs:
+                M[i, j] = cluster_boot(rs)[0]
+    from matplotlib.colors import LinearSegmentedColormap
+    cmap = LinearSegmentedColormap.from_list("seqblue", ["#f2f6fc", "#9cc0ee", "#2a78d6", "#123f75"])
+    fig, ax = plt.subplots(figsize=(3.4, 0.35 + 0.22 * len(methods)))
+    ax.imshow(M, cmap=cmap, vmin=0, vmax=1, aspect="auto")
+    for i in range(len(methods)):
+        for j in range(len(fams)):
+            if not np.isnan(M[i, j]):
+                ax.text(j, i, f"{100 * M[i, j]:.0f}", ha="center", va="center", fontsize=5,
+                        color="#0b0b0b" if M[i, j] < 0.6 else "#ffffff")
+    ax.set_xticks(range(len(fams))); ax.set_xticklabels(short, rotation=45, ha="right", fontsize=5.5)
+    ax.set_yticks(range(len(methods))); ax.set_yticklabels([LABEL[m] for m in methods], fontsize=5.5)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    ax.tick_params(length=0)
+    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)

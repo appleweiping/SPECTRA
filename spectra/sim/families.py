@@ -164,7 +164,7 @@ class CMirror:
         vdd, iin, vnom = cond.get("vdd", 1.8), p.get("iin", 10e-6), p.get("vout_nom", 0.9)
         sink = p.get("direction", "sink") == "sink"
         sl, echo = _op_block(ckt, "xd1")
-        iin_line = f"Iin vdd iin DC {iin}" if sink else f"Iin iin 0 DC {iin}"
+        iin_line = f"Iin vdd iin DC {iin}"     # input current always flows into iin; direction refers to the output
         net = f"""{_head(cond, 'current mirror tb')}{dut}
 Vdd vdd 0 DC {vdd}
 {iin_line}
@@ -450,6 +450,7 @@ wrdata tran.txt v(vout) i(vdd)
         if d is not None:
             vin, vo = d[:, 0], d[:, 1]
             m["vout_min"], m["vout_max"] = float(vo.min()), float(vo.max())
+            m["vout_min_rel"], m["vout_max_rel"] = m["vout_min"] / vdd, m["vout_max"] / vdd
             hi = np.where(vo > vdd / 2)[0]
             if len(hi) and 0 < hi[0]:
                 m["offset"] = float(vin[hi[0]] - vcm)
@@ -692,6 +693,7 @@ wrdata tran.txt v(vin) v(vout) i(vdd)
         if m["vth_hi"] is not None and m["vth_lo"] is not None:
             m["hysteresis"] = m["vth_hi"] - m["vth_lo"]
         m["vout_min"], m["vout_max"] = float(vo.min()), float(vo.max())
+        m["vout_min_rel"], m["vout_max_rel"] = m["vout_min"] / vdd, m["vout_max"] / vdd
         m["power_avg"] = float(-np.trapezoid(idd, tt) / tt[-1] * vdd)
         m["_ops"] = {}
         return m

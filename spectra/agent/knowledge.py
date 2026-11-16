@@ -27,9 +27,10 @@ output DC level and swing (output range keeping >=50% of small-signal gain under
     "tia": """Interface (.subckt dut iin vout vdd vss ibias): transimpedance amplifier. An AC current source drives iin
 (DC input current 0) in parallel with a photodiode capacitance CPD to ground. IREF flows from VDD INTO `ibias`.
 Load CL on vout. Transimpedance = |vout/iin| at low frequency (dB-ohm); bandwidth = -3 dB frequency.""",
-    "cmirror": """Interface (.subckt dut iin iout vdd vss): current mirror. An ideal input current IIN flows from VDD INTO pin iin
-(direction=sink) and the testbench holds iout at a DC voltage (swept 0..VDD); output current is the current flowing INTO
-iout (sink mirror). Measured: iout at VOUT_NOM, output resistance at VOUT_NOM, compliance voltage = lowest iout voltage at
+    "cmirror": """Interface (.subckt dut iin iout vdd vss): current mirror. An ideal input current IIN always flows from VDD INTO
+pin iin; the testbench holds iout at a DC voltage (swept 0..VDD). For direction=sink the output current is the current
+flowing INTO iout; for direction=source it is the current flowing OUT of iout (compliance then refers to VDD minus the
+highest output voltage). Measured: iout at VOUT_NOM, output resistance at VOUT_NOM, compliance voltage = lowest iout voltage at
 which the current is still >= 95% of its value at VOUT_NOM. vdd may be left unused.""",
     "ldo": """Interface (.subckt dut vin vout vref vss ibias): low-dropout regulator. vin is the input supply (1.8 V), vref an ideal
 reference voltage VREF, IREF flows from vin INTO `ibias`. Load: DC current sink ILOAD from vout to ground (stepped between

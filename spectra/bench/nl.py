@@ -31,6 +31,7 @@ PHRASE = {
     "vref": ("reference voltage at 27 C", "V", "plain"), "tc_ppm": ("temperature coefficient over -40..125 C", "ppm/C", "plain"),
     "startup_ok": ("reliable start-up (1 = yes)", "", "plain"), "tpd": ("propagation delay", "s", "eng"), "offset": ("input offset", "V", "eng"),
     "polarity_ok": ("correct output polarity (1 = yes)", "", "plain"), "vout_max": ("output high level", "V", "plain"),
+    "vout_max_rel": ("output high level relative to VDD", "x VDD", "plain"), "vout_min_rel": ("output low level relative to VDD", "x VDD", "plain"),
     "vout_min": ("output low level", "V", "plain"), "correct": ("correct decisions (1 = yes)", "", "plain"),
     "delay": ("clock-to-output delay", "s", "eng"), "energy": ("energy per comparison", "J", "eng"),
     "f_mid": ("oscillation frequency at the mid control voltage", "Hz", "eng"), "fmin": ("lowest frequency over the control range", "Hz", "eng"),

@@ -15,20 +15,25 @@ configuration. Every testbench was validated against hand analysis (e.g., an int
 157.7\,kHz versus 159\,kHz expected).
 
 \input{tables/families}
+\IfFileExists{tables/bench_stats.tex}{\input{tables/bench_stats}}{}
 
 \subsection{Task Tiers and Feasibility Certificates}
 Specifications are worthless if they are unattainable or trivially loose. For the \emph{certified tier} we wrote
-\NTemplates{} expert parametric templates spanning the families, explored each with CMA-ES under random
-scalarisations of the family's metrics (\NExploreEvals{} simulated designs in total), and selected reference
-designs near the Pareto front. Specifications are the reference's metrics relaxed by a tier margin
-(T1/T2/T3: e.g., $-10/-5/-2$\,dB for gains, $0.5/0.75/0.9\times$ for bandwidths, $2/1.33/1.1\times$ for power),
-rounded conservatively, with 4, 6 or all profile metrics, respectively. Every task is re-simulated with its
-reference before acceptance, so each certified task carries a \emph{feasibility certificate}. Robust tasks derive
-targets from the reference's worst case over the full PVT grid and must hold on all 45 conditions.
-Because certified specs come from our own templates, we add a \emph{designer tier} of \NDesigner{} tasks written
-independently from textbook and practitioner targets~\cite{allen2012cmos,razavi2017design} (e.g., a 1.2\,V/10\,mA
-on-chip LDO, a 1\,GHz dynamic comparator, a 1\,MHz Butterworth low-pass), whose feasibility is unknown a priori;
-and \emph{oracle-unmet controls} that tighten certified tasks beyond any design in the exploration archives.
+\NTemplates{} expert parametric templates spanning the families and explored each with CMA-ES under random
+scalarisations of the family's metrics (\NExploreEvals{} simulated designs in total). For each task slot a reference
+design is drawn from the near-Pareto region of its archive. A pilot showed that specifications relaxed from such
+archive points are too loose for a frontier LLM (all methods solved them), so for T3 and robust slots the
+reference is first \emph{frontier-refined}: CMA-ES maximises the minimum normalised improvement of all chosen metrics
+over the archive point (worst case over hard PVT conditions for robust slots). Specifications are the reference's
+metrics relaxed by a tier margin (T1/T2/T3: $-10/-5/-1$\,dB for gains, $0.5/0.75/0.95\times$ for bandwidth-like
+and $2/1.33/1.05\times$ for power-like metrics), rounded conservatively, with 4, 6 or all profile metrics,
+respectively; robust tasks use T3 margins on the reference's worst case over the full 45-condition grid. Every
+task is re-simulated with its reference before acceptance, so each certified task carries a \emph{feasibility
+certificate}. Because certified specs come from our own templates, we add a \emph{designer tier} of \NDesigner{}
+tasks written independently from textbook and practitioner targets~\cite{allen2012cmos,razavi2017design} (e.g., a
+150\,MHz OTA, a 1.2\,V/10\,mA on-chip LDO, a 1\,GHz dynamic comparator, a 1\,MHz Butterworth low-pass), whose
+feasibility is unknown a priori, and \emph{oracle-unmet controls} that tighten certified tasks until an extended
+template oracle (two 600-evaluation CMA-ES runs) cannot meet them.
 In total SPECTRA-Bench contains \NTasksTotal{} tasks (\NCertified{} certified, \NRobust{} of them robust).
 
 \subsection{Metrics and Budgets}

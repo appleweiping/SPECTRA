@@ -176,10 +176,10 @@ EXTRA_SPECS = {  # always-on functional specs (from sanity) per family
     "amp": [{"metric": "vout_dc", "op": "range", "value": [0.45, 1.35]}],
     "tia": [{"metric": "vout_dc", "op": "range", "value": [0.3, 1.5]}],
     "ref": [{"metric": "startup_ok", "op": ">=", "value": 1}],
-    "comparator": [{"metric": "polarity_ok", "op": ">=", "value": 1}, {"metric": "vout_max", "op": ">=", "value": 1.62},
-                   {"metric": "vout_min", "op": "<=", "value": 0.18}],
+    "comparator": [{"metric": "polarity_ok", "op": ">=", "value": 1}, {"metric": "vout_max_rel", "op": ">=", "value": 0.9},
+                   {"metric": "vout_min_rel", "op": "<=", "value": 0.1}],
     "latch": [{"metric": "correct", "op": ">=", "value": 1}],
-    "filter": [], "schmitt": [{"metric": "vout_max", "op": ">=", "value": 1.7}, {"metric": "vout_min", "op": "<=", "value": 0.1}],
+    "filter": [], "schmitt": [{"metric": "vout_max_rel", "op": ">=", "value": 0.94}, {"metric": "vout_min_rel", "op": "<=", "value": 0.06}],
     "opamp_app": [{"metric": "vout_offset", "op": "range", "value": [-0.05, 0.05]}],
     "ldo": [{"metric": "ripple_settled", "op": "<=", "value": 0.01}],
 }
@@ -189,13 +189,18 @@ FAMILY_EXTRA_METRICS = {"opamp": ["gain_db", "ugbw", "pm"], "amp": ["gain_db", "
                         "schmitt": ["hysteresis"]}
 
 
-def main(families=None, seed=0):
+def main(families=None, seed=0, only=None, out_name=None):
+    """only: optional set of (family, slot_index) to (re)build."""
     rng = np.random.default_rng(seed)
     tasks, used = [], set()
+    out_path = OUT / (out_name or ("tasks.jsonl" if not families else f"tasks_{'_'.join(families)}.jsonl"))
+    partial = out_path.with_suffix(".partial.jsonl")
     for fam, slots in SLOTS.items():
         if families and fam not in families:
             continue
         for si, (tag, tier, robust) in enumerate(slots):
+            if only is not None and (fam, si) not in only:
+                continue
             path = EXP / f"{tag}.jsonl"
             if not path.exists():
                 print("missing archive", tag); continue
@@ -254,7 +259,14 @@ def main(families=None, seed=0):
                         sp = derive_spec(n, v, 3 if robust else tier)
                     if sp:
                         specs.append(sp)
-                specs += EXTRA_SPECS.get(fam, [])
+                for es in EXTRA_SPECS.get(fam, []):
+                    es = dict(es)
+                    if robust and es["op"] == "range":
+                        vals = [m.get(es["metric"]) for m in ev.per_cond.values() if m.get(es["metric"]) is not None]
+                        if vals:
+                            lo, hi = es["value"]
+                            es["value"] = [round(max(0.2, min(lo, min(vals) - 0.05)), 3), round(min(1.6, max(hi, max(vals) + 0.05)), 3)]
+                    specs.append(es)
                 task["specs"] = specs
                 ev2 = evaluate(task, net, conds=conds)
                 if not ev2.passed:
@@ -267,11 +279,13 @@ def main(families=None, seed=0):
                              "ref_metrics": {k: v for k, v in m0.items()}})
                 task["nl_spec"] = render(task)
                 tasks.append(task)
+                with open(partial, "a") as pf:
+                    pf.write(json.dumps(task, default=float) + "\n")
                 print(f"{tid:34s} specs={len(specs)}", flush=True)
                 break
             else:
                 print("FAILED slot", fam, tag, tier, robust)
-    with open(OUT / ("tasks.jsonl" if not families else f"tasks_{'_'.join(families)}.jsonl"), "w") as f:
+    with open(out_path, "w") as f:
         for t in tasks:
             f.write(json.dumps(t, default=float) + "\n")
     print("total", len(tasks))
