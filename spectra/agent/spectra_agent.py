@@ -358,8 +358,9 @@ class Spectra:
                 prompt = prompt.replace('- "refine":', '- ("refine" is NOT available in this configuration)')
             text = ctx.ask(prompt, SYSTEM_SPECTRA, f"iter{it}")
             act = llm.extract_json(text) or {}
-            a = str(act.get("action", "edit")).lower()
             new_prog = llm.extract_block(text, "python")
+            a = str(act.get("action", "edit" if new_prog else ("refine" if act.get("params") or act.get("bounds") else "edit"))).lower()
+            ctx.log("action", it=it, action=a, has_program=bool(new_prog), reason=str(act.get("reason", ""))[:200])
             if a == "declare_infeasible":
                 self.status = "declared_infeasible"
                 ctx.log("declare_infeasible", reason=act.get("reason"))
@@ -368,7 +369,8 @@ class Spectra:
                 init = act.get("params") if isinstance(act.get("params"), dict) else None
                 bounds = act.get("bounds") if isinstance(act.get("bounds"), dict) else None
                 if init:
-                    self.params.update({k: float(v) for k, v in init.items() if isinstance(v, (int, float))})
+                    self.params.update({k: float(v) for k, v in init.items()
+                                        if isinstance(v, (int, float)) and k in self.params_spec})
                 conds = self.active if task.get("robust") else [NOMINAL]
                 best = self.refine(conds, min(max(cfg.refine_chunk, 16 * len(conds)), ctx.sims_left()), bounds=bounds)
                 self.history.append(hist_line + f" -> refine (best {best[0]:.3f})" if best else hist_line + " -> refine (no result)")

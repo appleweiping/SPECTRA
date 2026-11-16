@@ -1,0 +1,18 @@
+\subsection{Setup}
+\label{sec:setup}
+\textbf{Methods.} All LLM-based methods use the same model (Claude Opus~5.5 through the Claude Code CLI with default
+sampling), the same task text, interface description, PDK sheet and topology knowledge cards, and the same budgets
+(Section~\ref{sec:bench}). \emph{AnalogCoder-style}~\cite{lai2025analogcoder}: the LLM writes a design plan and a
+sized netlist and revises it from simulator feedback (spec table, errors, zero-current devices, failing PVT
+conditions). \emph{Gen+TPE} (AnalogCoder-Pro-style~\cite{lai2026analogcoderpro}): the LLM proposes a parameterised
+topology with bounds, TPE~\cite{bergstra2011tpe,akiba2019optuna} sizes it over raw $W/L/R/C$, and up to three
+regenerations receive the best result; for robust tasks TPE optimises the worst case over TT, SS/125\,$^\circ$C and
+FF/$-40\,^\circ$C. \emph{Gen+CMA-ES} replaces TPE by CMA-ES to separate optimiser from parameterisation.
+\emph{SPECTRA-min} is the decisive ablation: one planning call (plus at most two calls to fix program errors), then
+intent-space CMA-ES with the whole budget and SPECTRA's PVT loop, but no diagnosis and no LLM repair.
+\emph{Oracle} optimises the benchmark's own reference template with CMA-ES under the same budget---privileged
+information that bounds what sizing alone achieves on certified tasks.
+
+\textbf{Protocol.} Each method runs 3 seeds per task; success is decided by independent re-verification
+(Section~\ref{sec:bench}). Confidence intervals are 95\% cluster bootstraps over tasks; paired comparisons use the
+Wilcoxon signed-rank test on per-task success rates with Holm correction.

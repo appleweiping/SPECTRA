@@ -149,26 +149,27 @@ def utility(rows, fam, w):
 
 # family -> list of slots: (archive tag, template, tier, robust, extra tb)
 SLOTS = {
-    "opamp": [("ota5t", 1, 0), ("ota5t", 2, 0), ("ota5t", 3, 0), ("miller2", 1, 0), ("miller2", 2, 0), ("miller2", 2, 0),
-              ("miller2", 3, 0), ("miller2", 3, 0), ("miller2", 3, 0), ("fcasc", 1, 0), ("fcasc", 2, 0), ("fcasc", 3, 0),
-              ("fcasc", 3, 0), ("miller2", 2, 1), ("miller2", 2, 1), ("ota5t", 2, 1), ("fcasc", 2, 1), ("miller2", 3, 1)],
-    "amp": [("cs_pload", 1, 0), ("cs_pload", 2, 0), ("cs_diode", 1, 0), ("cs_diode", 3, 0), ("casc_amp", 2, 0),
-            ("casc_amp", 3, 0), ("sf", 2, 0), ("cs_diode", 2, 1)],
-    "tia": [("tia_sfb", 1, 0), ("tia_sfb", 2, 0), ("tia_sfb", 3, 0), ("tia_sfb", 3, 0), ("tia_sfb", 2, 1), ("tia_sfb", 2, 0)],
-    "cmirror": [("cm_simple@20u", 1, 0), ("cm_casc@80u", 2, 0), ("cm_wide@20u", 3, 0), ("cm_psrc@5u", 2, 0),
-                ("cm_wide@80u", 2, 0), ("cm_casc@5u", 3, 0), ("cm_simple@80u", 2, 1), ("cm_wide@20u", 2, 1), ("cm_casc@20u", 1, 0)],
+    "opamp": [("ota5t", 1, 0), ("miller2", 1, 0), ("ota5t", 2, 0), ("miller2", 2, 0), ("fcasc", 2, 0),
+              ("ota5t", 3, 0), ("miller2", 3, 0), ("miller2", 3, 0), ("miller2", 3, 0), ("fcasc", 3, 0), ("fcasc", 3, 0),
+              ("miller2", 3, 1), ("miller2", 3, 1), ("ota5t", 3, 1), ("fcasc", 3, 1)],
+    "amp": [("cs_diode", 1, 0), ("cs_pload", 2, 0), ("sf", 2, 0), ("cs_pload", 3, 0), ("casc_amp", 3, 0),
+            ("casc_amp", 3, 0), ("cs_diode", 3, 0), ("cs_diode", 3, 1)],
+    "tia": [("tia_sfb", 1, 0), ("tia_sfb", 2, 0), ("tia_sfb", 3, 0), ("tia_sfb", 3, 0), ("tia_sfb", 3, 0), ("tia_sfb", 3, 1)],
+    "cmirror": [("cm_simple@20u", 1, 0), ("cm_casc@80u", 2, 0), ("cm_psrc@20u", 2, 0), ("cm_wide@20u", 3, 0),
+                ("cm_casc@5u", 3, 0), ("cm_wide@80u", 3, 0), ("cm_simple@80u", 3, 1), ("cm_wide@20u", 3, 1)],
     "ldo": [("ldo_pmos", 1, 0), ("ldo_pmos", 2, 0), ("ldo_pmos", 2, 0), ("ldo_pmos", 3, 0), ("ldo_pmos", 3, 0),
-            ("ldo_pmos", 1, 0), ("ldo_pmos", 2, 1), ("ldo_pmos", 2, 1)],
-    "ref": [("bgr", 1, 0), ("bgr", 2, 0), ("bgr", 3, 0), ("bgr", 2, 0), ("bgr", 2, 1), ("bgr", 1, 1)],
-    "comparator": [("comp2", 1, 0), ("comp2", 2, 0), ("comp2", 3, 0), ("comp2", 2, 0), ("comp2", 3, 0), ("comp2", 2, 1)],
-    "latch": [("strongarm", 1, 0), ("strongarm", 2, 0), ("strongarm", 3, 0), ("strongarm", 2, 0), ("strongarm", 3, 0), ("strongarm", 2, 1)],
-    "vco": [("csring3", 1, 0), ("csring3", 2, 0), ("csring5", 2, 0), ("csring5", 3, 0), ("csring7", 2, 0), ("csring7", 3, 0),
-            ("csring3", 3, 0), ("csring5", 2, 1)],
-    "filter": [("sk_lpf2", 1, 0), ("sk_lpf2", 2, 0), ("sk_lpf2", 3, 0), ("sk_lpf3", 2, 0), ("sk_lpf3", 3, 0), ("mfb_bpf", 1, 0),
-               ("mfb_bpf", 2, 0), ("sk_lpf2", 2, 1)],
-    "schmitt": [("st6", 1, 0), ("st6", 2, 0), ("st6", 3, 0), ("st6", 2, 1)],
-    "opamp_app": [("app_inv", 1, 0), ("app_inv", 3, 0), ("app_noninv", 2, 0), ("app_sum", 2, 0), ("app_sum", 3, 0),
-                  ("app_diff", 2, 0), ("app_diff", 3, 0), ("app_integ", 2, 0), ("app_integ", 3, 0), ("app_inv", 2, 1)],
+            ("ldo_pmos", 3, 0), ("ldo_pmos", 3, 1), ("ldo_pmos", 3, 1)],
+    "ref": [("bgr", 1, 0), ("bgr", 2, 0), ("bgr", 3, 0), ("bgr", 3, 0), ("bgr", 3, 1), ("bgr", 3, 1)],
+    "comparator": [("comp2", 1, 0), ("comp2", 2, 0), ("comp2", 3, 0), ("comp2", 3, 0), ("comp2", 3, 0), ("comp2", 3, 1)],
+    "latch": [("strongarm", 1, 0), ("strongarm", 2, 0), ("strongarm", 3, 0), ("strongarm", 3, 0), ("strongarm", 3, 0),
+              ("strongarm", 3, 1)],
+    "vco": [("csring3", 1, 0), ("csring5", 2, 0), ("csring7", 2, 0), ("csring3", 3, 0), ("csring5", 3, 0), ("csring7", 3, 0),
+            ("csring3", 3, 1), ("csring5", 3, 1)],
+    "filter": [("sk_lpf2", 1, 0), ("sk_lpf2", 2, 0), ("mfb_bpf", 2, 0), ("sk_lpf2", 3, 0), ("sk_lpf3", 3, 0),
+               ("sk_lpf3", 3, 0), ("mfb_bpf", 3, 0), ("sk_lpf2", 3, 1)],
+    "schmitt": [("st6", 1, 0), ("st6", 2, 0), ("st6", 3, 0), ("st6", 3, 1)],
+    "opamp_app": [("app_inv", 1, 0), ("app_noninv", 2, 0), ("app_sum", 2, 0), ("app_integ", 2, 0), ("app_inv", 3, 0),
+                  ("app_sum", 3, 0), ("app_diff", 3, 0), ("app_integ", 3, 0), ("app_inv", 3, 1)],
 }
 EXTRA_SPECS = {  # always-on functional specs (from sanity) per family
     "opamp": [{"metric": "polarity_ok", "op": ">=", "value": 1}],
@@ -219,7 +220,7 @@ def main(families=None, seed=0):
                 xref = ref["x"]
                 if (tier == 3 or robust) and FRONTIER:
                     pm_names = [n for n, _, _ in prof if ref["m"].get(n) is not None and n not in TARGET][:6]
-                    xref = frontier_refine(fam, tname, ref["x"], tb, pm_names, robust, seed=si)
+                    xref = frontier_refine(fam, tname, ref["x"], tb, pm_names, robust, budget=(60 if robust else 160), seed=si)
                 net = T[tname]["build"](xref)
                 task = {"family": fam, "tb": tb, "specs": []}
                 conds = PVT if robust else [NOMINAL]

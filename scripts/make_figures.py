@@ -1,0 +1,66 @@
+"""Paper figures from results/ (matplotlib, PDF). Palette: validated categorical order (dataviz reference)."""
+import json, sys
+from pathlib import Path
+import numpy as np
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from spectra.paths import ROOT
+from scripts.analyze import load, cluster_boot
+
+FIG = ROOT / "paper" / "figs"
+PAL = {"spectra": "#2a78d6", "spectra_min": "#eb6834", "direct": "#1baf7a", "genbo": "#eda100",
+       "genbo_cmaes": "#e87ba4", "oracle_cmaes": "#008300", "spectra_nodiag": "#6250d6", "spectra_nointent": "#e34948",
+       "spectra_norefine": "#52514e"}
+LABEL = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE",
+         "genbo_cmaes": "Gen+CMA-ES", "oracle_cmaes": "Oracle topology+CMA-ES", "spectra_nodiag": "w/o diagnosis",
+         "spectra_nointent": "w/o intent (raw W/L)", "spectra_norefine": "w/o refinement"}
+plt.rcParams.update({"font.size": 7, "axes.spines.top": False, "axes.spines.right": False, "axes.linewidth": 0.6,
+                     "xtick.major.width": 0.6, "ytick.major.width": 0.6, "axes.edgecolor": "#52514e",
+                     "axes.labelcolor": "#0b0b0b", "xtick.color": "#52514e", "ytick.color": "#52514e",
+                     "pdf.fonttype": 42, "ps.fonttype": 42})
+
+
+def tier_bars(exp, methods, out):
+    runs = load(exp, methods)
+    groups = [("T1", lambda r: str(r["tier"]) == "1" and not r["robust"]), ("T2", lambda r: str(r["tier"]) == "2" and not r["robust"]),
+              ("T3", lambda r: str(r["tier"]) == "3" and not r["robust"]), ("Robust", lambda r: r["robust"] and r["tier"] != "D"),
+              ("Designer", lambda r: str(r["tier"]) == "D")]
+    groups = [(g, f) for g, f in groups if any(f(r) for r in runs)]
+    fig, ax = plt.subplots(figsize=(3.4, 1.7))
+    w = 0.8 / len(methods)
+    for i, m in enumerate(methods):
+        vals, los, his = [], [], []
+        for g, f in groups:
+            s, lo, hi = cluster_boot([r for r in runs if r["method"] == m and f(r)])
+            vals.append(s); los.append(s - lo); his.append(hi - s)
+        x = np.arange(len(groups)) + (i - (len(methods) - 1) / 2) * w
+        ax.bar(x, vals, w * 0.9, color=PAL[m], label=LABEL[m], yerr=[los, his], error_kw={"lw": 0.5, "capsize": 1, "ecolor": "#52514e"})
+    ax.set_xticks(range(len(groups))); ax.set_xticklabels([g for g, _ in groups])
+    ax.set_ylabel("Success rate"); ax.set_ylim(0, 1.05)
+    ax.grid(axis="y", color="#e5e4e0", lw=0.5); ax.set_axisbelow(True)
+    ax.legend(ncol=3, fontsize=5.5, frameon=False, loc="upper center", bbox_to_anchor=(0.5, 1.32))
+    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+
+
+def anytime(exp, methods, out, key="sims", xmax=300):
+    runs = load(exp, methods)
+    fig, ax = plt.subplots(figsize=(3.3, 1.6))
+    for m in methods:
+        rs = [r for r in runs if r["method"] == m and not r["robust"]]
+        if not rs:
+            continue
+        xs = np.unique(np.concatenate([[1], np.logspace(0, np.log10(xmax), 60)]))
+        ys = [np.mean([r["success"] and r[key] <= x for r in rs]) for x in xs]
+        ax.plot(xs, ys, color=PAL[m], lw=1.4, label=LABEL[m])
+    ax.set_xscale("log"); ax.set_xlabel("Simulations used (condition-evaluations)" if key == "sims" else "LLM calls")
+    ax.set_ylabel("Solved fraction"); ax.set_ylim(0, 1.02)
+    ax.grid(color="#e5e4e0", lw=0.5); ax.legend(fontsize=5.5, frameon=False, loc="lower right")
+    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+
+
+if __name__ == "__main__":
+    exp = sys.argv[1] if len(sys.argv) > 1 else "E1"
+    ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo", "genbo_cmaes"]
+    tier_bars(exp, ms, f"{exp}_tiers.pdf"); anytime(exp, ms, f"{exp}_anytime.pdf")
+    print("ok")

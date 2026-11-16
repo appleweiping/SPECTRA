@@ -84,7 +84,23 @@ def extract_block(text: str, lang: str) -> str | None:
     return cands[-1] if cands else None
 
 
-def extract_json(text: str):
+def extract_json(text: str, merge: bool = True):
+    """Parse ```json blocks. With merge=True all dict blocks are merged in order (later keys win), because models
+    often split e.g. {"action": ...} and {"params": ..., "bounds": ...} into separate blocks."""
+    import re
+    if merge:
+        merged, found = {}, False
+        for lang, body in re.findall(r"```(\w*)\s*\n(.*?)```", text, re.S):
+            if lang.lower() not in ("json", ""):
+                continue
+            try:
+                d = json.loads(body)
+            except Exception:
+                continue
+            if isinstance(d, dict):
+                merged.update(d); found = True
+        if found:
+            return merged
     b = extract_block(text, "json")
     for cand in ([b] if b else []) + [text]:
         if not cand:

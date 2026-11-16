@@ -17,7 +17,7 @@ RAW = ROOT / "results" / "raw"
 
 
 def budget_for(task):
-    return Budget(llm_calls=12, sims=3000 if task.get("robust") else 300)
+    return Budget(llm_calls=12, sims=2000 if task.get("robust") else 300)
 
 
 def make_runner(method, model):
