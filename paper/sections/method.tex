@@ -8,12 +8,13 @@ low-dimensional intent space exposed by the program, and robust tasks are closed
 
 \subsection{Design-Intent Programs}
 \label{sec:intent}
+\input{figs/program}
 A design-intent program is a short Python module with two parts. \texttt{PARAMS} declares 3--12 intent variables
 with initial values and bounds (inversion levels $g_m/I_D$, channel lengths, branch currents, compensation
-capacitance, resistor ratios). \texttt{design(p, lut, spec)} sizes every transistor from intent through a
-characterised lookup table, \texttt{lut.size(dev,\,$g_m/I_D$,\,L,\,$I_D$,\,$V_{DS}$,\,$V_{SB}$)}, which returns the
+capacitance, resistor ratios). \texttt{design(p,\,lut,\,spec)} sizes every transistor from intent through a
+characterised lookup table: \texttt{lut.size} maps $(g_m/I_D, L, I_D, V_{DS}, V_{SB})$ to the device and returns the
 width together with $V_{GS}$, $V_{th}$, $V_{dsat}$, $g_m$, $g_{ds}$, capacitances and $f_T$; the function returns
-the netlist \emph{and the program's own prediction of every specified metric}. The LUTs are generated with ngspice
+the netlist \emph{and the program's own prediction of every specified metric} (Fig.~\ref{fig:program}). The LUTs are generated with ngspice
 from the SKY130 BSIM4 models for $\{5$ process corners$\}\times\{-40,27,125\,^\circ\mathrm{C}\}$ on an
 $L\times V_{DS}\times V_{SB}\times V_{GS}$ grid ($11\times10\times5\times181$) at a reference finger width; queries
 interpolate trilinearly in $(\log L, V_{DS}, V_{SB})$ and invert $g_m/I_D$ on the strong-inversion branch, and

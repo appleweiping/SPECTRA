@@ -1,0 +1,24 @@
+\begin{figure}[t]
+\begin{lstlisting}[style=prog]
+PARAMS = {"gmid1": (18, 14, 22), "L1": (1.0, .5, 2),  # intent
+  "It": (30e-6, 15e-6, 60e-6), "I7": (120e-6, 60e-6, 250e-6),
+  "gmidp": (10, 7, 13), "Lp": (.8, .4, 1.5), "Cc": (1e-12, .5e-12, 2e-12),
+  "gmidn": (13, 9, 16), "Ln": (2, 1, 3), "kRz": (1.6, .8, 3.5)}
+def design(p, lut, spec):
+  m1 = lut.size("n", p["gmid1"], p["L1"], p["It"]/2, vds=.5, vsb=.25)
+  m3 = lut.size("p", p["gmidp"], p["Lp"], p["It"]/2, vds=.75)
+  m7 = lut.size("p", p["gmidp"], p["Lp"], p["I7"], vds=.9)
+  ...                                    # tail, bias, M8
+  n = Netlist("vinp vinn vout vdd vss ibias")
+  n.dev("M1", "d1", "vinn", "tail", "vss", m1)
+  n.dev("M7", "vout", "o1", "vdd", "vdd", m7)       # ...
+  n.R("RZ", "o1", "cz", p["kRz"] / m7.gm)
+  A = m1.gm/(m1.gds+m3.gds) * m7.gm/(m7.gds+m8.gds)
+  ugbw = m1.gm / (2*PI*p["Cc"])
+  return n, {"gain_db": db(A), "ugbw": ugbw, "pm": ..., ...}
+\end{lstlisting}
+\vspace{-2mm}
+\caption{Excerpt of a design-intent program written by SPECTRA for a two-stage op-amp task (abridged). Sizes come
+from $(g_m/I_D, L, I_D)$ through \texttt{lut.size}; the returned predictions are compared against simulation.}
+\label{fig:program}
+\end{figure}
