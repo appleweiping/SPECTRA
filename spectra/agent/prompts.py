@@ -58,6 +58,9 @@ Respond with:
 ITERATE = """# Task — iteration {it} (LLM calls left: {calls_left}, simulation budget left: {sims_left})
 {nl_spec}
 
+## Design-program API (unchanged)
+{dsl}
+
 ## Current design program
 ```python
 {program}

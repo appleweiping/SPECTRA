@@ -12,10 +12,20 @@ from spectra.agent import dsl
 SAFE_BUILTINS = {k: __builtins__[k] if isinstance(__builtins__, dict) else getattr(__builtins__, k)
                  for k in ["abs", "min", "max", "sum", "round", "range", "len", "enumerate", "zip", "float", "int",
                            "bool", "str", "dict", "list", "tuple", "set", "sorted", "reversed", "any", "all", "map",
-                           "filter", "isinstance", "pow", "divmod", "print", "ValueError", "Exception", "ZeroDivisionError",
-                           "KeyError", "IndexError", "TypeError", "True", "False", "None"]
+                           "filter", "isinstance", "hasattr", "pow", "divmod", "print", "repr", "format", "object",
+                           "staticmethod", "property", "super", "callable", "iter", "next", "slice", "complex",
+                           "__build_class__", "ValueError", "Exception", "ZeroDivisionError", "KeyError", "IndexError",
+                           "TypeError", "NameError", "AttributeError", "RuntimeError", "ArithmeticError", "OverflowError",
+                           "AssertionError", "StopIteration", "LookupError", "NotImplementedError", "True", "False", "None"]
                  if (k in __builtins__ if isinstance(__builtins__, dict) else hasattr(__builtins__, k))}
-FORBIDDEN = re.compile(r"\b(import|open|exec|eval|compile|globals|locals|getattr|setattr|__\w+__)\b")
+FORBIDDEN = re.compile(r"\b(import|open|exec|eval|compile|globals|locals|getattr|setattr|delattr|vars|breakpoint|input)\b"
+                       r"|__(import|builtins|class|subclasses|globals|code|dict|bases|mro|loader|spec|getattribute)__")
+
+
+API_HINT = ("\n[API reminder] design(p, lut, spec) must return (Netlist, predictions). Size devices with "
+            "lut.size(dev, gm_id, L, Id, vds=..., vsb=...) -> DevOP (fields W, L, Id, gm_id, vgs, vth, vdsat, gm, gds, "
+            "cgg, cgd, cdd, ft, intrinsic_gain); n = Netlist('port1 port2 ...'); n.dev(name, d, g, s, b, op, m=1); "
+            "n.M(name, d, g, s, b, 'nfet'|'pfet', W, L, m=1); n.Q/n.R/n.C. PARAMS = {name: (init, lo, hi)}.")
 
 
 def main(prog_path, jobs_path, out_path):
@@ -24,18 +34,26 @@ def main(prog_path, jobs_path, out_path):
     bad = FORBIDDEN.search(src)
     if bad:
         json.dump({"ok": False, "error": f"forbidden construct '{bad.group(0)}': programs may not import modules or use "
-                   f"I/O/introspection; math, np, Netlist, par, db, PI, UT are pre-imported."}, open(out_path, "w"))
+                   f"I/O/introspection. Pre-imported names: math, np, Netlist, par, db, PI, UT; the gm/Id sizer is the "
+                   f"`lut` argument of design(p, lut, spec): lut.size(dev, gm_id, L, Id, vds, vsb)."}, open(out_path, "w"))
         return
     ns = {"__builtins__": SAFE_BUILTINS, "__name__": "design_program", "math": math, "np": np, "Netlist": dsl.Netlist,
           "par": dsl.par, "db": dsl.db, "PI": dsl.PI, "UT": dsl.UT}
     out = {"ok": True, "results": []}
     try:
         exec(compile(src, "design_program.py", "exec"), ns)
-        params0 = {k: v[0] for k, v in ns["PARAMS"].items()}
-        out["PARAMS"] = {k: list(v) for k, v in ns["PARAMS"].items()}
+        norm = {}
+        for k, v in ns["PARAMS"].items():
+            if isinstance(v, (int, float)):
+                norm[k] = [float(v), float(v), float(v)]        # scalar -> fixed (not refinable)
+            else:
+                v = list(v)
+                norm[k] = [float(v[0]), float(v[1] if len(v) > 1 else v[0]), float(v[2] if len(v) > 2 else v[0])]
+        params0 = {k: v[0] for k, v in norm.items()}
+        out["PARAMS"] = norm
     except Exception:
         out["ok"] = False
-        out["error"] = traceback.format_exc(limit=3)[-2500:]
+        out["error"] = traceback.format_exc(limit=3)[-2500:] + API_HINT
         json.dump(out, open(out_path, "w")); return
     lut = dsl.LUT()
     for ps in jobs["params"]:
@@ -48,7 +66,7 @@ def main(prog_path, jobs_path, out_path):
                     for k, v in (pred or {}).items()}
             out["results"].append({"ok": True, "netlist": text, "pred": pred, "params": p})
         except Exception:
-            out["results"].append({"ok": False, "error": traceback.format_exc(limit=4)[-2500:], "params": p})
+            out["results"].append({"ok": False, "error": traceback.format_exc(limit=4)[-2500:] + API_HINT, "params": p})
     json.dump(out, open(out_path, "w"), default=float)
 
 

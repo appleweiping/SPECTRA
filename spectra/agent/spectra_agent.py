@@ -267,8 +267,8 @@ class Spectra:
             if err is None or fixes >= 2:
                 break
             fixes += 1
-            text = ctx.ask(f"# Task\n{task['nl_spec']}\n\nYour design program:\n```python\n{self.program}\n```\n"
-                           f"failed:\n{err}\n\nReturn the corrected complete program in a ```python block.",
+            text = ctx.ask(f"# Task\n{task['nl_spec']}\n\n## Design-program API\n{DSL_DOC}\n\nYour design program:\n"
+                           f"```python\n{self.program}\n```\nfailed:\n{err}\n\nReturn the corrected complete program in a ```python block.",
                            SYSTEM_SPECTRA, f"fix{fixes}")
             self.program, self.params = llm.extract_block(text, "python") or self.program, {}
         if err is None and r is not None:
@@ -353,6 +353,7 @@ class Spectra:
             prompt = ITERATE.format(task_id="", it=it, calls_left=ctx.calls_left(), sims_left=ctx.sims_left(),
                                     nl_spec=task["nl_spec"], program=self.program or "(none)", diagnosis=diag,
                                     history="\n".join(self.history[-6:]) or "(first iteration)",
+                                    dsl=(DSL_DOC if cfg.use_intent else NO_INTENT_DSL),
                                     robust_note=(ROBUST_NOTE if task.get("robust") else ""))
             if not cfg.use_refine:
                 prompt = prompt.replace('- "refine":', '- ("refine" is NOT available in this configuration)')
