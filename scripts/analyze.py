@@ -14,12 +14,19 @@ from spectra.paths import ROOT
 RAW = ROOT / "results" / "raw"
 
 
+# E1 protocol: SPECTRA and AnalogCoder-style use seeds 0-2; the simulation-heavy Gen+TPE and SPECTRA-min use 0-1
+SEED_FILTER = {"E1": {"genbo": {"s0", "s1"}, "spectra_min": {"s0", "s1"}}}
+
+
 def load(exp, methods=None):
     runs = []
+    sf = SEED_FILTER.get(exp, {})
     for mdir in sorted((RAW / exp).glob("*")):
         if methods and mdir.name not in methods:
             continue
         for f in mdir.glob("*/s*.json"):
+            if mdir.name in sf and f.stem not in sf[mdir.name]:
+                continue
             r = json.loads(f.read_text())
             meta = r.get("task_meta", {})
             v = r.get("verify", {})
