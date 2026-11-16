@@ -22,7 +22,7 @@ plt.rcParams.update({"font.size": 7, "axes.spines.top": False, "axes.spines.righ
 
 
 def tier_bars(exp, methods, out):
-    runs = load(exp, methods)
+    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
     groups = [("T1", lambda r: str(r["tier"]) == "1" and not r["robust"]), ("T2", lambda r: str(r["tier"]) == "2" and not r["robust"]),
               ("T3", lambda r: str(r["tier"]) == "3" and not r["robust"]), ("Robust", lambda r: r["robust"] and r["tier"] != "D"),
               ("Designer", lambda r: str(r["tier"]) == "D")]
@@ -44,7 +44,7 @@ def tier_bars(exp, methods, out):
 
 
 def anytime(exp, methods, out, key="sims", xmax=300):
-    runs = load(exp, methods)
+    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
     fig, ax = plt.subplots(figsize=(3.3, 1.6))
     for m in methods:
         rs = [r for r in runs if r["method"] == m and not r["robust"]]
@@ -59,16 +59,9 @@ def anytime(exp, methods, out, key="sims", xmax=300):
     fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
 
 
-if __name__ == "__main__":
-    exp = sys.argv[1] if len(sys.argv) > 1 else "E1"
-    ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo", "genbo_cmaes"]
-    tier_bars(exp, ms, f"{exp}_tiers.pdf"); anytime(exp, ms, f"{exp}_anytime.pdf")
-    print("ok")
-
-
 def family_heatmap(exp, methods, out):
     """Per-family success (rows: methods, cols: families); sequential single-hue blue, values annotated."""
-    runs = load(exp, methods)
+    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
     fams = ["opamp", "amp", "tia", "cmirror", "ldo", "ref", "comparator", "latch", "vco", "filter", "schmitt", "opamp_app"]
     short = ["OpAmp", "Amp", "TIA", "Mirror", "LDO", "Ref", "Comp", "Latch", "VCO", "Filter", "Schmitt", "App"]
     M = np.full((len(methods), len(fams)), np.nan)
@@ -92,3 +85,31 @@ def family_heatmap(exp, methods, out):
         sp.set_visible(False)
     ax.tick_params(length=0)
     fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+
+
+def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
+    """Two panels: solved fraction (nominal tasks) vs simulations and vs LLM calls."""
+    runs = [r for r in load(exp, methods) if not r["robust"] and not r.get("infeasible")]
+    fig, axes = plt.subplots(1, 2, figsize=(3.4, 1.55), sharey=True)
+    for m in methods:
+        rs = [r for r in runs if r["method"] == m]
+        if not rs:
+            continue
+        xs = np.unique(np.concatenate([[1], np.logspace(0, np.log10(xmax_sims), 60)]))
+        axes[0].plot(xs, [np.mean([r["success"] and r["sims"] <= x for r in rs]) for x in xs], color=PAL[m], lw=1.3, label=LABEL[m])
+        cs = np.arange(1, xmax_calls + 1)
+        axes[1].step(cs, [np.mean([r["success"] and r["calls"] <= c for r in rs]) for c in cs], where="post", color=PAL[m], lw=1.3)
+    axes[0].set_xscale("log"); axes[0].set_xlabel("Simulations"); axes[1].set_xlabel("LLM calls")
+    axes[0].set_ylabel("Solved fraction"); axes[0].set_ylim(0, 1.02)
+    for ax in axes:
+        ax.grid(color="#e5e4e0", lw=0.5)
+    axes[0].legend(fontsize=5, frameon=False, loc="lower right")
+    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+
+
+if __name__ == "__main__":
+    exp = sys.argv[1] if len(sys.argv) > 1 else "E1"
+    ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo", "genbo_cmaes"]
+    tier_bars(exp, ms, f"{exp}_tiers.pdf"); anytime(exp, ms, f"{exp}_anytime.pdf")
+    anytime2(exp, ms, f"{exp}_anytime2.pdf"); family_heatmap(exp, ms, f"{exp}_families.pdf")
+    print("ok")
