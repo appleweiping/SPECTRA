@@ -17,3 +17,14 @@ All MUST-FIX items addressed (commit "Code review R1 fixes"): opaque task ids an
 ota5t polarity + polarity spec/sanity, hard budget cap with lock, CMA incumbent + budget-sized populations, robust
 refine on the active corner set, oracle PVT loop, temperature LUTs (queued), sandbox import/I-O restrictions,
 settling relative to final value. Archives of ota5t/fcasc/sf/cm_psrc are regenerated.
+
+## 2026-11-16 Difficulty calibration (results/raw/calib, results/pilot/calib_run.log)
+Hardened tasks (frontier-refined T3 references, T3 margins; robust tasks from 45-condition worst case):
+| task | direct (AnalogCoder-style) | SPECTRA (pre-fix parser) |
+|---|---|---|
+| op-amp T3, 10 specs (frontier-refined) | 0/2 (12 calls each, $2.8–4.0) | 1/2 (9 calls, 228 sims; failed run within 0.4% of UGBW and 0.1% of settling) |
+| op-amp T3 robust (45 PVT) | 0/2 (TT pass, PVT fail; 12 calls) | 1/1 so far (3 calls, 132 sims, $0.35) |
+| cascode amplifier T3 | 0/2 (12 calls) | pending |
+Finding: the hardened tiers discriminate. A parser bug dropped split-JSON `refine` actions in 3 of 11 SPECTRA
+iterations of the failed run (fixed before E1). Cost per failing direct run on hard op-amps is $2.8–4.0 (very long
+outputs), relevant for the cost analysis.

@@ -30,7 +30,7 @@ class LLMError(Exception):
 
 
 def call(prompt: str, system: str, model: str = "opus", run_tag: str = "", tag: str = "", timeout: int = 900,
-         retries: int = 3, effort: str | None = None) -> dict:
+         retries: int = 6, effort: str | None = None) -> dict:
     model_id = MODELS.get(model, model)
     key = hashlib.sha256(json.dumps([model_id, system, prompt, run_tag, effort]).encode()).hexdigest()
     cp = CACHE / key[:2] / f"{key}.json"
@@ -55,11 +55,11 @@ def call(prompt: str, system: str, model: str = "opus", run_tag: str = "", tag: 
             js = json.loads(p.stdout)
         except Exception:
             last = (p.stdout + p.stderr)[-500:]
-            time.sleep(5 * (attempt + 1)); continue
+            time.sleep(min(300, 15 * 2 ** attempt)); continue
         text = js.get("result") or ""
         if js.get("is_error") or not text:
             last = str(js)[:500]
-            time.sleep(5 * (attempt + 1)); continue
+            time.sleep(min(300, 15 * 2 ** attempt)); continue
         u = js.get("usage", {})
         rec = {"text": text, "model": model_id, "seconds": round(dt, 2),
                "input_tokens": u.get("input_tokens", 0) + u.get("cache_read_input_tokens", 0) + u.get("cache_creation_input_tokens", 0),

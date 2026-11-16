@@ -1,36 +1,24 @@
-# EXPERIMENT PLAN — SPECTRA
+# EXPERIMENT PLAN — SPECTRA (revised after Gate-1 review, pilot and calibration)
 
-All runs: ngspice-42, SKY130 (tt/ff/ss/sf/fs), 4 CPU workers; LLM via `claude -p` (default sampling). Logs:
-`results/raw/<exp>/<method>/<task>/<seed>.json`, LLM usage `results/llm_usage.jsonl`.
+Common: ngspice-42, SKY130 (5 corners, 3 temps, 3 supplies = 45-condition PVT grid; per-instance mismatch MC),
+LLM = Claude Opus 5.5 via `claude -p` (default sampling) for all LLM methods; identical task text, interface,
+PDK sheet and topology knowledge cards for all LLM methods; opaque task ids; independent final verification.
+Budgets per run: ≤12 LLM calls; ≤300 (nominal) / ≤2000 (robust) condition-evaluations, hard-capped.
 
 ## Benchmark — SPECTRA-Bench
-- 12 families; tasks derived from expert-template exploration archives (`data/explore/*.jsonl`): pick diverse sane
-  reference designs; specs = reference metrics relaxed by tier margin (T1 loose, T2 standard, T3 tight); robust tier:
-  specs derived from the reference's worst-case over 17 PVT conditions (reference re-verified at PVT).
-- Infeasible controls: ~6 tasks with specs beyond every reference by a large margin (e.g. 120 dB gain single stage
-  at 10 µW), labelled infeasible.
-- Also: functional AnalogCoder-style tasks are subsumed by T1 tasks of the same circuits.
-
-## Methods (equal budgets per task-run: ≤ 12 LLM calls, ≤ 400 testbench simulations nominal-equivalent; PVT
-evaluations count each condition)
-1. SPECTRA (full)
-2. AnalogCoder-style: LLM writes sized netlist directly; iterative feedback of spec table + errors (AnalogCoder prompts
-   adapted to SKY130 interface), up to 12 calls.
-3. AnalogCoder-Pro-style: LLM proposes topology + parameterised netlist; TPE (Optuna) over raw W/L/R/C with the
-   remaining simulation budget; up to 3 regeneration rounds.
-4. Expert-topology oracle + CMA-ES / TPE / random (reference only — uses benchmark templates).
-Ablations of SPECTRA: −intent (raw W/L program), −diagnosis (spec table only), −refinement (LLM-only repair),
-−knowledge cards, −memory, −PVT-aware (robust tasks: nominal design then verify / verify-all-corners each iteration).
+- Certified tier: 92 slots over 12 families (T1/T2/T3 + 19 robust); T3/robust references frontier-refined;
+  T3 margins 1 dB / 2° / 0.95× / 0.97×; robust specs from the 45-condition worst case with T3 margins.
+- Designer tier: 25 hand-written tasks (5 robust), feasibility certified post hoc.
+- Oracle-unmet controls: tightened certified tasks that an extended template oracle (2×600 CMA-ES evals) cannot meet.
 
 ## Experiments
-- E1 main: all tasks × {1,2,3} × 3–5 seeds; metrics: success@TT, success@PVT (robust tasks), pass@k, sims, tokens, USD, time.
-- E2 ablations: stratified subset (≈36 tasks, 3/family) × 3 seeds.
-- E3 robustness: robust tier tasks; compare PVT strategies; cost (sims) vs robust success.
-- E4 diagnosis accuracy: fault injection on reference designs (≥ 100 faults: device to triode, under-biased branch,
-  missing compensation, wrong mirror ratio, swapped polarity...), top-1/top-3 root-cause localisation, vs raw-output LLM.
-- E5 backbones: Opus 5.5 / Sonnet 5.5 / Haiku 5.5 on the E2 subset for SPECTRA and AnalogCoder-style.
-- E6 infeasible controls: false-success rate, infeasibility declaration precision/recall.
-- E7 efficiency curves: success vs. simulation budget and vs. LLM calls (anytime curves).
-
+- E1 main: all tasks × 3 seeds × {SPECTRA, SPECTRA-min, AnalogCoder-style, Gen+TPE}; Oracle(CMA-ES) on template tasks.
+- E2 ablations (stratified subset, 2 hardest nominal + 1 robust per family): w/o diagnosis, w/o intent (raw W/L),
+  w/o refinement, Gen+CMA-ES; 3 seeds.
+- E3 PVT strategy (robust tasks): adaptive (SPECTRA) vs all-corners-every-step vs nominal-only; + MC yield of
+  robust-tier final designs (100 samples).
+- E4 diagnosis by fault injection: 7 fault classes on certified references; rule-only vs LLM+raw vs LLM+SPECTRA diagnosis.
+- E5 backbone scaling: Sonnet 5.5 / Haiku 5.5 on the subset for SPECTRA and AnalogCoder-style (2 seeds).
+- Efficiency: anytime success vs simulations and vs LLM calls; tokens/$ per success.
 ## Statistics
-95% bootstrap CIs over tasks×seeds; paired comparisons via McNemar / Wilcoxon signed-rank with Holm correction.
+Cluster bootstrap over tasks (95% CI); paired Wilcoxon on per-task success with Holm correction.
