@@ -6,7 +6,7 @@ import time
 from dataclasses import dataclass, field
 
 from ..sim.evaluate import NOMINAL, PVT, evaluate, cond_name
-from .knowledge import FAMILY_IFACE, PDK_SHEET
+from .knowledge import FAMILY_IFACE, KNOWLEDGE, PDK_SHEET
 from .prompts import ROBUST_NOTE
 from . import llm
 
@@ -82,4 +82,5 @@ def task_texts(task):
     tb = {k: v for k, v in task.get("tb", {}).items()}
     robust = task.get("robust", False)
     return {"task_id": task["id"], "nl_spec": task["nl_spec"], "iface": FAMILY_IFACE[fam], "tb": json.dumps(tb, default=str),
-            "pdk": PDK_SHEET, "robust_note": ("\n" + ROBUST_NOTE + "\n") if robust else ""}
+            "pdk": PDK_SHEET, "robust_note": ("\n" + ROBUST_NOTE + "\n") if robust else "",
+            "knowledge": KNOWLEDGE[fam]}

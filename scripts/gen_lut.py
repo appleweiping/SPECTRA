@@ -74,7 +74,9 @@ def gen(dev, corner="tt", temp=27):
 
 
 if __name__ == "__main__":
-    corners = sys.argv[1:] or ["tt"]
-    for c in corners:
-        for dev in ["n", "p"]:
-            gen(dev, c)
+    corners = [a for a in sys.argv[1:] if not a.startswith("T=")] or ["tt"]
+    temps = [int(a[2:]) for a in sys.argv[1:] if a.startswith("T=")] or [27]
+    for t in temps:
+        for c in corners:
+            for dev in ["n", "p"]:
+                gen(dev, c, t)

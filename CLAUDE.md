@@ -20,7 +20,7 @@ last_updated: "2026-11-16"
   W1.5 experiment-bridge -> W2 auto-review-loop -> W3 paper-writing; artifacts in canonical locations.
 - Executor: Claude Code (Opus 5.5). Reviewer: fresh `claude -p` sessions (Fable 5.1 primary, Opus 5.5
   secondary) via tools/aris_review.py; traces in .aris/traces/. Same-family => provisional acceptance.
-- Venue: ICCAD — IEEEtran conference, 8 pages content (+ references as allowed by CFP), double blind.
+- Venue: ICCAD (2026 CFP: ACM proceedings template `acmart` sigconf, <=8 pages incl. figures/tables + 1 page references, double blind, anonymous code via anonymous.4open.science). Keep LaTeX portable to IEEEtran.
 - All numbers in the paper must come from files in results/; no fabricated results.
 
 ## Non-Goals

@@ -58,6 +58,10 @@ class LUT:
     def table(self, dev, L, vds=0.6, vsb=0.0):
         return _lut.table(dev, L, vds, vsb)
 
+    def at(self, corner="tt", temp=27):
+        """LUT at another process corner (tt/ff/ss/sf/fs) and temperature (-40/27/125 C)."""
+        return LUT(corner, temp)
+
 
 def par(*rs):
     return 1.0 / sum(1.0 / r for r in rs)

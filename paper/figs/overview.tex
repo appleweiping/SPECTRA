@@ -1,0 +1,39 @@
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  node distance=4mm and 6mm,
+  box/.style={draw, rounded corners=2pt, align=center, font=\footnotesize, minimum height=11mm, inner sep=2pt, fill=white},
+  llm/.style={box, fill=blue!8, draw=blue!60!black},
+  det/.style={box, fill=gray!8},
+  sim/.style={box, fill=orange!10, draw=orange!70!black},
+  arr/.style={-{Stealth[length=2mm]}, thick},
+  lab/.style={font=\scriptsize\itshape, align=center}]
+\node[box, text width=24mm, fill=green!8] (spec) {NL specification\\ \scriptsize interface, loads,\\ \scriptsize targets, PVT req.};
+\node[llm, right=of spec, text width=27mm] (plan) {\textbf{LLM: plan}\\ \scriptsize topology choice +\\ \scriptsize design-intent program};
+\node[det, right=of plan, text width=30mm] (exec) {\textbf{Program executor}\\ \scriptsize \texttt{lut.size}($g_m/I_D$, L, $I_D$)\\ \scriptsize LUT: 5 corners $\times$ 3 temps\\ \scriptsize $\Rightarrow$ netlist + \emph{predictions}};
+\node[det, right=of exec, text width=17mm] (erc) {\textbf{ERC}\\ \scriptsize ports, DC paths,\\ \scriptsize bulks, ranges};
+\node[sim, right=of erc, text width=22mm] (tb) {\textbf{ngspice TB}\\ \scriptsize SKY130 BSIM4\\ \scriptsize all metrics, 1 run};
+\node[det, below=7mm of tb, text width=34mm] (diag) {\textbf{Device-level diagnosis}\\ \scriptsize spec table $\cdot$ regions \& margins\\ \scriptsize prediction discrepancy\\ \scriptsize sensitivities $\cdot$ rule hypotheses};
+\node[llm, left=of diag, text width=30mm] (pol) {\textbf{LLM: repair policy}\\ \scriptsize \textsc{Refine} $\mid$ \textsc{Edit} $\mid$ \textsc{Declare}};
+\node[det, left=of pol, text width=30mm] (ref) {\textbf{Intent-space CMA-ES}\\ \scriptsize re-executes program\\ \scriptsize (structure preserved)};
+\node[sim, left=of ref, text width=31mm] (pvt) {\textbf{PVT-aware refinement}\\ \scriptsize adaptive worst-condition set\\ \scriptsize $\to$ 45-cond.\ PVT + MC verify};
+\node[box, below=6mm of pvt, text width=31mm, fill=green!8, minimum height=7mm] (out) {Sized, verified SKY130 netlist};
+\draw[arr] (spec) -- (plan);
+\draw[arr] (plan) -- (exec);
+\draw[arr] (exec) -- (erc);
+\draw[arr] (erc) -- (tb);
+\draw[arr] (tb) -- (diag);
+\draw[arr] (diag) -- (pol);
+\draw[arr] (pol) -- node[above, lab]{Refine} (ref);
+\draw[arr] (pol.north) |- node[pos=0.25, right, lab]{Edit} ($(plan.south)+(0,-2mm)$) -- (plan.south);
+\draw[arr] (ref.north) -- ++(0,4mm) -| (exec.south);
+\draw[arr] (erc.south) |- node[pos=0.2, right, lab]{errors} ($(pol.north)+(4mm,0)$);
+\draw[arr] (pvt) -- (out);
+\draw[arr, dashed] (tb.east) -- ++(4mm,0) |- node[pos=0.75, below, lab]{TT pass (robust task)} ($(pvt.south)+(0,-4mm)$) -- (pvt.south);
+\end{tikzpicture}}
+\caption{SPECTRA. The LLM reasons in design intent and writes an executable sizing program; deterministic
+components execute, check, simulate and diagnose; all numerical search runs in the program's intent space; robust
+tasks close with adaptive worst-condition refinement and full PVT/mismatch verification.}
+\label{fig:overview}
+\end{figure*}

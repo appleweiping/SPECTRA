@@ -1,0 +1,30 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{xspace}
+\input{numbers}
+
+\begin{document}
+\title{SPECTRA: Spec-to-Robust Analog Circuit Synthesis with Design-Intent Programs and Device-Level Diagnosis}
+\author{Anonymous Author(s)}
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+\maketitle
+
+\input{sections/intro}
+\input{figs/overview}
+\input{sections/related}
+\input{sections/bench}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+\end{document}

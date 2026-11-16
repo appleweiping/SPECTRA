@@ -17,7 +17,7 @@ TB_DEFAULT = {
     "vco": {"vctrl_range": (0.7, 1.4), "tstop": 100e-9}, "filter": {"kind": "lowpass"}, "schmitt": {"inverting": False},
     "opamp_app": {"func": "inv"},
 }
-TB_OVERRIDE = {"sf": {"vin_dc": 1.4}}
+TB_OVERRIDE = {"sf": {"vin_dc": 1.4}, "cm_psrc": {"direction": "source"}}
 APP_FUNC = {"app_inv": "inv", "app_sum": "sum", "app_integ": "integ", "app_diff": "diff", "app_noninv": "noninv"}
 
 

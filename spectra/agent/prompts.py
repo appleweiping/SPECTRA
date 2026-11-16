@@ -14,6 +14,7 @@ def design(p, lut, spec):                   # p: dict of PARAMS values; spec: te
     op = lut.size(dev, gm_id, L, Id, vds=0.6, vsb=0.0)   # dev 'n'|'p'; returns DevOP with fields:
          # W [um], L, Id, gm_id, vgs, vth, vdsat, gm, gds, gmbs, cgg, cgd, cdd [F], ft, intrinsic_gain (|values|)
     lut.op(dev, W, L, vgs, vds, vsb=0.0) -> dict(Id, gm, gds, vth, vdsat, gm_id, cgg)   # forward model
+    lut.at(corner, temp)  # same API at corner in tt/ff/ss/sf/fs and temp in -40/27/125 (e.g. check worst-case headroom)
     n = Netlist("port1 port2 ...")             # EXACT port list of the task
     n.dev("M1", d, g, s, b, op, m=1)           # transistor sized by a DevOP (W split over m fingers)
     n.M("M2", d, g, s, b, "nfet"|"pfet", W, L, m=1)   # explicit size in um (use for switches/logic)
@@ -79,8 +80,8 @@ Choose ONE action and reply with a ```json block {{"action": ..., "reason": "<= 
   (explain the physical limit).
 {robust_note}"""
 
-ROBUST_NOTE = """ROBUSTNESS REQUIREMENT: the design must meet ALL specs at all 17 PVT conditions (process corners tt/ff/ss/sf/fs
-x temperature -40/27/125 C at 1.8 V, plus tt at 1.62 V and 1.98 V). Design with margin (bias currents, Vds-Vdsat > 0.1 V,
+ROBUST_NOTE = """ROBUSTNESS REQUIREMENT: the design must meet ALL specs at all 45 PVT conditions (process corners tt/ff/ss/sf/fs
+x temperature -40/27/125 C x supply 1.62/1.8/1.98 V). Design with margin (bias currents, Vds-Vdsat > 0.1 V,
 phase margin) — worst cases are usually ss/125C (slow, low gm) and ff/-40C."""
 
 # ----------------------------------------------------------------- AnalogCoder-style baseline
@@ -96,6 +97,9 @@ Testbench constants: {tb}
 {robust_note}
 ## Process
 {pdk}
+
+## Topology knowledge
+{knowledge}
 
 Your answer must contain:
 ### Task 1: a design plan — devices, their connections (node names) and the role of each device; how DC bias is set.
@@ -130,6 +134,9 @@ Testbench constants: {tb}
 {robust_note}
 ## Process
 {pdk}
+
+## Topology knowledge
+{knowledge}
 
 Propose a topology and write it as a PARAMETERISED netlist; a Bayesian optimiser (TPE) will tune the parameters
 afterwards using SPICE. Reply with:

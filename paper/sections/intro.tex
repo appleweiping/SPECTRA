@@ -1,0 +1,39 @@
+\section{Introduction}
+\label{sec:intro}
+
+Analog and mixed-signal blocks remain the least automated part of chip design. A designer turns a specification
+into a topology, budgets currents and voltage headroom, sizes every device, and iterates with a simulator until all
+targets hold not only at the typical corner but across process, voltage and temperature (PVT) and device mismatch.
+Large language models (LLMs) have recently entered this loop: training-free agents generate topologies as
+code~\cite{lai2025analogcoder,bao2026analogagent}, couple generation with Bayesian-optimisation
+sizing~\cite{lai2026analogcoderpro,wang2025analogsage}, or orchestrate designer/critic
+roles~\cite{habib2026aallm}. Their evaluation, however, leaves the hardest part of the problem untested. The most
+cited end-to-end benchmarks use square-law device models and functional pass/fail checks; spec-driven systems are
+evaluated on op-amps only and at the nominal corner; and the only PVT-aware LLM methods size a \emph{given}
+topology~\cite{long2026analogscout,saxena2026opera}. A recent agent benchmark confirms that frontier models fail
+mostly at \emph{electrical closure}---meeting all quantitative targets---rather than at producing plausible
+netlists~\cite{adbench2026longhorizon}.
+
+We argue that two mismatches cause this gap. First, LLMs are good at qualitative analog reasoning (choosing a
+topology, an inversion level, a current budget, a compensation strategy) but poor at the numerical part, so asking
+them for widths in micrometres wastes their strength. Second, raw simulator output is a poor feedback signal: a
+failing phase margin says nothing about \emph{which} device or assumption is wrong.
+
+This paper presents \textbf{SPECTRA}, an end-to-end agent that goes from a natural-language specification to a
+PVT-verified, sized SKY130 netlist, and \textbf{SPECTRA-Bench}, the benchmark we built to measure such agents.
+Our contributions are:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Design-intent programs.} The LLM writes an executable sizing procedure that expresses each transistor
+by $(g_m/I_D, L, I_D)$ through PDK lookup tables, exposes a handful of intent variables, and predicts its own
+performance. Discrepancies between prediction and simulation are fed back, and all numerical search---including
+PVT-aware refinement over an adaptively selected worst-condition set---runs in the intent space.
+\item \textbf{Device-level diagnosis} that converts simulation into operating-region margins, prediction
+discrepancies, sensitivities and rule-based hypotheses, and drives a hierarchical repair policy; we validate it
+directly with a stratified fault-injection study.
+\item \textbf{SPECTRA-Bench}: \NTasksTotal{} specification-driven tasks over twelve circuit families on SKY130 with
+feasibility certificates, an independently written designer tier, 45-condition PVT and mismatch verification, and
+budget accounting in simulations, LLM calls, tokens and dollars.
+\end{itemize}
+Under identical budgets and the same LLM, SPECTRA reaches \SpectraSucc{} overall success versus \DirectSucc{} for an
+AnalogCoder-style agent and \GenboSucc{} for an AnalogCoder-Pro-style generate-then-optimise agent, and
+\SpectraRobust{} on PVT-robust tasks (Section~\ref{sec:exp}).

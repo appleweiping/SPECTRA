@@ -40,7 +40,7 @@ def _fill(net, x):
     return re.sub(r"\{(\w+)\}", rep, net)
 
 
-def run_genbo(task, model="opus", seed=0, budget=None, rounds=3, method="genbo"):
+def run_genbo(task, model="opus", seed=0, budget=None, rounds=3, method="genbo", optimizer="tpe"):
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     ctx = Ctx(task=task, model=model, seed=seed, method=method)
@@ -57,19 +57,36 @@ def run_genbo(task, model="opus", seed=0, budget=None, rounds=3, method="genbo")
         best = (float("inf"), None, None)
         if net:
             per_round = max(len(conds), (ctx.sims_left()) // (rounds - rd))
-            sampler = optuna.samplers.TPESampler(seed=seed + rd, n_startup_trials=10, multivariate=True)
-            study = optuna.create_study(direction="minimize", sampler=sampler)
-            if init:
-                study.enqueue_trial(init)
+            if optimizer == "tpe":
+                sampler = optuna.samplers.TPESampler(seed=seed + rd, n_startup_trials=10, multivariate=True)
+                study = optuna.create_study(direction="minimize", sampler=sampler)
+                if init:
+                    study.enqueue_trial(init)
+            else:
+                import cma
+                u0 = [v.to_unit(init.get(v.name, (v.lo * v.hi) ** 0.5)) for v in vars_] or [0.5]
+                es = cma.CMAEvolutionStrategy(u0, 0.25, {"bounds": [0, 1], "seed": seed + rd + 1, "verbose": -9})
+                pending = []
             used = 0
             while used + len(conds) <= per_round and ctx.sims_left() >= len(conds):
-                tr = study.ask()
-                x = {v.name: tr.suggest_float(v.name, v.lo, v.hi, log=True) for v in vars_}
+                if optimizer == "tpe":
+                    tr = study.ask()
+                    x = {v.name: tr.suggest_float(v.name, v.lo, v.hi, log=True) for v in vars_}
+                else:
+                    if not pending:
+                        sols = es.ask(); pending = [list(u) for u in sols]; scores_cma = []; batch = sols
+                    u = pending.pop(0)
+                    x = {v.name: v.from_unit(ui) for v, ui in zip(vars_, u)}
                 filled = _fill(net, x)
                 ev = ctx.evaluate(filled, conds)
                 used += len(conds)
                 sc = ev.score if ev.status == "ok" else 20.0 + (10.0 if ev.status != "sim_error" else 0.0)
-                study.tell(tr, sc)
+                if optimizer == "tpe":
+                    study.tell(tr, sc)
+                else:
+                    scores_cma.append(sc)
+                    if not pending:
+                        es.tell(batch, scores_cma)
                 if sc < best[0]:
                     best = (sc, filled, ev)
                 if ev.status in ("parse_error", "erc_error") and used >= 3 * len(conds):

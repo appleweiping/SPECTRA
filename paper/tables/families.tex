@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{Circuit families and measured metrics (SKY130, VDD\,=\,1.8\,V).}
+\label{tab:families}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{17mm}p{63mm}@{}}
+\toprule
+Family & Metrics extracted by the testbench \\
+\midrule
+Op-amp/OTA & gain, UGBW, PM, CMRR, PSRR, loaded swing, slew, settling, noise, power \\
+Amplifier & gain, $f_{-3\mathrm{dB}}$, GBW, output DC, swing, power \\
+TIA & transimpedance, $f_{-3\mathrm{dB}}$, input noise current, output DC, power \\
+Current mirror & output-current error, $R_{out}$, compliance voltage \\
+LDO & accuracy, load/line regulation, PSRR, $I_Q$, load-step under/overshoot, ringing \\
+Reference & $V_{ref}$, TC ($-40$..125\,$^\circ$C), line reg., PSRR, start-up, power \\
+CT comparator & delay at 10\,mV overdrive, offset, polarity, output levels, power \\
+Clocked comp. & decision correctness, clock-to-output delay, energy/decision \\
+VCO & frequency at 3 control voltages, tuning ratio, $K_{VCO}$, swing, power \\
+Filter & passband gain, $f_c$ or $f_0$/$Q$, peaking, stop-band attenuation, power \\
+Schmitt trigger & thresholds, hysteresis, output levels, power \\
+Op-amp appl. & signed gains, closed-loop bandwidth, offset, integrator $f_u$ \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,38 @@
+\section{Related Work}
+\label{sec:related}
+
+\textbf{LLM agents for analog topology generation.}
+AnalogCoder~\cite{lai2025analogcoder} formulated analog design as training-free Python code generation with a
+feedback loop and a circuit tool library, and evaluated 24 functional tasks; AnalogAgent~\cite{bao2026analogagent}
+and MenTeR~\cite{chen2025menter} follow the same protocol. These works use square-law (Level-1) device models and
+functional pass/fail checks (e.g., differential gain exceeding common-mode gain), so they do not test quantitative
+specification closure. AnalogXpert~\cite{zhang2025analogxpert} maps structured specifications to op-amp topologies
+without simulation, and Artisan~\cite{chen2024artisan} and AmpAgent~\cite{liu2024ampagent} specialise in
+op-amps. Learned generators such as CktGNN~\cite{dong2023cktgnn}, LaMAGIC~\cite{chang2024lamagic,chang2025lamagic2},
+AnalogGenie~\cite{gao2025analoggenie} and FALCON~\cite{mehradfar2025falcon} generate or select topologies from
+data rather than from a specification-driven reasoning loop.
+
+\textbf{Topology plus sizing from specifications.}
+AnalogCoder-Pro~\cite{lai2026analogcoderpro} couples LLM topology generation with Bayesian-optimisation sizing on a
+45\,nm predictive model and optimises a single scalar figure of merit. AnalogSAGE~\cite{wang2025analogsage}
+(10 op-amp tasks) and AaLLM~\cite{habib2026aallm} (24 op-amp targets) are spec-driven on SKY130, and
+SAFTAC~\cite{huang2026saftac} fine-tunes an 8B model with simulation rewards. PANDA~\cite{zhang2026panda} and
+Atelier~\cite{shen2026atelier} extend toward layout. All of these verify designs at the nominal corner only.
+
+\textbf{LLM-assisted sizing of a given topology.}
+ADO-LLM~\cite{yin2024adollm}, LEDRO~\cite{kochar2025ledro}, AnaFlow~\cite{ahmadzadeh2025anaflow},
+EEsizer~\cite{liu2026eesizer}, AutoSizer~\cite{yu2026autosizer} and AgenticSizing~\cite{hao2026agenticsizing}
+use LLMs to guide or replace black-box sizing; RL and BO sizers such as AutoCkt~\cite{settaluri2020autockt} and
+GCN-RL~\cite{wang2020gcnrl} remain strong references, and AnalogGym~\cite{li2024analoggym} provides open SKY130
+sizing testbenches. PVT-aware LLM sizing is recent and limited to fixed topologies: AnalogScout~\cite{long2026analogscout}
+(3 OTAs, 9 corners, mismatch yield) and OPERA~\cite{saxena2026opera} (6 op-amps, expert-taught, post-layout corners).
+OPERA and AnalogScout also use $g_m/I_D$ reasoning~\cite{jespers2017gmid}; SPECTRA differs in letting the LLM write
+an executable sizing \emph{program} whose self-predictions are checked against simulation, and in choosing the
+topology itself.
+
+\textbf{Benchmarks.}
+The Long-Horizon Analog Design Bench~\cite{adbench2026longhorizon} shows that frontier coding agents fail mostly on
+electrical closure, and AnalogPortBench~\cite{rajabi2026analogportbench} introduces infeasible-spec controls.
+SPECTRA-Bench is, to our knowledge, the first open benchmark that combines topology-plus-sizing tasks across
+twelve circuit families with quantitative multi-spec targets, feasibility certificates, 45-condition PVT and
+mismatch verification on a real PDK, and simulation/token accounting.

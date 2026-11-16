@@ -17,7 +17,7 @@ RAW = ROOT / "results" / "raw"
 
 
 def budget_for(task):
-    return Budget(llm_calls=12, sims=1200 if task.get("robust") else 300)
+    return Budget(llm_calls=12, sims=3000 if task.get("robust") else 300)
 
 
 def make_runner(method, model):
@@ -27,7 +27,8 @@ def make_runner(method, model):
     from spectra.baselines.oracle import run_oracle
     abl = {"spectra": Config(), "spectra_nointent": Config(use_intent=False), "spectra_nodiag": Config(use_diag=False),
            "spectra_norefine": Config(use_refine=False), "spectra_noknow": Config(use_knowledge=False),
-           "spectra_pvt_all": Config(pvt_strategy="all_corners"), "spectra_pvt_nominal": Config(pvt_strategy="nominal_only")}
+           "spectra_pvt_all": Config(pvt_strategy="all_corners"), "spectra_pvt_nominal": Config(pvt_strategy="nominal_only"),
+           "spectra_min": Config(minimal=True)}
     if method in abl:
         return lambda task, seed: Spectra(task, model=model, seed=seed, cfg=abl[method], budget=budget_for(task),
                                           method=method).run()
@@ -35,6 +36,9 @@ def make_runner(method, model):
         return lambda task, seed: run_direct(task, model=model, seed=seed, budget=budget_for(task))
     if method == "genbo":
         return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task))
+    if method == "genbo_cmaes":
+        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task), optimizer="cmaes",
+                                            method="genbo_cmaes")
     if method.startswith("oracle_"):
         opt = method.split("_", 1)[1]
         return lambda task, seed: run_oracle(task, optimizer=opt, seed=seed, budget=budget_for(task))

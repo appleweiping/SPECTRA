@@ -39,6 +39,7 @@ class Config:
     pvt_strategy: str = "adaptive"     # adaptive | all_corners | nominal_only
     refine_chunk: int = 80
     sens_max_params: int = 8
+    minimal: bool = False              # SPECTRA-min: plan once, then intent-space CMA-ES with the whole budget
 
 
 def _vars_from(params_spec, overrides=None):
@@ -217,17 +218,66 @@ class Spectra:
         detail = diagnose.spec_table(self.task, evP, None, cond=worst)
         return "\n".join(rows) + "\n\nWorst condition detail:\n" + detail
 
+    # ------------------------------------------------------------------ minimal variant
+    def run_minimal(self):
+        ctx, task = self.ctx, self.task
+        fixes = 0
+        while True:
+            err = None
+            if not self.program:
+                err = "No ```python design program was found in your reply."
+            else:
+                r, perr = self.design_at(self.params)
+                if r is None:
+                    err = "PROGRAM ERROR:\n" + perr
+                else:
+                    ev = ctx.evaluate(r["netlist"])
+                    if ev.status in ("parse_error", "erc_error"):
+                        err = diagnose.report(task, ev)
+            if err is None or fixes >= 2:
+                break
+            fixes += 1
+            text = ctx.ask(f"# Task {task['id']}\n{task['nl_spec']}\n\nYour design program:\n```python\n{self.program}\n```\n"
+                           f"failed:\n{err}\n\nReturn the corrected complete program in a ```python block.",
+                           SYSTEM_SPECTRA, f"fix{fixes}")
+            self.program, self.params = llm.extract_block(text, "python") or self.program, {}
+        if err is None and r is not None:
+            if ev.passed:
+                ok = True
+            else:
+                reserve = len(PVT) * 3 if task.get("robust") else 0
+                best = self.refine([NOMINAL], max(8, ctx.sims_left() - reserve))
+                ok = bool(best and best[3].passed)
+            if ok:
+                r2, _ = self.design_at(self.params)
+                net = r2["netlist"] if r2 else r["netlist"]
+                if not task.get("robust"):
+                    self.status, self.final_netlist = "success", net
+                else:
+                    okp, _ = self.robust_stage(net)
+                    if okp:
+                        self.status, self.final_netlist = "success", self.final_netlist or net
+        if self.status == "running":
+            self.status = "budget_exhausted"
+        if self.final_netlist is None:
+            self.final_netlist = ctx.best.get("netlist")
+        return {"status": self.status, "final_netlist": self.final_netlist, "program": self.program,
+                "params": self.params, **ctx.summary(), "events": ctx.events}
+
     # ------------------------------------------------------------------ main loop
     def run(self):
         ctx, task, cfg = self.ctx, self.task, self.cfg
         t = task_texts(task)
         fam = task["family"]
-        prompt = PLAN.format(**t, knowledge=(KNOWLEDGE[fam] if cfg.use_knowledge else "(none provided)"),
+        t["knowledge"] = KNOWLEDGE[fam] if cfg.use_knowledge else "(none provided)"
+        prompt = PLAN.format(**t,
                              dsl=(DSL_DOC if cfg.use_intent else NO_INTENT_DSL), metric_names=METRIC_NAMES[fam])
         text = ctx.ask(prompt, SYSTEM_SPECTRA, "plan")
         self.program = llm.extract_block(text, "python")
         plan_json = llm.extract_json(text) or {}
         ctx.log("plan", topology=plan_json.get("topology"), targets=plan_json.get("targets"))
+        if cfg.minimal:
+            return self.run_minimal()
         it = 0
         last_score = None
         while ctx.calls_left() > 0 and ctx.sims_left() > 0:

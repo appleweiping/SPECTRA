@@ -1,0 +1,76 @@
+\section{SPECTRA Framework}
+\label{sec:method}
+
+Figure~\ref{fig:overview} summarises SPECTRA. Given a natural-language specification, the LLM writes a
+\emph{design-intent program}; a deterministic tool chain executes, checks and simulates it and returns a
+device-level diagnosis; the LLM then selects one of three repair actions. All numerical search happens in the
+low-dimensional intent space exposed by the program, and robust tasks are closed by PVT-aware refinement.
+
+\subsection{Design-Intent Programs}
+\label{sec:intent}
+A design-intent program is a short Python module with two parts. \texttt{PARAMS} declares 3--12 intent variables
+with initial values and bounds (inversion levels $g_m/I_D$, channel lengths, branch currents, compensation
+capacitance, resistor ratios). \texttt{design(p, lut, spec)} sizes every transistor from intent through a
+characterised lookup table, \texttt{lut.size(dev,\,$g_m/I_D$,\,L,\,$I_D$,\,$V_{DS}$,\,$V_{SB}$)}, which returns the
+width together with $V_{GS}$, $V_{th}$, $V_{dsat}$, $g_m$, $g_{ds}$, capacitances and $f_T$; the function returns
+the netlist \emph{and the program's own prediction of every specified metric}. The LUTs are generated with ngspice
+from the SKY130 BSIM4 models for $\{5$ process corners$\}\times\{-40,27,125\,^\circ\mathrm{C}\}$ on an
+$L\times V_{DS}\times V_{SB}\times V_{GS}$ grid ($11\times10\times5\times181$) at a reference finger width; queries
+interpolate trilinearly in $(\log L, V_{DS}, V_{SB})$ and invert $g_m/I_D$ on the strong-inversion branch, and
+\texttt{lut.at(corner,\,T)} exposes other corners for headroom checks. This mirrors the $g_m/I_D$
+methodology~\cite{jespers2017gmid}: the LLM reasons about \emph{what} each device should do, and widths follow
+deterministically. Programs run in an isolated subprocess; widths are split into fingers of at most
+$5\,\mu$m before compilation to SKY130 instances.
+
+The self-prediction is the key design choice. A two-stage op-amp program written by the agent predicted
+68.7\,dB / 33.4\,MHz / 62$^\circ$ for gain/UGBW/PM and simulated at 69.6\,dB / 28.6\,MHz / 66$^\circ$; when the
+two disagree, the discrepancy tells the LLM that its \emph{model of the circuit} is wrong, which is more
+informative than a failing number.
+
+\subsection{Static Checks}
+Before any simulation, the netlist is parsed into a canonical form and checked by an electrical-rule checker:
+exact port list, dangling nodes, nodes without a DC path to a port (floating gates), illegal body connections
+(SKY130 nFET bulk must be the substrate), substrate-PNP collectors, and device/passive ranges. Errors are returned
+verbatim and cost no simulation.
+
+\subsection{Device-Level Diagnosis}
+\label{sec:diag}
+Raw simulator output is converted into four pieces of evidence:
+(i) a \emph{specification table} with target, simulated and predicted values and a normalised violation;
+(ii) an \emph{operating-point table} classifying every transistor as saturated, at the edge of saturation
+($V_{DS}-V_{dsat}<50$\,mV), triode, weak inversion or off, with $I_D$, $g_m/I_D$, $g_m/g_{ds}$ and the
+$V_{DS}-V_{dsat}$ margin;
+(iii) \emph{prediction--simulation discrepancies} beyond 25\% (6\,dB, 10$^\circ$);
+(iv) \emph{finite-difference sensitivities} of every failing metric to up to eight intent variables (+10\%
+perturbations, one simulation each, charged to the budget).
+A small family-specific rule base (about 20 rules) turns this evidence into hypotheses that link failing specs to
+devices or nodes, e.g., ``M5 in triode ($V_{DS}=0.14<V_{dsat}=0.21$): tail source starved of headroom'' or
+``output DC at a rail: second-stage currents unbalanced''.
+
+\subsection{Hierarchical Repair Policy}
+After each evaluation the LLM receives the current program, the diagnosis and a six-step history, and selects
+(a) \textsc{Refine}---the structure is right and the specs are missed by moderate margins; it may move the
+initial point and bounds of the search; (b) \textsc{Edit}---rewrite the program (bias network, sizing logic,
+compensation or topology); or (c) \textsc{Declare-Infeasible} with a physical argument. Editing costs an LLM call
+but no search budget; refinement costs simulations but no LLM call.
+
+\subsection{Intent-Space Refinement}
+\textsc{Refine} runs CMA-ES~\cite{hansen2016cma} over the unit-normalised intent variables (log scale when the
+bound ratio exceeds 4), warm-started at the current point with $\sigma_0=0.15$ and population
+$\max(8, 4+\lfloor 3\ln n\rfloor)$, in chunks of 80 simulations. Each candidate is produced by re-executing the
+program, so matching, mirror ratios and bias relations encoded by the LLM are preserved by construction; the
+search space is typically 3--5$\times$ smaller than the raw $W/L$ space. The objective is the normalised violation
+\begin{equation}
+  \mathcal{V}(x)=\max_{c\in\mathcal{C}}\sum_{s\in\mathcal{S}}\min\!\big(2,\,v_s(m_{s,c}(x))\big),
+  \label{eq:viol}
+\end{equation}
+where $v_s$ is the relative (or log-ratio for frequency-, power- and time-like metrics) shortfall of metric $s$ at
+condition $c$, and $\mathcal{C}$ is the active condition set.
+
+\subsection{PVT-Aware Refinement}
+For robust tasks, a design that passes at TT is verified on all 45 conditions (5 corners $\times$
+$\{-40,27,125\,^\circ\mathrm{C}\}\times\{1.62,1.8,1.98\,\mathrm{V}\}$). If it fails, the active set
+$\mathcal{C}$ is initialised with TT and the two worst conditions, refinement minimises Eq.~\eqref{eq:viol} over
+$\mathcal{C}$, the result is re-verified, and the two worst new conditions are added (at most six), for up to three
+rounds; persistent failures are returned to the LLM with a per-condition failure table for structural edits
+(e.g., more headroom or a different bias scheme).

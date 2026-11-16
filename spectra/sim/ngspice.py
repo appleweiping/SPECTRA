@@ -26,6 +26,8 @@ _FLOAT_RE = re.compile(r"^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$")
 
 # global counter of simulator invocations (for budget accounting)
 SIM_COUNTER = {"calls": 0, "seconds": 0.0}
+import threading as _th
+_SIM_SEM = _th.BoundedSemaphore(int(os.environ.get("SPECTRA_SIM_CONCURRENCY", os.cpu_count() or 4)))
 
 
 @dataclass
@@ -61,8 +63,9 @@ def run(netlist: str, wrdata_files: tuple = (), timeout: float = 60.0,
         Path(d, ".spiceinit").write_text(SPICEINIT)
         Path(d, "c.sp").write_text(netlist)
         try:
-            p = subprocess.run(["ngspice", "-b", "c.sp"], cwd=d, capture_output=True,
-                               text=True, timeout=timeout)
+            with _SIM_SEM:
+                p = subprocess.run(["ngspice", "-b", "c.sp"], cwd=d, capture_output=True,
+                                   text=True, timeout=timeout)
             out = p.stdout + "\n" + p.stderr
         except subprocess.TimeoutExpired as e:
             SIM_COUNTER["calls"] += 1
