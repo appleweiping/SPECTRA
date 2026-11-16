@@ -1,0 +1,1 @@
+{"case": "ldo_pmos_4", "task": "ldo-00", "template": "ldo_pmos", "truth": "M1", "class": "short_L", "failing": ["psrr_1k"], "rule": ["M5", "M1", "R1"], "raw": ["M1", "M2", "M5"], "raw_cost": 0.032948, "spectra": ["M1", "M5", "M2"], "spectra_cost": 0.043428}

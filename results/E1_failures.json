@@ -1,0 +1,106 @@
+{
+ "direct": {
+  "n_fail": 6,
+  "near_miss_<5%": 2,
+  "median_violation": 0.09868062521902783,
+  "top_failing_metrics": [
+   [
+    "cmrr_db",
+    4
+   ],
+   [
+    "psrr_db",
+    1
+   ],
+   [
+    "power",
+    1
+   ]
+  ]
+ },
+ "genbo": {
+  "n_fail": 6,
+  "near_miss_<5%": 0,
+  "median_violation": 0.3418085650386802,
+  "top_failing_metrics": [
+   [
+    "noise_1k",
+    3
+   ],
+   [
+    "(PVT only)",
+    2
+   ],
+   [
+    "gain_db",
+    1
+   ],
+   [
+    "ugbw",
+    1
+   ],
+   [
+    "psrr_db",
+    1
+   ],
+   [
+    "polarity_ok",
+    1
+   ]
+  ]
+ },
+ "spectra": {
+  "n_fail": 2,
+  "near_miss_<5%": 1,
+  "median_violation": 0.09175848527076619,
+  "top_failing_metrics": [
+   [
+    "pm",
+    1
+   ],
+   [
+    "noise_1k",
+    1
+   ]
+  ]
+ },
+ "spectra_min": {
+  "n_fail": 7,
+  "near_miss_<5%": 1,
+  "median_violation": 0.3039860224067148,
+  "top_failing_metrics": [
+   [
+    "polarity_ok",
+    3
+   ],
+   [
+    "in_noise_1m",
+    2
+   ],
+   [
+    "noise_1k",
+    2
+   ],
+   [
+    "cmrr_db",
+    1
+   ],
+   [
+    "power",
+    1
+   ],
+   [
+    "settle",
+    1
+   ],
+   [
+    "psrr_db",
+    1
+   ],
+   [
+    "gain_db",
+    1
+   ]
+  ]
+ }
+}

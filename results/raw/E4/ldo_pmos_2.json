@@ -1,0 +1,1 @@
+{"case": "ldo_pmos_2", "task": "ldo-00", "template": "ldo_pmos", "truth": "M5", "class": "bias_starve", "failing": ["ripple_settled"], "rule": ["M5", "M2", "M1"], "raw": ["Cc", "M5", "Mp"], "raw_cost": 0.035132, "spectra": ["M5", "M6", "Cc"], "spectra_cost": 0.048248}

@@ -1,0 +1,1 @@
+{"case": "bgr_1", "task": "ref-00", "template": "bgr", "truth": "M5", "class": "mirror_ratio", "failing": ["line_reg"], "rule": ["M4", "M3", "M5"], "raw": ["Q2", "M2", "R1"], "raw_cost": 0.053616, "spectra": ["Mst2", "Mst1", "Mst3"], "spectra_cost": 0.06636800000000001}

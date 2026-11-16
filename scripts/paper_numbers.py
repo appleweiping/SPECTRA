@@ -28,8 +28,20 @@ def main():
         for m, key in [("spectra", "Spectra"), ("direct", "Direct"), ("genbo", "Genbo"), ("genbo_cmaes", "GenboC"),
                        ("spectra_min", "SpectraMin")]:
             if m in s:
-                out[key + "Succ"] = pct(s[m]["success"])
-                out[key + "Robust"] = pct(s[m].get("robust"))
+                d = s[m]
+                out[key + "Succ"] = pct(d["success"])
+                out[key + "Robust"] = pct(d.get("robust"))
+                for tk, nm in (("tier1", "One"), ("tier2", "Two"), ("tier3", "Three"), ("tierD", "Des")):
+                    out[key + "T" + nm] = pct(d.get(tk))
+                out[key + "Cost"] = f"\\${d['mean_cost_usd']:.2f}"
+                out[key + "Calls"] = f"{d['median_calls_success']:.0f}" if d.get("median_calls_success") is not None else "--"
+                out[key + "Sims"] = f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"
+                out[key + "Nruns"] = str(d["n_runs"])
+        t = json.loads(e1.read_text())["tests"]
+        for k, v in t.items():
+            nm = "Test" + "".join(w.capitalize() for w in k.replace("spectra_vs_", "").split("_"))
+            out[nm + "P"] = f"{v.get('p_holm', v['p']):.3g}"
+            out[nm + "Diff"] = f"{100 * v['mean_diff']:+.1f}"
     e4 = ROOT / "results/E4_summary.json"
     if e4.exists():
         d = json.loads(e4.read_text())

@@ -1,0 +1,1 @@
+{"case": "tia_sfb_1", "task": "tia-00", "template": "tia_sfb", "truth": "M7", "class": "undersize_W", "failing": ["f3db", "power"], "rule": ["M2", "M4", "Rf"], "raw": ["M4", "M7", "M6"], "raw_cost": 0.070188, "spectra": ["M4", "M3", "M7"], "spectra_cost": 0.050808000000000006}

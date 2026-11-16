@@ -1,0 +1,1 @@
+{"case": "ldo_pmos_0", "task": "ldo-00", "template": "ldo_pmos", "truth": "Mp", "class": "undersize_W", "failing": ["psrr_1k"], "rule": ["Mp", "M2", "M5"], "raw": ["M5", "Mp", "M4"], "raw_cost": 0.08636399999999998, "spectra": ["Mp", "M5", "R2"], "spectra_cost": 0.055704000000000004}

@@ -1,0 +1,1 @@
+{"case": "tia_sfb_5", "task": "tia-00", "template": "tia_sfb", "truth": "Rf", "class": "resistor_value", "failing": ["zt_dbohm", "in_noise_1m"], "rule": ["Rf", "M1", "M7"], "raw": ["Rf", "M1", "M2"], "raw_cost": 0.032788, "spectra": ["Rf", "M1", "M2"], "spectra_cost": 0.039344000000000004}
