@@ -27,7 +27,30 @@ _FLOAT_RE = re.compile(r"^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$")
 # global counter of simulator invocations (for budget accounting)
 SIM_COUNTER = {"calls": 0, "seconds": 0.0}
 import threading as _th
+import fcntl as _fcntl
+import contextlib as _ctx
 _SIM_SEM = _th.BoundedSemaphore(int(os.environ.get("SPECTRA_SIM_CONCURRENCY", os.cpu_count() or 4)))
+_GLOBAL_SLOTS = int(os.environ.get("SPECTRA_GLOBAL_SIM_SLOTS", "5"))     # machine-wide cap across processes
+_SLOT_DIR = "/tmp/spectra_sim_slots"
+
+
+@_ctx.contextmanager
+def _global_slot():
+    """Cross-process limit on concurrent ngspice processes (flock on one of N slot files)."""
+    os.makedirs(_SLOT_DIR, exist_ok=True)
+    while True:
+        for i in range(_GLOBAL_SLOTS):
+            f = open(f"{_SLOT_DIR}/slot{i}", "w")
+            try:
+                _fcntl.flock(f, _fcntl.LOCK_EX | _fcntl.LOCK_NB)
+            except BlockingIOError:
+                f.close(); continue
+            try:
+                yield
+            finally:
+                _fcntl.flock(f, _fcntl.LOCK_UN); f.close()
+            return
+        time.sleep(0.05)
 
 
 @dataclass
@@ -63,7 +86,7 @@ def run(netlist: str, wrdata_files: tuple = (), timeout: float = 60.0,
         Path(d, ".spiceinit").write_text(SPICEINIT)
         Path(d, "c.sp").write_text(netlist)
         try:
-            with _SIM_SEM:
+            with _SIM_SEM, _global_slot():
                 p = subprocess.run(["ngspice", "-b", "c.sp"], cwd=d, capture_output=True,
                                    text=True, timeout=timeout)
             out = p.stdout + "\n" + p.stderr

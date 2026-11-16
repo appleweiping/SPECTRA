@@ -1,0 +1,1 @@
+{"case": "csring7_1", "task": "vco-02", "template": "csring7", "truth": "Mq6", "class": "undersize_W", "failing": ["swing"], "rule": ["Mq6", "Mb1", "Mn0"], "raw": ["Mq6", "Mp6", "Mb2"], "raw_cost": 0.030116, "spectra": ["Mq6", "Mb2", "Mb1"], "spectra_cost": 0.029756}
