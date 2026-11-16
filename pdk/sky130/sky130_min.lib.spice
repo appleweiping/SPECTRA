@@ -1,0 +1,56 @@
+* Minimal SKY130 library for SPECTRA: 1.8V nfet/pfet only (from google/skywater-pdk-libs-sky130_fd_pr, Apache-2.0)
+.lib tt
+.option scale=1.0u
+.include "models/parameters/lod.spice"
+.param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
+.param mc_mm_switch=0 mc_pr_switch=0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.pm3.spice"
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__tt.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.endl tt
+.lib ff
+.option scale=1.0u
+.include "models/parameters/lod.spice"
+.param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
+.param mc_mm_switch=0 mc_pr_switch=0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__ff.pm3.spice"
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__ff.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.endl ff
+.lib ss
+.option scale=1.0u
+.include "models/parameters/lod.spice"
+.param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
+.param mc_mm_switch=0 mc_pr_switch=0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__ss.pm3.spice"
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__ss.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.endl ss
+.lib sf
+.option scale=1.0u
+.include "models/parameters/lod.spice"
+.param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
+.param mc_mm_switch=0 mc_pr_switch=0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__sf.pm3.spice"
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__sf.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.endl sf
+.lib fs
+.option scale=1.0u
+.include "models/parameters/lod.spice"
+.param sky130_fd_pr__nfet_01v8__dlc_rotweak=0 sky130_fd_pr__pfet_01v8__dlc_rotweak=0
+.param mc_mm_switch=0 mc_pr_switch=0
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=1.0 sky130_fd_pr__nfet_01v8__pjunction_mult=1.0
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__fs.pm3.spice"
+.include "cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__fs.corner.spice"
+.include "cells/pfet_01v8/sky130_fd_pr__pfet_01v8__mismatch.corner.spice"
+.endl fs

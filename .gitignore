@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+runs/
+results/raw/**/tmp*
+*.log
+!data/lut/*.log
+.ipynb_checkpoints/
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+.aris/cache/
