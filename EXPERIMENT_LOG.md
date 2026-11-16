@@ -24,7 +24,13 @@ Hardened tasks (frontier-refined T3 references, T3 margins; robust tasks from 45
 |---|---|---|
 | op-amp T3, 10 specs (frontier-refined) | 0/2 (12 calls each, $2.8–4.0) | 1/2 (9 calls, 228 sims; failed run within 0.4% of UGBW and 0.1% of settling) |
 | op-amp T3 robust (45 PVT) | 0/2 (TT pass, PVT fail; 12 calls) | 1/1 so far (3 calls, 132 sims, $0.35) |
-| cascode amplifier T3 | 0/2 (12 calls) | pending |
+| cascode amplifier T3 (not frontier-refined) | 2/2* | 2/2* |
 Finding: the hardened tiers discriminate. A parser bug dropped split-JSON `refine` actions in 3 of 11 SPECTRA
 iterations of the failed run (fixed before E1). Cost per failing direct run on hard op-amps is $2.8–4.0 (very long
 outputs), relevant for the cost analysis.
+
+*Correction: when assembling `data/bench/calib_tasks.jsonl` I appended `polarity_ok>=1` to every calibration task,
+including the amplifier task whose family has no such metric (an inverting CS/cascode stage), which made that task
+unsatisfiable; the logged `budget_exhausted` outcomes for it are artefacts. Re-checking the returned netlists against the
+task's real specs (scripts in this log entry) gives 2/2 for both methods. The production builder adds `polarity_ok`
+only to the op-amp family (EXTRA_SPECS), so SPECTRA-Bench is unaffected.

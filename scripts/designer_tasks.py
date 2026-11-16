@@ -39,10 +39,17 @@ D = [
  ("schmitt", "centred Schmitt trigger", {"inverting": False}, [S("vth_hi", "range", [1.0, 1.2]), S("vth_lo", "range", [0.6, 0.8]), S("vout_max", ">=", 1.7), S("vout_min", "<=", 0.1)], 0),
 ]
 
+# template used ONLY by the oracle baseline (not a feasibility certificate; certification is post hoc)
+ORACLE_TPL = {"opamp": "miller2", "ldo": "ldo_pmos", "ref": "bgr", "comparator": "comp2", "latch": "strongarm",
+              "tia": "tia_sfb", "amp": "cs_pload", "schmitt": "st6"}
+SPECIAL = {"GHz ring VCO": "csring3", "low-power 100 MHz VCO": "csring7", "2nd-order Butterworth low-pass 1 MHz": "sk_lpf2",
+           "3rd-order low-pass 100 kHz": "sk_lpf3", "band-pass 1 MHz, Q 2-3": "mfb_bpf", "1:4 wide-swing mirror": "cm_wide",
+           "high-impedance 50 uA sink": "cm_casc", "inverting amplifier x10": "app_inv", "10 kHz integrator": "app_integ"}
 out = []
 for i, (fam, title, tb, specs, robust) in enumerate(D):
-    t = {"id": f"D{i + 1:02d}-{fam}", "family": fam, "tb": tb, "specs": specs, "tier": "D", "robust": bool(robust),
-         "title": title, "ref": None}
+    tpl = SPECIAL.get(title, ORACLE_TPL.get(fam))
+    t = {"id": f"D{i + 1:02d}", "family": fam, "tb": tb, "specs": specs, "tier": "D", "robust": bool(robust),
+         "title": title, "ref": {"template": tpl, "x": None, "certificate": False}}
     t["nl_spec"] = render(t)
     out.append(t)
 with open(ROOT / "data" / "bench" / "designer_tasks.jsonl", "w") as f:
