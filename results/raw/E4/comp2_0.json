@@ -1,0 +1,1 @@
+{"case": "comp2_0", "task": "comparator-00", "template": "comp2", "truth": "M4", "class": "mirror_ratio", "failing": ["tpd", "polarity_ok", "vout_min_rel"], "rule": ["M9", "M8", "M3"], "raw": ["M4", "M7", "M8"], "raw_cost": 0.028644000000000003, "spectra": ["M4", "M3", "M7"], "spectra_cost": 0.042336}

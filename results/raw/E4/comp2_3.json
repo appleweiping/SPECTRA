@@ -1,0 +1,1 @@
+{"case": "comp2_3", "task": "comparator-00", "template": "comp2", "truth": "M3", "class": "undersize_W", "failing": ["tpd", "polarity_ok", "vout_min_rel"], "rule": ["M9", "M8", "M4"], "raw": ["M4", "M3", "M7"], "raw_cost": 0.026423999999999996, "spectra": ["M4", "M3", "M5"], "spectra_cost": 0.042584}

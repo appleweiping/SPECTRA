@@ -5,7 +5,18 @@
 \subsection{Main Results}
 \label{sec:main}
 \IfFileExists{tables/main.tex}{\input{tables/main}}{}
-% RESULTS-MAIN
+Table~\ref{tab:main} summarises \SpectraNruns{} runs per method. SPECTRA reaches \SpectraSucc{} overall
+success, versus \DirectSucc{} for the AnalogCoder-style agent, \GenboSucc{} for Gen+TPE and \SpectraMinSucc{} for
+SPECTRA-min. Consistent with our pilot, the easier tiers are nearly saturated by every method---a frontier LLM can
+already design a textbook amplifier to loose specifications---and the differences open where specifications are
+close to the frontier: on T3, SPECTRA solves \SpectraTThree{} of runs against \DirectTThree{} (AnalogCoder-style),
+\GenboTThree{} (Gen+TPE) and \SpectraMinTThree{} (SPECTRA-min). The AnalogCoder-style agent's failures are
+dominated by near misses on precisely the quantities that require numerical closure (CMRR, PSRR, power), which it
+cannot tune by rewriting widths; generate-then-optimise baselines fail when the proposed parameterisation or
+topology cannot reach the spec, which no amount of TPE fixes. \IfFileExists{figs/E1_tiers.pdf}{Fig.~\ref{fig:tiers}
+breaks success down by tier.}{}
+\IfFileExists{figs/E1_tiers.pdf}{\begin{figure}[t]\centering\includegraphics[width=\columnwidth]{figs/E1_tiers.pdf}
+\vspace{-6mm}\caption{Success by tier (95\% cluster-bootstrap CIs over tasks).}\label{fig:tiers}\end{figure}}{}
 
 \subsection{Ablations: What Matters?}
 \label{sec:ablation}

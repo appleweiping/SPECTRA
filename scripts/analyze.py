@@ -67,7 +67,9 @@ def pass_at_k(runs, k):
 def summarize(runs, methods):
     out = {}
     for m in methods:
-        rs = [r for r in runs if r["method"] == m]
+        rs_all = [r for r in runs if r["method"] == m]
+        rs = [r for r in rs_all if not r.get("infeasible")]
+        ctl = [r for r in rs_all if r.get("infeasible")]
         if not rs:
             continue
         s, lo, hi = cluster_boot(rs)
@@ -78,7 +80,10 @@ def summarize(runs, methods):
              "median_calls_success": float(np.median([r["calls"] for r in succ])) if succ else None,
              "mean_cost_usd": float(np.mean([r["cost"] for r in rs])), "mean_tokens": float(np.mean([r["tokens"] for r in rs])),
              "mean_wall_s": float(np.mean([r["wall"] for r in rs])), "mean_sims": float(np.mean([r["sims"] for r in rs])),
-             "declared_infeasible": sum(r["declared_infeasible"] for r in rs)}
+             "declared_infeasible": sum(r["declared_infeasible"] for r in rs),
+             "controls_n": len(ctl), "controls_success": (sum(r["success"] for r in ctl) / len(ctl)) if ctl else None,
+             "controls_declared": sum(r["declared_infeasible"] for r in ctl),
+             "controls_mean_cost": (sum(r["cost"] for r in ctl) / len(ctl)) if ctl else None}
         for name, sel in [("nominal", lambda r: not r["robust"]), ("robust", lambda r: r["robust"])] + \
                          [(f"tier{t}", (lambda t: lambda r: str(r["tier"]) == str(t) and not r["robust"])(t)) for t in (1, 2, 3, "D", "C")]:
             sub = [r for r in rs if sel(r)]
@@ -94,6 +99,7 @@ def summarize(runs, methods):
 def paired(runs, a, b):
     from scipy.stats import wilcoxon
     ta = defaultdict(list); tb = defaultdict(list)
+    runs = [r for r in runs if not r.get("infeasible")]
     for r in runs:
         if r["method"] == a: ta[r["task"]].append(r["success"])
         if r["method"] == b: tb[r["task"]].append(r["success"])
@@ -110,7 +116,7 @@ def paired(runs, a, b):
 def anytime(runs, methods, budgets=(1, 5, 10, 20, 50, 100, 200, 300)):
     curves = {}
     for m in methods:
-        rs = [r for r in runs if r["method"] == m and not r["robust"]]
+        rs = [r for r in runs if r["method"] == m and not r["robust"] and not r.get("infeasible")]
         if not rs:
             continue
         curves[m] = {b: float(np.mean([r["success"] and r["sims"] <= b for r in rs])) for b in budgets}
