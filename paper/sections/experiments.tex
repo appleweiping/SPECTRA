@@ -20,11 +20,14 @@ breaks success down by tier.}{}
 
 \subsection{Ablations: What Matters?}
 \label{sec:ablation}
-% RESULTS-ABLATION
+\IfFileExists{tables/ablation.tex}{\input{tables/ablation}}{\textbf{[E2 ablations running: w/o diagnosis,
+w/o intent (raw $W/L$ programs), w/o refinement, Gen+CMA-ES and the template oracle on a stratified subset of
+\NSubset{} tasks.]}}
+\AblationText{}
 
 \subsection{PVT Closure and Mismatch}
 \label{sec:pvt}
-% RESULTS-PVT
+\PVTText{}
 
 \subsection{Diagnosis Accuracy under Fault Injection}
 \label{sec:fault}
@@ -45,4 +48,10 @@ Section~\ref{sec:ablation}, not as a stand-alone localiser.
 
 \subsection{Backbone Scaling and Cost}
 \label{sec:scaling}
-% RESULTS-SCALING
+\ScalingText{} The mean LLM cost per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
+agent, \GenboCost{} for Gen+TPE and \SpectraMinCost{} for SPECTRA-min; SPECTRA's successful runs need a median of
+\SpectraCalls{} LLM calls and \SpectraSims{} simulations. \IfFileExists{figs/E1_anytime2.pdf}{Fig.~\ref{fig:anytime}
+shows the solved fraction as a function of simulations and of LLM calls.}{}
+\IfFileExists{figs/E1_anytime2.pdf}{\begin{figure}[t]\centering\includegraphics[width=\columnwidth]{figs/E1_anytime2.pdf}
+\vspace{-6mm}\caption{Anytime performance on nominal tasks: fraction of runs solved within a given number of
+simulations (left) and LLM calls (right).}\label{fig:anytime}\end{figure}}{}
