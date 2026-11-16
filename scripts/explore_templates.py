@@ -17,6 +17,7 @@ TB_DEFAULT = {
     "vco": {"vctrl_range": (0.7, 1.4), "tstop": 100e-9}, "filter": {"kind": "lowpass"}, "schmitt": {"inverting": False},
     "opamp_app": {"func": "inv"},
 }
+TB_OVERRIDE = {"sf": {"vin_dc": 1.4}}
 APP_FUNC = {"app_inv": "inv", "app_sum": "sum", "app_integ": "integ", "app_diff": "diff", "app_noninv": "noninv"}
 
 
@@ -55,6 +56,7 @@ def main(names, n_obj=4, budget=120, seed=0):
     for name, tag, extra in jobs:
         t = T[name]; fam = t["family"]
         tb = dict(TB_DEFAULT[fam]); tb.update(extra)
+        tb.update(TB_OVERRIDE.get(name, {}))
         if name in APP_FUNC:
             tb["func"] = APP_FUNC[name]
         if name == "mfb_bpf":

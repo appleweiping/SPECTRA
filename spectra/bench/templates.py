@@ -58,39 +58,36 @@ Cc z vout {x['Cc']:.4g}
 .ends"""
 
 
-@reg("fcasc", "opamp", [Var("W1", 1, 200), Var("L1", 0.15, 2), Var("Wp", 1, 300), Var("Lp", 0.15, 2),
-                        Var("Wc", 1, 200), Var("Lc", 0.15, 2), Var("Wn", 1, 200), Var("Ln", 0.15, 3),
-                        Var("kt", 1, 40), Var("kp", 1, 80), Var("Rb", 1e3, 200e3)],
-     "folded-cascode OTA: NMOS input pair, PMOS current sources, PMOS/NMOS cascodes, wide-swing cascode mirror; cascode biases from resistor-shifted diode stacks")
+@reg("fcasc", "opamp", [Var("W1", 1, 200), Var("L1", 0.15, 2), Var("Wp", 1, 400), Var("Lp", 0.3, 3),
+                        Var("Wc", 1, 300), Var("Lc", 0.15, 1.5), Var("Wn", 1, 300), Var("Ln", 0.3, 3),
+                        Var("kt", 1, 40), Var("r", 0.15, 3)],
+     "folded-cascode OTA: NMOS input pair, PMOS current sources + PMOS cascodes, NMOS cascode mirror; wide-swing "
+     "cascode biases from low-density diode-connected devices (10 uA bias branches)")
 def fcasc(x):
-    wb = 2.0
+    ib = 10e-6
+    it = ib * x["kt"]; ip = it / 2 * (1 + x["r"]); ic = ip - it / 2
+    wpd = max(0.42, x["Wp"] * ib / ip)                 # pb diode: same density as M3/M4
+    wpc = max(0.42, x["Wc"] * ib / ic / 4)             # pc diode: 1/4 density of cascode -> larger |Vgs|
+    wnc = max(0.42, x["Wn"] * ib / ic / 4)             # nc diode: 1/4 density of NMOS cascode
     return f""".subckt dut vinp vinn vout vdd vss ibias
-* input pair and tail
-M1 f1 vinn t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
-M2 f2 vinp t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
-M5 t ibias vss vss nfet W={wb * x['kt']:.3f} L=1
-M0 ibias ibias vss vss nfet W={wb:.3f} L=1
-* PMOS current sources (top)
+M0 ibias ibias vss vss nfet W=2 L=1
+M5 t ibias vss vss nfet W={2 * x['kt']:.3f} L=1
+M1 f1 vinp t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
+M2 f2 vinn t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
 M3 f1 pb vdd vdd pfet W={x['Wp']:.3f} L={x['Lp']:.3f}
 M4 f2 pb vdd vdd pfet W={x['Wp']:.3f} L={x['Lp']:.3f}
-* PMOS cascodes
 M6 c1 pc f1 vdd pfet W={x['Wc']:.3f} L={x['Lc']:.3f}
 M7 vout pc f2 vdd pfet W={x['Wc']:.3f} L={x['Lc']:.3f}
-* NMOS cascode mirror (wide swing)
 M8 c1 nc s1 vss nfet W={x['Wn']:.3f} L={x['Ln']:.3f}
 M9 vout nc s2 vss nfet W={x['Wn']:.3f} L={x['Ln']:.3f}
 M10 s1 c1 vss vss nfet W={x['Wn']:.3f} L={x['Ln']:.3f}
 M11 s2 c1 vss vss nfet W={x['Wn']:.3f} L={x['Ln']:.3f}
-* bias: pb from mirrored current through diode pfet; pc = pb - Ib*Rb ; nc = diode + Rb
-Mb1 pbd ibias vss vss nfet W={wb * x['kp']:.3f} L=1
-Mb2 pbd pb vdd vdd pfet W={x['Wp'] * 0.25:.3f} L={x['Lp']:.3f}
-Rpb pb pbd 1
-Mb3 pc ibias vss vss nfet W={wb:.3f} L=1
-Mb4 pcx pcx vdd vdd pfet W={x['Wp'] * 0.1:.3f} L={x['Lp']:.3f}
-Rpc pcx pc {x['Rb']:.1f}
-Mb5 ncd ncd vss vss nfet W={x['Wn'] * 0.2:.3f} L={x['Ln']:.3f}
-Rnc nc ncd {x['Rb']:.1f}
-Mb6 nc pb vdd vdd pfet W={x['Wp'] * 0.05:.3f} L={x['Lp']:.3f}
+Mb1 pb ibias vss vss nfet W=2 L=1
+Mb2 pb pb vdd vdd pfet W={wpd:.3f} L={x['Lp']:.3f}
+Mb3 pc ibias vss vss nfet W=2 L=1
+Mb4 pc pc vdd vdd pfet W={wpc:.3f} L={x['Lc']:.3f}
+Mb5 nc nc vss vss nfet W={wnc:.3f} L={x['Ln']:.3f}
+Mb6 nc pb vdd vdd pfet W={wpd:.3f} L={x['Lp']:.3f}
 .ends"""
 
 

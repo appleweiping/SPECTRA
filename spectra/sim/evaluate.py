@@ -22,8 +22,10 @@ class _OpampFam:
 FAMILIES["opamp"] = _OpampFam
 
 NOMINAL = {"corner": "tt", "temp": 27, "vdd": 1.8}
-PVT = ([{"corner": c, "temp": t, "vdd": 1.8} for c in ["tt", "ff", "ss", "sf", "fs"] for t in (-40, 27, 125)]
-       + [{"corner": "tt", "temp": 27, "vdd": v} for v in (1.62, 1.98)])
+# full PVT grid: 5 process corners x 3 temperatures x 3 supplies = 45 conditions (nominal first)
+PVT = [NOMINAL] + [{"corner": c, "temp": t, "vdd": v} for c in ["tt", "ff", "ss", "sf", "fs"] for t in (-40, 27, 125)
+                   for v in (1.62, 1.8, 1.98) if not (c == "tt" and t == 27 and v == 1.8)]
+MC = [{"corner": "tt_mc", "temp": 27, "vdd": 1.8, "seed": i} for i in range(1, 101)]
 # metrics where log-ratio violations make more sense
 LOG_METRICS = {"ugbw", "f3db", "gbw", "rout", "fmin", "fmax", "f_mid", "f_lo", "f_hi", "fc", "f0", "slew",
                "tuning_ratio", "kvco", "bw", "f_unity", "power", "power_avg", "energy", "tpd", "delay",
@@ -32,7 +34,7 @@ LOG_METRICS = {"ugbw", "f3db", "gbw", "rout", "fmin", "fmax", "f_mid", "f_lo", "
 
 
 def cond_name(c):
-    return f"{c['corner']}_{c['temp']}C_{c['vdd']}V"
+    return f"{c['corner']}_{c['temp']}C_{c['vdd']}V" + (f"_s{c['seed']}" if "seed" in c else "")
 
 
 @dataclass

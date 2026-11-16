@@ -1,0 +1,15 @@
+{
+ "what": "gm/Id intent program (two-stage Miller) prediction vs simulation (TT)",
+ "pred": {
+  "gain_db": 68.72986093066444,
+  "ugbw": 33371225.36497294,
+  "pm": 62.17573454010645,
+  "power": 0.00021600000000000002
+ },
+ "sim": {
+  "gain_db": 69.59182856668966,
+  "ugbw": 28605802.82635739,
+  "pm": 66.1892014975093,
+  "power": 0.0002225106
+ }
+}

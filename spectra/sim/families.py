@@ -14,8 +14,9 @@ from .netlist import device_op_saves
 
 
 def _head(cond, title):
+    seed = f".option seed={cond['seed']}\n" if "seed" in cond else ""
     return (f"* {title}\n{ng.lib_line(cond.get('corner', 'tt'))}\n.temp {cond.get('temp', 27)}\n"
-            ".option gmin=1e-15 reltol=1e-4\n")
+            ".option gmin=1e-15 reltol=1e-4\n" + seed)
 
 
 def _op_block(ckt, inst):

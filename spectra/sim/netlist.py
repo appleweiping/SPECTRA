@@ -236,7 +236,8 @@ def compile_sky130(ckt: Circuit, name: str | None = None) -> str:
         elif d.kind == "pnp":
             out.append(f"X{d.name} {' '.join(d.nodes)} {ground_of(ckt)} {PNP} m={d.m}")
         elif d.kind == "R":
-            out.append(f"{d.name} {' '.join(d.nodes)} {d.value:.6g}")
+            # SKY130 high-resistance poly first-order model: PDK body TC1/TC2 (tnom 30 C)
+            out.append(f"{d.name} {' '.join(d.nodes)} {d.value:.6g} spectra_rpoly")
         elif d.kind == "C":
             out.append(f"{d.name} {' '.join(d.nodes)} {d.value:.6g}")
     out.append(".ends")

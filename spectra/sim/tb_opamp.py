@@ -21,6 +21,7 @@ PORTS = ["vinp", "vinn", "vout", "vdd", "vss", "ibias"]
 def build(dut_sky130: str, ckt, cond: dict, p: dict) -> list:
     vdd, vcm, iref, cl = cond.get("vdd", 1.8), p.get("vcm", 0.9), p.get("iref", 10e-6), p.get("cl", 1e-12)
     a = p.get("step", 0.4) / 2
+    seed = f".option seed={cond['seed']}\n" if "seed" in cond else ""
     saves = device_op_saves(ckt, "xd1")
     save_line = " ".join(s for _, _, s in saves)
     echo_ops = "\n".join(f'echo "@@ op:{dn}:{k} $&{s}"' for dn, k, s in saves)
@@ -29,7 +30,7 @@ def build(dut_sky130: str, ckt, cond: dict, p: dict) -> list:
 {ng.lib_line(cond.get('corner', 'tt'))}
 .temp {cond.get('temp', 27)}
 .option gmin=1e-15 reltol=1e-4 abstol=1e-14 vntol=1e-7
-{dut_sky130}
+{seed}{dut_sky130}
 * --- X1: open loop + DC servo
 Vdd1 vdd1 0 DC {vdd} AC 0
 Iref1 vdd1 ib1 DC {iref}
@@ -80,7 +81,7 @@ wrdata dc.txt v(vout3)
     net_b = f"""* opamp testbench (transient)
 {ng.lib_line(cond.get('corner', 'tt'))}
 .temp {cond.get('temp', 27)}
-{dut_sky130}
+{seed}{dut_sky130}
 Vdd2 vdd2 0 DC {vdd}
 Iref2 vdd2 ib2 DC {iref}
 Vin2 vinp2 0 PULSE({vcm - a} {vcm + a} 1u 1n 1n 4u 10u)

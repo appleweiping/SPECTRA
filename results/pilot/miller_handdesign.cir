@@ -1,0 +1,11 @@
+.subckt dut vinp vinn vout vdd vss ibias
+M1 n1 vinn n3 vss nfet W=4 L=0.5
+M2 n2 vinp n3 vss nfet W=4 L=0.5
+M3 n1 n1 vdd vdd pfet W=8 L=0.5
+M4 n2 n1 vdd vdd pfet W=8 L=0.5
+M5 n3 ibias vss vss nfet W=12 L=1 m=2
+M6 ibias ibias vss vss nfet W=6 L=1
+M7 vout n2 vdd vdd pfet W=40 L=0.5
+M8 vout ibias vss vss nfet W=24 L=1
+Cc n2 vout 1p
+.ends
