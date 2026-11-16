@@ -96,6 +96,16 @@ def main():
     out["NTOne"] = str(sum(1 for t in bench if str(t.get("tier")) == "1" and not t.get("robust")))
     out["NTTwo"] = str(sum(1 for t in bench if str(t.get("tier")) == "2" and not t.get("robust")))
     out["NTThree"] = str(sum(1 for t in bench if str(t.get("tier")) == "3" and not t.get("robust")))
+    fa = ROOT / "results/E1_failures.json"
+    if fa.exists():
+        d = json.loads(fa.read_text())
+        nm = {"cmrr_db": "CMRR", "psrr_db": "PSRR", "power": "power", "noise_1k": "noise", "gain_db": "gain", "ugbw": "UGBW",
+              "pm": "phase margin", "slew": "slew rate", "settle": "settling", "swing": "swing", "(PVT only)": "PVT corners",
+              "polarity_ok": "polarity", "in_noise_1m": "input noise current", "f3db": "bandwidth", "vout_dc": "output DC level", "zt_dbohm": "transimpedance"}
+        for m, key in (("direct", "FailDirectTop"), ("genbo", "FailGenboTop")):
+            if m in d:
+                tops = d[m]["top_failing_metrics"][:3]
+                out[key] = ", ".join(f"{nm.get(k, k.replace('_', ' '))} ({v})" for k, v in tops) + f" of {d[m]['n_fail']} failed runs"
     sub = ROOT / "data/bench/subset_E2.jsonl"
     out["NSubset"] = str(sum(1 for _ in open(sub))) if sub.exists() else "--"
     for k in ("AblationText", "PVTText", "ScalingText"):

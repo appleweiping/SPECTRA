@@ -1,16 +1,16 @@
 {
  "direct": {
-  "n_fail": 6,
+  "n_fail": 8,
   "near_miss_<5%": 2,
-  "median_violation": 0.09868062521902783,
+  "median_violation": 0.10081397916045064,
   "top_failing_metrics": [
    [
     "cmrr_db",
-    4
+    5
    ],
    [
     "psrr_db",
-    1
+    3
    ],
    [
     "power",
@@ -19,43 +19,75 @@
   ]
  },
  "genbo": {
-  "n_fail": 6,
-  "near_miss_<5%": 0,
-  "median_violation": 0.3418085650386802,
+  "n_fail": 13,
+  "near_miss_<5%": 3,
+  "median_violation": 0.03915273162840543,
   "top_failing_metrics": [
+   [
+    "(PVT only)",
+    4
+   ],
    [
     "noise_1k",
     3
    ],
    [
-    "(PVT only)",
+    "zt_dbohm",
     2
    ],
    [
-    "gain_db",
-    1
-   ],
-   [
     "ugbw",
+    2
+   ],
+   [
+    "f3db",
     1
    ],
    [
-    "psrr_db",
+    "in_noise_1m",
     1
    ],
    [
-    "polarity_ok",
+    "power",
+    1
+   ],
+   [
+    "pm",
     1
    ]
   ]
  },
  "spectra": {
-  "n_fail": 2,
+  "n_fail": 6,
   "near_miss_<5%": 1,
-  "median_violation": 0.09175848527076619,
+  "median_violation": 1.000182406142783,
   "top_failing_metrics": [
    [
+    "swing",
+    2
+   ],
+   [
+    "peaking_db",
+    2
+   ],
+   [
     "pm",
+    1
+   ],
+   [
+    "f3db",
+    1
+   ],
+   [
+    "gbw",
+    1
+   ],
+   [
+    "vout_dc",
+    1
+   ],
+   [
+    "gain_db",
     1
    ],
    [
@@ -65,16 +97,24 @@
   ]
  },
  "spectra_min": {
-  "n_fail": 7,
-  "near_miss_<5%": 1,
-  "median_violation": 0.3039860224067148,
+  "n_fail": 11,
+  "near_miss_<5%": 3,
+  "median_violation": 0.1011683092355815,
   "top_failing_metrics": [
+   [
+    "in_noise_1m",
+    3
+   ],
    [
     "polarity_ok",
     3
    ],
    [
-    "in_noise_1m",
+    "power",
+    2
+   ],
+   [
+    "psrr_db",
     2
    ],
    [
@@ -82,23 +122,15 @@
     2
    ],
    [
+    "vout_dc",
+    1
+   ],
+   [
+    "f3db",
+    1
+   ],
+   [
     "cmrr_db",
-    1
-   ],
-   [
-    "power",
-    1
-   ],
-   [
-    "settle",
-    1
-   ],
-   [
-    "psrr_db",
-    1
-   ],
-   [
-    "gain_db",
     1
    ]
   ]

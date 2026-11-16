@@ -1,16 +1,16 @@
 \begin{table*}[t]
 \centering
-\caption{Main results on SPECTRA-Bench (success = independent re-verification at TT, or on all 45 PVT conditions for robust tasks; 3 seeds for SPECTRA/AnalogCoder-style, 2 for the others). Calls/Sims: medians over successful runs; \$/run: mean LLM cost.}
+\caption{Main results on the tasks completed by every method (success = re-simulation outside the agent at TT, or on all 45 PVT conditions for robust tasks; 3 seeds for SPECTRA/AnalogCoder-style, 2--3 for the others). Calls/Sims: medians over successful runs; \$/run: mean LLM cost.}
 \label{tab:main}
 \small
 \begin{tabular}{@{}lccccccccc@{}}
 \toprule
 Method & Success (\%) [95\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\star$ & Sims$^\star$ & \$/run \\
 \midrule
-\textbf{SPECTRA} & 96 [90,100] & 100 & 100 & 96 & 83 & 95 & 3.0 & 10 & 0.53 \\
-SPECTRA-min (1 call + intent CMA-ES) & 83 [72,93] & 75 & 100 & 72 & 83 & 93 & 2.0 & 12 & 0.31 \\
-AnalogCoder-style~\cite{lai2025analogcoder} & 90 [78,99] & 100 & 100 & 70 & 100 & 100 & 1.0 & 1.0 & 0.63 \\
-Gen+TPE (AnalogCoder-Pro-style)~\cite{lai2026analogcoderpro} & 79 [65,92] & 100 & 88 & 71 & 25 & 86 & 1.0 & 7.5 & 0.17 \\
+\textbf{SPECTRA} & 99 [96,100] & 100 & 100 & 100 & 100 & 95 & 3.0 & 10 & 0.47 \\
+SPECTRA-min (1 call + intent CMA-ES) & 86 [76,94] & 83 & 92 & 81 & 83 & 90 & 2.0 & 11 & 0.30 \\
+AnalogCoder-style~\cite{lai2025analogcoder} & 94 [86,100] & 100 & 100 & 81 & 100 & 100 & 1.0 & 1.0 & 0.47 \\
+Gen+TPE (AnalogCoder-Pro-style)~\cite{lai2026analogcoderpro} & 81 [65,93] & 100 & 92 & 76 & 17 & 86 & 1.0 & 9.0 & 0.17 \\
 \bottomrule
 \end{tabular}
 \end{table*}
