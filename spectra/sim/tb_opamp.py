@@ -26,6 +26,16 @@ def build(dut_sky130: str, ckt, cond: dict, p: dict) -> list:
     save_line = " ".join(s for _, _, s in saves)
     echo_ops = "\n".join(f'echo "@@ op:{dn}:{k} $&{s}"' for dn, k, s in saves)
     sw = 0.9 * min(vcm, vdd - vcm) / 10.0
+    need = p.get("_need")
+    want = lambda *ms: need is None or any(m in need for m in ms)
+    noise_blk = ("noise v(vout1) vin1 dec 10 1 1e8\nsetplot noise1\nwrdata noise.txt inoise_spectrum\nsetplot ac1\n"
+                 if want("noise_1k") else "")
+    cm_blk = ("alter @vacg1[acmag]=1\nac dec 5 0.01 10\nwrdata ac_cm.txt v(vout1)\nalter @vacg1[acmag]=0\n"
+              if want("cmrr_db") else "")
+    ps_blk = ("alter @vin1[acmag]=0\nalter @vdd1[acmag]=1\nac dec 5 0.01 10\nwrdata ac_ps.txt v(vout1)\n"
+              if want("psrr_db") else "")
+    dc_blk = (f"dc vs3 {vcm - sw:.4f} {vcm + sw:.4f} {sw / 60:.5f}\nwrdata dc.txt v(vout3)\n"
+              if want("swing", "swing_lo", "swing_hi") else "")
     net_a = f"""* opamp testbench
 {ng.lib_line(cond.get('corner', 'tt'))}
 .temp {cond.get('temp', 27)}
@@ -61,21 +71,7 @@ echo "@@ vos $&vos"
 {echo_ops}
 ac dec 20 0.01 1e10
 wrdata ac_dm.txt v(vout1)
-noise v(vout1) vin1 dec 10 1 1e8
-setplot noise1
-wrdata noise.txt inoise_spectrum
-setplot ac1
-alter @vacg1[acmag]=1
-ac dec 5 0.01 10
-wrdata ac_cm.txt v(vout1)
-alter @vacg1[acmag]=0
-alter @vin1[acmag]=0
-alter @vdd1[acmag]=1
-ac dec 5 0.01 10
-wrdata ac_ps.txt v(vout1)
-dc vs3 {vcm - sw:.4f} {vcm + sw:.4f} {sw / 60:.5f}
-wrdata dc.txt v(vout3)
-.endc
+{noise_blk}{cm_blk}{ps_blk}{dc_blk}.endc
 .end
 """
     net_b = f"""* opamp testbench (transient)
@@ -93,7 +89,10 @@ wrdata tran.txt v(vout2)
 .endc
 .end
 """
-    return [(net_a, FILES_A), (net_b, FILES_B)]
+    jobs = [(net_a, FILES_A)]
+    if want("slew", "settle"):
+        jobs.append((net_b, FILES_B))
+    return jobs
 
 
 FILES_A = ("ac_dm.txt", "ac_cm.txt", "ac_ps.txt", "dc.txt", "noise.txt")
@@ -104,7 +103,8 @@ def measure(rs: list, cond: dict, p: dict) -> dict:
     vdd, vcm = cond.get("vdd", 1.8), p.get("vcm", 0.9)
     m = {}
     r = rs[0]
-    r.vectors.update(rs[1].vectors)
+    for extra in rs[1:]:
+        r.vectors.update(extra.vectors)
     sc = r.scalars
     if sc.get("idd") is not None:
         m["power"] = -sc["idd"] * vdd
@@ -118,6 +118,7 @@ def measure(rs: list, cond: dict, p: dict) -> dict:
         m["gain_db"], m["ugbw"], m["pm"], m["gm_db"], m["f3db"] = (acm["gain_db"], acm["ugbw"], acm["pm"],
                                                                     acm["gm_db"], acm["f3db"])
         m["_inverting"] = acm["inverting"]
+        m["polarity_ok"] = 0.0 if acm["inverting"] else 1.0
         adm = mag_at(f, re_, im_, 1.0)
         cm = r.vectors.get("ac_cm.txt")
         if cm is not None and cm.ndim == 2 and len(cm) > 2:

@@ -33,7 +33,7 @@ def design(p, lut, spec):
     n.dev("M3", "pb", "pb", "vdd", "vdd", m3)          # pb diode fed by an nfet mirror of ibias (not shown)
     return n, {"gain_db": db(m1.gm / (m1.gds + m2.gds))}'''
 
-PLAN = """# Task {task_id}
+PLAN = """# Task
 {nl_spec}
 
 ## Interface and testbench
@@ -55,7 +55,7 @@ Respond with:
    (metric names: {metric_names})
 2. ONE complete design program in a ```python block."""
 
-ITERATE = """# Task {task_id} — iteration {it} (LLM calls left: {calls_left}, simulation budget left: {sims_left})
+ITERATE = """# Task — iteration {it} (LLM calls left: {calls_left}, simulation budget left: {sims_left})
 {nl_spec}
 
 ## Current design program
@@ -88,7 +88,7 @@ phase margin) — worst cases are usually ss/125C (slow, low gm) and ff/-40C."""
 SYSTEM_DIRECT = """You are an expert analog IC designer. You design transistor-level circuits in the SkyWater SKY130
 1.8 V process and write them as SPICE-like netlists with explicit device sizes."""
 
-DIRECT_PLAN = """# Task {task_id}
+DIRECT_PLAN = """# Task
 {nl_spec}
 
 ## Interface and testbench
@@ -110,7 +110,7 @@ M1 d g s b nfet W=.. L=..
 .ends
 Give concrete numeric sizes (no placeholders)."""
 
-DIRECT_ITERATE = """# Task {task_id} — revision {it}
+DIRECT_ITERATE = """# Task — revision {it} (LLM calls left: {calls_left})
 {nl_spec}
 
 ## Your previous netlist
@@ -125,7 +125,7 @@ Fix the design so that ALL specs are met. Briefly state what you change and why,
 netlist in a ```spice block."""
 
 # ----------------------------------------------------------------- Gen+BO (AnalogCoder-Pro-style) baseline
-GENBO_PLAN = """# Task {task_id}
+GENBO_PLAN = """# Task
 {nl_spec}
 
 ## Interface and testbench
@@ -145,7 +145,7 @@ afterwards using SPICE. Reply with:
 2. a ```json block {{"params": {{"W1": [init, lo, hi], "L1": [init, lo, hi], ...}}}} (W, L in um; R in ohm; C in F;
    at most 16 parameters)."""
 
-GENBO_RETRY = """# Task {task_id} — regeneration {it}
+GENBO_RETRY = """# Task — regeneration {it}
 {nl_spec}
 
 The previous topology/parameterisation (below) was optimised with TPE but did not meet all specs.

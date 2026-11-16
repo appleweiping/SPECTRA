@@ -71,6 +71,7 @@ class Spectra:
         self.history = []
         self.status = "running"
         self.final_netlist = None
+        self.active = [NOMINAL]
 
     # ------------------------------------------------------------------ program execution
     def exec_program(self, params_list):
@@ -92,43 +93,66 @@ class Spectra:
 
     # ------------------------------------------------------------------ refinement in intent space
     def refine(self, conds, budget, bounds=None, init=None):
+        """CMA-ES in intent space; the incumbent is evaluated first and only replaced by a better point."""
         import cma
+        from concurrent.futures import ThreadPoolExecutor
         vars_ = _vars_from(self.params_spec, bounds)
-        if not vars_ or budget < 8:
+        budget = min(budget, self.ctx.sims_left())
+        if not vars_ or budget < 2 * len(conds):
             return None
         x0 = dict(self.params); x0.update(init or {})
         u0 = [v.to_unit(float(x0.get(v.name, self.params_spec[v.name][0]))) for v in vars_]
-        es = cma.CMAEvolutionStrategy(u0, 0.15, {"bounds": [0, 1], "seed": self.ctx.seed + 7, "verbose": -9,
-                                                 "popsize": max(8, 4 + int(3 * math.log(len(vars_))))})
-        best = None
-        used = 0
-        while used + len(conds) <= budget and not es.stop():
-            sols = es.ask()
-            ps = [{**x0, **{v.name: v.from_unit(u) for v, u in zip(vars_, s)}} for s in sols]
+        pop = max(8, 4 + int(3 * math.log(len(vars_))))
+        es = cma.CMAEvolutionStrategy(u0, 0.15, {"bounds": [0, 1], "seed": self.ctx.seed + 7, "verbose": -9, "popsize": pop})
+        best, used = None, 0
+
+        def ev_one(r):
+            if not r["ok"]:
+                return None
+            return self.ctx.evaluate(r["netlist"], conds)
+
+        def run_batch(ps):
             out = self.exec_program(ps)
             if not out.get("ok"):
                 return None
-            from concurrent.futures import ThreadPoolExecutor
-            res = out["results"]
-
-            def ev_one(r):
-                if not r["ok"]:
-                    return None
-                return self.ctx.evaluate(r["netlist"], conds)
-
             with ThreadPoolExecutor(max_workers=4) as ex:
-                evs = list(ex.map(ev_one, res))
+                return list(zip(ps, out["results"], ex.map(ev_one, out["results"])))
+
+        # incumbent
+        inc = run_batch([x0])
+        if inc is None:
+            return None
+        for p, r, ev in inc:
+            used += len(conds)
+            if ev is not None and ev.status == "ok":
+                best = (ev.score, p, r, ev)
+        if best and best[3].passed:
+            self.params = best[1]
+            return best
+        while not es.stop():
+            n_left = (budget - used) // len(conds)
+            if n_left < 2:
+                break
+            sols = es.ask()
+            k = min(len(sols), n_left)
+            ps = [{**x0, **{v.name: v.from_unit(u) for v, u in zip(vars_, s_)}} for s_ in sols[:k]]
+            res = run_batch(ps)
+            if res is None:
+                break
             scores = []
-            for p, r, ev in zip(ps, res, evs):
+            for p, r, ev in res:
                 used += len(conds)
                 sc = ev.score if (ev is not None and ev.status == "ok") else 20.0
                 scores.append(sc)
                 if ev is not None and ev.status == "ok" and (best is None or sc < best[0]):
                     best = (sc, p, r, ev)
-            es.tell(sols, scores)
-            if best and best[3].passed:
+            if any(ev is not None and ev.status == "budget" for _, _, ev in res):
                 break
-            if used + len(conds) * len(sols) > budget:
+            if k == len(sols):
+                es.tell(sols, scores)
+            else:
+                break
+            if best and best[3].passed:
                 break
         if best:
             self.params = best[1]
@@ -177,6 +201,8 @@ class Spectra:
     def robust_stage(self, netlist):
         ctx = self.ctx
         evP = ctx.evaluate(netlist, PVT)
+        if evP.status == "budget":
+            return False, None
         if evP.passed:
             return True, evP
         if not self.cfg.use_refine or self.cfg.pvt_strategy == "nominal_only":
@@ -193,7 +219,10 @@ class Spectra:
             best = self.refine(active, chunk)
             if not best:
                 break
-            evP = ctx.evaluate(best[2]["netlist"], PVT)
+            evP2 = ctx.evaluate(best[2]["netlist"], PVT)
+            if evP2.status == "budget":
+                break
+            evP = evP2
             ctx.log("pvt_verify", rounds=rounds, passed=evP.passed, score=round(evP.score, 3), active=len(active))
             if evP.passed:
                 self.final_netlist = best[2]["netlist"]
@@ -203,6 +232,7 @@ class Spectra:
                 for c in worst[:2]:
                     if c not in active and len(active) < 6:
                         active.append(c)
+        self.active = active
         return False, evP
 
     def pvt_report(self, evP):
@@ -237,7 +267,7 @@ class Spectra:
             if err is None or fixes >= 2:
                 break
             fixes += 1
-            text = ctx.ask(f"# Task {task['id']}\n{task['nl_spec']}\n\nYour design program:\n```python\n{self.program}\n```\n"
+            text = ctx.ask(f"# Task\n{task['nl_spec']}\n\nYour design program:\n```python\n{self.program}\n```\n"
                            f"failed:\n{err}\n\nReturn the corrected complete program in a ```python block.",
                            SYSTEM_SPECTRA, f"fix{fixes}")
             self.program, self.params = llm.extract_block(text, "python") or self.program, {}
@@ -300,6 +330,8 @@ class Spectra:
                             self.final_netlist = self.final_netlist or r["netlist"]
                             self.status = "success"
                             break
+                        if evP is None:
+                            break
                         diag = "Nominal (TT) specs PASS but the design fails at PVT corners.\n" + self.pvt_report(evP)
                         if evP and self.cfg.use_diag:
                             rt, _ = diagnose.region_table(ev)
@@ -318,7 +350,7 @@ class Spectra:
             hist_line = f"iter {it}: score={'n/a' if score is None else f'{score:.3f}'}"
             if ctx.calls_left() <= 0:
                 break
-            prompt = ITERATE.format(task_id=task["id"], it=it, calls_left=ctx.calls_left(), sims_left=ctx.sims_left(),
+            prompt = ITERATE.format(task_id="", it=it, calls_left=ctx.calls_left(), sims_left=ctx.sims_left(),
                                     nl_spec=task["nl_spec"], program=self.program or "(none)", diagnosis=diag,
                                     history="\n".join(self.history[-6:]) or "(first iteration)",
                                     robust_note=(ROBUST_NOTE if task.get("robust") else ""))
@@ -337,8 +369,8 @@ class Spectra:
                 bounds = act.get("bounds") if isinstance(act.get("bounds"), dict) else None
                 if init:
                     self.params.update({k: float(v) for k, v in init.items() if isinstance(v, (int, float))})
-                conds = [NOMINAL]
-                best = self.refine(conds, min(cfg.refine_chunk, ctx.sims_left()), bounds=bounds)
+                conds = self.active if task.get("robust") else [NOMINAL]
+                best = self.refine(conds, min(max(cfg.refine_chunk, 16 * len(conds)), ctx.sims_left()), bounds=bounds)
                 self.history.append(hist_line + f" -> refine (best {best[0]:.3f})" if best else hist_line + " -> refine (no result)")
             else:
                 if new_prog:

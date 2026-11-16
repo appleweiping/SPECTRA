@@ -49,6 +49,8 @@ def run_direct(task, model="opus", seed=0, budget=None, method="direct"):
                     status, final = "success", net
                     break
                 evP = ctx.evaluate(net, PVT)
+                if evP.status == "budget":
+                    break
                 if evP.passed:
                     status, final = "success", net
                     break
@@ -56,7 +58,7 @@ def run_direct(task, model="opus", seed=0, budget=None, method="direct"):
         if ctx.calls_left() <= 0 or ctx.sims_left() <= 0:
             break
         it += 1
-        text = ctx.ask(DIRECT_ITERATE.format(task_id=task["id"], it=it, nl_spec=task["nl_spec"],
+        text = ctx.ask(DIRECT_ITERATE.format(task_id="", it=it, calls_left=ctx.calls_left(), nl_spec=task["nl_spec"],
                                              netlist=net or "(none)", feedback=fb), SYSTEM_DIRECT, f"iter{it}")
     if final is None:
         final = ctx.best.get("netlist")

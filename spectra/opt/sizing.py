@@ -104,6 +104,7 @@ class Runner:
         return scores
 
     def done(self, budget):
+        """True when the budget is spent (callers size batches with remaining())."""
         if self.res.n_evals >= budget:
             return True
         return self.stop_on_pass and self.res.first_pass_eval is not None

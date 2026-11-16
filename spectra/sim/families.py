@@ -273,11 +273,15 @@ wrdata tran.txt v(vout)
 .endc
 .end
 """
-        return [(net_a, ("ac.txt", "load.txt", "line.txt")), (net_b, ("tran.txt",))]
+        need = p.get("_need")
+        jobs = [(net_a, ("ac.txt", "load.txt", "line.txt"))]
+        if need is None or need & {"undershoot", "overshoot", "ripple_settled"}:
+            jobs.append((net_b, ("tran.txt",)))
+        return jobs
 
     @staticmethod
     def measure(rs, cond, p):
-        r, rt = rs; sc = r.scalars; m = {}
+        r = rs[0]; rt = rs[1] if len(rs) > 1 else None; sc = r.scalars; m = {}
         imax, imin = p.get("iload_max", 5e-3), p.get("iload_min", 50e-6)
         vin = cond.get("vdd", 1.8)
         m["vout"] = sc.get("vout_imax")
@@ -296,7 +300,7 @@ wrdata tran.txt v(vout)
         ln = _arr(r, "line.txt")
         if ln is not None:
             m["line_reg"] = float(abs(ln[-1, 1] - ln[0, 1]) / (ln[-1, 0] - ln[0, 0]))  # V/V
-        t = _arr(rt, "tran.txt")
+        t = _arr(rt, "tran.txt") if rt is not None else None
         if t is not None:
             tt, v = t[:, 0], t[:, 1]
             pre = v[(tt > 4e-6) & (tt < 5e-6)]
@@ -364,7 +368,11 @@ wrdata tran.txt v(vref)
 .endc
 .end
 """
-        return [(net_a, ("temp.txt",)), (net_b, ("ac.txt", "line.txt")), (net_c, ("tran.txt",))]
+        need = p.get("_need")
+        jobs = [(net_a, ("temp.txt",))]
+        jobs.append((net_b, ("ac.txt", "line.txt")) if (need is None or need & {"line_reg", "psrr_1k"}) else None)
+        jobs.append((net_c, ("tran.txt",)) if (need is None or "startup_ok" in need) else None)
+        return [j if j else (f"* empty\n.end\n", ()) for j in jobs]
 
     @staticmethod
     def measure(rs, cond, p):

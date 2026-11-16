@@ -3,7 +3,7 @@
 python -m scripts.run_bench --exp E1 --methods spectra,direct,genbo --seeds 0,1,2 [--tasks file] [--filter regex]
        [--model opus] [--workers 6]
 Each run -> results/raw/<exp>/<method>/<task_id>/s<seed>.json, including an INDEPENDENT final verification of the
-returned netlist at TT and (for robust tasks) at all 17 PVT conditions (not charged to the method's budget).
+returned netlist at TT and (for robust tasks) at all 45 PVT conditions (not charged to the method's budget).
 """
 import argparse, json, re, sys, time, traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed

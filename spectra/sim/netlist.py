@@ -140,7 +140,10 @@ def parse(text: str, expected_ports: list | None = None) -> Circuit:
             ckt.devices.append(Device(nm, "pnp", [n.lower() for n in toks[1:4]], m=max(1, mult)))
         elif c in ("r", "c") and len(toks) >= 4:
             try:
-                v = parse_value(toks[3].split("=")[-1])
+                tok = toks[3].split("=")[-1]
+                v = parse_value(tok)
+                if c == "r" and re.match(r"^[\d.]+M$", tok):     # '1M' written for 1 MOhm (SPICE would read milli)
+                    v *= 1e9
             except ValueError as e:
                 raise NetlistError(f"{nm}: {e}")
             ckt.devices.append(Device(nm, c.upper(), [toks[1].lower(), toks[2].lower()], value=v))
@@ -202,7 +205,7 @@ def erc(ckt: Circuit, ground="vss", supplies=("vdd",), sources=()) -> tuple[list
             errors.append(f"{d.name}: pfet bulk (n-well) tied to '{ground}' forward-biases the well")
         if dn == s:
             warns.append(f"{d.name}: drain and source are the same node '{dn}' (device does nothing)")
-        if d.W < W_MIN or d.W > W_MAX_TOTAL:
+        if d.W < W_MIN or d.W * d.m > W_MAX_TOTAL:
             errors.append(f"{d.name}: W={d.W}um out of range [{W_MIN}, {W_MAX_TOTAL}]")
         if d.L < L_MIN or d.L > L_MAX:
             errors.append(f"{d.name}: L={d.L}um out of range [{L_MIN}, {L_MAX}]")

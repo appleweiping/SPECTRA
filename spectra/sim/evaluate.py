@@ -106,9 +106,12 @@ def evaluate(task: dict, netlist_text: str, conds=None, keep_ops=True, timeout=1
         return EvalResult("erc_error", errors=errs, warnings=warns, seconds=time.time() - t0, ckt=ckt)
     dut = compile_sky130(ckt, "dut")
     conds = conds or [NOMINAL]
+    tbp = dict(task.get("tb", {}))
+    if task.get("specs") and not task.get("full_analyses"):
+        tbp["_need"] = {s["metric"] for s in task["specs"]}
     jobs, idx = [], []
     for ci, c in enumerate(conds):
-        for net, files in fam.build(dut, ckt, c, task.get("tb", {})):
+        for net, files in fam.build(dut, ckt, c, tbp):
             jobs.append((net, files)); idx.append(ci)
     results = ng.run_many([j[0] for j in jobs], wrdata_files=tuple(sorted({f for _, fs in jobs for f in fs})),
                           timeout=timeout)
@@ -124,7 +127,7 @@ def evaluate(task: dict, netlist_text: str, conds=None, keep_ops=True, timeout=1
             chk, tot = check(task["specs"], {})
         else:
             try:
-                m = fam.measure(rs, c, task.get("tb", {}))
+                m = fam.measure(rs, c, tbp)
             except Exception as e:  # measurement crash -> treat as failure with message
                 m = {"_ops": {}}
                 res.errors.append(f"{name}: measurement error: {type(e).__name__}: {e}")

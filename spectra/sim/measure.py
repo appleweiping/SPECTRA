@@ -70,7 +70,8 @@ def slew_settle(t, v, vlo, vhi, t_edge, tol=0.01, rising=True):
     a, b = vlo + 0.1 * step, vlo + 0.9 * step
     ta, tb = _cross(tt, vv, a), _cross(tt, vv, b)
     sr = (0.8 * step) / max(tb - ta, 1e-15) if (ta is not None and tb is not None) else None
-    err = np.abs(vv - vhi) > tol * abs(step)
+    final = float(np.mean(vv[int(len(vv) * 0.9):]))      # settle to the actual final value
+    err = np.abs(vv - final) > tol * abs(step)
     if err[-1]:
         ts = None
     else:

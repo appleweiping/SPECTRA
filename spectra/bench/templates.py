@@ -29,8 +29,8 @@ def _w(x, k):
 def ota5t(x):
     w6 = x["W5"] / x["k5"]
     return f""".subckt dut vinp vinn vout vdd vss ibias
-M1 a vinn t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
-M2 vout vinp t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
+M1 a vinp t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
+M2 vout vinn t vss nfet W={x['W1']:.3f} L={x['L1']:.3f}
 M3 a a vdd vdd pfet W={x['W3']:.3f} L={x['L3']:.3f}
 M4 vout a vdd vdd pfet W={x['W3']:.3f} L={x['L3']:.3f}
 M5 t ibias vss vss nfet W={x['W5']:.3f} L={x['L5']:.3f}

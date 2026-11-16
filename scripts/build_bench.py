@@ -29,9 +29,10 @@ PCT = {"iout_err_pct", "vout_err_pct"}
 TARGET = {"fc": "rel", "f0": "rel", "vref": "rel", "f_unity": "rel", "a1": "rel", "a2": "rel"}
 
 MARGIN = {  # tier -> (dB, deg, log factor, lin factor, pct)
-    1: (10.0, 15.0, 0.5, 0.7, 5.0), 2: (5.0, 8.0, 0.75, 0.85, 3.0), 3: (2.0, 3.0, 0.9, 0.95, 1.5)}
-REL_TOL = {1: 0.2, 2: 0.1, 3: 0.05}
+    1: (10.0, 15.0, 0.5, 0.7, 5.0), 2: (5.0, 8.0, 0.75, 0.85, 3.0), 3: (1.0, 2.0, 0.95, 0.97, 1.0)}
+REL_TOL = {1: 0.2, 2: 0.1, 3: 0.03}
 N_SPECS = {1: 4, 2: 6, 3: 99}
+FRONTIER = True
 
 
 def nice_floor(v, digits=2):
@@ -85,6 +86,53 @@ def worst_case(evP, metric, sense):
     return min(vals) if sense == "+" else max(vals)
 
 
+FRONTIER_CONDS = [NOMINAL, {"corner": "ss", "temp": 125, "vdd": 1.62}, {"corner": "ff", "temp": -40, "vdd": 1.98},
+                  {"corner": "sf", "temp": 125, "vdd": 1.62}, {"corner": "fs", "temp": -40, "vdd": 1.62}]
+
+
+def frontier_refine(fam, tname, x0, tb, metrics, robust, budget=160, seed=0):
+    """Push a reference toward the template's Pareto front: maximise the minimum normalised improvement of the chosen
+    metrics over the reference (worst case over a few hard PVT conditions for robust tasks), subject to sanity."""
+    from spectra.opt.sizing import run_cmaes
+    tpl = T[tname]
+    prof = {n: s for n, s, _ in PROFILES[fam]["metrics"]}
+    conds = FRONTIER_CONDS if robust else [NOMINAL]
+    task0 = {"family": fam, "tb": tb, "specs": [{"metric": m, "op": ">=", "value": -1e30} for m in metrics]}
+    ev0 = evaluate(task0, tpl["build"](x0), conds=conds)
+    if ev0.status != "ok":
+        return x0
+    def agg(ev, m, sense):
+        vals = [d.get(m) for d in ev.per_cond.values()]
+        if any(v is None for v in vals):
+            return None
+        return min(vals) if sense == "+" else max(vals)
+    ref = {m: agg(ev0, m, prof.get(m, "+")) for m in metrics}
+    def unit(m, a, b):  # improvement of b over a in "spec units"
+        sense = prof.get(m, "+")
+        if a is None or b is None:
+            return -5.0
+        if m in DB or m.endswith("_db"):
+            d = (b - a) / 3.0
+        elif m == "pm":
+            d = (b - a) / 5.0
+        else:
+            d = math.log(max(abs(b), 1e-30) / max(abs(a), 1e-30)) / math.log(1.25)
+        return d if sense == "+" else -d
+    def score(ev):
+        if ev.status != "ok":
+            return 50.0
+        from spectra.sim.evaluate import check
+        san = 0.0
+        for c in ev.per_cond.values():
+            _, v = check(PROFILES[fam]["sanity"], c); san = max(san, v)
+        imp = min(unit(m, ref[m], agg(ev, m, prof.get(m, "+"))) for m in metrics)
+        return 10 * san - min(imp, 2.0)
+    task = {"family": fam, "tb": tb, "specs": task0["specs"]}
+    r = run_cmaes(task, tpl["build"], tpl["vars"], budget=budget, conds=conds, seed=seed, x0=x0, sigma0=0.12,
+                  score_fn=score)
+    return r.best_x if (r.best_x and r.best_score < score(ev0)) else x0
+
+
 def utility(rows, fam, w):
     prof = PROFILES[fam]["metrics"]
     M = []
@@ -123,6 +171,7 @@ SLOTS = {
                   ("app_diff", 2, 0), ("app_diff", 3, 0), ("app_integ", 2, 0), ("app_integ", 3, 0), ("app_inv", 2, 1)],
 }
 EXTRA_SPECS = {  # always-on functional specs (from sanity) per family
+    "opamp": [{"metric": "polarity_ok", "op": ">=", "value": 1}],
     "amp": [{"metric": "vout_dc", "op": "range", "value": [0.45, 1.35]}],
     "tia": [{"metric": "vout_dc", "op": "range", "value": [0.3, 1.5]}],
     "ref": [{"metric": "startup_ok", "op": ">=", "value": 1}],
@@ -167,7 +216,11 @@ def main(families=None, seed=0):
                 tb = ref["tb"]
                 if fam == "filter" and tname == "mfb_bpf":
                     tb = dict(tb, kind="bandpass")
-                net = T[tname]["build"](ref["x"])
+                xref = ref["x"]
+                if (tier == 3 or robust) and FRONTIER:
+                    pm_names = [n for n, _, _ in prof if ref["m"].get(n) is not None and n not in TARGET][:6]
+                    xref = frontier_refine(fam, tname, ref["x"], tb, pm_names, robust, seed=si)
+                net = T[tname]["build"](xref)
                 task = {"family": fam, "tb": tb, "specs": []}
                 conds = PVT if robust else [NOMINAL]
                 ev = evaluate(task, net, conds=conds)
@@ -180,6 +233,8 @@ def main(families=None, seed=0):
                     names = ["f0", "q", "gain_db", "power"]
                 order_m = list(rng.permutation(names))
                 core = [c for c in FAMILY_EXTRA_METRICS.get(fam, []) if c in names or c in ("vref", "fc", "a1", "f0")]
+                if any(m0.get(c) is None for c in core if c not in ("vref", "fc", "a1", "f0")):
+                    print("  core metric missing; retry", tag); continue
                 chosen = core + [n for n in order_m if n not in core][: max(0, N_SPECS[tier] - len(core))]
                 specs = []
                 for n in chosen:
@@ -195,7 +250,7 @@ def main(families=None, seed=0):
                         span = max(abs(hi), abs(lo)) * REL_TOL[2]
                         sp = {"metric": n, "op": "range", "value": [float(f"{lo - span:.4g}"), float(f"{hi + span:.4g}")]}
                     else:
-                        sp = derive_spec(n, v, 2 if robust else tier)
+                        sp = derive_spec(n, v, 3 if robust else tier)
                     if sp:
                         specs.append(sp)
                 specs += EXTRA_SPECS.get(fam, [])
@@ -205,8 +260,9 @@ def main(families=None, seed=0):
                     print("  reference fails derived specs; retry", tag, [k for c in ev2.checks.values() for k, v in c.items() if not v[1]][:4])
                     continue
                 used.add((tag, pick))
-                tid = f"{fam}-{tname}-t{tier}{'r' if robust else ''}-{si:02d}"
-                task.update({"id": tid, "tier": tier, "robust": bool(robust), "ref": {"template": tname, "x": ref["x"], "archive": tag},
+                tid = f"{fam}-{si:02d}"
+                task.update({"id": tid, "tier": tier, "robust": bool(robust), "ref": {"template": tname, "x": xref, "archive": tag,
+                             "frontier_refined": xref is not ref["x"]},
                              "ref_metrics": {k: v for k, v in m0.items()}})
                 task["nl_spec"] = render(task)
                 tasks.append(task)

@@ -2,18 +2,32 @@
     python -m spectra.agent.sandbox_worker <program.py> <jobs.json> <out.json>
 jobs.json: {"spec": {...}, "params": [ {name: value}, ... ] }  (empty dict -> PARAMS initial values)
 """
-import json, math, sys, traceback
+import json, math, re, sys, traceback
 
 import numpy as np
 
 from spectra.agent import dsl
 
 
+SAFE_BUILTINS = {k: __builtins__[k] if isinstance(__builtins__, dict) else getattr(__builtins__, k)
+                 for k in ["abs", "min", "max", "sum", "round", "range", "len", "enumerate", "zip", "float", "int",
+                           "bool", "str", "dict", "list", "tuple", "set", "sorted", "reversed", "any", "all", "map",
+                           "filter", "isinstance", "pow", "divmod", "print", "ValueError", "Exception", "ZeroDivisionError",
+                           "KeyError", "IndexError", "TypeError", "True", "False", "None"]
+                 if (k in __builtins__ if isinstance(__builtins__, dict) else hasattr(__builtins__, k))}
+FORBIDDEN = re.compile(r"\b(import|open|exec|eval|compile|globals|locals|getattr|setattr|__\w+__)\b")
+
+
 def main(prog_path, jobs_path, out_path):
     src = open(prog_path).read()
     jobs = json.load(open(jobs_path))
-    ns = {"__name__": "design_program", "math": math, "np": np, "Netlist": dsl.Netlist, "par": dsl.par,
-          "db": dsl.db, "PI": dsl.PI, "UT": dsl.UT}
+    bad = FORBIDDEN.search(src)
+    if bad:
+        json.dump({"ok": False, "error": f"forbidden construct '{bad.group(0)}': programs may not import modules or use "
+                   f"I/O/introspection; math, np, Netlist, par, db, PI, UT are pre-imported."}, open(out_path, "w"))
+        return
+    ns = {"__builtins__": SAFE_BUILTINS, "__name__": "design_program", "math": math, "np": np, "Netlist": dsl.Netlist,
+          "par": dsl.par, "db": dsl.db, "PI": dsl.PI, "UT": dsl.UT}
     out = {"ok": True, "results": []}
     try:
         exec(compile(src, "design_program.py", "exec"), ns)

@@ -24,12 +24,17 @@ def load(exp, methods=None):
             meta = r.get("task_meta", {})
             v = r.get("verify", {})
             succ = bool(v.get("pvt_pass")) if meta.get("robust") else bool(v.get("tt_pass"))
+            bs, bc = r.get("budget_sims"), r.get("budget_calls")
+            over = (bs is not None and (r.get("sims") or 0) > bs) or (bc is not None and (r.get("calls") or 0) > bc)
+            if over:
+                succ = False
             runs.append({"method": mdir.name, "task": f.parent.name, "seed": f.stem, "success": succ,
                          "tt_pass": bool(v.get("tt_pass")), "robust": meta.get("robust", False), "tier": meta.get("tier"),
                          "family": meta.get("family"), "sims": r.get("sims") or 0, "calls": r.get("calls") or 0,
                          "cost": r.get("cost_usd") or 0.0, "wall": r.get("wall_seconds") or 0.0,
                          "tokens": (r.get("tokens_in") or 0) + (r.get("tokens_out") or 0), "status": r.get("status"),
-                         "first_pass_sims": r.get("first_pass_sims"), "declared_infeasible": r.get("status") == "declared_infeasible"})
+                         "first_pass_sims": r.get("first_pass_sims"), "declared_infeasible": r.get("status") == "declared_infeasible",
+                         "over_budget": over, "infeasible": meta.get("infeasible", False)})
     return runs
 
 
@@ -75,7 +80,7 @@ def summarize(runs, methods):
              "mean_wall_s": float(np.mean([r["wall"] for r in rs])), "mean_sims": float(np.mean([r["sims"] for r in rs])),
              "declared_infeasible": sum(r["declared_infeasible"] for r in rs)}
         for name, sel in [("nominal", lambda r: not r["robust"]), ("robust", lambda r: r["robust"])] + \
-                         [(f"tier{t}", (lambda t: lambda r: str(r["tier"]) == str(t) and not r["robust"])(t)) for t in (1, 2, 3, "D")]:
+                         [(f"tier{t}", (lambda t: lambda r: str(r["tier"]) == str(t) and not r["robust"])(t)) for t in (1, 2, 3, "D", "C")]:
             sub = [r for r in rs if sel(r)]
             if sub:
                 d[name] = cluster_boot(sub)[0]

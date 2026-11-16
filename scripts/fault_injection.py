@@ -171,14 +171,15 @@ def main(n_per_template=6, seed=0, model="opus"):
         results = list(ex.map(run_case, range(len(cases))))
     summ = {}
     for arm in ("rule", "raw", "spectra"):
-        top1 = sum(r[arm][:1] == [r["truth"]] for r in results) / len(results)
-        top3 = sum(r["truth"] in r[arm][:3] for r in results) / len(results)
+        norm = lambda xs: [str(x).strip().lower() for x in xs]
+        top1 = sum(norm(r[arm][:1]) == [r["truth"].lower()] for r in results) / len(results)
+        top3 = sum(r["truth"].lower() in norm(r[arm][:3]) for r in results) / len(results)
         summ[arm] = {"top1": top1, "top3": top3}
         for cls in CLASSES:
             rr = [r for r in results if r["class"] == cls]
             if rr:
-                summ[arm][cls] = {"n": len(rr), "top1": sum(r[arm][:1] == [r["truth"]] for r in rr) / len(rr),
-                                  "top3": sum(r["truth"] in r[arm][:3] for r in rr) / len(rr)}
+                summ[arm][cls] = {"n": len(rr), "top1": sum(norm(r[arm][:1]) == [r["truth"].lower()] for r in rr) / len(rr),
+                                  "top3": sum(r["truth"].lower() in norm(r[arm][:3]) for r in rr) / len(rr)}
     (ROOT / "results" / "E4_summary.json").write_text(json.dumps(summ, indent=1))
     print(json.dumps(summ, indent=1))
 
