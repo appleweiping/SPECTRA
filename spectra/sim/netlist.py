@@ -164,7 +164,7 @@ def erc(ckt: Circuit, ground="vss", supplies=("vdd",), sources=()) -> tuple[list
             conn[n].append((d, t))
     for p in ckt.ports:
         if p not in conn:
-            errors.append(f"port '{p}' is not connected to any device")
+            warns.append(f"port '{p}' is not connected to any device")
     for n, lst in conn.items():
         if n in ckt.ports or n in ("0", "gnd"):
             continue

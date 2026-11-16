@@ -59,6 +59,7 @@ Xd1 vin vout vdd 0 ib dut
 CL vout 0 {cl}
 {f'RL vout 0 {rl}' if rl else ''}
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ idd $&i(vdd)"
@@ -117,6 +118,7 @@ Cpd iin 0 {cpd}
 Xd1 iin vout vdd 0 ib dut
 CL vout 0 {cl}
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ idd $&i(vdd)"
@@ -169,6 +171,7 @@ Vo vo 0 DC {vnom}
 Vm vo iout DC 0
 Xd1 iin iout vdd 0 dut
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ iout $&i(vm)"
@@ -236,6 +239,7 @@ Il vout 0 DC {imax}
 Xd1 vin vout vref 0 ib dut
 {cl_line}
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ vout_imax $&v(vout)"
@@ -262,6 +266,7 @@ Il vout 0 PULSE({imin} {imax} 5u 100n 100n 10u 30u)
 Xd1 vin vout vref 0 ib dut
 {cl_line}
 .control
+set wr_singlescale
 tran 10n 25u
 wrdata tran.txt v(vout)
 .endc
@@ -323,6 +328,7 @@ Vdd vdd 0 DC {vdd} AC 1
 Xd1 vdd vref 0 dut
 Cl vref 0 1p
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ vref $&v(vref)"
@@ -338,6 +344,7 @@ Vdd vdd 0 DC {vdd} AC 1
 Xd1 vdd vref 0 dut
 Cl vref 0 1p
 .control
+set wr_singlescale
 ac dec 10 10 1e8
 wrdata ac.txt v(vref)
 dc vdd {vdd - 0.2:.3f} {vdd + 0.2:.3f} 0.02
@@ -350,6 +357,7 @@ Vdd vdd 0 PWL(0 0 10u {vdd})
 Xd1 vdd vref 0 dut
 Cl vref 0 1p
 .control
+set wr_singlescale
 tran 20n 60u
 wrdata tran.txt v(vref)
 .endc
@@ -397,6 +405,7 @@ Vp vinp 0 DC {vcm - 0.05}
 Xd1 vinp vinn vout vdd 0 ib dut
 CL vout 0 {cl}
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ idd_low $&i(vdd)"
@@ -416,6 +425,7 @@ Vp vinp 0 PULSE({vcm - vod} {vcm + vod} {tper / 4} 10p 10p {tper / 2} {tper})
 Xd1 vinp vinn vout vdd 0 ib dut
 CL vout 0 {cl}
 .control
+set wr_singlescale
 tran {tper / 2000} {tper * 1.25 + tper / 4}
 wrdata tran.txt v(vout) i(vdd)
 .endc
@@ -440,12 +450,17 @@ wrdata tran.txt v(vout) i(vdd)
         if t is not None:
             tt, vo, idd = t[:, 0], t[:, 1], t[:, 2]
             t_r, t_f = tper / 4, tper / 4 + tper / 2
+            pre = vo[(tt > t_r * 0.5) & (tt < t_r)]
+            if len(pre) and pre.mean() > vdd / 2:
+                m["polarity_ok"] = 0.0
+            else:
+                m["polarity_ok"] = 1.0
             seg_r = tt >= t_r
             x = _cross(tt[seg_r], vo[seg_r], vdd / 2)
-            m["tpd_rise"] = (x - t_r) if x is not None and x < t_f else None
+            m["tpd_rise"] = (x - t_r) if (x is not None and x < t_f and m["polarity_ok"]) else None
             seg_f = tt >= t_f
             x2 = _cross(tt[seg_f], vdd - vo[seg_f], vdd / 2)
-            m["tpd_fall"] = (x2 - t_f) if x2 is not None else None
+            m["tpd_fall"] = (x2 - t_f) if (x2 is not None and m["polarity_ok"]) else None
             if m["tpd_rise"] is not None and m["tpd_fall"] is not None:
                 m["tpd"] = max(m["tpd_rise"], m["tpd_fall"])
             m["power_avg"] = float(-np.trapezoid(idd, tt) / (tt[-1] - tt[0]) * vdd)
@@ -472,6 +487,7 @@ Xd1 vinp vinn clk outp outn vdd 0 dut
 C1 outp 0 {cl}
 C2 outn 0 {cl}
 .control
+set wr_singlescale
 tran {T / 400} {2.5 * T}
 wrdata tran.txt v(outp) v(outn) i(vdd)
 .endc
@@ -531,6 +547,7 @@ class VCO:
         net = f"""{_head(cond, 'vco tb')}{dut}
 {chr(10).join(lines)}
 .control
+set wr_singlescale
 tran {tstop / 20000} {tstop}
 wrdata tran.txt v(vo0) v(vo1) v(vo2) i(vdd1)
 .endc
@@ -541,13 +558,13 @@ wrdata tran.txt v(vo0) v(vo1) v(vo2) i(vdd1)
     @staticmethod
     def measure(rs, cond, p):
         r = rs[0]; vdd = cond.get("vdd", 1.8); m = {}
-        t = _arr(r, "tran.txt", 8)
+        t = _arr(r, "tran.txt", 5)
         if t is None:
             m["_ops"] = {}
             return m
         tt = t[:, 0]; half = tt > tt[-1] * 0.4
         freqs, swings = [], []
-        for col in (1, 3, 5):
+        for col in (1, 2, 3):
             v = t[:, col][half]; ts = tt[half]
             s = np.sign(v - vdd / 2)
             idx = np.where((s[:-1] < 0) & (s[1:] >= 0))[0]
@@ -564,7 +581,7 @@ wrdata tran.txt v(vo0) v(vo1) v(vo2) i(vdd1)
             vlo, vhi = p.get("vctrl_range", (0.6, 1.2))
             m["kvco"] = abs(freqs[2] - freqs[0]) / (vhi - vlo)
         m["swing"] = min(swings)
-        idd = t[:, 7][half]
+        idd = t[:, 4][half]
         m["power"] = float(-np.mean(idd) * vdd)
         m["_ops"] = {}
         return m
@@ -585,6 +602,7 @@ Vin vin 0 DC {vcm} AC 1
 Xd1 vin vout vdd 0 ib dut
 CL vout 0 {cl}
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ idd $&i(vdd)"
@@ -639,6 +657,7 @@ Vin vin 0 PWL(0 0 10u {vdd} 20u 0)
 Xd1 vin vout vdd 0 dut
 CL vout 0 10f
 .control
+set wr_singlescale
 tran 5n 20u
 wrdata tran.txt v(vin) v(vout) i(vdd)
 .endc
@@ -649,11 +668,11 @@ wrdata tran.txt v(vin) v(vout) i(vdd)
     @staticmethod
     def measure(rs, cond, p):
         r = rs[0]; vdd = cond.get("vdd", 1.8); m = {}
-        t = _arr(r, "tran.txt", 6)
+        t = _arr(r, "tran.txt", 4)
         if t is None:
             m["_ops"] = {}
             return m
-        tt, vi, vo, idd = t[:, 0], t[:, 1], t[:, 3], t[:, 5]
+        tt, vi, vo, idd = t[:, 0], t[:, 1], t[:, 2], t[:, 3]
         inv = p.get("inverting", False)
         y = (vdd - vo) if inv else vo
         up = tt <= 10e-6; dn = tt > 10e-6
@@ -688,6 +707,7 @@ V2 vin2 0 DC {vcm} AC 0
 Xd1 vin1 vin2 vout vcm vdd 0 ib dut
 CL vout 0 {cl}
 .control
+set wr_singlescale
 save all {sl}
 op
 echo "@@ idd $&i(vdd)"
@@ -724,11 +744,15 @@ wrdata dc1.txt v(vout)
                 idx = np.where(mag < 1.0)[0]
                 if len(idx) and idx[0] > 0:
                     i = idx[0]
-                    m["f_unity"] = float(10 ** np.interp(0.0, [np.log10(mag[i]), np.log10(mag[i - 1])][::-1] if False else [np.log10(mag[i - 1]) * -1, -np.log10(mag[i])], [np.log10(f[i - 1]), np.log10(f[i])]))
-                # slope check: gain at 10*f_unity/100 should be ~ +40 dB above
-                m["gain_100hz_db"] = float(20 * np.log10(np.abs(np.interp(100, f, np.abs(h)))))
-                ph = np.degrees(np.angle(h[np.searchsorted(f, 1e3)]))
-                m["phase_1k"] = float(ph)
+                    x0, x1 = np.log10(f[i - 1]), np.log10(f[i])
+                    y0, y1 = np.log10(mag[i - 1]), np.log10(mag[i])
+                    m["f_unity"] = float(10 ** (x0 + (0 - y0) * (x1 - x0) / (y1 - y0)))
+                    # integrator slope between f_unity/100 and f_unity/10 (ideal -20 dB/dec)
+                    fa, fb = m["f_unity"] / 100, m["f_unity"] / 10
+                    ga = np.interp(np.log10(fa), np.log10(f), 20 * np.log10(np.maximum(mag, 1e-30)))
+                    gb = np.interp(np.log10(fb), np.log10(f), 20 * np.log10(np.maximum(mag, 1e-30)))
+                    m["slope_db_dec"] = float(gb - ga)
+                m["gain_dc_db"] = float(20 * np.log10(max(mag[0], 1e-30)))
             else:
                 g = h[min(np.searchsorted(f, 100), len(h) - 1)]
                 m[f"a{k}"] = float(np.real(g))     # signed low-frequency gain
