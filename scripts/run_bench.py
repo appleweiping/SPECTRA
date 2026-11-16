@@ -17,7 +17,7 @@ RAW = ROOT / "results" / "raw"
 
 
 def budget_for(task):
-    return Budget(llm_calls=12, sims=2000 if task.get("robust") else 300)
+    return Budget(llm_calls=12, sims=1200 if task.get("robust") else 300)
 
 
 def make_runner(method, model):
@@ -75,9 +75,9 @@ def main():
     seeds = [int(s) for s in a.seeds.split(",")]
     methods = a.methods.split(",")
     jobs = []
-    for m in methods:
-        for t in tasks:
-            for s in seeds:
+    for t in tasks:          # interleave methods so partial results are comparable and load is mixed
+        for s in seeds:
+            for m in methods:
                 tag = m if a.model == "opus" or m.startswith("oracle") else f"{m}@{a.model}"
                 out = RAW / a.exp / tag / t["id"] / f"s{s}.json"
                 if not out.exists():

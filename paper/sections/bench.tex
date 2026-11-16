@@ -40,7 +40,7 @@ In total SPECTRA-Bench contains \NTasksTotal{} tasks (\NCertified{} certified, \
 A run succeeds only if an \emph{independent} re-simulation of the returned netlist meets every specification at TT
 (nominal tasks) or at all 45 PVT conditions (robust tasks); final robust designs are additionally analysed with a
 100-sample per-instance mismatch Monte Carlo using the PDK's Pelgrom coefficients~\cite{pelgrom1989matching}. All
-methods share the same budget per run: at most 12 LLM calls and 300 (nominal) or 2{,}000 (robust)
+methods share the same budget per run: at most 12 LLM calls and 300 (nominal) or 1{,}200 (robust)
 \emph{condition-evaluations}, where evaluating one design at one PVT condition counts once regardless of how many
 analyses the testbench needs; simulations spent on sensitivities or failed refinements are charged. We report
 success with 95\% cluster-bootstrap confidence intervals over tasks, simulations and LLM calls to first success,

@@ -3,7 +3,7 @@
 cd /home/user/spectra
 export PYTHONPATH=. SPECTRA_LLM_CONCURRENCY=10 SPECTRA_SIM_CONCURRENCY=4
 python3 -m scripts.make_subset
-python3 -m scripts.run_bench --exp E2 --methods spectra_nodiag,spectra_nointent,spectra_norefine,genbo_cmaes --seeds 0,1,2 \
+python3 -m scripts.run_bench --exp E2 --methods spectra_nodiag,spectra_nointent,spectra_norefine,genbo_cmaes,oracle_cmaes --seeds 0,1,2 \
     --tasks data/bench/subset_E2.jsonl --workers 10 >> results/E2_run.log 2>&1
 python3 - <<'PY'
 import json
