@@ -3,16 +3,16 @@
 ## Pipeline Status
 
 ```yaml
-stage: idea-discovery   # idle | idea-discovery | implementation | training | review | paper
+stage: paper   # idle | idea-discovery | implementation | training | review | paper
 idea: "Spec-to-robust-netlist analog agent with design-intent (gm/Id) programs, causal diagnosis, PVT-aware refinement"
-contract: "refine-logs/FINAL_PROPOSAL.md"
+contract: "refine-logs/FINAL_PROPOSAL.md; paper/PAPER_ACCEPTANCE_CONTRACT.md (frozen after 3 rounds)"
 current_branch: "main"
-baseline: "AnalogCoder-style codegen agent; netlist ReAct agent; BO/CMA-ES sizing on raw W/L"
-training_status: idle
+baseline: "AnalogCoder-style codegen agent; AnalogCoder-Pro-style Gen+TPE (+Gen+TPE-full); SPECTRA-min"
+training_status: "final experiments running (E1 seed0 primary + 600-cap re-runs, E1 seed1 T3, E2, E3, E5, MC yield)"
 language: en
-active_tasks: [literature-survey, repo-analysis, sim-substrate]
-next: "finish LUTs + testbenches; write IDEA_REPORT; reviewer gate"
-last_updated: "2026-11-16"
+active_tasks: [E1-finish, E2-E3-E5, rerun-600, mc-yield, W2-round2, claim-audit, kill-argument]
+next: "bash scripts/finalize_paper.sh when all *_DONE flags exist; write ablation/PVT/scaling interpretation; W2 r2; audits"
+last_updated: "2026-11-17"
 ```
 
 ## Project Constraints
