@@ -118,10 +118,10 @@ Netlist (canonical format; W/L in um):
 Reply with a ```json block {{"ranking": ["<most likely element name>", "<2nd>", "<3rd>"], "fault": "<short description>"}}."""
 
 
-def main(n_per_template=6, seed=0, model="gpt-5-mini"):
+def main(n_per_template=6, seed=0, model="gpt-6.1-sol"):
     import zlib
     global OUT
-    exp_tag = "E4g" if model.lower() in {"gpt", "openai", "gpt-mini", "gpt5-mini", "gpt-5-mini"} else f"E4_{model}"
+    exp_tag = "E4g" if model.lower() in {"gpt", "openai", "gpt-mini", "gpt-6.1-sol", "gpt61-sol"} else f"E4_{model}"
     OUT = ROOT / "results" / "raw" / exp_tag
     OUT.mkdir(parents=True, exist_ok=True)
     tasks = [json.loads(l) for l in open(ROOT / "data" / "bench" / "tasks.jsonl")]
@@ -190,4 +190,4 @@ def main(n_per_template=6, seed=0, model="gpt-5-mini"):
 
 
 if __name__ == "__main__":
-    main(model=sys.argv[1] if len(sys.argv) > 1 else "gpt-5-mini")
+    main(model=sys.argv[1] if len(sys.argv) > 1 else "gpt-6.1-sol")

@@ -7,6 +7,7 @@ python -m scripts.comparisons
 """
 import argparse
 import json
+import os
 from collections import defaultdict
 
 import numpy as np
@@ -55,17 +56,18 @@ def block(runs, methods, ref, task_ids, require=None):
 
 
 def _strip_model_suffix(runs):
-    """Normalize GPT experiment directory names (method@gpt-5-mini) for paired tables."""
+    """Normalize GPT experiment directory names (method@gpt-6.1-sol) for paired tables."""
     return [dict(r, method=r["method"].split("@", 1)[0]) for r in runs]
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--e1", default="E1")
-    ap.add_argument("--e2", default="E2")
-    ap.add_argument("--e3", default="E3")
-    ap.add_argument("--e5", default="E5")
-    ap.add_argument("--strip-model-suffix", action="store_true")
+    ap.add_argument("--e1", default=os.environ.get("SPECTRA_MAIN_EXP", "E1"))
+    ap.add_argument("--e2", default=os.environ.get("SPECTRA_E2_EXP", "E2"))
+    ap.add_argument("--e3", default=os.environ.get("SPECTRA_E3_EXP", "E3"))
+    ap.add_argument("--e5", default=os.environ.get("SPECTRA_E5_EXP", "E5"))
+    ap.add_argument("--strip-model-suffix", action="store_true",
+                    default=os.environ.get("SPECTRA_STRIP_MODEL_SUFFIX", "").lower() in {"1", "true", "yes"})
     a = ap.parse_args()
     e1, e2, e3, e5 = (load(x) for x in (a.e1, a.e2, a.e3, a.e5))
     if a.strip_model_suffix:

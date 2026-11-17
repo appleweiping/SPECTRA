@@ -360,10 +360,11 @@ python3 tools/aris_review.py --skill kill-argument --prompt-file .aris/prompts/w
 
 ## 11. Execution update after handoff (2026-11-16 client session)
 
-The user confirmed **GPT-5 mini** as the single main experiment backbone and explicitly removed the token/US-dollar
+The user confirmed **GPT-6.1-sol** as the single main experiment backbone and explicitly removed the token/US-dollar
 cap. This resolves the open choice in Sections 7.0, 7.2 and 10. New LLM calls now use the OpenAI Python client;
 Claude and the legacy `opus`/`haiku` aliases are rejected. The cache and `results/llm_usage.jsonl` schema are kept,
-with configurable per-million-token prices. The ARIS bridge is GPT-only and writes a bounded read-only context
+with configurable per-million-token prices (the configured gateway has no published tariff, so the default is zero).
+The ARIS bridge is GPT-only and writes a bounded read-only context
 manifest for each fresh review. New experiment names are `E1g`, `E2g`, `E3g`, `E4g`, and `E5g`; historical Claude
 results remain isolated under their original names.
 
@@ -373,14 +374,14 @@ full and `/autodl-pub/data` is read-only on this instance. No local C: or D: exp
 three-way commit hash is recorded only after local checks pass and the changes are pushed.
 
 ## 12. 命令速查
-（以下命令按 GPT-5 mini 更新；使用新实验名 `E1g` 等，历史 Claude 目录只作补充。）
+（以下命令按 GPT-6.1-sol 更新；使用新实验名 `E1g` 等，历史 Claude 目录只作补充。）
 ```bash
 # 跑实验（可续跑）
 PYTHONPATH=. SPECTRA_GLOBAL_SIM_SLOTS=6 SPECTRA_SIM_CONCURRENCY=4 SPECTRA_LLM_CONCURRENCY=14 \
-  python -m scripts.run_bench --exp E1g --model gpt-5-mini --methods spectra,direct --seeds 0,1,2 --tasks data/bench/E1_primary.jsonl --workers 16
+  python -m scripts.run_bench --exp E1g --model gpt-6.1-sol --methods spectra,direct --seeds 0,1,2 --tasks data/bench/E1_primary.jsonl --workers 16
 # 可用方法名：spectra, spectra_min, spectra_nodiag, spectra_nointent, spectra_norefine, spectra_noknow,
 #   spectra_pvt_nominal, spectra_pvt_all, direct, direct_noknow, genbo, genbo_cmaes, genbo_full, oracle_cmaes
-#   （--model gpt-5-mini；方法目录名为 method@gpt-5-mini）
+#   （--model gpt-6.1-sol；方法目录名为 method@gpt-6.1-sol）
 python -m scripts.analyze --exp E1          # 打印汇总并写 results/E1_summary.json
 bash scripts/finalize_paper.sh              # 重生成一切并编译
 python -m scripts.mc_yield 100              # 失配 MC

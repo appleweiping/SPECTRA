@@ -1,6 +1,6 @@
 \subsection{Setup}
 \label{sec:setup}
-\textbf{Methods.} All LLM-based methods use the same model (GPT-5 mini through the OpenAI Python client with default
+\textbf{Methods.} All LLM-based methods use the same model (GPT-6.1-sol through the OpenAI Python client with default
 sampling), the same task text, interface description, PDK sheet and topology knowledge cards, and the same budgets
 (Section~\ref{sec:bench}); only SPECTRA and its ablations receive the $g_m/I_D$ lookup-table API, which is part of the
 method (the w/o-intent ablation removes it). Responses are cached per prompt and run so that interrupted runs resume

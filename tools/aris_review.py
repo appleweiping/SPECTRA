@@ -87,7 +87,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--skill", required=True)
     ap.add_argument("--prompt-file", required=True)
-    ap.add_argument("--model", default="gpt-5-mini")
+    ap.add_argument("--model", default="gpt-6.1-sol")
     ap.add_argument("--include", action="append", default=[], help="Repository-relative artifact to include (repeatable)")
     ap.add_argument("--tools", default="Read,Grep,Glob", help="Retained for ARIS prompt compatibility; no remote tools are used")
     ap.add_argument("--out", default=None)
@@ -137,7 +137,7 @@ def main() -> int:
         "tool": "openai-python",
         "requested_model": a.model,
         "reported_models": usage.get("reported_models"),
-        "executor_model": "gpt-5-mini",
+        "executor_model": "gpt-6.1-sol",
         "review_independence": "same-family",
         "acceptance_status": "provisional",
         "status": status,

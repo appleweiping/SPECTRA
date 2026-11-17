@@ -29,22 +29,24 @@ _sem = threading.Semaphore(int(os.environ.get("SPECTRA_LLM_CONCURRENCY", "8")))
 # stale ``--model opus``/``claude-*`` invocation must fail instead of silently
 # sending data to the retired Claude backend.
 MODELS = {
-    "gpt": "gpt-5-mini",
-    "openai": "gpt-5-mini",
-    "gpt-mini": "gpt-5-mini",
-    "gpt-5-mini": "gpt-5-mini",
-    "gpt5-mini": "gpt-5-mini",
+    "gpt": "gpt-6.1-sol",
+    "openai": "gpt-6.1-sol",
+    "gpt-mini": "gpt-6.1-sol",
+    "gpt-6.1-sol": "gpt-6.1-sol",
+    "gpt61-sol": "gpt-6.1-sol",
     "gpt-5.1": "gpt-5.1",
     "gpt5.1": "gpt-5.1",
     "gpt-5": "gpt-5",
     "gpt5": "gpt-5",
 }
 
-# USD per one million tokens.  These defaults are kept in code so old result
-# records remain self-contained; operators can override them when OpenAI's
-# public prices change without changing the call protocol.
+# USD per one million tokens.  The configured GPT-6.1-sol gateway does not
+# publish a USD tariff, so its default is deliberately zero rather than an
+# invented price.  Operators can set the two SPECTRA_OPENAI_*_PRICE variables
+# when an accountable tariff is available; token counts remain recorded either
+# way.
 _DEFAULT_PRICES = {
-    "gpt-5-mini": (0.25, 2.00),
+    "gpt-6.1-sol": (0.0, 0.0),
     "gpt-5.1": (1.25, 10.00),
     "gpt-5": (1.25, 10.00),
 }
@@ -54,18 +56,18 @@ class LLMError(Exception):
     pass
 
 
-def call(prompt: str, system: str, model: str = "gpt-5-mini", run_tag: str = "", tag: str = "", timeout: int = 900,
+def call(prompt: str, system: str, model: str = "gpt-6.1-sol", run_tag: str = "", tag: str = "", timeout: int = 900,
          retries: int = 6, effort: str | None = None) -> dict:
     model_id = MODELS.get(model.lower(), model)
     if model_id.lower().startswith("claude") or model.lower() in {"opus", "sonnet", "haiku", "fable"}:
         raise LLMError(
             f"Claude model '{model}' is disabled for this project. "
-            "Use a GPT alias such as --model gpt-5-mini or --model gpt-5.1."
+            "Use a GPT alias such as --model gpt-6.1-sol or --model gpt-5.1."
         )
     if not (model_id.lower().startswith("gpt-") or model_id.lower().startswith(("o1", "o3", "o4"))):
         raise LLMError(
             f"Unsupported LLM model '{model}'. Use an OpenAI GPT model "
-            "(for example gpt-5-mini or gpt-5.1)."
+            "(for example gpt-6.1-sol or gpt-5.1)."
         )
     key = hashlib.sha256(json.dumps([model_id, system, prompt, run_tag, effort]).encode()).hexdigest()
     cp = CACHE / key[:2] / f"{key}.json"
@@ -100,7 +102,7 @@ def call(prompt: str, system: str, model: str = "gpt-5-mini", run_tag: str = "",
                         {"role": "user", "content": prompt},
                     ],
                 }
-                # GPT-5 family models support reasoning_effort on Chat
+                # GPT family models support reasoning_effort on Chat
                 # Completions.  Omit it when unset to preserve model defaults.
                 if effort:
                     kwargs["reasoning_effort"] = effort

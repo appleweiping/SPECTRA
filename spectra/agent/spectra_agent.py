@@ -58,7 +58,7 @@ def _vars_from(params_spec, overrides=None):
 
 
 class Spectra:
-    def __init__(self, task, model="gpt-5-mini", seed=0, cfg: Config | None = None, budget=None, method="spectra"):
+    def __init__(self, task, model="gpt-6.1-sol", seed=0, cfg: Config | None = None, budget=None, method="spectra"):
         self.cfg = cfg or Config()
         self.ctx = Ctx(task=task, model=model, seed=seed, method=method)
         if budget:

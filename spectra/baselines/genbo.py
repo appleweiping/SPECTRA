@@ -40,7 +40,7 @@ def _fill(net, x):
     return re.sub(r"\{(\w+)\}", rep, net)
 
 
-def run_genbo(task, model="gpt-5-mini", seed=0, budget=None, rounds=3, method="genbo", optimizer="tpe", adaptive_pvt=False):
+def run_genbo(task, model="gpt-6.1-sol", seed=0, budget=None, rounds=3, method="genbo", optimizer="tpe", adaptive_pvt=False):
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     ctx = Ctx(task=task, model=model, seed=seed, method=method)

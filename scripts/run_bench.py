@@ -1,7 +1,7 @@
 """Resumable, parallel benchmark runner.
 
 python -m scripts.run_bench --exp E1g --methods spectra,direct,genbo --seeds 0,1,2 [--tasks file] [--filter regex]
-       [--model gpt-5-mini] [--workers 6]
+       [--model gpt-6.1-sol] [--workers 6]
 Each run -> results/raw/<exp>/<method>/<task_id>/s<seed>.json, including an INDEPENDENT final verification of the
 returned netlist at TT and (for robust tasks) at all 45 PVT conditions (not charged to the method's budget).
 """
@@ -76,7 +76,7 @@ def main():
     ap.add_argument("--seeds", default="0")
     ap.add_argument("--tasks", default=str(ROOT / "data" / "bench" / "tasks.jsonl"))
     ap.add_argument("--filter", default="")
-    ap.add_argument("--model", default="gpt-5-mini")
+    ap.add_argument("--model", default="gpt-6.1-sol")
     ap.add_argument("--workers", type=int, default=6)
     a = ap.parse_args()
     tasks = [json.loads(l) for l in open(a.tasks)]

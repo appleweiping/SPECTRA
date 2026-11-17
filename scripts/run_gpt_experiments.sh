@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# GPT-5 mini experiment chain. Run from the server checkout after exporting
+# GPT-6.1-sol experiment chain. Run from the server checkout after exporting
 # OPENAI_API_KEY. Each stage writes a new experiment namespace (E1g..E5g), so
 # historical Claude-backed results are never mixed with the primary analysis.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONPATH=.
-MODEL="${SPECTRA_MODEL:-gpt-5-mini}"
+MODEL="${SPECTRA_MODEL:-gpt-6.1-sol}"
 WORKERS="${SPECTRA_WORKERS:-8}"
 export SPECTRA_GLOBAL_SIM_SLOTS="${SPECTRA_GLOBAL_SIM_SLOTS:-6}"
 export SPECTRA_SIM_CONCURRENCY="${SPECTRA_SIM_CONCURRENCY:-4}"
