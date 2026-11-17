@@ -103,8 +103,10 @@ def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
     axes[0].set_ylabel("Solved fraction"); axes[0].set_ylim(0, 1.02)
     for ax in axes:
         ax.grid(color="#e5e4e0", lw=0.5)
-    axes[0].legend(fontsize=5, frameon=False, loc="lower right")
-    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+    h, l = axes[0].get_legend_handles_labels()
+    fig.legend(h, l, fontsize=5.5, frameon=False, loc="upper center", ncol=4, bbox_to_anchor=(0.5, 1.02),
+               handlelength=1.2, columnspacing=0.8)
+    fig.tight_layout(rect=(0, 0, 1, 0.9)); fig.savefig(FIG / out); plt.close(fig)
 
 
 if __name__ == "__main__":

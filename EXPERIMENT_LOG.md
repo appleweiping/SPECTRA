@@ -77,3 +77,15 @@ E5: Haiku 5.5, SPECTRA vs AnalogCoder-style on the subset's T3+robust tasks (1 s
 PVT strategy, the template oracle and Sonnet were dropped for compute and are listed as limitations.
 - 02:55 ordering: seed 0 for all methods on primary tasks first, then seed 1 for SPECTRA/AnalogCoder-style.
 - 03:25 robust tasks: seed 0 only for all methods (seed 1 for SPECTRA/AnalogCoder-style on T3 only).
+
+## 2026-11-17 04:40 Robust runs re-run natively at 600 (replaces truncation scoring)
+W3 contract review (paper/.contract_r1.md) pointed out that truncation at 600 is not equivalent to a 600-cap run:
+the iteration prompt shows the remaining simulation budget, and Gen+TPE splits the remaining budget over its
+regenerations (`per_round = sims_left // (rounds - rd)`: 400 vs 200 evaluations in round 0). All 79 robust runs
+that ran under the 1200 cap (E1: SPECTRA 10, AnalogCoder-style 6, Gen+TPE 13, SPECTRA-min 17; E2: w/o diagnosis 12,
+w/o intent 13; E5: 8) were moved to `results/raw_cap1200_archive/` and are re-run natively at 600 (E1 and E5 by their
+chains, E2 by `scripts/run_rerun_cap600.sh`). LLM responses are cached per (prompt, run tag), so re-runs reuse calls
+whose prompt is unchanged and only pay for diverging calls. Archived seed-1 robust runs are not re-run (robust
+tasks use seed 0 in the final scope). After the re-runs no run is scored by truncation.
+- Also from the review: the T3 ∪ robust primary endpoint was fixed at interim review round 1 (E1 ≈35% complete), not
+  before E1; the paper now says "pre-specified at review round 1" instead of "pre-registered".
