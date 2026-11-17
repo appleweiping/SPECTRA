@@ -113,6 +113,10 @@ def main():
     def summ(exp, methods):
         f = ROOT / "results" / f"{exp}_summary.json"
         return json.loads(f.read_text()) if f.exists() else None
+    pf = ROOT / "results/pvt_failure_conditions.json"
+    if pf.exists():
+        d = json.loads(pf.read_text()); tot = sum(d["fail_counts"].values()) or 1
+        out["PVTFailDesigns"] = str(d["n_designs"]); out["PVTFailLowVdd"] = f"{100 * d['by_vdd'].get('1.62V', 0) / tot:.0f}\\%"
     subp = ROOT / "data/bench/subset_E2.jsonl"
     if subp.exists() and (ROOT / "results/raw/E1/spectra").exists():
         from scripts.analyze import load, cluster_boot

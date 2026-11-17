@@ -31,7 +31,11 @@ w/o intent (raw $W/L$ programs), w/o refinement, Gen+CMA-ES and the template ora
 
 \subsection{PVT Closure and Mismatch}
 \label{sec:pvt}
-\PVTText{}
+\IfFileExists{tables/pvt.tex}{\input{tables/pvt}}{}
+\PVTText{} Robust success requires every specification at all 45 corner/temperature/supply combinations. Across the
+\PVTFailDesigns{} returned designs that pass at TT but fail the grid, \PVTFailLowVdd{} of the failing conditions are at
+the low supply (1.62\,V), the slow-NMOS corners SF and SS are the most frequent, and cold ($-40\,^\circ$C) fails as
+often as hot---headroom, not temperature, is what nominal-corner design misses.
 
 \subsection{Diagnosis Accuracy under Fault Injection}
 \label{sec:fault}
@@ -52,6 +56,7 @@ the agent itself sees intent-variable sensitivities and prediction discrepancies
 
 \subsection{Backbone Scaling and Cost}
 \label{sec:scaling}
+\IfFileExists{tables/scaling.tex}{\input{tables/scaling}}{}
 \ScalingText{} The mean LLM cost per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
 agent, \GenboCost{} for Gen+TPE and \SpectraMinCost{} for SPECTRA-min; SPECTRA's successful runs need a median of
 \SpectraCalls{} LLM calls and \SpectraSims{} simulations. \IfFileExists{figs/E1_anytime2.pdf}{Fig.~\ref{fig:anytime}
