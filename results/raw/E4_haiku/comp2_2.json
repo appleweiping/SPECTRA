@@ -1,0 +1,1 @@
+{"case": "comp2_2", "task": "comparator-00", "template": "comp2", "truth": "M4", "class": "miswire_gate", "failing": ["tpd", "polarity_ok", "vout_min_rel"], "rule": ["M9", "M8", "M4"], "raw": ["M4", "M7", "M3"], "raw_cost": 0.0011556000000000001, "spectra": ["M4", "M7", "M3"], "spectra_cost": 0.0017012}

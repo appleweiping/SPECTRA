@@ -1,0 +1,1 @@
+{"case": "csring3_2", "task": "vco-00", "template": "csring3", "truth": "Mq2", "class": "mirror_ratio", "failing": ["tuning_ratio"], "rule": ["Mp0", "Mq0", "Mn0"], "raw": ["Mq2", "Mc2", "Mb2"], "raw_cost": 0.0011765, "spectra": ["Mq2", "Mp2", "Mc2"], "spectra_cost": 0.0014981999999999999}

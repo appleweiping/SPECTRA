@@ -1,0 +1,1 @@
+{"case": "ldo_pmos_5", "task": "ldo-00", "template": "ldo_pmos", "truth": "Cc", "class": "comp_cap", "failing": ["ripple_settled"], "rule": ["M5", "Mp", "M1"], "raw": ["Cc", "Mp", "M5"], "raw_cost": 0.0017412, "spectra": ["M5", "M1", "Cc"], "spectra_cost": 0.0032945000000000006}

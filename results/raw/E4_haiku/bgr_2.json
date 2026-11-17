@@ -1,0 +1,1 @@
+{"case": "bgr_2", "task": "ref-00", "template": "bgr", "truth": "M2", "class": "miswire_gate", "failing": ["line_reg", "startup_ok"], "rule": ["M3", "M5", "M2"], "raw": ["M2", "R2", "Mst3"], "raw_cost": 0.0029005999999999997, "spectra": ["M2", "Mst2", "Mst1"], "spectra_cost": 0.0035879}

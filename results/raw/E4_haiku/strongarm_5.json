@@ -1,0 +1,1 @@
+{"case": "strongarm_5", "task": "latch-00", "template": "strongarm", "truth": "M2", "class": "miswire_gate", "failing": ["delay", "correct"], "rule": ["Mt", "M1", "M2"], "raw": ["M2", "M1", "M3"], "raw_cost": 0.0012926, "spectra": ["M2", "M1", "M4"], "spectra_cost": 0.0010216000000000001}

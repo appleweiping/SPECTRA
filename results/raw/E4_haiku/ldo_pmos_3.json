@@ -1,0 +1,1 @@
+{"case": "ldo_pmos_3", "task": "ldo-00", "template": "ldo_pmos", "truth": "R2", "class": "resistor_value", "failing": ["vout_err_pct", "undershoot", "ripple_settled"], "rule": ["M5", "M2", "M1"], "raw": ["R1", "Cc", "Mp"], "raw_cost": 0.0016194, "spectra": ["R2", "R1", "M5"], "spectra_cost": 0.0023812}

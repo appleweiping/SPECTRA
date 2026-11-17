@@ -76,10 +76,41 @@ def _parse_wrdata(path: Path):
     return arr
 
 
+_CACHE_DIR = os.environ.get("SPECTRA_SIM_CACHE", str(Path(__file__).resolve().parents[2] / "data" / "sim_cache"))
+
+
+def _cache_get(key):
+    import gzip, pickle
+    fp = Path(_CACHE_DIR) / key[:2] / f"{key}.pkl.gz"
+    if fp.exists():
+        try:
+            with gzip.open(fp, "rb") as f:
+                return pickle.load(f)
+        except Exception:
+            return None
+    return None
+
+
+def _cache_put(key, res):
+    import gzip, pickle
+    fp = Path(_CACHE_DIR) / key[:2] / f"{key}.pkl.gz"
+    fp.parent.mkdir(parents=True, exist_ok=True)
+    tmp = fp.with_suffix(f".tmp{os.getpid()}_{_th.get_ident()}")
+    with gzip.open(tmp, "wb", compresslevel=3) as f:
+        pickle.dump(res, f)
+    os.replace(tmp, fp)
+
+
 def run(netlist: str, wrdata_files: tuple = (), timeout: float = 60.0,
         keep_dir: str | None = None) -> SimResult:
     """Run one ngspice batch job. ``wrdata_files`` lists file names the
-    control block writes via ``wrdata`` that should be loaded as arrays."""
+    control block writes via ``wrdata`` that should be loaded as arrays.
+    Results are cached on disk by the hash of (netlist, files): ngspice is deterministic."""
+    key = hashlib.sha1((netlist + "|" + ",".join(wrdata_files)).encode()).hexdigest()
+    if not keep_dir and os.environ.get("SPECTRA_SIM_CACHE_OFF") != "1":
+        hit = _cache_get(key)
+        if hit is not None:
+            return hit
     t0 = time.time()
     d = tempfile.mkdtemp(prefix="ngs_")
     try:
@@ -124,7 +155,13 @@ def run(netlist: str, wrdata_files: tuple = (), timeout: float = 60.0,
         dt = time.time() - t0
         SIM_COUNTER["calls"] += 1
         SIM_COUNTER["seconds"] += dt
-        return SimResult(ok, scalars, vectors, out[-6000:], err, dt)
+        res = SimResult(ok, scalars, vectors, out[-6000:], err, dt)
+        if not keep_dir:
+            try:
+                _cache_put(key, res)
+            except Exception:
+                pass
+        return res
     finally:
         shutil.rmtree(d, ignore_errors=True)
 

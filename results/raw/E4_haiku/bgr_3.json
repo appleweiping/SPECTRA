@@ -1,0 +1,1 @@
+{"case": "bgr_3", "task": "ref-00", "template": "bgr", "truth": "M2", "class": "undersize_W", "failing": ["line_reg", "startup_ok"], "rule": ["M5", "M4", "M3"], "raw": ["Mst2", "Mst3", "M2"], "raw_cost": 0.0024544000000000002, "spectra": ["Mst2", "Mst1", "Mst3"], "spectra_cost": 0.0040379000000000005}

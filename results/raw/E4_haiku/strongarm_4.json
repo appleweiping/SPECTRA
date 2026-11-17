@@ -1,0 +1,1 @@
+{"case": "strongarm_4", "task": "latch-00", "template": "strongarm", "truth": "M3", "class": "undersize_W", "failing": ["delay", "correct"], "rule": ["Mt", "M1", "M2"], "raw": ["M3", "M4", "M1"], "raw_cost": 0.00110809, "spectra": ["M4", "M3", "M2"], "spectra_cost": 0.0012503899999999999}
