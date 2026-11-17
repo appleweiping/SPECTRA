@@ -21,6 +21,20 @@ if [[ -z "${OPENAI_API_KEY:-}" ]]; then
   exit 2
 fi
 
+# Fail before spending tokens when a proxy does not advertise the requested
+# model (the local proxy may expose a different GPT catalog than api.openai.com).
+python - "$MODEL" <<'PY'
+import os, sys
+from openai import OpenAI
+model = sys.argv[1]
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+ids = {m.id for m in client.models.list().data}
+if model not in ids:
+    available = sorted(x for x in ids if x.startswith("gpt-"))
+    raise SystemExit(f"Requested model {model!r} is not advertised by the configured endpoint; GPT models: {available}")
+print(f"Using advertised model {model}", file=sys.stderr)
+PY
+
 # E1g: seed 0 for all four methods on the 61-task primary endpoint, then two
 # additional seeds for SPECTRA and the direct baseline on certified T3 tasks.
 run --exp E1g --model "$MODEL" --methods spectra,direct,genbo,spectra_min --seeds 0 \
