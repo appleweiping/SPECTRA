@@ -9,15 +9,21 @@ from spectra.sim.netlist import parse
 
 DBM = {"gain_db", "cmrr_db", "psrr_db", "zt_dbohm", "psrr_1k", "atten_db", "pm"}
 
+
+def base_method(name):
+    return str(name).split("@", 1)[0]
+
 def main(exp="E1", method="spectra"):
     tasks = {json.loads(l)["id"]: json.loads(l) for f in ["tasks.jsonl", "designer_tasks.jsonl"]
              for l in open(ROOT / "data/bench" / f)}
     from scripts.analyze import load_common
     keep = {(r["task"], r["seed"]) for r in load_common(exp, ["spectra", "spectra_min", "direct", "genbo"]) if r["method"] == method}
     err = defaultdict(list); ratios = []; n_int, n_raw = [], []
-    for f in sorted(glob.glob(str(ROOT / f"results/raw/{exp}/{method}/*/s*.json"))):
-        r = json.load(open(f)); t = tasks.get(f.split("/")[-2])
-        if (f.split("/")[-2], f.split("/")[-1][:-5]) not in keep:
+    raw_root = ROOT / "results" / "raw" / exp
+    files = [f for mdir in sorted(raw_root.glob("*")) if base_method(mdir.name) == method for f in sorted(mdir.glob("*/s*.json"))]
+    for f in files:
+        r = json.loads(f.read_text()); t = tasks.get(f.parent.name)
+        if (f.parent.name, f.stem) not in keep:
             continue
         if not t or not r.get("program") or not r.get("verify", {}).get("tt_metrics"):
             continue

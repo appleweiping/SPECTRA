@@ -1,5 +1,6 @@
 """LaTeX tables from results/*_summary.json (numbers only from files)."""
 import json, sys
+import os
 from pathlib import Path
 from spectra.paths import ROOT
 
@@ -24,6 +25,14 @@ SHORT = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "AnalogCo
          "spectra_pvt_nominal": "w/o PVT refinement", "spectra_haiku": "SPECTRA (Haiku)", "direct_haiku": "AnalogCoder-style (Haiku)"}
 
 
+def base_method(name):
+    return str(name).split("@", 1)[0]
+
+
+def env_bool(name):
+    return os.environ.get(name, "").lower() in {"1", "true", "yes"}
+
+
 def seeds_text(d):
     """{method: [lo, hi]} -> 'SPECTRA 1--2, ...' (seeds per task, computed from the runs)."""
     def rg(v):
@@ -31,12 +40,18 @@ def seeds_text(d):
     return ", ".join(f"{SHORT.get(m, m)} {rg(v)}" for m, v in d.items())
 
 
-def main_table(exp="E1", out="main.tex"):
-    from scripts.analyze import load_common
+def main_table(exp=None, out="main.tex"):
+    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
     summ = json.loads((ROOT / "results" / f"{exp}_summary.json").read_text())
-    s = summ["summary"]
+    # `analyze --strip-model-suffix` emits base method names.  Normalize here
+    # too so this table remains valid when a summary was generated without the
+    # optional flag from a method@gpt-6.1-sol raw directory.
+    s = {base_method(m): d for m, d in summ["summary"].items()}
     methods = [m for m in ("spectra", "spectra_min", "direct", "genbo") if m in s]
-    runs = load_common(exp, methods)
+    from scripts.analyze import load, common_tasks
+    runs = [dict(r, method=base_method(r["method"])) for r in load(exp)]
+    ct = common_tasks([r for r in runs if not r.get("infeasible")], methods)
+    runs = [r for r in runs if not r.get("infeasible") and r["task"] in ct]
     from scripts.comparisons import seeds_range
     seeds = {m: seeds_range([r for r in runs if r["method"] == m]) for m in methods}
     rows = []
@@ -143,8 +158,10 @@ def scaling_table(out="scaling.tex"):
 
 
 def fault_table(out="fault.tex"):
-    s = json.loads((ROOT / "results/E4_summary.json").read_text())
-    hp = ROOT / "results/E4_haiku_summary.json"
+    main_exp = os.environ.get("SPECTRA_E4_EXP", "E4")
+    alt_exp = os.environ.get("SPECTRA_E4_ALT_EXP", "E4_haiku")
+    s = json.loads((ROOT / f"results/{main_exp}_summary.json").read_text())
+    hp = ROOT / f"results/{alt_exp}_summary.json"
     h = json.loads(hp.read_text()) if hp.exists() else None
     classes = [c for c in s["rule"] if c not in ("top1", "top3")]
     nice = {"undersize_W": "Undersized $W$", "short_L": "Short $L$", "mirror_ratio": "Mirror ratio", "comp_cap": "Comp.\\ cap",
@@ -158,7 +175,10 @@ def fault_table(out="fault.tex"):
         rows.append(f"{nice.get(c, c)} & {s['rule'][c]['n']} & " + " & ".join(cell(d, a, c) for d, a in arms) + " \\\\")
     rows.append("\\midrule")
     rows.append("All & " + str(sum(s['rule'][c]['n'] for c in classes)) + " & " + " & ".join(cell(d, a) for d, a in arms) + " \\\\")
-    head = "Fault class & $n$ & Rules & Opus+raw & Opus+diag." + (" & Haiku+raw & Haiku+diag." if h else "")
+    default_main_label = "GPT-6.1-sol" if main_exp.lower().endswith("g") else "Opus 5.5"
+    main_label = os.environ.get("SPECTRA_E4_MAIN_LABEL", default_main_label)
+    alt_label = os.environ.get("SPECTRA_E4_ALT_LABEL", "Haiku 5.5")
+    head = f"Fault class & $n$ & Rules & {main_label}+raw & {main_label}+diag." + (f" & {alt_label}+raw & {alt_label}+diag." if h else "")
     cols = "lc" + "c" * len(arms)
     tex = ("\\begin{table}[t]\n\\centering\n\\caption{Fault localisation accuracy (top-1/top-3, \\%) by injected fault class: "
            "rule-only diagnoser vs.\\ LLM given the netlist and spec table (raw) or the SPECTRA diagnosis.}\n"
@@ -171,7 +191,7 @@ def fault_table(out="fault.tex"):
 
 
 if __name__ == "__main__":
-    main_table("E1")
+    main_table(os.environ.get("SPECTRA_MAIN_EXP", "E1"))
     fault_table()
     ablation_table()
     pvt_table()

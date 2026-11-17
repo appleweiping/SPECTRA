@@ -3,17 +3,22 @@
 Pools the final designs of the four E1 methods (SPECTRA, SPECTRA-min, AnalogCoder-style, Gen+TPE) on robust tasks and
 records exactly which runs were pooled. Writes results/pvt_failure_conditions.json.
 """
-import json, glob, collections
+import json, glob, collections, os, sys
 from spectra.paths import ROOT
 
 METHODS = ("spectra", "spectra_min", "direct", "genbo")
 
 
-def main():
+def base_method(name):
+    return str(name).split("@", 1)[0]
+
+
+def main(exp=None):
+    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
     c = collections.Counter(); runs = []
     per_design = collections.Counter()
-    for f in sorted(glob.glob(str(ROOT / "results/raw/E1/*/*/s*.json"))):
-        method = f.split("/")[-3]
+    for f in sorted(glob.glob(str(ROOT / "results/raw" / exp / "*/*/s*.json"))):
+        method = base_method(f.replace("\\", "/").split("/")[-3])
         if method not in METHODS:
             continue
         r = json.load(open(f)); v = r.get("verify", {})
@@ -30,7 +35,8 @@ def main():
     bc, bt, bv = collections.Counter(), collections.Counter(), collections.Counter()
     for k, v in c.items():
         a, b, d = k.split("_")[:3]; bc[a] += v; bt[b] += v; bv[d] += v
-    out = {"pooled": "E1 final designs of " + ", ".join(METHODS) + " on robust tasks that pass TT and fail PVT",
+    out = {"experiment": exp,
+           "pooled": f"{exp} final designs of " + ", ".join(METHODS) + " on robust tasks that pass TT and fail PVT",
            "n_designs": len(runs), "runs": runs, "n_fail_conditions": sum(c.values()), "fail_counts": dict(c),
            "by_corner": dict(bc.most_common()), "by_temp": dict(bt.most_common()), "by_vdd": dict(bv.most_common()),
            "designs_failing_at_1.62V": per_design["any_1.62V"], "designs_failing_only_at_1.62V": per_design["only_1.62V"]}
@@ -39,4 +45,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("exp", nargs="?", default=None)
+    main(ap.parse_args().exp)

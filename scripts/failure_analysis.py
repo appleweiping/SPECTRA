@@ -8,6 +8,10 @@ from spectra.sim.evaluate import check
 METHODS = ["spectra", "spectra_min", "direct", "genbo"]
 
 
+def base_method(name):
+    return str(name).split("@", 1)[0]
+
+
 def main(exp="E1"):
     from scripts.analyze import load_common
     keep = {(r["method"], r["task"], r["seed"]) for r in load_common(exp, METHODS)}
@@ -19,7 +23,7 @@ def main(exp="E1"):
                 t = json.loads(l); tasks[t["id"]] = t
     out = {}
     for mdir in sorted((ROOT / "results/raw" / exp).glob("*")):
-        m = mdir.name
+        m = base_method(mdir.name)
         if m not in METHODS:
             continue
         viol, metr, near = [], collections.Counter(), 0

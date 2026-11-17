@@ -4,7 +4,7 @@ python -m scripts.analyze --exp E1 [--methods a,b,c] [--baseline spectra]
 Success := independent verification passes (TT for nominal tasks; all 45 PVT conditions for robust tasks).
 """
 import sys
-import argparse, json, math, random
+import argparse, json, math, random, os
 from collections import defaultdict
 from pathlib import Path
 
@@ -15,16 +15,28 @@ from spectra.paths import ROOT
 RAW = ROOT / "results" / "raw"
 
 
+def base_method(name):
+    """Return the method name without the optional ``@model`` run suffix.
+
+    GPT runs use directories such as ``spectra@gpt-6.1-sol`` so that they can
+    coexist with historical runs.  Aggregation tables compare methods, not
+    provider-specific directory names, and therefore need this normalization
+    at the ingestion boundary.
+    """
+    return str(name).split("@", 1)[0]
+
+
 # E1 protocol: SPECTRA and AnalogCoder-style use seeds 0-2; the simulation-heavy Gen+TPE and SPECTRA-min use 0-1
 SEED_FILTER = {}   # all completed seeds are used (per-task means)
 ROBUST_CAP = 600   # condition-evaluations per robust run (final protocol)
 
 
-def load(exp, methods=None):
+def load(exp, methods=None, strip_model_suffix=False):
     runs = []
     sf = SEED_FILTER.get(exp, {})
     for mdir in sorted((RAW / exp).glob("*")):
-        if methods and mdir.name not in methods:
+        method = base_method(mdir.name) if strip_model_suffix else mdir.name
+        if methods and mdir.name not in methods and method not in methods:
             continue
         for f in mdir.glob("*/s*.json"):
             if mdir.name in sf and f.stem not in sf[mdir.name]:
@@ -41,7 +53,7 @@ def load(exp, methods=None):
             over = (bs is not None and (r.get("sims") or 0) > bs) or (bc is not None and (r.get("calls") or 0) > bc)
             if over:
                 succ = False
-            runs.append({"method": mdir.name, "task": f.parent.name, "seed": f.stem, "success": succ,
+            runs.append({"method": method, "task": f.parent.name, "seed": f.stem, "success": succ,
                          "tt_pass": bool(v.get("tt_pass")), "robust": meta.get("robust", False), "tier": meta.get("tier"),
                          "family": meta.get("family"), "sims": r.get("sims") or 0, "calls": r.get("calls") or 0,
                          "cost": r.get("cost_usd") or 0.0, "wall": r.get("wall_seconds") or 0.0,
@@ -147,7 +159,10 @@ TIER_GROUPS = [("T1", lambda r: str(r["tier"]) == "1" and not r["robust"]),
 
 def load_common(exp, methods):
     """Runs of `methods` restricted to the tasks every method completed (the set used for all E1 statistics)."""
-    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
+    # Accept both legacy method directories (``spectra``) and model-qualified
+    # directories (``spectra@gpt-6.1-sol``).  The returned records always use
+    # the base method names so downstream analyses remain model agnostic.
+    runs = [r for r in load(exp, strip_model_suffix=True) if not r.get("infeasible") and r["method"] in methods]
     ct = common_tasks(runs, methods)
     return [r for r in runs if r["task"] in ct]
 
@@ -189,9 +204,11 @@ def main():
     ap.add_argument("--exp", required=True)
     ap.add_argument("--methods", default="")
     ap.add_argument("--baseline", default="spectra")
+    ap.add_argument("--strip-model-suffix", action="store_true",
+                    default=os.environ.get("SPECTRA_STRIP_MODEL_SUFFIX", "").lower() in {"1", "true", "yes"})
     a = ap.parse_args()
     methods = a.methods.split(",") if a.methods else None
-    runs = load(a.exp, methods)
+    runs = load(a.exp, methods, strip_model_suffix=a.strip_model_suffix)
     methods = methods or sorted({r["method"] for r in runs})
     feas = [r for r in runs if not r.get("infeasible")]
     ct = common_tasks(feas, methods)

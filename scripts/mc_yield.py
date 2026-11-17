@@ -10,11 +10,20 @@ python -m scripts.mc_yield [N]
 """
 import argparse
 import json, sys
+import os
 from concurrent.futures import ThreadPoolExecutor
 from spectra.paths import ROOT
 from spectra.sim.evaluate import evaluate, MC
 
 SCOPE = {"E1": ("spectra", "spectra_min", "direct", "genbo"), "E3": ("spectra_pvt_nominal", "genbo_full")}
+
+
+def method_dirs(exp, method):
+    """Yield raw-run directories for a base method in legacy or GPT runs."""
+    root = ROOT / "results" / "raw" / exp
+    for p in sorted(root.glob(f"{method}*")):
+        if p.is_dir() and p.name.split("@", 1)[0] == method:
+            yield p
 
 
 def main(n=100, e1="E1", e3="E3"):
@@ -23,19 +32,25 @@ def main(n=100, e1="E1", e3="E3"):
     tasks = {json.loads(l)["id"]: json.loads(l) for f in ["tasks.jsonl", "designer_tasks.jsonl"]
              for l in open(ROOT / "data" / "bench" / f)}
     outp = ROOT / "results" / "mc_yield.json"
-    out = json.loads(outp.read_text()) if outp.exists() else {"n_samples": n, "yield": {}}
-    if out.get("n_samples") != n:
-        out = {"n_samples": n, "yield": {}}
+    manifest = {"e1": e1, "e3": e3}
+    out = json.loads(outp.read_text()) if outp.exists() else {}
+    # The method names are shared by legacy E1/E3 and GPT E1g/E3g.  Reset the
+    # post-hoc file when its source experiments differ, otherwise a previous
+    # model's yields would silently suppress the new jobs as already complete.
+    if out.get("n_samples") != n or out.get("experiments") != manifest:
+        out = {"n_samples": n, "experiments": manifest, "yield": {}}
+    out.setdefault("yield", {})
     jobs = []
     for exp, methods in scope.items():
         for m in methods:
-            for f in sorted((ROOT / "results" / "raw" / exp / m).glob("*/s0.json")):
-                r = json.loads(f.read_text()); t = tasks.get(f.parent.name)
-                if not t or not t.get("robust") or not r.get("verify", {}).get("pvt_pass") or r.get("budget_sims") != 600:
-                    continue
-                if f"{t['id']}/s0" in out["yield"].get(m, {}):
-                    continue
-                jobs.append((m, t, r["final_netlist"]))
+            for mdir in method_dirs(exp, m):
+                for f in sorted(mdir.glob("*/s0.json")):
+                    r = json.loads(f.read_text()); t = tasks.get(f.parent.name)
+                    if not t or not t.get("robust") or not r.get("verify", {}).get("pvt_pass") or r.get("budget_sims") != 600:
+                        continue
+                    if f"{t['id']}/s0" in out["yield"].get(m, {}):
+                        continue
+                    jobs.append((m, t, r["final_netlist"]))
     print(len(jobs), "designs to analyse", flush=True)
 
     def one(j):
@@ -61,7 +76,7 @@ def main(n=100, e1="E1", e3="E3"):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("n", nargs="?", type=int, default=100)
-    ap.add_argument("--e1", default="E1")
-    ap.add_argument("--e3", default="E3")
+    ap.add_argument("--e1", default=os.environ.get("SPECTRA_MAIN_EXP", "E1"))
+    ap.add_argument("--e3", default=os.environ.get("SPECTRA_E3_EXP", "E3"))
     a = ap.parse_args()
     main(a.n, a.e1, a.e3)

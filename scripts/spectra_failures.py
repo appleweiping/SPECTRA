@@ -8,7 +8,7 @@ results/E1_spectra_failure_modes.json.
 
 python -m scripts.spectra_failures
 """
-import json
+import json, os, sys
 from collections import defaultdict
 from statistics import median
 
@@ -18,13 +18,22 @@ from scripts.analyze import load_common, primary
 METHODS = ["spectra", "spectra_min", "direct", "genbo"]
 
 
-def main():
-    runs = load_common("E1", METHODS)
+def base_method(name):
+    return str(name).split("@", 1)[0]
+
+
+def main(exp=None):
+    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
+    runs = load_common(exp, METHODS)
     fails = []
     for r in runs:
         if r["method"] != "spectra" or r["success"]:
             continue
-        d = json.loads((ROOT / "results/raw/E1/spectra" / r["task"] / f"{r['seed']}.json").read_text())
+        method_dir = next((p for p in (ROOT / "results/raw" / exp).glob("spectra*")
+                           if p.is_dir() and base_method(p.name) == "spectra"), None)
+        if method_dir is None:
+            continue
+        d = json.loads((method_dir / r["task"] / f"{r['seed']}.json").read_text())
         ev = d.get("events", [])
         ver = [e for e in ev if e.get("kind") == "pvt_verify"]
         pvt_sims, prev = 0, 0
@@ -59,9 +68,12 @@ def main():
            "nominal_median_calls": median([f["calls"] for f in fails if not f["robust"]]) if len(fails) > len(rob) else None,
            "primary_losses": losses, "primary_loss_families": {b: sorted({fam[t] for t in v}) for b, v in losses.items()},
            "runs": fails}
-    (ROOT / "results/E1_spectra_failure_modes.json").write_text(json.dumps(out, indent=1))
+    (ROOT / "results" / f"{exp}_spectra_failure_modes.json").write_text(json.dumps(out, indent=1))
     print(json.dumps({k: v for k, v in out.items() if k != "runs"}, indent=1))
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("exp", nargs="?", default=None)
+    main(ap.parse_args().exp)

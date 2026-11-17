@@ -1,12 +1,49 @@
-"""Generate paper/numbers.tex (LaTeX macros) from results/ and data/ files so every number in the paper is traceable."""
-import json, sys
+"""Generate paper/numbers.tex from results/ and data/ files.
+
+The source experiment names are configurable so the same generator can be
+used for the historical E1/E4 results or the GPT-6.1-sol E1g--E5g run set.
+Set ``SPECTRA_MAIN_EXP``, ``SPECTRA_E4_EXP``, ``SPECTRA_E4_ALT_EXP`` and
+``SPECTRA_E4_TESTS`` (or pass the corresponding CLI flags).
+"""
+import argparse, json, os, sys
 from pathlib import Path
 from spectra.paths import ROOT
 
 def pct(x):
     return f"{100 * x:.1f}\\%" if x is not None else "--"
 
-def main():
+
+def base_method(name):
+    return str(name).split("@", 1)[0]
+
+
+def normalize_methods(d):
+    """Collapse method@gpt-model keys emitted by an un-normalized analyze run."""
+    if not isinstance(d, dict):
+        return d
+    return {base_method(k): v for k, v in d.items()}
+
+
+def normalize_pair_keys(d):
+    if not isinstance(d, dict):
+        return d
+    out = {}
+    for k, v in d.items():
+        if "_vs_" in k:
+            a, b = k.split("_vs_", 1)
+            k = f"{base_method(a)}_vs_{base_method(b)}"
+        out[k] = v
+    return out
+
+
+def main(main_exp=None, e4_exp=None, e4_alt_exp=None, e4_tests_name=None, primary_tasks=None):
+    main_exp = main_exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
+    e4_exp = e4_exp or os.environ.get("SPECTRA_E4_EXP", "E4")
+    e4_alt_exp = e4_alt_exp if e4_alt_exp is not None else os.environ.get("SPECTRA_E4_ALT_EXP", "E4_haiku")
+    e4_tests_name = e4_tests_name or os.environ.get("SPECTRA_E4_TESTS", "E4_tests")
+    primary_tasks = primary_tasks or os.environ.get("SPECTRA_PRIMARY_TASKS", "E1_primary.jsonl")
+    e4_main_key = os.environ.get("SPECTRA_E4_MAIN_KEY", "opus" if e4_exp == "E4" else "main")
+    e4_alt_key = os.environ.get("SPECTRA_E4_ALT_KEY", "haiku" if e4_alt_exp == "E4_haiku" else "alternate")
     out = {}
     bench = [json.loads(l) for l in open(ROOT / "data/bench/tasks.jsonl")] if (ROOT / "data/bench/tasks.jsonl").exists() else []
     des = [json.loads(l) for l in open(ROOT / "data/bench/designer_tasks.jsonl")] if (ROOT / "data/bench/designer_tasks.jsonl").exists() else []
@@ -22,9 +59,15 @@ def main():
     for f in (ROOT / "data/explore").glob("*.jsonl"):
         n += sum(1 for _ in open(f))
     out["NExploreEvals"] = f"{n:,}".replace(",", "{,}")
-    e1 = ROOT / "results/E1_summary.json"
+    e1 = ROOT / "results" / f"{main_exp}_summary.json"
     if e1.exists():
-        s = json.loads(e1.read_text())["summary"]
+        full = json.loads(e1.read_text())
+        # Be tolerant of summaries made without analyze.py's normalization flag.
+        full["summary"] = normalize_methods(full.get("summary", {}))
+        full["primary"] = normalize_methods(full.get("primary", {}))
+        full["tests"] = normalize_pair_keys(full.get("tests", {}))
+        full["exact"] = normalize_pair_keys(full.get("exact", {}))
+        s = full["summary"]
         for m, key in [("spectra", "Spectra"), ("direct", "Direct"), ("genbo", "Genbo"), ("genbo_cmaes", "GenboC"),
                        ("spectra_min", "SpectraMin")]:
             if m in s:
@@ -37,11 +80,10 @@ def main():
                 out[key + "Calls"] = f"{d['median_calls_success']:.0f}" if d.get("median_calls_success") is not None else "--"
                 out[key + "Sims"] = f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"
                 out[key + "Nruns"] = str(d["n_runs"])
-        full = json.loads(e1.read_text())
         out["NDeclaredSpectra"] = str(full["summary"].get("spectra", {}).get("declared_infeasible", 0))
         out["NCommon"] = str(full.get("common_tasks", "--")); out["NPrimaryTasks"] = str(full.get("primary_n_tasks", "--"))
         out["NPrimaryFamilies"] = str(full.get("primary_families", "--")); out["NCommonFamilies"] = str(full.get("common_families", "--"))
-        pt = ROOT / "data/bench/E1_primary.jsonl"
+        pt = ROOT / "data/bench" / primary_tasks
         out["NPrimaryAll"] = str(sum(1 for _ in open(pt))) if pt.exists() else "--"
         for m, key in [("spectra", "Spectra"), ("direct", "Direct"), ("genbo", "Genbo"), ("spectra_min", "SpectraMin")]:
             if m in full.get("primary", {}):
@@ -81,7 +123,7 @@ def main():
             nm = "Test" + "".join(w.capitalize() for w in k.replace("spectra_vs_", "").split("_"))
             out[nm + "P"] = f"{v.get('p_holm', v['p']):.3g}"
             out[nm + "Diff"] = f"{100 * v['mean_diff']:+.1f}"
-    e4 = ROOT / "results/E4_summary.json"
+    e4 = ROOT / "results" / f"{e4_exp}_summary.json"
     if e4.exists():
         d = json.loads(e4.read_text())
         out["FaultN"] = str(d.get("n_cases", sum(v["n"] for k, v in d["rule"].items() if isinstance(v, dict))))
@@ -89,28 +131,31 @@ def main():
         out["FaultRawTopOne"] = pct(d["raw"]["top1"])
         out["FaultDiagTopOne"] = pct(d["spectra"]["top1"])
         out["FaultDiagTopThree"] = pct(d["spectra"]["top3"])
-    e4h = ROOT / "results/E4_haiku_summary.json"
+    e4h = ROOT / "results" / f"{e4_alt_exp}_summary.json" if e4_alt_exp else ROOT / "results/__none__"
     if e4h.exists():
         d = json.loads(e4h.read_text())
-        tp = ROOT / "results/E4_tests.json"
+        tp = ROOT / "results" / (e4_tests_name if e4_tests_name.endswith(".json") else f"{e4_tests_name}.json")
         tt = json.loads(tp.read_text()) if tp.exists() else None
-        if tt and tt["haiku"]["n"] != d["n_cases"]:
-            print(f"WARNING: E4_tests haiku n={tt['haiku']['n']} != E4_haiku_summary n_cases={d['n_cases']}", file=sys.stderr)
-        if tt:
-            h = tt["haiku"]
-            out["FaultHaikuSentence"] = (f"With the smaller Haiku~5.5 model top-1 accuracy is {pct(h['top1_raw'])} with the raw "
+        if tt and e4_alt_key in tt and tt[e4_alt_key]["n"] != d["n_cases"]:
+            print(f"WARNING: E4_tests {e4_alt_key} n={tt[e4_alt_key]['n']} != {e4_alt_exp}_summary n_cases={d['n_cases']}", file=sys.stderr)
+        if tt and e4_alt_key in tt:
+            h = tt[e4_alt_key]
+            label = os.environ.get("SPECTRA_E4_ALT_LABEL", "Haiku~5.5")
+            out["FaultHaikuSentence"] = (f"With the {label} model top-1 accuracy is {pct(h['top1_raw'])} with the raw "
                                          f"evidence and {pct(h['top1_diag'])} with the diagnosis ({h['n']} cases; "
                                          f"{h['only_raw_correct']} are solved only with the raw evidence and "
                                          f"{h['only_diag_correct']} only with the diagnosis, exact McNemar $p={h['p_mcnemar_exact']:.2f}$).")
             out["FaultHaikuInterp"] = ("More evidence is therefore not automatically better: the long structured report "
-                                       "hurts the smaller model." if h["p_mcnemar_exact"] < 0.05 and h["top1_diag"] < h["top1_raw"] else "")
+                                       "hurts the smaller model." if h["top1_diag"] is not None and h["top1_raw"] is not None
+                                       and h["p_mcnemar_exact"] < 0.05 and h["top1_diag"] < h["top1_raw"] else "")
         else:
             out["FaultHaikuSentence"] = ""; out["FaultHaikuInterp"] = ""
-        if tt and tt["opus"]["n"] != json.loads((ROOT / "results/E4_summary.json").read_text())["n_cases"]:
-            print("WARNING: E4_tests opus n != E4_summary n_cases", file=sys.stderr)
+        main_summary = json.loads(e4.read_text()) if e4.exists() else None
+        if tt and e4_main_key in tt and main_summary and tt[e4_main_key]["n"] != main_summary.get("n_cases"):
+            print(f"WARNING: E4_tests {e4_main_key} n != {e4_exp}_summary n_cases", file=sys.stderr)
     else:
         out["FaultHaikuSentence"] = ""
-    pa = ROOT / "results/E1_spectra_prediction_accuracy.json"
+    pa = ROOT / "results" / f"{main_exp}_spectra_prediction_accuracy.json"
     if pa.exists():
         d = json.loads(pa.read_text()); mm = d["metrics"]
         out["NPrograms"] = str(d["n_programs"])
@@ -137,7 +182,7 @@ def main():
     out["NTOne"] = str(sum(1 for t in bench if str(t.get("tier")) == "1" and not t.get("robust")))
     out["NTTwo"] = str(sum(1 for t in bench if str(t.get("tier")) == "2" and not t.get("robust")))
     out["NTThree"] = str(sum(1 for t in bench if str(t.get("tier")) == "3" and not t.get("robust")))
-    fa = ROOT / "results/E1_failures.json"
+    fa = ROOT / "results" / f"{main_exp}_failures.json"
     if fa.exists():
         d = json.loads(fa.read_text())
         nm = {"cmrr_db": "CMRR", "psrr_db": "PSRR", "power": "power", "noise_1k": "noise", "gain_db": "gain", "ugbw": "UGBW",
@@ -168,7 +213,7 @@ def main():
             f"low-supply condition; failing conditions by corner are "
             + ", ".join(f"{cn.get(k, k)} {v}" for k, v in d["by_corner"].items())
             + " and by temperature " + ", ".join(f"{tn.get(k, k)} {v}" for k, v in d["by_temp"].items()) + ".")
-    sf = ROOT / "results/E1_spectra_failure_modes.json"
+    sf = ROOT / "results" / f"{main_exp}_spectra_failure_modes.json"
     if sf.exists():
         d = json.loads(sf.read_text())
         fam = {"ref": "voltage references", "opamp": "op-amps", "ldo": "LDOs", "amp": "amplifiers", "tia": "TIAs",
@@ -271,4 +316,11 @@ def main():
     print("\n".join(lines))
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--main-exp", default=None)
+    ap.add_argument("--e4-exp", default=None)
+    ap.add_argument("--e4-alt-exp", default=None, help="empty string disables the alternate E4 arm")
+    ap.add_argument("--e4-tests", default=None)
+    ap.add_argument("--primary-tasks", default=None)
+    a = ap.parse_args()
+    main(a.main_exp, a.e4_exp, a.e4_alt_exp, a.e4_tests, a.primary_tasks)
