@@ -12,7 +12,10 @@ cited end-to-end benchmarks use square-law device models and functional pass/fai
 evaluated on op-amps only and at the nominal corner; and the only PVT-aware LLM methods size a \emph{given}
 topology~\cite{long2026analogscout,saxena2026opera}. A recent agent benchmark confirms that frontier models fail
 mostly at \emph{electrical closure}---meeting all quantitative targets---rather than at producing plausible
-netlists~\cite{adbench2026longhorizon}.
+netlists~\cite{adbench2026longhorizon}. Our own pilot makes the point sharper: on specifications relaxed from
+ordinary design points, a frontier LLM writing netlists directly, a generate-then-optimise agent and our agent all
+succeed almost every time, so benchmarks must be built near the performance frontier and across PVT to be
+informative.
 
 We argue that two mismatches cause this gap. First, LLMs are good at qualitative analog reasoning (choosing a
 topology, an inversion level, a current budget, a compensation strategy) but poor at the numerical part, so asking
@@ -27,9 +30,10 @@ Our contributions are:
 by $(g_m/I_D, L, I_D)$ through PDK lookup tables, exposes a handful of intent variables, and predicts its own
 performance. Discrepancies between prediction and simulation are fed back, and all numerical search---including
 PVT-aware refinement over an adaptively selected worst-condition set---runs in the intent space.
-\item \textbf{Device-level diagnosis} that converts simulation into operating-region margins, prediction
-discrepancies, sensitivities and rule-based hypotheses, and drives a hierarchical repair policy; we validate it
-directly with a stratified fault-injection study.
+\item \textbf{Device-level diagnosis and hierarchical repair.} Simulation results are converted into
+operating-region margins, prediction discrepancies, sensitivities and rule-based hypotheses that drive a
+refine/edit/declare policy. We evaluate it end-to-end (ablation) and in isolation by fault injection, where---a
+negative result---it does not beat a frontier LLM that simply reads the netlist.
 \item \textbf{SPECTRA-Bench}: \NTasksTotal{} specification-driven tasks over twelve circuit families on SKY130 with
 feasibility certificates, an independently written designer tier, 45-condition PVT and mismatch verification, and
 budget accounting in simulations, LLM calls, tokens and dollars.
