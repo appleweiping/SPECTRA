@@ -7,16 +7,15 @@ sized netlist and revises it from simulator feedback (spec table, errors, zero-c
 conditions). \emph{Gen+TPE} (AnalogCoder-Pro-style~\cite{lai2026analogcoderpro}): the LLM proposes a parameterised
 topology with bounds, TPE~\cite{bergstra2011tpe,akiba2019optuna} sizes it over raw $W/L/R/C$, and up to three
 regenerations receive the best result; for robust tasks TPE optimises the worst case over TT, SS/125\,$^\circ$C and
-FF/$-40\,^\circ$C. \emph{Gen+CMA-ES} replaces TPE by CMA-ES to separate optimiser from parameterisation.
-\emph{SPECTRA-min} is the decisive ablation: one planning call (plus at most two calls to fix program errors), then
+FF/$-40\,^\circ$C. \emph{SPECTRA-min} is the decisive ablation: one planning call (plus at most two calls to fix program errors), then
 intent-space CMA-ES with the whole budget and SPECTRA's PVT loop, but no diagnosis and no LLM repair.
-\emph{Oracle} optimises the benchmark's own reference template with CMA-ES under the same budget---privileged
-information that bounds what sizing alone achieves on certified tasks.
+A fairness variant, \emph{Gen+TPE-full}, may regenerate until the 12 calls are used and closes PVT with the same
+adaptive worst-corner loop as SPECTRA (Section~\ref{sec:pvt}).
 
 \textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs on the
-primary endpoint: SPECTRA and the AnalogCoder-style agent run 3 seeds on certified T3 tasks, 2 on robust tasks and 1
-on the saturated T1/T2/designer tiers; the simulation-heavy Gen+TPE and SPECTRA-min run 2 seeds on T3 and 1 elsewhere
-(seeds completed earlier are kept). Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
+primary endpoint: SPECTRA and the AnalogCoder-style agent run at least 2 seeds on every T3 and robust task, the
+simulation-heavy Gen+TPE and SPECTRA-min at least 1, and every method at least 1 seed on the saturated T1/T2/designer
+tiers (additional completed seeds are kept and averaged per task). Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
 The pre-registered primary endpoint is success on near-frontier (T3) and robust tasks. Confidence intervals are 95\%
 cluster bootstraps over tasks; paired comparisons use per-task success rates with an exact sign test and a paired
 permutation test, Holm-corrected across baselines.
