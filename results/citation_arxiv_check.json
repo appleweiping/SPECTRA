@@ -1,0 +1,198 @@
+[
+ {
+  "key": "lai2025analogcoder",
+  "arxiv": "2405.14918",
+  "bib_title": "AnalogCoder : Analog Circuit Design via Training-Free Code Generation",
+  "arxiv_title": "AnalogCoder: Analog Circuit Design via Training-Free Code Generation",
+  "similarity": 0.99
+ },
+ {
+  "key": "lai2026analogcoderpro",
+  "arxiv": "2508.02518",
+  "bib_title": "AnalogCoder-Pro : Unifying Analog Circuit Generation and Optimization via Multimodal LLMs",
+  "arxiv_title": "AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs",
+  "similarity": 0.99
+ },
+ {
+  "key": "bao2026analogagent",
+  "arxiv": "2603.23910",
+  "bib_title": "AnalogAgent : Self-Improving Analog Circuit Design Automation with LLM Agents",
+  "arxiv_title": "AnalogAgent: Self-Improving Analog Circuit Design Automation with LLM Agents",
+  "similarity": 0.99
+ },
+ {
+  "key": "liu2024ampagent",
+  "arxiv": "2409.14739",
+  "bib_title": "AmpAgent : An LLM -based Multi-Agent System for Multi-stage Amplifier Schematic Design from Literature for Process and Performance Porting",
+  "arxiv_title": "AmpAgent: An LLM-based Multi-Agent System for Multi-stage Amplifier Schematic Design from Literature for Process and Performance Porting",
+  "similarity": 0.99
+ },
+ {
+  "key": "wang2025analogsage",
+  "arxiv": "2512.22435",
+  "bib_title": "AnalogSAGE : Self-evolving Analog Design Multi-Agents with Stratified Memory and Grounded Experience",
+  "arxiv_title": "AnalogSAGE: Self-evolving Analog Design Multi-Agents with Stratified Memory and Grounded Experience",
+  "similarity": 0.99
+ },
+ {
+  "key": "habib2026aallm",
+  "arxiv": "2608.13472",
+  "bib_title": "AaLLM : An End-to-End Analog Circuit Design Framework from Topology Generation to Sizing Using Large Language Models",
+  "arxiv_title": "AaLLM: An End-to-End Analog Circuit Design Framework from Topology Generation to Sizing Using Large Language Models",
+  "similarity": 1.0
+ },
+ {
+  "key": "huang2026saftac",
+  "arxiv": "2611.08543",
+  "bib_title": "SAFTAC : Simulation-Augmented Fine-Tuning of Open-Source LLMs for Analog Circuit Design",
+  "arxiv_title": "SAFTAC: Simulation-Augmented Fine-Tuning of Open-Source LLMs for Analog Circuit Design",
+  "similarity": 0.99
+ },
+ {
+  "key": "saxena2026opera",
+  "arxiv": "2610.39395",
+  "bib_title": "OPERA : OPamp Design by an Expert-Taught Reasoning Agent, from Specifications to Layout",
+  "arxiv_title": "OPERA: OPamp Design by an Expert-Taught Reasoning Agent, from Specifications to Layout",
+  "similarity": 0.99
+ },
+ {
+  "key": "hao2026agenticsizing",
+  "arxiv": "2609.25873",
+  "bib_title": "AgenticSizing : A Large Language Model-based Multi-Agent Framework for Analog Circuit Sizing",
+  "arxiv_title": "AgenticSizing: A Large Language Model-based Multi-Agent Framework for Analog Circuit Sizing",
+  "similarity": 0.99
+ },
+ {
+  "key": "long2026analogscout",
+  "arxiv": "2610.37319",
+  "bib_title": "AnalogScout : Simulation-Efficient PVT -Aware Analog Sizing with LLM Agents",
+  "arxiv_title": "AnalogScout: Simulation-Efficient PVT-Aware Analog Sizing with LLM Agents",
+  "similarity": 0.99
+ },
+ {
+  "key": "wu2025easysize",
+  "arxiv": "2508.05113",
+  "bib_title": "EasySize : Elastic Analog Circuit Sizing via LLM -Guided Heuristic Search",
+  "arxiv_title": "EasySize: Elastic Analog Circuit Sizing via LLM-Guided Heuristic Search",
+  "similarity": 0.99
+ },
+ {
+  "key": "poddar2025heart",
+  "arxiv": "2511.19669",
+  "bib_title": "HeaRT : A Hierarchical Circuit Reasoning Tree-Based Agentic Framework for AMS Design Optimization",
+  "arxiv_title": "HeaRT: A Hierarchical Circuit Reasoning Tree-Based Agentic Framework for AMS Design Optimization",
+  "similarity": 0.99
+ },
+ {
+  "key": "li2026sable",
+  "arxiv": "2607.03701",
+  "bib_title": "SABLE : An NDA -Safe Closed-Loop LLM Framework for Analog Circuit Optimization in Industrial EDA Flows",
+  "arxiv_title": "SABLE: An NDA-Safe Closed-Loop LLM Framework for Analog Circuit Optimization in Industrial EDA Flows",
+  "similarity": 0.99
+ },
+ {
+  "key": "wei2026cascode",
+  "arxiv": "2611.11710",
+  "bib_title": "CASCoDe : A Closed-Loop Agentic Framework for Analog Sizing and Layout Co-Design",
+  "arxiv_title": "CASCoDe: A Closed-Loop Agentic Framework for Analog Sizing and Layout Co-Design",
+  "similarity": 0.99
+ },
+ {
+  "key": "dong2023cktgnn",
+  "arxiv": "2308.16406",
+  "bib_title": "CktGNN : Circuit Graph Neural Network for Electronic Design Automation",
+  "arxiv_title": "CktGNN: Circuit Graph Neural Network for Electronic Design Automation",
+  "similarity": 0.99
+ },
+ {
+  "key": "gao2025analoggenie",
+  "arxiv": "2503.00205",
+  "bib_title": "AnalogGenie : A Generative Engine for Automatic Discovery of Analog Circuit Topologies",
+  "arxiv_title": "AnalogGenie: A Generative Engine for Automatic Discovery of Analog Circuit Topologies",
+  "similarity": 0.99
+ },
+ {
+  "key": "mehradfar2025falcon",
+  "arxiv": "2505.21923",
+  "bib_title": "FALCON : An ML Framework for Fully Automated Layout-Constrained Analog Circuit Design",
+  "arxiv_title": "FALCON: An ML Framework for Fully Automated Layout-Constrained Analog Circuit Design",
+  "similarity": 0.99
+ },
+ {
+  "key": "zhou2026explore",
+  "arxiv": "2607.13416",
+  "bib_title": "EXPLORE : Exploration with Guided Search for Analog Topology Generation using Language Models",
+  "arxiv_title": "EXPLORE: Exploration with Guided Search for Analog Topology Generation using Language Models",
+  "similarity": 0.99
+ },
+ {
+  "key": "kim2026analogtobi",
+  "arxiv": "2603.08720",
+  "bib_title": "AnalogToBi : Device-Level Analog Circuit Topology Generation via Bipartite Graph and Grammar Guided Decoding",
+  "arxiv_title": "AnalogToBi: Device-Level Analog Circuit Topology Generation via Bipartite Graph and Grammar Guided Decoding",
+  "similarity": 1.0
+ },
+ {
+  "key": "islam2026circuitformer",
+  "arxiv": "2605.05773",
+  "bib_title": "CircuitFormer : A Circuit Language Model for Analog Topology Design from Natural Language Prompt",
+  "arxiv_title": "CircuitFormer: A Circuit Language Model for Analog Topology Design from Natural Language Prompt",
+  "similarity": 0.99
+ },
+ {
+  "key": "adbench2026longhorizon",
+  "arxiv": "2609.33356",
+  "bib_title": "Long-Horizon Analog Design Bench: Benchmarking Agents on Hours-Long Analog and Mixed-Signal Circuit Design Tasks",
+  "arxiv_title": "Long-Horizon Analog Design Bench: Benchmarking Agents on Hours-Long Analog and Mixed-Signal Circuit Design Tasks",
+  "similarity": 1.0
+ },
+ {
+  "key": "rajabi2026analogportbench",
+  "arxiv": "2610.33088",
+  "bib_title": "AnalogPortBench : Benchmarking LLMs on Analog Circuit Porting",
+  "arxiv_title": "AnalogPortBench: Benchmarking LLMs on Analog Circuit Porting",
+  "similarity": 0.99
+ },
+ {
+  "key": "leibl2026loadbench",
+  "arxiv": "2610.21591",
+  "bib_title": "LOADBench : A Large Open Analog Dataset and Benchmark for Machine Learning in IC Design",
+  "arxiv_title": "LOADBench: A Large Open Analog Dataset and Benchmark for Machine Learning in IC Design",
+  "similarity": 0.99
+ },
+ {
+  "key": "bhandari2024masalachai",
+  "arxiv": "2411.14299",
+  "bib_title": "Masala-CHAI : A Large-Scale SPICE Netlist Dataset for Analog Circuits by Harnessing AI",
+  "arxiv_title": "Masala-CHAI: A Large-Scale SPICE Netlist Dataset for Analog Circuits by Harnessing AI",
+  "similarity": 0.99
+ },
+ {
+  "key": "chen2025analogseeker",
+  "arxiv": "2508.10409",
+  "bib_title": "Dataset Construction for Training LLM to Learn Analog Circuit Knowledge (formerly: AnalogSeeker : An Open-source Foundation Language Model for Analog Circuit Design)",
+  "arxiv_title": "Dataset Construction for Training LLM to Learn Analog Circuit Knowledge",
+  "similarity": 0.6
+ },
+ {
+  "key": "yoshioka2026vibetapeout",
+  "arxiv": "2610.15240",
+  "bib_title": "The Era of Vibe Tapeout: Dark Age or Golden Age for Analog Circuit Design?",
+  "arxiv_title": "The Era of Vibe Tapeout: Dark Age or Golden Age for Analog Circuit Design?",
+  "similarity": 1.0
+ },
+ {
+  "key": "pan2025crop",
+  "arxiv": "2507.02128",
+  "bib_title": "CROP : Circuit Retrieval and Optimization with Parameter Guidance using LLMs",
+  "arxiv_title": "CROP: Circuit Retrieval and Optimization with Parameter Guidance using LLMs",
+  "similarity": 0.99
+ },
+ {
+  "key": "hansen2016cma",
+  "arxiv": "1604.00772",
+  "bib_title": "The CMA Evolution Strategy: A Tutorial",
+  "arxiv_title": "The CMA Evolution Strategy: A Tutorial",
+  "similarity": 1.0
+ }
+]

@@ -16,5 +16,7 @@ information that bounds what sizing alone achieves on certified tasks.
 \textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs on the
 primary endpoint: SPECTRA and the AnalogCoder-style agent run 3 seeds on certified T3 tasks, 2 on robust tasks and 1
 on the saturated T1/T2/designer tiers; the simulation-heavy Gen+TPE and SPECTRA-min run 2 seeds on T3 and 1 elsewhere
-(seeds completed earlier are kept). success is decided by re-verification outside the agent (Section~\ref{sec:bench}). Confidence intervals are 95\% cluster bootstraps over tasks; paired comparisons use the
-Wilcoxon signed-rank test on per-task success rates with Holm correction.
+(seeds completed earlier are kept). Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
+The pre-registered primary endpoint is success on near-frontier (T3) and robust tasks. Confidence intervals are 95\%
+cluster bootstraps over tasks; paired comparisons use per-task success rates with an exact sign test and a paired
+permutation test, Holm-corrected across baselines.
