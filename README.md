@@ -10,9 +10,10 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
 * **SPECTRA-Bench** (`data/bench`, `spectra/sim`, `spectra/bench`): 12 circuit families (op-amp, amplifier, TIA,
   current mirror, LDO, bandgap reference, CT comparator, StrongARM latch, VCO, filters, Schmitt trigger, op-amp
   applications) with testbenches, certified tiers (feasibility certificates from expert templates), a designer tier,
-  oracle-unmet controls, 45-condition PVT grid and per-instance mismatch Monte Carlo.
-* **Baselines** (`spectra/baselines`): AnalogCoder-style direct netlist agent, AnalogCoder-Pro-style generate+TPE /
-  generate+CMA-ES, expert-template oracle; ablations in `scripts/run_bench.py`.
+  45-condition PVT grid and per-instance mismatch Monte Carlo (an early infeasible-control tier was withdrawn).
+* **Baselines** (`spectra/baselines`): AnalogCoder-style direct netlist agent, AnalogCoder-Pro-style generate+TPE
+  (and the Gen+TPE-full fairness variant); ablations in `scripts/run_bench.py`. Generate+CMA-ES and the template oracle
+  are implemented but were not run in the final protocol (compute).
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.
@@ -23,7 +24,9 @@ pip install numpy scipy cma optuna matplotlib      # + ngspice >= 42 on PATH, `c
 python -m scripts.gen_lut tt ff ss sf fs T=-40 T=27 T=125      # gm/Id lookup tables
 python -m scripts.run_bench --exp E1 --methods spectra,direct,genbo --seeds 0,1,2
 python -m scripts.analyze --exp E1
+bash scripts/finalize_paper.sh        # regenerate every analysis, table, figure and paper macro, then compile
 ```
+Experiment protocol and every deviation: `EXPERIMENT_LOG.md`; acceptance contract: `paper/PAPER_ACCEPTANCE_CONTRACT.md`.
 
 ## Layout
 - `spectra/sim` — ngspice runner, canonical netlist + ERC + SKY130 compiler, testbenches/measurements, LUT API, evaluation
