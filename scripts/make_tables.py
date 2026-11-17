@@ -18,56 +18,128 @@ def f(x, pct=True):
     return f"{100 * x:.0f}" if pct else (f"{x:.0f}" if x >= 10 else f"{x:.1f}")
 
 
-def main_table(exp="E1", methods=None, out="main.tex", caption="", label="tab:main"):
-    s = json.loads((ROOT / "results" / f"{exp}_summary.json").read_text())["summary"]
-    methods = methods or [m for m in LABEL if m in s]
+SHORT = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE",
+         "spectra_nodiag": "w/o diagnosis", "spectra_nointent": "w/o intent", "spectra_norefine": "w/o refinement",
+         "spectra_noknow": "w/o cards", "direct_noknow": "AnalogCoder-style w/o cards", "genbo_full": "Gen+TPE-full",
+         "spectra_pvt_nominal": "TT-only design", "spectra_haiku": "SPECTRA (Haiku)", "direct_haiku": "AnalogCoder-style (Haiku)"}
+
+
+def seeds_text(d):
+    """{method: [lo, hi]} -> 'SPECTRA 1--2, ...' (seeds per task, computed from the runs)."""
+    def rg(v):
+        return f"{v[0]}" if v[0] == v[1] else f"{v[0]}--{v[1]}"
+    return ", ".join(f"{SHORT.get(m, m)} {rg(v)}" for m, v in d.items())
+
+
+def main_table(exp="E1", out="main.tex"):
+    from scripts.analyze import load_common
+    summ = json.loads((ROOT / "results" / f"{exp}_summary.json").read_text())
+    s = summ["summary"]
+    methods = [m for m in ("spectra", "spectra_min", "direct", "genbo") if m in s]
+    runs = load_common(exp, methods)
+    from scripts.comparisons import seeds_range
+    seeds = {m: seeds_range([r for r in runs if r["method"] == m]) for m in methods}
     rows = []
     for m in methods:
-        d = s.get(m)
-        if not d:
-            continue
+        d = s[m]
         rows.append(f"{LABEL.get(m, m)} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {f(d.get('tier1'))} & "
                     f"{f(d.get('tier2'))} & {f(d.get('tier3'))} & {f(d.get('robust'))} & {f(d.get('tierD'))} & "
-                    f"{f(d.get('median_calls_success'), False)} & {f(d.get('median_sims_success'), False)} & {d['mean_cost_usd']:.2f} \\\\")
-    tex = ("\\begin{table*}[t]\n\\centering\n\\caption{" + caption + "}\n\\label{" + label + "}\n\\small\n"
-           "\\begin{tabular}{@{}lccccccccc@{}}\n\\toprule\n"
-           "Method & Success (\\%) [95\\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\\star$ & Sims$^\\star$ & \\$/run \\\\\n\\midrule\n"
+                    f"{f(d.get('median_calls_success'), False)} & {f(d.get('median_sims_success'), False)} & "
+                    f"{d['mean_tokens'] / 1e3:.0f} & {d['mean_cost_usd']:.2f} \\\\")
+    cap = (f"Main results on the {summ['common_tasks']} tasks completed by every method (success = re-simulation outside "
+           "the agent at TT, or on all 45 PVT conditions for robust tasks; per-task means over seeds, seeds per task: "
+           + seeds_text(seeds) + "). Calls/Sims: medians over successful runs; kTok and \\$/run: mean LLM tokens "
+           "(thousands) and cost per run.")
+    tex = ("\\begin{table*}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:main}\n\\small\n"
+           "\\begin{tabular}{@{}lcccccccccc@{}}\n\\toprule\n"
+           "Method & Success (\\%) [95\\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\\star$ & Sims$^\\star$ & kTok & \\$/run \\\\\n\\midrule\n"
            + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n\\end{table*}\n")
     (TAB / out).write_text(tex)
-    print(tex)
 
 
-if __name__ == "__main__":
-    main_table(*(sys.argv[1:2] or ["E1"]))
+def _cmp():
+    p = ROOT / "results" / "comparisons.json"
+    return json.loads(p.read_text()) if p.exists() else {}
 
 
-def ablation_table(exp_main="E1", exp_abl="E2", out="ablation.tex"):
-    """Ablations on the E2 subset: SPECTRA/SPECTRA-min/baselines restricted to subset tasks + E2 variants."""
-    from scripts.analyze import load, cluster_boot
-    import numpy as np
-    sub = {json.loads(l)["id"] for l in open(ROOT / "data/bench/subset_E2.jsonl")}
-    runs = [r for r in load(exp_main) + load(exp_abl) if r["task"] in sub]
-    order = ["spectra", "spectra_nodiag", "spectra_nointent", "spectra_norefine", "spectra_min", "genbo", "genbo_cmaes", "direct"]
-    rows = []
-    for m in order:
-        rs = [r for r in runs if r["method"] == m]
-        if not rs:
-            continue
-        s, lo, hi = cluster_boot(rs)
-        nom = cluster_boot([r for r in rs if not r["robust"]])[0]
-        rob = cluster_boot([r for r in rs if r["robust"]])[0]
-        succ = [r for r in rs if r["success"]]
-        calls = np.median([r["calls"] for r in succ]) if succ else None
-        sims = np.median([r["sims"] for r in succ]) if succ else None
-        cost = np.mean([r["cost"] for r in rs])
-        rows.append(f"{LABEL.get(m, m)} & {f(s)} [{f(lo)},{f(hi)}] & {f(nom)} & {f(rob)} & {f(calls, False)} & {f(sims, False)} & {cost:.2f} \\\\")
-    tex = ("\\begin{table}[t]\n\\centering\n\\caption{Ablations on the stratified subset (" + str(len(sub)) +
-           " tasks, 3 seeds). Calls/sims: medians over successful runs.}\n\\label{tab:ablation}\n\\scriptsize\n"
-           "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lcccccc@{}}\n\\toprule\n"
-           "Variant & Succ.\\,(\\%) [CI] & Nom. & Rob. & Calls & Sims & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
+def _wl(d):
+    v = d.get("vs_ref")
+    return "--" if not v else f"{v['wins']}/{v['losses']}"
+
+
+def _row(name, d, extra=""):
+    return (f"{name} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {_wl(d)} & "
+            f"{f(d['median_calls_success'], False)} & {f(d['median_sims_success'], False)} & {d['mean_cost_usd']:.2f}{extra} \\\\")
+
+
+def ablation_table(out="ablation.tex"):
+    c = _cmp()
+    A, B = c.get("ablation_subset"), c.get("ablation_t3")
+    if not A or len(A["methods"]) < 3:
+        return
+    lab = {"spectra": "\\textbf{SPECTRA}", "spectra_nodiag": "\\quad w/o diagnosis", "spectra_nointent": "\\quad w/o intent (raw $W/L$)",
+           "spectra_min": "\\quad SPECTRA-min", "genbo": "Gen+TPE", "direct": "AnalogCoder-style",
+           "spectra_norefine": "\\quad w/o refinement", "spectra_noknow": "\\quad w/o knowledge cards",
+           "direct_noknow": "AnalogCoder-style w/o cards"}
+    rows = [f"\\multicolumn{{6}}{{@{{}}l}}{{\\emph{{(a) stratified subset, {A['n_tasks']} tasks}}}} \\\\"]
+    rows += [_row(lab[m], d) for m, d in A["methods"].items()]
+    seeds = {m: d["seeds"] for m, d in A["methods"].items()}
+    if B and len(B["methods"]) >= 3:
+        rows.append("\\midrule")
+        rows.append(f"\\multicolumn{{6}}{{@{{}}l}}{{\\emph{{(b) T3 tasks of the subset, {B['n_tasks']} tasks}}}} \\\\")
+        rows += [_row(lab[m], d) for m, d in B["methods"].items()]
+        seeds.update({m: d["seeds"] for m, d in B["methods"].items() if m not in seeds})
+    cap = ("Ablations on matched tasks. W/L: tasks on which SPECTRA has a higher/lower success rate than the variant. "
+           "Calls/sims: medians over successful runs. Seeds per task: " + seeds_text(seeds) + ".")
+    tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:ablation}\n\\scriptsize\n"
+           "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lccccc@{}}\n\\toprule\n"
+           "Variant & Succ.\\,(\\%) [CI] & W/L & Calls & Sims & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
     (TAB / out).write_text(tex)
-    print(tex)
+
+
+def pvt_table(out="pvt.tex"):
+    c = _cmp().get("pvt")
+    if not c or len(c["methods"]) < 3:
+        return
+    lab = {"spectra": "\\textbf{SPECTRA} (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad TT-only design, verify at end",
+           "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE (3 fixed corners)",
+           "genbo_full": "Gen+TPE-full (12 regen., adaptive)"}
+    yp = ROOT / "results" / "E1_mc_yield.json"
+    my = json.loads(yp.read_text()) if yp.exists() else {}
+    rows = []
+    for m, d in c["methods"].items():
+        ys = [v for k, v in my.get(m, {}).items() if k.split("/")[0] in set(c["tasks"]) and k.endswith("s0")]
+        y = f" & {100 * sum(ys) / len(ys):.0f}" if ys else (" & --" if my else "")
+        rows.append(f"{lab[m]} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {_wl(d)} & "
+                    f"{f(d['median_sims_success'], False)} & {f(d['mean_sims'], False)}{y} \\\\")
+    ycol = " & Yield" if my else ""
+    cap = (f"PVT-robust tasks of the subset ({c['n_tasks']} tasks, seed 0; success on all 45 conditions). Sims: "
+           "condition-evaluations, median over successful runs and mean over all runs"
+           + ("; yield: mean mismatch Monte-Carlo yield (\\%) at TT of the successful designs" if my else "") + ".")
+    tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:pvt}\n\\scriptsize\n"
+           "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lcccc" + ("c" if my else "") + "@{}}\n\\toprule\n"
+           "Method & Success (\\%) [CI] & W/L & Sims$^\\star$ & Sims" + ycol + " \\\\\n\\midrule\n" + "\n".join(rows) +
+           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+    (TAB / out).write_text(tex)
+
+
+def scaling_table(out="scaling.tex"):
+    c = _cmp().get("scaling")
+    if not c or not any(m.endswith("_haiku") for m in c["methods"]):
+        return
+    rows = []
+    for m, d in c["methods"].items():
+        llm = "Haiku 5.5" if m.endswith("_haiku") else "Opus 5.5"
+        meth = "SPECTRA" if m.startswith("spectra") else "AnalogCoder-style"
+        rows.append(f"{llm} & {meth} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & "
+                    f"{f(d['median_calls_success'], False)} & {d['mean_cost_usd']:.2f} \\\\")
+    cap = f"Backbone study on the subset's T3 and robust tasks ({c['n_tasks']} tasks, seed 0)."
+    tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:scaling}\n\\scriptsize\n"
+           "\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}llccc@{}}\n\\toprule\n"
+           "LLM & Method & Success (\\%) [CI] & Calls$^\\star$ & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
+           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
+    (TAB / out).write_text(tex)
 
 
 def fault_table(out="fault.tex"):
@@ -96,59 +168,12 @@ def fault_table(out="fault.tex"):
     print(tex)
 
 
-def pvt_table(out="pvt.tex"):
-    """Robust (45-condition PVT) tasks of the subset: E1 methods + E3 PVT-strategy variants on identical tasks."""
-    from scripts.analyze import load, cluster_boot
-    import numpy as np
-    ids = {json.loads(l)["id"] for l in open(ROOT / "data/bench/subset_robust.jsonl")}
-    runs = [r for r in load("E1") + load("E3") if r["task"] in ids]
-    order = ["spectra", "spectra_pvt_nominal", "spectra_pvt_all", "spectra_min", "direct", "genbo", "genbo_full"]
-    lab = {"spectra": "SPECTRA (adaptive worst corners)", "spectra_pvt_nominal": "\\quad TT-only design, verify at end",
-           "spectra_pvt_all": "\\quad refine on all 45 conditions", "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style",
-           "genbo": "Gen+TPE (3 fixed corners)", "genbo_full": "Gen+TPE (12 regen., adaptive corners)"}
-    my = {}
-    yp = ROOT / "results/E1_mc_yield.json"
-    if yp.exists():
-        my = json.loads(yp.read_text())
-    rows = []
-    for m in order:
-        rs = [r for r in runs if r["method"] == m]
-        if not rs:
-            continue
-        s, lo, hi = cluster_boot(rs)
-        succ = [r for r in rs if r["success"]]
-        sims = np.median([r["sims"] for r in succ]) if succ else None
-        ys = [v for k, v in my.get(m, {}).items() if k.split("/")[0] in ids]
-        y = f"{100 * np.mean(ys):.0f}" if ys else "--"
-        rows.append(f"{lab[m]} & {len({r['task'] for r in rs})} & {f(s)} [{f(lo)},{f(hi)}] & {f(sims, False)} & {y} \\\\")
-    tex = ("\\begin{table}[t]\n\\centering\n\\caption{PVT-robust tasks of the subset (success on all 45 conditions); "
-           "sims: median condition-evaluations of successful runs; yield: mean 100-sample TT mismatch yield of successful designs.}\n"
-           "\\label{tab:pvt}\n\\scriptsize\n\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lcccc@{}}\n\\toprule\n"
-           "Method & Tasks & Success (\\%) [CI] & Sims & Yield (\\%) \\\\\n\\midrule\n" + "\n".join(rows) +
-           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    (TAB / out).write_text(tex)
-    print(tex)
 
 
-def scaling_table(out="scaling.tex"):
-    from scripts.analyze import load, cluster_boot
-    import numpy as np
-    ids = {json.loads(l)["id"] for l in open(ROOT / "data/bench/subset_E2.jsonl")}
-    rows = []
-    for model, exp, suffix in (("Opus 5.5", "E1", ""), ("Sonnet 5.5", "E5", "@sonnet"), ("Haiku 5.5", "E5", "@haiku")):
-        for m in ("spectra", "direct"):
-            rs = [r for r in load(exp) if r["method"] == m + suffix and r["task"] in ids]
-            if exp == "E1":
-                rs = [r for r in rs if r["seed"] == "s0"]
-            if not rs:
-                continue
-            s, lo, hi = cluster_boot(rs)
-            prim = [r for r in rs if r["robust"] or str(r["tier"]) == "3"]
-            rows.append(f"{model} & {'SPECTRA' if m == 'spectra' else 'AnalogCoder-style'} & {len(rs)} & {f(s)} [{f(lo)},{f(hi)}] & "
-                        f"{f(cluster_boot(prim)[0]) if prim else '--'} & {np.mean([r['cost'] for r in rs]):.2f} \\\\")
-    tex = ("\\begin{table}[t]\n\\centering\n\\caption{Backbone scaling on the stratified subset (seed 0).}\n\\label{tab:scaling}\n"
-           "\\scriptsize\n\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}llcccc@{}}\n\\toprule\n"
-           "LLM & Method & Runs & Success (\\%) [CI] & T3+R & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
-           "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    (TAB / out).write_text(tex)
-    print(tex)
+if __name__ == "__main__":
+    main_table("E1")
+    fault_table()
+    ablation_table()
+    pvt_table()
+    scaling_table()
+    print("tables:", sorted(p.name for p in TAB.glob("*.tex")))

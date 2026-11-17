@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{PVT-robust tasks of the subset (2 tasks, seed 0; success on all 45 conditions). Sims: condition-evaluations, median over successful runs and mean over all runs.}
+\label{tab:pvt}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Method & Success (\%) [CI] & W/L & Sims$^\star$ & Sims \\
+\midrule
+\textbf{SPECTRA} (adaptive worst conditions) & 50 [0,100] & -- & 46 & 318 \\
+SPECTRA-min & 100 [100,100] & 0/1 & 122 & 122 \\
+Gen+TPE (3 fixed corners) & 0 [0,0] & 1/0 & -- & 399 \\
+AnalogCoder-style & 100 [100,100] & 0/1 & 139 & 139 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -2,7 +2,9 @@
 \label{sec:setup}
 \textbf{Methods.} All LLM-based methods use the same model (Claude Opus~5.5 through the Claude Code CLI with default
 sampling), the same task text, interface description, PDK sheet and topology knowledge cards, and the same budgets
-(Section~\ref{sec:bench}). \emph{AnalogCoder-style}~\cite{lai2025analogcoder}: the LLM writes a design plan and a
+(Section~\ref{sec:bench}); only SPECTRA and its ablations receive the $g_m/I_D$ lookup-table API, which is part of the
+method (the w/o-intent ablation removes it). Responses are cached per prompt and run so that interrupted runs resume
+identically. \emph{AnalogCoder-style}~\cite{lai2025analogcoder}: the LLM writes a design plan and a
 sized netlist and revises it from simulator feedback (spec table, errors, zero-current devices, failing PVT
 conditions). \emph{Gen+TPE} (AnalogCoder-Pro-style~\cite{lai2026analogcoderpro}): the LLM proposes a parameterised
 topology with bounds, TPE~\cite{bergstra2011tpe,akiba2019optuna} sizes it over raw $W/L/R/C$, and up to three
@@ -15,8 +17,13 @@ adaptive worst-corner loop as SPECTRA (Section~\ref{sec:pvt}).
 \textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs where methods differ:
 SPECTRA and the AnalogCoder-style agent run two seeds on every T3 task, and every method runs at least one seed on
 every other task, including the robust tasks, whose runs cost about ten times more simulations (seeds completed
-earlier are kept and averaged per task). Robust runs started under an earlier cap of 1200 condition-evaluations
-are scored by truncation at 600---success only if reached within 600---for every method. Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
-The pre-registered primary endpoint is success on near-frontier (T3) and robust tasks. Confidence intervals are 95\%
+earlier are kept and averaged per task). Robust runs that had started under an earlier cap of 1200
+condition-evaluations were discarded and re-run at 600. During the main experiment we fixed a harness defect found by
+inspecting a failed designer-tier run (iteration prompts did not repeat the program API, and the sandbox rejected some
+exception classes); all SPECTRA and SPECTRA-min runs were re-run with the fixed harness, while baseline runs, which do
+not use the affected code, were kept. Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
+The primary endpoint is success on near-frontier (T3) and robust tasks; we fixed it at an interim review, after
+about a third of the main-experiment runs and before the remaining ones, when the pilot had shown the easier tiers to be
+saturated. Confidence intervals are 95\%
 cluster bootstraps over tasks; paired comparisons use per-task success rates with an exact sign test and a paired
 permutation test, Holm-corrected across baselines.

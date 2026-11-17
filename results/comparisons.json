@@ -1,0 +1,420 @@
+{
+ "ablation_subset": {
+  "n_tasks": 5,
+  "tasks": [
+   "opamp-05",
+   "opamp-06",
+   "ref-04",
+   "tia-02",
+   "tia-03"
+  ],
+  "ref": "spectra",
+  "methods": {
+   "spectra": {
+    "success": 0.8,
+    "ci95": [
+     0.4,
+     1.0
+    ],
+    "n_runs": 13,
+    "seeds": [
+     1,
+     3
+    ],
+    "median_calls_success": 4.0,
+    "median_sims_success": 11.0,
+    "mean_sims": 73.15384615384616,
+    "mean_cost_usd": 0.5086999999999999,
+    "mean_tokens": 39189.692307692305
+   },
+   "spectra_nodiag": {
+    "success": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n_runs": 9,
+    "seeds": [
+     1,
+     2
+    ],
+    "median_calls_success": 3.0,
+    "median_sims_success": 6.0,
+    "mean_sims": 41.111111111111114,
+    "mean_cost_usd": 0.4783888888888889,
+    "mean_tokens": 36316.444444444445,
+    "vs_ref": {
+     "n_tasks": 5,
+     "mean_diff": -0.2,
+     "wins": 0,
+     "losses": 1,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   },
+   "spectra_nointent": {
+    "success": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n_runs": 9,
+    "seeds": [
+     1,
+     2
+    ],
+    "median_calls_success": 3.0,
+    "median_sims_success": 11.0,
+    "mean_sims": 84.44444444444444,
+    "mean_cost_usd": 0.4639,
+    "mean_tokens": 33016.666666666664,
+    "vs_ref": {
+     "n_tasks": 5,
+     "mean_diff": -0.2,
+     "wins": 0,
+     "losses": 1,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   },
+   "spectra_min": {
+    "success": 0.7999999999999999,
+    "ci95": [
+     0.6666666666666666,
+     0.9333333333333332
+    ],
+    "n_runs": 13,
+    "seeds": [
+     1,
+     3
+    ],
+    "median_calls_success": 2.0,
+    "median_sims_success": 72.0,
+    "mean_sims": 136.3846153846154,
+    "mean_cost_usd": 0.2782307692307692,
+    "mean_tokens": 20325.384615384617,
+    "vs_ref": {
+     "n_tasks": 5,
+     "mean_diff": 2.2204460492503132e-17,
+     "wins": 3,
+     "losses": 1,
+     "p_sign": 0.625,
+     "p_perm": 1.0
+    }
+   },
+   "genbo": {
+    "success": 0.6666666666666666,
+    "ci95": [
+     0.3333333333333333,
+     0.9333333333333332
+    ],
+    "n_runs": 13,
+    "seeds": [
+     1,
+     3
+    ],
+    "median_calls_success": 1.0,
+    "median_sims_success": 42.5,
+    "mean_sims": 97.46153846153847,
+    "mean_cost_usd": 0.15157692307692308,
+    "mean_tokens": 10787.384615384615,
+    "vs_ref": {
+     "n_tasks": 5,
+     "mean_diff": 0.13333333333333336,
+     "wins": 2,
+     "losses": 0,
+     "p_sign": 0.5,
+     "p_perm": 0.49925
+    }
+   },
+   "direct": {
+    "success": 0.9333333333333332,
+    "ci95": [
+     0.7999999999999999,
+     1.0
+    ],
+    "n_runs": 13,
+    "seeds": [
+     1,
+     3
+    ],
+    "median_calls_success": 3.5,
+    "median_sims_success": 3.5,
+    "mean_sims": 21.153846153846153,
+    "mean_cost_usd": 0.6837230769230769,
+    "mean_tokens": 43727.07692307692,
+    "vs_ref": {
+     "n_tasks": 5,
+     "mean_diff": -0.13333333333333333,
+     "wins": 1,
+     "losses": 1,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   }
+  }
+ },
+ "ablation_t3": {
+  "n_tasks": 4,
+  "tasks": [
+   "opamp-05",
+   "opamp-06",
+   "tia-02",
+   "tia-03"
+  ],
+  "ref": "spectra",
+  "methods": {
+   "spectra": {
+    "success": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n_runs": 12,
+    "seeds": [
+     3,
+     3
+    ],
+    "median_calls_success": 4.0,
+    "median_sims_success": 11.0,
+    "mean_sims": 30.166666666666668,
+    "mean_cost_usd": 0.5058416666666666,
+    "mean_tokens": 38860.583333333336
+   },
+   "direct": {
+    "success": 0.9166666666666666,
+    "ci95": [
+     0.7499999999999999,
+     1.0
+    ],
+    "n_runs": 12,
+    "seeds": [
+     3,
+     3
+    ],
+    "median_calls_success": 3.0,
+    "median_sims_success": 3.0,
+    "mean_sims": 3.75,
+    "mean_cost_usd": 0.6768,
+    "mean_tokens": 43362.5,
+    "vs_ref": {
+     "n_tasks": 4,
+     "mean_diff": 0.08333333333333334,
+     "wins": 1,
+     "losses": 0,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   }
+  }
+ },
+ "pvt": {
+  "n_tasks": 2,
+  "tasks": [
+   "ref-04",
+   "vco-06"
+  ],
+  "ref": "spectra",
+  "methods": {
+   "spectra": {
+    "success": 0.5,
+    "ci95": [
+     0.0,
+     1.0
+    ],
+    "n_runs": 2,
+    "seeds": [
+     1,
+     1
+    ],
+    "median_calls_success": 1.0,
+    "median_sims_success": 46.0,
+    "mean_sims": 317.5,
+    "mean_cost_usd": 0.3763,
+    "mean_tokens": 28814.5
+   },
+   "spectra_min": {
+    "success": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n_runs": 2,
+    "seeds": [
+     1,
+     1
+    ],
+    "median_calls_success": 1.5,
+    "median_sims_success": 122.5,
+    "mean_sims": 122.5,
+    "mean_cost_usd": 0.28400000000000003,
+    "mean_tokens": 18330.5,
+    "vs_ref": {
+     "n_tasks": 2,
+     "mean_diff": -0.5,
+     "wins": 0,
+     "losses": 1,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   },
+   "genbo": {
+    "success": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n_runs": 2,
+    "seeds": [
+     1,
+     1
+    ],
+    "median_calls_success": null,
+    "median_sims_success": null,
+    "mean_sims": 399.0,
+    "mean_cost_usd": 0.2965,
+    "mean_tokens": 19674.0,
+    "vs_ref": {
+     "n_tasks": 2,
+     "mean_diff": 0.5,
+     "wins": 1,
+     "losses": 0,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   },
+   "direct": {
+    "success": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n_runs": 2,
+    "seeds": [
+     1,
+     1
+    ],
+    "median_calls_success": 4.5,
+    "median_sims_success": 139.0,
+    "mean_sims": 139.0,
+    "mean_cost_usd": 0.5790500000000001,
+    "mean_tokens": 36672.0,
+    "vs_ref": {
+     "n_tasks": 2,
+     "mean_diff": -0.5,
+     "wins": 0,
+     "losses": 1,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   }
+  }
+ },
+ "scaling": {
+  "n_tasks": 0,
+  "tasks": [],
+  "ref": "spectra",
+  "methods": {
+   "spectra": {
+    "success": NaN,
+    "ci95": [
+     NaN,
+     NaN
+    ],
+    "n_runs": 0,
+    "seeds": [
+     0,
+     0
+    ],
+    "median_calls_success": null,
+    "median_sims_success": null,
+    "mean_sims": NaN,
+    "mean_cost_usd": NaN,
+    "mean_tokens": NaN
+   },
+   "direct": {
+    "success": NaN,
+    "ci95": [
+     NaN,
+     NaN
+    ],
+    "n_runs": 0,
+    "seeds": [
+     0,
+     0
+    ],
+    "median_calls_success": null,
+    "median_sims_success": null,
+    "mean_sims": NaN,
+    "mean_cost_usd": NaN,
+    "mean_tokens": NaN,
+    "vs_ref": {
+     "n_tasks": 0,
+     "mean_diff": 0.0,
+     "wins": 0,
+     "losses": 0,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   },
+   "spectra_haiku": {
+    "success": NaN,
+    "ci95": [
+     NaN,
+     NaN
+    ],
+    "n_runs": 0,
+    "seeds": [
+     0,
+     0
+    ],
+    "median_calls_success": null,
+    "median_sims_success": null,
+    "mean_sims": NaN,
+    "mean_cost_usd": NaN,
+    "mean_tokens": NaN,
+    "vs_ref": {
+     "n_tasks": 0,
+     "mean_diff": 0.0,
+     "wins": 0,
+     "losses": 0,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   },
+   "direct_haiku": {
+    "success": NaN,
+    "ci95": [
+     NaN,
+     NaN
+    ],
+    "n_runs": 0,
+    "seeds": [
+     0,
+     0
+    ],
+    "median_calls_success": null,
+    "median_sims_success": null,
+    "mean_sims": NaN,
+    "mean_cost_usd": NaN,
+    "mean_tokens": NaN,
+    "vs_ref": {
+     "n_tasks": 0,
+     "mean_diff": 0.0,
+     "wins": 0,
+     "losses": 0,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   }
+  },
+  "haiku_spectra_vs_direct": {
+   "n_tasks": 0,
+   "mean_diff": 0.0,
+   "wins": 0,
+   "losses": 0,
+   "p_sign": 1.0,
+   "p_perm": 1.0
+  }
+ }
+}

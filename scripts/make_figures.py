@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from spectra.paths import ROOT
-from scripts.analyze import load, cluster_boot
+from scripts.analyze import load, cluster_boot, load_common, TIER_GROUPS
 
 FIG = ROOT / "paper" / "figs"
 PAL = {"spectra": "#2a78d6", "spectra_min": "#eb6834", "direct": "#1baf7a", "genbo": "#eda100",
@@ -22,10 +22,8 @@ plt.rcParams.update({"font.size": 7, "axes.spines.top": False, "axes.spines.righ
 
 
 def tier_bars(exp, methods, out):
-    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
-    groups = [("T1", lambda r: str(r["tier"]) == "1" and not r["robust"]), ("T2", lambda r: str(r["tier"]) == "2" and not r["robust"]),
-              ("T3", lambda r: str(r["tier"]) == "3" and not r["robust"]), ("Robust", lambda r: r["robust"] and r["tier"] != "D"),
-              ("Designer", lambda r: str(r["tier"]) == "D")]
+    runs = load_common(exp, methods)
+    groups = TIER_GROUPS
     groups = [(g, f) for g, f in groups if any(f(r) for r in runs)]
     fig, ax = plt.subplots(figsize=(3.4, 1.7))
     w = 0.8 / len(methods)
@@ -44,7 +42,7 @@ def tier_bars(exp, methods, out):
 
 
 def anytime(exp, methods, out, key="sims", xmax=300):
-    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
+    runs = load_common(exp, methods)
     fig, ax = plt.subplots(figsize=(3.3, 1.6))
     for m in methods:
         rs = [r for r in runs if r["method"] == m and not r["robust"]]
@@ -61,7 +59,7 @@ def anytime(exp, methods, out, key="sims", xmax=300):
 
 def family_heatmap(exp, methods, out):
     """Per-family success (rows: methods, cols: families); sequential single-hue blue, values annotated."""
-    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
+    runs = load_common(exp, methods)
     fams = ["opamp", "amp", "tia", "cmirror", "ldo", "ref", "comparator", "latch", "vco", "filter", "schmitt", "opamp_app"]
     short = ["OpAmp", "Amp", "TIA", "Mirror", "LDO", "Ref", "Comp", "Latch", "VCO", "Filter", "Schmitt", "App"]
     M = np.full((len(methods), len(fams)), np.nan)
@@ -89,7 +87,7 @@ def family_heatmap(exp, methods, out):
 
 def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
     """Two panels: solved fraction (nominal tasks) vs simulations and vs LLM calls."""
-    runs = [r for r in load(exp, methods) if not r["robust"] and not r.get("infeasible")]
+    runs = [r for r in load_common(exp, methods) if not r["robust"]]
     fig, axes = plt.subplots(1, 2, figsize=(3.4, 1.55), sharey=True)
     for m in methods:
         rs = [r for r in runs if r["method"] == m]
@@ -111,7 +109,7 @@ def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
 
 if __name__ == "__main__":
     exp = sys.argv[1] if len(sys.argv) > 1 else "E1"
-    ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo", "genbo_cmaes"]
+    ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo"]
     tier_bars(exp, ms, f"{exp}_tiers.pdf"); anytime(exp, ms, f"{exp}_anytime.pdf")
     anytime2(exp, ms, f"{exp}_anytime2.pdf"); family_heatmap(exp, ms, f"{exp}_families.pdf")
     print("ok")

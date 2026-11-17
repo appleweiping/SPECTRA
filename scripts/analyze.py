@@ -3,6 +3,7 @@
 python -m scripts.analyze --exp E1 [--methods a,b,c] [--baseline spectra]
 Success := independent verification passes (TT for nominal tasks; all 45 PVT conditions for robust tasks).
 """
+import sys
 import argparse, json, math, random
 from collections import defaultdict
 from pathlib import Path
@@ -34,7 +35,9 @@ def load(exp, methods=None):
             succ = bool(v.get("pvt_pass")) if meta.get("robust") else bool(v.get("tt_pass"))
             bs, bc = r.get("budget_sims"), r.get("budget_calls")
             if meta.get("robust") and bs is not None and bs > ROBUST_CAP:
-                bs = ROBUST_CAP          # runs started under the earlier 1200 cap are truncated at 600 (stop-at-success)
+                # 1200-cap runs were archived and re-run natively at 600 (EXPERIMENT_LOG 2026-11-17 04:40)
+                print(f"WARNING: {f} ran under a {bs} cap; excluded", file=sys.stderr)
+                continue
             over = (bs is not None and (r.get("sims") or 0) > bs) or (bc is not None and (r.get("calls") or 0) > bc)
             if over:
                 succ = False
@@ -133,6 +136,22 @@ def anytime(runs, methods, budgets=(1, 5, 10, 20, 50, 100, 200, 300)):
     return curves
 
 
+# One tier-group definition shared by analyze, make_tables and make_figures: every PVT-robust task (certified or
+# designer-written) counts as Robust; T1/T2/T3/Designer contain nominal tasks only.
+TIER_GROUPS = [("T1", lambda r: str(r["tier"]) == "1" and not r["robust"]),
+               ("T2", lambda r: str(r["tier"]) == "2" and not r["robust"]),
+               ("T3", lambda r: str(r["tier"]) == "3" and not r["robust"]),
+               ("Robust", lambda r: r["robust"]),
+               ("Designer", lambda r: str(r["tier"]) == "D" and not r["robust"])]
+
+
+def load_common(exp, methods):
+    """Runs of `methods` restricted to the tasks every method completed (the set used for all E1 statistics)."""
+    runs = [r for r in load(exp, methods) if not r.get("infeasible")]
+    ct = common_tasks(runs, methods)
+    return [r for r in runs if r["task"] in ct]
+
+
 def common_tasks(runs, methods):
     sets = [{r["task"] for r in runs if r["method"] == m} for m in methods]
     sets = [x for x in sets if x]
@@ -140,7 +159,7 @@ def common_tasks(runs, methods):
 
 
 def primary(r):
-    """Pre-registered primary endpoint: near-frontier tasks (certified T3) and every PVT-robust task."""
+    """Primary endpoint (fixed at interim review round 1): near-frontier tasks (certified T3) and every PVT-robust task."""
     return r["robust"] or str(r["tier"]) == "3"
 
 
@@ -197,6 +216,8 @@ def main():
     for i, (p, k) in enumerate(ps):
         exact[k]["primary"]["p_perm_holm"] = min(1.0, p * (len(ps) - i))
     res = {"common_tasks": len(ct), "summary": summ, "primary": summ_primary, "primary_n_tasks": len({r["task"] for r in prim}),
+           "primary_families": len({r["family"] for r in prim}), "common_families": len({r["family"] for r in runs_c}),
+           "primary_tasks": sorted({r["task"] for r in prim}),
            "tests": tests, "exact": exact, "anytime": anytime(runs_c, methods)}
     (ROOT / "results" / f"{a.exp}_summary.json").write_text(json.dumps(res, indent=1))
     print(f"{'method':22s} {'n':>4s} {'succ':>6s} {'95%CI':>15s} {'nom':>6s} {'rob':>6s} {'T1':>5s} {'T2':>5s} {'T3':>5s} {'D':>5s} {'sims*':>6s} {'calls*':>6s} {'$':>6s}")

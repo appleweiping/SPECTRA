@@ -9,7 +9,7 @@ low-dimensional intent space exposed by the program, and robust tasks are closed
 \subsection{Design-Intent Programs}
 \label{sec:intent}
 \input{figs/program}
-A design-intent program is a short Python module with two parts. \texttt{PARAMS} declares 3--12 intent variables
+A design-intent program is a short Python module with two parts. \texttt{PARAMS} declares the intent variables (the prompt asks for 3--12)
 with initial values and bounds (inversion levels $g_m/I_D$, channel lengths, branch currents, compensation
 capacitance, resistor ratios). \texttt{design(p,\,lut,\,spec)} sizes every transistor from intent through a
 characterised lookup table: \texttt{lut.size} maps $(g_m/I_D, L, I_D, V_{DS}, V_{SB})$ to the device and returns the
@@ -55,7 +55,7 @@ devices or nodes, e.g., ``M5 in triode ($V_{DS}=0.14<V_{dsat}=0.21$): tail sourc
 After each evaluation the LLM receives the current program, the diagnosis and a six-step history, and selects
 (a) \textsc{Refine}---the structure is right and the specs are missed by moderate margins; it may move the
 initial point and bounds of the search; (b) \textsc{Edit}---rewrite the program (bias network, sizing logic,
-compensation or topology); or (c) \textsc{Declare-Infeasible} with a physical argument. Editing costs an LLM call
+compensation or topology); or (c) \textsc{Declare-Infeasible} with a physical argument (\NDeclaredSpectra{} of SPECTRA's main-experiment runs ended this way). Editing costs an LLM call
 but no search budget; refinement costs simulations but no LLM call.
 
 \subsection{Intent-Space Refinement}

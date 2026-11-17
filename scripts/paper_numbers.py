@@ -38,7 +38,11 @@ def main():
                 out[key + "Sims"] = f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"
                 out[key + "Nruns"] = str(d["n_runs"])
         full = json.loads(e1.read_text())
+        out["NDeclaredSpectra"] = str(full["summary"].get("spectra", {}).get("declared_infeasible", 0))
         out["NCommon"] = str(full.get("common_tasks", "--")); out["NPrimaryTasks"] = str(full.get("primary_n_tasks", "--"))
+        out["NPrimaryFamilies"] = str(full.get("primary_families", "--")); out["NCommonFamilies"] = str(full.get("common_families", "--"))
+        pt = ROOT / "data/bench/E1_primary.jsonl"
+        out["NPrimaryAll"] = str(sum(1 for _ in open(pt))) if pt.exists() else "--"
         for m, key in [("spectra", "Spectra"), ("direct", "Direct"), ("genbo", "Genbo"), ("spectra_min", "SpectraMin")]:
             if m in full.get("primary", {}):
                 pd = full["primary"][m]
@@ -115,37 +119,74 @@ def main():
         return json.loads(f.read_text()) if f.exists() else None
     pf = ROOT / "results/pvt_failure_conditions.json"
     if pf.exists():
-        d = json.loads(pf.read_text()); tot = sum(d["fail_counts"].values()) or 1
-        out["PVTFailDesigns"] = str(d["n_designs"]); out["PVTFailLowVdd"] = f"{100 * d['by_vdd'].get('1.62V', 0) / tot:.0f}\\%"
-    subp = ROOT / "data/bench/subset_E2.jsonl"
-    if subp.exists() and (ROOT / "results/raw/E1/spectra").exists():
-        from scripts.analyze import load, cluster_boot
-        ids = {json.loads(l)["id"] for l in open(subp)}
-        rs = [r for r in load("E1", ["spectra"]) if r["task"] in ids]
-        if rs:
-            out["SubsetSpectra"] = pct(cluster_boot(rs)[0])
-    e2 = summ("E2", None)
-    if e2:
-        s2 = e2["summary"]
-        parts = []
-        lab = {"spectra_nodiag": "without diagnosis", "spectra_nointent": "without intent (raw $W/L$ programs)",
-               "spectra_norefine": "without refinement", "genbo_cmaes": "Gen+CMA-ES", "oracle_cmaes": "the template oracle",
-               "spectra_noknow": "SPECTRA without knowledge cards", "direct_noknow": "AnalogCoder-style without cards"}
-        for m, d in s2.items():
-            parts.append(f"{lab.get(m, m)} {pct(d['success'])}")
-        out["AblationText"] = ("On the stratified subset, success is " + "; ".join(parts) +
-                               f" (SPECTRA on the same tasks: \\SubsetSpectra{{}}).")
-    e3 = summ("E3", None)
-    if e3:
-        s3 = e3["summary"]
-        lab = {"genbo_full": "Gen+TPE with 12 regenerations and adaptive corners", "spectra_pvt_nominal": "SPECTRA designing at TT only",
-               "spectra_pvt_all": "SPECTRA refining on all 45 conditions"}
-        out["PVTText"] = ("On the robust tasks, " + "; ".join(f"{lab.get(m, m)} reaches {pct(d['success'])} with a median of "
-                          f"{d['median_sims_success'] if d.get('median_sims_success') is not None else '--'} condition-evaluations"
-                          for m, d in s3.items()) + " (SPECTRA with adaptive worst-corner selection: \\SpectraRobust{}).")
-    e5 = summ("E5", None)
-    if e5:
-        out["ScalingText"] = "Backbone scaling on the subset: " + "; ".join(f"{m.replace('@', ' with ')} {pct(d['success'])}" for m, d in e5["summary"].items()) + "."
+        d = json.loads(pf.read_text()); tot = d["n_fail_conditions"] or 1
+        out["PVTFailDesigns"] = str(d["n_designs"])
+        out["PVTFailLowVdd"] = f"{100 * d['by_vdd'].get('1.62V', 0) / tot:.0f}\\%"
+        cn = {"tt": "TT", "ss": "SS", "ff": "FF", "sf": "SF", "fs": "FS"}
+        tn = {"125C": "125\\,$^\\circ$C", "-40C": "$-40\\,^\\circ$C", "27C": "27\\,$^\\circ$C"}
+        out["PVTFailSentence"] = (
+            f"Across the {d['n_designs']} designs returned by the four main methods that pass at TT but fail the grid, "
+            f"{100 * d['by_vdd'].get('1.62V', 0) / tot:.0f}\\% of the {d['n_fail_conditions']} failing conditions are at the "
+            f"low supply (1.62\\,V) and {d['designs_failing_at_1.62V']} of the {d['n_designs']} designs fail at least one "
+            f"low-supply condition; failing conditions by corner are "
+            + ", ".join(f"{cn.get(k, k)} {v}" for k, v in d["by_corner"].items())
+            + " and by temperature " + ", ".join(f"{tn.get(k, k)} {v}" for k, v in d["by_temp"].items()) + ".")
+    cp = ROOT / "results/comparisons.json"
+    cmp = json.loads(cp.read_text()) if cp.exists() else {}
+    def wl(d):
+        v = d.get("vs_ref")
+        return f" ({v['wins']}/{v['losses']} per-task wins/losses for SPECTRA)" if v else ""
+    def sr(d):
+        return f"{pct(d['success'])}"
+    A, B = cmp.get("ablation_subset"), cmp.get("ablation_t3")
+    lab = {"spectra_nodiag": "without diagnosis", "spectra_nointent": "without intent (raw $W/L$ programs)",
+           "spectra_min": "SPECTRA-min", "genbo": "Gen+TPE", "direct": "the AnalogCoder-style agent",
+           "spectra_norefine": "without refinement", "spectra_noknow": "without knowledge cards",
+           "direct_noknow": "the AnalogCoder-style agent without cards"}
+    txt = []
+    if A and len(A["methods"]) >= 3 and "spectra" in A["methods"]:
+        ms = [m for m in ("spectra_nodiag", "spectra_nointent", "spectra_min") if m in A["methods"]]
+        txt.append(f"On the {A['n_tasks']} matched tasks of the stratified subset SPECTRA reaches {sr(A['methods']['spectra'])}; "
+                   + "; ".join(f"{lab[m]} {sr(A['methods'][m])}{wl(A['methods'][m])}" for m in ms) + ".")
+        out["AblSpectra"] = sr(A["methods"]["spectra"])
+        for m, key in (("spectra_nodiag", "AblNoDiag"), ("spectra_nointent", "AblNoIntent"), ("spectra_min", "AblMin")):
+            if m in A["methods"]:
+                out[key] = sr(A["methods"][m]); v = A["methods"][m]["vs_ref"]
+                out[key + "WL"] = f"{v['wins']}/{v['losses']}"; out[key + "P"] = f"{v['p_perm']:.2g}"
+    if B and len(B["methods"]) >= 3 and "spectra" in B["methods"]:
+        ms = [m for m in ("spectra_norefine", "spectra_noknow", "direct", "direct_noknow") if m in B["methods"]]
+        txt.append(f"On its {B['n_tasks']} T3 tasks SPECTRA reaches {sr(B['methods']['spectra'])}; "
+                   + "; ".join(f"{lab[m]} {sr(B['methods'][m])}{wl(B['methods'][m])}" for m in ms) + ".")
+        for m, key in (("spectra_norefine", "AblNoRefine"), ("spectra_noknow", "AblNoKnow"), ("direct", "AblDirectTThree"),
+                       ("direct_noknow", "AblDirectNoKnow")):
+            if m in B["methods"]:
+                out[key] = sr(B["methods"][m])
+        out["AblTThreeN"] = str(B["n_tasks"]); out["AblSpectraTThree"] = sr(B["methods"]["spectra"])
+    out["AblationText"] = " ".join(txt)
+    P = cmp.get("pvt")
+    if P and len(P["methods"]) >= 3:
+        lab3 = {"spectra": "SPECTRA", "spectra_pvt_nominal": "designing at TT only and verifying at the end",
+                "genbo_full": "Gen+TPE-full", "spectra_min": "SPECTRA-min", "genbo": "Gen+TPE", "direct": "the AnalogCoder-style agent"}
+        def sims(d):
+            return f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"
+        out["PVTText"] = (f"On the {P['n_tasks']} robust tasks of the subset (seed 0), "
+                          + "; ".join(f"{lab3[m]} reaches {sr(d)} (median {sims(d)} condition-evaluations when successful)"
+                                      for m, d in P["methods"].items()) + ".")
+        out["PVTN"] = str(P["n_tasks"])
+        for m, key in (("spectra", "PVTSpectra"), ("spectra_pvt_nominal", "PVTNominal"), ("genbo_full", "PVTGenboFull")):
+            if m in P["methods"]:
+                out[key] = sr(P["methods"][m]); out[key + "Sims"] = sims(P["methods"][m])
+    S = cmp.get("scaling")
+    if S and "spectra_haiku" in S["methods"] and "direct_haiku" in S["methods"]:
+        h = S.get("haiku_spectra_vs_direct", {})
+        out["ScalingText"] = (f"On the subset's {S['n_tasks']} T3 and robust tasks (seed 0), SPECTRA reaches "
+                              f"{sr(S['methods']['spectra'])} with Opus~5.5 and {sr(S['methods']['spectra_haiku'])} with Haiku~5.5; "
+                              f"the AnalogCoder-style agent reaches {sr(S['methods']['direct'])} and "
+                              f"{sr(S['methods']['direct_haiku'])}" + (f" (Haiku: {h['wins']}/{h['losses']} per-task wins/losses for SPECTRA)" if h else "") + ".")
+        out["ScaleN"] = str(S["n_tasks"])
+        for m, key in (("spectra", "ScaleSpectraOpus"), ("direct", "ScaleDirectOpus"), ("spectra_haiku", "ScaleSpectraHaiku"),
+                       ("direct_haiku", "ScaleDirectHaiku")):
+            out[key] = sr(S["methods"][m])
     for k in ("AblationText", "PVTText", "ScalingText"):
         out.setdefault(k, "")
     lines = ["% auto-generated by scripts/paper_numbers.py -- do not edit"]
