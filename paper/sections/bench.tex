@@ -1,5 +1,11 @@
 \section{SPECTRA-Bench}
 \label{sec:bench}
+\input{tables/compare}
+Table~\ref{tab:compare} contrasts SPECTRA-Bench with the evaluation settings of recent LLM-based analog design work.
+Closest is the Long-Horizon Analog Design Bench~\cite{adbench2026longhorizon}, whose 50 designer-contributed SKY130
+tasks include PVT and mismatch tests for some tasks and are attempted by coding agents for hours each. SPECTRA-Bench
+is larger, certifies feasibility for its template-derived tier, makes PVT robustness a task tier with a fixed
+45-condition grid, and accounts every simulation and LLM call, so that methods can be compared under equal budgets.
 
 \subsection{Interface, Devices and Testbenches}
 Each task fixes a port list, a testbench and quantitative specifications. The designer (human or agent) returns one
