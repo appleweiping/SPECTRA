@@ -1,0 +1,1 @@
+{"case": "tia_sfb_0", "task": "tia-00", "template": "tia_sfb", "truth": "M5", "class": "miswire_gate", "failing": ["zt_dbohm", "f3db", "in_noise_1m", "vout_dc"], "rule": ["M6", "M2", "M5"], "raw": ["M5", "M1", "M6"], "raw_cost": 0.00118, "spectra": ["M5", "M6", "M7"], "spectra_cost": 0.0034754}

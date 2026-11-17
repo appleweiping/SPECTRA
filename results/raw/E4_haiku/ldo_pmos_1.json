@@ -1,0 +1,1 @@
+{"case": "ldo_pmos_1", "task": "ldo-00", "template": "ldo_pmos", "truth": "M4", "class": "mirror_ratio", "failing": ["vout_err_pct", "undershoot", "ripple_settled"], "rule": ["M5", "M4", "R1"], "raw": ["M4", "M3", "M2"], "raw_cost": 0.0011128, "spectra": ["M5", "M4", "M6"], "spectra_cost": 0.0020908}

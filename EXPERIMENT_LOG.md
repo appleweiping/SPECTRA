@@ -58,3 +58,4 @@ SPECTRA and AnalogCoder-style: 3 seeds on certified T3, 2 seeds on robust tasks,
 Gen+TPE and SPECTRA-min: 2 seeds on T3, 1 seed elsewhere. Seeds completed earlier are kept (per-task means).
 E2 ablations w/o diagnosis and w/o intent: 2 seeds on the 35-task subset; no-card, w/o-refinement and Gen+CMA-ES:
 1 seed on the subset's T3 tasks; E3 (genbo_full, PVT strategies): 1 seed on all robust tasks; E5: 1 seed.
+- E3 reduced to the 11 robust tasks of the E2 subset (1 seed); E2 oracle dropped (compute).
