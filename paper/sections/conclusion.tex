@@ -2,7 +2,7 @@
 \label{sec:conclusion}
 \textbf{Limitations.} SPECTRA-Bench stops at schematic level: no layout parasitics, and passives use a first-order
 poly-resistor model and ideal capacitors. The certified tier derives from our own templates; the independently written designer tier mitigates
-but does not remove this bias. Compute (4 CPU cores) limited most cells to one or two seeds, so per-task
+but does not remove this bias. Compute (4 CPU cores) limited each task to one to three seeds, so per-task
 estimates are coarse and the confidence intervals are wide; for the same reason we dropped a Gen+CMA-ES arm, an
 all-corners PVT strategy, a template oracle, a third backbone, and infeasible-specification controls, which we built
 incorrectly and withdrew. All LLM results use one model family; the backbone study varies model size, not provider. Reviewer-side checks of this work were performed by models of the same family and are therefore

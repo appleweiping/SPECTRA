@@ -1,11 +1,18 @@
-"""Failure-mode analysis: for failed runs, final normalised violation and which metrics fail most often."""
+"""Failure-mode analysis: for failed runs, final normalised violation and which metrics fail most often.
+
+Pool: E1 runs of the four main methods on the common task set (scripts.analyze.load_common), i.e. the runs of Table main."""
 import json, glob, collections, sys
 from spectra.paths import ROOT
 from spectra.sim.evaluate import check
 
+METHODS = ["spectra", "spectra_min", "direct", "genbo"]
+
+
 def main(exp="E1"):
+    from scripts.analyze import load_common
+    keep = {(r["method"], r["task"], r["seed"]) for r in load_common(exp, METHODS)}
     tasks = {}
-    for f in ["tasks.jsonl", "designer_tasks.jsonl", "control_tasks.jsonl"]:
+    for f in ["tasks.jsonl", "designer_tasks.jsonl"]:
         p = ROOT / "data/bench" / f
         if p.exists():
             for l in open(p):
@@ -13,11 +20,13 @@ def main(exp="E1"):
     out = {}
     for mdir in sorted((ROOT / "results/raw" / exp).glob("*")):
         m = mdir.name
+        if m not in METHODS:
+            continue
         viol, metr, near = [], collections.Counter(), 0
         nfail = 0
         for f in mdir.glob("*/s*.json"):
             r = json.loads(f.read_text()); t = tasks.get(f.parent.name)
-            if t is None:
+            if t is None or (m, f.parent.name, f.stem) not in keep:
                 continue
             v = r.get("verify", {})
             ok = v.get("pvt_pass") if t.get("robust") else v.get("tt_pass")

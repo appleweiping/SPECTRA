@@ -1,12 +1,12 @@
-Large language model (LLM) agents can now draft analog circuits, but published evaluations rarely test what makes
-analog design hard: meeting many quantitative specifications at once, in a real process, across process, voltage
-and temperature (PVT) corners. We present SPECTRA, an end-to-end agent that turns a natural-language specification
-into a sized, PVT-verified SKY130 netlist. Instead of asking the LLM for transistor widths, SPECTRA has it write a
-\emph{design-intent program} that sizes every device from $(g_m/I_D, L, I_D)$ through PDK lookup tables and
-predicts its own performance. A deterministic layer executes, checks and simulates the program and returns a
-device-level diagnosis (operating-region margins, prediction--simulation discrepancies and sensitivities). The LLM
-uses this diagnosis to choose between rewriting the program and handing it to a numerical refiner that searches the
-program's low-dimensional intent space, with adaptive worst-corner selection for robust tasks. We also release
-SPECTRA-Bench: \NTasksTotal{} specification-driven tasks over twelve circuit families. Its tasks include certified
-specifications, an independently written designer tier, and verification over 45 PVT conditions plus mismatch.
-Under identical LLM and simulation budgets, SPECTRA \AbsMainClaim{}
+Large language model (LLM) agents can draft analog circuits, but their evaluations rarely test what makes analog
+design hard: meeting many quantitative specifications at once, in a real process, across process, voltage and
+temperature (PVT) corners. We present SPECTRA, an agent that turns a natural-language specification into a sized,
+PVT-verified SKY130 netlist. Instead of asking the LLM for transistor widths, SPECTRA has it write a
+\emph{design-intent program} that sizes every device from $(g_m/I_D, L, I_D)$ through PDK lookup tables and predicts
+its own performance. A deterministic layer executes and simulates the program and returns a device-level diagnosis;
+the LLM uses it to choose between rewriting the program and handing it to a numerical refiner that searches the
+program's low-dimensional intent space, with adaptive worst-condition selection for robust tasks. We also release
+SPECTRA-Bench: \NTasksTotal{} specification-driven tasks over twelve circuit families, with certified specifications,
+an independently written designer tier, and verification over 45 PVT conditions. With the same LLM, knowledge and
+budgets, SPECTRA \AbsMainClaim{} We also report where the approach does not help: the diagnosis does not by itself
+improve fault localisation, and intent programs mispredict second-order effects such as supply rejection.

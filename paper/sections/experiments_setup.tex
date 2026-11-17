@@ -17,8 +17,9 @@ adaptive worst-corner loop as SPECTRA (Section~\ref{sec:pvt}).
 \textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs where methods differ:
 SPECTRA and the AnalogCoder-style agent run two seeds on every T3 task, and every method runs at least one seed on
 every other task, including the robust tasks, whose runs cost about ten times more simulations (seeds completed
-earlier are kept and averaged per task). Robust runs that had started under an earlier cap of 1200
-condition-evaluations were discarded and re-run at 600. During the main experiment we fixed a harness defect found by
+earlier are kept and averaged per task). Robust tasks use seed 0 in the main and backbone experiments and seeds 0--1 in
+the ablations; robust runs that had started under an earlier cap of 1200 condition-evaluations were discarded and
+re-run at 600, and their higher seeds were dropped. During the main experiment we fixed a harness defect found by
 inspecting a failed designer-tier run (iteration prompts did not repeat the program API, and the sandbox rejected some
 exception classes); all SPECTRA and SPECTRA-min runs were re-run with the fixed harness, while baseline runs, which do
 not use the affected code, were kept. Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).

@@ -53,6 +53,23 @@ def main():
             pr = v["primary"]
             out["Prim" + nm + "P"] = f"{pr.get('p_perm_holm', pr['p_perm']):.2g}"
             out["Prim" + nm + "WL"] = f"{pr['wins']}/{pr['losses']}"
+        # abstract main claim: wording chosen by the Holm-corrected paired permutation p on the primary endpoint
+        ex = full.get("exact", {}); P = full.get("primary", {})
+        if all(m in P for m in ("spectra", "direct", "genbo")):
+            names = {"direct": "an AnalogCoder-style agent", "genbo": "an AnalogCoder-Pro-style generate-then-optimise agent"}
+            sig = [m for m in ("direct", "genbo") if ex.get(f"spectra_vs_{m}", {}).get("primary", {}).get("p_perm_holm", 1) < 0.05]
+            ns = [m for m in ("direct", "genbo") if m not in sig]
+            claim = (f"solves {pct(P['spectra']['success'])} of the near-frontier and PVT-robust tasks (our primary endpoint; "
+                     f"{full['primary_n_tasks']} tasks) versus {pct(P['direct']['success'])} for {names['direct']} and "
+                     f"{pct(P['genbo']['success'])} for {names['genbo']}.")
+            if sig:
+                claim += (" The gain over " + " and over ".join(names[m].replace("an ", "the ", 1) for m in sig)
+                          + " is significant in a paired, Holm-corrected test")
+                claim += ("; the gain over " + names[ns[0]].replace("an ", "the ", 1) + " is not (p = "
+                          + f"{ex[f'spectra_vs_{ns[0]}']['primary']['p_perm_holm']:.2g})." if ns else ".")
+            else:
+                claim += " At this sample size neither difference is significant in a paired, Holm-corrected test."
+            out["AbsMainClaim"] = claim
         t = full["tests"]
         for k, v in t.items():
             nm = "Test" + "".join(w.capitalize() for w in k.replace("spectra_vs_", "").split("_"))
@@ -69,8 +86,13 @@ def main():
     e4h = ROOT / "results/E4_haiku_summary.json"
     if e4h.exists():
         d = json.loads(e4h.read_text())
-        out["FaultHaikuSentence"] = (f"With the smaller Haiku~5.5 model the diagnosis changes top-1 accuracy from "
-                                     f"{pct(d['raw']['top1'])} (raw) to {pct(d['spectra']['top1'])}.")
+        tp = ROOT / "results/E4_tests.json"
+        tt = json.loads(tp.read_text())["haiku"] if tp.exists() else None
+        out["FaultHaikuSentence"] = (f"With the smaller Haiku~5.5 model top-1 accuracy is {pct(d['raw']['top1'])} with the raw "
+                                     f"evidence and {pct(d['spectra']['top1'])} with the diagnosis ({d['n_cases']} cases"
+                                     + (f"; {tt['only_raw_correct']} cases are solved only with the raw evidence and "
+                                        f"{tt['only_diag_correct']} only with the diagnosis, exact McNemar $p={tt['p_mcnemar_exact']:.2f}$"
+                                        if tt else "") + ").")
     else:
         out["FaultHaikuSentence"] = ""
     pa = ROOT / "results/E1_spectra_prediction_accuracy.json"
@@ -182,7 +204,8 @@ def main():
         def sims(d):
             return f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"
         out["PVTText"] = (f"On the {P['n_tasks']} robust tasks of the subset (seed 0), "
-                          + "; ".join(f"{lab3[m]} reaches {sr(d)} (median {sims(d)} condition-evaluations when successful)"
+                          + "; ".join(f"{lab3[m]} reaches {sr(d)}" + (f" (median {sims(d)} condition-evaluations when successful)"
+                                                                       if d.get("median_sims_success") is not None else "")
                                       for m, d in P["methods"].items()) + ".")
         out["PVTN"] = str(P["n_tasks"])
         for m, key in (("spectra", "PVTSpectra"), ("spectra_pvt_nominal", "PVTNominal"), ("genbo_full", "PVTGenboFull")):

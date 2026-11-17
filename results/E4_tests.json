@@ -1,0 +1,18 @@
+{
+ "opus": {
+  "n": 166,
+  "top1_raw": 0.7710843373493976,
+  "top1_diag": 0.7710843373493976,
+  "only_raw_correct": 10,
+  "only_diag_correct": 10,
+  "p_mcnemar_exact": 1.0
+ },
+ "haiku": {
+  "n": 156,
+  "top1_raw": 0.6089743589743589,
+  "top1_diag": 0.5512820512820513,
+  "only_raw_correct": 25,
+  "only_diag_correct": 16,
+  "p_mcnemar_exact": 0.21102359760880063
+ }
+}

@@ -3,7 +3,8 @@
 Scope: seed-0 runs of E1 (SPECTRA, SPECTRA-min, AnalogCoder-style, Gen+TPE) and E3 (TT-only design, Gen+TPE-full) on
 robust tasks whose final design passed all 45 PVT conditions. Each design is simulated at TT/27 C with N per-instance
 mismatch samples (agauss on the PDK's Pelgrom slopes, `.option seed=k`); yield = fraction of samples meeting every
-specification. Writes results/mc_yield.json: {"n_samples": N, "yield": {method: {"task/s0": y}}}.
+specification. Writes results/mc_yield.json: {"n_samples": N, "yield": {method: {"task/s0": y}},
+"max_rel_spread": {method: {"task/s0": largest (max-min)/|mean| over metrics}}} (> 0 shows that samples differ).
 
 python -m scripts.mc_yield [N]
 """
@@ -39,13 +40,20 @@ def main(n=100):
         m, t, net = j
         ev = evaluate(t, net, conds=MC[:n])
         ok = [all(v[1] for v in chk.values()) for chk in ev.checks.values()]
-        return m, t["id"], sum(ok) / n, len(ok)        # unsimulatable samples count as failures
+        # sanity check that mismatch samples differ: largest relative spread (max-min)/|mean| over the metrics
+        spread = 0.0
+        for k in (next(iter(ev.checks.values())) if ev.checks else {}):
+            vals = [chk[k][0] for chk in ev.checks.values() if k in chk and isinstance(chk[k][0], (int, float))]
+            if len(vals) > 1 and abs(sum(vals) / len(vals)) > 0:
+                spread = max(spread, (max(vals) - min(vals)) / abs(sum(vals) / len(vals)))
+        return m, t["id"], sum(ok) / n, len(ok), spread   # unsimulatable samples count as failures
 
     with ThreadPoolExecutor(2) as ex:
-        for m, tid, y, k in ex.map(one, jobs):
+        for m, tid, y, k, sp in ex.map(one, jobs):
             out["yield"].setdefault(m, {})[f"{tid}/s0"] = y
+            out.setdefault("max_rel_spread", {}).setdefault(m, {})[f"{tid}/s0"] = sp
             outp.write_text(json.dumps(out, indent=1))
-            print(m, tid, f"yield={y:.2f} ({k} samples)", flush=True)
+            print(m, tid, f"yield={y:.2f} ({k} samples, max rel. spread {sp:.3f})", flush=True)
 
 
 if __name__ == "__main__":

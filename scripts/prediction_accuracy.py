@@ -1,5 +1,6 @@
 """C1 evidence from E1: (a) accuracy of the agent's own design-intent-program predictions vs re-simulation of the
-final design; (b) size of the intent space vs the raw sizing space of the generated netlist."""
+final design; (b) size of the intent space vs the raw sizing space of the generated netlist.
+Pool: SPECTRA runs of E1 on the common task set of the four main methods (scripts.analyze.load_common)."""
 import json, glob, math, statistics as st, sys
 from collections import defaultdict
 from spectra.paths import ROOT
@@ -11,9 +12,13 @@ DBM = {"gain_db", "cmrr_db", "psrr_db", "zt_dbohm", "psrr_1k", "atten_db", "pm"}
 def main(exp="E1", method="spectra"):
     tasks = {json.loads(l)["id"]: json.loads(l) for f in ["tasks.jsonl", "designer_tasks.jsonl"]
              for l in open(ROOT / "data/bench" / f)}
+    from scripts.analyze import load_common
+    keep = {(r["task"], r["seed"]) for r in load_common(exp, ["spectra", "spectra_min", "direct", "genbo"]) if r["method"] == method}
     err = defaultdict(list); ratios = []; n_int, n_raw = [], []
     for f in sorted(glob.glob(str(ROOT / f"results/raw/{exp}/{method}/*/s*.json"))):
         r = json.load(open(f)); t = tasks.get(f.split("/")[-2])
+        if (f.split("/")[-2], f.split("/")[-1][:-5]) not in keep:
+            continue
         if not t or not r.get("program") or not r.get("verify", {}).get("tt_metrics"):
             continue
         out = run_program(r["program"], [r.get("params") or {}], spec=t.get("tb", {}))
