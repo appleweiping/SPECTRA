@@ -11,8 +11,10 @@ topology with bounds, TPE~\cite{bergstra2011tpe,akiba2019optuna} sizes it over r
 regenerations receive the best result; for robust tasks TPE optimises the worst case over TT, SS/125\,$^\circ$C and
 FF/$-40\,^\circ$C. \emph{SPECTRA-min} is the decisive ablation: one planning call (plus at most two calls to fix program errors), then
 intent-space CMA-ES with the whole budget and SPECTRA's PVT loop, but no diagnosis and no LLM repair.
-A fairness variant, \emph{Gen+TPE-full}, may regenerate until the 12 calls are used and closes PVT with the same
-adaptive worst-corner loop as SPECTRA (Section~\ref{sec:pvt}).
+A fairness variant, \emph{Gen+TPE-full}, may regenerate until the 12 calls are used and, after a failed PVT
+verification, adds the two worst conditions to the set TPE optimises over (at most eight). The PVT ablation
+\emph{w/o PVT-aware refinement} keeps everything else in SPECTRA but returns a design that fails the grid directly to
+the LLM with the per-condition failure table (Section~\ref{sec:pvt}).
 
 \textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs where methods differ:
 SPECTRA and the AnalogCoder-style agent run two seeds on every T3 task, and every method runs at least one seed on

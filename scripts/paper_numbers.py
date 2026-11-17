@@ -194,7 +194,7 @@ def main():
     if mp.exists():
         d = json.loads(mp.read_text()); Y = d["yield"]
         labm = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "the AnalogCoder-style agent", "genbo": "Gen+TPE",
-                "spectra_pvt_nominal": "TT-only design", "genbo_full": "Gen+TPE-full"}
+                "spectra_pvt_nominal": "SPECTRA w/o PVT-aware refinement", "genbo_full": "Gen+TPE-full"}
         parts = [f"{labm.get(m, m)} {100 * sum(v.values()) / len(v):.0f}\\% ({len(v)} designs, "
                  f"{sum(1 for x in v.values() if x >= 0.9)} with yield $\\geq$90\\%)" for m, v in Y.items() if v]
         out["MCN"] = str(d["n_samples"])
@@ -236,7 +236,7 @@ def main():
     out["AblationText"] = " ".join(txt)
     P = cmp.get("pvt")
     if P and len(P["methods"]) >= 3:
-        lab3 = {"spectra": "SPECTRA", "spectra_pvt_nominal": "designing at TT only and verifying at the end",
+        lab3 = {"spectra": "SPECTRA", "spectra_pvt_nominal": "SPECTRA without PVT-aware refinement (PVT failures go to the LLM as a table)",
                 "genbo_full": "Gen+TPE-full", "spectra_min": "SPECTRA-min", "genbo": "Gen+TPE", "direct": "the AnalogCoder-style agent"}
         def sims(d):
             return f"{d['median_sims_success']:.0f}" if d.get("median_sims_success") is not None else "--"

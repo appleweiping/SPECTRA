@@ -61,7 +61,7 @@ A9. Negative results appear in the intro and experiments: (i) diagnosis does not
 A10. Ablation text names the matched task count and the seeds per task (computed, from the table caption); a component
     is called "necessary"/"essential" only with a paired-test-supported difference; otherwise "contributes" (point
     estimate and W/L) or "no measurable effect".
-A11. PVT section: SPECTRA vs TT-only design vs Gen+TPE-full (and E1 methods) on the same robust subset tasks (seed 0),
+A11. PVT section: SPECTRA vs SPECTRA w/o PVT-aware refinement vs Gen+TPE-full (and E1 methods) on the same robust subset tasks (seed 0),
     with simulation cost; failing-condition statements come only from the generated `\PVTFailSentence` over the file's
     recorded run list (E1 final designs of the four main methods). Fallback: if E3 is incomplete at submission, the
     abstract makes no PVT-strategy claim and the section reports only completed arms.
@@ -83,7 +83,7 @@ A15. Limitations name: schematic level only; template-derived certified tier; 1â
     (Gen+CMA-ES, all-corner strategy, template oracle, third backbone, infeasible-spec controls); mid-E1 harness fix with
     re-run of SPECTRA/SPECTRA-min only; same-family executor and reviewer.
 A16. Scope of dropped hypotheses: no claim that adaptive worst-condition selection is cheaper than all-corner refinement
-    (only vs TT-only design and Gen+TPE-full); no claim that gains hold across backbones (only Haiku vs Opus, one seed);
+    (only vs no PVT-aware refinement and Gen+TPE-full); no claim that gains hold across backbones (only Haiku vs Opus, one seed);
     no infeasibility-detection claim, and the number of SPECTRA runs ending in Declare-Infeasible is reported.
 A17. Baselines are called "AnalogCoder-style" / "AnalogCoder-Pro-style" re-implementations, never the original systems,
     and their shared resources with SPECTRA are listed.

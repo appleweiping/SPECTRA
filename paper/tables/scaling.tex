@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Backbone study on the subset's T3 and robust tasks (0 tasks, seed 0).}
+\caption{Backbone study on the subset's T3 and robust tasks (1 tasks, seed 0).}
 \label{tab:scaling}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -8,10 +8,10 @@
 \toprule
 LLM & Method & Success (\%) [CI] & Calls$^\star$ & \$/run \\
 \midrule
-Opus 5.5 & SPECTRA & nan [nan,nan] & -- & nan \\
-Opus 5.5 & AnalogCoder-style & nan [nan,nan] & -- & nan \\
-Haiku 5.5 & SPECTRA & nan [nan,nan] & -- & nan \\
-Haiku 5.5 & AnalogCoder-style & nan [nan,nan] & -- & nan \\
+Opus 5.5 & SPECTRA & 100 [100,100] & 3.0 & 0.53 \\
+Opus 5.5 & AnalogCoder-style & 100 [100,100] & 4.0 & 0.58 \\
+Haiku 5.5 & SPECTRA & 0 [0,0] & -- & 0.10 \\
+Haiku 5.5 & AnalogCoder-style & 0 [0,0] & -- & 0.20 \\
 \bottomrule
 \end{tabular}
 \end{table}

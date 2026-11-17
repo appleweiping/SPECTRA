@@ -9,7 +9,7 @@ LABEL = {"spectra": "\\textbf{SPECTRA}", "spectra_min": "SPECTRA-min (1 call + i
          "genbo_cmaes": "Gen+CMA-ES", "oracle_cmaes": "\\textit{Oracle topology + CMA-ES}",
          "spectra_nodiag": "\\quad w/o diagnosis", "spectra_nointent": "\\quad w/o intent (raw $W/L$)",
          "spectra_norefine": "\\quad w/o refinement", "spectra_pvt_all": "\\quad PVT: all corners each step",
-         "spectra_pvt_nominal": "\\quad PVT: nominal-only design"}
+         "spectra_pvt_nominal": "\\quad w/o PVT-aware refinement"}
 
 
 def f(x, pct=True):
@@ -21,7 +21,7 @@ def f(x, pct=True):
 SHORT = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE",
          "spectra_nodiag": "w/o diagnosis", "spectra_nointent": "w/o intent", "spectra_norefine": "w/o refinement",
          "spectra_noknow": "w/o cards", "direct_noknow": "AnalogCoder-style w/o cards", "genbo_full": "Gen+TPE-full",
-         "spectra_pvt_nominal": "TT-only design", "spectra_haiku": "SPECTRA (Haiku)", "direct_haiku": "AnalogCoder-style (Haiku)"}
+         "spectra_pvt_nominal": "w/o PVT refinement", "spectra_haiku": "SPECTRA (Haiku)", "direct_haiku": "AnalogCoder-style (Haiku)"}
 
 
 def seeds_text(d):
@@ -102,7 +102,7 @@ def pvt_table(out="pvt.tex"):
     c = _cmp().get("pvt")
     if not c or len(c["methods"]) < 3:
         return
-    lab = {"spectra": "\\textbf{SPECTRA} (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad TT-only design, verify at end",
+    lab = {"spectra": "\\textbf{SPECTRA} (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad w/o PVT-aware refinement",
            "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE (3 fixed corners)",
            "genbo_full": "Gen+TPE-full (12 regen., adaptive)"}
     yp = ROOT / "results" / "mc_yield.json"
