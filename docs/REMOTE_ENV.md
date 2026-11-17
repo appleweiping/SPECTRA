@@ -20,4 +20,5 @@ through `SPECTRA_MODEL` but default to this exact ID and refuse to run without `
 The gateway does not publish a USD tariff for this model. Runs therefore record input/output token counts and leave
 `cost_usd` at zero unless the operator supplies the two `SPECTRA_OPENAI_*_PRICE_USD_PER_MILLION` overrides.
 The only admissible benchmark backbone for this handoff is GPT-6.1-sol; results from other model IDs are not part of
-the experiment chain.
+the experiment chain. A fresh server preflight on 2026-11-17 found `gpt-6.1-sol` in `/models` and a minimal chat
+request returned `OK.` with the gateway reporting `gpt-6.1-sol`.
