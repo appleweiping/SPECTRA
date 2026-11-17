@@ -1,0 +1,1 @@
+{"case": "csring5_1", "task": "vco-01", "template": "csring5", "truth": "Mp0", "class": "miswire_gate", "failing": ["tuning_ratio", "swing"], "rule": ["Mb2", "Mq0", "Mn2"], "raw": ["Mn0", "Mp0", "Mn4"], "raw_cost": 0.0014577000000000001, "spectra": ["Mp0", "Mq0", "Mn2"], "spectra_cost": 0.0019213}

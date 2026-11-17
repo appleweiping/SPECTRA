@@ -1,0 +1,16 @@
+{
+  "backend": "claude-code",
+  "tool": "claude -p",
+  "requested_model": "claude-fable-5-1",
+  "reported_models": [
+    "claude-fable-5-1"
+  ],
+  "executor_model": "claude-opus-5-5",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "status": "ok",
+  "seconds": 275.7,
+  "skill": "paper-writing",
+  "tools": "Read,Grep,Glob",
+  "cwd": "/home/user/spectra"
+}

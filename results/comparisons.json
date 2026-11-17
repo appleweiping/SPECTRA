@@ -1,52 +1,55 @@
 {
  "ablation_subset": {
-  "n_tasks": 5,
+  "n_tasks": 8,
   "tasks": [
+   "amp-04",
    "opamp-05",
    "opamp-06",
+   "opamp_app-08",
    "ref-04",
+   "schmitt-03",
    "tia-02",
    "tia-03"
   ],
   "ref": "spectra",
   "methods": {
    "spectra": {
-    "success": 0.8,
+    "success": 0.875,
     "ci95": [
-     0.4,
+     0.625,
      1.0
     ],
-    "n_runs": 13,
+    "n_runs": 16,
     "seeds": [
      1,
      3
     ],
     "median_calls_success": 4.0,
     "median_sims_success": 11.0,
-    "mean_sims": 73.15384615384616,
-    "mean_cost_usd": 0.5086999999999999,
-    "mean_tokens": 39189.692307692305
+    "mean_sims": 71.75,
+    "mean_cost_usd": 0.54078125,
+    "mean_tokens": 40587.875
    },
    "spectra_nodiag": {
-    "success": 1.0,
+    "success": 0.875,
     "ci95": [
-     1.0,
+     0.625,
      1.0
     ],
-    "n_runs": 9,
+    "n_runs": 16,
     "seeds": [
      1,
-     2
+     3
     ],
     "median_calls_success": 3.0,
-    "median_sims_success": 6.0,
-    "mean_sims": 41.111111111111114,
-    "mean_cost_usd": 0.4783888888888889,
-    "mean_tokens": 36316.444444444445,
+    "median_sims_success": 14.5,
+    "mean_sims": 113.0,
+    "mean_cost_usd": 0.59355,
+    "mean_tokens": 44713.4375,
     "vs_ref": {
-     "n_tasks": 5,
-     "mean_diff": -0.2,
-     "wins": 0,
+     "n_tasks": 8,
+     "mean_diff": 0.0,
+     "wins": 1,
      "losses": 1,
      "p_sign": 1.0,
      "p_perm": 1.0
@@ -58,19 +61,19 @@
      1.0,
      1.0
     ],
-    "n_runs": 9,
+    "n_runs": 16,
     "seeds": [
      1,
-     2
+     3
     ],
     "median_calls_success": 3.0,
-    "median_sims_success": 11.0,
-    "mean_sims": 84.44444444444444,
-    "mean_cost_usd": 0.4639,
-    "mean_tokens": 33016.666666666664,
+    "median_sims_success": 18.5,
+    "mean_sims": 103.8125,
+    "mean_cost_usd": 0.563175,
+    "mean_tokens": 39144.9375,
     "vs_ref": {
-     "n_tasks": 5,
-     "mean_diff": -0.2,
+     "n_tasks": 8,
+     "mean_diff": -0.125,
      "wins": 0,
      "losses": 1,
      "p_sign": 1.0,
@@ -78,54 +81,109 @@
     }
    },
    "spectra_min": {
-    "success": 0.7999999999999999,
+    "success": 0.75,
     "ci95": [
-     0.6666666666666666,
-     0.9333333333333332
+     0.5,
+     0.9166666666666666
     ],
-    "n_runs": 13,
+    "n_runs": 16,
     "seeds": [
      1,
      3
     ],
     "median_calls_success": 2.0,
-    "median_sims_success": 72.0,
-    "mean_sims": 136.3846153846154,
-    "mean_cost_usd": 0.2782307692307692,
-    "mean_tokens": 20325.384615384617,
+    "median_sims_success": 54.5,
+    "mean_sims": 150.0625,
+    "mean_cost_usd": 0.2760625,
+    "mean_tokens": 20279.375,
     "vs_ref": {
-     "n_tasks": 5,
-     "mean_diff": 2.2204460492503132e-17,
-     "wins": 3,
+     "n_tasks": 8,
+     "mean_diff": 0.12500000000000003,
+     "wins": 4,
      "losses": 1,
-     "p_sign": 0.625,
-     "p_perm": 1.0
+     "p_sign": 0.375,
+     "p_perm": 0.62298
     }
    },
    "genbo": {
-    "success": 0.6666666666666666,
+    "success": 0.41666666666666663,
     "ci95": [
-     0.3333333333333333,
-     0.9333333333333332
+     0.125,
+     0.7083333333333333
     ],
-    "n_runs": 13,
+    "n_runs": 16,
     "seeds": [
      1,
      3
     ],
     "median_calls_success": 1.0,
     "median_sims_success": 42.5,
-    "mean_sims": 97.46153846153847,
-    "mean_cost_usd": 0.15157692307692308,
-    "mean_tokens": 10787.384615384615,
+    "mean_sims": 128.9375,
+    "mean_cost_usd": 0.18024375,
+    "mean_tokens": 12439.6875,
     "vs_ref": {
-     "n_tasks": 5,
-     "mean_diff": 0.13333333333333336,
-     "wins": 2,
+     "n_tasks": 8,
+     "mean_diff": 0.45833333333333337,
+     "wins": 5,
      "losses": 0,
-     "p_sign": 0.5,
-     "p_perm": 0.49925
+     "p_sign": 0.0625,
+     "p_perm": 0.06152
     }
+   },
+   "direct": {
+    "success": 0.9583333333333333,
+    "ci95": [
+     0.875,
+     1.0
+    ],
+    "n_runs": 16,
+    "seeds": [
+     1,
+     3
+    ],
+    "median_calls_success": 3.0,
+    "median_sims_success": 4.0,
+    "mean_sims": 23.25,
+    "mean_cost_usd": 0.6386062499999999,
+    "mean_tokens": 40421.0625,
+    "vs_ref": {
+     "n_tasks": 8,
+     "mean_diff": -0.08333333333333333,
+     "wins": 1,
+     "losses": 1,
+     "p_sign": 1.0,
+     "p_perm": 1.0
+    }
+   }
+  }
+ },
+ "ablation_t3": {
+  "n_tasks": 5,
+  "tasks": [
+   "amp-04",
+   "opamp-05",
+   "opamp-06",
+   "tia-02",
+   "tia-03"
+  ],
+  "ref": "spectra",
+  "methods": {
+   "spectra": {
+    "success": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "n_runs": 13,
+    "seeds": [
+     1,
+     3
+    ],
+    "median_calls_success": 4.0,
+    "median_sims_success": 11.0,
+    "mean_sims": 28.615384615384617,
+    "mean_cost_usd": 0.507523076923077,
+    "mean_tokens": 38658.92307692308
    },
    "direct": {
     "success": 0.9333333333333332,
@@ -140,66 +198,12 @@
     ],
     "median_calls_success": 3.5,
     "median_sims_success": 3.5,
-    "mean_sims": 21.153846153846153,
-    "mean_cost_usd": 0.6837230769230769,
-    "mean_tokens": 43727.07692307692,
+    "mean_sims": 3.769230769230769,
+    "mean_cost_usd": 0.6696076923076922,
+    "mean_tokens": 42791.153846153844,
     "vs_ref": {
      "n_tasks": 5,
-     "mean_diff": -0.13333333333333333,
-     "wins": 1,
-     "losses": 1,
-     "p_sign": 1.0,
-     "p_perm": 1.0
-    }
-   }
-  }
- },
- "ablation_t3": {
-  "n_tasks": 4,
-  "tasks": [
-   "opamp-05",
-   "opamp-06",
-   "tia-02",
-   "tia-03"
-  ],
-  "ref": "spectra",
-  "methods": {
-   "spectra": {
-    "success": 1.0,
-    "ci95": [
-     1.0,
-     1.0
-    ],
-    "n_runs": 12,
-    "seeds": [
-     3,
-     3
-    ],
-    "median_calls_success": 4.0,
-    "median_sims_success": 11.0,
-    "mean_sims": 30.166666666666668,
-    "mean_cost_usd": 0.5058416666666666,
-    "mean_tokens": 38860.583333333336
-   },
-   "direct": {
-    "success": 0.9166666666666666,
-    "ci95": [
-     0.7499999999999999,
-     1.0
-    ],
-    "n_runs": 12,
-    "seeds": [
-     3,
-     3
-    ],
-    "median_calls_success": 3.0,
-    "median_sims_success": 3.0,
-    "mean_sims": 3.75,
-    "mean_cost_usd": 0.6768,
-    "mean_tokens": 43362.5,
-    "vs_ref": {
-     "n_tasks": 4,
-     "mean_diff": 0.08333333333333334,
+     "mean_diff": 0.06666666666666668,
      "wins": 1,
      "losses": 0,
      "p_sign": 1.0,
@@ -209,100 +213,104 @@
   }
  },
  "pvt": {
-  "n_tasks": 2,
+  "n_tasks": 6,
   "tasks": [
+   "filter-07",
+   "latch-05",
+   "opamp_app-08",
    "ref-04",
+   "schmitt-03",
    "vco-06"
   ],
   "ref": "spectra",
   "methods": {
    "spectra": {
-    "success": 0.5,
+    "success": 0.8333333333333334,
     "ci95": [
-     0.0,
+     0.5,
      1.0
     ],
-    "n_runs": 2,
+    "n_runs": 6,
     "seeds": [
      1,
      1
     ],
-    "median_calls_success": 1.0,
+    "median_calls_success": 2.0,
     "median_sims_success": 46.0,
-    "mean_sims": 317.5,
-    "mean_cost_usd": 0.3763,
-    "mean_tokens": 28814.5
+    "mean_sims": 193.33333333333334,
+    "mean_cost_usd": 0.45825000000000005,
+    "mean_tokens": 33129.0
    },
    "spectra_min": {
-    "success": 1.0,
+    "success": 0.8333333333333334,
     "ci95": [
-     1.0,
+     0.5,
      1.0
     ],
-    "n_runs": 2,
+    "n_runs": 6,
     "seeds": [
      1,
      1
     ],
-    "median_calls_success": 1.5,
-    "median_sims_success": 122.5,
-    "mean_sims": 122.5,
-    "mean_cost_usd": 0.28400000000000003,
-    "mean_tokens": 18330.5,
+    "median_calls_success": 2.0,
+    "median_sims_success": 121.0,
+    "mean_sims": 191.83333333333334,
+    "mean_cost_usd": 0.23356666666666667,
+    "mean_tokens": 17358.166666666668,
     "vs_ref": {
-     "n_tasks": 2,
-     "mean_diff": -0.5,
-     "wins": 0,
+     "n_tasks": 6,
+     "mean_diff": 0.0,
+     "wins": 1,
      "losses": 1,
      "p_sign": 1.0,
      "p_perm": 1.0
     }
    },
    "genbo": {
-    "success": 0.0,
+    "success": 0.16666666666666666,
     "ci95": [
      0.0,
-     0.0
+     0.5
     ],
-    "n_runs": 2,
+    "n_runs": 6,
     "seeds": [
      1,
      1
     ],
-    "median_calls_success": null,
-    "median_sims_success": null,
-    "mean_sims": 399.0,
-    "mean_cost_usd": 0.2965,
-    "mean_tokens": 19674.0,
+    "median_calls_success": 1.0,
+    "median_sims_success": 48.0,
+    "mean_sims": 273.0,
+    "mean_cost_usd": 0.2523,
+    "mean_tokens": 16781.166666666668,
     "vs_ref": {
-     "n_tasks": 2,
-     "mean_diff": 0.5,
-     "wins": 1,
+     "n_tasks": 6,
+     "mean_diff": 0.6666666666666666,
+     "wins": 4,
      "losses": 0,
-     "p_sign": 1.0,
-     "p_perm": 1.0
+     "p_sign": 0.125,
+     "p_perm": 0.12403
     }
    },
    "direct": {
-    "success": 1.0,
+    "success": 0.8333333333333334,
     "ci95": [
-     1.0,
+     0.5,
      1.0
     ],
-    "n_runs": 2,
+    "n_runs": 6,
     "seeds": [
      1,
      1
     ],
-    "median_calls_success": 4.5,
-    "median_sims_success": 139.0,
-    "mean_sims": 139.0,
-    "mean_cost_usd": 0.5790500000000001,
-    "mean_tokens": 36672.0,
+    "median_calls_success": 3.0,
+    "median_sims_success": 48.0,
+    "mean_sims": 176.83333333333334,
+    "mean_cost_usd": 0.5405333333333333,
+    "mean_tokens": 34363.333333333336,
     "vs_ref": {
-     "n_tasks": 2,
-     "mean_diff": -0.5,
-     "wins": 0,
+     "n_tasks": 6,
+     "mean_diff": 0.0,
+     "wins": 1,
      "losses": 1,
      "p_sign": 1.0,
      "p_perm": 1.0
@@ -311,45 +319,47 @@
   }
  },
  "scaling": {
-  "n_tasks": 0,
-  "tasks": [],
+  "n_tasks": 1,
+  "tasks": [
+   "amp-04"
+  ],
   "ref": "spectra",
   "methods": {
    "spectra": {
-    "success": NaN,
+    "success": 1.0,
     "ci95": [
-     NaN,
-     NaN
+     1.0,
+     1.0
     ],
-    "n_runs": 0,
+    "n_runs": 1,
     "seeds": [
-     0,
-     0
+     1,
+     1
     ],
-    "median_calls_success": null,
-    "median_sims_success": null,
-    "mean_sims": NaN,
-    "mean_cost_usd": NaN,
-    "mean_tokens": NaN
+    "median_calls_success": 3.0,
+    "median_sims_success": 10.0,
+    "mean_sims": 10.0,
+    "mean_cost_usd": 0.5277,
+    "mean_tokens": 36239.0
    },
    "direct": {
-    "success": NaN,
+    "success": 1.0,
     "ci95": [
-     NaN,
-     NaN
+     1.0,
+     1.0
     ],
-    "n_runs": 0,
+    "n_runs": 1,
     "seeds": [
-     0,
-     0
+     1,
+     1
     ],
-    "median_calls_success": null,
-    "median_sims_success": null,
-    "mean_sims": NaN,
-    "mean_cost_usd": NaN,
-    "mean_tokens": NaN,
+    "median_calls_success": 4.0,
+    "median_sims_success": 4.0,
+    "mean_sims": 4.0,
+    "mean_cost_usd": 0.5833,
+    "mean_tokens": 35935.0,
     "vs_ref": {
-     "n_tasks": 0,
+     "n_tasks": 1,
      "mean_diff": 0.0,
      "wins": 0,
      "losses": 0,
@@ -358,50 +368,50 @@
     }
    },
    "spectra_haiku": {
-    "success": NaN,
+    "success": 0.0,
     "ci95": [
-     NaN,
-     NaN
+     0.0,
+     0.0
     ],
-    "n_runs": 0,
+    "n_runs": 2,
     "seeds": [
-     0,
-     0
+     2,
+     2
     ],
     "median_calls_success": null,
     "median_sims_success": null,
-    "mean_sims": NaN,
-    "mean_cost_usd": NaN,
-    "mean_tokens": NaN,
+    "mean_sims": 92.0,
+    "mean_cost_usd": 0.1022,
+    "mean_tokens": 250584.5,
     "vs_ref": {
-     "n_tasks": 0,
-     "mean_diff": 0.0,
-     "wins": 0,
+     "n_tasks": 1,
+     "mean_diff": 1.0,
+     "wins": 1,
      "losses": 0,
      "p_sign": 1.0,
      "p_perm": 1.0
     }
    },
    "direct_haiku": {
-    "success": NaN,
+    "success": 0.0,
     "ci95": [
-     NaN,
-     NaN
+     0.0,
+     0.0
     ],
-    "n_runs": 0,
+    "n_runs": 2,
     "seeds": [
-     0,
-     0
+     2,
+     2
     ],
     "median_calls_success": null,
     "median_sims_success": null,
-    "mean_sims": NaN,
-    "mean_cost_usd": NaN,
-    "mean_tokens": NaN,
+    "mean_sims": 11.5,
+    "mean_cost_usd": 0.19665,
+    "mean_tokens": 412032.5,
     "vs_ref": {
-     "n_tasks": 0,
-     "mean_diff": 0.0,
-     "wins": 0,
+     "n_tasks": 1,
+     "mean_diff": 1.0,
+     "wins": 1,
      "losses": 0,
      "p_sign": 1.0,
      "p_perm": 1.0
@@ -409,7 +419,7 @@
    }
   },
   "haiku_spectra_vs_direct": {
-   "n_tasks": 0,
+   "n_tasks": 1,
    "mean_diff": 0.0,
    "wins": 0,
    "losses": 0,
