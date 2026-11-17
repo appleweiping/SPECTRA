@@ -1,10 +1,10 @@
-"""Failure modes of SPECTRA's failed E1 runs (common task set of the four main methods).
+"""Failure modes of SPECTRA's failed main-experiment runs (common task set of the four main methods).
 
 For each failed run: robust or nominal, LLM calls and simulations used, the simulations spent inside the PVT loop
 (refinement on the active condition set + full 45-condition verifications), the number of full verifications, and
 whether the worst-case PVT violation stalled (no decrease between consecutive verifications). Also lists, per
 baseline, the primary-endpoint tasks on which SPECTRA's per-task success rate is lower. Writes
-results/E1_spectra_failure_modes.json.
+ ``results/{experiment}_spectra_failure_modes.json``.
 
 python -m scripts.spectra_failures
 """
@@ -22,6 +22,18 @@ def base_method(name):
     return str(name).split("@", 1)[0]
 
 
+def raw_run_file(exp, method, task, seed):
+    """Find a run in either ``method`` or ``method@model`` directories."""
+    root = ROOT / "results" / "raw" / exp
+    for method_dir in sorted(root.glob(f"{method}*")):
+        if not method_dir.is_dir() or base_method(method_dir.name) != method:
+            continue
+        path = method_dir / task / f"{seed}.json"
+        if path.exists():
+            return path
+    return None
+
+
 def main(exp=None):
     exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1g")
     runs = load_common(exp, METHODS)
@@ -29,11 +41,10 @@ def main(exp=None):
     for r in runs:
         if r["method"] != "spectra" or r["success"]:
             continue
-        method_dir = next((p for p in (ROOT / "results/raw" / exp).glob("spectra*")
-                           if p.is_dir() and base_method(p.name) == "spectra"), None)
-        if method_dir is None:
+        path = raw_run_file(exp, "spectra", r["task"], r["seed"])
+        if path is None:
             continue
-        d = json.loads((method_dir / r["task"] / f"{r['seed']}.json").read_text())
+        d = json.loads(path.read_text())
         ev = d.get("events", [])
         ver = [e for e in ev if e.get("kind") == "pvt_verify"]
         pvt_sims, prev = 0, 0
@@ -61,7 +72,7 @@ def main(exp=None):
         losses[b] = sorted(t for t, d in per_task.items()
                            if d.get(b) and sum(d["spectra"]) / len(d["spectra"]) < sum(d[b]) / len(d[b]))
     fam = {r["task"]: r["family"] for r in runs}
-    out = {"n_failed_runs": len(fails), "n_failed_robust": len(rob), "n_failed_nominal": len(fails) - len(rob),
+    out = {"experiment": exp, "n_failed_runs": len(fails), "n_failed_robust": len(rob), "n_failed_nominal": len(fails) - len(rob),
            "robust_stalled": sum(f["pvt_stalled"] for f in rob),
            "robust_median_pvt_sims": median([f["pvt_sims"] for f in rob]) if rob else None,
            "robust_median_calls": median([f["calls"] for f in rob]) if rob else None,

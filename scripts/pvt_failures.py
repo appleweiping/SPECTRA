@@ -1,9 +1,12 @@
 """Which PVT conditions break designs that pass at TT but fail the 45-condition grid.
 
-Pools the final designs of the four E1 methods (SPECTRA, SPECTRA-min, AnalogCoder-style, Gen+TPE) on robust tasks and
-records exactly which runs were pooled. Writes results/pvt_failure_conditions.json.
+Pools the final designs of the four main methods on robust tasks and records
+exactly which runs were pooled.  The experiment defaults to ``E1g`` and can be
+overridden by a positional argument or ``SPECTRA_MAIN_EXP``.  This keeps the
+analysis on the GPT namespace while retaining compatibility with legacy E1
+directories.  Writes ``results/pvt_failure_conditions.json``.
 """
-import json, glob, collections, os, sys
+import json, collections, os
 from spectra.paths import ROOT
 
 METHODS = ("spectra", "spectra_min", "direct", "genbo")
@@ -13,20 +16,37 @@ def base_method(name):
     return str(name).split("@", 1)[0]
 
 
+def run_files(exp):
+    """Yield ``(base_method, path)`` for legacy and method@model run trees."""
+    root = ROOT / "results" / "raw" / exp
+    if not root.exists():
+        return
+    for method_dir in sorted(root.iterdir()):
+        if not method_dir.is_dir():
+            continue
+        method = base_method(method_dir.name)
+        if method not in METHODS:
+            continue
+        for task_dir in sorted(method_dir.iterdir()):
+            if not task_dir.is_dir():
+                continue
+            yield from ((method, path) for path in sorted(task_dir.glob("s*.json")))
+
+
 def main(exp=None):
     exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1g")
     c = collections.Counter(); runs = []
     per_design = collections.Counter()
-    for f in sorted(glob.glob(str(ROOT / "results/raw" / exp / "*/*/s*.json"))):
-        method = base_method(f.replace("\\", "/").split("/")[-3])
-        if method not in METHODS:
-            continue
-        r = json.load(open(f)); v = r.get("verify", {})
-        if r.get("budget_sims", 0) > 600:
+    for method, f in run_files(exp):
+        with f.open() as fh:
+            r = json.load(fh)
+        v = r.get("verify", {})
+        budget = r.get("budget_sims")
+        if budget is not None and budget > 600:
             continue
         if r.get("task_meta", {}).get("robust") and v.get("tt_pass") and not v.get("pvt_pass"):
             conds = v.get("pvt_fail_conds", [])
-            runs.append(f"{method}/{f.split('/')[-2]}/{f.split('/')[-1][:-5]}")
+            runs.append(f"{method}/{f.parent.name}/{f.stem}")
             for cn in conds:
                 c[cn] += 1
             parts = [cn.split("_")[:3] for cn in conds]
