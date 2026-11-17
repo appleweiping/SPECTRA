@@ -12,10 +12,11 @@ intent-space CMA-ES with the whole budget and SPECTRA's PVT loop, but no diagnos
 A fairness variant, \emph{Gen+TPE-full}, may regenerate until the 12 calls are used and closes PVT with the same
 adaptive worst-corner loop as SPECTRA (Section~\ref{sec:pvt}).
 
-\textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs on the
-primary endpoint: SPECTRA and the AnalogCoder-style agent run at least 2 seeds on every T3 and robust task, the
-simulation-heavy Gen+TPE and SPECTRA-min at least 1, and every method at least 1 seed on the saturated T1/T2/designer
-tiers (additional completed seeds are kept and averaged per task). Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
+\textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs where methods differ:
+SPECTRA and the AnalogCoder-style agent run two seeds on every T3 task, and every method runs at least one seed on
+every other task, including the robust tasks, whose runs cost about ten times more simulations (seeds completed
+earlier are kept and averaged per task). Robust runs started under an earlier cap of 1200 condition-evaluations
+are scored by truncation at 600---success only if reached within 600---for every method. Success is decided by re-verification outside the agent (Section~\ref{sec:bench}).
 The pre-registered primary endpoint is success on near-frontier (T3) and robust tasks. Confidence intervals are 95\%
 cluster bootstraps over tasks; paired comparisons use per-task success rates with an exact sign test and a paired
 permutation test, Holm-corrected across baselines.
