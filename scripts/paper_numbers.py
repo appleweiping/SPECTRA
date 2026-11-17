@@ -37,13 +37,13 @@ def normalize_pair_keys(d):
 
 
 def main(main_exp=None, e4_exp=None, e4_alt_exp=None, e4_tests_name=None, primary_tasks=None):
-    main_exp = main_exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
-    e4_exp = e4_exp or os.environ.get("SPECTRA_E4_EXP", "E4")
-    e4_alt_exp = e4_alt_exp if e4_alt_exp is not None else os.environ.get("SPECTRA_E4_ALT_EXP", "E4_haiku")
-    e4_tests_name = e4_tests_name or os.environ.get("SPECTRA_E4_TESTS", "E4_tests")
+    main_exp = main_exp or os.environ.get("SPECTRA_MAIN_EXP", "E1g")
+    e4_exp = e4_exp or os.environ.get("SPECTRA_E4_EXP", "E4g")
+    e4_alt_exp = e4_alt_exp if e4_alt_exp is not None else os.environ.get("SPECTRA_E4_ALT_EXP", "")
+    e4_tests_name = e4_tests_name or os.environ.get("SPECTRA_E4_TESTS", "E4g_tests")
     primary_tasks = primary_tasks or os.environ.get("SPECTRA_PRIMARY_TASKS", "E1_primary.jsonl")
-    e4_main_key = os.environ.get("SPECTRA_E4_MAIN_KEY", "opus" if e4_exp == "E4" else "main")
-    e4_alt_key = os.environ.get("SPECTRA_E4_ALT_KEY", "haiku" if e4_alt_exp == "E4_haiku" else "alternate")
+    e4_main_key = os.environ.get("SPECTRA_E4_MAIN_KEY", "main")
+    e4_alt_key = os.environ.get("SPECTRA_E4_ALT_KEY", "alternate")
     out = {}
     bench = [json.loads(l) for l in open(ROOT / "data/bench/tasks.jsonl")] if (ROOT / "data/bench/tasks.jsonl").exists() else []
     des = [json.loads(l) for l in open(ROOT / "data/bench/designer_tasks.jsonl")] if (ROOT / "data/bench/designer_tasks.jsonl").exists() else []

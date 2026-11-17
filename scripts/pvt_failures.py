@@ -14,7 +14,7 @@ def base_method(name):
 
 
 def main(exp=None):
-    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
+    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1g")
     c = collections.Counter(); runs = []
     per_design = collections.Counter()
     for f in sorted(glob.glob(str(ROOT / "results/raw" / exp / "*/*/s*.json"))):

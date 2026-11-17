@@ -62,10 +62,10 @@ def _strip_model_suffix(runs):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--e1", default=os.environ.get("SPECTRA_MAIN_EXP", "E1"))
-    ap.add_argument("--e2", default=os.environ.get("SPECTRA_E2_EXP", "E2"))
-    ap.add_argument("--e3", default=os.environ.get("SPECTRA_E3_EXP", "E3"))
-    ap.add_argument("--e5", default=os.environ.get("SPECTRA_E5_EXP", "E5"))
+    ap.add_argument("--e1", default=os.environ.get("SPECTRA_MAIN_EXP", "E1g"))
+    ap.add_argument("--e2", default=os.environ.get("SPECTRA_E2_EXP", "E2g"))
+    ap.add_argument("--e3", default=os.environ.get("SPECTRA_E3_EXP", "E3g"))
+    ap.add_argument("--e5", default=os.environ.get("SPECTRA_E5_EXP", "E5g"))
     ap.add_argument("--strip-model-suffix", action="store_true",
                     default=os.environ.get("SPECTRA_STRIP_MODEL_SUFFIX", "").lower() in {"1", "true", "yes"})
     a = ap.parse_args()

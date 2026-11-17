@@ -12,7 +12,7 @@ def base_method(name):
     return str(name).split("@", 1)[0]
 
 
-def main(exp="E1"):
+def main(exp="E1g"):
     from scripts.analyze import load_common
     keep = {(r["method"], r["task"], r["seed"]) for r in load_common(exp, METHODS)}
     tasks = {}

@@ -53,10 +53,11 @@ by the ablation in Section~\ref{sec:ablation}. (E4 evaluates element-level evide
 the agent itself sees intent-variable sensitivities and prediction discrepancies of its own program.)
 \IfFileExists{tables/fault.tex}{\input{tables/fault}}{}
 
-\subsection{Backbone Scaling and Cost}
+\subsection{Backbone Scope and Cost}
 \label{sec:scaling}
 \IfFileExists{tables/scaling.tex}{\input{tables/scaling}}{}
-\ScalingText{} The recorded LLM-cost field per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
+\ScalingText{} The E5g arm reuses GPT-6.1-sol on a matched subset as a replication check; it is not a cross-backbone
+comparison. The recorded LLM-cost field per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
 agent, \GenboCost{} for Gen+TPE and \SpectraMinCost{} for SPECTRA-min. The GPT-6.1-sol gateway publishes no USD
 tariff, so these values are zero-valued availability sentinels unless price overrides are supplied; token counts are
 the accountable usage measure. SPECTRA's successful runs need a median of

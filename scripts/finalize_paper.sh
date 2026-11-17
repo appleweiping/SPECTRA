@@ -25,7 +25,7 @@ python3 -m scripts.prediction_accuracy "$MAIN_EXP" spectra
 python3 -m scripts.e4_tests --main "$E4_EXP" --alt "$E4_ALT_EXP" --main-key main --output "$E4_TESTS"
 python3 -m scripts.make_tables
 python3 -m scripts.bench_stats
-python3 -m scripts.make_figures
+python3 -m scripts.make_figures "$MAIN_EXP"
 python3 -m scripts.paper_numbers --main-exp "$MAIN_EXP" --e4-exp "$E4_EXP" --e4-alt-exp "$E4_ALT_EXP" --e4-tests "$E4_TESTS"
 cd paper && latexmk -pdf -interaction=nonstopmode main.tex
 pdfinfo main.pdf | grep Pages

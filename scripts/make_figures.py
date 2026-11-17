@@ -108,7 +108,7 @@ def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
 
 
 if __name__ == "__main__":
-    exp = sys.argv[1] if len(sys.argv) > 1 else "E1"
+    exp = sys.argv[1] if len(sys.argv) > 1 else "E1g"
     ms = sys.argv[2].split(",") if len(sys.argv) > 2 else ["spectra", "spectra_min", "direct", "genbo"]
     tier_bars(exp, ms, f"{exp}_tiers.pdf"); anytime(exp, ms, f"{exp}_anytime.pdf")
     anytime2(exp, ms, f"{exp}_anytime2.pdf"); family_heatmap(exp, ms, f"{exp}_families.pdf")

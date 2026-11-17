@@ -1,7 +1,8 @@
 """Paired exact tests for E4 fault localisation.
 
-The default invocation preserves the historical Opus/Haiku output schema.  A
-GPT run can pass a different main/alternate directory and output file, e.g.::
+The default invocation targets the GPT-6.1-sol E4g case pool.  A separate
+main/alternate directory and output file can be passed for an explicitly
+recorded alternate backbone, e.g.::
 
     python -m scripts.e4_tests --main E4g --alt '' --main-key main \
         --output E4g_tests
@@ -32,7 +33,7 @@ def test(d):
             "only_raw_correct": only_raw, "only_diag_correct": only_diag, "p_mcnemar_exact": float(p)}
 
 
-def main(main_exp="E4", alt_exp="E4_haiku", output="E4_tests", main_key=None, alt_key=None):
+def main(main_exp="E4g", alt_exp="", output="E4g_tests", main_key=None, alt_key=None):
     legacy = main_exp == "E4" and alt_exp == "E4_haiku" and output == "E4_tests"
     main_key = main_key or ("opus" if legacy else "main")
     alt_key = alt_key or ("haiku" if legacy else "alternate")
@@ -46,9 +47,9 @@ def main(main_exp="E4", alt_exp="E4_haiku", output="E4_tests", main_key=None, al
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--main", default="E4")
-    ap.add_argument("--alt", default="E4_haiku", help="empty string disables the alternate arm")
-    ap.add_argument("--output", default="E4_tests")
+    ap.add_argument("--main", default="E4g")
+    ap.add_argument("--alt", default="", help="empty string disables the alternate arm")
+    ap.add_argument("--output", default="E4g_tests")
     ap.add_argument("--main-key")
     ap.add_argument("--alt-key")
     a = ap.parse_args()

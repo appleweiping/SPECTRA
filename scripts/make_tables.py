@@ -5,7 +5,7 @@ from pathlib import Path
 from spectra.paths import ROOT
 
 TAB = ROOT / "paper" / "tables"
-LABEL = {"spectra": "\\textbf{SPECTRA}", "spectra_min": "SPECTRA-min (1 call + intent CMA-ES)",
+LABEL = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min (1 call + intent CMA-ES)",
          "direct": "AnalogCoder-style~\\cite{lai2025analogcoder}", "genbo": "Gen+TPE (AnalogCoder-Pro-style)~\\cite{lai2026analogcoderpro}",
          "genbo_cmaes": "Gen+CMA-ES", "oracle_cmaes": "\\textit{Oracle topology + CMA-ES}",
          "spectra_nodiag": "\\quad w/o diagnosis", "spectra_nointent": "\\quad w/o intent (raw $W/L$)",
@@ -22,7 +22,7 @@ def f(x, pct=True):
 SHORT = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE",
          "spectra_nodiag": "w/o diagnosis", "spectra_nointent": "w/o intent", "spectra_norefine": "w/o refinement",
          "spectra_noknow": "w/o cards", "direct_noknow": "AnalogCoder-style w/o cards", "genbo_full": "Gen+TPE-full",
-         "spectra_pvt_nominal": "w/o PVT refinement", "spectra_haiku": "SPECTRA (Haiku)", "direct_haiku": "AnalogCoder-style (Haiku)"}
+         "spectra_pvt_nominal": "w/o PVT refinement"}
 
 
 def base_method(name):
@@ -41,7 +41,7 @@ def seeds_text(d):
 
 
 def main_table(exp=None, out="main.tex"):
-    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
+    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1g")
     summ = json.loads((ROOT / "results" / f"{exp}_summary.json").read_text())
     # `analyze --strip-model-suffix` emits base method names.  Normalize here
     # too so this table remains valid when a summary was generated without the
@@ -55,9 +55,14 @@ def main_table(exp=None, out="main.tex"):
     from scripts.comparisons import seeds_range
     seeds = {m: seeds_range([r for r in runs if r["method"] == m]) for m in methods}
     rows = []
+    best = max((s[m].get("success", float("-inf")) for m in methods), default=float("-inf"))
+    unique_best = sum(abs(s[m].get("success", float("-inf")) - best) < 1e-12 for m in methods) == 1
     for m in methods:
         d = s[m]
-        rows.append(f"{LABEL.get(m, m)} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {f(d.get('tier1'))} & "
+        name = LABEL.get(m, m)
+        if unique_best and abs(d.get("success", float("-inf")) - best) < 1e-12:
+            name = f"\\textbf{{{name}}}"
+        rows.append(f"{name} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {f(d.get('tier1'))} & "
                     f"{f(d.get('tier2'))} & {f(d.get('tier3'))} & {f(d.get('robust'))} & {f(d.get('tierD'))} & "
                     f"{f(d.get('median_calls_success'), False)} & {f(d.get('median_sims_success'), False)} & "
                     f"{d['mean_tokens'] / 1e3:.0f} & {d['mean_cost_usd']:.2f} \\\\")
@@ -92,17 +97,23 @@ def ablation_table(out="ablation.tex"):
     A, B = c.get("ablation_subset"), c.get("ablation_t3")
     if not A or len(A["methods"]) < 3:
         return
-    lab = {"spectra": "\\textbf{SPECTRA}", "spectra_nodiag": "\\quad w/o diagnosis", "spectra_nointent": "\\quad w/o intent (raw $W/L$)",
+    lab = {"spectra": "SPECTRA", "spectra_nodiag": "\\quad w/o diagnosis", "spectra_nointent": "\\quad w/o intent (raw $W/L$)",
            "spectra_min": "\\quad SPECTRA-min", "genbo": "Gen+TPE", "direct": "AnalogCoder-style",
            "spectra_norefine": "\\quad w/o refinement", "spectra_noknow": "\\quad w/o knowledge cards",
            "direct_noknow": "AnalogCoder-style w/o cards"}
     rows = [f"\\multicolumn{{6}}{{@{{}}l}}{{\\emph{{(a) stratified subset, {A['n_tasks']} tasks}}}} \\\\"]
-    rows += [_row(lab[m], d) for m, d in A["methods"].items()]
+    best_a = max((d.get("success", float("-inf")) for d in A["methods"].values()), default=float("-inf"))
+    unique_a = sum(abs(d.get("success", float("-inf")) - best_a) < 1e-12 for d in A["methods"].values()) == 1
+    rows += [_row((f"\\textbf{{{lab[m]}}}" if unique_a and abs(d.get("success", float("-inf")) - best_a) < 1e-12 else lab[m]), d)
+             for m, d in A["methods"].items()]
     seeds = {m: d["seeds"] for m, d in A["methods"].items()}
     if B and len(B["methods"]) >= 3:
         rows.append("\\midrule")
         rows.append(f"\\multicolumn{{6}}{{@{{}}l}}{{\\emph{{(b) T3 tasks of the subset, {B['n_tasks']} tasks}}}} \\\\")
-        rows += [_row(lab[m], d) for m, d in B["methods"].items()]
+        best_b = max((d.get("success", float("-inf")) for d in B["methods"].values()), default=float("-inf"))
+        unique_b = sum(abs(d.get("success", float("-inf")) - best_b) < 1e-12 for d in B["methods"].values()) == 1
+        rows += [_row((f"\\textbf{{{lab[m]}}}" if unique_b and abs(d.get("success", float("-inf")) - best_b) < 1e-12 else lab[m]), d)
+                 for m, d in B["methods"].items()]
         seeds.update({m: d["seeds"] for m, d in B["methods"].items() if m not in seeds})
     cap = ("Ablations on matched tasks. W/L: tasks on which SPECTRA has a higher/lower success rate than the variant. "
            "Calls/sims: medians over successful runs. Seeds per task: " + seeds_text(seeds) + ".")
@@ -117,16 +128,21 @@ def pvt_table(out="pvt.tex"):
     c = _cmp().get("pvt")
     if not c or len(c["methods"]) < 3:
         return
-    lab = {"spectra": "\\textbf{SPECTRA} (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad w/o PVT-aware refinement",
+    lab = {"spectra": "SPECTRA (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad w/o PVT-aware refinement",
            "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE (3 fixed corners)",
            "genbo_full": "Gen+TPE-full (12 regen., adaptive)"}
     yp = ROOT / "results" / "mc_yield.json"
     my = json.loads(yp.read_text())["yield"] if yp.exists() else {}
     rows = []
+    best = max((d.get("success", float("-inf")) for d in c["methods"].values()), default=float("-inf"))
+    unique_best = sum(abs(d.get("success", float("-inf")) - best) < 1e-12 for d in c["methods"].values()) == 1
     for m, d in c["methods"].items():
+        name = lab[m]
+        if unique_best and abs(d.get("success", float("-inf")) - best) < 1e-12:
+            name = f"\\textbf{{{name}}}"
         ys = [v for k, v in my.get(m, {}).items() if k.split("/")[0] in set(c["tasks"]) and k.endswith("s0")]
         y = f" & {100 * sum(ys) / len(ys):.0f}" if ys else (" & --" if my else "")
-        rows.append(f"{lab[m]} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {_wl(d)} & "
+        rows.append(f"{name} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {_wl(d)} & "
                     f"{f(d['median_sims_success'], False)} & {f(d['mean_sims'], False)}{y} \\\\")
     ycol = " & Yield" if my else ""
     cap = (f"PVT-robust tasks of the subset ({c['n_tasks']} tasks, seed 0; success on all 45 conditions). Sims: "
@@ -141,7 +157,13 @@ def pvt_table(out="pvt.tex"):
 
 def scaling_table(out="scaling.tex"):
     c = _cmp().get("scaling")
+    path = TAB / out
     if not c or not any(m.endswith("_haiku") for m in c["methods"]):
+        # E5g reuses GPT-6.1-sol as a same-backbone replication arm.  It is
+        # not a cross-backbone study; remove historical tables instead of
+        # carrying stale model labels into the GPT paper.
+        if path.exists():
+            path.unlink()
         return
     rows = []
     for m, d in c["methods"].items():
@@ -154,12 +176,12 @@ def scaling_table(out="scaling.tex"):
            "\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}llccc@{}}\n\\toprule\n"
            "LLM & Method & Success (\\%) [CI] & Calls$^\\star$ & Cost$^\\dagger$ \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    (TAB / out).write_text(tex)
+    path.write_text(tex)
 
 
 def fault_table(out="fault.tex"):
-    main_exp = os.environ.get("SPECTRA_E4_EXP", "E4")
-    alt_exp = os.environ.get("SPECTRA_E4_ALT_EXP", "E4_haiku")
+    main_exp = os.environ.get("SPECTRA_E4_EXP", "E4g")
+    alt_exp = os.environ.get("SPECTRA_E4_ALT_EXP", "")
     s = json.loads((ROOT / f"results/{main_exp}_summary.json").read_text())
     hp = ROOT / f"results/{alt_exp}_summary.json"
     h = json.loads(hp.read_text()) if hp.exists() else None
@@ -175,9 +197,9 @@ def fault_table(out="fault.tex"):
         rows.append(f"{nice.get(c, c)} & {s['rule'][c]['n']} & " + " & ".join(cell(d, a, c) for d, a in arms) + " \\\\")
     rows.append("\\midrule")
     rows.append("All & " + str(sum(s['rule'][c]['n'] for c in classes)) + " & " + " & ".join(cell(d, a) for d, a in arms) + " \\\\")
-    default_main_label = "GPT-6.1-sol" if main_exp.lower().endswith("g") else "Opus 5.5"
+    default_main_label = "GPT-6.1-sol"
     main_label = os.environ.get("SPECTRA_E4_MAIN_LABEL", default_main_label)
-    alt_label = os.environ.get("SPECTRA_E4_ALT_LABEL", "Haiku 5.5")
+    alt_label = os.environ.get("SPECTRA_E4_ALT_LABEL", "alternate")
     head = f"Fault class & $n$ & Rules & {main_label}+raw & {main_label}+diag." + (f" & {alt_label}+raw & {alt_label}+diag." if h else "")
     cols = "lc" + "c" * len(arms)
     tex = ("\\begin{table}[t]\n\\centering\n\\caption{Fault localisation accuracy (top-1/top-3, \\%) by injected fault class: "
@@ -191,7 +213,7 @@ def fault_table(out="fault.tex"):
 
 
 if __name__ == "__main__":
-    main_table(os.environ.get("SPECTRA_MAIN_EXP", "E1"))
+    main_table(os.environ.get("SPECTRA_MAIN_EXP", "E1g"))
     fault_table()
     ablation_table()
     pvt_table()

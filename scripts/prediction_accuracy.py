@@ -13,7 +13,7 @@ DBM = {"gain_db", "cmrr_db", "psrr_db", "zt_dbohm", "psrr_1k", "atten_db", "pm"}
 def base_method(name):
     return str(name).split("@", 1)[0]
 
-def main(exp="E1", method="spectra"):
+def main(exp="E1g", method="spectra"):
     tasks = {json.loads(l)["id"]: json.loads(l) for f in ["tasks.jsonl", "designer_tasks.jsonl"]
              for l in open(ROOT / "data/bench" / f)}
     from scripts.analyze import load_common

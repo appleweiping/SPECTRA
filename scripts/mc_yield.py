@@ -26,7 +26,7 @@ def method_dirs(exp, method):
             yield p
 
 
-def main(n=100, e1="E1", e3="E3"):
+def main(n=100, e1="E1g", e3="E3g"):
     n = int(n)
     scope = {e1: SCOPE["E1"], e3: SCOPE["E3"]}
     tasks = {json.loads(l)["id"]: json.loads(l) for f in ["tasks.jsonl", "designer_tasks.jsonl"]
@@ -76,7 +76,7 @@ def main(n=100, e1="E1", e3="E3"):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("n", nargs="?", type=int, default=100)
-    ap.add_argument("--e1", default=os.environ.get("SPECTRA_MAIN_EXP", "E1"))
-    ap.add_argument("--e3", default=os.environ.get("SPECTRA_E3_EXP", "E3"))
+    ap.add_argument("--e1", default=os.environ.get("SPECTRA_MAIN_EXP", "E1g"))
+    ap.add_argument("--e3", default=os.environ.get("SPECTRA_E3_EXP", "E3g"))
     a = ap.parse_args()
     main(a.n, a.e1, a.e3)

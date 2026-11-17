@@ -23,7 +23,7 @@ def base_method(name):
 
 
 def main(exp=None):
-    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1")
+    exp = exp or os.environ.get("SPECTRA_MAIN_EXP", "E1g")
     runs = load_common(exp, METHODS)
     fails = []
     for r in runs:
