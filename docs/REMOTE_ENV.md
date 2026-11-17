@@ -17,3 +17,6 @@ The API environment is held outside the repository at `/root/autodl-tmp/spectra-
 never committed. The configured proxy currently advertises GPT-5.6-sol/GPT-5.6-terra and does not advertise
 `gpt-5-mini`; this is a pending model-selection decision, so experiment scripts keep the model configurable through
 `SPECTRA_MODEL` and refuse to run without `OPENAI_API_KEY`.
+
+Validation: one short `gpt-5.6-sol` request returned `OK`; `gpt-5-mini` was absent from the advertised catalog and a
+direct request returned HTTP 503 from the proxy. No benchmark run was started under the wrong model.
