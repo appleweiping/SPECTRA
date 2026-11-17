@@ -27,6 +27,7 @@ python3 -m scripts.make_tables
 python3 -m scripts.bench_stats
 python3 -m scripts.make_figures "$MAIN_EXP"
 python3 -m scripts.paper_numbers --main-exp "$MAIN_EXP" --e4-exp "$E4_EXP" --e4-alt-exp "$E4_ALT_EXP" --e4-tests "$E4_TESTS"
+python3 -m scripts.write_evidence_manifest --experiments "$MAIN_EXP,$E2_EXP,$E3_EXP,$E4_EXP,$E5_EXP"
 cd paper && latexmk -pdf -interaction=nonstopmode main.tex
 pdfinfo main.pdf | grep Pages
 if grep -Eq "Overfull|undefined" main.log; then
