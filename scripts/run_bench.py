@@ -5,7 +5,7 @@ python -m scripts.run_bench --exp E1g --methods spectra,direct,genbo --seeds 0,1
 Each run -> results/raw/<exp>/<method>/<task_id>/s<seed>.json, including an INDEPENDENT final verification of the
 returned netlist at TT and (for robust tasks) at all 45 PVT conditions (not charged to the method's budget).
 """
-import argparse, json, re, sys, time, traceback
+import argparse, hashlib, json, os, re, subprocess, sys, time, traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -14,6 +14,26 @@ from spectra.agent.common import Budget
 from spectra.sim.evaluate import evaluate, NOMINAL, PVT
 
 RAW = ROOT / "results" / "raw"
+
+
+def _sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def _sha256_text(text: str) -> str:
+    return _sha256_bytes(text.encode("utf-8"))
+
+
+def _ngspice_version() -> str | None:
+    """Return the simulator identity without exposing environment secrets."""
+    binary = os.environ.get("SPECTRA_NGSPICE", "ngspice")
+    try:
+        return subprocess.check_output([binary, "-v"], text=True, stderr=subprocess.STDOUT).strip().splitlines()[0]
+    except (OSError, subprocess.CalledProcessError, IndexError):
+        return None
+
+
+_NGSPICE_VERSION = None
 
 
 def budget_for(task):
@@ -57,16 +77,57 @@ def make_runner(method, model):
 
 def verify(task, netlist):
     if not netlist:
-        return {"tt_pass": False, "pvt_pass": False if task.get("robust") else None, "tt_score": None}
+        return {"tt_pass": False, "pvt_pass": False if task.get("robust") else None, "tt_score": None,
+                "status": "not_evaluated", "errors": ["no final netlist"]}
     ev = evaluate(task, netlist)
     out = {"tt_pass": bool(ev.passed), "tt_score": ev.score, "tt_metrics": ev.summary()["per_cond"].get("tt_27C_1.8V"),
-           "status": ev.status, "errors": ev.errors[:3]}
+           "status": ev.status, "errors": ev.errors[:3], "n_sims": ev.n_sims, "seconds": ev.seconds}
     if task.get("robust"):
         evP = evaluate(task, netlist, conds=PVT)
         out["pvt_pass"] = bool(evP.passed)
         out["pvt_score"] = evP.score
         out["pvt_fail_conds"] = [c for c, chk in evP.checks.items() if not all(v[1] for v in chk.values())]
     return out
+
+
+def _evidence_record(exp, tag, method, task, seed, model, budget, res, verification):
+    """Add an immutable run identity while keeping the historical result schema intact."""
+    task_bytes = (json.dumps(task, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    netlist = res.get("final_netlist")
+    global _NGSPICE_VERSION
+    if _NGSPICE_VERSION is None:
+        _NGSPICE_VERSION = _ngspice_version()
+    execution = verification.get("status")
+    if execution == "not_evaluated":
+        execution_status, collection_status, spec_verdict = "not_started", "absent", "not-evaluated"
+    elif execution == "ok":
+        execution_status = "finished"
+        collection_status = "complete" if verification.get("tt_metrics") is not None else "partial"
+        spec_verdict = "pass" if verification.get("tt_pass") else "failed"
+    else:
+        execution_status, collection_status, spec_verdict = "failed", "partial", "failed"
+    run_id = f"{exp}:{tag}:{task['id']}:s{seed}"
+    input_digest = _sha256_bytes(task_bytes + f"|{model}|{method}|{seed}|{budget.sims}|{budget.llm_calls}".encode())
+    return {
+        "schema": "spectra-run-evidence/v1",
+        "run_id": run_id,
+        "input_digest": input_digest,
+        "task_sha256": _sha256_bytes(task_bytes),
+        "final_netlist_sha256": _sha256_text(netlist) if isinstance(netlist, str) else None,
+        "model": model,
+        "method": method,
+        "seed": seed,
+        "budget": {"llm_calls": budget.llm_calls, "sims": budget.sims},
+        "simulator": _NGSPICE_VERSION,
+        "lifecycle": {
+            "preparation": "frozen",
+            "execution": execution_status,
+            "collection": collection_status,
+            "spec_verdict": spec_verdict,
+            "verification": "independent_outside_agent_budget",
+        },
+        "verification": verification,
+    }
 
 
 def main():
@@ -103,6 +164,7 @@ def main():
         except Exception as e:
             res = {"status": "crash", "error": traceback.format_exc()[-3000:], "final_netlist": None}
         res["verify"] = verify(t, res.get("final_netlist"))
+        res["evidence"] = _evidence_record(a.exp, tag, m, t, s, a.model, budget_for(t), res, res["verify"])
         res["task_meta"] = {"family": t["family"], "tier": t.get("tier"), "robust": t.get("robust", False),
                             "infeasible": t.get("infeasible", False)}
         out.parent.mkdir(parents=True, exist_ok=True)
