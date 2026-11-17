@@ -131,6 +131,18 @@ def main():
             f"low-supply condition; failing conditions by corner are "
             + ", ".join(f"{cn.get(k, k)} {v}" for k, v in d["by_corner"].items())
             + " and by temperature " + ", ".join(f"{tn.get(k, k)} {v}" for k, v in d["by_temp"].items()) + ".")
+    mp = ROOT / "results/mc_yield.json"
+    if mp.exists():
+        d = json.loads(mp.read_text()); Y = d["yield"]
+        labm = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "the AnalogCoder-style agent", "genbo": "Gen+TPE",
+                "spectra_pvt_nominal": "TT-only design", "genbo_full": "Gen+TPE-full"}
+        parts = [f"{labm.get(m, m)} {100 * sum(v.values()) / len(v):.0f}\\% ({len(v)} designs, "
+                 f"{sum(1 for x in v.values() if x >= 0.9)} with yield $\\geq$90\\%)" for m, v in Y.items() if v]
+        out["MCN"] = str(d["n_samples"])
+        out["MCSentence"] = (f"Under {d['n_samples']}-sample mismatch Monte Carlo at TT, the mean yield of the PVT-verified "
+                             "seed-0 designs is " + "; ".join(parts) + ".") if parts else ""
+    else:
+        out["MCSentence"] = ""
     cp = ROOT / "results/comparisons.json"
     cmp = json.loads(cp.read_text()) if cp.exists() else {}
     def wl(d):

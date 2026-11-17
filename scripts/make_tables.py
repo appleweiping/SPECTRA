@@ -105,8 +105,8 @@ def pvt_table(out="pvt.tex"):
     lab = {"spectra": "\\textbf{SPECTRA} (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad TT-only design, verify at end",
            "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE (3 fixed corners)",
            "genbo_full": "Gen+TPE-full (12 regen., adaptive)"}
-    yp = ROOT / "results" / "E1_mc_yield.json"
-    my = json.loads(yp.read_text()) if yp.exists() else {}
+    yp = ROOT / "results" / "mc_yield.json"
+    my = json.loads(yp.read_text())["yield"] if yp.exists() else {}
     rows = []
     for m, d in c["methods"].items():
         ys = [v for k, v in my.get(m, {}).items() if k.split("/")[0] in set(c["tasks"]) and k.endswith("s0")]
