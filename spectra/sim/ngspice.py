@@ -27,16 +27,27 @@ _FLOAT_RE = re.compile(r"^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$")
 # global counter of simulator invocations (for budget accounting)
 SIM_COUNTER = {"calls": 0, "seconds": 0.0}
 import threading as _th
-import fcntl as _fcntl
+try:
+    import fcntl as _fcntl
+except ImportError:  # Windows has no flock; local runs are unsupported for experiments but imports stay usable.
+    _fcntl = None
 import contextlib as _ctx
 _SIM_SEM = _th.BoundedSemaphore(int(os.environ.get("SPECTRA_SIM_CONCURRENCY", os.cpu_count() or 4)))
 _GLOBAL_SLOTS = int(os.environ.get("SPECTRA_GLOBAL_SIM_SLOTS", "5"))     # machine-wide cap across processes
-_SLOT_DIR = "/tmp/spectra_sim_slots"
+_SLOT_DIR = os.path.join(tempfile.gettempdir(), "spectra_sim_slots")
+
+
+def _creationflags() -> int:
+    """Suppress a console window for headless simulator jobs on Windows."""
+    return getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
 
 
 @_ctx.contextmanager
 def _global_slot():
     """Cross-process limit on concurrent ngspice processes (flock on one of N slot files)."""
+    if _fcntl is None:
+        yield
+        return
     os.makedirs(_SLOT_DIR, exist_ok=True)
     while True:
         for i in range(_GLOBAL_SLOTS):
@@ -119,7 +130,7 @@ def run(netlist: str, wrdata_files: tuple = (), timeout: float = 60.0,
         try:
             with _SIM_SEM, _global_slot():
                 p = subprocess.run(["ngspice", "-b", "c.sp"], cwd=d, capture_output=True,
-                                   text=True, timeout=timeout)
+                                   text=True, timeout=timeout, creationflags=_creationflags())
             out = p.stdout + "\n" + p.stderr
         except subprocess.TimeoutExpired as e:
             SIM_COUNTER["calls"] += 1
