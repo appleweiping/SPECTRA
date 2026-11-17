@@ -67,3 +67,11 @@ protocol: 600 condition-evaluations per robust run (~13 full 45-condition verifi
 started under the 1200 cap are scored by truncation (success iff the run succeeded within 600; all methods stop at
 first success, and refinement chunk sizes are identical while more than ~150 evaluations remain), implemented in
 `scripts/analyze.py` (ROBUST_CAP). A deterministic on-disk ngspice result cache makes restarts cheap.
+
+## 2026-11-17 02:35 Final scope (v3)
+Throughput ~36 runs/h left >15 h of work. Final scope: E1 robust (SPECTRA/AnalogCoder-style 2 seeds, Gen+TPE and
+SPECTRA-min 1), E1 T3 (2 seeds / 1 seed), T1/T2/designer: runs already completed (>=1 seed per method). E2: w/o
+diagnosis and w/o intent (2 seeds, 35-task subset); w/o refinement and no-card arms (1 seed, subset T3). E3:
+Gen+TPE with 12 regenerations + adaptive corners, and SPECTRA TT-only design (1 seed, 11 subset robust tasks).
+E5: Haiku 5.5, SPECTRA vs AnalogCoder-style on the subset's T3+robust tasks (1 seed). Gen+CMA-ES, the all-corners
+PVT strategy, the template oracle and Sonnet were dropped for compute and are listed as limitations.
