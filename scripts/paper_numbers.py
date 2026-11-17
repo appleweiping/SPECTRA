@@ -140,7 +140,7 @@ def main(main_exp=None, e4_exp=None, e4_alt_exp=None, e4_tests_name=None, primar
             print(f"WARNING: E4_tests {e4_alt_key} n={tt[e4_alt_key]['n']} != {e4_alt_exp}_summary n_cases={d['n_cases']}", file=sys.stderr)
         if tt and e4_alt_key in tt:
             h = tt[e4_alt_key]
-            label = os.environ.get("SPECTRA_E4_ALT_LABEL", "Haiku~5.5")
+            label = os.environ.get("SPECTRA_E4_ALT_LABEL", "alternate backbone")
             out["FaultHaikuSentence"] = (f"With the {label} model top-1 accuracy is {pct(h['top1_raw'])} with the raw "
                                          f"evidence and {pct(h['top1_diag'])} with the diagnosis ({h['n']} cases; "
                                          f"{h['only_raw_correct']} are solved only with the raw evidence and "
