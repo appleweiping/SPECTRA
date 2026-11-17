@@ -76,3 +76,4 @@ Gen+TPE with 12 regenerations + adaptive corners, and SPECTRA TT-only design (1 
 E5: Haiku 5.5, SPECTRA vs AnalogCoder-style on the subset's T3+robust tasks (1 seed). Gen+CMA-ES, the all-corners
 PVT strategy, the template oracle and Sonnet were dropped for compute and are listed as limitations.
 - 02:55 ordering: seed 0 for all methods on primary tasks first, then seed 1 for SPECTRA/AnalogCoder-style.
+- 03:25 robust tasks: seed 0 only for all methods (seed 1 for SPECTRA/AnalogCoder-style on T3 only).
