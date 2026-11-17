@@ -1,6 +1,9 @@
 # PAPER ACCEPTANCE CONTRACT — SPECTRA (ICCAD)
 
-status: proposed (round 2 revision; reviews: paper/.contract_r1.md, paper/.contract_r2.md)
+status: frozen after 3 negotiation rounds (reviews: paper/.contract_r1.md, .contract_r2.md, .contract_r3.md). Round 3 ended
+`CONTRACT_ACCEPTED: no` with three demands; all three were adopted verbatim below (A3/A9 E4 pool equality, A9 claim rule,
+A7 sign rule), so no item is disputed. The reviewer did not re-confirm (round limit reached); the Phase-6 gate grades
+this version.
 Inputs: NARRATIVE_REPORT.md, paper/ (draft), results/, EXPERIMENT_LOG.md.
 Each assertion is checked against the compiled `paper/main.pdf`, its sources and the named files.
 
@@ -42,13 +45,17 @@ A6. The primary endpoint (T3 ∪ robust) is described as fixed at an interim rev
 A7. Every comparative claim ("SPECTRA beats/outperforms/is more reliable than X") anywhere — abstract, intro,
     experiments, conclusion — is backed by Holm-corrected p < 0.05 on the primary endpoint; otherwise it is a point
     estimate with CI and per-task wins/losses, without "significant", "reliable", "outperforms". `\AbsMainClaim` is
-    emitted by `scripts/paper_numbers.py`, which chooses the significance wording per baseline from the Holm-corrected p.
+    emitted by `scripts/paper_numbers.py`, which chooses the wording per baseline: "significant gain" requires Holm-corrected
+    p < 0.05 and a positive mean per-task difference for SPECTRA; a significant negative difference is reported as a loss
+    with the same statistics.
 A8. Setup states: same LLM (Opus 5.5 via the Claude Code CLI, default sampling), same task text, PDK sheet and knowledge
     cards, identical budgets (12 calls; 300 / 600 condition-evaluations); only SPECTRA (and its ablations) gets the
     gm/Id LUT API; responses are cached per (prompt, run tag).
 A9. Negative results appear in the intro and experiments: (i) diagnosis does not improve fault localisation in isolation
-    (E4); the Haiku result is stated as a point estimate with n and the exact McNemar p from
-    `results/E4_tests.json` (no "degrades" claim unless p < 0.05); (ii) intent programs mispredict second-order metrics; (iii) per-task losses of SPECTRA
+    (E4). The Haiku accuracies, n and p in `\FaultHaikuSentence` are all read from `results/E4_tests.json`, and
+    `E4_tests.json[model].n` equals `n_cases` of the corresponding E4 summary for both models at check time (else the
+    fault table states n per model). No statement that the diagnosis hurts, distracts or degrades the smaller model
+    unless the exact McNemar p < 0.05 (and the sign is negative); otherwise only the point estimate with n and p; (ii) intent programs mispredict second-order metrics; (iii) per-task losses of SPECTRA
     against each baseline (W/L macros), including the designer-tier low-noise op-amp if SPECTRA still loses it.
 A10. Ablation text names the matched task count and the seeds per task (computed, from the table caption); a component
     is called "necessary"/"essential" only with a paired-test-supported difference; otherwise "contributes" (point

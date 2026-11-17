@@ -44,8 +44,8 @@ sensitivities (no LLM), and the LLM given either the netlist with the specificat
 AnalogCoder-style agents) or the netlist with SPECTRA's diagnosis. Table~\ref{tab:fault} shows that the LLM is far better than the rules (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{}
 top-1), but that SPECTRA's evidence does \emph{not} improve localisation: with Opus~5.5 top-1 is \FaultDiagTopOne{}
 with the diagnosis (top-3 \FaultDiagTopThree{}), and the per-class differences go in both directions, with
-the largest ones on the smallest classes. \FaultHaikuSentence{} More evidence is therefore not automatically better: a long
-structured report can distract a smaller model. This is a null result for localisation, and we do not claim the
+the largest ones on the smallest classes. \FaultHaikuSentence{} \FaultHaikuInterp{}
+This is a null result for localisation, and we do not claim the
 diagnosis as a stand-alone debugger; its end-to-end value, as the input to the refine-vs-edit decision, is measured
 by the ablation in Section~\ref{sec:ablation}. (E4 evaluates element-level evidence on corrupted reference designs;
 the agent itself sees intent-variable sensitivities and prediction discrepancies of its own program.)

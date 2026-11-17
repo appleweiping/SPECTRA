@@ -38,7 +38,7 @@ def tier_bars(exp, methods, out):
     ax.set_ylabel("Success rate"); ax.set_ylim(0, 1.05)
     ax.grid(axis="y", color="#e5e4e0", lw=0.5); ax.set_axisbelow(True)
     ax.legend(ncol=3, fontsize=5.5, frameon=False, loc="upper center", bbox_to_anchor=(0.5, 1.32))
-    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+    fig.tight_layout(); fig.savefig(FIG / out, metadata={"CreationDate": None}); plt.close(fig)
 
 
 def anytime(exp, methods, out, key="sims", xmax=300):
@@ -54,7 +54,7 @@ def anytime(exp, methods, out, key="sims", xmax=300):
     ax.set_xscale("log"); ax.set_xlabel("Simulations used (condition-evaluations)" if key == "sims" else "LLM calls")
     ax.set_ylabel("Solved fraction"); ax.set_ylim(0, 1.02)
     ax.grid(color="#e5e4e0", lw=0.5); ax.legend(fontsize=5.5, frameon=False, loc="lower right")
-    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+    fig.tight_layout(); fig.savefig(FIG / out, metadata={"CreationDate": None}); plt.close(fig)
 
 
 def family_heatmap(exp, methods, out):
@@ -82,7 +82,7 @@ def family_heatmap(exp, methods, out):
     for sp in ax.spines.values():
         sp.set_visible(False)
     ax.tick_params(length=0)
-    fig.tight_layout(); fig.savefig(FIG / out); plt.close(fig)
+    fig.tight_layout(); fig.savefig(FIG / out, metadata={"CreationDate": None}); plt.close(fig)
 
 
 def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
@@ -104,7 +104,7 @@ def anytime2(exp, methods, out, xmax_sims=300, xmax_calls=12):
     h, l = axes[0].get_legend_handles_labels()
     fig.legend(h, l, fontsize=5.5, frameon=False, loc="upper center", ncol=4, bbox_to_anchor=(0.5, 1.02),
                handlelength=1.2, columnspacing=0.8)
-    fig.tight_layout(rect=(0, 0, 1, 0.9)); fig.savefig(FIG / out); plt.close(fig)
+    fig.tight_layout(rect=(0, 0, 1, 0.9)); fig.savefig(FIG / out, metadata={"CreationDate": None}); plt.close(fig)
 
 
 if __name__ == "__main__":

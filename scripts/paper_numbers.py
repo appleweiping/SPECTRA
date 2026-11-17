@@ -1,5 +1,5 @@
 """Generate paper/numbers.tex (LaTeX macros) from results/ and data/ files so every number in the paper is traceable."""
-import json
+import json, sys
 from pathlib import Path
 from spectra.paths import ROOT
 
@@ -57,18 +57,24 @@ def main():
         ex = full.get("exact", {}); P = full.get("primary", {})
         if all(m in P for m in ("spectra", "direct", "genbo")):
             names = {"direct": "an AnalogCoder-style agent", "genbo": "an AnalogCoder-Pro-style generate-then-optimise agent"}
-            sig = [m for m in ("direct", "genbo") if ex.get(f"spectra_vs_{m}", {}).get("primary", {}).get("p_perm_holm", 1) < 0.05]
-            ns = [m for m in ("direct", "genbo") if m not in sig]
+            def _pr(m):
+                return ex.get(f"spectra_vs_{m}", {}).get("primary", {})
+            sig = [m for m in ("direct", "genbo") if _pr(m).get("p_perm_holm", 1) < 0.05 and _pr(m).get("mean_diff", 0) > 0]
+            neg = [m for m in ("direct", "genbo") if _pr(m).get("p_perm_holm", 1) < 0.05 and _pr(m).get("mean_diff", 0) < 0]
+            ns = [m for m in ("direct", "genbo") if m not in sig and m not in neg]
             claim = (f"solves {pct(P['spectra']['success'])} of the near-frontier and PVT-robust tasks (our primary endpoint; "
                      f"{full['primary_n_tasks']} tasks) versus {pct(P['direct']['success'])} for {names['direct']} and "
                      f"{pct(P['genbo']['success'])} for {names['genbo']}.")
             if sig:
                 claim += (" The gain over " + " and over ".join(names[m].replace("an ", "the ", 1) for m in sig)
                           + " is significant in a paired, Holm-corrected test")
-                claim += ("; the gain over " + names[ns[0]].replace("an ", "the ", 1) + " is not (p = "
+                claim += ("; the difference to " + names[ns[0]].replace("an ", "the ", 1) + " is not (p = "
                           + f"{ex[f'spectra_vs_{ns[0]}']['primary']['p_perm_holm']:.2g})." if ns else ".")
-            else:
+            elif not neg:
                 claim += " At this sample size neither difference is significant in a paired, Holm-corrected test."
+            for m in neg:
+                claim += (" SPECTRA is significantly worse than " + names[m].replace("an ", "the ", 1)
+                          + f" (paired, Holm-corrected p = {_pr(m)['p_perm_holm']:.2g}).")
             out["AbsMainClaim"] = claim
         t = full["tests"]
         for k, v in t.items():
@@ -87,12 +93,21 @@ def main():
     if e4h.exists():
         d = json.loads(e4h.read_text())
         tp = ROOT / "results/E4_tests.json"
-        tt = json.loads(tp.read_text())["haiku"] if tp.exists() else None
-        out["FaultHaikuSentence"] = (f"With the smaller Haiku~5.5 model top-1 accuracy is {pct(d['raw']['top1'])} with the raw "
-                                     f"evidence and {pct(d['spectra']['top1'])} with the diagnosis ({d['n_cases']} cases"
-                                     + (f"; {tt['only_raw_correct']} cases are solved only with the raw evidence and "
-                                        f"{tt['only_diag_correct']} only with the diagnosis, exact McNemar $p={tt['p_mcnemar_exact']:.2f}$"
-                                        if tt else "") + ").")
+        tt = json.loads(tp.read_text()) if tp.exists() else None
+        if tt and tt["haiku"]["n"] != d["n_cases"]:
+            print(f"WARNING: E4_tests haiku n={tt['haiku']['n']} != E4_haiku_summary n_cases={d['n_cases']}", file=sys.stderr)
+        if tt:
+            h = tt["haiku"]
+            out["FaultHaikuSentence"] = (f"With the smaller Haiku~5.5 model top-1 accuracy is {pct(h['top1_raw'])} with the raw "
+                                         f"evidence and {pct(h['top1_diag'])} with the diagnosis ({h['n']} cases; "
+                                         f"{h['only_raw_correct']} are solved only with the raw evidence and "
+                                         f"{h['only_diag_correct']} only with the diagnosis, exact McNemar $p={h['p_mcnemar_exact']:.2f}$).")
+            out["FaultHaikuInterp"] = ("More evidence is therefore not automatically better: the long structured report "
+                                       "hurts the smaller model." if h["p_mcnemar_exact"] < 0.05 and h["top1_diag"] < h["top1_raw"] else "")
+        else:
+            out["FaultHaikuSentence"] = ""; out["FaultHaikuInterp"] = ""
+        if tt and tt["opus"]["n"] != json.loads((ROOT / "results/E4_summary.json").read_text())["n_cases"]:
+            print("WARNING: E4_tests opus n != E4_summary n_cases", file=sys.stderr)
     else:
         out["FaultHaikuSentence"] = ""
     pa = ROOT / "results/E1_spectra_prediction_accuracy.json"

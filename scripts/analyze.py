@@ -97,8 +97,8 @@ def summarize(runs, methods):
              "controls_n": len(ctl), "controls_success": (sum(r["success"] for r in ctl) / len(ctl)) if ctl else None,
              "controls_declared": sum(r["declared_infeasible"] for r in ctl),
              "controls_mean_cost": (sum(r["cost"] for r in ctl) / len(ctl)) if ctl else None}
-        for name, sel in [("nominal", lambda r: not r["robust"]), ("robust", lambda r: r["robust"])] + \
-                         [(f"tier{t}", (lambda t: lambda r: str(r["tier"]) == str(t) and not r["robust"])(t)) for t in (1, 2, 3, "D", "C")]:
+        key = {"T1": "tier1", "T2": "tier2", "T3": "tier3", "Robust": "robust", "Designer": "tierD"}
+        for name, sel in [("nominal", lambda r: not r["robust"])] + [(key[g], fn) for g, fn in TIER_GROUPS]:
             sub = [r for r in rs if sel(r)]
             if sub:
                 d[name] = cluster_boot(sub)[0]
