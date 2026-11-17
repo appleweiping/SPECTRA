@@ -50,3 +50,11 @@ E4 extension, control-task runs) were paused (SIGSTOP) and E1 restarted with (i)
 ngspice processes (flock slots) and (ii) the seed protocol: SPECTRA and the AnalogCoder-style agent 3 seeds, the
 simulation-heavy Gen+TPE and SPECTRA-min 2 seeds (analysis uses seeds 0-1 for these two even where a third seed
 had completed). Restarting loses no LLM work: responses are cached per (run tag, call index).
+
+## 2026-11-17 01:00 Tiered seed policy (compute-bound)
+Robust runs cost ~10x the simulations of nominal runs; at ~15 robust runs/hour the full plan needed >15 h. Following
+review round 1 ("finish E1 on T3 and robust tasks first; T1/T2/D are saturated and only burn cores"), E1 now uses:
+SPECTRA and AnalogCoder-style: 3 seeds on certified T3, 2 seeds on robust tasks, 1 seed on T1/T2/designer;
+Gen+TPE and SPECTRA-min: 2 seeds on T3, 1 seed elsewhere. Seeds completed earlier are kept (per-task means).
+E2 ablations w/o diagnosis and w/o intent: 2 seeds on the 35-task subset; no-card, w/o-refinement and Gen+CMA-ES:
+1 seed on the subset's T3 tasks; E3 (genbo_full, PVT strategies): 1 seed on all robust tasks; E5: 1 seed.

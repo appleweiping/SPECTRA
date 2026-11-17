@@ -13,7 +13,8 @@ intent-space CMA-ES with the whole budget and SPECTRA's PVT loop, but no diagnos
 \emph{Oracle} optimises the benchmark's own reference template with CMA-ES under the same budget---privileged
 information that bounds what sizing alone achieves on certified tasks.
 
-\textbf{Protocol.} SPECTRA and the AnalogCoder-style agent run 3 seeds per task, the simulation-heavy Gen+TPE and
-SPECTRA-min 2 seeds (compute-bound on 4 CPU cores); success is decided by independent re-verification
-(Section~\ref{sec:bench}). Confidence intervals are 95\% cluster bootstraps over tasks; paired comparisons use the
+\textbf{Protocol.} Compute (4 CPU cores) dictates a tiered seed policy that concentrates runs on the
+primary endpoint: SPECTRA and the AnalogCoder-style agent run 3 seeds on certified T3 tasks, 2 on robust tasks and 1
+on the saturated T1/T2/designer tiers; the simulation-heavy Gen+TPE and SPECTRA-min run 2 seeds on T3 and 1 elsewhere
+(seeds completed earlier are kept). success is decided by re-verification outside the agent (Section~\ref{sec:bench}). Confidence intervals are 95\% cluster bootstraps over tasks; paired comparisons use the
 Wilcoxon signed-rank test on per-task success rates with Holm correction.
