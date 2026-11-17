@@ -22,6 +22,7 @@ A3. Every result number in every section (abstract, intro, bench, method, experi
     - `python -m scripts.comparisons` → `results/comparisons.json`
     - `python -m scripts.pvt_failures` → `results/pvt_failure_conditions.json`
     - `python -m scripts.failure_analysis E1` → `results/E1_failures.json`
+    - `python -m scripts.spectra_failures` → `results/E1_spectra_failure_modes.json` (additive amendment after freeze)
     - `python -m scripts.prediction_accuracy E1 spectra` → `results/E1_spectra_prediction_accuracy.json`
     - `python -m scripts.e4_tests` → `results/E4_tests.json`
     - `python -m scripts.make_tables` → `paper/tables/{main,fault,ablation,pvt,scaling}.tex`

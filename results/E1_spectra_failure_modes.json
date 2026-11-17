@@ -1,0 +1,111 @@
+{
+ "n_failed_runs": 5,
+ "n_failed_robust": 3,
+ "n_failed_nominal": 2,
+ "robust_stalled": 2,
+ "robust_median_pvt_sims": 336,
+ "robust_median_calls": 5,
+ "nominal_median_calls": 12.0,
+ "primary_losses": {
+  "direct": [
+   "ref-04",
+   "ref-05"
+  ],
+  "genbo": [],
+  "spectra_min": [
+   "opamp-08",
+   "ref-04"
+  ]
+ },
+ "primary_loss_families": {
+  "direct": [
+   "ref"
+  ],
+  "genbo": [],
+  "spectra_min": [
+   "opamp",
+   "ref"
+  ]
+ },
+ "runs": [
+  {
+   "task": "opamp-08",
+   "seed": "s2",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "ref-04",
+   "seed": "s0",
+   "family": "ref",
+   "robust": true,
+   "calls": 4,
+   "sims": 589,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 4,
+   "pvt_sims": 336,
+   "pvt_scores": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pvt_stalled": true
+  },
+  {
+   "task": "ldo-07",
+   "seed": "s0",
+   "family": "ldo",
+   "robust": true,
+   "calls": 9,
+   "sims": 600,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 3,
+   "pvt_sims": 295,
+   "pvt_scores": [
+    6.417,
+    6.263,
+    6.125
+   ],
+   "pvt_stalled": false
+  },
+  {
+   "task": "ref-05",
+   "seed": "s0",
+   "family": "ref",
+   "robust": true,
+   "calls": 5,
+   "sims": 562,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 4,
+   "pvt_sims": 340,
+   "pvt_scores": [
+    0.413,
+    0.392,
+    1.023,
+    1.0
+   ],
+   "pvt_stalled": true
+  },
+  {
+   "task": "D06",
+   "seed": "s0",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 28,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  }
+ ]
+}

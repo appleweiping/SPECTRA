@@ -168,6 +168,28 @@ def main():
             f"low-supply condition; failing conditions by corner are "
             + ", ".join(f"{cn.get(k, k)} {v}" for k, v in d["by_corner"].items())
             + " and by temperature " + ", ".join(f"{tn.get(k, k)} {v}" for k, v in d["by_temp"].items()) + ".")
+    sf = ROOT / "results/E1_spectra_failure_modes.json"
+    if sf.exists():
+        d = json.loads(sf.read_text())
+        fam = {"ref": "voltage references", "opamp": "op-amps", "ldo": "LDOs", "amp": "amplifiers", "tia": "TIAs",
+               "cmirror": "current mirrors", "comparator": "comparators", "latch": "latches", "vco": "VCOs",
+               "filter": "filters", "schmitt": "Schmitt triggers", "opamp_app": "op-amp applications"}
+        txt = (f"SPECTRA fails {d['n_failed_runs']} of its runs on the common tasks, {d['n_failed_robust']} of them robust. "
+               if d["n_failed_runs"] else "")
+        if d["n_failed_robust"]:
+            txt += (f"In these robust failures the PVT loop consumed a median of {d['robust_median_pvt_sims']:.0f} of the 600 "
+                    f"condition-evaluations, and in {d['robust_stalled']} of them the worst-case violation did not decrease "
+                    f"between successive full verifications; because the loop has no early exit, such runs return to the LLM "
+                    f"with budget for few edits (median {d['robust_median_calls']:.0f} LLM calls used). ")
+        if d["n_failed_nominal"] and d.get("nominal_median_calls") is not None:
+            txt += f"Its nominal failures used a median of {d['nominal_median_calls']:.0f} LLM calls. "
+        lf = d["primary_loss_families"].get("direct", [])
+        if lf:
+            txt += ("All primary-endpoint tasks on which the AnalogCoder-style agent does better than SPECTRA are "
+                    + ", ".join(fam.get(f, f) for f in lf) + ".")
+        out["SpectraFailSentence"] = txt.strip()
+    else:
+        out["SpectraFailSentence"] = ""
     mp = ROOT / "results/mc_yield.json"
     if mp.exists():
         d = json.loads(mp.read_text()); Y = d["yield"]

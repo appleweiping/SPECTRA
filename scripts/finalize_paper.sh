@@ -7,6 +7,7 @@ python3 -m scripts.analyze --exp E1
 python3 -m scripts.comparisons
 python3 -m scripts.pvt_failures
 python3 -m scripts.failure_analysis E1
+python3 -m scripts.spectra_failures
 python3 -m scripts.prediction_accuracy E1 spectra
 python3 -m scripts.e4_tests
 python3 -m scripts.make_tables
