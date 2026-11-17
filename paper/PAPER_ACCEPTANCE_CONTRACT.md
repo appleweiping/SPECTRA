@@ -75,8 +75,9 @@ A13. Mismatch: `results/mc_yield.json` (schema `{"n_samples", "yield": {method: 
     its pool (PVT-verified seed-0 designs of E1's four methods and E3's two arms) and the sample count matches the file;
     every analysed design has `max_rel_spread > 0` (samples differ). Otherwise the mismatch claims are removed from the
     intro, bench section and PVT section. The abstract makes no mismatch claim.
-A14. Every quantity promised in the metrics paragraph (success with CIs, sims and calls to success, tokens, cost) appears
-    in a table; wall-clock is explicitly not reported.
+A14. Every quantity promised in the metrics paragraph (success with CIs, sims and calls to success, tokens, the retained
+cost field) appears in a table; the GPT-6.1-sol gateway's unpublished tariff is disclosed wherever the zero-valued
+sentinel appears; wall-clock is explicitly not reported.
 
 ## Honesty / limitations / dropped hypotheses
 A15. Limitations name: schematic level only; template-derived certified tier; 1–3 seeds per task (tiered); dropped arms

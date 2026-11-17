@@ -56,8 +56,10 @@ the agent itself sees intent-variable sensitivities and prediction discrepancies
 \subsection{Backbone Scaling and Cost}
 \label{sec:scaling}
 \IfFileExists{tables/scaling.tex}{\input{tables/scaling}}{}
-\ScalingText{} The mean LLM cost per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
-agent, \GenboCost{} for Gen+TPE and \SpectraMinCost{} for SPECTRA-min; SPECTRA's successful runs need a median of
+\ScalingText{} The recorded LLM-cost field per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
+agent, \GenboCost{} for Gen+TPE and \SpectraMinCost{} for SPECTRA-min. The GPT-6.1-sol gateway publishes no USD
+tariff, so these values are zero-valued availability sentinels unless price overrides are supplied; token counts are
+the accountable usage measure. SPECTRA's successful runs need a median of
 \SpectraCalls{} LLM calls and \SpectraSims{} simulations. \IfFileExists{figs/E1_anytime2.pdf}{Fig.~\ref{fig:anytime}
 shows the solved fraction as a function of simulations and of LLM calls.}{}
 \IfFileExists{figs/E1_anytime2.pdf}{\begin{figure}[t]\centering\includegraphics[width=\columnwidth]{figs/E1_anytime2.pdf}\Description{Two line plots of solved fraction versus simulations and versus LLM calls for each method.}

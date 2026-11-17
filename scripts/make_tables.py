@@ -63,11 +63,11 @@ def main_table(exp=None, out="main.tex"):
                     f"{d['mean_tokens'] / 1e3:.0f} & {d['mean_cost_usd']:.2f} \\\\")
     cap = (f"Main results on the {summ['common_tasks']} tasks completed by every method (success = re-simulation outside "
            "the agent at TT, or on all 45 PVT conditions for robust tasks; per-task means over seeds, seeds per task: "
-           + seeds_text(seeds) + "). Calls/Sims: medians over successful runs; kTok and \\$/run: mean LLM tokens "
-           "(thousands) and cost per run.")
+           + seeds_text(seeds) + "). Calls/Sims: medians over successful runs; kTok: mean LLM tokens "
+           "(thousands); Cost$^\\dagger$: retained cost field (the configured gateway has no published tariff).")
     tex = ("\\begin{table*}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:main}\n\\small\n"
            "\\begin{tabular}{@{}lcccccccccc@{}}\n\\toprule\n"
-           "Method & Success (\\%) [95\\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\\star$ & Sims$^\\star$ & kTok & \\$/run \\\\\n\\midrule\n"
+           "Method & Success (\\%) [95\\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\\star$ & Sims$^\\star$ & kTok & Cost$^\\dagger$ \\\\\n\\midrule\n"
            + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n\\end{table*}\n")
     (TAB / out).write_text(tex)
 
@@ -108,7 +108,7 @@ def ablation_table(out="ablation.tex"):
            "Calls/sims: medians over successful runs. Seeds per task: " + seeds_text(seeds) + ".")
     tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:ablation}\n\\scriptsize\n"
            "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lccccc@{}}\n\\toprule\n"
-           "Variant & Succ.\\,(\\%) [CI] & W/L & Calls & Sims & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
+           "Variant & Succ.\\,(\\%) [CI] & W/L & Calls & Sims & Cost$^\\dagger$ \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
     (TAB / out).write_text(tex)
 
@@ -152,7 +152,7 @@ def scaling_table(out="scaling.tex"):
     cap = f"Backbone study on the subset's T3 and robust tasks ({c['n_tasks']} tasks, seed 0)."
     tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:scaling}\n\\scriptsize\n"
            "\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}llccc@{}}\n\\toprule\n"
-           "LLM & Method & Success (\\%) [CI] & Calls$^\\star$ & \\$/run \\\\\n\\midrule\n" + "\n".join(rows) +
+           "LLM & Method & Success (\\%) [CI] & Calls$^\\star$ & Cost$^\\dagger$ \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
     (TAB / out).write_text(tex)
 
