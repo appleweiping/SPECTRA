@@ -1,5 +1,8 @@
 # NARRATIVE REPORT — SPECTRA (ARIS W3 input)
 
+> 2026-11-17: project handed off (see HANDOFF.md). All numbers below are Claude Opus 5.5 backbone, interim; the
+> main experiments are to be re-run with a GPT-family backbone (HANDOFF section 0.5).
+
 Status: experiments in progress (final scope v3, see EXPERIMENT_LOG.md). Numbers below marked *interim* are read from
 `results/` at the time of writing and are regenerated into `paper/numbers.tex` by `scripts/paper_numbers.py`; the paper
 never hard-codes a result.

@@ -89,3 +89,11 @@ whose prompt is unchanged and only pay for diverging calls. Archived seed-1 robu
 tasks use seed 0 in the final scope). After the re-runs no run is scored by truncation.
 - Also from the review: the T3 ∪ robust primary endpoint was fixed at interim review round 1 (E1 ≈35% complete), not
   before E1; the paper now says "pre-specified at review round 1" instead of "pre-registered".
+
+## 2026-11-17 05:00 STOP and handoff
+By user request all experiment chains were stopped (in-flight runs interrupted; their LLM calls and simulations are
+cached). Completion at the stop is recorded in HANDOFF.md section 5.1. Claude quota is exhausted: from here on the
+executor, the experiment LLM and the ARIS reviewer are GPT-family models (HANDOFF.md section 0.5). All results in
+results/raw/{E1,E2,E4,E4_haiku,E5} are Claude-backbone (Opus 5.5 / Haiku 5.5) and must not be mixed with GPT-backbone
+runs in one comparison; GPT runs go to new experiment names (E1g, ...).
+- Note: task #4's title in the old task list said "AnalogCoder 24 functional tasks"; that benchmark was never ported.
