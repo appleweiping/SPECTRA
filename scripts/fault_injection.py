@@ -118,10 +118,11 @@ Netlist (canonical format; W/L in um):
 Reply with a ```json block {{"ranking": ["<most likely element name>", "<2nd>", "<3rd>"], "fault": "<short description>"}}."""
 
 
-def main(n_per_template=6, seed=0, model="opus"):
+def main(n_per_template=6, seed=0, model="gpt-5-mini"):
     import zlib
     global OUT
-    OUT = ROOT / "results" / "raw" / ("E4" if model == "opus" else f"E4_{model}")
+    exp_tag = "E4g" if model.lower() in {"gpt", "openai", "gpt-mini", "gpt5-mini", "gpt-5-mini"} else f"E4_{model}"
+    OUT = ROOT / "results" / "raw" / exp_tag
     OUT.mkdir(parents=True, exist_ok=True)
     tasks = [json.loads(l) for l in open(ROOT / "data" / "bench" / "tasks.jsonl")]
     seen, cases = set(), []
@@ -184,9 +185,9 @@ def main(n_per_template=6, seed=0, model="opus"):
                 summ[arm][cls] = {"n": len(rr), "top1": sum(norm(r[arm][:1]) == [r["truth"].lower()] for r in rr) / len(rr),
                                   "top3": sum(r["truth"].lower() in norm(r[arm][:3]) for r in rr) / len(rr)}
     summ["n_cases"] = len(results)
-    (ROOT / "results" / ("E4_summary.json" if model == "opus" else f"E4_{model}_summary.json")).write_text(json.dumps(summ, indent=1))
+    (ROOT / "results" / ("E4g_summary.json" if exp_tag == "E4g" else f"{exp_tag}_summary.json")).write_text(json.dumps(summ, indent=1))
     print(json.dumps(summ, indent=1))
 
 
 if __name__ == "__main__":
-    main(model=sys.argv[1] if len(sys.argv) > 1 else "opus")
+    main(model=sys.argv[1] if len(sys.argv) > 1 else "gpt-5-mini")

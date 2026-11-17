@@ -49,7 +49,7 @@ A7. Every comparative claim ("SPECTRA beats/outperforms/is more reliable than X"
     emitted by `scripts/paper_numbers.py`, which chooses the wording per baseline: "significant gain" requires Holm-corrected
     p < 0.05 and a positive mean per-task difference for SPECTRA; a significant negative difference is reported as a loss
     with the same statistics.
-A8. Setup states: same LLM (Opus 5.5 via the Claude Code CLI, default sampling), same task text, PDK sheet and knowledge
+A8. Setup states: same GPT-5 mini model via the OpenAI Python client (default sampling), same task text, PDK sheet and knowledge
     cards, identical budgets (12 calls; 300 / 600 condition-evaluations); only SPECTRA (and its ablations) gets the
     gm/Id LUT API; responses are cached per (prompt, run tag).
 A9. Negative results appear in the intro and experiments: (i) diagnosis does not improve fault localisation in isolation

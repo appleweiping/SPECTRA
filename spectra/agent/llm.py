@@ -1,16 +1,20 @@
-"""LLM access through the Claude Code CLI (`claude -p`), stateless calls.
+"""Stateless LLM calls with a persistent cache.
 
-* tools disabled, custom system prompt, JSON output -> text + usage
-* on-disk cache keyed by (model, system, prompt, run_tag) so reruns are free and
-  independent trials (different run_tag) are independent samples
-* every call appended to results/llm_usage.jsonl (tokens, cost, latency)
+The project used to shell out to the Claude Code CLI.  Claude is no longer an
+allowed backend for this project, so calls now go through the OpenAI Python
+client.  The public :func:`call` contract and cache/usage record format remain
+unchanged; this keeps the experiment runners and cached results compatible.
+
+The OpenAI import is intentionally lazy.  Importing the rest of SPECTRA (for
+example to analyse old results) must still work on a machine without the
+optional ``openai`` package.  A clear ``LLMError`` is raised only when a GPT
+call is actually requested.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import os
-import subprocess
 import threading
 import time
 from pathlib import Path
@@ -21,50 +25,123 @@ CACHE = Path(os.environ.get("SPECTRA_LLM_CACHE", ROOT / "data" / "llm_cache"))
 USAGE = ROOT / "results" / "llm_usage.jsonl"
 _lock = threading.Lock()
 _sem = threading.Semaphore(int(os.environ.get("SPECTRA_LLM_CONCURRENCY", "8")))
-MODELS = {"opus": "claude-opus-5-5", "sonnet": "claude-sonnet-5-5", "haiku": "claude-haiku-5-5",
-          "fable": "claude-fable-5-1"}
+# Aliases used by the run scripts.  Keep this table deliberately GPT-only: a
+# stale ``--model opus``/``claude-*`` invocation must fail instead of silently
+# sending data to the retired Claude backend.
+MODELS = {
+    "gpt": "gpt-5-mini",
+    "openai": "gpt-5-mini",
+    "gpt-mini": "gpt-5-mini",
+    "gpt-5-mini": "gpt-5-mini",
+    "gpt5-mini": "gpt-5-mini",
+    "gpt-5.1": "gpt-5.1",
+    "gpt5.1": "gpt-5.1",
+    "gpt-5": "gpt-5",
+    "gpt5": "gpt-5",
+}
+
+# USD per one million tokens.  These defaults are kept in code so old result
+# records remain self-contained; operators can override them when OpenAI's
+# public prices change without changing the call protocol.
+_DEFAULT_PRICES = {
+    "gpt-5-mini": (0.25, 2.00),
+    "gpt-5.1": (1.25, 10.00),
+    "gpt-5": (1.25, 10.00),
+}
 
 
 class LLMError(Exception):
     pass
 
 
-def call(prompt: str, system: str, model: str = "opus", run_tag: str = "", tag: str = "", timeout: int = 900,
+def call(prompt: str, system: str, model: str = "gpt-5-mini", run_tag: str = "", tag: str = "", timeout: int = 900,
          retries: int = 6, effort: str | None = None) -> dict:
-    model_id = MODELS.get(model, model)
+    model_id = MODELS.get(model.lower(), model)
+    if model_id.lower().startswith("claude") or model.lower() in {"opus", "sonnet", "haiku", "fable"}:
+        raise LLMError(
+            f"Claude model '{model}' is disabled for this project. "
+            "Use a GPT alias such as --model gpt-5-mini or --model gpt-5.1."
+        )
+    if not (model_id.lower().startswith("gpt-") or model_id.lower().startswith(("o1", "o3", "o4"))):
+        raise LLMError(
+            f"Unsupported LLM model '{model}'. Use an OpenAI GPT model "
+            "(for example gpt-5-mini or gpt-5.1)."
+        )
     key = hashlib.sha256(json.dumps([model_id, system, prompt, run_tag, effort]).encode()).hexdigest()
     cp = CACHE / key[:2] / f"{key}.json"
     if cp.exists():
         d = json.loads(cp.read_text())
         d["cached"] = True
         return d
-    cmd = ["claude", "-p", prompt, "--model", model_id, "--output-format", "json", "--tools", "",
-           "--system-prompt", system, "--no-session-persistence", "--strict-mcp-config"]
-    if effort:
-        cmd += ["--effort", effort]
+    try:
+        from openai import OpenAI
+    except ImportError as exc:  # pragma: no cover - exercised in deployment
+        raise LLMError(
+            "The GPT backend requires the optional 'openai' package. "
+            "Install it with: python -m pip install openai"
+        ) from exc
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise LLMError("OPENAI_API_KEY is not set; refusing to make an unauthenticated GPT call")
+
+    # The SDK uses HTTPS directly and does not create a console process.  This
+    # keeps Windows runs headless (the project's CREATE_NO_WINDOW policy still
+    # applies to any future subprocess-based launcher).
+    client = OpenAI(api_key=api_key, timeout=timeout)
     last = ""
     for attempt in range(retries):
         t0 = time.time()
         with _sem:
             try:
-                p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd="/tmp")
-            except subprocess.TimeoutExpired:
-                last = "timeout"; continue
+                kwargs = {
+                    "model": model_id,
+                    "messages": [
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": prompt},
+                    ],
+                }
+                # GPT-5 family models support reasoning_effort on Chat
+                # Completions.  Omit it when unset to preserve model defaults.
+                if effort:
+                    kwargs["reasoning_effort"] = effort
+                p = client.chat.completions.create(**kwargs)
+            except Exception as exc:
+                last = f"{type(exc).__name__}: {exc}"
+                if attempt + 1 < retries:
+                    time.sleep(min(300, 15 * 2 ** attempt))
+                continue
         dt = time.time() - t0
         try:
-            js = json.loads(p.stdout)
-        except Exception:
-            last = (p.stdout + p.stderr)[-500:]
-            time.sleep(min(300, 15 * 2 ** attempt)); continue
-        text = js.get("result") or ""
-        if js.get("is_error") or not text:
-            last = str(js)[:500]
-            time.sleep(min(300, 15 * 2 ** attempt)); continue
-        u = js.get("usage", {})
+            choice = p.choices[0]
+            text = choice.message.content or ""
+        except Exception as exc:
+            last = f"Malformed OpenAI response: {exc}"
+            if attempt + 1 < retries:
+                time.sleep(min(300, 15 * 2 ** attempt))
+            continue
+        if not text.strip():
+            last = "OpenAI returned an empty response"
+            if attempt + 1 < retries:
+                time.sleep(min(300, 15 * 2 ** attempt))
+            continue
+        u = getattr(p, "usage", None)
+        input_tokens = int(getattr(u, "prompt_tokens", 0) or 0)
+        output_tokens = int(getattr(u, "completion_tokens", 0) or 0)
+        # ``prompt_tokens`` already includes cached input in the Chat
+        # Completions API.  Some compatible gateways expose ``input_tokens``
+        # instead, so accept that spelling as a fallback.
+        if not input_tokens:
+            input_tokens = int(getattr(u, "input_tokens", 0) or 0)
+        if not output_tokens:
+            output_tokens = int(getattr(u, "output_tokens", 0) or 0)
+        in_price, out_price = _prices_for(model_id)
+        cost = input_tokens / 1_000_000 * in_price + output_tokens / 1_000_000 * out_price
+        reported_model = getattr(p, "model", None) or model_id
         rec = {"text": text, "model": model_id, "seconds": round(dt, 2),
-               "input_tokens": u.get("input_tokens", 0) + u.get("cache_read_input_tokens", 0) + u.get("cache_creation_input_tokens", 0),
-               "output_tokens": u.get("output_tokens", 0), "cost_usd": js.get("total_cost_usd", 0.0),
-               "reported_models": list((js.get("modelUsage") or {}).keys())}
+               "input_tokens": input_tokens,
+               "output_tokens": output_tokens,
+               "cost_usd": round(cost, 8),
+               "reported_models": [reported_model]}
         cp.parent.mkdir(parents=True, exist_ok=True)
         cp.write_text(json.dumps(rec))
         with _lock:
@@ -74,6 +151,29 @@ def call(prompt: str, system: str, model: str = "opus", run_tag: str = "", tag: 
         rec["cached"] = False
         return rec
     raise LLMError(f"LLM call failed after {retries} attempts: {last}")
+
+
+def _prices_for(model_id: str) -> tuple[float, float]:
+    """Return (input, output) USD/M tokens, with environment overrides."""
+    base = model_id.lower()
+    # Prefix matching lets dated model IDs (e.g. gpt-5.1-2026-...) use the
+    # corresponding published price while still allowing explicit overrides.
+    in_default, out_default = next(
+        (v for k, v in _DEFAULT_PRICES.items() if base == k or base.startswith(k + "-")),
+        (0.0, 0.0),
+    )
+    def env_price(name: str, default: float) -> float:
+        raw = os.environ.get(name)
+        if raw is None:
+            return default
+        try:
+            return float(raw)
+        except ValueError as exc:
+            raise LLMError(f"{name} must be a number, got {raw!r}") from exc
+    return (
+        env_price("SPECTRA_OPENAI_INPUT_PRICE_USD_PER_MILLION", in_default),
+        env_price("SPECTRA_OPENAI_OUTPUT_PRICE_USD_PER_MILLION", out_default),
+    )
 
 
 def extract_block(text: str, lang: str) -> str | None:

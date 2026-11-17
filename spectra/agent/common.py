@@ -21,7 +21,7 @@ class Budget:
 @dataclass
 class Ctx:
     task: dict
-    model: str = "opus"
+    model: str = "gpt-5-mini"
     seed: int = 0
     budget: Budget = field(default_factory=Budget)
     method: str = ""

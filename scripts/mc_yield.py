@@ -8,6 +8,7 @@ specification. Writes results/mc_yield.json: {"n_samples": N, "yield": {method: 
 
 python -m scripts.mc_yield [N]
 """
+import argparse
 import json, sys
 from concurrent.futures import ThreadPoolExecutor
 from spectra.paths import ROOT
@@ -16,8 +17,9 @@ from spectra.sim.evaluate import evaluate, MC
 SCOPE = {"E1": ("spectra", "spectra_min", "direct", "genbo"), "E3": ("spectra_pvt_nominal", "genbo_full")}
 
 
-def main(n=100):
+def main(n=100, e1="E1", e3="E3"):
     n = int(n)
+    scope = {e1: SCOPE["E1"], e3: SCOPE["E3"]}
     tasks = {json.loads(l)["id"]: json.loads(l) for f in ["tasks.jsonl", "designer_tasks.jsonl"]
              for l in open(ROOT / "data" / "bench" / f)}
     outp = ROOT / "results" / "mc_yield.json"
@@ -25,7 +27,7 @@ def main(n=100):
     if out.get("n_samples") != n:
         out = {"n_samples": n, "yield": {}}
     jobs = []
-    for exp, methods in SCOPE.items():
+    for exp, methods in scope.items():
         for m in methods:
             for f in sorted((ROOT / "results" / "raw" / exp / m).glob("*/s0.json")):
                 r = json.loads(f.read_text()); t = tasks.get(f.parent.name)
@@ -57,4 +59,9 @@ def main(n=100):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:2])
+    ap = argparse.ArgumentParser()
+    ap.add_argument("n", nargs="?", type=int, default=100)
+    ap.add_argument("--e1", default="E1")
+    ap.add_argument("--e3", default="E3")
+    a = ap.parse_args()
+    main(a.n, a.e1, a.e3)

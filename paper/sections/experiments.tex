@@ -44,7 +44,7 @@ resistor) and keep the \FaultN{} cases that violate at least one specification. 
 corrupted element: a rule-only diagnoser that scores elements by operating-region flags and element-level
 sensitivities (no LLM), and the LLM given either the netlist with the specification table (the feedback used by
 AnalogCoder-style agents) or the netlist with SPECTRA's diagnosis. Table~\ref{tab:fault} shows that the LLM is far better than the rules (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{}
-top-1), but that SPECTRA's evidence does \emph{not} improve localisation: with Opus~5.5 top-1 is \FaultDiagTopOne{}
+top-1), but that SPECTRA's evidence does \emph{not} improve localisation: with GPT-5 mini top-1 is \FaultDiagTopOne{}
 with the diagnosis (top-3 \FaultDiagTopThree{}), and the per-class differences go in both directions, with
 the largest ones on the smallest classes. \FaultHaikuSentence{} \FaultHaikuInterp{}
 This is a null result for localisation, and we do not claim the

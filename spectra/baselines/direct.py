@@ -29,7 +29,7 @@ def _feedback(task, ev, evP=None):
     return fb
 
 
-def run_direct(task, model="opus", seed=0, budget=None, method="direct", knowledge_override=None):
+def run_direct(task, model="gpt-5-mini", seed=0, budget=None, method="direct", knowledge_override=None):
     ctx = Ctx(task=task, model=model, seed=seed, method=method)
     if budget:
         ctx.budget = budget

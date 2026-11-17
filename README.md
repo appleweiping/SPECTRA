@@ -20,9 +20,9 @@ Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BR
 
 ## Quick start
 ```bash
-pip install numpy scipy cma optuna matplotlib      # + ngspice >= 42 on PATH, `claude` CLI for LLM calls
+pip install numpy scipy cma optuna matplotlib openai # + ngspice >= 42 on PATH, OPENAI_API_KEY for GPT calls
 python -m scripts.gen_lut tt ff ss sf fs T=-40 T=27 T=125      # gm/Id lookup tables
-python -m scripts.run_bench --exp E1 --methods spectra,direct,genbo --seeds 0,1,2
+python -m scripts.run_bench --exp E1g --model gpt-5-mini --methods spectra,direct,genbo --seeds 0,1,2
 python -m scripts.analyze --exp E1
 bash scripts/finalize_paper.sh        # regenerate every analysis, table, figure and paper macro, then compile
 ```

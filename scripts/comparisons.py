@@ -5,6 +5,7 @@ computed on one task set. Writes results/comparisons.json; make_tables.py and pa
 
 python -m scripts.comparisons
 """
+import argparse
 import json
 from collections import defaultdict
 
@@ -53,8 +54,22 @@ def block(runs, methods, ref, task_ids, require=None):
     return out
 
 
+def _strip_model_suffix(runs):
+    """Normalize GPT experiment directory names (method@gpt-5-mini) for paired tables."""
+    return [dict(r, method=r["method"].split("@", 1)[0]) for r in runs]
+
+
 def main():
-    e1, e2, e3, e5 = (load(x) for x in ("E1", "E2", "E3", "E5"))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--e1", default="E1")
+    ap.add_argument("--e2", default="E2")
+    ap.add_argument("--e3", default="E3")
+    ap.add_argument("--e5", default="E5")
+    ap.add_argument("--strip-model-suffix", action="store_true")
+    a = ap.parse_args()
+    e1, e2, e3, e5 = (load(x) for x in (a.e1, a.e2, a.e3, a.e5))
+    if a.strip_model_suffix:
+        e1, e2, e3, e5 = (_strip_model_suffix(x) for x in (e1, e2, e3, e5))
     sub, t3, rob, prim = _ids("subset_E2.jsonl"), _ids("subset_T3.jsonl"), _ids("subset_robust.jsonl"), _ids("subset_primary.jsonl")
     res = {}
     # E2-A: components on the whole stratified subset (2 seeds for the ablated arms)
@@ -71,10 +86,13 @@ def main():
     e1s0 = [r for r in e1 if r["seed"] == "s0"]
     res["pvt"] = block(e1s0 + e3, ["spectra", "spectra_pvt_nominal", "genbo_full", "spectra_min", "genbo", "direct"],
                        "spectra", rob, require=["spectra"])
-    # E5: backbone, seed 0, subset T3 + robust tasks
+    # E5: backbone, seed 0, subset T3 + robust tasks. GPT runs can keep the
+    # original @model suffix for a genuine second backbone; a same-model E5g
+    # arm is recorded but omitted from the scaling comparison.
     e5r = [dict(r, method=r["method"].replace("@haiku", "_haiku")) for r in e5]
-    res["scaling"] = block(e1s0 + e5r, ["spectra", "direct", "spectra_haiku", "direct_haiku"], "spectra", prim,
-                           require=["spectra"])
+    scaling_methods = ["spectra", "direct", "spectra_haiku", "direct_haiku"]
+    res["scaling"] = None if a.strip_model_suffix else block(e1s0 + e5r, scaling_methods, "spectra", prim,
+                                                               require=["spectra"])
     if res["scaling"] and "spectra_haiku" in res["scaling"]["methods"] and "direct_haiku" in res["scaling"]["methods"]:
         ct = set(res["scaling"]["tasks"])
         res["scaling"]["haiku_spectra_vs_direct"] = exact_tests([r for r in e5r if r["task"] in ct], "spectra_haiku", "direct_haiku")
