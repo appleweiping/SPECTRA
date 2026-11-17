@@ -59,3 +59,11 @@ Gen+TPE and SPECTRA-min: 2 seeds on T3, 1 seed elsewhere. Seeds completed earlie
 E2 ablations w/o diagnosis and w/o intent: 2 seeds on the 35-task subset; no-card, w/o-refinement and Gen+CMA-ES:
 1 seed on the subset's T3 tasks; E3 (genbo_full, PVT strategies): 1 seed on all robust tasks; E5: 1 seed.
 - E3 reduced to the 11 robust tasks of the E2 subset (1 seed); E2 oracle dropped (compute).
+
+## 2026-11-17 02:15 Robust budget 600 (final protocol)
+Robust runs were simulation-bound (failing runs exhaust 1200 condition-evaluations at 2-3 netlists each). Of 58
+successful robust runs so far only 3 used more than 600 (SPECTRA 858, w/o-diagnosis 635, w/o-intent 839). Final
+protocol: 600 condition-evaluations per robust run (~13 full 45-condition verifications) for all methods. Runs that
+started under the 1200 cap are scored by truncation (success iff the run succeeded within 600; all methods stop at
+first success, and refinement chunk sizes are identical while more than ~150 evaluations remain), implemented in
+`scripts/analyze.py` (ROBUST_CAP). A deterministic on-disk ngspice result cache makes restarts cheap.

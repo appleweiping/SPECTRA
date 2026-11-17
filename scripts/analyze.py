@@ -16,6 +16,7 @@ RAW = ROOT / "results" / "raw"
 
 # E1 protocol: SPECTRA and AnalogCoder-style use seeds 0-2; the simulation-heavy Gen+TPE and SPECTRA-min use 0-1
 SEED_FILTER = {}   # all completed seeds are used (per-task means)
+ROBUST_CAP = 600   # condition-evaluations per robust run (final protocol)
 
 
 def load(exp, methods=None):
@@ -32,6 +33,8 @@ def load(exp, methods=None):
             v = r.get("verify", {})
             succ = bool(v.get("pvt_pass")) if meta.get("robust") else bool(v.get("tt_pass"))
             bs, bc = r.get("budget_sims"), r.get("budget_calls")
+            if meta.get("robust") and bs is not None and bs > ROBUST_CAP:
+                bs = ROBUST_CAP          # runs started under the earlier 1200 cap are truncated at 600 (stop-at-success)
             over = (bs is not None and (r.get("sims") or 0) > bs) or (bc is not None and (r.get("calls") or 0) > bc)
             if over:
                 succ = False
