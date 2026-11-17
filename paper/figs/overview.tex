@@ -17,7 +17,7 @@
 \node[det, below=7mm of tb, text width=34mm] (diag) {\textbf{Device-level diagnosis}\\ \scriptsize spec table $\cdot$ regions \& margins\\ \scriptsize prediction discrepancy\\ \scriptsize sensitivities $\cdot$ rule hypotheses};
 \node[llm, left=of diag, text width=30mm] (pol) {\textbf{LLM: repair policy}\\ \scriptsize \textsc{Refine} $\mid$ \textsc{Edit} $\mid$ \textsc{Declare}};
 \node[det, left=of pol, text width=30mm] (ref) {\textbf{Intent-space CMA-ES}\\ \scriptsize re-executes program\\ \scriptsize (structure preserved)};
-\node[sim, left=of ref, text width=31mm] (pvt) {\textbf{PVT-aware refinement}\\ \scriptsize adaptive worst-condition set\\ \scriptsize $\to$ 45-cond.\ PVT + MC verify};
+\node[sim, left=of ref, text width=31mm] (pvt) {\textbf{PVT-aware refinement}\\ \scriptsize adaptive worst-condition set\\ \scriptsize $\to$ 45-condition PVT verify};
 \node[box, below=6mm of pvt, text width=31mm, fill=green!8, minimum height=7mm] (out) {Sized, verified SKY130 netlist};
 \draw[arr] (spec) -- (plan);
 \draw[arr] (plan) -- (exec);
@@ -34,6 +34,6 @@
 \end{tikzpicture}}
 \caption{SPECTRA. The LLM reasons in design intent and writes an executable sizing program; deterministic
 components execute, check, simulate and diagnose; all numerical search runs in the program's intent space; robust
-tasks close with adaptive worst-condition refinement and full PVT/mismatch verification.}
+tasks close with adaptive worst-condition refinement and full 45-condition PVT verification.}
 \label{fig:overview}
 \end{figure*}
