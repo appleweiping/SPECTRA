@@ -218,9 +218,11 @@ def analyze(task, ev, pred=None, sens=None, cond=None, max_items=8):
     attribution.sort(key=lambda x: (x["d_violation"] is None, x["d_violation"] if x["d_violation"] is not None else 0.0))
     flags_for_hyp = [(x["device"], x) for x in flags]
     hypotheses = root_causes(task, ev, flags_for_hyp, cond)
+    dis = discrepancy(task, ev, pred, cond)
     return {"schema": "spectra-diagnosis/v2", "status": ev.status, "condition": cond,
             "score": float(ev.score), "failing": failing, "regions": regions, "flags": flags,
-            "attribution": attribution[:max_items], "hypotheses": hypotheses[:max_items]}
+            "attribution": attribution[:max_items], "hypotheses": hypotheses[:max_items],
+            "discrepancy": dis}
 
 
 def render_analysis(analysis):
@@ -250,6 +252,9 @@ def render_analysis(analysis):
     hyps = analysis.get("hypotheses", [])
     if hyps:
         lines.append("Root-cause hypotheses:\n" + "\n".join(f"- {h}" for h in hyps[:8]))
+    dis = analysis.get("discrepancy")
+    if dis:
+        lines.append(dis)
     return "\n".join(lines)
 
 
