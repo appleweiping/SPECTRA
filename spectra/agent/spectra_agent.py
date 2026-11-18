@@ -258,6 +258,68 @@ class Spectra:
             sens[k] = d
         return sens
 
+    def diagnosis_repair_probe(self, ev, analysis):
+        """Apply one bounded, simulator-checked repair from diagnosis evidence.
+
+        The diagnosis ablation must remove an actual mechanism rather than merely
+        shortening the prompt.  When finite-difference attribution identifies a
+        parameter direction, the full arm gets a small, trust-region probe before
+        asking the LLM for another program edit.  The candidate is kept only when
+        the measured nominal violation improves, so this probe cannot silently
+        replace a better incumbent.  It uses the same simulator accounting as any
+        other candidate and records a structured event for the mechanism matrix.
+        """
+        if not self.cfg.use_diag or not analysis or ev is None:
+            return ev, None
+        attrs = [a for a in analysis.get("attribution", [])
+                 if isinstance(a, dict) and isinstance(a.get("d_violation"), (int, float))
+                 and a.get("param") in self.params_spec]
+        if not attrs or not self.program or not self.params_spec:
+            return ev, None
+        # Keep the repair low dimensional and deterministic.  Attribution is
+        # already sorted by normalized violation direction in diagnose.analyze.
+        attrs = attrs[:4]
+        candidate = dict(self.params)
+        changed = []
+        for a in attrs:
+            name = a["param"]
+            init, lo, hi = self.params_spec[name]
+            current = float(candidate.get(name, init))
+            span = float(hi) - float(lo)
+            if span <= 0:
+                continue
+            d_vio = float(a["d_violation"])
+            # A positive finite-difference delta means increasing the parameter
+            # worsens violation, hence move down.  Use a small bounded step so
+            # the probe remains a local repair rather than a second optimizer.
+            step = min(0.14, 0.06 + 0.04 * min(1.0, abs(d_vio))) * span
+            direction = -1.0 if d_vio > 0 else 1.0
+            value = min(float(hi), max(float(lo), current + direction * step))
+            if value != current:
+                candidate[name] = int(round(value)) if isinstance(init, int) else value
+                changed.append(name)
+        if not changed:
+            return ev, None
+        r, err = self.design_at(candidate)
+        if r is None:
+            self.ctx.log("diagnosis_repair_probe", accepted=False, changed=changed,
+                         reason=str(err)[:160])
+            return ev, None
+        trial = self.ctx.evaluate(r["netlist"])
+        if trial.status != "ok":
+            self.ctx.log("diagnosis_repair_probe", accepted=False, changed=changed,
+                         status=trial.status)
+            return ev, None
+        before = float(ev.score) if ev.status == "ok" else float("inf")
+        accepted = float(trial.score) + 1e-9 < before
+        self.ctx.log("diagnosis_repair_probe", accepted=accepted, changed=changed,
+                     score_before=None if not math.isfinite(before) else round(before, 6),
+                     score_after=round(float(trial.score), 6))
+        if accepted:
+            self.params = candidate
+            return trial, r
+        return ev, None
+
     # ------------------------------------------------------------------ robust stage
     def robust_stage(self, netlist):
         ctx = self.ctx
@@ -422,6 +484,13 @@ class Spectra:
                             analysis = diagnose.failure_summary(task, ev)
                             diag = diagnose.spec_table(task, ev, None)
             self.last_analysis = analysis
+            # Use a simulator-checked local repair when diagnosis identifies a
+            # directional parameter effect.  This is enabled only in the full
+            # arm, leaving spectra_nodiag as a genuine removal ablation.
+            if cfg.use_diag and analysis is not None and ev is not None:
+                ev_probe, r_probe = self.diagnosis_repair_probe(ev, analysis)
+                if r_probe is not None:
+                    ev, r = ev_probe, r_probe
             cards = retrieve_cards(task, analysis) if cfg.use_knowledge and analysis else []
             cards_text = render_cards(cards)
             if analysis is not None:
