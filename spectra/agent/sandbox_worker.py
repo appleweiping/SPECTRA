@@ -70,6 +70,9 @@ def main(prog_path, jobs_path, out_path):
             usage = net.usage() if hasattr(net, "usage") else {"intent_devices": 0, "explicit_devices": 0}
             stats = {"param_count": len(norm), "intent_calls": len(lut.intent_records),
                      "intent_records": lut.intent_records, **usage}
+            total_devices = stats["intent_devices"] + stats["explicit_devices"]
+            stats["intent_fraction"] = (stats["intent_devices"] / total_devices) if total_devices else 0.0
+            stats["intent_compliant"] = bool(stats["intent_calls"] and stats["intent_devices"])
             out["results"].append({"ok": True, "netlist": text, "pred": pred, "params": p,
                                     "program_stats": stats})
         except Exception:
