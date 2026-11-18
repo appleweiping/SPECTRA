@@ -30,3 +30,8 @@ the E: workspace after SHA-256 verification. Its hash is recorded in
 `work/remote_archive/ext_final_raw.tar.sha256`. The long-request recovery pass used
 `SPECTRA_OPENAI_MAX_COMPLETION_TOKENS=4096`, `SPECTRA_OPENAI_TIMEOUT=30`, and
 `SPECTRA_OPENAI_RETRIES=1`, preserving timeout outcomes as crash records.
+
+The strict paper sizing track completed 252 unique records for 36 tasks × 7 paper-backed adapters. The component
+mechanism track completed 270 unique records for 18 tasks × 5 arms × 3 seeds. The combined raw-evidence archive is
+`work/remote_archive/sizing_component_final.tar` with SHA-256
+`221B11AC6409F075D7D67B6D91FF0220797B13539732FD6A94E38F91BF79DC0F`.
