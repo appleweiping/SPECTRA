@@ -152,6 +152,11 @@ def main():
     tasks = [json.loads(l) for l in open(a.tasks)]
     if a.filter:
         tasks = [t for t in tasks if re.search(a.filter, t["id"])]
+    if a.strict_sizing:
+        missing_sizing = [t.get("id", "<unknown>") for t in tasks if not isinstance(t.get("sizing"), dict)]
+        if missing_sizing:
+            preview = ", ".join(missing_sizing[:8])
+            raise SystemExit(f"strict sizing requires public sizing fields; missing for {len(missing_sizing)} tasks: {preview}")
     seeds = [int(s) for s in a.seeds.split(",")]
     methods = a.methods.split(",")
     jobs = []
