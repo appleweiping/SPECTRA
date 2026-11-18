@@ -1,0 +1,2179 @@
+{
+  "schema": "spectra-e2g-mech-manifest/v1",
+  "exp": "E2g_mech",
+  "task_count": 18,
+  "method_count": 5,
+  "expected_records": 270,
+  "observed_records": 270,
+  "unique_records": 270,
+  "missing": [],
+  "extra": [],
+  "status_counts": {
+    "success": 135,
+    "budget_exhausted": 37,
+    "crash": 98
+  },
+  "generated_utc": "2026-11-18T11:44:11Z",
+  "records": [
+    {
+      "method": "spectra",
+      "task": "amp-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "c803cd179bca56151970ec415af53978f4b783ffcbda61c822c859708f450141",
+      "bytes": 9233
+    },
+    {
+      "method": "spectra",
+      "task": "amp-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "43705288d525ceda6378487109bd4327e6cc75e1a77953033f82a3bd862cde4d",
+      "bytes": 27833
+    },
+    {
+      "method": "spectra",
+      "task": "amp-03",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "0bf9ac080e770d290376bd28fd03b68047c110b9b990a74c40ae6035a93d8c9f",
+      "bytes": 16793
+    },
+    {
+      "method": "spectra",
+      "task": "amp-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "9d335dec38b6945ef4b7078a11b0c5daa4f6aba87dd1750c1fb34fe05c663269",
+      "bytes": 2195
+    },
+    {
+      "method": "spectra",
+      "task": "amp-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "680e2f566f102382a8b842f89cf703fd407efec74dadd1b9ff42e403f18a0996",
+      "bytes": 34792
+    },
+    {
+      "method": "spectra",
+      "task": "amp-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "55332067671e818671a5343f319ffb6952715283ff1140887cf357c550109801",
+      "bytes": 33840
+    },
+    {
+      "method": "spectra",
+      "task": "amp-07",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "4855dd3cbd2ceb6ecc7d94481f874897dbaf67d4659cd6aa155b436eee2c8886",
+      "bytes": 18952
+    },
+    {
+      "method": "spectra",
+      "task": "amp-07",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "5f0d75f02f3b9eb63b3a95cddf6492794056ff614e567c1c0edfc08b9fa1d70c",
+      "bytes": 2128
+    },
+    {
+      "method": "spectra",
+      "task": "amp-07",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "b8a0d8d0b044f51414947daecd35ee1f7d00cb27da013e70817bf1faa174e571",
+      "bytes": 2129
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "1308e3e1fa7562b5d03896a80b4f9e1cc581c65ef90ab7b933b8a1c00d3ca162",
+      "bytes": 14603
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "ce77df1fe608df864c29e31c6a41abb0e2e7ce645a8574b6181b21264772eafe",
+      "bytes": 11766
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "2b4d53c2878cb6e53947e122cbd98358a90d6a76f391d19e369118f928a8f137",
+      "bytes": 14676
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-04",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "bda77e08f4c0d4238a3de6fce7fd6dcb3e3d4d5c5a7724771c2f6c3c710200a3",
+      "bytes": 17157
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "2f1c6d80a1dbb92e4c6b410a25f4c646d7db08472487d852c63219a654135101",
+      "bytes": 11089
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "141a56b184b08d878b1c73dd523e22a3827938b712b9f6052b79206be2c5b6bd",
+      "bytes": 15376
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "95e1756faa62bbfa14edcf9307302e0464dd604cf6ee3424ed1ff9bbbce37aee",
+      "bytes": 5908
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "5d47113db8fd7976699996b4be4cbcb8bf5d4b3aacd16fe620b9a089246f2778",
+      "bytes": 6908
+    },
+    {
+      "method": "spectra",
+      "task": "cmirror-06",
+      "seed": 2,
+      "status": "success",
+      "sha256": "e8b8ceca6db2f0cd29d7a5133790506dfabe6d6a4c5016fc795a4eb77de159b2",
+      "bytes": 5902
+    },
+    {
+      "method": "spectra",
+      "task": "filter-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "9a16f17305b2b0ae6c415ad1776f6716248af427f5a6d741c5557cd7ff091918",
+      "bytes": 119166
+    },
+    {
+      "method": "spectra",
+      "task": "filter-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "b462692c0798bd23b146d39e71d0ab58fa66ee29f37d913c38c5fda0514693ff",
+      "bytes": 15534
+    },
+    {
+      "method": "spectra",
+      "task": "filter-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "b38f45b0d164757550d3cf91c840901b609bde3ac3cc7239c4443e423800ab8d",
+      "bytes": 24487
+    },
+    {
+      "method": "spectra",
+      "task": "filter-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "294ed12fb4a7dbcb4cb52115a96771132a3cabbee3a7bdc4ee82181b8a777684",
+      "bytes": 16061
+    },
+    {
+      "method": "spectra",
+      "task": "filter-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "23d0746b88f762998f18c250dbf519a4bcf8bbfa64a2190884659288ea15b59a",
+      "bytes": 13792
+    },
+    {
+      "method": "spectra",
+      "task": "filter-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "91604392a5973ae7b4d5e50efe8cd3c16eec14ae1212dad36637fc222d68a759",
+      "bytes": 13598
+    },
+    {
+      "method": "spectra",
+      "task": "filter-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "a521cf8c4b67b25ed04528e9e4e672f426a29a2174bf9430af47c325e05cf426",
+      "bytes": 17132
+    },
+    {
+      "method": "spectra",
+      "task": "filter-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "f7e541c85b181a2b65fc3fbc9ca6b0fba89d26daf6faadfde58f347cc9fce15f",
+      "bytes": 9401
+    },
+    {
+      "method": "spectra",
+      "task": "filter-07",
+      "seed": 2,
+      "status": "success",
+      "sha256": "40f5864360154401858ad4ebd807a0bdd30f37e78b16b712f736252193507ec5",
+      "bytes": 8450
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-03",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "67ad80e543ec81c0e851ffb5b1f53c26dc75666339beccf6272847a7967c5687",
+      "bytes": 2137
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "683299d3a8a01a6ff2d019056e9815436d0d5073b38f13c18f6a373d24998dfe",
+      "bytes": 2137
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-03",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "a5f185588be201db1e0149f6827cda53c68f6bf639c36abee98f7354dc520912",
+      "bytes": 23625
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "4c2d04db50f37b7a07e24f20fccb9896fa17d3d1d8468752e3f4de31028e0c97",
+      "bytes": 2137
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "ba801f42134d434bb169746ae225fc6fe562a31ae4605f81fea5709ce8bef046",
+      "bytes": 2137
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "f588941d5001d77ea0b9df23f23be00940e4089e3ad92f8bdbadb0e4ba2f2da1",
+      "bytes": 20724
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-06",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "ead244364d03cbc4516f3ba98daa282640a66635afa8d427ef94fdc09010cdcc",
+      "bytes": 38218
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "2c6aade900a7ef571f336d9580834a2793bf4fa35bd603f6cf3c98daca729ce4",
+      "bytes": 2128
+    },
+    {
+      "method": "spectra",
+      "task": "ldo-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "ef1fa23d44886f1723c4cb85c148dda55c5064d6246d1968f52d8dd6799143ce",
+      "bytes": 2128
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-05",
+      "seed": 0,
+      "status": "success",
+      "sha256": "009b726ad0f98fb533f00c92c6d64bb23d53857dba4ec1724c15cd5313c306cf",
+      "bytes": 15303
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-05",
+      "seed": 1,
+      "status": "success",
+      "sha256": "3aa2272a881b7237c5bfb3c96617ccdc1d0c7e33dec7e9b5d7587150f2e89fb0",
+      "bytes": 22286
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-05",
+      "seed": 2,
+      "status": "success",
+      "sha256": "fc79dec61b832e994c356eca5291f88e9c0559414565165684b5057172e02602",
+      "bytes": 16602
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-06",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "6abb19302a1173d30f02b2ee08e4e29a9d35b5b3659b95cc5e37a51b26857aed",
+      "bytes": 26660
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-06",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "e43b77c041368b00986de43dec8c43a0fa486676174e856d87417c0a3e94b584",
+      "bytes": 36334
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "5d091c62c305c29cf0884a4e45fdd7bea93bb618c6ac50e3195ddab36a299608",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-11",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "54b16f244ea825467cd2c421f268e6381ca2a5e534233d16a0277029b0c2adc4",
+      "bytes": 74349
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-11",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "9098971082c3da8bc4fb0ee36ee70623984b015c9aef2e56ad280233a7ce99b4",
+      "bytes": 21126
+    },
+    {
+      "method": "spectra",
+      "task": "opamp-11",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "a4edeb637bd3f5d497cb3b5c568b76004d2f27d2f48b95cff5ef78034abb7e09",
+      "bytes": 25021
+    },
+    {
+      "method": "spectra",
+      "task": "vco-03",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "f533b17cbdf198984aa3b53d1b4c6e1544301096164eadc4fca3de94f633cac7",
+      "bytes": 24231
+    },
+    {
+      "method": "spectra",
+      "task": "vco-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "9bbdc4a6658adfbe73f6da2c261b59963eb6178fa7d873010d4862c0a0fe18d3",
+      "bytes": 30282
+    },
+    {
+      "method": "spectra",
+      "task": "vco-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "87745a01469f12ec4a947360b1f3249f47311785148aabc8ace3f014bebdf91d",
+      "bytes": 2137
+    },
+    {
+      "method": "spectra",
+      "task": "vco-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "8d003fa80ea9876be4078efbf70ff16837246290a80428b0f1f6cc8fbcb25ebd",
+      "bytes": 2137
+    },
+    {
+      "method": "spectra",
+      "task": "vco-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "8481efb304b10e3142c4c3344befd9942899b6dc0efe7905de448fb770911393",
+      "bytes": 16786
+    },
+    {
+      "method": "spectra",
+      "task": "vco-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "fefcdea5660a001b89ee5fefe46a7c70182b1be695cf1cfa6debd72921db1188",
+      "bytes": 16219
+    },
+    {
+      "method": "spectra",
+      "task": "vco-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "aa4af39388714ee4fde26441831fb23d420ab5cdb0f9f3104ebb4475a9ddd63c",
+      "bytes": 10597
+    },
+    {
+      "method": "spectra",
+      "task": "vco-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "1a19e6d750e4451c553d19275ea1a350826f904a2d0ddcb5f87e3013ea8ee20f",
+      "bytes": 2128
+    },
+    {
+      "method": "spectra",
+      "task": "vco-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "60fb2d8413de7d44296a23f5509a9dbb2893f3448473be17658f6ce1f968e63f",
+      "bytes": 2128
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "80bc4d062eb65d88b315d037b33fabb0f1d9b6a34dd772789bc89f51f62d7f05",
+      "bytes": 16106
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "35b495c271b9abc9efd059c76442b49f1e00e2d180813657c704df87e7f07ea9",
+      "bytes": 24601
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "a7ec4e7bdfcd0edc5820a6692566c6062d272af40f26781e342439bcd0af413a",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "307daef2ec7c7e7e5582e5412af0ba05e63703100ace51e94d66f07d897a2854",
+      "bytes": 23940
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "3edbdafa2f338cfe55dd4ca99f96e87e7cf4885cc054998e9b0d2fea0edcbc19",
+      "bytes": 29100
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "2b337a3cddb7eb485918f4503b68a541e2c7d4aec9bb99ccbe13cfe782fe8bcc",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "ba8d89f46b8a81bb5c116ca3fa12edba64a786a8a549153ecec8d41f3d9b934d",
+      "bytes": 14729
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "ef6933e339a5a63aba7076bd361a0c86ff96b5cf54f1587eb547eef75b6ffe48",
+      "bytes": 12825
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "amp-07",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "a5617e084309d81cc88c05de8d8f720dae5f5ee36f47e45c533ec13b75f79b72",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "f0dbbe043aff8f43b9c8fd96d7bdb620fa66ac184f6f9c47fd31ea99c6e18f97",
+      "bytes": 12812
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "a2df3f64d86ed36c2846f06da72a1698cd149f9645a1b585b0f5dae341edd347",
+      "bytes": 10270
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "193effe1b09b225315fa6d3955355ae1a61b4d121cd62e0c662191c3e3c02ba2",
+      "bytes": 11136
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-04",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "6f32eeb4e17dae9c127a1128c2d855ea5affc0c348a64495e031b600a46a6528",
+      "bytes": 11452
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-04",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "c9e70d4943265374d6643ff1a94d8cab43a4319ee41edb02f996cf661e2fb6da",
+      "bytes": 20498
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "49b83c10249db2b0f9e73a81a3746f7c789c53a908c230987cc89036496404aa",
+      "bytes": 17461
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "6c72d713d68727a1cd785670633fb76f90386d9480b99ca7e020822225aa1894",
+      "bytes": 6056
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "d9aad62e23285104031d21cd18366928003db7397045445fde9adc5a6d2a2e6f",
+      "bytes": 6755
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "cmirror-06",
+      "seed": 2,
+      "status": "success",
+      "sha256": "dfa89401de0bbe46be3596cb40bb6b5b1d1af6b68c4229aafdd6b41641926c29",
+      "bytes": 6266
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "c02ffd57a9ebc3f91ef07fa811a1b4d535d2b3c5c2c238a1b2cbe1bf611a1356",
+      "bytes": 15352
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "a2907ff0fd563419164ad1283c9dffbed1cd2087f69adac350db9409104f00ce",
+      "bytes": 22122
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "60a3f790907268d6042ae5707c4c6a48232415d38c164d968bacc6a700371727",
+      "bytes": 17079
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "7440693a5943207a2b3483fec298832045c9c6883dfcd449659ce8dc19355f72",
+      "bytes": 10312
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "6bcded0e2851e9f527b78e25f19e2c420a4567e4513bccfaef1f47071131c0ee",
+      "bytes": 12089
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "121fbbeba4282de26cd6213dba347a902dd1e9cdf41f42e29018fc849390a19c",
+      "bytes": 15068
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "ff9da8f67e2716828f80c6c9ef1d2a5c7065665621be9de5e4efcfbb9783fd8b",
+      "bytes": 21007
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "ce3d8ab27fbdf8bdfcff89492ee293ba6dffaaf01dca03e0a16cb48caa05d9e2",
+      "bytes": 9365
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "filter-07",
+      "seed": 2,
+      "status": "success",
+      "sha256": "d8833d0a56b7cff05eafa657d51fbe19a41ce8bb21539812267c16259f44e7cc",
+      "bytes": 9308
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "4ea954c5b5ae2e8eb2c9f46e45c18f64bc611b2853f76afb49a01a7151092881",
+      "bytes": 15651
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-03",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "984062ceb33d0b3571825f7b2ae074a6f687fa01f76a85fc569bda7ebcde40b0",
+      "bytes": 3526647
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "d044c7ddcad72a9ff9e04e870824ee08128157116033c775ca524de5e9544327",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-04",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "4771ed4c91bd31607663ce0f97d7196cfd475161817b67fb134ce0394db522e4",
+      "bytes": 27475
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "a5d512fd9f1fadc558ffaef6256934bcba6a60d15bbd8b539d0ddc69a8034d25",
+      "bytes": 14980
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "6cc59f9d3e2041bc8a637f2286bc801d5da4420f038e08218520f57f86ad6ef2",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-06",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "1d8e52841a573d35b1a21e771fda7f6bcfa27cf29e5651317a497979eee7076c",
+      "bytes": 110991
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-06",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "c45ff3768ae0b523f12d30a4afb4a1ae968c6d0216d44866a2a59c560f9b4e85",
+      "bytes": 30463
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "ldo-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "152d1540e48c1bcd172220d208bc09694b2b098f1cafb4ddc70c43de0f449efa",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-05",
+      "seed": 0,
+      "status": "success",
+      "sha256": "550fa39f0fadecb93630fdeb89d87d695159e4250ec47cf641bb97c9000729c1",
+      "bytes": 15225
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-05",
+      "seed": 1,
+      "status": "success",
+      "sha256": "4c32bb41dec5607e871ec42ac2ff273db542fd0b84f79d8edfaeefc61459e117",
+      "bytes": 13361
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-05",
+      "seed": 2,
+      "status": "success",
+      "sha256": "f25a459387f1d1622ba614b39a8c82528572ab5fe39842ec571811525db41dee",
+      "bytes": 20825
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-06",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "5f50ed99869635e4cf5844ac01eee9563fa0c14ae42a57c0b19303418d3aa21b",
+      "bytes": 16144
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-06",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "da1f7b05993d54c5c6babe2d8b91e3f09cbe92b1c370641a61a9e2a7c86050ee",
+      "bytes": 40694
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "f78d624fdf47a88d93321edbf7ac1f6049aad264a01cc257bad0deb8295dc35a",
+      "bytes": 2194
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-11",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "593dbe146155adadb089c2ebe60295990ae50bab65ad9ce94d9e51c4333be5e8",
+      "bytes": 29990
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-11",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "92e51329c0e30e4568bcaa19b2044d0dd974c41530004ef9f8191a7f64f7be9d",
+      "bytes": 23902
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "opamp-11",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "1722e13e89e10c9f231311e874ab4d63b4da86afc30a71bdc874447b19758c12",
+      "bytes": 30887
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-03",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "5bfb075fbcaf1380f879eebeb2862fa4161f9169ffb86922d9bf25026dc5757c",
+      "bytes": 20927
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-03",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "094a73666a421801a6779ed324cda17ec03e1ca099032fde69cd8a7cd889c008",
+      "bytes": 20678
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "9a84494266d892c242f087ea692034a8987f38e21269bef00ff3dd63b6e2db5f",
+      "bytes": 16908
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "202b302b66ec67a953e088dab5372f602d4c5b0d1ac4069e114be9421118e5cd",
+      "bytes": 2151
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "2512f743021db2bde97aa9eb342f53af87cfffc43c925303b0932c405d204fce",
+      "bytes": 13218
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "c241b6ef375117b85c662331bd0bcc36541b456a05980d0c5ac09c21ea316847",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "4dad84fe0e30939ef877528137387bd67e0c7fed36bc5898d7d0ab55457c7f30",
+      "bytes": 11382
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "d16e6bc1c801843a500c8f631c4c6e1499cc5fcfbe3d14e77491e5abbb59bbeb",
+      "bytes": 10015
+    },
+    {
+      "method": "spectra_nodiag",
+      "task": "vco-06",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "0887f76cce0d410d560854526f15c61eed38277ee65f48ccaff37382c4bc48e2",
+      "bytes": 16547
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "03a5377e01e7ae1ff20ef5095b2c82eecec744806891856cd1475430cef14a91",
+      "bytes": 15477
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "e1ea1bd14bd7f2d03d46c581405135087e1f8198b94cb2054794a26b3ad20fb7",
+      "bytes": 2213
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "b09def712a04027d86e28395f3c7b0dc79fbb9aec4e9adb459fddb39b49771d0",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "22157ddcbbe98d959f90947fac5e2bda33f10999190abb7106038a3c7d2f630e",
+      "bytes": 13846
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "a80fdad3e51f498c2a44b8a756c4464e2e57eeead5e9e74f0beb760ed1d28732",
+      "bytes": 15239
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "05874db9030913153007d4b76acd42038dc8ed1425e9ed26007f389befb3c457",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "b9bcfb3f249729c1a49e69a0bf3d71365123771bfa0f9875b763988f4602b939",
+      "bytes": 10546
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "f0135cbd74999f937f857e1907bffa90b9976d0a19d905f2ed822224cb6a9a67",
+      "bytes": 10744
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "amp-07",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "66fef9770a9942d36857facc9a095b8fd798d3fba29f938872584fa4ca081ee8",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "fa2b83e14e1925f088b6f30282a1524e4b82de7dce31dfe06cf7c6ddd7079117",
+      "bytes": 7966
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "3d2357aa376602f22359efd0e57b369479bcaec2889373fb5a05fd8d04d2632e",
+      "bytes": 8410
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "81936c731cabdaf1ee1a009cec74081044b59656f7283826b790a24c06b6ffd3",
+      "bytes": 6714
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "09ae351559b1a02b5a43b903037a67fd43bfbd806154538e84cce4d64530995c",
+      "bytes": 9105
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "3bd407aa6470e08d11ddc08444745876e68a14b1edb5faa6cd8bb8514daa9acb",
+      "bytes": 9322
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "98b00d8be51f63d6edeb0d6addafac0941034c40166cd83614d1266205606077",
+      "bytes": 8334
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "1bacaf0d1c41211e4a1c66687e2efd857a57a0c44345c9e659d69d2c0ceb9389",
+      "bytes": 7032
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "c239df963e13f5728107503be919b84f848f779502db350d8ba66b3f76986109",
+      "bytes": 7043
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "cmirror-06",
+      "seed": 2,
+      "status": "success",
+      "sha256": "2fae868a8f6665f54856cf1122eb1c5d89b2a044e2d59cb3041d31c396b17ea9",
+      "bytes": 12247
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "c8920fe876b8d71f2fd1c749539935162f7607efa7a3d23044f4f5cecbade165",
+      "bytes": 10006
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "48362ba2b4f86a7be702d052f228cbabeaf0e7cb79ee73d7d9d8b14e3b624abd",
+      "bytes": 10265
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "42df4320e39f472f342c88c74bdaa9c6fe41f4a0a94c432bc7fc54e00a3e2f0a",
+      "bytes": 9164
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "b3f81fe078827cbd8948d4c08309c67b8376044cd5ddf20162102fe666e33a27",
+      "bytes": 12845
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "299b90601cba270ea7962273b984b296988c2b5ae345ea1bcaac5352e04a5ff3",
+      "bytes": 12213
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "18dc6c9e95aa002efbe9ea8b5deb2d490aa5b2a588e74244b2d254b6024444f1",
+      "bytes": 2151
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "45ee31560eeefd8ffb86168ca87b9fe41127bbce634d4a60392a08ef8c10ca2e",
+      "bytes": 7752
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "0ca25ee40549e79cc3eb12f6e3bf4df03d060494b85245704a74fa2ce1ebee09",
+      "bytes": 7316
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "filter-07",
+      "seed": 2,
+      "status": "success",
+      "sha256": "47ae1c98e88a30d685caac41cfa82a640ab18fa1a13fd45ead81195a410ac67e",
+      "bytes": 7686
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-03",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "362242f0808528decb761b67d67e9b7470a29215c853cac96bf464e741e5f7d8",
+      "bytes": 29876
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "83acf14b2239b166ab3dfc8f68390ccba74de4aac66c64cf06f8c3adeed6ecea",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "f3b3438e67e21e472561db45471aec6292009fd13d4d9449a9eec28f966dbf10",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "c5d0586a3e6b05519a661b3dee18c076d810a4d4e75ac9cc03a72e3cfc369196",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "679a81e72b57c31dfb145d8949e20255bbd4574b177822c656f8cade784b3a68",
+      "bytes": 21570
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "63d167d70ed4cf61d692f5c58e1f083c12788a4bd38ac790d2f380554b4b8164",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "c2f9265493abc06e900149c4915d43346b3313e1a3619c1e5408aaeca88573de",
+      "bytes": 11408
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-06",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "c931b3061380a625636176e5b473c084b07dffa918c4e883f9b919f951687b0c",
+      "bytes": 25878
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "ldo-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "127f81216d11c53fc0f64261633840d202a389d6f79741d37a6006ad6ed807d1",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-05",
+      "seed": 0,
+      "status": "success",
+      "sha256": "80073333faefa15db744f0974170b197f31bf90f6868dbabddc9b713a21bcc5b",
+      "bytes": 12657
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-05",
+      "seed": 1,
+      "status": "success",
+      "sha256": "8f79d1bcfdb2c17adf9d181d0be6b54d4920e324edd6ea1aed539634e30995b9",
+      "bytes": 10986
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-05",
+      "seed": 2,
+      "status": "success",
+      "sha256": "30a38d5cc5a11f5eb41b0aeb3002257b3c092446fa3b69a9eca2172615f0003a",
+      "bytes": 15191
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "86b5d21c7c3a05939eca8ed899ca184fc6fc440c0e1aad9cf9269c548dc21e95",
+      "bytes": 20899
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "cecc4728ea86c09f322353a0ccc60a34818c7606d1de37deb85eac7c1e3a5822",
+      "bytes": 21962
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "a63506d231c3cebfad8e728ef7dec815064381d54ce3c9bcb737d8ed49b62ab1",
+      "bytes": 2149
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-11",
+      "seed": 0,
+      "status": "success",
+      "sha256": "00df7a7e070aac1bca7d55a35863b73fae2618ccd2ff951b12633ab817892ae1",
+      "bytes": 14003
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-11",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "c3ffeb321dd6903f497958fd68f302a1c5e08cdf963f627ed13a26199fb1a21f",
+      "bytes": 26020
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "opamp-11",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "2691734c0fbf56b1ec7cd5341a6a782b729210d71ad1c019faa15a1ae45041a1",
+      "bytes": 15490
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-03",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "33c1acf469bc9ce077b15c681466a8071377d1dd1b7e11453dcc0aa4a8b2b0f3",
+      "bytes": 25294
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "6d73eeda9b2518c25a57cb7566c332671a26abc93aa2d1cbe9dc5e35c895c002",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "f10521ea234cf168b1295238e0b4acbdd91a19c708bd2d437b59f0a67a5bfd2c",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "ad3d662c67fe7d4058f3a6eca4c13c9eb8f88fb853c88871d1ae102dbf0d566b",
+      "bytes": 8363
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "dabfa428ee77a10575368393dbb761b9afee4a45ca2a5aaacbf36a82badfe625",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "c8767570ab4ee6fb3abddcc4280b79d5f25479e9e4509d70ca12efc1d5f9b135",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "5ef3832f673ba688dae22b5a727761870b27cb7ad04c22d500e576a0f66e3bad",
+      "bytes": 10855
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "82afbd1a4026c56f1f99bea26cb60e6a44294a56dd7f681c3f3a50307c56f238",
+      "bytes": 9204
+    },
+    {
+      "method": "spectra_nointent",
+      "task": "vco-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "f3f2965c16760f29c2fee5c06f8ccfd0265a409374ad0e33ec28059a1473610b",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-03",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "83891b406c8ca726cc7442fd0d956bc030607cefdd78115dde386b6f3bac7249",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "6e46be5477bc1753e54729b4983ceead0b8da3a4a6271853a0ccc639a78b73e3",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "51f1116e8a8bc1668a7e4a08fc619000e92420e87907d91ac278717d78644c0a",
+      "bytes": 11352
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "e640b21448216cf98a5a963a6d0a7fc9db4c73c25e8d550592fd1e1af11205f6",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "6c927fa60a3229176faff3b2fe6d64081e70e27081f0917bb5ad1cec57076bf2",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "4958b040761a7c810f7713225aff3a3d69b3482658da71310b926668f9291a1d",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-07",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "d81e5190d79cca5b3415273003c46014188ab15e6d0e7347ccc449291d053fbc",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-07",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "5465b0b8c71e25dcdb5d8ecde7ac10a336bce666c9b277534b72dc438485ef3a",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "amp-07",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "e7281a1f73c916e9073ad1c1db5a3dbe2f3141f7e0806ef6ce292e07fd015fc0",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "4895564bd891d92d97b7e8ea71ac75ab9fd778a5aa4fb3b89b80a9810775b53d",
+      "bytes": 13441
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "85be3777d304214c880340edec13580fab9047a8ef2f6371afad7f6fa20def10",
+      "bytes": 40603
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "b65af3f205e3ad714fd0ff74ee49dd40a209629c7a35397c09fb067f008c7e1c",
+      "bytes": 8598
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "b222866b5bbe39e91e1ec1bb00b8a79708f971bf8d13263f4d7352c29ca2a557",
+      "bytes": 9706
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "4f3c7918b9c0f953a7ee8cfc93c3770f3f1cd4f7e85e22e683be44506d6892d7",
+      "bytes": 63561
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "d2fb0191393513c21f0c3e63feaa21f77ca2d28b05f6fd5c5fd65e5d9c3f6d55",
+      "bytes": 2159
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "1b36907e44d898264901d150baca595175969b7cb7daa6812c197184c3afd2e2",
+      "bytes": 6867
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "10a82c1aad3c3505454c1a9535a3acc7741513828199a931f0d8252467794257",
+      "bytes": 8458
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "cmirror-06",
+      "seed": 2,
+      "status": "success",
+      "sha256": "ce5fd1d7d87522d7ffbae5429a32e6cb59e1078b1275b5dd9e45feebceb22719",
+      "bytes": 6370
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "1e62a89492e8ce51b678f9dac5f8032a12e45cd0841daa195dfd532661c56139",
+      "bytes": 15056
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "494fa8b892701d0a03a298dfe665f3630cbcc67a88c79bd344834164ba36c3a4",
+      "bytes": 9375
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "f700bc918d3634623727f9144bf4e3efd606be37db5f1454c705f1ba5bc65932",
+      "bytes": 14069
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "4356739dc8a26b4cc1a92402d1e41d962c675bbb39dae58542320893d054d9ab",
+      "bytes": 18987
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "89413caab3fd3cc6b4938870bfabcd256d846728005b04ae526929d44956fae6",
+      "bytes": 34024
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "68800a51ba09876fe35f848584ecd54da18271969dc7baf48680052a72f0ed0e",
+      "bytes": 15746
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "9767566a9db14036b6e0462b05888e794067b9ddc16f60f3706e78e0f2b60548",
+      "bytes": 7968
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "c9f1d2325eba3b3b789432098ff180bcf8a490c06b43127f9ac70934ab33caeb",
+      "bytes": 12453
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "filter-07",
+      "seed": 2,
+      "status": "success",
+      "sha256": "b09b96b4958b992a693ebda2c854d18a81e99ae528f11ad53a21c90fffea8452",
+      "bytes": 19769
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-03",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "d08ce275f4c4ed781355ba66f15e742423d048351d0bc8e4a18fc948a386c2ea",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "272d2909b1ddafc65be5c7e3a835412986a84c1d6db6aa496adcfe02229a8e76",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "03b34d96e77cbaa8492a8348861bac35fc5ae7ebe1db62b797d66d8fd5d88c63",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "da90dbd20b27dd2000d8b11bd50335c2cb0b0f41d895e49c518d730955a99081",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "6ab69e332505eae0925af8297c0043897a6ccff1c78f359acfe9803ffd287159",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "91ad1a2996529570a27b2033fd9422a7a6288f5a2548ab2ef95dae2aeaf1c805",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-06",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "2cbcd307a1b1613831802d08f8c6ecd5c513f4ce32b1828c099c02a8eb683227",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "3a0d244f9996ff0f45a4836fd3a03e30ad370c9fd6ea24aea8e4f2a3163ff5c4",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "ldo-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "5d677d117dcf1178b3d9d3b8749bd85d1806475dc6a3bad57141eb0659918102",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-05",
+      "seed": 0,
+      "status": "success",
+      "sha256": "4ad38fbf4783be28ba53cbdaa4a45f44a19d94832e6579a78c133ebd87f4f1c5",
+      "bytes": 19564
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-05",
+      "seed": 1,
+      "status": "success",
+      "sha256": "e65fe6f06fc01de8591315f4cf0738e6e868a153a69ce21a6ab0b26366e694b5",
+      "bytes": 14733
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-05",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "c0ab6dfdc109ad908cd0527ab53ee2b74e0e678008ae2db919036c05c7b531fb",
+      "bytes": 19599
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-06",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "502137b0b1ece96dfd8b3a9e91c04710a5de759a35e05e551c5c75ae03256426",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "7a1f19f1763e647b9a4a2c19c70fc46f3839de0f64af2d1891f55754a2bab536",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "15adf0cafcd5c2dde07fc63ce3c93a6713609980570f8489c2e215a8c4131a2a",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-11",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "5cd7645c51c78dc928e3230585386818ccb0e7477feba36913adb00b0644dffb",
+      "bytes": 23017
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-11",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "d5a63a98a351029da748bfdb71663554a2ac4e9990456cbbaa695fcd3c8f9a6f",
+      "bytes": 25238
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "opamp-11",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "cb54953c92a73a50030d8e7aa9e42c932c6306367ada1cdc61f677f7b0abb915",
+      "bytes": 2156
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "57e7f793d6eb6fe1fc8405717ec5875f7e4efafb449abac3ecfb21c33e63f81d",
+      "bytes": 25384
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "3b6b21df5eda0d029e39356509c31ac356ce09da000f5a2e87262258f3f5aa9a",
+      "bytes": 2151
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "c40dc64993d1cffbceb319065bf69d816f3730d4df16be3dfa6d30d9e759b080",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "2606b0346d169071fc61b73ca53008770a6881258c821f9b24ca42104b949f44",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "9d9e75f5e7675eb862c8f998deafbd0f5ea0922d1a46ef57d652e996914aa0bb",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "a33457faa5f8037dc563fcc6adfc4be02106fac4052e05bf21e61f4ecdab38b0",
+      "bytes": 2141
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-06",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "c2396235b03631bd55b84be949a8a8b7e8863e827d7bcfbd2bf6107bb56693fd",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "7587c76ed345616383c27409d35475830eabec781ec49d4bb48c160697b209c4",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_noknow",
+      "task": "vco-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "e5dec68c3cdbafd0a938b27e5220927d5ce1ce432ed31e72ad5ee0935bdd6cea",
+      "bytes": 2142
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-03",
+      "seed": 0,
+      "status": "budget_exhausted",
+      "sha256": "eee5b1527e138df8daab8ab871365b7386fb0ae8a422cd0869ea11d061b89e21",
+      "bytes": 27877
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "639b328db26a0da0083ecc5f5d571438963dc2418776d06bcc4088ddc2751b9c",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "f5548a3e7bd1a648b2ec13bf33aea691b2048e1ea9a43046382cc4a6a68ba739",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "e40d8f15ef1b03615686921c5a946142429ac98db0012df3830d9e08e8dd3cfc",
+      "bytes": 39253
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "b493ed922784f52d2538ad1da7896f4960337d327e684c34f2faa8110efdb560",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "a100f4bf69a52e76dc5d3dd2029b87364c89265428a9be4cef6852d0cc8ccf6b",
+      "bytes": 57507
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-07",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "1ecf68614059e609e2e0e3b51f289f6f7848a3aa04a3ce4781325d431b46babc",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-07",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "7dc26789e3fa337e33ef2a8f87ba010d6094ff3c06a2c01c39d7b50a7b519ed8",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "amp-07",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "63c9bb49b417627f99c5f1012a5d8efc4e601a04a07af04f9a56a12ffdb758fc",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "d9f684cfab25033ea58545da9d99b0231a0b816e04a1e0e87350c4b14bf15bc9",
+      "bytes": 17297
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "46700be80bf98eee824339d98b5886a8db8263b80625e21dd605304fd6c241a1",
+      "bytes": 11625
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "e3ac9b0d861ab36398b2c6f2506db284255e0b5318f51773aa81ff2868f1ff80",
+      "bytes": 9021
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "6b82c64724a5a8e3c8680dda3484b99693b3a5d7fbcd11e34cfa63d6f7af1f84",
+      "bytes": 29882
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-04",
+      "seed": 1,
+      "status": "success",
+      "sha256": "105dd952314f5a5782429063c50bb80bfeb5a95757f36755fb28410a2162d0b1",
+      "bytes": 68376
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-04",
+      "seed": 2,
+      "status": "success",
+      "sha256": "dd485076042100967e8b9d01b5b45700dfb150a65dfec17e3d101964781aa046",
+      "bytes": 115113
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-06",
+      "seed": 0,
+      "status": "success",
+      "sha256": "64090909cb6b7ede58104bb30777786fbfca4508178993ebf8461aa88ec21292",
+      "bytes": 6560
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-06",
+      "seed": 1,
+      "status": "success",
+      "sha256": "86eee6727e94410b4d1978a070bbbdf2610e0e05af50b6202bc9a0def1ff5593",
+      "bytes": 6526
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "cmirror-06",
+      "seed": 2,
+      "status": "success",
+      "sha256": "2d33de9c7dd25a154f61e946b3da0f13ef91b3b77053b369901576e4def71b3b",
+      "bytes": 7218
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "e043aed5c795c6a494a5bd371efe318a6b13fc25f5a61cd2d5248bb14cdee6a8",
+      "bytes": 14734
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-03",
+      "seed": 1,
+      "status": "success",
+      "sha256": "20ea8ecc3ae821a345111453e99d19dfe585288261efb44f5203f0b1c8d2e68e",
+      "bytes": 9989
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-03",
+      "seed": 2,
+      "status": "success",
+      "sha256": "98815afa0b9b10d4d2e4c51d64ea40f2284b274bc2d24d0cfffdc853a68c2f18",
+      "bytes": 21875
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "3e67292bcb82f1f2cca9f88c9bc2793023325f82242ff0f7167d185292e646c3",
+      "bytes": 11363
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "2840b86f26e2c5b3192e66e70f3648f2dd7c1e247b35b480bd4c109ba0825c54",
+      "bytes": 2151
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "8108ac5aa381348a9b22349881ad27552af00267509abc3adcc024ddeb548f32",
+      "bytes": 2151
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-07",
+      "seed": 0,
+      "status": "success",
+      "sha256": "3654b20ecf6cafa70bd0564905930d837da06768f8f6c558a51c919e5c22174a",
+      "bytes": 9187
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-07",
+      "seed": 1,
+      "status": "success",
+      "sha256": "98b8ba7f04397af9c22b7ff2df4f8dbb1d9d53b2aa78547da850b14adeacf8d9",
+      "bytes": 8750
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "filter-07",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "893b3bef7eae8fa4d65b1218c4720c0ffcb3f974a35002bd1ebfdc4177d1f5c6",
+      "bytes": 2152
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-03",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "a3c75a6ae0dad83bb7ba39ee7aaf16488770ba94652122d8bb9958ddd390387f",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "fb68687c6ade21d81fdad77385b2e86a80996dacd65c4c7950f5293b215afb53",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "516f5ae286b9a27bc178ab370dfa80dbc467eb1f3cb59772ab1e6ae8585b1374",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-04",
+      "seed": 0,
+      "status": "success",
+      "sha256": "0b889712dfc8786a09798cd731297682c18f5fd1a501aba1696730e76280094f",
+      "bytes": 31976
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "1ffab5977377af5281a6fcfd54848b1fcfdc056734b80590370ef39710aa55be",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "275aba60b0ca03d529f95272ded56018dda33bb995142457633d721906b83733",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-06",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "11f3552903ea85c3d01467feffa87e1e7f62b47180363411e362b3aa603e0899",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "9ed57ae740a07f733dad5e08956af06420a3061cbd06ee9f518e76b2acf03f5d",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "ldo-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "9999f325b6ab1c9004d0c4b2628b265646b2879fb5de8a5a6ba75c830b7f3383",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-05",
+      "seed": 0,
+      "status": "success",
+      "sha256": "120b7ae5abc6847bb7a5a009dff080ffafcddcafb409408fd6d683e448c10ec0",
+      "bytes": 16127
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-05",
+      "seed": 1,
+      "status": "budget_exhausted",
+      "sha256": "cbd31a0d4c856d83f48d8524f4c052764eee99804180d61a24a7fea9be4e9057",
+      "bytes": 31772
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-05",
+      "seed": 2,
+      "status": "success",
+      "sha256": "650c244ba7226670712c2edddd5ce30c645553eb2c62875a5185794b152d4635",
+      "bytes": 18335
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-06",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "60c9eb8094e63e75b5debff5e022b9466d9a07811fc44085cb1ff5733a52c4d9",
+      "bytes": 2159
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "d47895520034a3b71a69acbed7323c1f85f97bf8347f4f6efeb9167c9c07e181",
+      "bytes": 2149
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-06",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "4b8a4a0fe696f521104f4f587ab5958bcc31b89b636d0b8b7566ab15e82d0dc6",
+      "bytes": 27105
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-11",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "9e98c0a41c8b498a6b8d73aa24fde48dc109a8718c3423420f58099930bcb9ff",
+      "bytes": 2150
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-11",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "81ac40418b14915557aa738c4cd8aa7e6dd4b79f6d88d677154eb34c037d1c05",
+      "bytes": 2150
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "opamp-11",
+      "seed": 2,
+      "status": "budget_exhausted",
+      "sha256": "bdf8de6ee0c2566dfc5fb3d63105c994bd19da03e82ce8a1799ec5ff4630174a",
+      "bytes": 21031
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-03",
+      "seed": 0,
+      "status": "success",
+      "sha256": "796fbcd5a9bcf8fb3c1701f82bfdfc4052dc346639b2a4ab5bf90730d0f3aff2",
+      "bytes": 31731
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-03",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "280ecc75a1743cdd4930fcdee53a7d0f9a57faaf42a776dac9ba764dfb767b16",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-03",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "0449d6ad398c69adafaa88c74f1dc9fa3be68a86136cb942a5ea57cb8c3f9f63",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-04",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "1ae3d885e91ef2d9ee4d112ce750950dcc1e4f159f2421c3bfb419485fb63e82",
+      "bytes": 2155
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-04",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "06fbc3f1ad3ada67f5f94d1dcf12fa2ddf83f138a09c7fcc8c227ad62581ee3a",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-04",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "966871b18ebd2599e3e7e6b026bbd5d20cb6f77b9d6db3980e66bfe9f5c34d9d",
+      "bytes": 2145
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-06",
+      "seed": 0,
+      "status": "crash",
+      "sha256": "e80a32383cc99ab90b3d279fbbe5ed6e03f764e15e1ebb3f6ef8c63b6a610e1c",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-06",
+      "seed": 1,
+      "status": "crash",
+      "sha256": "ec4550f1bd54892039d62d04fe008cd156f6d1d1f3cb2bd676b4f64aaa81d22e",
+      "bytes": 2146
+    },
+    {
+      "method": "spectra_norefine",
+      "task": "vco-06",
+      "seed": 2,
+      "status": "crash",
+      "sha256": "2b6ce53cfa67571243d96cd9a232246a7fb764baea0070bdfd5b6a10ab97d07c",
+      "bytes": 2146
+    }
+  ]
+}

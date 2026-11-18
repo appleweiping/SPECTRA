@@ -15,6 +15,11 @@ The completed matrix has eight rows and should be read as a protocol matrix rath
 
 The ablation rule follows the component studies in AnalogCoder and AnalogScout. A component is retained in the final claim only when the paired comparison supports a directional contribution. If an ablation wins on a subset, the result remains in the tables and the paper reports the negative or mixed finding rather than changing the endpoint or deleting the task.
 
+The mechanism track follows that rule in `results/component_mechanism_matrix.json`. Refinement and knowledge removal reduce
+paired TT success on the matched six-domain set. Diagnosis and intent produce auditable attribution and parameterization
+signals, but their TT/PVT removal arms are mixed or numerically better on this run. The project therefore does not make
+an all-components performance claim.
+
 The strict sizing track now uses `data/bench/paper_sizing_tasks.jsonl`. It contains 36 public fixed-topology tasks
 across opamp, amp, cmirror, filter, ldo and vco, including a robust subset with PVT-enabled verification. Its seven
 paper-backed rows are AnalogCoder AAAI-25, ADO-LLM ICCAD-24, AnaFlow ICCAD-25, Artisan DAC-24, AutoSizer ICML-26,
