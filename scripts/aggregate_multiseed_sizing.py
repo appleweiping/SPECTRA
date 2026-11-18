@@ -85,7 +85,7 @@ def _pair_sign_p(wins, losses):
     return min(1.0, 2 * tail)
 
 
-def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("SIZ7g", "SIZ7g_MS"), reps=4000):
+def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("SIZ7g", "SIZ7g_MS_FINAL"), reps=4000):
     tasks = _load_tasks(ROOT / subset)
     root = ROOT
     cells = {m: {} for m in METHODS}
@@ -199,7 +199,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--subset", default="data/bench/paper_sizing_tasks.jsonl")
     ap.add_argument("--seeds", default="0,1,2")
-    ap.add_argument("--exps", default="SIZ7g,SIZ7g_MS")
+    ap.add_argument("--exps", default="SIZ7g,SIZ7g_MS_FINAL")
     ap.add_argument("--reps", type=int, default=4000)
     args = ap.parse_args()
     main(args.subset, tuple(int(x) for x in args.seeds.split(",")), tuple(args.exps.split(",")), args.reps)
