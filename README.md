@@ -24,7 +24,7 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   a separate diagnostic appendix.
   The final matched extension contains 864 cells, eight rows across 36 tasks and three seeds. In the primary
   eight-row aggregate SPECTRA reaches 0.806 TT and 0.194 PVT, while AnaFlow reaches 0.870 TT and 0.306 PVT.
-  The independently reported SPECTRA-PVT-staged variant reaches 0.833 TT, 0.222 PVT and 0.5063 mean PVT violation.
+  The independently reported post-fix SPECTRA-PVT-staged variant reaches 0.815 TT, 0.222 PVT and 0.5009 mean PVT violation.
   These are track-scoped measurements and do not establish universal analog-sizing SOTA.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement

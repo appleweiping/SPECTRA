@@ -1,11 +1,13 @@
 {
   "method": "spectra_staged",
+  "source_commit": "3347b38c19efe60dfbaa5bd71c7fe898207ea199",
+  "experiment": "SIZ7g_SPECTRA_STAGED_POSTFIX_FINAL",
   "cells": 108,
-  "tt_success": 0.8333333333333334,
+  "tt_success": 0.8148148148148148,
   "pvt_success": 0.2222222222222222,
-  "tt_violation": 0.10519314518034449,
-  "pvt_violation": 0.5063272803884586,
-  "mean_sims": 132.2685185185185,
+  "tt_violation": 0.10713267408028362,
+  "pvt_violation": 0.5008983930287914,
+  "mean_sims": 133.57407407407408,
   "mean_calls": 2.1203703703703702,
   "pvt_observed": 36
 }
