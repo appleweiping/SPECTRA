@@ -1,0 +1,158 @@
+{
+ "direct": {
+  "n_fail": 44,
+  "near_miss_<5%": 6,
+  "median_violation": 0.267055814289941,
+  "top_failing_metrics": [
+   [
+    "cmrr_db",
+    9
+   ],
+   [
+    "(PVT only)",
+    7
+   ],
+   [
+    "psrr_db",
+    6
+   ],
+   [
+    "power",
+    6
+   ],
+   [
+    "swing",
+    6
+   ],
+   [
+    "psrr_1k",
+    6
+   ],
+   [
+    "line_reg",
+    4
+   ],
+   [
+    "rout",
+    3
+   ]
+  ]
+ },
+ "genbo": {
+  "n_fail": 47,
+  "near_miss_<5%": 2,
+  "median_violation": 0.4310322824634898,
+  "top_failing_metrics": [
+   [
+    "power",
+    13
+   ],
+   [
+    "(PVT only)",
+    8
+   ],
+   [
+    "psrr_db",
+    5
+   ],
+   [
+    "psrr_1k",
+    5
+   ],
+   [
+    "cmrr_db",
+    4
+   ],
+   [
+    "undershoot",
+    4
+   ],
+   [
+    "ripple_settled",
+    4
+   ],
+   [
+    "line_reg",
+    3
+   ]
+  ]
+ },
+ "spectra": {
+  "n_fail": 24,
+  "near_miss_<5%": 6,
+  "median_violation": 0.08835527008031038,
+  "top_failing_metrics": [
+   [
+    "(PVT only)",
+    4
+   ],
+   [
+    "noise_1k",
+    3
+   ],
+   [
+    "undershoot",
+    2
+   ],
+   [
+    "ripple_settled",
+    2
+   ],
+   [
+    "psrr_db",
+    2
+   ],
+   [
+    "f3db",
+    2
+   ],
+   [
+    "psrr_1k",
+    2
+   ],
+   [
+    "delay",
+    2
+   ]
+  ]
+ },
+ "spectra_min": {
+  "n_fail": 33,
+  "near_miss_<5%": 2,
+  "median_violation": 0.35675632850233857,
+  "top_failing_metrics": [
+   [
+    "(PVT only)",
+    6
+   ],
+   [
+    "power",
+    6
+   ],
+   [
+    "psrr_1k",
+    6
+   ],
+   [
+    "cmrr_db",
+    4
+   ],
+   [
+    "swing",
+    4
+   ],
+   [
+    "noise_1k",
+    3
+   ],
+   [
+    "psrr_db",
+    3
+   ],
+   [
+    "slew",
+    3
+   ]
+  ]
+ }
+}

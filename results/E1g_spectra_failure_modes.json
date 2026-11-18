@@ -1,0 +1,392 @@
+{
+ "experiment": "E1g",
+ "n_failed_runs": 24,
+ "n_failed_robust": 7,
+ "n_failed_nominal": 17,
+ "robust_stalled": 4,
+ "robust_median_pvt_sims": 141,
+ "robust_median_calls": 12,
+ "nominal_median_calls": 12,
+ "primary_losses": {
+  "direct": [
+   "D09",
+   "comparator-03",
+   "latch-02",
+   "ldo-07",
+   "opamp-09",
+   "opamp_app-08",
+   "schmitt-03",
+   "tia-03"
+  ],
+  "genbo": [
+   "comparator-03",
+   "latch-02",
+   "vco-05"
+  ],
+  "spectra_min": [
+   "comparator-03",
+   "latch-04",
+   "tia-02",
+   "tia-03",
+   "vco-05"
+  ]
+ },
+ "primary_loss_families": {
+  "direct": [
+   "comparator",
+   "latch",
+   "ldo",
+   "opamp",
+   "opamp_app",
+   "schmitt",
+   "tia"
+  ],
+  "genbo": [
+   "comparator",
+   "latch",
+   "vco"
+  ],
+  "spectra_min": [
+   "comparator",
+   "latch",
+   "tia",
+   "vco"
+  ]
+ },
+ "runs": [
+  {
+   "task": "tia-05",
+   "seed": "s0",
+   "family": "tia",
+   "robust": true,
+   "calls": 12,
+   "sims": 205,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 3,
+   "pvt_sims": 141,
+   "pvt_scores": [
+    0.746,
+    0.746,
+    0.746
+   ],
+   "pvt_stalled": true
+  },
+  {
+   "task": "opamp-14",
+   "seed": "s0",
+   "family": "opamp",
+   "robust": true,
+   "calls": 12,
+   "sims": 542,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 8,
+   "pvt_sims": 375,
+   "pvt_scores": [
+    2.973,
+    2.973,
+    2.973,
+    0.199,
+    0.199,
+    0.199,
+    2.085,
+    2.085
+   ],
+   "pvt_stalled": true
+  },
+  {
+   "task": "ldo-07",
+   "seed": "s0",
+   "family": "ldo",
+   "robust": true,
+   "calls": 12,
+   "sims": 25,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "ldo-06",
+   "seed": "s0",
+   "family": "ldo",
+   "robust": true,
+   "calls": 12,
+   "sims": 73,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp_app-08",
+   "seed": "s0",
+   "family": "opamp_app",
+   "robust": true,
+   "calls": 6,
+   "sims": 600,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 3,
+   "pvt_sims": 295,
+   "pvt_scores": [
+    0.112,
+    0.112,
+    0.112
+   ],
+   "pvt_stalled": true
+  },
+  {
+   "task": "schmitt-03",
+   "seed": "s0",
+   "family": "schmitt",
+   "robust": true,
+   "calls": 8,
+   "sims": 591,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 4,
+   "pvt_sims": 290,
+   "pvt_scores": [
+    4.0,
+    4.0,
+    4.0,
+    4.0
+   ],
+   "pvt_stalled": true
+  },
+  {
+   "task": "opamp-09",
+   "seed": "s2",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 30,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp-09",
+   "seed": "s1",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 35,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "D09",
+   "seed": "s0",
+   "family": "ldo",
+   "robust": true,
+   "calls": 12,
+   "sims": 49,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp-07",
+   "seed": "s0",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 43,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp-07",
+   "seed": "s1",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 69,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp-08",
+   "seed": "s0",
+   "family": "opamp",
+   "robust": false,
+   "calls": 12,
+   "sims": 298,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp-08",
+   "seed": "s1",
+   "family": "opamp",
+   "robust": false,
+   "calls": 11,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "opamp-08",
+   "seed": "s2",
+   "family": "opamp",
+   "robust": false,
+   "calls": 11,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "tia-03",
+   "seed": "s0",
+   "family": "tia",
+   "robust": false,
+   "calls": 8,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "tia-02",
+   "seed": "s0",
+   "family": "tia",
+   "robust": false,
+   "calls": 9,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "ldo-05",
+   "seed": "s2",
+   "family": "ldo",
+   "robust": false,
+   "calls": 12,
+   "sims": 25,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "ldo-03",
+   "seed": "s0",
+   "family": "ldo",
+   "robust": false,
+   "calls": 12,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "latch-02",
+   "seed": "s2",
+   "family": "latch",
+   "robust": false,
+   "calls": 12,
+   "sims": 254,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "ldo-04",
+   "seed": "s1",
+   "family": "ldo",
+   "robust": false,
+   "calls": 12,
+   "sims": 288,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "latch-04",
+   "seed": "s1",
+   "family": "latch",
+   "robust": false,
+   "calls": 6,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "comparator-03",
+   "seed": "s2",
+   "family": "comparator",
+   "robust": false,
+   "calls": 8,
+   "sims": 300,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "vco-05",
+   "seed": "s2",
+   "family": "vco",
+   "robust": false,
+   "calls": 12,
+   "sims": 64,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  },
+  {
+   "task": "vco-03",
+   "seed": "s0",
+   "family": "vco",
+   "robust": false,
+   "calls": 12,
+   "sims": 65,
+   "status": "budget_exhausted",
+   "n_pvt_verify": 0,
+   "pvt_sims": 0,
+   "pvt_scores": [],
+   "pvt_stalled": false
+  }
+ ]
+}

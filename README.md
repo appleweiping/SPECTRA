@@ -11,9 +11,10 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   current mirror, LDO, bandgap reference, CT comparator, StrongARM latch, VCO, filters, Schmitt trigger, op-amp
   applications) with testbenches, certified tiers (feasibility certificates from expert templates), a designer tier,
   45-condition PVT grid and per-instance mismatch Monte Carlo (an early infeasible-control tier was withdrawn).
-* **Baselines** (`spectra/baselines`): AnalogCoder-style direct netlist agent, AnalogCoder-Pro-style generate+TPE
-  (and the Gen+TPE-full fairness variant); ablations in `scripts/run_bench.py`. Generate+CMA-ES and the template oracle
-  are implemented but were not run in the final protocol (compute).
+* **Baselines** (`spectra/baselines`): AnalogCoder-style direct netlist agent, AnalogCoder-Pro-style generate+TPE,
+  generate+CMA-ES and three explicitly labelled template-oracle optimizers. The six-domain extension evaluates these
+  seven external frameworks beside SPECTRA under one budget. Oracle rows are privileged upper bounds and are not used
+  for fair LLM superiority claims. Ablations are in `scripts/run_bench.py`.
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.
@@ -23,6 +24,7 @@ Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BR
 pip install numpy scipy cma optuna matplotlib openai # + ngspice >= 42 on PATH, OPENAI_API_KEY for GPT calls
 python -m scripts.gen_lut tt ff ss sf fs T=-40 T=27 T=125      # gm/Id lookup tables
 python -m scripts.run_bench --exp E1g --model gpt-6.1-sol --methods spectra,direct,genbo --seeds 0,1,2
+python -m scripts.run_bench --exp EXT7g --model gpt-6.1-sol --methods genbo_cmaes,oracle_random,oracle_cmaes,oracle_tpe --seeds 0 --tasks data/bench/topconf6.jsonl
 python -m scripts.analyze --exp E1
 bash scripts/finalize_paper.sh        # regenerate every analysis, table, figure and paper macro, then compile
 ```

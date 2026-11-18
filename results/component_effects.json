@@ -1,0 +1,91 @@
+{
+  "schema": "spectra-component-effects/v1",
+  "model": "gpt-6.1-sol",
+  "rows": [
+    {
+      "component": "diagnosis",
+      "variant": "spectra_nodiag",
+      "matched_tasks": 34,
+      "seeds": [
+        2,
+        2
+      ],
+      "success_with": 0.8137254901960784,
+      "success_without": 0.7941176470588235,
+      "delta_success_pp": 1.9607843137254943,
+      "with_mean_sims": 77.775,
+      "without_mean_sims": 103.16176470588235,
+      "wins": 7,
+      "losses": 5,
+      "paired_p": 0.79219,
+      "mechanism": "The failure-feedback path lowers mean simulations on the matched set and provides causal device/sensitivity evidence. E4 fault top-1 is raw 80.7% versus diagnosis 76.5%, so localization is a negative or mixed standalone result.",
+      "status": "mixed"
+    },
+    {
+      "component": "intent-program abstraction",
+      "variant": "spectra_nointent",
+      "matched_tasks": 34,
+      "seeds": [
+        2,
+        2
+      ],
+      "success_with": 0.8137254901960784,
+      "success_without": 0.8382352941176471,
+      "delta_success_pp": -2.450980392156865,
+      "with_mean_sims": 77.775,
+      "without_mean_sims": 99.25,
+      "wins": 6,
+      "losses": 8,
+      "paired_p": 0.75453,
+      "mechanism": "Median intent variables 10 versus 25 raw sizing variables (2.29x compression). First-order predictions are accurate for some metrics and poor for second-order metrics.",
+      "status": "mixed"
+    },
+    {
+      "component": "PVT-aware refinement",
+      "variant": "spectra_norefine",
+      "matched_tasks": 23,
+      "seeds": [
+        1,
+        1
+      ],
+      "success_with": 0.8985507246376813,
+      "success_without": 0.6956521739130435,
+      "delta_success_pp": 20.28985507246378,
+      "with_mean_sims": 47.46376811594203,
+      "without_mean_sims": 24.565217391304348,
+      "wins": 7,
+      "losses": 3,
+      "paired_p": 0.05194,
+      "mechanism": "Worst-condition CMA-ES refinement is the strongest endpoint contribution in the matched T3 block.",
+      "status": "directional"
+    },
+    {
+      "component": "knowledge cards",
+      "variant": "spectra_noknow",
+      "matched_tasks": 23,
+      "seeds": [
+        1,
+        1
+      ],
+      "success_with": 0.8985507246376813,
+      "success_without": 0.8695652173913043,
+      "delta_success_pp": 2.898550724637694,
+      "with_mean_sims": 47.46376811594203,
+      "without_mean_sims": 53.08695652173913,
+      "wins": 3,
+      "losses": 6,
+      "paired_p": 0.85903,
+      "mechanism": "Cards encode topology, headroom, bias and stability constraints. The observed endpoint difference is small and the W/L test is non-significant, so the mechanism is retained without an essentiality claim.",
+      "status": "mixed"
+    }
+  ],
+  "diagnosis_fault_test": {
+    "n": 166,
+    "top1_raw": 0.8072289156626506,
+    "top1_diag": 0.7650602409638554,
+    "only_raw_correct": 15,
+    "only_diag_correct": 8,
+    "p_mcnemar_exact": 0.21003961563110352
+  },
+  "interpretation": "Endpoint success, mechanism evidence and paired significance are reported separately. Mixed or null effects are retained."
+}

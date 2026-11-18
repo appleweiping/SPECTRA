@@ -1,17 +1,19 @@
 \begin{table}[t]
 \centering
-\caption{PVT-robust tasks of the subset (6 tasks, seed 0; success on all 45 conditions). Sims: condition-evaluations, median over successful runs and mean over all runs.}
+\caption{PVT-robust tasks of the subset (11 tasks, seed 0; success on all 45 conditions). Sims: condition-evaluations, median over successful runs and mean over all runs; yield: mean mismatch Monte-Carlo yield (\%) at TT of the successful designs.}
 \label{tab:pvt}
 \scriptsize
 \setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}lccccc@{}}
 \toprule
-Method & Success (\%) [CI] & W/L & Sims$^\star$ & Sims \\
+Method & Success (\%) [CI] & W/L & Sims$^\star$ & Sims & Yield \\
 \midrule
-\textbf{SPECTRA} (adaptive worst conditions) & 83 [50,100] & -- & 46 & 193 \\
-SPECTRA-min & 83 [50,100] & 1/1 & 121 & 192 \\
-Gen+TPE (3 fixed corners) & 17 [0,50] & 4/0 & 48 & 273 \\
-AnalogCoder-style & 83 [50,100] & 1/1 & 48 & 177 \\
+SPECTRA (adaptive worst conditions) & 64 [36,91] & -- & 111 & 268 & 86 \\
+\quad w/o PVT-aware refinement & 64 [36,91] & 1/1 & 56 & 257 & 95 \\
+Gen+TPE-full (12 regen., adaptive) & 64 [36,91] & 2/2 & 48 & 275 & 98 \\
+SPECTRA-min & 45 [18,73] & 2/0 & 46 & 187 & 78 \\
+Gen+TPE (3 fixed corners) & 27 [0,55] & 4/0 & 48 & 327 & 88 \\
+\textbf{AnalogCoder-style} & 73 [45,100] & 1/2 & 70 & 132 & 85 \\
 \bottomrule
 \end{tabular}
 \end{table}

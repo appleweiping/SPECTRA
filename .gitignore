@@ -14,4 +14,7 @@ paper/*.fdb_latexmk
 paper/*.synctex.gz
 .aris/cache/
 data/sim_cache/
+data/llm_cache/
+results/raw/*g/
+work/
 .env*

@@ -1,0 +1,10 @@
+{
+ "main": {
+  "n": 166,
+  "top1_raw": 0.8072289156626506,
+  "top1_diag": 0.7650602409638554,
+  "only_raw_correct": 15,
+  "only_diag_correct": 8,
+  "p_mcnemar_exact": 0.21003961563110352
+ }
+}
