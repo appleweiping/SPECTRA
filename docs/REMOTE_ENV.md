@@ -35,3 +35,10 @@ The strict paper sizing track completed 252 unique records for 36 tasks × 7 pap
 mechanism track completed 270 unique records for 18 tasks × 5 arms × 3 seeds. The combined raw-evidence archive is
 `work/remote_archive/sizing_component_final.tar` with SHA-256
 `221B11AC6409F075D7D67B6D91FF0220797B13539732FD6A94E38F91BF79DC0F`.
+
+The strict eight-row SIZ7g rerun added the native fixed-topology SPECTRA row. It contains 288 observed cells,
+36 tasks per row, 12 robust tasks, a 300 simulation-unit cap and a 12-call cap. The final strict archive is
+`work/remote_archive/siz7g_spectra_final.tar` with SHA-256
+`4B81D1BD1407A06BC6BAEAF3FC7B2A62C16FC7B88C7D90CDEB1AB62B4E9BF949`. SPECTRA records 31/36 TT passes and
+2/12 independent PVT passes. The matrix is a single-seed descriptive snapshot and mismatch is unavailable for
+the public task file.

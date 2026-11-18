@@ -1,11 +1,12 @@
 {
-  "schema": "spectra-paper-sizing/v2",
+  "schema": "spectra-paper-sizing/v4",
   "model": "gpt-6.1-sol",
   "subset": "data/bench/paper_sizing_tasks.jsonl",
   "exp": "SIZ7g",
   "n_tasks": 36,
-  "n_frameworks": 7,
+  "n_frameworks": 8,
   "frameworks": [
+    "spectra",
     "analogcoder",
     "ado_llm",
     "anaflow",
@@ -20,6 +21,8 @@
   },
   "search_corners": 3,
   "verifier_corners": 45,
+  "primary_endpoint": "tt_success",
+  "inference_scope": "single_seed_paired_snapshot",
   "metrics": [
     "tt_success",
     "pvt_success",
@@ -35,6 +38,64 @@
     "failure_taxonomy"
   ],
   "rows": [
+    {
+      "method": "spectra",
+      "paper": "SPECTRA (ours)",
+      "venue": "this work",
+      "repo": "local framework",
+      "implementation": "native-SPECTRA-fixed-topology-adapter",
+      "task_scope": "fixed_topology_sizing",
+      "observed": 36,
+      "missing": 0,
+      "task_count": 36,
+      "family_count": 6,
+      "robust_tasks": 12,
+      "robust_observed": 12,
+      "tt_success": 0.8611111111111112,
+      "tt_ci95": [
+        0.7134,
+        0.9392
+      ],
+      "pvt_success": 0.16666666666666666,
+      "pvt_ci95": [
+        0.047,
+        0.448
+      ],
+      "mismatch_yield": null,
+      "mismatch_observed": 0,
+      "mean_sims": 52.861111111111114,
+      "median_sims": 6.0,
+      "mean_calls": 1.75,
+      "median_calls": 2.0,
+      "mean_wall_seconds": 186.4388888888889,
+      "median_wall_seconds": 105.05,
+      "mean_tokens_in": 7479.222222222223,
+      "mean_tokens_out": 689.8055555555555,
+      "mean_cost_usd": 0.0,
+      "mean_first_pass_sims": 24.789473684210527,
+      "mean_first_pass_calls": 1.736842105263158,
+      "first_pass_observed": 19,
+      "mean_violation_score": 0.07403430840485824,
+      "median_violation_score": 0.0,
+      "violation_observed": 36,
+      "mean_simulation_units": 52.861111111111114,
+      "failure_taxonomy": {
+        "pvt_fail": 6,
+        "budget_exhausted": 15,
+        "pass": 15
+      },
+      "crashes": 0,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_analogcoder": 18,
+      "losses_vs_analogcoder": 0
+    },
     {
       "method": "analogcoder",
       "paper": "AnalogCoder",
@@ -445,6 +506,395 @@
       ],
       "wins_vs_analogcoder": 4,
       "losses_vs_analogcoder": 9
+    }
+  ],
+  "pairwise_vs_spectra": {
+    "analogcoder": {
+      "common": 36,
+      "tt_wins": 18,
+      "tt_losses": 0,
+      "tt_ties": 18,
+      "exact_sign_p_single_seed": 7.62939453125e-06
+    },
+    "ado_llm": {
+      "common": 36,
+      "tt_wins": 6,
+      "tt_losses": 1,
+      "tt_ties": 29,
+      "exact_sign_p_single_seed": 0.125
+    },
+    "anaflow": {
+      "common": 36,
+      "tt_wins": 7,
+      "tt_losses": 2,
+      "tt_ties": 27,
+      "exact_sign_p_single_seed": 0.1796875
+    },
+    "artisan": {
+      "common": 36,
+      "tt_wins": 8,
+      "tt_losses": 2,
+      "tt_ties": 26,
+      "exact_sign_p_single_seed": 0.109375
+    },
+    "autosizer": {
+      "common": 36,
+      "tt_wins": 7,
+      "tt_losses": 1,
+      "tt_ties": 28,
+      "exact_sign_p_single_seed": 0.0703125
+    },
+    "atlas": {
+      "common": 36,
+      "tt_wins": 19,
+      "tt_losses": 0,
+      "tt_ties": 17,
+      "exact_sign_p_single_seed": 3.814697265625e-06
+    },
+    "glova": {
+      "common": 36,
+      "tt_wins": 23,
+      "tt_losses": 0,
+      "tt_ties": 13,
+      "exact_sign_p_single_seed": 2.384185791015625e-07
+    }
+  },
+  "domain_rows": [
+    {
+      "method": "spectra",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "spectra",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.16666666666666666,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.5,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.16666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "anaflow",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.5,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "anaflow",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 0.25
+    },
+    {
+      "method": "anaflow",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 0.5
+    },
+    {
+      "method": "artisan",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "autosizer",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.16666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.16666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.5
+    },
+    {
+      "method": "glova",
+      "family": "amp",
+      "observed": 6,
+      "tt_success": 0.16666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "cmirror",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "filter",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "ldo",
+      "observed": 6,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "opamp",
+      "observed": 6,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "vco",
+      "observed": 6,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
     }
   ]
 }
