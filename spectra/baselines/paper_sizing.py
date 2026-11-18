@@ -243,7 +243,7 @@ def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
     # One full-grid evaluation anchors the PVT objective, then a small-sigma
     # CMA search stays near the TT-feasible staged incumbent.
     if ctx.sims_left() >= len(PVT) and staged_best.get("netlist"):
-        ev_full, net_full, score_full = _evaluate(ctx, build, staged_best["netlist"], conds=PVT)
+        ev_full, net_full, score_full = _evaluate(ctx, build, staged_best.get("params", _midpoint(vars_)), conds=PVT)
         _update_robust_best(ctx, ev_full, net_full, score_full)
     if ctx.sims_left() >= 4 * len(PVT) and ctx.best.get("netlist"):
         _cmaes(ctx, build, vars_, seed + 197, x0=_params_from_netlist(task, vars_, staged_best),
