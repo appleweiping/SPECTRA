@@ -78,6 +78,7 @@ class Spectra:
 
     # ------------------------------------------------------------------ program execution
     def exec_program(self, params_list):
+        self.program_stats = {}
         out = run_program(self.program, params_list, spec=self.tb)
         if out.get("ok") and out.get("PARAMS"):
             self.params_spec = {k: tuple(v) for k, v in out["PARAMS"].items()}
