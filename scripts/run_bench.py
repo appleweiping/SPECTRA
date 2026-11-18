@@ -45,6 +45,7 @@ def make_runner(method, model):
     from spectra.baselines.direct import run_direct
     from spectra.baselines.genbo import run_genbo
     from spectra.baselines.oracle import run_oracle
+    from spectra.baselines.paper_sizing import RUNNERS as PAPER_RUNNERS
     abl = {"spectra": Config(), "spectra_nointent": Config(use_intent=False), "spectra_nodiag": Config(use_diag=False),
            "spectra_norefine": Config(use_refine=False), "spectra_noknow": Config(use_knowledge=False),
            "spectra_pvt_all": Config(pvt_strategy="all_corners"), "spectra_pvt_nominal": Config(pvt_strategy="nominal_only"),
@@ -72,6 +73,8 @@ def make_runner(method, model):
     if method.startswith("oracle_"):
         opt = method.split("_", 1)[1]
         return lambda task, seed: run_oracle(task, optimizer=opt, seed=seed, budget=budget_for(task))
+    if method in PAPER_RUNNERS:
+        return lambda task, seed: PAPER_RUNNERS[method](task, model=model, seed=seed, budget=budget_for(task))
     raise ValueError(method)
 
 
