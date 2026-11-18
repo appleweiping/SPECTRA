@@ -18,6 +18,16 @@ from spectra.paths import ROOT
 FAIR = ("direct", "genbo", "spectra_min", "genbo_cmaes")
 ORACLE = ("oracle_random", "oracle_cmaes", "oracle_tpe")
 METHODS = ("spectra",) + FAIR + ORACLE
+ROW_METADATA = {
+    "spectra": {"role": "proposed_method", "literature_lineage": []},
+    "direct": {"role": "literature_lineage_adaptation", "literature_lineage": ["AnalogCoder-AAAI-2025"]},
+    "genbo": {"role": "literature_lineage_adaptation", "literature_lineage": ["AnalogCoder-Pro-TCAD-2026"]},
+    "spectra_min": {"role": "internal_control", "literature_lineage": []},
+    "genbo_cmaes": {"role": "optimizer_control", "literature_lineage": []},
+    "oracle_random": {"role": "privileged_oracle", "literature_lineage": []},
+    "oracle_cmaes": {"role": "privileged_oracle", "literature_lineage": []},
+    "oracle_tpe": {"role": "privileged_oracle", "literature_lineage": []},
+}
 
 
 def _load_tasks(path: Path) -> dict[str, dict]:
@@ -98,6 +108,8 @@ def main(subset: str = "data/bench/topconf6.jsonl", output: str = "results/exten
         numeric_sims = [record.get("sims", 0) or 0 for _, _, record in observed]
         rows.append({
             "method": method,
+            "role": ROW_METADATA[method]["role"],
+            "literature_lineage": ROW_METADATA[method]["literature_lineage"],
             "family_count": len({task["family"] for _, task, _ in observed}),
             "task_count": len(tasks),
             "observed": len(observed),

@@ -11,10 +11,11 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   current mirror, LDO, bandgap reference, CT comparator, StrongARM latch, VCO, filters, Schmitt trigger, op-amp
   applications) with testbenches, certified tiers (feasibility certificates from expert templates), a designer tier,
   45-condition PVT grid and per-instance mismatch Monte Carlo (an early infeasible-control tier was withdrawn).
-* **Baselines** (`spectra/baselines`): AnalogCoder-style direct netlist agent, AnalogCoder-Pro-style generate+TPE,
-  generate+CMA-ES and three explicitly labelled template-oracle optimizers. The six-domain extension evaluates these
-  seven external frameworks beside SPECTRA under one budget. Oracle rows are privileged upper bounds and are not used
-  for fair LLM superiority claims. Ablations are in `scripts/run_bench.py`.
+* **Baselines** (`spectra/baselines`): an AnalogCoder-style direct netlist agent, an AnalogCoder-Pro-style
+  generate+TPE adaptation, a generate+CMA-ES optimizer control and three explicitly labelled template-oracle
+  controls. The six-domain extension evaluates eight rows under one budget. Only the first two rows have direct
+  literature lineage. SPECTRA-min is an internal control, and oracle rows are privileged upper bounds. Ablations are
+  in `scripts/run_bench.py`.
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.

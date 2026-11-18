@@ -36,6 +36,8 @@
   "rows": [
     {
       "method": "spectra",
+      "role": "proposed_method",
+      "literature_lineage": [],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -68,6 +70,10 @@
     },
     {
       "method": "direct",
+      "role": "literature_lineage_adaptation",
+      "literature_lineage": [
+        "AnalogCoder-AAAI-2025"
+      ],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -100,6 +106,10 @@
     },
     {
       "method": "genbo",
+      "role": "literature_lineage_adaptation",
+      "literature_lineage": [
+        "AnalogCoder-Pro-TCAD-2026"
+      ],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -132,6 +142,8 @@
     },
     {
       "method": "spectra_min",
+      "role": "internal_control",
+      "literature_lineage": [],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -164,6 +176,8 @@
     },
     {
       "method": "genbo_cmaes",
+      "role": "optimizer_control",
+      "literature_lineage": [],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -196,6 +210,8 @@
     },
     {
       "method": "oracle_random",
+      "role": "privileged_oracle",
+      "literature_lineage": [],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -228,6 +244,8 @@
     },
     {
       "method": "oracle_cmaes",
+      "role": "privileged_oracle",
+      "literature_lineage": [],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
@@ -260,6 +278,8 @@
     },
     {
       "method": "oracle_tpe",
+      "role": "privileged_oracle",
+      "literature_lineage": [],
       "family_count": 6,
       "task_count": 36,
       "observed": 36,
