@@ -156,6 +156,19 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
             ctx.best = {"score": score, "netlist": net, "passed": True}
             return _finish(ctx, net)
         # Reserve a bounded refinement tranche after enough evidence has accumulated.
+        # For robust tasks the refinement is charged against the full PVT grid so
+        # that a local move cannot improve only the three search corners.
+        if robust and ctx.calls >= 2 and ctx.sims_left() >= 4 * len(robust_conds):
+            refine_budget = min(4 * len(robust_conds), ctx.sims_left())
+            refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
+                             tag="spectra_pvt_fullgrid_refine", conds=robust_conds,
+                             popsize=4)
+            refinement_done = True
+            if refined:
+                net = refined
+                ctx.log("spectra_refine_trace", budget=refine_budget,
+                         returned_best=True, objective="full_pvt_worst_violation")
+            break
         if not robust and ctx.calls >= 1 and ctx.sims_left() >= 24:
             refine_budget = min(240, ctx.sims_left())
             refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
@@ -223,19 +236,22 @@ def _tpe(ctx, build, vars_, seed, x0=None, budget=None, tag="tpe"):
     return ctx.best.get("netlist")
 
 
-def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes"):
+def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes", conds=None, popsize=None):
     import cma
     budget = ctx.sims_left() if budget is None else min(budget, ctx.sims_left())
     if budget <= 0 or not vars_:
         return ctx.best.get("netlist")
     u0 = [v.to_unit((x0 or _midpoint(vars_)).get(v.name, _midpoint([v])[v.name])) for v in vars_]
-    es = cma.CMAEvolutionStrategy(u0, 0.25, {"bounds": [0, 1], "seed": seed, "verbose": -9})
+    options = {"bounds": [0, 1], "seed": seed, "verbose": -9}
+    if popsize is not None:
+        options["popsize"] = int(popsize)
+    es = cma.CMAEvolutionStrategy(u0, 0.25, options)
     while budget > 0 and ctx.sims_left() > 0 and not es.stop():
         solutions = es.ask()
         scores = []
         for unit in solutions:
             x = {v.name: v.from_unit(float(u)) for v, u in zip(vars_, unit)}
-            ev, net, score = _evaluate(ctx, build, x)
+            ev, net, score = _evaluate(ctx, build, x, conds=conds)
             scores.append(score)
             ctx.log("paper_search", algorithm=tag, score=score, passed=bool(ev and ev.passed))
             budget -= 1
