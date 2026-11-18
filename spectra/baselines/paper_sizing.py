@@ -121,8 +121,8 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         from ..sim.evaluate import PVT
         robust_conds = PVT
     ev, net, score = _evaluate(ctx, build, x, conds=robust_conds)
-    if robust and ev is not None and ev.status == "ok" and score < ctx.best.get("score", float("inf")):
-        ctx.best = {"score": score, "netlist": net, "passed": ev.passed}
+    if robust:
+        _update_robust_best(ctx, ev, net, score)
     ctx.log("spectra_plan", score=score, passed=bool(ev and ev.passed), topology="frozen")
     if ev is not None and ev.passed:
         ctx.best = {"score": score, "netlist": net, "passed": True}
@@ -147,8 +147,8 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         # set while retaining the best full-grid candidate found so far.
         eval_conds = robust_conds if (robust_conds is not None and ctx.sims_left() >= len(robust_conds)) else None
         ev, net, score = _evaluate(ctx, build, x, conds=eval_conds)
-        if robust and ev is not None and ev.status == "ok" and score < ctx.best.get("score", float("inf")):
-            ctx.best = {"score": score, "netlist": net, "passed": ev.passed}
+        if robust and eval_conds is robust_conds:
+            _update_robust_best(ctx, ev, net, score)
         ctx.log("spectra_revision", score=score, passed=bool(ev and ev.passed),
                 diagnosis=analysis.get("schema") if analysis else None,
                 cards=[c.get("id") for c in cards])
@@ -209,6 +209,25 @@ def _evaluate(ctx, build, x, conds=None):
     return ev, net, score
 
 
+def _update_robust_best(ctx, ev, net, score):
+    """Keep TT feasibility lexicographically ahead of PVT violation.
+
+    A full-grid candidate can reduce a cold-corner violation by sacrificing the
+    nominal target.  The strict endpoint requires TT success as well, so such a
+    candidate must not replace a TT-feasible incumbent merely because its raw
+    worst-corner score is smaller.
+    """
+    if ev is None or ev.status != "ok" or not net:
+        return
+    nominal = ev.checks.get("tt_27C_1.8V", {})
+    tt_pass = bool(nominal) and all(v[1] for v in nominal.values())
+    rank = (0 if tt_pass else 1, float(score))
+    old_rank = ctx.best.get("robust_rank", (1, float("inf")))
+    if rank < old_rank:
+        ctx.best = {"score": score, "netlist": net, "passed": ev.passed,
+                    "robust_rank": rank, "robust_tt_pass": tt_pass}
+
+
 def _finish(ctx, net):
     status = "success" if ctx.best.get("passed") else "budget_exhausted"
     return {"status": status, "final_netlist": net or ctx.best.get("netlist"), **ctx.summary(), "events": ctx.events}
@@ -254,8 +273,8 @@ def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes", conds=Non
             ev, net, score = _evaluate(ctx, build, x, conds=conds)
             scores.append(score)
             ctx.log("paper_search", algorithm=tag, score=score, passed=bool(ev and ev.passed))
-            if conds is not None and ev is not None and ev.status == "ok" and score < ctx.best.get("score", float("inf")):
-                ctx.best = {"score": score, "netlist": net, "passed": ev.passed}
+            if conds is not None:
+                _update_robust_best(ctx, ev, net, score)
             budget -= 1
             if budget <= 0 or ctx.sims_left() <= 0:
                 break
