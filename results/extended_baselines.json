@@ -1,0 +1,294 @@
+{
+  "schema": "spectra-extended-baselines/v1",
+  "model": "gpt-6.1-sol",
+  "subset": "data/bench/topconf6.jsonl",
+  "families": [
+    "amp",
+    "cmirror",
+    "filter",
+    "ldo",
+    "opamp",
+    "vco"
+  ],
+  "n_tasks": 36,
+  "n_frameworks": 8,
+  "frameworks": [
+    "spectra",
+    "direct",
+    "genbo",
+    "spectra_min",
+    "genbo_cmaes",
+    "oracle_random",
+    "oracle_cmaes",
+    "oracle_tpe"
+  ],
+  "fair_frameworks": [
+    "direct",
+    "genbo",
+    "spectra_min",
+    "genbo_cmaes"
+  ],
+  "privileged_frameworks": [
+    "oracle_random",
+    "oracle_cmaes",
+    "oracle_tpe"
+  ],
+  "rows": [
+    {
+      "method": "spectra",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.8055555555555556,
+      "tt_ci95": [
+        0.6497,
+        0.9025
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 3.4444444444444446,
+      "median_calls": 2.0,
+      "mean_sims": 18.13888888888889,
+      "median_sims": 1.0,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 5,
+      "privileged_upper_bound": false,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": null,
+      "losses_vs_spectra": null
+    },
+    {
+      "method": "direct",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.75,
+      "tt_ci95": [
+        0.5893,
+        0.8625
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 3.5833333333333335,
+      "median_calls": 2.0,
+      "mean_sims": 2.638888888888889,
+      "median_sims": 2.0,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 5,
+      "privileged_upper_bound": false,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 2,
+      "losses_vs_spectra": 4
+    },
+    {
+      "method": "genbo",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.4166666666666667,
+      "tt_ci95": [
+        0.2714,
+        0.578
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 1.8055555555555556,
+      "median_calls": 1.5,
+      "mean_sims": 116.0,
+      "median_sims": 13.5,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 5,
+      "privileged_upper_bound": false,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 0,
+      "losses_vs_spectra": 14
+    },
+    {
+      "method": "spectra_min",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.5833333333333334,
+      "tt_ci95": [
+        0.422,
+        0.7286
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 1.6388888888888888,
+      "median_calls": 2.0,
+      "mean_sims": 55.30555555555556,
+      "median_sims": 1.0,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 6,
+      "privileged_upper_bound": false,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 0,
+      "losses_vs_spectra": 8
+    },
+    {
+      "method": "genbo_cmaes",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.5,
+      "tt_ci95": [
+        0.3447,
+        0.6553
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 0.7222222222222222,
+      "median_calls": 0.5,
+      "mean_sims": 4.722222222222222,
+      "median_sims": 0.5,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 18,
+      "privileged_upper_bound": false,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 2,
+      "losses_vs_spectra": 13
+    },
+    {
+      "method": "oracle_random",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.3333333333333333,
+      "tt_ci95": [
+        0.2021,
+        0.4967
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 0.0,
+      "median_calls": 0.0,
+      "mean_sims": 240.88888888888889,
+      "median_sims": 300.0,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 0,
+      "privileged_upper_bound": true,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 3,
+      "losses_vs_spectra": 20
+    },
+    {
+      "method": "oracle_cmaes",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.75,
+      "tt_ci95": [
+        0.5893,
+        0.8625
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 0.0,
+      "median_calls": 0.0,
+      "mean_sims": 112.97222222222223,
+      "median_sims": 72.0,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 0,
+      "privileged_upper_bound": true,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 7,
+      "losses_vs_spectra": 9
+    },
+    {
+      "method": "oracle_tpe",
+      "family_count": 6,
+      "task_count": 36,
+      "observed": 36,
+      "missing": 0,
+      "tt_success": 0.6944444444444444,
+      "tt_ci95": [
+        0.5314,
+        0.82
+      ],
+      "pvt_success": null,
+      "pvt_ci95": null,
+      "mean_calls": 0.0,
+      "median_calls": 0.0,
+      "mean_sims": 153.88888888888889,
+      "median_sims": 146.0,
+      "mean_mismatch_yield": null,
+      "mismatch_observed": 0,
+      "crashes": 0,
+      "privileged_upper_bound": true,
+      "families": [
+        "amp",
+        "cmirror",
+        "filter",
+        "ldo",
+        "opamp",
+        "vco"
+      ],
+      "wins_vs_spectra": 6,
+      "losses_vs_spectra": 10
+    }
+  ]
+}
