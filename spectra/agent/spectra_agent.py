@@ -74,6 +74,7 @@ class Spectra:
         self.status = "running"
         self.final_netlist = None
         self.active = [NOMINAL]
+        self.refine_round = 0
 
     # ------------------------------------------------------------------ program execution
     def exec_program(self, params_list):
@@ -96,15 +97,28 @@ class Spectra:
 
     # ------------------------------------------------------------------ refinement in intent space
     def refine(self, conds, budget, bounds=None, init=None):
-        """CMA-ES in intent space; the incumbent is evaluated first and only replaced by a better point."""
+        """Active-set trust-region refinement followed by bounded CMA-ES."""
         import cma
         from concurrent.futures import ThreadPoolExecutor
         vars_ = _vars_from(self.params_spec, bounds)
+        self.refine_round += 1
+        attribution = (self.last_analysis or {}).get("attribution", []) if self.last_analysis else []
+        active_names = []
+        for item in attribution:
+            name = item.get("param")
+            if name in self.params_spec and name not in active_names and item.get("d_vio") is not None:
+                active_names.append(name)
+        if active_names:
+            active_names = active_names[:4]
+            vars_ = [v for v in vars_ if v.name in active_names]
+        if not vars_:
+            return None
         budget = min(budget, self.ctx.sims_left())
         if not vars_ or budget < 2 * len(conds):
             return None
         x0 = dict(self.params); x0.update(init or {})
         u0 = [v.to_unit(float(x0.get(v.name, self.params_spec[v.name][0]))) for v in vars_]
+        trust_radius = min(0.25, 0.08 + 0.02 * self.refine_round)
         pop = max(8, 4 + int(3 * math.log(len(vars_))))
         es = cma.CMAEvolutionStrategy(u0, 0.15, {"bounds": [0, 1], "seed": self.ctx.seed + 7, "verbose": -9, "popsize": pop})
         best, used = None, 0
@@ -132,6 +146,35 @@ class Spectra:
         if best and best[3].passed:
             self.params = best[1]
             return best
+        # Probe an active-set trust region before the population search.  Each
+        # candidate is charged through the same context evaluator and is
+        # logged so the component's mechanism can be audited after the run.
+        probes = []
+        for idx, var in enumerate(vars_):
+            direction = 1.0
+            for item in attribution:
+                if item.get("param") == var.name and item.get("d_vio") is not None:
+                    direction = -1.0 if float(item["d_vio"]) > 0 else 1.0
+                    break
+            for sign in (direction, -direction):
+                uu = list(u0)
+                uu[idx] = min(1.0, max(0.0, uu[idx] + sign * trust_radius))
+                probes.append({**x0, var.name: var.from_unit(uu[idx])})
+        if probes and budget - used >= len(probes) * len(conds):
+            probe_res = run_batch(probes)
+            if probe_res:
+                probe_scores = []
+                for p, r, ev in probe_res:
+                    used += len(conds)
+                    sc = ev.score if ev is not None and ev.status == "ok" else 20.0
+                    probe_scores.append(sc)
+                    if ev is not None and ev.status == "ok" and (best is None or sc < best[0]):
+                        best = (sc, p, r, ev)
+                self.ctx.log("refine_trace", round=self.refine_round, active_conditions=[str(c) for c in conds],
+                             active_params=[v.name for v in vars_], radius=round(trust_radius, 4),
+                             candidates=len(probes), probe_scores=[round(x, 4) for x in probe_scores],
+                             score_before=round(inc[0][2].score, 4) if inc and inc[0][2] is not None else None,
+                             score_after=round(best[0], 4) if best else None)
         while not es.stop():
             n_left = (budget - used) // len(conds)
             if n_left < 2:
@@ -159,7 +202,8 @@ class Spectra:
                 break
         if best:
             self.params = best[1]
-            self.ctx.log("refine", conds=len(conds), used=used, best=round(best[0], 4), passed=best[3].passed)
+            self.ctx.log("refine", conds=len(conds), used=used, best=round(best[0], 4), passed=best[3].passed,
+                         active_params=[v.name for v in vars_], trust_radius=round(trust_radius, 4))
         return best
 
     # ------------------------------------------------------------------ sensitivities
@@ -217,6 +261,7 @@ class Spectra:
             return False, None
         if evP.passed:
             return True, evP
+        self.last_analysis = diagnose.analyze(self.task, evP)
         if not self.cfg.use_refine or self.cfg.pvt_strategy == "nominal_only":
             return False, evP
         rounds = 0

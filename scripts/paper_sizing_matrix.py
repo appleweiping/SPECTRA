@@ -56,6 +56,25 @@ def _mean(values):
     return sum(values) / len(values) if values else None
 
 
+def _median(values):
+    return median(values) if values else None
+
+
+def _failure_taxonomy(record):
+    """Return an observed failure label without inferring missing outcomes."""
+    verify = record.get("verify", {})
+    if verify.get("status") not in (None, "ok"):
+        return str(verify.get("status"))
+    status = str(record.get("status", ""))
+    if status and status not in ("success", "ok"):
+        return status
+    if verify.get("tt_pass") is False:
+        return "tt_fail"
+    if verify.get("pvt_pass") is False:
+        return "pvt_fail"
+    return "pass"
+
+
 def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
     tasks = _load(ROOT / subset)
     rows, records = [], {}
@@ -74,6 +93,15 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         tokens_in = [int(rec.get("tokens_in", 0) or 0) for _, _, rec in observed]
         tokens_out = [int(rec.get("tokens_out", 0) or 0) for _, _, rec in observed]
         costs = [float(rec.get("cost_usd", 0) or 0) for _, _, rec in observed]
+        violation_scores = [float(rec.get("verify", {}).get("tt_score"))
+                            for _, _, rec in observed
+                            if isinstance(rec.get("verify", {}).get("tt_score"), (int, float))]
+        charged_sims = [int(rec.get("sims", rec.get("verify", {}).get("n_sims", 0)) or 0)
+                        for _, _, rec in observed]
+        failure_taxonomy = {}
+        for _, _, rec in observed:
+            label = _failure_taxonomy(rec)
+            failure_taxonomy[label] = failure_taxonomy.get(label, 0) + 1
         first_pass_sims = [int(rec["first_pass_sims"]) for _, _, rec in observed
                            if rec.get("first_pass_sims") is not None]
         first_pass_calls = [int(rec["first_pass_calls"]) for _, _, rec in observed
@@ -98,6 +126,11 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
             "mean_first_pass_sims": _mean(first_pass_sims),
             "mean_first_pass_calls": _mean(first_pass_calls),
             "first_pass_observed": len(first_pass_sims),
+            "mean_violation_score": _mean(violation_scores),
+            "median_violation_score": _median(violation_scores),
+            "violation_observed": len(violation_scores),
+            "mean_simulation_units": _mean(charged_sims),
+            "failure_taxonomy": failure_taxonomy,
             "crashes": sum(rec.get("status") == "crash" for _, _, rec in observed),
             "families": sorted({task["family"] for _, task, _ in observed}),
         })
