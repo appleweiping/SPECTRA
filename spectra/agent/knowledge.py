@@ -1,5 +1,8 @@
 """Shared interface/PDK descriptions and topology knowledge cards (all given to ALL LLM methods)."""
 
+import hashlib
+import json
+
 PDK_SHEET = """PDK: SkyWater SKY130, 1.8 V core devices only, simulated with ngspice (BSIM4), nominal VDD = 1.8 V, 27 C.
 Devices you may use inside the DUT (canonical netlist syntax, sizes in micrometres):
   M<name> <d> <g> <s> <b> nfet W=<um> L=<um> [m=<int>]   (NMOS; bulk MUST be vss = p-substrate)
@@ -183,9 +186,12 @@ def _build_cards():
     cards = []
     for family, rules in _CARD_RULES.items():
         for cid, metrics, regions, formula, action in rules:
-            cards.append({"id": f"{family}.{cid}", "family": family, "metrics": list(metrics),
-                          "regions": list(regions), "formula": formula, "action": action,
-                          "source": "SPECTRA-knowledge-v1", "version": 1})
+            card = {"id": f"{family}.{cid}", "family": family, "metrics": list(metrics),
+                    "regions": list(regions), "formula": formula, "action": action,
+                    "source": "SPECTRA-knowledge-v1", "version": 1}
+            payload = json.dumps(card, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+            card["sha256"] = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+            cards.append(card)
     return tuple(cards)
 
 
@@ -219,5 +225,6 @@ def render_cards(cards):
     """Render retrieved cards for the iterate prompt without hidden state."""
     if not cards:
         return "(no retrieved cards; use only the interface, PDK and observed simulation evidence)"
-    return "\n".join(f"- [{c['id']}] {c['formula']}. Action: {c['action']} (source={c['source']} v{c['version']})"
+    return "\n".join(f"- [{c['id']}] {c['formula']}. Action: {c['action']} "
+                     f"(source={c['source']} v{c['version']} sha256={c['sha256'][:12]})"
                      for c in cards)
