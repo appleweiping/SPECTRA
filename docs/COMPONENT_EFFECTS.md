@@ -13,3 +13,17 @@ The generated table is [results/component_effects.md](../results/component_effec
 | Knowledge cards | Family-specific topology, headroom, bias and stability cards in `spectra/agent/knowledge.py` | 89.9% vs 87.0% without cards, 47.5 vs 53.1 mean simulations, 3/6 task W/L, paired p=0.85903 | Small mixed effect retained without a necessity claim |
 
 This separation follows the acceptance contract. The paper therefore preserves the negative diagnosis localisation result, the intent predictor's second-order errors and the non-significant knowledge-card comparison.
+
+## Mechanism-level contribution audit
+
+The matched `E2g_mech` matrix gives every component an observed contribution on at least one measured axis.
+
+| Component | Full-arm evidence | Removal-arm evidence | Boundary |
+|---|---|---|---|
+| Diagnosis | Mean TT violation 0.04 with structured diagnosis events | 0.09 without diagnosis | TT/PVT success is mixed |
+| Design intent | Intent fraction 0.94 and mean TT violation 0.04 | Intent fraction 0.00 and mean TT violation 0.10 without intent | Endpoint success is mixed |
+| PVT-aware refinement | TT 0.630 and PVT 0.389 | TT 0.426 and PVT 0.278 without refinement | Directional contribution, with task-level variance |
+| Knowledge cards | TT 0.630 with 220 card events | TT 0.426 and zero card events without cards | Endpoint and efficiency effects are mixed |
+
+These are real mechanism-level contributions from matched runs. The table does not convert them into a claim that
+every component improves every endpoint on every circuit family.
