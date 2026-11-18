@@ -48,10 +48,10 @@ The final matched three-seed extension is stored in
 `8a360f800f0460e3bcfed188ead3d77dca4c6e6bf56832aa39c90d3eb1348a5a`. It contains the 288-cell seed-0 rerun,
 the 576-cell seed-1/2 rerun, the 108-cell staged PVT sensitivity track, and the complete legacy component
 mechanism evidence. The final source checkout is synchronized to GitHub `main` at commit
-`a0ea01557995466da251a36e221049fca8fba708`. The eight-row primary aggregate has 864/864 observed cells.
+`12f33cbf6209a674d3d35bc50bd72782c85ac470`. The eight-row primary aggregate has 864/864 observed cells.
 The primary SIZ7g files were generated from source commit `017536507bbf283ba5cfffbbc9f6d098bdd01250`.
-SPECTRA reaches 0.806 TT, 0.194 PVT, 0.1180 mean TT violation and 0.5648 mean PVT violation. The staged
-post-fix staged variant was generated from source commit `3347b38c19efe60dfbaa5bd71c7fe898207ea199` and reaches
+SPECTRA reaches 0.806 TT, 0.194 PVT, 0.1180 mean TT violation and 0.5648 mean PVT violation. The post-fix staged
+variant was generated from source commit `3347b38c19efe60dfbaa5bd71c7fe898207ea199` and reaches
 0.815 TT, 0.222 PVT, 0.1071 mean TT violation and 0.5009 mean PVT violation.
 The post-fix archive is `work/remote_archive/siz7g_final_postfix_bundle.tar.gz` with SHA-256
 `56695cd111867bff21df3847832e87610e9c20d0cc50f66ba310c217e6e4f6db`. These results are scoped to the frozen

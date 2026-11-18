@@ -6,7 +6,7 @@ The strict sizing evidence was generated on the westc server and retained there 
 
 | Item | Value |
 |---|---|
-| Final source checkout | `a0ea01557995466da251a36e221049fca8fba708` |
+| Final source checkout | `12f33cbf6209a674d3d35bc50bd72782c85ac470` |
 | Primary run source | `017536507bbf283ba5cfffbbc9f6d098bdd01250` |
 | Post-fix staged run source | `3347b38c19efe60dfbaa5bd71c7fe898207ea199` |
 | Server checkout | `/root/autodl-tmp/spectra-analog-agent` |
