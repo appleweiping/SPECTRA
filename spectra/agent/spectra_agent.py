@@ -269,7 +269,7 @@ class Spectra:
         replace a better incumbent.  It uses the same simulator accounting as any
         other candidate and records a structured event for the mechanism matrix.
         """
-        if not self.cfg.use_diag or not analysis or ev is None:
+        if not self.cfg.use_diag or not analysis or ev is None or self.ctx.sims_left() < 1:
             return ev, None
         attrs = [a for a in analysis.get("attribution", [])
                  if isinstance(a, dict) and isinstance(a.get("d_violation"), (int, float))
@@ -494,7 +494,10 @@ class Spectra:
             # Use a simulator-checked local repair when diagnosis identifies a
             # directional parameter effect.  This is enabled only in the full
             # arm, leaving spectra_nodiag as a genuine removal ablation.
-            if cfg.use_diag and analysis is not None and ev is not None:
+            # Robust tasks carry a PVT diagnosis whose score is not represented
+            # by the nominal ``ev`` object in this loop.  Leave those repairs to
+            # robust_stage so a nominal probe cannot accept a PVT-misaligned move.
+            if cfg.use_diag and analysis is not None and ev is not None and not task.get("robust"):
                 ev_probe, r_probe = self.diagnosis_repair_probe(ev, analysis)
                 if r_probe is not None:
                     ev, r = ev_probe, r_probe
