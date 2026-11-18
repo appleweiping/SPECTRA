@@ -266,7 +266,8 @@ class Spectra:
             return False, None
         if evP.passed:
             return True, evP
-        self.last_analysis = diagnose.analyze(self.task, evP)
+        self.last_analysis = (diagnose.analyze(self.task, evP) if self.cfg.use_diag
+                              else diagnose.failure_summary(self.task, evP))
         if not self.cfg.use_refine or self.cfg.pvt_strategy == "nominal_only":
             return False, evP
         rounds = 0
@@ -397,12 +398,14 @@ class Spectra:
                         if evP is None:
                             break
                         diag = "Nominal (TT) specs PASS but the design fails at PVT corners.\n" + self.pvt_report(evP)
-                        analysis = diagnose.analyze(task, evP, r.get("pred"))
+                        analysis = (diagnose.analyze(task, evP, r.get("pred")) if self.cfg.use_diag
+                                    else diagnose.failure_summary(task, evP))
                         if evP and self.cfg.use_diag:
                             rt, _ = diagnose.region_table(ev)
                             diag += "\n\nNominal operating points:\n" + rt
                     elif ev.status != "ok":
-                        analysis = diagnose.analyze(task, ev, r.get("pred"))
+                        analysis = (diagnose.analyze(task, ev, r.get("pred")) if cfg.use_diag
+                                    else diagnose.failure_summary(task, ev))
                         diag = diagnose.render_analysis(analysis)
                     else:
                         failing = [s["metric"] for s in task["specs"]
@@ -412,7 +415,7 @@ class Spectra:
                             analysis = diagnose.analyze(task, ev, r.get("pred"), sens)
                             diag = diagnose.render_analysis(analysis)
                         else:
-                            analysis = diagnose.analyze(task, ev, r.get("pred"), None)
+                            analysis = diagnose.failure_summary(task, ev)
                             diag = diagnose.spec_table(task, ev, None)
             self.last_analysis = analysis
             cards = retrieve_cards(task, analysis) if cfg.use_knowledge and analysis else []

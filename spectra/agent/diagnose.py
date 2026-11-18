@@ -227,6 +227,27 @@ def analyze(task, ev, pred=None, sens=None, cond=None, max_items=8):
             "discrepancy": dis}
 
 
+def failure_summary(task, ev, cond=None):
+    """Expose only observed failed margins for the diagnosis ablation arm.
+
+    Knowledge retrieval may still use the failed metric names, while operating
+    regions, hypotheses and parameter attribution remain unavailable.  This
+    keeps the no-diagnosis arm from receiving the component it is meant to
+    remove.
+    """
+    cond = cond or next(iter(ev.checks), None)
+    checks = ev.checks.get(cond, {}) if cond else {}
+    metrics = ev.per_cond.get(cond, {}) if cond else {}
+    failing = []
+    for spec in task.get("specs", []):
+        value, ok, vio = checks.get(spec_key(spec), (metrics.get(spec["metric"]), False, 2.0))
+        if not ok:
+            failing.append({"metric": spec["metric"], "value": value, "target": spec["value"],
+                            "op": spec["op"], "violation": float(vio)})
+    return {"schema": "spectra-diagnosis/disabled", "status": ev.status, "condition": cond,
+            "failing": failing, "flags": [], "attribution": [], "hypotheses": []}
+
+
 def render_analysis(analysis):
     """Render :func:`analyze` output into the compact feedback text expected by LLMs."""
     if not analysis:
