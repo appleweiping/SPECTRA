@@ -20,6 +20,9 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   Artisan, AutoSizer, ATLAS and GLOVA are clean-room adapters with paper and venue metadata in
   `data/bench/paper_sizing_manifest.json`. They receive the same frozen topology, bounds, 300 simulation-unit
   budget and 12-call LLM cap. The previous EXT7g framework-and-control matrix remains a separate diagnostic appendix.
+* **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
+  SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
+  traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.
