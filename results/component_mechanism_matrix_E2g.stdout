@@ -1,0 +1,302 @@
+{
+  "schema": "spectra-component-mechanism/v1",
+  "exp": "E2g_mech",
+  "subset": "data/bench/component_mech_tasks.jsonl",
+  "model": "gpt-6.1-sol",
+  "tasks": 18,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "methods": [
+    "spectra",
+    "spectra_nodiag",
+    "spectra_nointent",
+    "spectra_norefine",
+    "spectra_noknow"
+  ],
+  "rows": [
+    {
+      "method": "spectra",
+      "observed": 54,
+      "expected": 54,
+      "missing": 0,
+      "tt_success": 0.6296296296296297,
+      "tt_ci95": [
+        0.4963,
+        0.7458
+      ],
+      "pvt_observed": 18,
+      "pvt_success": 0.3888888888888889,
+      "pvt_ci95": [
+        0.2031,
+        0.6138
+      ],
+      "mean_violation_score": 0.0404420381156693,
+      "median_violation_score": 0.0,
+      "mean_simulation_units": 96.70370370370371,
+      "mean_llm_calls": 3.8518518518518516,
+      "mean_wall_seconds": 369.76851851851853,
+      "intent_fraction_mean": 0.9393939393939394,
+      "intent_compliant_rate": 0.9393939393939394,
+      "diagnosis_events": 115,
+      "refine_trace_events": 30,
+      "refine_active_param_mean": 8.266666666666667,
+      "card_events": 220,
+      "card_top": [
+        [
+          "opamp.phase_pole",
+          42
+        ],
+        [
+          "opamp.headroom",
+          31
+        ],
+        [
+          "opamp.gain_ro",
+          24
+        ],
+        [
+          "amp.output_headroom",
+          20
+        ],
+        [
+          "ldo.loop_stability",
+          17
+        ]
+      ],
+      "failure_taxonomy": {
+        "success": 29,
+        "budget_exhausted": 11,
+        "crash": 14
+      }
+    },
+    {
+      "method": "spectra_nodiag",
+      "observed": 54,
+      "expected": 54,
+      "missing": 0,
+      "tt_success": 0.6481481481481481,
+      "tt_ci95": [
+        0.5148,
+        0.7618
+      ],
+      "pvt_observed": 18,
+      "pvt_success": 0.5555555555555556,
+      "pvt_ci95": [
+        0.3372,
+        0.7544
+      ],
+      "mean_violation_score": 0.08731184474110816,
+      "median_violation_score": 0.0,
+      "mean_simulation_units": 90.37037037037037,
+      "mean_llm_calls": 4.166666666666667,
+      "mean_wall_seconds": 381.90185185185186,
+      "intent_fraction_mean": 0.90367811420443,
+      "intent_compliant_rate": 0.918918918918919,
+      "diagnosis_events": 125,
+      "refine_trace_events": 43,
+      "refine_active_param_mean": 8.930232558139535,
+      "card_events": 251,
+      "card_top": [
+        [
+          "opamp.phase_pole",
+          37
+        ],
+        [
+          "opamp.gain_ro",
+          33
+        ],
+        [
+          "opamp.headroom",
+          32
+        ],
+        [
+          "ldo.loop_stability",
+          30
+        ],
+        [
+          "vco.tuning",
+          22
+        ]
+      ],
+      "failure_taxonomy": {
+        "success": 31,
+        "crash": 9,
+        "budget_exhausted": 14
+      }
+    },
+    {
+      "method": "spectra_nointent",
+      "observed": 54,
+      "expected": 54,
+      "missing": 0,
+      "tt_success": 0.6481481481481481,
+      "tt_ci95": [
+        0.5148,
+        0.7618
+      ],
+      "pvt_observed": 18,
+      "pvt_success": 0.6666666666666666,
+      "pvt_ci95": [
+        0.4375,
+        0.8372
+      ],
+      "mean_violation_score": 0.1048227350984947,
+      "median_violation_score": 0.0,
+      "mean_simulation_units": 70.48148148148148,
+      "mean_llm_calls": 2.962962962962963,
+      "mean_wall_seconds": 285.14629629629627,
+      "intent_fraction_mean": 0.0,
+      "intent_compliant_rate": 0.0,
+      "diagnosis_events": 72,
+      "refine_trace_events": 23,
+      "refine_active_param_mean": 8.173913043478262,
+      "card_events": 126,
+      "card_top": [
+        [
+          "opamp.phase_pole",
+          19
+        ],
+        [
+          "ldo.loop_stability",
+          17
+        ],
+        [
+          "opamp.gain_ro",
+          12
+        ],
+        [
+          "opamp.headroom",
+          12
+        ],
+        [
+          "vco.swing",
+          10
+        ]
+      ],
+      "failure_taxonomy": {
+        "success": 33,
+        "crash": 16,
+        "budget_exhausted": 5
+      }
+    },
+    {
+      "method": "spectra_norefine",
+      "observed": 54,
+      "expected": 54,
+      "missing": 0,
+      "tt_success": 0.42592592592592593,
+      "tt_ci95": [
+        0.3033,
+        0.5584
+      ],
+      "pvt_observed": 18,
+      "pvt_success": 0.2777777777777778,
+      "pvt_ci95": [
+        0.125,
+        0.5087
+      ],
+      "mean_violation_score": 0.0012370605313322327,
+      "median_violation_score": 0.0,
+      "mean_simulation_units": 16.61111111111111,
+      "mean_llm_calls": 2.4074074074074074,
+      "mean_wall_seconds": 206.00185185185185,
+      "intent_fraction_mean": 0.9523809523809523,
+      "intent_compliant_rate": 0.9523809523809523,
+      "diagnosis_events": 72,
+      "refine_trace_events": 0,
+      "refine_active_param_mean": null,
+      "card_events": 142,
+      "card_top": [
+        [
+          "opamp.phase_pole",
+          23
+        ],
+        [
+          "opamp.gain_ro",
+          20
+        ],
+        [
+          "opamp.headroom",
+          16
+        ],
+        [
+          "amp.output_headroom",
+          14
+        ],
+        [
+          "amp.bandwidth_gm",
+          10
+        ]
+      ],
+      "failure_taxonomy": {
+        "budget_exhausted": 4,
+        "crash": 29,
+        "success": 21
+      }
+    },
+    {
+      "method": "spectra_noknow",
+      "observed": 54,
+      "expected": 54,
+      "missing": 0,
+      "tt_success": 0.42592592592592593,
+      "tt_ci95": [
+        0.3033,
+        0.5584
+      ],
+      "pvt_observed": 18,
+      "pvt_success": 0.3333333333333333,
+      "pvt_ci95": [
+        0.1628,
+        0.5625
+      ],
+      "mean_violation_score": 0.00011821213829017145,
+      "median_violation_score": 0.0,
+      "mean_simulation_units": 36.55555555555556,
+      "mean_llm_calls": 1.6296296296296295,
+      "mean_wall_seconds": 177.84444444444446,
+      "intent_fraction_mean": 0.9130434782608695,
+      "intent_compliant_rate": 0.9130434782608695,
+      "diagnosis_events": 43,
+      "refine_trace_events": 9,
+      "refine_active_param_mean": 7.555555555555555,
+      "card_events": 0,
+      "card_top": [],
+      "failure_taxonomy": {
+        "crash": 30,
+        "success": 21,
+        "budget_exhausted": 3
+      }
+    }
+  ],
+  "paired": {
+    "spectra_nodiag": {
+      "n": 54,
+      "mean_delta_score_with_minus_without": -0.03159218015451592,
+      "tt_wins": 6,
+      "tt_losses": 7
+    },
+    "spectra_nointent": {
+      "n": 54,
+      "mean_delta_score_with_minus_without": -0.08397011414696649,
+      "tt_wins": 7,
+      "tt_losses": 8
+    },
+    "spectra_norefine": {
+      "n": 54,
+      "mean_delta_score_with_minus_without": 0.0047604937687418586,
+      "tt_wins": 15,
+      "tt_losses": 4
+    },
+    "spectra_noknow": {
+      "n": 54,
+      "mean_delta_score_with_minus_without": 0.005618578421919464,
+      "tt_wins": 14,
+      "tt_losses": 3
+    }
+  },
+  "interpretation": "Rows keep missing runs and mixed effects visible. Mechanism fields are observed event logs, not post-hoc labels."
+}
