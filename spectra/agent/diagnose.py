@@ -99,6 +99,8 @@ def sensitivity_text(sens, failing):
     for met in failing:
         items = []
         for p, d in sens.items():
+            if p.startswith("_") or not isinstance(d, dict):
+                continue
             if met in d and d[met] is not None:
                 items.append((abs(d[met]), p, d[met]))
         items.sort(reverse=True)
