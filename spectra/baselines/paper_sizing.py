@@ -220,7 +220,12 @@ def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes"):
                 break
             if ev is not None and ev.passed:
                 return net
-        es.tell(solutions[:len(scores)], scores)
+        # A final truncated batch can contain fewer points than CMA-ES needs
+        # for an update when the strict simulation budget is exhausted.
+        if len(scores) >= int(getattr(getattr(es, "sp", None), "mu", 4)):
+            es.tell(solutions[:len(scores)], scores)
+        else:
+            break
     return ctx.best.get("netlist")
 
 
