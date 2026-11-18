@@ -254,6 +254,8 @@ def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes", conds=Non
             ev, net, score = _evaluate(ctx, build, x, conds=conds)
             scores.append(score)
             ctx.log("paper_search", algorithm=tag, score=score, passed=bool(ev and ev.passed))
+            if conds is not None and ev is not None and ev.status == "ok" and score < ctx.best.get("score", float("inf")):
+                ctx.best = {"score": score, "netlist": net, "passed": ev.passed}
             budget -= 1
             if budget <= 0 or ctx.sims_left() <= 0:
                 break
