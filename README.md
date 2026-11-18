@@ -22,8 +22,10 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   diagnosis, knowledge and bounded-refinement loop through a fixed-topology adapter. All eight rows receive the same
   bounds, 300 simulation-unit budget and 12-call LLM cap. The previous EXT7g framework-and-control matrix remains
   a separate diagnostic appendix.
-  The completed SIZ7g snapshot records SPECTRA at 30/36 TT passes, the highest nominal rate in this track. PVT is
-  reported separately and remains a distinct robustness result.
+  The final matched extension contains 864 cells, eight rows across 36 tasks and three seeds. In the primary
+  eight-row aggregate SPECTRA reaches 0.806 TT and 0.194 PVT, while AnaFlow reaches 0.870 TT and 0.306 PVT.
+  The independently reported SPECTRA-PVT-staged variant reaches 0.833 TT, 0.222 PVT and 0.5063 mean PVT violation.
+  These are track-scoped measurements and do not establish universal analog-sizing SOTA.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.

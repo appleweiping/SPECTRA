@@ -1,0 +1,11 @@
+{
+  "method": "spectra_staged",
+  "cells": 108,
+  "tt_success": 0.8333333333333334,
+  "pvt_success": 0.2222222222222222,
+  "tt_violation": 0.10519314518034449,
+  "pvt_violation": 0.5063272803884586,
+  "mean_sims": 132.2685185185185,
+  "mean_calls": 2.1203703703703702,
+  "pvt_observed": 36
+}

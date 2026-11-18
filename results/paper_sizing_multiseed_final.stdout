@@ -1,0 +1,782 @@
+{
+  "schema": "spectra-paper-sizing/multiseed-v1",
+  "model": "gpt-6.1-sol",
+  "subset": "data/bench/paper_sizing_tasks.jsonl",
+  "experiments": [
+    "SIZ7g_FINAL",
+    "SIZ7g_MS_FINAL"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "n_tasks": 36,
+  "n_frameworks": 8,
+  "budget": {
+    "simulation_units": 300,
+    "llm_calls": 12
+  },
+  "search_corners_by_method": {
+    "spectra": 45,
+    "external_adapters": 3
+  },
+  "verifier_corners": 45,
+  "protocol_note": "SPECTRA uses its PVT-aware full-grid search objective on robust tasks. External paper-aligned adapters retain the preregistered three-corner search. Budgets, tasks, verifier and reported metrics remain matched.",
+  "inference_scope": "three_seed_task_clustered_snapshot",
+  "bootstrap_replicates": 4000,
+  "rows": [
+    {
+      "method": "spectra",
+      "paper": "SPECTRA (ours)",
+      "venue": "this work",
+      "repo": "local framework",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.8055555555555556,
+      "tt_wilson95": [
+        0.721,
+        0.8692
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.6759,
+        0.9167
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.19444444444444445,
+      "pvt_wilson95": [
+        0.0975,
+        0.3503
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.4167
+      ],
+      "mean_violation_score": 0.11798020364539147,
+      "violation_task_cluster_bootstrap95": [
+        0.0261,
+        0.2492
+      ],
+      "mean_pvt_violation_score": 0.5648166709322913,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.3071,
+        0.8317
+      ],
+      "mean_sims": 112.31481481481481,
+      "mean_calls": 1.7314814814814814,
+      "crashes": 0
+    },
+    {
+      "method": "analogcoder",
+      "paper": "AnalogCoder",
+      "venue": "AAAI-25",
+      "repo": "https://github.com/laiyao1/AnalogCoder",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.4722222222222222,
+      "tt_wilson95": [
+        0.3806,
+        0.5657
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.3241,
+        0.6204
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.25,
+      "pvt_wilson95": [
+        0.1375,
+        0.4107
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.5
+      ],
+      "mean_violation_score": 0.5576726775916332,
+      "violation_task_cluster_bootstrap95": [
+        0.3335,
+        0.7947
+      ],
+      "mean_pvt_violation_score": 0.9238626229030003,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.4694,
+        1.4105
+      ],
+      "mean_sims": 4.37037037037037,
+      "mean_calls": 3.324074074074074,
+      "crashes": 0
+    },
+    {
+      "method": "ado_llm",
+      "paper": "ADO-LLM",
+      "venue": "ICCAD-24",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.75,
+      "tt_wilson95": [
+        0.6607,
+        0.8221
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.6111,
+        0.8704
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.16666666666666666,
+      "pvt_wilson95": [
+        0.0787,
+        0.3189
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.4167
+      ],
+      "mean_violation_score": 0.05452813052740343,
+      "violation_task_cluster_bootstrap95": [
+        0.0134,
+        0.1032
+      ],
+      "mean_pvt_violation_score": 0.6365664187683701,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.325,
+        1.0213
+      ],
+      "mean_sims": 113.26851851851852,
+      "mean_calls": 5.0,
+      "crashes": 0
+    },
+    {
+      "method": "anaflow",
+      "paper": "AnaFlow",
+      "venue": "ICCAD-25",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.8703703703703703,
+      "tt_wilson95": [
+        0.7941,
+        0.9212
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.7778,
+        0.9444
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.3055555555555556,
+      "pvt_wilson95": [
+        0.18,
+        0.4686
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0833,
+        0.5556
+      ],
+      "mean_violation_score": 0.03808846993026812,
+      "violation_task_cluster_bootstrap95": [
+        0.0034,
+        0.0844
+      ],
+      "mean_pvt_violation_score": 0.6666815304146576,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.1995,
+        1.1562
+      ],
+      "mean_sims": 80.70370370370371,
+      "mean_calls": 2.0,
+      "crashes": 0
+    },
+    {
+      "method": "artisan",
+      "paper": "Artisan",
+      "venue": "DAC-24",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.7129629629629629,
+      "tt_wilson95": [
+        0.6215,
+        0.7898
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.5833,
+        0.8333
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.08333333333333333,
+      "pvt_wilson95": [
+        0.0287,
+        0.2183
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.1667
+      ],
+      "mean_violation_score": 0.15400742547261798,
+      "violation_task_cluster_bootstrap95": [
+        0.0415,
+        0.2822
+      ],
+      "mean_pvt_violation_score": 1.4790969793171362,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.6174,
+        2.4713
+      ],
+      "mean_sims": 94.57407407407408,
+      "mean_calls": 1.0,
+      "crashes": 0
+    },
+    {
+      "method": "autosizer",
+      "paper": "AutoSizer",
+      "venue": "ICML-26",
+      "repo": "https://github.com/yuxi120407/AutoSizer",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.8055555555555556,
+      "tt_wilson95": [
+        0.721,
+        0.8692
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.6944,
+        0.8981
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.1388888888888889,
+      "pvt_wilson95": [
+        0.0608,
+        0.2866
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.3333
+      ],
+      "mean_violation_score": 0.05649780220713233,
+      "violation_task_cluster_bootstrap95": [
+        0.0034,
+        0.1391
+      ],
+      "mean_pvt_violation_score": 1.2400728327569452,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.3955,
+        2.0112
+      ],
+      "mean_sims": 129.72222222222223,
+      "mean_calls": 2.0,
+      "crashes": 0
+    },
+    {
+      "method": "atlas",
+      "paper": "ATLAS",
+      "venue": "ICCAD-26",
+      "repo": "https://github.com/youngmin0oh/atlas",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.35185185185185186,
+      "tt_wilson95": [
+        0.2683,
+        0.4456
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.2222,
+        0.4815
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.08333333333333333,
+      "pvt_wilson95": [
+        0.0287,
+        0.2183
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.1944
+      ],
+      "mean_violation_score": 0.3659994451716271,
+      "violation_task_cluster_bootstrap95": [
+        0.1869,
+        0.5013
+      ],
+      "mean_pvt_violation_score": 0.9955757504709261,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.2588,
+        1.7092
+      ],
+      "mean_sims": 84.36111111111111,
+      "mean_calls": 0.0,
+      "crashes": 2
+    },
+    {
+      "method": "glova",
+      "paper": "GLOVA",
+      "venue": "DAC-25",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.35185185185185186,
+      "tt_wilson95": [
+        0.2683,
+        0.4456
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.213,
+        0.5
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.027777777777777776,
+      "pvt_wilson95": [
+        0.0049,
+        0.1417
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.0833
+      ],
+      "mean_violation_score": 0.46232543150692346,
+      "violation_task_cluster_bootstrap95": [
+        0.2584,
+        0.6781
+      ],
+      "mean_pvt_violation_score": 0.5313330146018955,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.3174,
+        0.8537
+      ],
+      "mean_sims": 28.14814814814815,
+      "mean_calls": 1.0,
+      "crashes": 0
+    }
+  ],
+  "pairwise_vs_spectra": {
+    "analogcoder": {
+      "common_cells": 108,
+      "tt_wins": 38,
+      "tt_losses": 2,
+      "tt_ties": 68,
+      "exact_sign_p_cells": 1.4933903003111482e-09,
+      "task_cluster_bootstrap_diff95": [
+        0.1852,
+        0.4815
+      ],
+      "holm_p7": 7.467e-09
+    },
+    "ado_llm": {
+      "common_cells": 108,
+      "tt_wins": 19,
+      "tt_losses": 13,
+      "tt_ties": 76,
+      "exact_sign_p_cells": 0.37708558747544885,
+      "task_cluster_bootstrap_diff95": [
+        -0.1111,
+        0.213
+      ],
+      "holm_p7": 0.754171174951
+    },
+    "anaflow": {
+      "common_cells": 108,
+      "tt_wins": 7,
+      "tt_losses": 14,
+      "tt_ties": 87,
+      "exact_sign_p_cells": 0.18924713134765625,
+      "task_cluster_bootstrap_diff95": [
+        -0.1759,
+        0.0463
+      ],
+      "holm_p7": 0.567741394043
+    },
+    "artisan": {
+      "common_cells": 108,
+      "tt_wins": 22,
+      "tt_losses": 12,
+      "tt_ties": 74,
+      "exact_sign_p_cells": 0.12144948495551944,
+      "task_cluster_bootstrap_diff95": [
+        -0.0648,
+        0.2593
+      ],
+      "holm_p7": 0.485797939822
+    },
+    "autosizer": {
+      "common_cells": 108,
+      "tt_wins": 11,
+      "tt_losses": 11,
+      "tt_ties": 86,
+      "exact_sign_p_cells": 1.0,
+      "task_cluster_bootstrap_diff95": [
+        -0.1204,
+        0.1204
+      ],
+      "holm_p7": 1.0
+    },
+    "atlas": {
+      "common_cells": 108,
+      "tt_wins": 57,
+      "tt_losses": 8,
+      "tt_ties": 43,
+      "exact_sign_p_cells": 3.1632431884368734e-10,
+      "task_cluster_bootstrap_diff95": [
+        0.2685,
+        0.6296
+      ],
+      "holm_p7": 1.898e-09
+    },
+    "glova": {
+      "common_cells": 108,
+      "tt_wins": 52,
+      "tt_losses": 3,
+      "tt_ties": 53,
+      "exact_sign_p_cells": 1.5418777365994174e-12,
+      "task_cluster_bootstrap_diff95": [
+        0.2963,
+        0.6111
+      ],
+      "holm_p7": 1.1e-11
+    }
+  },
+  "domain_rows": [
+    {
+      "method": "spectra",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "spectra",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.3333333333333333
+    },
+    {
+      "method": "spectra",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.2777777777777778,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "anaflow",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.6111111111111112,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "anaflow",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "anaflow",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.3888888888888889,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "artisan",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "artisan",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.9444444444444444,
+      "pvt_success": 0.8333333333333334
+    },
+    {
+      "method": "autosizer",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.3888888888888889,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.9444444444444444,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.1111111111111111,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.3888888888888889,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "atlas",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.1111111111111111,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.6111111111111112,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.3333333333333333
+    },
+    {
+      "method": "glova",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.3888888888888889,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.4444444444444444,
+      "pvt_success": 0.08333333333333333
+    },
+    {
+      "method": "glova",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    }
+  ]
+}

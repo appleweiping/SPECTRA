@@ -42,3 +42,13 @@ The strict eight-row SIZ7g rerun added the native fixed-topology SPECTRA row. It
 `B47560536B9478C9B0CA157024B24FF0BD22D149EBEABBCFE6C063BA012711B0`. SPECTRA records 30/36 TT passes and
 3/12 independent PVT passes. The matrix is a single-seed descriptive snapshot and mismatch is unavailable for
 the public task file. Earlier mixed-version and timeout-recovery archives remain on the server for audit.
+
+The final matched three-seed extension is stored in
+`work/remote_archive/siz7g_final_bundle.tar.gz` with SHA-256
+`8a360f800f0460e3bcfed188ead3d77dca4c6e6bf56832aa39c90d3eb1348a5a`. It contains the 288-cell seed-0 rerun,
+the 576-cell seed-1/2 rerun, the 108-cell staged PVT sensitivity track, and the complete legacy component
+mechanism evidence. The final source checkout is synchronized to GitHub `main` at commit
+`017536507bbf283ba5cfffbbc9f6d098bdd01250`. The eight-row primary aggregate has 864/864 observed cells.
+SPECTRA reaches 0.806 TT, 0.194 PVT, 0.1180 mean TT violation and 0.5648 mean PVT violation. The staged
+variant reaches 0.833 TT, 0.222 PVT, 0.1052 mean TT violation and 0.5063 mean PVT violation. These results
+are scoped to the frozen fixed-topology benchmark and are not a universal SOTA claim.
