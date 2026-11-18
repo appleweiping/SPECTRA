@@ -19,6 +19,11 @@ The 300-unit cap is the common resource constraint. The external clean-room adap
 
 The aggregate keeps every task-seed cell. Confidence intervals use task-clustered bootstrap resampling, so the three seeds for one task are not treated as independent tasks. SPECTRA-versus-external paired TT tests use exact sign tests with Holm correction across the seven external rows. The three-seed result is a matched-budget snapshot. It does not support a universal analog-sizing SOTA claim.
 
+The repository-wide expansion uses `data/bench/all_sizing_tasks.jsonl`, which exposes the same sizing schema for 92
+tasks across 12 circuit families. Its preflight completed 48 cells without crashes. The full expansion was stopped
+after 122 completed cells because robust simulator evaluations made the remaining run several hours. The audit and
+archive are recorded in `results/EXTERNAL_EXPANSION_AUDIT.md`, and no partial expansion cell enters the primary claim.
+
 ## Excluded from the primary ranking
 
 The legacy E1/EXT7g direct, Gen+TPE, SPECTRA-min, optimizer-control and template-oracle arms remain in their historical diagnostic tables. They are internal controls or privileged upper bounds, not paper-backed external frameworks, and are excluded from the primary eight-row ranking. The SPECTRA-PVT-staged run is a predeclared sensitivity analysis and is reported separately from the primary SPECTRA row.

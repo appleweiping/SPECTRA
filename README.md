@@ -26,6 +26,8 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   These are track-scoped measurements and do not establish universal analog-sizing SOTA.
   The primary-row contract, metric definitions, statistical scope and exclusions are fixed in
   `docs/MAIN_COMPARISON_PROTOCOL.md`.
+  A 92-task, 12-family external-only expansion is documented in `results/EXTERNAL_EXPANSION_AUDIT.md`; its
+  48-cell preflight passed, while the full run was stopped after 122 cells and excluded from ranking.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.
