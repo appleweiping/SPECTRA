@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 
 import numpy as np
 
@@ -110,6 +111,8 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
                                      initial_context, SYSTEM_SPECTRA_FIXED)
     refinement_done = False
     robust = bool(task.get("robust"))
+    if robust and os.environ.get("SPECTRA_PVT_STRATEGY", "fullgrid") == "staged":
+        return _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed)
     # Robust tasks use the same 300 condition-evaluation budget as every other
     # strict row, but spend it on the actual 45-corner objective.  The old path
     # stopped as soon as TT passed, which made a nominally good design consume
@@ -203,6 +206,59 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     return _finish(ctx, final_net)
 
 
+def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
+    """Optional staged robust strategy for sensitivity analysis.
+
+    It keeps an incumbent that passes TT plus two representative corners while
+    reserving the remaining budget for full-grid local refinement.  The default
+    strict row remains the full-grid strategy above.  This path is deliberately
+    selected by an environment flag so it cannot silently replace the primary
+    evidence.
+    """
+    from ..sim.evaluate import PVT
+    search_conds = [NOMINAL, {"corner": "ss", "temp": 125, "vdd": 1.8},
+                    {"corner": "ff", "temp": -40, "vdd": 1.8}]
+    ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
+    staged_best = {"score": score, "netlist": net, "params": dict(x), "passed": bool(ev and ev.passed)}
+    ctx.log("spectra_staged_plan", score=score, passed=staged_best["passed"], search_corners=3)
+    revisions = 0
+    while not llm_failed and ctx.calls_left() > 1 and revisions < 2 and ctx.sims_left() >= len(search_conds):
+        analysis = diagnose.analyze(task, ev) if ev is not None and ev.status == "ok" else None
+        cards = retrieve_cards(task, analysis) if analysis else []
+        context = ""
+        if analysis:
+            context += "Structured diagnosis:\n" + diagnose.render_analysis(analysis)
+        if cards:
+            context += "\nKnowledge cards:\n" + render_cards(cards)
+        context += "\nCurrent parameters:\n" + json.dumps(x, sort_keys=True)
+        x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA staged diagnosis revision",
+                                         context, SYSTEM_SPECTRA_FIXED)
+        ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
+        ctx.log("spectra_staged_revision", score=score, passed=bool(ev and ev.passed),
+                diagnosis=analysis.get("schema") if analysis else None,
+                cards=[c.get("id") for c in cards])
+        if ev is not None and ev.status == "ok" and score < staged_best["score"]:
+            staged_best = {"score": score, "netlist": net, "params": dict(x), "passed": bool(ev.passed)}
+        revisions += 1
+    # One full-grid evaluation anchors the PVT objective, then a small-sigma
+    # CMA search stays near the TT-feasible staged incumbent.
+    if ctx.sims_left() >= len(PVT) and staged_best.get("netlist"):
+        ev_full, net_full, score_full = _evaluate(ctx, build, staged_best["netlist"], conds=PVT)
+        _update_robust_best(ctx, ev_full, net_full, score_full)
+    if ctx.sims_left() >= 4 * len(PVT) and ctx.best.get("netlist"):
+        _cmaes(ctx, build, vars_, seed + 197, x0=_params_from_netlist(task, vars_, staged_best),
+               budget=4 * len(PVT), tag="spectra_pvt_staged_refine", conds=PVT, popsize=4, sigma=0.08)
+    final_net = ctx.best.get("netlist") or staged_best.get("netlist")
+    return _finish(ctx, final_net)
+
+
+def _params_from_netlist(task, vars_, staged_best):
+    """Return the staged parameter center when it is already represented."""
+    # The staged path retains parameters directly via this private field.  Fall
+    # back to geometric midpoints for old result records.
+    return staged_best.get("params") or _midpoint(vars_)
+
+
 def _evaluate(ctx, build, x, conds=None):
     try:
         net = build(x)
@@ -263,7 +319,7 @@ def _tpe(ctx, build, vars_, seed, x0=None, budget=None, tag="tpe"):
     return ctx.best.get("netlist")
 
 
-def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes", conds=None, popsize=None):
+def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes", conds=None, popsize=None, sigma=0.25):
     import cma
     budget = ctx.sims_left() if budget is None else min(budget, ctx.sims_left())
     if budget <= 0 or not vars_:
@@ -272,7 +328,7 @@ def _cmaes(ctx, build, vars_, seed, x0=None, budget=None, tag="cmaes", conds=Non
     options = {"bounds": [0, 1], "seed": seed, "verbose": -9}
     if popsize is not None:
         options["popsize"] = int(popsize)
-    es = cma.CMAEvolutionStrategy(u0, 0.25, options)
+    es = cma.CMAEvolutionStrategy(u0, sigma, options)
     while budget > 0 and ctx.sims_left() > 0 and not es.stop():
         solutions = es.ask()
         scores = []
