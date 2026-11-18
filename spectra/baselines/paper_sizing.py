@@ -92,6 +92,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     ev, net, score = _evaluate(ctx, build, x)
     ctx.log("spectra_plan", score=score, passed=bool(ev and ev.passed), topology="frozen")
     if ev is not None and ev.passed:
+        ctx.best = {"score": score, "netlist": net, "passed": True}
         return _finish(ctx, net)
 
     # Keep the same 12-call cap. Each revision receives a structured diagnosis and
@@ -113,6 +114,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
                 diagnosis=analysis.get("schema") if analysis else None,
                 cards=[c.get("id") for c in cards])
         if ev is not None and ev.passed:
+            ctx.best = {"score": score, "netlist": net, "passed": True}
             return _finish(ctx, net)
         # Reserve a bounded refinement tranche after enough evidence has accumulated.
         if ctx.calls >= 3 and ctx.sims_left() >= 24:
@@ -123,6 +125,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
                 net = refined
                 ctx.log("spectra_refine_trace", budget=refine_budget,
                          returned_best=True)
+                ctx.best = {"score": score, "netlist": net, "passed": False}
             break
     return _finish(ctx, net or ctx.best.get("netlist"))
 
