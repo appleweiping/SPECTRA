@@ -53,7 +53,7 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         rows.append({
             "method": method,
             **PAPER_META[method],
-            "implementation": "paper-faithful-clean-room",
+            "implementation": "paper-aligned-clean-room-reimplementation",
             "task_scope": "fixed_topology_sizing",
             "observed": len(observed), "missing": len(tasks) - len(observed), "task_count": len(tasks),
             "family_count": len({task["family"] for _, task, _ in observed}),

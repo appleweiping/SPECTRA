@@ -1,6 +1,6 @@
 """Paper-backed fixed-topology sizing adapters.
 
-These runners are clean-room, paper-faithful reimplementations. They share the
+These runners are clean-room, paper-aligned reimplementations. They share the
 same frozen topology, variable bounds, simulator, task text and budget.
 """
 from __future__ import annotations
