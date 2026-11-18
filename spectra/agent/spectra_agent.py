@@ -97,7 +97,7 @@ class Spectra:
 
     # ------------------------------------------------------------------ refinement in intent space
     def refine(self, conds, budget, bounds=None, init=None):
-        """Active-set trust-region refinement followed by bounded CMA-ES."""
+        """Active-set probes followed by CMA-ES inside a bounded trust region."""
         import cma
         from concurrent.futures import ThreadPoolExecutor
         vars_ = _vars_from(self.params_spec, bounds)
@@ -120,7 +120,11 @@ class Spectra:
         u0 = [v.to_unit(float(x0.get(v.name, self.params_spec[v.name][0]))) for v in vars_]
         trust_radius = min(0.25, 0.08 + 0.02 * self.refine_round)
         pop = max(8, 4 + int(3 * math.log(len(vars_))))
-        es = cma.CMAEvolutionStrategy(u0, 0.15, {"bounds": [0, 1], "seed": self.ctx.seed + 7, "verbose": -9, "popsize": pop})
+        lo = [max(0.0, u - trust_radius) for u in u0]
+        hi = [min(1.0, u + trust_radius) for u in u0]
+        es = cma.CMAEvolutionStrategy(u0, min(0.15, trust_radius / 2),
+                                       {"bounds": [lo, hi], "seed": self.ctx.seed + 7,
+                                        "verbose": -9, "popsize": pop})
         best, used = None, 0
 
         def ev_one(r):
