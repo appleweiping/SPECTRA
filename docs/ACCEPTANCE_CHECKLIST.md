@@ -6,7 +6,7 @@ This checklist turns the project handoff and the ICCAD contract into checks that
 |---|---|---|---|
 | ENV-1 | No local C/D experiments | Worktree and caches under `E:\CodexProjects`; no simulator/LLM run on the workstation | PASS (E-only source, cache and PDF build; remote-only experiments) |
 | ENV-2 | Server storage and simulator | westc `/root/autodl-tmp/spectra-analog-agent`, `ngspice -v` = 42, GPU/CPU inventory recorded | PASS (see `docs/REMOTE_ENV.md`) |
-| SYNC-1 | Three-way synchronization | Same commit hash on local E:, server, and GitHub; clean worktrees | PASS (`58f419ba38cec77478b091a6d348a7b7140cba1e` on all three) |
+| SYNC-1 | Three-way synchronization | Same commit hash on local E:, server, and GitHub; clean worktrees | PASS (final handoff verification; see `git rev-parse HEAD` on each checkout) |
 | CODE-1 | GPT-only experiment backend | `spectra/agent/llm.py` uses OpenAI client, rejects Claude aliases, preserves cache/usage schema | PASS (offline fake-client smoke; 2026-11-17 server GPT-6.1-sol catalog + `OK.` smoke) |
 | CODE-2 | GPT ARIS reviewer | `tools/aris_review.py` uses fresh GPT call and read-only context manifest; no `claude -p` invocation | PASS (compile/help smoke; paid review pending) |
 | EXP-1 | Main comparison | GPT-6.1-sol E1g with SPECTRA, direct, Gen+TPE, SPECTRA-min; common primary endpoint | PASS (`results/E1g_summary.json`, `results/comparisons.json`) |
