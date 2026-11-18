@@ -189,7 +189,7 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
     (ROOT / "results/paper_sizing_matrix.json").write_text(json.dumps(result, indent=2) + "\n")
     lines = ["# Strict eight-framework fixed-topology sizing track", "",
              "All rows receive the same frozen topology, variable bounds, task text, SKY130/ngspice-42 and 300 simulation-unit budget. LLM adapters share a 12-call cap. Results are reimplementations or adapters and do not reuse paper-reported numbers.", "",
-             "Search uses 3 corners during adaptation. An independent 45-corner verifier reports PVT pass. Missing fields remain missing and are never imputed.", "",
+             "Search uses 3 corners during adaptation. An independent 45-corner verifier reports PVT pass. Missing fields remain missing and are never imputed. Pairwise p-values are single-seed descriptive snapshot statistics.", "",
              "| Framework | Venue | Observed/36 | Robust n | TT success (95% Wilson CI) | PVT success (95% Wilson CI) | Mismatch n | Mean sims | Mean calls | Mean wall s | Mean cost | W/L vs AnalogCoder | Crashes |", "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for row in rows:
         ci = row["tt_ci95"]
