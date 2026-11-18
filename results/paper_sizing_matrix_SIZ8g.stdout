@@ -51,38 +51,38 @@
       "family_count": 6,
       "robust_tasks": 12,
       "robust_observed": 12,
-      "tt_success": 0.8611111111111112,
+      "tt_success": 0.8333333333333334,
       "tt_ci95": [
-        0.7134,
-        0.9392
+        0.6811,
+        0.9213
       ],
-      "pvt_success": 0.16666666666666666,
+      "pvt_success": 0.25,
       "pvt_ci95": [
-        0.047,
-        0.448
+        0.0889,
+        0.5323
       ],
       "mismatch_yield": null,
       "mismatch_observed": 0,
-      "mean_sims": 52.861111111111114,
+      "mean_sims": 54.69444444444444,
       "median_sims": 6.0,
-      "mean_calls": 1.75,
+      "mean_calls": 1.6666666666666667,
       "median_calls": 2.0,
-      "mean_wall_seconds": 186.4388888888889,
-      "median_wall_seconds": 105.05,
-      "mean_tokens_in": 7479.222222222223,
-      "mean_tokens_out": 689.8055555555555,
+      "mean_wall_seconds": 110.45555555555556,
+      "median_wall_seconds": 29.85,
+      "mean_tokens_in": 7295.111111111111,
+      "mean_tokens_out": 674.5555555555555,
       "mean_cost_usd": 0.0,
-      "mean_first_pass_sims": 24.789473684210527,
-      "mean_first_pass_calls": 1.736842105263158,
-      "first_pass_observed": 19,
-      "mean_violation_score": 0.07403430840485824,
+      "mean_first_pass_sims": 23.055555555555557,
+      "mean_first_pass_calls": 1.5555555555555556,
+      "first_pass_observed": 18,
+      "mean_violation_score": 0.0709016022897233,
       "median_violation_score": 0.0,
       "violation_observed": 36,
-      "mean_simulation_units": 52.861111111111114,
+      "mean_simulation_units": 54.69444444444444,
       "failure_taxonomy": {
         "pvt_fail": 6,
-        "budget_exhausted": 15,
-        "pass": 15
+        "budget_exhausted": 16,
+        "pass": 14
       },
       "crashes": 0,
       "families": [
@@ -93,7 +93,7 @@
         "opamp",
         "vco"
       ],
-      "wins_vs_analogcoder": 18,
+      "wins_vs_analogcoder": 17,
       "losses_vs_analogcoder": 0
     },
     {
@@ -511,52 +511,52 @@
   "pairwise_vs_spectra": {
     "analogcoder": {
       "common": 36,
-      "tt_wins": 18,
+      "tt_wins": 17,
       "tt_losses": 0,
-      "tt_ties": 18,
-      "exact_sign_p_single_seed": 7.62939453125e-06
+      "tt_ties": 19,
+      "exact_sign_p_single_seed": 1.52587890625e-05
     },
     "ado_llm": {
+      "common": 36,
+      "tt_wins": 5,
+      "tt_losses": 1,
+      "tt_ties": 30,
+      "exact_sign_p_single_seed": 0.21875
+    },
+    "anaflow": {
+      "common": 36,
+      "tt_wins": 7,
+      "tt_losses": 3,
+      "tt_ties": 26,
+      "exact_sign_p_single_seed": 0.34375
+    },
+    "artisan": {
+      "common": 36,
+      "tt_wins": 8,
+      "tt_losses": 3,
+      "tt_ties": 25,
+      "exact_sign_p_single_seed": 0.2265625
+    },
+    "autosizer": {
       "common": 36,
       "tt_wins": 6,
       "tt_losses": 1,
       "tt_ties": 29,
       "exact_sign_p_single_seed": 0.125
     },
-    "anaflow": {
-      "common": 36,
-      "tt_wins": 7,
-      "tt_losses": 2,
-      "tt_ties": 27,
-      "exact_sign_p_single_seed": 0.1796875
-    },
-    "artisan": {
-      "common": 36,
-      "tt_wins": 8,
-      "tt_losses": 2,
-      "tt_ties": 26,
-      "exact_sign_p_single_seed": 0.109375
-    },
-    "autosizer": {
-      "common": 36,
-      "tt_wins": 7,
-      "tt_losses": 1,
-      "tt_ties": 28,
-      "exact_sign_p_single_seed": 0.0703125
-    },
     "atlas": {
       "common": 36,
-      "tt_wins": 19,
+      "tt_wins": 18,
       "tt_losses": 0,
-      "tt_ties": 17,
-      "exact_sign_p_single_seed": 3.814697265625e-06
+      "tt_ties": 18,
+      "exact_sign_p_single_seed": 7.62939453125e-06
     },
     "glova": {
       "common": 36,
-      "tt_wins": 23,
+      "tt_wins": 22,
       "tt_losses": 0,
-      "tt_ties": 13,
-      "exact_sign_p_single_seed": 2.384185791015625e-07
+      "tt_ties": 14,
+      "exact_sign_p_single_seed": 4.76837158203125e-07
     }
   },
   "domain_rows": [
@@ -593,13 +593,13 @@
       "family": "opamp",
       "observed": 6,
       "tt_success": 1.0,
-      "pvt_success": 0.0
+      "pvt_success": 0.25
     },
     {
       "method": "spectra",
       "family": "vco",
       "observed": 6,
-      "tt_success": 1.0,
+      "tt_success": 0.8333333333333334,
       "pvt_success": 0.0
     },
     {

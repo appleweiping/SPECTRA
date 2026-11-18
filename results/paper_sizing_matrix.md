@@ -6,7 +6,7 @@ Search uses 3 corners during adaptation. An independent 45-corner verifier repor
 
 | Framework | Venue | Observed/36 | Robust n | TT success (95% Wilson CI) | PVT success (95% Wilson CI) | Mismatch n | Mean sims | Mean calls | Mean wall s | Mean cost | W/L vs AnalogCoder | Crashes |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| SPECTRA (ours) | this work | 36/36 | 12/12 | 0.861 [0.713,0.939] | 0.167 [0.047,0.448] | 0 | 52.9 | 1.8 | 186.4 | $0.000 | 18/0 | 0 |
+| SPECTRA (ours) | this work | 36/36 | 12/12 | 0.833 [0.681,0.921] | 0.250 [0.089,0.532] | 0 | 54.7 | 1.7 | 110.5 | $0.000 | 17/0 | 0 |
 | AnalogCoder | AAAI-25 | 36/36 | 12/12 | 0.361 [0.225,0.524] | 0.250 [0.089,0.532] | 0 | 3.1 | 2.3 | 38.3 | $0.000 | -- | 10 |
 | ADO-LLM | ICCAD-24 | 36/36 | 12/12 | 0.722 [0.560,0.842] | 0.250 [0.089,0.532] | 0 | 120.3 | 4.7 | 185.9 | $0.000 | 13/0 | 2 |
 | AnaFlow | ICCAD-25 | 36/36 | 12/12 | 0.722 [0.560,0.842] | 0.333 [0.138,0.609] | 0 | 53.6 | 1.6 | 79.3 | $0.000 | 13/0 | 7 |
@@ -19,7 +19,7 @@ Search uses 3 corners during adaptation. An independent 45-corner verifier repor
 
 | Method | opamp | amp | cmirror | filter | ldo | vco |
 |---|---:|---:|---:|---:|---:|---:|
-| spectra | 1.000 | 0.667 | 1.000 | 0.667 | 0.833 | 1.000 |
+| spectra | 1.000 | 0.667 | 1.000 | 0.667 | 0.833 | 0.833 |
 | analogcoder | 0.667 | 0.000 | 1.000 | 0.167 | 0.000 | 0.333 |
 | ado_llm | 0.833 | 0.500 | 1.000 | 0.333 | 0.833 | 0.833 |
 | anaflow | 1.000 | 0.167 | 1.000 | 0.500 | 0.833 | 0.833 |
@@ -32,10 +32,10 @@ Search uses 3 corners during adaptation. An independent 45-corner verifier repor
 
 | Method | Common | SPECTRA wins | SPECTRA losses | Ties | Exact sign p |
 |---|---:|---:|---:|---:|---:|
-| analogcoder | 36 | 18 | 0 | 18 | 7.629e-06 |
-| ado_llm | 36 | 6 | 1 | 29 | 0.125 |
-| anaflow | 36 | 7 | 2 | 27 | 0.1797 |
-| artisan | 36 | 8 | 2 | 26 | 0.1094 |
-| autosizer | 36 | 7 | 1 | 28 | 0.07031 |
-| atlas | 36 | 19 | 0 | 17 | 3.815e-06 |
-| glova | 36 | 23 | 0 | 13 | 2.384e-07 |
+| analogcoder | 36 | 17 | 0 | 19 | 1.526e-05 |
+| ado_llm | 36 | 5 | 1 | 30 | 0.2188 |
+| anaflow | 36 | 7 | 3 | 26 | 0.3438 |
+| artisan | 36 | 8 | 3 | 25 | 0.2266 |
+| autosizer | 36 | 6 | 1 | 29 | 0.125 |
+| atlas | 36 | 18 | 0 | 18 | 7.629e-06 |
+| glova | 36 | 22 | 0 | 14 | 4.768e-07 |

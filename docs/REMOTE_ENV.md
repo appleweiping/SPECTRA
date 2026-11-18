@@ -37,8 +37,8 @@ mechanism track completed 270 unique records for 18 tasks × 5 arms × 3 seeds. 
 `221B11AC6409F075D7D67B6D91FF0220797B13539732FD6A94E38F91BF79DC0F`.
 
 The strict eight-row SIZ7g rerun added the native fixed-topology SPECTRA row. It contains 288 observed cells,
-36 tasks per row, 12 robust tasks, a 300 simulation-unit cap and a 12-call cap. The final strict archive is
-`work/remote_archive/siz7g_spectra_final.tar` with SHA-256
-`4B81D1BD1407A06BC6BAEAF3FC7B2A62C16FC7B88C7D90CDEB1AB62B4E9BF949`. SPECTRA records 31/36 TT passes and
-2/12 independent PVT passes. The matrix is a single-seed descriptive snapshot and mismatch is unavailable for
-the public task file.
+36 tasks per row, 12 robust tasks, a 300 simulation-unit cap and a 12-call cap. The uniform final strict archive is
+`work/remote_archive/siz7g_spectra_uniform_final.tar` with SHA-256
+`B47560536B9478C9B0CA157024B24FF0BD22D149EBEABBCFE6C063BA012711B0`. SPECTRA records 30/36 TT passes and
+3/12 independent PVT passes. The matrix is a single-seed descriptive snapshot and mismatch is unavailable for
+the public task file. Earlier mixed-version and timeout-recovery archives remain on the server for audit.

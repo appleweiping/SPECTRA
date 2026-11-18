@@ -22,7 +22,7 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   diagnosis, knowledge and bounded-refinement loop through a fixed-topology adapter. All eight rows receive the same
   bounds, 300 simulation-unit budget and 12-call LLM cap. The previous EXT7g framework-and-control matrix remains
   a separate diagnostic appendix.
-  The completed SIZ7g snapshot records SPECTRA at 31/36 TT passes, the highest nominal rate in this track. PVT is
+  The completed SIZ7g snapshot records SPECTRA at 30/36 TT passes, the highest nominal rate in this track. PVT is
   reported separately and remains a distinct robustness result.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement

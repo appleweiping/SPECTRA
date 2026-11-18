@@ -36,8 +36,8 @@ topology interface. Official code is used only where the paper repository suppor
 rows record the unsupported features and the adaptation in `data/bench/paper_sizing_manifest.json`, so a clean-room
 adapter is not presented as an official reproduction.
 
-The completed eight-row SIZ7g snapshot gives SPECTRA the highest observed nominal TT success, 31/36 or 0.861,
-with a 95% Wilson interval of [0.713, 0.939]. Its independent 45-corner PVT success is 2/12 or 0.167, while
+The completed eight-row SIZ7g snapshot gives SPECTRA the highest observed nominal TT success, 30/36 or 0.833,
+with a 95% Wilson interval of [0.681, 0.921]. Its independent 45-corner PVT success is 3/12 or 0.250, while
 AnaFlow reaches 4/12 or 0.333. The result supports a strict-track nominal sizing lead under the frozen protocol.
 It does not support a universal analog-sizing SOTA statement because the track is fixed-topology, self-constructed,
 single-seed and mismatch data are unavailable for all rows.
