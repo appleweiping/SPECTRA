@@ -22,9 +22,21 @@ ATLAS ICCAD-26 and GLOVA DAC-25. Each row is an explicitly labelled clean-room a
 variable bounds, task text, simulator, 300 simulation-unit budget and 12-call LLM cap are used across rows. The
 earlier EXT7g rows remain a diagnostic framework-and-control matrix and are excluded from the strict seven count.
 
+The strict rows are paper-backed framework identities, while the implementations in this repository are clean-room
+adapters that expose each paper's sizing loop through the frozen fixed-topology interface. Official code is used only
+where the paper repository supports the required interface. Paper-only rows record the unsupported features and the
+adaptation in `data/bench/paper_sizing_manifest.json`, so a clean-room adapter is not presented as an official
+reproduction.
+
 References
 
 - AnalogCoder, AAAI 2025. <https://ojs.aaai.org/index.php/AAAI/article/download/32016/34171>
 - AnalogGym, ICCAD 2024. <https://arxiv.org/abs/2409.08534>
 - AnalogGenie, ICLR 2025. <https://proceedings.iclr.cc/paper_files/paper/2025/file/f0552f14388d95b19740dee809f5cad1-Paper-Conference.pdf>
 - AnalogScout, arXiv 2026. <https://arxiv.org/abs/2610.37319>
+- ADO-LLM, ICCAD 2024. <https://doi.org/10.1145/3676536.3676816>
+- AnaFlow, ICCAD 2025. <https://doi.org/10.1109/ICCAD66269.2025.11240818>
+- Artisan, DAC 2024. <https://doi.org/10.1145/3649329.3655903>
+- AutoSizer, ICML 2026. <https://proceedings.mlr.press/v306/yu26aw.html>
+- ATLAS, ICCAD 2026. <https://doi.org/10.1145/3831252.3834039>
+- GLOVA, DAC 2025. <https://doi.org/10.1109/DAC63849.2025.11132461>

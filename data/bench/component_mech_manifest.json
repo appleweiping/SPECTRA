@@ -1,0 +1,19 @@
+{
+  "schema": "spectra-component-mechanism/v1",
+  "experiment": "E2g_mech",
+  "model": "gpt-6.1-sol",
+  "tasks": "data/bench/component_mech_tasks.jsonl",
+  "task_count": 18,
+  "families": ["opamp", "amp", "cmirror", "filter", "ldo", "vco"],
+  "methods": ["spectra", "spectra_nodiag", "spectra_nointent", "spectra_norefine", "spectra_noknow"],
+  "seeds": [0, 1, 2],
+  "budget": {"llm_calls": 12, "simulation_units": 300, "robust_simulation_units": 600},
+  "primary_metrics": ["tt_success", "pvt_success", "violation_score", "simulation_units", "llm_calls", "wall_seconds"],
+  "mechanism_metrics": {
+    "diagnosis": ["cause_hit_at_1", "cause_hit_at_3", "direction_accuracy", "delta_violation", "sims_to_pass"],
+    "intent": ["intent_fraction", "intent_compliant", "first_pass_tt", "first_pass_pvt", "pvt_margin_q10"],
+    "refinement": ["active_params", "active_conditions", "trust_radius", "closure_rounds", "delta_score_per_sim", "pvt_pass"],
+    "knowledge": ["card_id", "card_sha256", "retrieval_score", "card_action_delta_violation", "first_pass_tt", "first_pass_pvt"]
+  },
+  "fairness": "same task order, model, seeds, call/simulation budget and independent verifier across all arms"
+}
