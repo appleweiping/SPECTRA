@@ -51,6 +51,9 @@ def make_runner(method, model, strict_sizing=False):
            "spectra_norefine": Config(use_refine=False), "spectra_noknow": Config(use_knowledge=False),
            "spectra_pvt_all": Config(pvt_strategy="all_corners"), "spectra_pvt_nominal": Config(pvt_strategy="nominal_only"),
            "spectra_min": Config(minimal=True)}
+    if strict_sizing and method in PAPER_RUNNERS:
+        return lambda task, seed: PAPER_RUNNERS[method](task, model=model, seed=seed,
+                                                         budget=budget_for(task, strict_sizing))
     if method in abl:
         return lambda task, seed: Spectra(task, model=model, seed=seed, cfg=abl[method], budget=budget_for(task, strict_sizing),
                                           method=method).run()
