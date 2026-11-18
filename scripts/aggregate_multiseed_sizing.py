@@ -134,15 +134,21 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("S
     for method in METHODS:
         if method == "spectra":
             continue
-        pairs = [(a, b) for tid in tasks for a, b in zip(cells["spectra"][tid], cells[method][tid])
-                 if a["seed"] == b["seed"]]
+        pairs = []
+        for tid in tasks:
+            other_by_seed = {r["seed"]: r for r in cells[method][tid]}
+            for a in cells["spectra"][tid]:
+                b = other_by_seed.get(a["seed"])
+                if b is not None:
+                    pairs.append((a, b))
         wins = sum(a["tt"] and not b["tt"] for a, b in pairs)
         losses = sum(b["tt"] and not a["tt"] for a, b in pairs)
         # Task-clustered paired bootstrap of the TT difference.
         groups = []
         for tid in tasks:
-            by_seed = {a["seed"]: (int(a["tt"]) - int(b["tt"]))
-                       for a in cells["spectra"][tid] for b in cells[method][tid] if a["seed"] == b["seed"]}
+            other_by_seed = {r["seed"]: r for r in cells[method][tid]}
+            by_seed = {a["seed"]: (int(a["tt"]) - int(other_by_seed[a["seed"]]["tt"]))
+                       for a in cells["spectra"][tid] if a["seed"] in other_by_seed}
             if by_seed:
                 groups.append(list(by_seed.values()))
         diff_ci = _cluster_bootstrap(groups, reps, 29)
