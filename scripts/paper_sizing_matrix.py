@@ -105,6 +105,9 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         violation_scores = [float(rec.get("verify", {}).get("tt_score"))
                             for _, _, rec in observed
                             if isinstance(rec.get("verify", {}).get("tt_score"), (int, float))]
+        pvt_violation_scores = [float(rec.get("verify", {}).get("pvt_score"))
+                                for _, task, rec in observed
+                                if task.get("robust") and isinstance(rec.get("verify", {}).get("pvt_score"), (int, float))]
         charged_sims = [int(rec.get("sims", rec.get("verify", {}).get("n_sims", 0)) or 0)
                         for _, _, rec in observed]
         failure_taxonomy = {}
@@ -139,6 +142,9 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
             "mean_violation_score": _mean(violation_scores),
             "median_violation_score": _median(violation_scores),
             "violation_observed": len(violation_scores),
+            "mean_pvt_violation_score": _mean(pvt_violation_scores),
+            "median_pvt_violation_score": _median(pvt_violation_scores),
+            "pvt_violation_observed": len(pvt_violation_scores),
             "mean_simulation_units": _mean(charged_sims),
             "failure_taxonomy": failure_taxonomy,
             "crashes": sum(rec.get("status") == "crash" for _, _, rec in observed),
@@ -182,7 +188,7 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
               "search_corners": 3, "verifier_corners": 45,
               "primary_endpoint": "tt_success",
               "inference_scope": "single_seed_paired_snapshot",
-              "metrics": ["tt_success", "pvt_success", "mismatch_yield", "violation_score",
+              "metrics": ["tt_success", "pvt_success", "mismatch_yield", "violation_score", "pvt_violation_score",
                           "simulation_units", "llm_calls", "wall_seconds", "tokens", "cost_usd",
                           "first_pass_sims", "first_pass_calls", "failure_taxonomy"],
               "rows": rows, "pairwise_vs_spectra": pairwise, "domain_rows": domain_rows}
@@ -203,6 +209,11 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         wl = "--" if row["wins_vs_analogcoder"] is None else f"{row['wins_vs_analogcoder']}/{row['losses_vs_analogcoder']}"
         robust_n = f"{row['robust_observed']}/{row['robust_tasks']}"
         lines.append(f"| {row['paper']} | {row['venue']} | {row['observed']}/{row['task_count']} | {robust_n} | {rate} | {pvt} | {row['mismatch_observed']} | {sims} | {calls} | {wall} | {cost} | {wl} | {row['crashes']} |")
+    lines += ["", "## Violation endpoints", "", "| Method | TT mean violation | PVT mean violation | PVT observations |", "|---|---:|---:|---:|"]
+    for row in rows:
+        tt_v = row["mean_violation_score"]
+        pvt_v = row["mean_pvt_violation_score"]
+        lines.append("| " + row["method"] + " | " + ("--" if tt_v is None else f"{tt_v:.4f}") + " | " + ("--" if pvt_v is None else f"{pvt_v:.4f}") + " | " + str(row["pvt_violation_observed"]) + " |")
     lines += ["", "## Per-domain TT success", "", "| Method | opamp | amp | cmirror | filter | ldo | vco |", "|---|---:|---:|---:|---:|---:|---:|"]
     by_method = {m: {r["family"]: r for r in domain_rows if r["method"] == m} for m in METHODS}
     for method in METHODS:
