@@ -138,7 +138,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
             return _finish(ctx, net)
         # Reserve a bounded refinement tranche after enough evidence has accumulated.
         if ctx.calls >= 1 and ctx.sims_left() >= 24:
-            refine_budget = min(120, ctx.sims_left())
+            refine_budget = min(240, ctx.sims_left())
             refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
                              tag="spectra_active_set_refine")
             refinement_done = True
@@ -149,7 +149,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
                 ctx.best = {"score": score, "netlist": net, "passed": False}
             break
     if llm_failed and not refinement_done and ctx.sims_left() >= 24:
-        refine_budget = min(120, ctx.sims_left())
+        refine_budget = min(240, ctx.sims_left())
         refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
                          tag="spectra_fallback_refine")
         if refined:
