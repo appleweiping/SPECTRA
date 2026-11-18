@@ -291,7 +291,12 @@ def run_astra(task, model="gpt-6.1-sol", seed=0, budget=None):
     x = _ask_params(ctx, task, vars_, "gm/id knowledge initialization and critical-device reasoning")
     critical = vars_[:max(1, min(4, len(vars_)))]
     ctx.log("critical_variable_selection", variables=[v.name for v in critical])
-    _tpe(ctx, build, critical, seed + 17, x0=x, budget=max(1, ctx.sims_left() // 2), tag="astra_focal_bo")
+    base = _midpoint(vars_)
+    def build_critical(partial):
+        return build({**base, **partial})
+    critical_x = {v.name: x.get(v.name, base[v.name]) for v in critical}
+    _tpe(ctx, build_critical, critical, seed + 17, x0=critical_x,
+         budget=max(1, ctx.sims_left() // 2), tag="astra_focal_bo")
     return _finish(ctx, _tpe(ctx, build, vars_, seed + 18, x0=x, tag="astra_global_bo"))
 
 
