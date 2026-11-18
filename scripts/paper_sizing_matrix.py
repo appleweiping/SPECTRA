@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from statistics import median
 
@@ -58,6 +59,14 @@ def _mean(values):
 
 def _median(values):
     return median(values) if values else None
+
+
+def _exact_sign_p(wins, losses):
+    n = wins + losses
+    if n == 0:
+        return None
+    tail = sum(math.comb(n, k) for k in range(0, min(wins, losses) + 1)) / (2 ** n)
+    return min(1.0, 2 * tail)
 
 
 def _failure_taxonomy(record):
@@ -143,14 +152,40 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         common = set(base) & set(records[row["method"]])
         row["wins_vs_analogcoder"] = sum(bool(records[row["method"]][t].get("verify", {}).get("tt_pass")) and not bool(base[t].get("verify", {}).get("tt_pass")) for t in common)
         row["losses_vs_analogcoder"] = sum(bool(base[t].get("verify", {}).get("tt_pass")) and not bool(records[row["method"]][t].get("verify", {}).get("tt_pass")) for t in common)
-    result = {"schema": "spectra-paper-sizing/v3", "model": "gpt-6.1-sol", "subset": subset,
+    pairwise = {}
+    for method in METHODS:
+        if method == "spectra":
+            continue
+        common = sorted(set(records["spectra"]) & set(records[method]))
+        wins = sum(bool(records["spectra"][t].get("verify", {}).get("tt_pass")) and
+                   not bool(records[method][t].get("verify", {}).get("tt_pass")) for t in common)
+        losses = sum(bool(records[method][t].get("verify", {}).get("tt_pass")) and
+                     not bool(records["spectra"][t].get("verify", {}).get("tt_pass")) for t in common)
+        pairwise[method] = {"common": len(common), "tt_wins": wins, "tt_losses": losses,
+                            "tt_ties": len(common) - wins - losses,
+                            "exact_sign_p_single_seed": _exact_sign_p(wins, losses)}
+
+    domain_rows = []
+    for method in METHODS:
+        for family in sorted({task["family"] for task in tasks.values()}):
+            observed = [(tid, task, records[method].get(tid)) for tid, task in tasks.items()
+                        if task["family"] == family and records[method].get(tid) is not None]
+            verifies = [rec.get("verify", {}) for _, _, rec in observed]
+            robust_verifies = [v for (_, task, _), v in zip(observed, verifies) if task.get("robust") and "pvt_pass" in v]
+            domain_rows.append({"method": method, "family": family, "observed": len(observed),
+                                "tt_success": _mean([bool(v.get("tt_pass")) for v in verifies]),
+                                "pvt_success": _mean([bool(v.get("pvt_pass")) for v in robust_verifies])})
+
+    result = {"schema": "spectra-paper-sizing/v4", "model": "gpt-6.1-sol", "subset": subset,
               "exp": exp, "n_tasks": len(tasks), "n_frameworks": len(METHODS), "frameworks": list(METHODS),
               "budget": {"simulation_units": 300, "llm_calls": 12},
               "search_corners": 3, "verifier_corners": 45,
+              "primary_endpoint": "tt_success",
+              "inference_scope": "single_seed_paired_snapshot",
               "metrics": ["tt_success", "pvt_success", "mismatch_yield", "violation_score",
                           "simulation_units", "llm_calls", "wall_seconds", "tokens", "cost_usd",
                           "first_pass_sims", "first_pass_calls", "failure_taxonomy"],
-              "rows": rows}
+              "rows": rows, "pairwise_vs_spectra": pairwise, "domain_rows": domain_rows}
     (ROOT / "results/paper_sizing_matrix.json").write_text(json.dumps(result, indent=2) + "\n")
     lines = ["# Strict eight-framework fixed-topology sizing track", "",
              "All rows receive the same frozen topology, variable bounds, task text, SKY130/ngspice-42 and 300 simulation-unit budget. LLM adapters share a 12-call cap. Results are reimplementations or adapters and do not reuse paper-reported numbers.", "",
@@ -168,6 +203,14 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         wl = "--" if row["wins_vs_analogcoder"] is None else f"{row['wins_vs_analogcoder']}/{row['losses_vs_analogcoder']}"
         robust_n = f"{row['robust_observed']}/{row['robust_tasks']}"
         lines.append(f"| {row['paper']} | {row['venue']} | {row['observed']}/{row['task_count']} | {robust_n} | {rate} | {pvt} | {row['mismatch_observed']} | {sims} | {calls} | {wall} | {cost} | {wl} | {row['crashes']} |")
+    lines += ["", "## Per-domain TT success", "", "| Method | opamp | amp | cmirror | filter | ldo | vco |", "|---|---:|---:|---:|---:|---:|---:|"]
+    by_method = {m: {r["family"]: r for r in domain_rows if r["method"] == m} for m in METHODS}
+    for method in METHODS:
+        values = [by_method[method][family]["tt_success"] for family in ("opamp", "amp", "cmirror", "filter", "ldo", "vco")]
+        lines.append("| " + method + " | " + " | ".join("--" if v is None else f"{v:.3f}" for v in values) + " |")
+    lines += ["", "## Paired TT snapshot against SPECTRA", "", "| Method | Common | SPECTRA wins | SPECTRA losses | Ties | Exact sign p |", "|---|---:|---:|---:|---:|---:|"]
+    for method, p in pairwise.items():
+        lines.append(f"| {method} | {p['common']} | {p['tt_wins']} | {p['tt_losses']} | {p['tt_ties']} | {p['exact_sign_p_single_seed']:.4g} |")
     (ROOT / "results/paper_sizing_matrix.md").write_text("\n".join(lines) + "\n")
     print(json.dumps(result, indent=2))
 
