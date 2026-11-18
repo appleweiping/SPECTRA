@@ -125,7 +125,10 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         _update_robust_best(ctx, ev, net, score)
     ctx.log("spectra_plan", score=score, passed=bool(ev and ev.passed), topology="frozen")
     if ev is not None and ev.passed:
-        ctx.best = {"score": score, "netlist": net, "passed": True}
+        if robust:
+            _update_robust_best(ctx, ev, net, score)
+        else:
+            ctx.best = {"score": score, "netlist": net, "passed": True}
         return _finish(ctx, net)
 
     # Keep the same 12-call cap. Each revision receives a structured diagnosis and
@@ -153,7 +156,10 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
                 diagnosis=analysis.get("schema") if analysis else None,
                 cards=[c.get("id") for c in cards])
         if ev is not None and ev.passed and (not robust or eval_conds is robust_conds):
-            ctx.best = {"score": score, "netlist": net, "passed": True}
+            if robust:
+                _update_robust_best(ctx, ev, net, score)
+            else:
+                ctx.best = {"score": score, "netlist": net, "passed": True}
             return _finish(ctx, net)
         # Reserve a bounded refinement tranche after enough evidence has accumulated.
         # For robust tasks the refinement is charged against the full PVT grid so
