@@ -71,6 +71,7 @@ def _record_metrics(rec):
         "tt": bool(verify.get("tt_pass")) if rec else None,
         "pvt": bool(verify.get("pvt_pass")) if rec and "pvt_pass" in verify else None,
         "violation": float(verify["tt_score"]) if rec and isinstance(verify.get("tt_score"), (int, float)) else None,
+        "pvt_violation": float(verify["pvt_score"]) if rec and isinstance(verify.get("pvt_score"), (int, float)) else None,
         "sims": float(rec.get("sims", 0) or 0) if rec else None,
         "calls": float(rec.get("calls", 0) or 0) if rec else None,
         "crash": bool(rec and rec.get("status") == "crash"),
@@ -105,11 +106,16 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("S
         pvt = [r["pvt"] for tid, values in cells[method].items() for r in values
                if tasks[tid].get("robust") and r["pvt"] is not None]
         violation = [r["violation"] for r in all_cells if r["violation"] is not None]
+        pvt_violation = [r["pvt_violation"] for tid, values in cells[method].items()
+                         for r in values if tasks[tid].get("robust") and r["pvt_violation"] is not None]
         task_tt_groups = [[r["tt"] for r in cells[method][tid]] for tid in tasks]
         task_pvt_groups = [[r["pvt"] for r in cells[method][tid] if tasks[tid].get("robust") and r["pvt"] is not None]
                            for tid in tasks]
         task_violation_groups = [[r["violation"] for r in cells[method][tid] if r["violation"] is not None]
                                  for tid in tasks]
+        task_pvt_violation_groups = [[r["pvt_violation"] for r in cells[method][tid]
+                                     if tasks[tid].get("robust") and r["pvt_violation"] is not None]
+                                    for tid in tasks]
         rows.append({
             "method": method,
             **PAPER_META[method],
@@ -125,6 +131,8 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("S
             "pvt_task_cluster_bootstrap95": _cluster_bootstrap(task_pvt_groups, reps, 19),
             "mean_violation_score": sum(violation) / len(violation) if violation else None,
             "violation_task_cluster_bootstrap95": _cluster_bootstrap(task_violation_groups, reps, 23),
+            "mean_pvt_violation_score": sum(pvt_violation) / len(pvt_violation) if pvt_violation else None,
+            "pvt_violation_task_cluster_bootstrap95": _cluster_bootstrap(task_pvt_violation_groups, reps, 31),
             "mean_sims": sum(r["sims"] for r in all_cells if r["sims"] is not None) / len(all_cells) if all_cells else None,
             "mean_calls": sum(r["calls"] for r in all_cells if r["calls"] is not None) / len(all_cells) if all_cells else None,
             "crashes": sum(r["crash"] for r in all_cells),
@@ -182,9 +190,9 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("S
     out_json = root / "results/paper_sizing_multiseed.json"
     out_md = root / "results/paper_sizing_multiseed.md"
     out_json.write_text(json.dumps(result, indent=2) + "\n")
-    lines = ["# Three-seed strict sizing track", "", "Seed 0 is from SIZ7g and seeds 1/2 are from SIZ7g_MS. All methods use the frozen 36-task, 300-simulation-unit, 12-call protocol. Bootstrap intervals resample task IDs, preserving seed dependence.", "", "| Framework | Cells | TT success | Task-cluster TT 95% | PVT success | Task-cluster PVT 95% | Mean violation | Crashes |", "|---|---:|---:|---|---:|---|---:|---:|"]
+    lines = ["# Three-seed strict sizing track", "", "Seed 0 is from SIZ7g and seeds 1/2 are from SIZ7g_MS_FINAL. All methods use the frozen 36-task, 300-simulation-unit, 12-call protocol. Bootstrap intervals resample task IDs, preserving seed dependence.", "", "| Framework | Cells | TT success | Task-cluster TT 95% | PVT success | Task-cluster PVT 95% | Mean TT violation | Mean PVT violation | Crashes |", "|---|---:|---:|---|---:|---|---:|---:|---:|"]
     for row in rows:
-        lines.append(f"| {row['method']} | {row['cells_observed']}/{row['cells_expected']} | {row['tt_success']:.3f} [{row['tt_wilson95'][0]:.3f},{row['tt_wilson95'][1]:.3f}] | {row['tt_task_cluster_bootstrap95']} | {row['pvt_success']:.3f} [{row['pvt_wilson95'][0]:.3f},{row['pvt_wilson95'][1]:.3f}] | {row['pvt_task_cluster_bootstrap95']} | {row['mean_violation_score']:.4f} | {row['crashes']} |")
+        lines.append(f"| {row['method']} | {row['cells_observed']}/{row['cells_expected']} | {row['tt_success']:.3f} [{row['tt_wilson95'][0]:.3f},{row['tt_wilson95'][1]:.3f}] | {row['tt_task_cluster_bootstrap95']} | {row['pvt_success']:.3f} [{row['pvt_wilson95'][0]:.3f},{row['pvt_wilson95'][1]:.3f}] | {row['pvt_task_cluster_bootstrap95']} | {row['mean_violation_score']:.4f} | {row['mean_pvt_violation_score']:.4f} | {row['crashes']} |")
     lines += ["", "## Paired SPECTRA comparisons", "", "| Framework | Common cells | SPECTRA wins | losses | ties | Exact sign p | Cluster bootstrap diff 95% |", "|---|---:|---:|---:|---:|---:|---|"]
     for method, p in pairwise.items():
         lines.append(f"| {method} | {p['common_cells']} | {p['tt_wins']} | {p['tt_losses']} | {p['tt_ties']} | {p['exact_sign_p_cells']:.4g} | {p['task_cluster_bootstrap_diff95']} |")
