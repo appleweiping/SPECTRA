@@ -89,9 +89,13 @@ def call(prompt: str, system: str, model: str = "gpt-6.1-sol", run_tag: str = ""
     # The SDK uses HTTPS directly and does not create a console process.  This
     # keeps Windows runs headless (the project's CREATE_NO_WINDOW policy still
     # applies to any future subprocess-based launcher).
-    client = OpenAI(api_key=api_key, timeout=timeout)
+    # Long benchmark sweeps may opt into a bounded request lifetime while
+    # retaining the historical 900 s / six-attempt defaults for normal runs.
+    request_timeout = int(os.environ.get("SPECTRA_OPENAI_TIMEOUT", timeout))
+    retry_count = int(os.environ.get("SPECTRA_OPENAI_RETRIES", retries))
+    client = OpenAI(api_key=api_key, timeout=request_timeout)
     last = ""
-    for attempt in range(retries):
+    for attempt in range(retry_count):
         t0 = time.time()
         with _sem:
             try:
@@ -106,10 +110,13 @@ def call(prompt: str, system: str, model: str = "gpt-6.1-sol", run_tag: str = ""
                 # Completions.  Omit it when unset to preserve model defaults.
                 if effort:
                     kwargs["reasoning_effort"] = effort
+                max_completion_tokens = os.environ.get("SPECTRA_OPENAI_MAX_COMPLETION_TOKENS")
+                if max_completion_tokens:
+                    kwargs["max_completion_tokens"] = int(max_completion_tokens)
                 p = client.chat.completions.create(**kwargs)
             except Exception as exc:
                 last = f"{type(exc).__name__}: {exc}"
-                if attempt + 1 < retries:
+                if attempt + 1 < retry_count:
                     time.sleep(min(300, 15 * 2 ** attempt))
                 continue
         dt = time.time() - t0
@@ -118,12 +125,12 @@ def call(prompt: str, system: str, model: str = "gpt-6.1-sol", run_tag: str = ""
             text = choice.message.content or ""
         except Exception as exc:
             last = f"Malformed OpenAI response: {exc}"
-            if attempt + 1 < retries:
+            if attempt + 1 < retry_count:
                 time.sleep(min(300, 15 * 2 ** attempt))
             continue
         if not text.strip():
             last = "OpenAI returned an empty response"
-            if attempt + 1 < retries:
+            if attempt + 1 < retry_count:
                 time.sleep(min(300, 15 * 2 ** attempt))
             continue
         u = getattr(p, "usage", None)
@@ -152,7 +159,7 @@ def call(prompt: str, system: str, model: str = "gpt-6.1-sol", run_tag: str = ""
                 f.write(json.dumps({"t": time.time(), "tag": tag, "run_tag": run_tag, **{k: v for k, v in rec.items() if k != "text"}}) + "\n")
         rec["cached"] = False
         return rec
-    raise LLMError(f"LLM call failed after {retries} attempts: {last}")
+    raise LLMError(f"LLM call failed after {retry_count} attempts: {last}")
 
 
 def _prices_for(model_id: str) -> tuple[float, float]:
