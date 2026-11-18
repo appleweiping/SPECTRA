@@ -11,12 +11,15 @@ import math
 import numpy as np
 
 from ..agent.common import Budget, Ctx
+from ..agent import diagnose
+from ..agent.knowledge import render_cards, retrieve_cards
 from ..agent import llm
 from ..bench.templates import T
 from ..opt.sizing import Var
 from ..sim.evaluate import NOMINAL
 
 PAPER_META = {
+    "spectra": {"paper": "SPECTRA (ours)", "venue": "this work", "repo": "local framework"},
     "analogcoder": {"paper": "AnalogCoder", "venue": "AAAI-25", "repo": "https://github.com/laiyao1/AnalogCoder"},
     "ado_llm": {"paper": "ADO-LLM", "venue": "ICCAD-24", "repo": "paper-only-clean-room"},
     "anaflow": {"paper": "AnaFlow", "venue": "ICCAD-25", "repo": "paper-only-clean-room"},
@@ -29,6 +32,12 @@ PAPER_META = {
 SYSTEM = """You reproduce a published analog transistor sizing framework on a frozen topology.
 Choose numeric values for the listed variables only. Do not add devices or change net names.
 Return JSON with a params object whose values lie within the supplied bounds."""
+
+SYSTEM_SPECTRA_FIXED = """You are the SPECTRA fixed-topology sizing agent.
+The circuit topology and simulator interface are frozen by the benchmark. You may choose only
+the numeric sizing variables listed in the task. Use the family knowledge, structured diagnosis,
+and observed simulator measurements to propose a physically coherent design. Return JSON only
+with a params object. Every value must lie within the supplied bounds."""
 
 
 def _vars(task):
@@ -57,16 +66,65 @@ def _clip(x, vars_):
     return out
 
 
-def _ask_params(ctx, task, vars_, role, context=""):
+def _ask_params(ctx, task, vars_, role, context="", system=SYSTEM):
     bounds = ", ".join(f"{v.name}=[{v.lo:g},{v.hi:g}]" for v in vars_)
     prompt = f"Role: {role}.\nSpecification: {task['nl_spec']}\nVariables: {bounds}\n"
     if context:
         prompt += f"Context:\n{context}\n"
     prompt += "Return JSON only, for example {\"params\": {\"W1\": 4.0}}."
-    text = ctx.ask(prompt, SYSTEM, role)
+    text = ctx.ask(prompt, system, role)
     data = llm.extract_json(text) or {}
     params = data.get("params", data) if isinstance(data, dict) else {}
     return _clip(params if isinstance(params, dict) else {}, vars_)
+
+
+def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
+    """Run SPECTRA's diagnosis/knowledge/refinement loop on the frozen topology.
+
+    This adapter keeps the strict track's fixed-topology contract. SPECTRA controls the
+    intent proposal, structured failure diagnosis, knowledge-card retrieval and bounded
+    refinement, while the public template supplies the immutable netlist topology.
+    """
+    ctx = Ctx(task=task, model=model, seed=seed, method="spectra")
+    ctx.budget = budget or Budget()
+    vars_, build = _vars(task), _template(task)
+    x = _ask_params(ctx, task, vars_, "SPECTRA intent planner", system=SYSTEM_SPECTRA_FIXED)
+    ev, net, score = _evaluate(ctx, build, x)
+    ctx.log("spectra_plan", score=score, passed=bool(ev and ev.passed), topology="frozen")
+    if ev is not None and ev.passed:
+        return _finish(ctx, net)
+
+    # Keep the same 12-call cap. Each revision receives a structured diagnosis and
+    # versioned family cards, then the remaining simulation budget is used by the
+    # active-set trust-region refinement implemented by the SPECTRA adapter.
+    while ctx.calls_left() > 1 and ctx.sims_left() > 0:
+        analysis = diagnose.analyze(task, ev) if ev is not None and ev.status == "ok" else None
+        cards = retrieve_cards(task, analysis) if analysis else []
+        context = ""
+        if analysis:
+            context += "Structured diagnosis:\n" + diagnose.render_analysis(analysis)
+        if cards:
+            context += "\nKnowledge cards:\n" + render_cards(cards)
+        context += "\nCurrent parameters:\n" + json.dumps(x, sort_keys=True)
+        x = _ask_params(ctx, task, vars_, "SPECTRA diagnosis-guided revision", context,
+                        system=SYSTEM_SPECTRA_FIXED)
+        ev, net, score = _evaluate(ctx, build, x)
+        ctx.log("spectra_revision", score=score, passed=bool(ev and ev.passed),
+                diagnosis=analysis.get("schema") if analysis else None,
+                cards=[c.get("id") for c in cards])
+        if ev is not None and ev.passed:
+            return _finish(ctx, net)
+        # Reserve a bounded refinement tranche after enough evidence has accumulated.
+        if ctx.calls >= 3 and ctx.sims_left() >= 24:
+            refine_budget = min(80, ctx.sims_left())
+            refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
+                             tag="spectra_active_set_refine")
+            if refined:
+                net = refined
+                ctx.log("spectra_refine_trace", budget=refine_budget,
+                         returned_best=True)
+            break
+    return _finish(ctx, net or ctx.best.get("netlist"))
 
 
 def _evaluate(ctx, build, x, conds=None):
@@ -340,6 +398,7 @@ def run_atlas(task, model="gpt-6.1-sol", seed=0, budget=None):
 
 
 RUNNERS = {
+    "spectra": run_spectra,
     "analogcoder": run_analogcoder,
     "ado_llm": run_ado_llm,
     "anaflow": run_anaflow,

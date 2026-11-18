@@ -22,16 +22,19 @@ an all-components performance claim.
 
 The strict sizing track now uses `data/bench/paper_sizing_tasks.jsonl`. It contains 36 public fixed-topology tasks
 across opamp, amp, cmirror, filter, ldo and vco, including a robust subset with PVT-enabled verification. Its seven
-paper-backed rows are AnalogCoder AAAI-25, ADO-LLM ICCAD-24, AnaFlow ICCAD-25, Artisan DAC-24, AutoSizer ICML-26,
-ATLAS ICCAD-26 and GLOVA DAC-25. Each row is an explicitly labelled clean-room adapter. The same topology digest,
-variable bounds, task text, simulator, 300 simulation-unit budget and 12-call LLM cap are used across rows. The
-earlier EXT7g rows remain a diagnostic framework-and-control matrix and are excluded from the strict seven count.
+external paper-backed rows are AnalogCoder AAAI-25, ADO-LLM ICCAD-24, AnaFlow ICCAD-25, Artisan DAC-24, AutoSizer
+ICML-26, ATLAS ICCAD-26 and GLOVA DAC-25. SPECTRA is the eighth row and uses the native diagnosis, knowledge and
+bounded-refinement loop through a fixed-topology adapter. The external rows are explicitly labelled clean-room
+adapters. The same topology digest, variable bounds, task text, simulator, 300 simulation-unit budget and 12-call
+LLM cap are used across rows. The earlier EXT7g rows remain a diagnostic framework-and-control matrix and are
+excluded from the strict external count.
 
-The strict rows are paper-backed framework identities, while the implementations in this repository are clean-room
-adapters that expose each paper's sizing loop through the frozen fixed-topology interface. Official code is used only
-where the paper repository supports the required interface. Paper-only rows record the unsupported features and the
-adaptation in `data/bench/paper_sizing_manifest.json`, so a clean-room adapter is not presented as an official
-reproduction.
+The seven external strict rows are paper-backed framework identities, while their implementations in this
+repository are clean-room adapters that expose each paper's sizing loop through the frozen fixed-topology interface.
+SPECTRA is evaluated through its native diagnosis, knowledge and bounded-refinement logic with the same frozen
+topology interface. Official code is used only where the paper repository supports the required interface. Paper-only
+rows record the unsupported features and the adaptation in `data/bench/paper_sizing_manifest.json`, so a clean-room
+adapter is not presented as an official reproduction.
 
 References
 

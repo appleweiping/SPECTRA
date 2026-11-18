@@ -1,4 +1,4 @@
-"""Aggregate the strict seven-framework fixed-topology sizing track."""
+"""Aggregate the strict eight-framework fixed-topology sizing track."""
 from __future__ import annotations
 
 import argparse
@@ -109,7 +109,8 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         rows.append({
             "method": method,
             **PAPER_META[method],
-            "implementation": "paper-aligned-clean-room-reimplementation",
+            "implementation": ("native-SPECTRA-fixed-topology-adapter" if method == "spectra"
+                               else "paper-aligned-clean-room-reimplementation"),
             "task_scope": "fixed_topology_sizing",
             "observed": len(observed), "missing": len(tasks) - len(observed), "task_count": len(tasks),
             "family_count": len({task["family"] for _, task, _ in observed}),
@@ -142,7 +143,7 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
         common = set(base) & set(records[row["method"]])
         row["wins_vs_analogcoder"] = sum(bool(records[row["method"]][t].get("verify", {}).get("tt_pass")) and not bool(base[t].get("verify", {}).get("tt_pass")) for t in common)
         row["losses_vs_analogcoder"] = sum(bool(base[t].get("verify", {}).get("tt_pass")) and not bool(records[row["method"]][t].get("verify", {}).get("tt_pass")) for t in common)
-    result = {"schema": "spectra-paper-sizing/v2", "model": "gpt-6.1-sol", "subset": subset,
+    result = {"schema": "spectra-paper-sizing/v3", "model": "gpt-6.1-sol", "subset": subset,
               "exp": exp, "n_tasks": len(tasks), "n_frameworks": len(METHODS), "frameworks": list(METHODS),
               "budget": {"simulation_units": 300, "llm_calls": 12},
               "search_corners": 3, "verifier_corners": 45,
@@ -151,7 +152,7 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", exp="SIZ7g"):
                           "first_pass_sims", "first_pass_calls", "failure_taxonomy"],
               "rows": rows}
     (ROOT / "results/paper_sizing_matrix.json").write_text(json.dumps(result, indent=2) + "\n")
-    lines = ["# Strict seven-framework fixed-topology sizing track", "",
+    lines = ["# Strict eight-framework fixed-topology sizing track", "",
              "All rows receive the same frozen topology, variable bounds, task text, SKY130/ngspice-42 and 300 simulation-unit budget. LLM adapters share a 12-call cap. Results are reimplementations or adapters and do not reuse paper-reported numbers.", "",
              "Search uses 3 corners during adaptation. An independent 45-corner verifier reports PVT pass. Missing fields remain missing and are never imputed.", "",
              "| Framework | Venue | Observed/36 | Robust n | TT success (95% Wilson CI) | PVT success (95% Wilson CI) | Mismatch n | Mean sims | Mean calls | Mean wall s | Mean cost | W/L vs AnalogCoder | Crashes |", "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]

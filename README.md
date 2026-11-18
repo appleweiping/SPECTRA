@@ -16,10 +16,12 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   controls. The six-domain extension evaluates eight rows under one budget. Only the first two rows have direct
   literature lineage. SPECTRA-min is an internal control, and oracle rows are privileged upper bounds. Ablations are
   in `scripts/run_bench.py`.
-* **Strict paper sizing track** (`data/bench/paper_sizing_tasks.jsonl`): AnalogCoder, ADO-LLM, AnaFlow,
-  Artisan, AutoSizer, ATLAS and GLOVA are clean-room adapters with paper and venue metadata in
-  `data/bench/paper_sizing_manifest.json`. They receive the same frozen topology, bounds, 300 simulation-unit
-  budget and 12-call LLM cap. The previous EXT7g framework-and-control matrix remains a separate diagnostic appendix.
+* **Strict paper sizing track** (`data/bench/paper_sizing_tasks.jsonl`): SPECTRA plus AnalogCoder, ADO-LLM, AnaFlow,
+  Artisan, AutoSizer, ATLAS and GLOVA use one frozen-topology protocol. The seven external rows are clean-room
+  adapters with paper and venue metadata in `data/bench/paper_sizing_manifest.json`. SPECTRA uses the native
+  diagnosis, knowledge and bounded-refinement loop through a fixed-topology adapter. All eight rows receive the same
+  bounds, 300 simulation-unit budget and 12-call LLM cap. The previous EXT7g framework-and-control matrix remains
+  a separate diagnostic appendix.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.

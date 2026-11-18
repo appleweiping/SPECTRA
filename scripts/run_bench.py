@@ -36,11 +36,12 @@ def _ngspice_version() -> str | None:
 _NGSPICE_VERSION = None
 
 
-def budget_for(task):
-    return Budget(llm_calls=12, sims=600 if task.get("robust") else 300)
+def budget_for(task, strict_sizing=False):
+    """Return the run budget, with the fixed-topology track using 300 for every task."""
+    return Budget(llm_calls=12, sims=300 if strict_sizing or not task.get("robust") else 600)
 
 
-def make_runner(method, model):
+def make_runner(method, model, strict_sizing=False):
     from spectra.agent.spectra_agent import Spectra, Config
     from spectra.baselines.direct import run_direct
     from spectra.baselines.genbo import run_genbo
@@ -51,30 +52,30 @@ def make_runner(method, model):
            "spectra_pvt_all": Config(pvt_strategy="all_corners"), "spectra_pvt_nominal": Config(pvt_strategy="nominal_only"),
            "spectra_min": Config(minimal=True)}
     if method in abl:
-        return lambda task, seed: Spectra(task, model=model, seed=seed, cfg=abl[method], budget=budget_for(task),
+        return lambda task, seed: Spectra(task, model=model, seed=seed, cfg=abl[method], budget=budget_for(task, strict_sizing),
                                           method=method).run()
     if method == "direct":
-        return lambda task, seed: run_direct(task, model=model, seed=seed, budget=budget_for(task))
+        return lambda task, seed: run_direct(task, model=model, seed=seed, budget=budget_for(task, strict_sizing))
     if method == "genbo":
-        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task))
+        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task, strict_sizing))
     if method == "genbo_full":     # fairness variant: regenerate until calls run out + adaptive PVT corners
-        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task), rounds=12,
+        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task, strict_sizing), rounds=12,
                                             method="genbo_full", adaptive_pvt=True)
     if method == "direct_noknow":
         def _dn(task, seed):
             import spectra.agent.common as C
             orig = C.KNOWLEDGE
-            return run_direct(task, model=model, seed=seed, budget=budget_for(task), method="direct_noknow",
+            return run_direct(task, model=model, seed=seed, budget=budget_for(task, strict_sizing), method="direct_noknow",
                               knowledge_override="(none provided)")
         return _dn
     if method == "genbo_cmaes":
-        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task), optimizer="cmaes",
+        return lambda task, seed: run_genbo(task, model=model, seed=seed, budget=budget_for(task, strict_sizing), optimizer="cmaes",
                                             method="genbo_cmaes")
     if method.startswith("oracle_"):
         opt = method.split("_", 1)[1]
-        return lambda task, seed: run_oracle(task, optimizer=opt, seed=seed, budget=budget_for(task))
+        return lambda task, seed: run_oracle(task, optimizer=opt, seed=seed, budget=budget_for(task, strict_sizing))
     if method in PAPER_RUNNERS:
-        return lambda task, seed: PAPER_RUNNERS[method](task, model=model, seed=seed, budget=budget_for(task))
+        return lambda task, seed: PAPER_RUNNERS[method](task, model=model, seed=seed, budget=budget_for(task, strict_sizing))
     raise ValueError(method)
 
 
@@ -142,6 +143,8 @@ def main():
     ap.add_argument("--filter", default="")
     ap.add_argument("--model", default="gpt-6.1-sol")
     ap.add_argument("--workers", type=int, default=6)
+    ap.add_argument("--strict-sizing", action="store_true",
+                    help="Use the fixed-topology track budget of 300 simulation units for robust tasks too")
     a = ap.parse_args()
     tasks = [json.loads(l) for l in open(a.tasks)]
     if a.filter:
@@ -157,7 +160,7 @@ def main():
                 if not out.exists():
                     jobs.append((m, tag, t, s, out))
     print(f"{len(jobs)} runs to do", flush=True)
-    runners = {m: make_runner(m, a.model) for m in methods}
+    runners = {m: make_runner(m, a.model, strict_sizing=a.strict_sizing) for m in methods}
 
     def do(job):
         m, tag, t, s, out = job
@@ -167,7 +170,8 @@ def main():
         except Exception as e:
             res = {"status": "crash", "error": traceback.format_exc()[-3000:], "final_netlist": None}
         res["verify"] = verify(t, res.get("final_netlist"))
-        res["evidence"] = _evidence_record(a.exp, tag, m, t, s, a.model, budget_for(t), res, res["verify"])
+        res["evidence"] = _evidence_record(a.exp, tag, m, t, s, a.model,
+                                            budget_for(t, a.strict_sizing), res, res["verify"])
         res["task_meta"] = {"family": t["family"], "tier": t.get("tier"), "robust": t.get("robust", False),
                             "infeasible": t.get("infeasible", False)}
         out.parent.mkdir(parents=True, exist_ok=True)
