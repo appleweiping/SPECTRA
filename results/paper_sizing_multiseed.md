@@ -15,15 +15,15 @@ Seed 0 is from SIZ7g and seeds 1/2 are from SIZ7g_MS_FINAL. All methods use the 
 
 ## Paired SPECTRA comparisons
 
-| Framework | Common cells | SPECTRA wins | losses | ties | Exact sign p | Cluster bootstrap diff 95% |
-|---|---:|---:|---:|---:|---:|---|
-| analogcoder | 108 | 40 | 2 | 66 | 4.111e-10 | [0.213, 0.4907] |
-| ado_llm | 108 | 16 | 10 | 82 | 0.3269 | [-0.0741, 0.1852] |
-| anaflow | 108 | 11 | 12 | 85 | 1 | [-0.1111, 0.0833] |
-| artisan | 108 | 23 | 12 | 73 | 0.08953 | [-0.037, 0.25] |
-| autosizer | 108 | 13 | 10 | 85 | 0.6776 | [-0.0741, 0.1389] |
-| atlas | 108 | 55 | 6 | 47 | 5.381e-11 | [0.2963, 0.6111] |
-| glova | 108 | 53 | 3 | 52 | 8.137e-13 | [0.3241, 0.6019] |
+| Framework | Common cells | SPECTRA wins | losses | ties | Exact sign p | Holm p (7 tests) | Cluster bootstrap diff 95% |
+|---|---:|---:|---:|---:|---:|---|---|
+| analogcoder | 108 | 40 | 2 | 66 | 4.111e-10 | 2.055e-09 | [0.213, 0.4907] |
+| ado_llm | 108 | 16 | 10 | 82 | 0.3269 | 0.9808 | [-0.0741, 0.1852] |
+| anaflow | 108 | 11 | 12 | 85 | 1 | 1 | [-0.1111, 0.0833] |
+| artisan | 108 | 23 | 12 | 73 | 0.08953 | 0.3581 | [-0.037, 0.25] |
+| autosizer | 108 | 13 | 10 | 85 | 0.6776 | 1 | [-0.0741, 0.1389] |
+| atlas | 108 | 55 | 6 | 47 | 5.381e-11 | 3.23e-10 | [0.2963, 0.6111] |
+| glova | 108 | 53 | 3 | 52 | 8.137e-13 | 6e-12 | [0.3241, 0.6019] |
 
 ## Per-domain rates
 
