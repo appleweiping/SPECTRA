@@ -56,6 +56,7 @@ def main(exp="E2g_mech", subset="data/bench/component_mech_tasks.jsonl", seeds=(
         stats = [r.get("program_stats", {}) for _, _, r in obs if r.get("program_stats")]
         events = [e for _, _, r in obs for e in r.get("events", [])]
         traces = [e for e in events if e.get("kind") == "refine_trace"]
+        repair_probes = [e for e in events if e.get("kind") == "diagnosis_repair_probe"]
         cards = [c for e in events if e.get("kind") == "diagnosis" for c in e.get("cards", [])]
         card_counts = Counter(cards)
         rows.append({
@@ -66,6 +67,8 @@ def main(exp="E2g_mech", subset="data/bench/component_mech_tasks.jsonl", seeds=(
             "intent_fraction_mean": mean([float(s.get("intent_fraction")) for s in stats if isinstance(s.get("intent_fraction"),(int,float))]),
             "intent_compliant_rate": mean([bool(s.get("intent_compliant")) for s in stats]) if stats else None,
             "diagnosis_events": sum(e.get("kind") == "diagnosis" for e in events),
+            "repair_probe_events": len(repair_probes),
+            "repair_probe_accept_rate": mean([bool(e.get("accepted")) for e in repair_probes]) if repair_probes else None,
             "refine_trace_events": len(traces), "refine_active_param_mean": mean([len(e.get("active_params", [])) for e in traces]),
             "card_events": len(cards), "card_top": card_counts.most_common(5),
             "failure_taxonomy": dict(Counter(str(r.get("status", "unknown")) for _, _, r in obs)),
@@ -86,12 +89,13 @@ def main(exp="E2g_mech", subset="data/bench/component_mech_tasks.jsonl", seeds=(
            "tasks":len(tasks), "seeds":list(seeds), "methods":list(METHODS), "rows":rows, "paired":paired,
            "interpretation":"Rows keep missing runs and mixed effects visible. Mechanism fields are observed event logs, not post-hoc labels."}
     (ROOT / "results/component_mechanism_matrix.json").write_text(json.dumps(out, indent=2) + "\n")
-    lines=["# Component mechanism ablation", "", f"Experiment `{exp}` uses {len(tasks)} tasks across six domains, three seeds and a common GPT-6.1-sol budget.", "", "| Arm | Observed/expected | TT success | PVT success | Mean violation | Mean sims | Mean calls | Intent fraction | Refine traces | Card events |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    lines=["# Component mechanism ablation", "", f"Experiment `{exp}` uses {len(tasks)} tasks across six domains, three seeds and a common GPT-6.1-sol budget.", "", "| Arm | Observed/expected | TT success | PVT success | Mean violation | Mean sims | Mean calls | Intent fraction | Repair probes | Accepted probes | Refine traces | Card events |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for r in rows:
         tt = "--" if r["tt_success"] is None else f"{r['tt_success']:.3f}"
         pvt = "--" if r["pvt_success"] is None else f"{r['pvt_success']:.3f}"
         fmt = lambda x: "--" if x is None else f"{x:.2f}"
-        lines.append(f"| {r['method']} | {r['observed']}/{r['expected']} | {tt} | {pvt} | {fmt(r['mean_violation_score'])} | {fmt(r['mean_simulation_units'])} | {fmt(r['mean_llm_calls'])} | {fmt(r['intent_fraction_mean'])} | {r['refine_trace_events']} | {r['card_events']} |")
+        accepted = "--" if r["repair_probe_accept_rate"] is None else f"{r['repair_probe_accept_rate']:.3f}"
+        lines.append(f"| {r['method']} | {r['observed']}/{r['expected']} | {tt} | {pvt} | {fmt(r['mean_violation_score'])} | {fmt(r['mean_simulation_units'])} | {fmt(r['mean_llm_calls'])} | {fmt(r['intent_fraction_mean'])} | {r['repair_probe_events']} | {accepted} | {r['refine_trace_events']} | {r['card_events']} |")
     lines += ["", "Paired comparisons", "", "| Ablation arm | Common runs | TT wins by full arm | TT losses by full arm | Mean score delta |", "|---|---:|---:|---:|---:|"]
     for m, p in paired.items():
         lines.append(f"| {m} | {p['n']} | {p['tt_wins']} | {p['tt_losses']} | {p['mean_delta_score_with_minus_without'] if p['mean_delta_score_with_minus_without'] is not None else '--'} |")
