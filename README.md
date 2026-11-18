@@ -11,11 +11,9 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   current mirror, LDO, bandgap reference, CT comparator, StrongARM latch, VCO, filters, Schmitt trigger, op-amp
   applications) with testbenches, certified tiers (feasibility certificates from expert templates), a designer tier,
   45-condition PVT grid and per-instance mismatch Monte Carlo (an early infeasible-control tier was withdrawn).
-* **Baselines** (`spectra/baselines`): an AnalogCoder-style direct netlist agent, an AnalogCoder-Pro-style
-  generate+TPE adaptation, a generate+CMA-ES optimizer control and three explicitly labelled template-oracle
-  controls. The six-domain extension evaluates eight rows under one budget. Only the first two rows have direct
-  literature lineage. SPECTRA-min is an internal control, and oracle rows are privileged upper bounds. Ablations are
-  in `scripts/run_bench.py`.
+* **Baselines** (`spectra/baselines`): the repository keeps legacy controls and oracle implementations for audit
+  reproducibility. They are excluded from the primary claim. The primary comparison is the native SPECTRA framework
+  against seven paper-backed external sizing frameworks in `results/external_primary_sota.md`.
 * **Strict paper sizing track** (`data/bench/paper_sizing_tasks.jsonl`): SPECTRA plus AnalogCoder, ADO-LLM, AnaFlow,
   Artisan, AutoSizer, ATLAS and GLOVA use one frozen-topology protocol. The seven external rows are clean-room
   adapters with paper and venue metadata in `data/bench/paper_sizing_manifest.json`. SPECTRA uses the native
@@ -26,6 +24,8 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   eight-row aggregate SPECTRA reaches 0.806 TT and 0.194 PVT, while AnaFlow reaches 0.870 TT and 0.306 PVT.
   The independently reported post-fix SPECTRA-PVT-staged variant reaches 0.815 TT, 0.222 PVT and 0.5009 mean PVT violation.
   These are track-scoped measurements and do not establish universal analog-sizing SOTA.
+  The primary-row contract, metric definitions, statistical scope and exclusions are fixed in
+  `docs/MAIN_COMPARISON_PROTOCOL.md`.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.

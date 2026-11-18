@@ -11,7 +11,11 @@ This note records why the expanded SPECTRA evaluation uses its current task, bas
 
 The current SPECTRA-Bench contains 11 circuit families, 92 certified or designer tasks and 25 additional designer tasks. Its evaluator exposes gain, bandwidth, phase margin, power, swing, noise, PSRR, CMRR, slew, settling, ripple, line regulation and delay where the circuit family defines them. All methods receive the same task text, simulator, PDK, seed and simulation budget. Robust tasks use the 45-corner PVT grid, and mismatch is reported as a separate post-hoc verification stage.
 
-The completed matrix has eight rows and should be read as a protocol matrix rather than seven top-conference framework implementations. Direct generation has AnalogCoder AAAI 2025 lineage. Generate plus TPE is an AnalogCoder-Pro IEEE TCAD adaptation. SPECTRA-min is an internal control, generate plus CMA-ES is an optimizer replacement control, and the three oracle rows are privileged template-optimization upper bounds. AnalogGenie, AnalogGym and AnalogScout informed the benchmark protocol but were not executed as drop-in sizing agents. All eight rows use the same 36-task six-domain extension. The four existing arms reuse their 16 matching E1g records and are rerun on the 20 topconf6 tasks absent from that chain before aggregation. The matrix records success rate with confidence intervals, per-task wins/losses, simulator evaluations to success, LLM calls, cost fields, PVT feasibility and mismatch yield.
+The primary comparison is one SPECTRA framework against seven paper-backed external sizing frameworks. Legacy internal
+controls and privileged oracle rows remain available for audit reproducibility and are excluded from the primary claim.
+AnalogGenie, AnalogGym and AnalogScout informed the benchmark protocol but were not executed as drop-in sizing agents.
+All primary rows use the same 36-task six-domain extension. The matrix records success rate with confidence intervals,
+per-task wins/losses, simulator evaluations to success, LLM calls, cost fields, PVT feasibility and mismatch yield.
 
 The ablation rule follows the component studies in AnalogCoder and AnalogScout. A component is retained in the final claim only when the paired comparison supports a directional contribution. If an ablation wins on a subset, the result remains in the tables and the paper reports the negative or mixed finding rather than changing the endpoint or deleting the task.
 
@@ -36,7 +40,8 @@ topology interface. Official code is used only where the paper repository suppor
 rows record the unsupported features and the adaptation in `data/bench/paper_sizing_manifest.json`, so a clean-room
 adapter is not presented as an official reproduction.
 
-The final matched three-seed aggregate has 108 cells per framework. Primary SPECTRA reaches 0.806 TT, 0.194 PVT,
+The final matched three-seed aggregate has 108 cells per framework. The external-primary table is recorded in
+`results/external_primary_sota.md`. Primary SPECTRA reaches 0.806 TT, 0.194 PVT,
 0.1180 mean TT violation and 0.5648 mean PVT violation. AnaFlow reaches 0.870 TT, 0.306 PVT and 0.0381 mean TT
 violation. The independently reported post-fix SPECTRA-PVT-staged variant reaches 0.815 TT, 0.222 PVT, 0.1071 mean TT
 violation and 0.5009 mean PVT violation. The staged variant therefore leads the reported PVT-violation endpoint,
@@ -45,6 +50,10 @@ robust primary and staged variants use their disclosed PVT-aware search objectiv
 These results support a scoped robustness finding on the matched fixed-topology track. They do not support a universal
 analog-sizing SOTA statement because the benchmark is self-constructed, topology-fixed, mismatch is unavailable for
 the external rows, and the main success endpoints are not led by SPECTRA.
+
+The single-SPECTRA primary-row contract is fixed in `docs/MAIN_COMPARISON_PROTOCOL.md` and summarized in
+`results/external_primary_sota.md`. Legacy controls, privileged oracle rows and the SPECTRA-PVT-staged sensitivity
+remain audit or sensitivity artifacts and are excluded from the primary ranking.
 
 References
 
