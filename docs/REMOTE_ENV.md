@@ -22,3 +22,11 @@ The gateway does not publish a USD tariff for this model. Runs therefore record 
 The only admissible benchmark backbone for this handoff is GPT-6.1-sol; results from other model IDs are not part of
 the experiment chain. A fresh server preflight on 2026-11-17 found `gpt-6.1-sol` in `/models` and a minimal chat
 request returned `OK.` with the gateway reporting `gpt-6.1-sol`.
+
+The six-domain extension used a frozen 36-task subset and the same 12-call/300-simulation
+budget for every row. The completed EXT7g run contains 224 raw records covering the four
+GPT arms, Gen+CMA-ES and three privileged oracle arms. The final raw archive was copied to
+the E: workspace after SHA-256 verification. Its hash is recorded in
+`work/remote_archive/ext_final_raw.tar.sha256`. The long-request recovery pass used
+`SPECTRA_OPENAI_MAX_COMPLETION_TOKENS=4096`, `SPECTRA_OPENAI_TIMEOUT=30`, and
+`SPECTRA_OPENAI_RETRIES=1`, preserving timeout outcomes as crash records.
