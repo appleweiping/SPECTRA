@@ -86,6 +86,21 @@ def _pair_sign_p(wins, losses):
     return min(1.0, 2 * tail)
 
 
+def _holm(pairs):
+    """Holm step-down correction over the seven paired framework tests."""
+    ordered = sorted(((name, value.get("exact_sign_p_cells")) for name, value in pairs.items()
+                      if value.get("exact_sign_p_cells") is not None), key=lambda item: item[1])
+    adjusted = {}
+    previous = 0.0
+    total = len(ordered)
+    for rank, (name, p) in enumerate(ordered):
+        value = min(1.0, (total - rank) * p)
+        value = max(previous, value)
+        adjusted[name] = round(value, 12)
+        previous = value
+    return adjusted
+
+
 def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("SIZ7g", "SIZ7g_MS_FINAL"), reps=4000):
     tasks = _load_tasks(ROOT / subset)
     root = ROOT
@@ -167,6 +182,9 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("S
             "task_cluster_bootstrap_diff95": diff_ci,
         }
 
+    for method, corrected in _holm(pairwise).items():
+        pairwise[method]["holm_p7"] = corrected
+
     domain_rows = []
     for method in METHODS:
         for family in sorted({task["family"] for task in tasks.values()}):
@@ -196,9 +214,9 @@ def main(subset="data/bench/paper_sizing_tasks.jsonl", seeds=(0, 1, 2), exps=("S
     lines = ["# Three-seed strict sizing track", "", f"Seed 0 is from {exps[0]} and seeds 1/2 are from {exps[1]}. All methods use the frozen 36-task, 300-simulation-unit, 12-call protocol. Bootstrap intervals resample task IDs, preserving seed dependence.", "", "| Framework | Cells | TT success | Task-cluster TT 95% | PVT success | Task-cluster PVT 95% | Mean TT violation | Mean PVT violation | Crashes |", "|---|---:|---:|---|---:|---|---:|---:|---:|"]
     for row in rows:
         lines.append(f"| {row['method']} | {row['cells_observed']}/{row['cells_expected']} | {row['tt_success']:.3f} [{row['tt_wilson95'][0]:.3f},{row['tt_wilson95'][1]:.3f}] | {row['tt_task_cluster_bootstrap95']} | {row['pvt_success']:.3f} [{row['pvt_wilson95'][0]:.3f},{row['pvt_wilson95'][1]:.3f}] | {row['pvt_task_cluster_bootstrap95']} | {row['mean_violation_score']:.4f} | {row['mean_pvt_violation_score']:.4f} | {row['crashes']} |")
-    lines += ["", "## Paired SPECTRA comparisons", "", "| Framework | Common cells | SPECTRA wins | losses | ties | Exact sign p | Cluster bootstrap diff 95% |", "|---|---:|---:|---:|---:|---:|---|"]
+    lines += ["", "## Paired SPECTRA comparisons", "", "| Framework | Common cells | SPECTRA wins | losses | ties | Exact sign p | Holm p (7 tests) | Cluster bootstrap diff 95% |", "|---|---:|---:|---:|---:|---:|---|---|"]
     for method, p in pairwise.items():
-        lines.append(f"| {method} | {p['common_cells']} | {p['tt_wins']} | {p['tt_losses']} | {p['tt_ties']} | {p['exact_sign_p_cells']:.4g} | {p['task_cluster_bootstrap_diff95']} |")
+        lines.append(f"| {method} | {p['common_cells']} | {p['tt_wins']} | {p['tt_losses']} | {p['tt_ties']} | {p['exact_sign_p_cells']:.4g} | {p['holm_p7']:.4g} | {p['task_cluster_bootstrap_diff95']} |")
     lines += ["", "## Per-domain rates", "", "| Method | Family | Cells | TT | PVT |", "|---|---|---:|---:|---:|"]
     for row in domain_rows:
         lines.append(f"| {row['method']} | {row['family']} | {row['cells_observed']} | {row['tt_success']:.3f} | {row['pvt_success']:.3f} |")
