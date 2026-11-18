@@ -433,7 +433,14 @@ class Spectra:
             "(no family-specific cards; use only the interface, PDK and observed simulation evidence)")
         prompt = PLAN.format(**t,
                              dsl=(DSL_DOC if cfg.use_intent else NO_INTENT_DSL), metric_names=METRIC_NAMES[fam])
-        text = ctx.ask(prompt, SYSTEM_SPECTRA, "plan")
+        try:
+            text = ctx.ask(prompt, SYSTEM_SPECTRA, "plan")
+        except llm.LLMError as exc:
+            # A transient gateway timeout should consume the failed call and
+            # leave the deterministic refinement path available.  Converting
+            # it into a crash biases ablations toward infrastructure noise.
+            ctx.log("llm_failure_fallback", role="plan", error=str(exc)[:240])
+            text = ""
         self.program = llm.extract_block(text, "python")
         plan_json = llm.extract_json(text) or {}
         ctx.log("plan", topology=plan_json.get("topology"), targets=plan_json.get("targets"))
@@ -509,7 +516,11 @@ class Spectra:
                                     robust_note=(ROBUST_NOTE if task.get("robust") else ""))
             if not cfg.use_refine:
                 prompt = prompt.replace('- "refine":', '- ("refine" is NOT available in this configuration)')
-            text = ctx.ask(prompt, SYSTEM_SPECTRA, f"iter{it}")
+            try:
+                text = ctx.ask(prompt, SYSTEM_SPECTRA, f"iter{it}")
+            except llm.LLMError as exc:
+                ctx.log("llm_failure_fallback", role=f"iter{it}", error=str(exc)[:240])
+                text = ""
             act = llm.extract_json(text) or {}
             new_prog = llm.extract_block(text, "python")
             a = str(act.get("action", "edit" if new_prog else ("refine" if act.get("params") or act.get("bounds") else "edit"))).lower()
