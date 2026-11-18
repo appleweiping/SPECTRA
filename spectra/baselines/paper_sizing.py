@@ -220,6 +220,7 @@ def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
                     {"corner": "ff", "temp": -40, "vdd": 1.8}]
     ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
     staged_best = {"score": score, "netlist": net, "params": dict(x), "passed": bool(ev and ev.passed)}
+    staged_rank = (0 if staged_best["passed"] else 1, score)
     ctx.log("spectra_staged_plan", score=score, passed=staged_best["passed"], search_corners=3)
     revisions = 0
     while not llm_failed and ctx.calls_left() > 1 and revisions < 2 and ctx.sims_left() >= len(search_conds):
@@ -237,11 +238,20 @@ def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
         ctx.log("spectra_staged_revision", score=score, passed=bool(ev and ev.passed),
                 diagnosis=analysis.get("schema") if analysis else None,
                 cards=[c.get("id") for c in cards])
-        if ev is not None and ev.status == "ok" and score < staged_best["score"]:
+        candidate_rank = (0 if ev is not None and ev.passed else 1, score)
+        if ev is not None and ev.status == "ok" and candidate_rank < staged_rank:
             staged_best = {"score": score, "netlist": net, "params": dict(x), "passed": bool(ev.passed)}
+            staged_rank = candidate_rank
         revisions += 1
     # One full-grid evaluation anchors the PVT objective, then a small-sigma
     # CMA search stays near the TT-feasible staged incumbent.
+    # Preserve a staged TT-feasible incumbent while full-grid candidates are
+    # being tested. A full-grid candidate that still fails TT must not replace
+    # this incumbent merely because its PVT worst-case score is numerically
+    # smaller.
+    if staged_best.get("passed") and staged_best.get("netlist"):
+        ctx.best = {"score": float("inf"), "netlist": staged_best["netlist"], "passed": False,
+                    "robust_rank": (0, float("inf")), "robust_tt_pass": True}
     if ctx.sims_left() >= len(PVT) and staged_best.get("netlist"):
         ev_full, net_full, score_full = _evaluate(ctx, build, staged_best.get("params", _midpoint(vars_)), conds=PVT)
         _update_robust_best(ctx, ev_full, net_full, score_full)
