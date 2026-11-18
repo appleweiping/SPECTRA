@@ -1,0 +1,771 @@
+{
+  "schema": "spectra-paper-sizing/multiseed-v1",
+  "model": "gpt-6.1-sol",
+  "subset": "data/bench/paper_sizing_tasks.jsonl",
+  "experiments": [
+    "SIZ7g",
+    "SIZ7g_MS_FINAL"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "n_tasks": 36,
+  "n_frameworks": 8,
+  "budget": {
+    "simulation_units": 300,
+    "llm_calls": 12
+  },
+  "search_corners": 3,
+  "verifier_corners": 45,
+  "inference_scope": "three_seed_task_clustered_snapshot",
+  "bootstrap_replicates": 4000,
+  "rows": [
+    {
+      "method": "spectra",
+      "paper": "SPECTRA (ours)",
+      "venue": "this work",
+      "repo": "local framework",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.8055555555555556,
+      "tt_wilson95": [
+        0.721,
+        0.8692
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.6944,
+        0.9074
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.2222222222222222,
+      "pvt_wilson95": [
+        0.1172,
+        0.3808
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0278,
+        0.4444
+      ],
+      "mean_violation_score": 0.10275904654703173,
+      "violation_task_cluster_bootstrap95": [
+        0.0225,
+        0.2236
+      ],
+      "mean_pvt_violation_score": 0.5642787777842385,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.2785,
+        0.8734
+      ],
+      "mean_sims": 93.71296296296296,
+      "mean_calls": 1.712962962962963,
+      "crashes": 0
+    },
+    {
+      "method": "analogcoder",
+      "paper": "AnalogCoder",
+      "venue": "AAAI-25",
+      "repo": "https://github.com/laiyao1/AnalogCoder",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.4537037037037037,
+      "tt_wilson95": [
+        0.363,
+        0.5476
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.3056,
+        0.6111
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.25,
+      "pvt_wilson95": [
+        0.1375,
+        0.4107
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.5
+      ],
+      "mean_violation_score": 0.510255287597278,
+      "violation_task_cluster_bootstrap95": [
+        0.337,
+        0.8114
+      ],
+      "mean_pvt_violation_score": 0.9802417793591708,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.4741,
+        1.4747
+      ],
+      "mean_sims": 3.9444444444444446,
+      "mean_calls": 2.935185185185185,
+      "crashes": 10
+    },
+    {
+      "method": "ado_llm",
+      "paper": "ADO-LLM",
+      "venue": "ICCAD-24",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.75,
+      "tt_wilson95": [
+        0.6607,
+        0.8221
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.6204,
+        0.8704
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.19444444444444445,
+      "pvt_wilson95": [
+        0.0975,
+        0.3503
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.4167
+      ],
+      "mean_violation_score": 0.05353002796115249,
+      "violation_task_cluster_bootstrap95": [
+        0.0133,
+        0.1028
+      ],
+      "mean_pvt_violation_score": 0.6153475381427577,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.3233,
+        1.0213
+      ],
+      "mean_sims": 112.54629629629629,
+      "mean_calls": 4.907407407407407,
+      "crashes": 2
+    },
+    {
+      "method": "anaflow",
+      "paper": "AnaFlow",
+      "venue": "ICCAD-25",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.8148148148148148,
+      "tt_wilson95": [
+        0.7312,
+        0.8768
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.7222,
+        0.8981
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.3055555555555556,
+      "pvt_wilson95": [
+        0.18,
+        0.4686
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0833,
+        0.5556
+      ],
+      "mean_violation_score": 0.03963382426472062,
+      "violation_task_cluster_bootstrap95": [
+        0.0031,
+        0.085
+      ],
+      "mean_pvt_violation_score": 0.734227203712072,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.2893,
+        1.2419
+      ],
+      "mean_sims": 73.72222222222223,
+      "mean_calls": 1.8703703703703705,
+      "crashes": 7
+    },
+    {
+      "method": "artisan",
+      "paper": "Artisan",
+      "venue": "DAC-24",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.7037037037037037,
+      "tt_wilson95": [
+        0.6118,
+        0.7816
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.5741,
+        0.8241
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.1388888888888889,
+      "pvt_wilson95": [
+        0.0608,
+        0.2866
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.3056
+      ],
+      "mean_violation_score": 0.16906239575208568,
+      "violation_task_cluster_bootstrap95": [
+        0.044,
+        0.3083
+      ],
+      "mean_pvt_violation_score": 1.456516856547107,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.6005,
+        2.1999
+      ],
+      "mean_sims": 83.87037037037037,
+      "mean_calls": 0.9537037037037037,
+      "crashes": 5
+    },
+    {
+      "method": "autosizer",
+      "paper": "AutoSizer",
+      "venue": "ICML-26",
+      "repo": "https://github.com/yuxi120407/AutoSizer",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.7777777777777778,
+      "tt_wilson95": [
+        0.6906,
+        0.8459
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.6574,
+        0.8796
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.1388888888888889,
+      "pvt_wilson95": [
+        0.0608,
+        0.2866
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.3333
+      ],
+      "mean_violation_score": 0.057216302357825995,
+      "violation_task_cluster_bootstrap95": [
+        0.0012,
+        0.1398
+      ],
+      "mean_pvt_violation_score": 1.2400728327569452,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.3955,
+        2.0112
+      ],
+      "mean_sims": 125.81481481481481,
+      "mean_calls": 1.9074074074074074,
+      "crashes": 5
+    },
+    {
+      "method": "atlas",
+      "paper": "ATLAS",
+      "venue": "ICCAD-26",
+      "repo": "https://github.com/youngmin0oh/atlas",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.35185185185185186,
+      "tt_wilson95": [
+        0.2683,
+        0.4456
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.2222,
+        0.4815
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.08333333333333333,
+      "pvt_wilson95": [
+        0.0287,
+        0.2183
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.1944
+      ],
+      "mean_violation_score": 0.3659994451716271,
+      "violation_task_cluster_bootstrap95": [
+        0.1869,
+        0.5013
+      ],
+      "mean_pvt_violation_score": 0.9955757504709261,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.2588,
+        1.7092
+      ],
+      "mean_sims": 84.36111111111111,
+      "mean_calls": 0.0,
+      "crashes": 2
+    },
+    {
+      "method": "glova",
+      "paper": "GLOVA",
+      "venue": "DAC-25",
+      "repo": "paper-only-clean-room",
+      "cells_observed": 108,
+      "cells_expected": 108,
+      "tasks_observed": 36,
+      "tt_success": 0.3425925925925926,
+      "tt_wilson95": [
+        0.2599,
+        0.4361
+      ],
+      "tt_task_cluster_bootstrap95": [
+        0.2037,
+        0.4815
+      ],
+      "pvt_cells_observed": 36,
+      "pvt_success": 0.027777777777777776,
+      "pvt_wilson95": [
+        0.0049,
+        0.1417
+      ],
+      "pvt_task_cluster_bootstrap95": [
+        0.0,
+        0.0833
+      ],
+      "mean_violation_score": 0.4680826660183273,
+      "violation_task_cluster_bootstrap95": [
+        0.2576,
+        0.6767
+      ],
+      "mean_pvt_violation_score": 0.5340200438610205,
+      "pvt_violation_task_cluster_bootstrap95": [
+        0.3174,
+        0.8815
+      ],
+      "mean_sims": 27.12037037037037,
+      "mean_calls": 0.9537037037037037,
+      "crashes": 5
+    }
+  ],
+  "pairwise_vs_spectra": {
+    "analogcoder": {
+      "common_cells": 108,
+      "tt_wins": 40,
+      "tt_losses": 2,
+      "tt_ties": 66,
+      "exact_sign_p_cells": 4.1109160520136356e-10,
+      "task_cluster_bootstrap_diff95": [
+        0.213,
+        0.4907
+      ]
+    },
+    "ado_llm": {
+      "common_cells": 108,
+      "tt_wins": 16,
+      "tt_losses": 10,
+      "tt_ties": 82,
+      "exact_sign_p_cells": 0.32693958282470703,
+      "task_cluster_bootstrap_diff95": [
+        -0.0741,
+        0.1852
+      ]
+    },
+    "anaflow": {
+      "common_cells": 108,
+      "tt_wins": 11,
+      "tt_losses": 12,
+      "tt_ties": 85,
+      "exact_sign_p_cells": 1.0,
+      "task_cluster_bootstrap_diff95": [
+        -0.1111,
+        0.0833
+      ]
+    },
+    "artisan": {
+      "common_cells": 108,
+      "tt_wins": 23,
+      "tt_losses": 12,
+      "tt_ties": 73,
+      "exact_sign_p_cells": 0.0895310789346695,
+      "task_cluster_bootstrap_diff95": [
+        -0.037,
+        0.25
+      ]
+    },
+    "autosizer": {
+      "common_cells": 108,
+      "tt_wins": 13,
+      "tt_losses": 10,
+      "tt_ties": 85,
+      "exact_sign_p_cells": 0.6776394844055176,
+      "task_cluster_bootstrap_diff95": [
+        -0.0741,
+        0.1389
+      ]
+    },
+    "atlas": {
+      "common_cells": 108,
+      "tt_wins": 55,
+      "tt_losses": 6,
+      "tt_ties": 47,
+      "exact_sign_p_cells": 5.380614009897755e-11,
+      "task_cluster_bootstrap_diff95": [
+        0.2963,
+        0.6111
+      ]
+    },
+    "glova": {
+      "common_cells": 108,
+      "tt_wins": 53,
+      "tt_losses": 3,
+      "tt_ties": 52,
+      "exact_sign_p_cells": 8.137102103233929e-13,
+      "task_cluster_bootstrap_diff95": [
+        0.3241,
+        0.6019
+      ]
+    }
+  },
+  "domain_rows": [
+    {
+      "method": "spectra",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.7777777777777778,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "spectra",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.3333333333333333
+    },
+    {
+      "method": "spectra",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "spectra",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.08333333333333333
+    },
+    {
+      "method": "spectra",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.9444444444444444,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.1111111111111111,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "analogcoder",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.3333333333333333
+    },
+    {
+      "method": "ado_llm",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.7222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "ado_llm",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.5555555555555556,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "anaflow",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.6111111111111112,
+      "pvt_success": 1.0
+    },
+    {
+      "method": "anaflow",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "anaflow",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "anaflow",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.9444444444444444,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.3888888888888889,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "artisan",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.2777777777777778,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "artisan",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.8888888888888888,
+      "pvt_success": 0.3333333333333333
+    },
+    {
+      "method": "artisan",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.9444444444444444,
+      "pvt_success": 0.8333333333333334
+    },
+    {
+      "method": "autosizer",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.6111111111111112,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 1.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "autosizer",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.9444444444444444,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.1111111111111111,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.3888888888888889,
+      "pvt_success": 0.16666666666666666
+    },
+    {
+      "method": "atlas",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.1111111111111111,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.6111111111111112,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "atlas",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.6666666666666666,
+      "pvt_success": 0.3333333333333333
+    },
+    {
+      "method": "glova",
+      "family": "amp",
+      "cells_observed": 18,
+      "tt_success": 0.3333333333333333,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "cmirror",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "filter",
+      "cells_observed": 18,
+      "tt_success": 0.0,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "ldo",
+      "cells_observed": 18,
+      "tt_success": 0.2222222222222222,
+      "pvt_success": 0.0
+    },
+    {
+      "method": "glova",
+      "family": "opamp",
+      "cells_observed": 18,
+      "tt_success": 0.4444444444444444,
+      "pvt_success": 0.08333333333333333
+    },
+    {
+      "method": "glova",
+      "family": "vco",
+      "cells_observed": 18,
+      "tt_success": 0.8333333333333334,
+      "pvt_success": 0.0
+    }
+  ]
+}
