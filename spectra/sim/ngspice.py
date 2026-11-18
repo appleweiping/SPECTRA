@@ -129,7 +129,8 @@ def run(netlist: str, wrdata_files: tuple = (), timeout: float = 60.0,
         Path(d, "c.sp").write_text(netlist)
         try:
             with _SIM_SEM, _global_slot():
-                p = subprocess.run(["ngspice", "-b", "c.sp"], cwd=d, capture_output=True,
+                binary = os.environ.get("SPECTRA_NGSPICE", "ngspice")
+                p = subprocess.run([binary, "-b", "c.sp"], cwd=d, capture_output=True,
                                    text=True, timeout=timeout, creationflags=_creationflags())
             out = p.stdout + "\n" + p.stderr
         except subprocess.TimeoutExpired as e:
