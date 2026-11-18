@@ -109,7 +109,20 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA intent planner",
                                      initial_context, SYSTEM_SPECTRA_FIXED)
     refinement_done = False
-    ev, net, score = _evaluate(ctx, build, x)
+    robust = bool(task.get("robust"))
+    # Robust tasks use the same 300 condition-evaluation budget as every other
+    # strict row, but spend it on the actual 45-corner objective.  The old path
+    # stopped as soon as TT passed, which made a nominally good design consume
+    # three search corners and then fail the independent PVT verifier.  Keeping
+    # the full-grid score in-loop gives the diagnosis and violation objective the
+    # information that the final verifier uses.
+    robust_conds = None
+    if robust:
+        from ..sim.evaluate import PVT
+        robust_conds = PVT
+    ev, net, score = _evaluate(ctx, build, x, conds=robust_conds)
+    if robust and ev is not None and ev.status == "ok" and score < ctx.best.get("score", float("inf")):
+        ctx.best = {"score": score, "netlist": net, "passed": ev.passed}
     ctx.log("spectra_plan", score=score, passed=bool(ev and ev.passed), topology="frozen")
     if ev is not None and ev.passed:
         ctx.best = {"score": score, "netlist": net, "passed": True}
@@ -129,15 +142,21 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         context += "\nCurrent parameters:\n" + json.dumps(x, sort_keys=True)
         x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA diagnosis-guided revision", context,
                                          SYSTEM_SPECTRA_FIXED)
-        ev, net, score = _evaluate(ctx, build, x)
+        # Full-grid evaluations are charged in 45-unit blocks.  If the tail of
+        # the budget cannot fit a full block, use the fixed three-corner search
+        # set while retaining the best full-grid candidate found so far.
+        eval_conds = robust_conds if (robust_conds is not None and ctx.sims_left() >= len(robust_conds)) else None
+        ev, net, score = _evaluate(ctx, build, x, conds=eval_conds)
+        if robust and ev is not None and ev.status == "ok" and score < ctx.best.get("score", float("inf")):
+            ctx.best = {"score": score, "netlist": net, "passed": ev.passed}
         ctx.log("spectra_revision", score=score, passed=bool(ev and ev.passed),
                 diagnosis=analysis.get("schema") if analysis else None,
                 cards=[c.get("id") for c in cards])
-        if ev is not None and ev.passed:
+        if ev is not None and ev.passed and (not robust or eval_conds is robust_conds):
             ctx.best = {"score": score, "netlist": net, "passed": True}
             return _finish(ctx, net)
         # Reserve a bounded refinement tranche after enough evidence has accumulated.
-        if ctx.calls >= 1 and ctx.sims_left() >= 24:
+        if not robust and ctx.calls >= 1 and ctx.sims_left() >= 24:
             refine_budget = min(240, ctx.sims_left())
             refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
                              tag="spectra_active_set_refine")
