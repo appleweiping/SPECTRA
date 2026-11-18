@@ -55,8 +55,11 @@ def main(prog_path, jobs_path, out_path):
         out["ok"] = False
         out["error"] = traceback.format_exc(limit=3)[-2500:] + API_HINT
         json.dump(out, open(out_path, "w")); return
-    lut = dsl.LUT()
     for ps in jobs["params"]:
+        # Keep provenance per parameter set.  A program may call ``lut.at``
+        # while checking corners, so the facade shares one record list with
+        # its derived LUTs for this job only.
+        lut = dsl.LUT()
         p = dict(params0); p.update(ps)
         try:
             res = ns["design"](p, lut, jobs.get("spec", {}))
@@ -64,7 +67,11 @@ def main(prog_path, jobs_path, out_path):
             text = net.text() if hasattr(net, "text") else str(net)
             pred = {k: (float(v) if isinstance(v, (int, float, np.floating)) and math.isfinite(float(v)) else None)
                     for k, v in (pred or {}).items()}
-            out["results"].append({"ok": True, "netlist": text, "pred": pred, "params": p})
+            usage = net.usage() if hasattr(net, "usage") else {"intent_devices": 0, "explicit_devices": 0}
+            stats = {"param_count": len(norm), "intent_calls": len(lut.intent_records),
+                     "intent_records": lut.intent_records, **usage}
+            out["results"].append({"ok": True, "netlist": text, "pred": pred, "params": p,
+                                    "program_stats": stats})
         except Exception:
             out["results"].append({"ok": False, "error": traceback.format_exc(limit=4)[-2500:] + API_HINT, "params": p})
     json.dump(out, open(out_path, "w"), default=float)

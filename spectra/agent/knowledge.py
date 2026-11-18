@@ -110,3 +110,114 @@ non-inverting 1+Rf/Rg, summing -Rf/Ri per input, difference Rf/R1 with matched R
 Integrator: f_unity = 1/(2 pi R C); add a large resistor across C for a DC operating point. Resistors load the op-amp output:
 keep them >= ~10 kOhm or provide output drive.""",
 }
+
+
+# Quantitative cards are retrieved from observations rather than pasted as one
+# large family paragraph on every iteration.  The cards intentionally contain
+# first-order relations and actions only.  They never contain a reference
+# design, hidden optimum, or benchmark answer.
+_CARD_RULES = {
+    "opamp": [
+        ("phase_pole", ("pm", "ugbw"), ("edge-of-saturation",), "p2≈gm7/(2πCL); increase Cc or gm7 and set Rz≈1/gm7", "check compensation and non-dominant pole"),
+        ("gain_ro", ("gain_db",), (), "A0≈gm1ro1·gm7ro7; longer L raises ro", "increase L on high-impedance devices"),
+        ("headroom", ("swing",), ("triode", "edge-of-saturation"), "Vds−Vdsat must stay positive at the output stack", "raise gm/Id or reduce stacked headroom"),
+    ],
+    "amp": [
+        ("gain_ro", ("gain_db",), (), "A≈gmro for a common-source stage", "increase L or gm while preserving output bias"),
+        ("bandwidth_gm", ("f3db", "gbw"), (), "f−3dB follows gm/(2πCL)", "raise gm or reduce effective capacitance"),
+        ("output_headroom", ("swing", "vout_dc"), ("triode",), "output devices need Vds−Vdsat margin", "rebias the output node or raise gm/Id"),
+    ],
+    "tia": [
+        ("feedback_bandwidth", ("f3db",), (), "Zt bandwidth is limited by (1+A)/(2πRfCin)", "reduce Rf/Cin or increase loop gain"),
+        ("transimpedance", ("zt_dbohm",), (), "Zt≈Rf·A/(1+A)", "increase loop gain before raising Rf"),
+        ("noise", ("in_noise_1m",), (), "resistor and input-device noise set the floor", "balance Rf and input gm under the power limit"),
+    ],
+    "cmirror": [
+        ("compliance", ("v_compliance",), ("triode", "edge-of-saturation"), "compliance is set by the output Vdsat stack", "raise gm/Id or use a wide-swing cascode"),
+        ("output_resistance", ("rout",), (), "Rout≈gm·ro² for a cascode", "increase L while retaining headroom"),
+        ("matching_ratio", ("iout_err_pct",), (), "matched L and m preserve the mirror ratio", "use shared intent variables for matched devices"),
+    ],
+    "ldo": [
+        ("loop_stability", ("ripple_settled", "undershoot", "overshoot"), (), "loop pole/zero placement controls settling", "retune Cc and the gate/output pole"),
+        ("load_regulation", ("load_reg", "line_reg"), (), "loop gain≈Aea·gm_pass·Rout", "increase error-amplifier gain or pass gm"),
+        ("dropout_drive", ("vout_err_pct",), ("triode",), "pass-device Vdsat consumes dropout headroom", "increase pass width and preserve gate swing"),
+    ],
+    "ref": [
+        ("startup", ("startup_ok",), (), "self-biased references need a transient startup path", "add a weak startup branch that turns off in steady state"),
+        ("temperature", ("tc_ppm",), (), "PTAT and CTAT slopes should cancel", "rebalance resistor ratio and device area ratio"),
+        ("line_psrr", ("line_reg", "psrr_1k"), (), "cascoded mirrors improve supply rejection", "increase output resistance with available headroom"),
+    ],
+    "filter": [
+        ("cutoff", ("fc", "f0"), (), "w0≈1/sqrt(R1R2C1C2)", "scale the RC product to move the pole"),
+        ("quality_factor", ("q", "peaking_db"), (), "Q is controlled by the resistor/capacitor ratio", "retune the damping ratio"),
+        ("active_drive", ("gain_db",), (), "the op-amp GBW should exceed f0·Q", "increase gm or lower the target pole"),
+    ],
+    "vco": [
+        ("tuning", ("tuning_ratio", "kvco", "fmin", "fmax"), (), "ring frequency follows I/(NCVDD)", "move the control device between weak and moderate inversion"),
+        ("swing", ("swing",), (), "buffer gain and current determine rail-to-rail swing", "increase the final-stage drive"),
+        ("power", ("power",), (), "dynamic power≈CVDD²f plus bias current", "reduce switched capacitance or bias current"),
+    ],
+    "comparator": [
+        ("delay", ("tpd",), (), "delay is dominated by slewing and regenerative gm", "increase input/latch gm under the power budget"),
+        ("offset", ("offset",), (), "matched input devices reduce systematic offset", "share intent variables and equalize operating regions"),
+        ("polarity", ("polarity_ok",), (), "input polarity must map to the required output state", "check the differential pair and inverter orientation"),
+    ],
+    "latch": [
+        ("regeneration", ("correct", "delay"), (), "regeneration time scales with CL/gm", "increase latch gm and reset margin"),
+        ("reset", ("correct",), (), "reset devices must equalize internal nodes", "strengthen reset paths without upsetting the tail"),
+        ("energy", ("energy",), (), "switching energy≈CswVDD²", "reduce unnecessary internal capacitance"),
+    ],
+    "schmitt": [
+        ("thresholds", ("vth_hi", "vth_lo", "hysteresis"), (), "feedback-device ratios set the two thresholds", "adjust the positive-feedback widths"),
+        ("swing", ("power_avg",), (), "rail-to-rail inverter drive controls transition quality", "balance pull-up and pull-down strength"),
+    ],
+    "opamp_app": [
+        ("closed_loop_gain", ("a1", "a2"), (), "closed-loop gain follows resistor ratios", "match the feedback ratio to the requested signed gain"),
+        ("closed_loop_bw", ("bw", "f_unity"), (), "closed-loop bandwidth≈GBW·β", "increase op-amp gm or feedback bandwidth"),
+        ("offset", ("vout_offset",), (), "input mismatch and bias imbalance shift the DC output", "rebalance matched branches and bias currents"),
+    ],
+}
+
+
+def _build_cards():
+    cards = []
+    for family, rules in _CARD_RULES.items():
+        for cid, metrics, regions, formula, action in rules:
+            cards.append({"id": f"{family}.{cid}", "family": family, "metrics": list(metrics),
+                          "regions": list(regions), "formula": formula, "action": action,
+                          "source": "SPECTRA-knowledge-v1", "version": 1})
+    return tuple(cards)
+
+
+CARD_INDEX = _build_cards()
+
+
+def retrieve_cards(task, analysis=None, limit=3):
+    """Retrieve cards using only the task family and observed failure evidence."""
+    family = task.get("family")
+    analysis = analysis or {}
+    failed = {x.get("metric") for x in analysis.get("failing", [])}
+    regions = {x.get("region") for x in analysis.get("flags", [])}
+    ranked = []
+    for card in CARD_INDEX:
+        if card["family"] != family:
+            continue
+        metric_hits = len(failed & set(card["metrics"]))
+        region_hits = len(regions & set(card["regions"]))
+        # Cards matching an observed violation are preferred.  Stable ID tie
+        # breaking makes retrieval reproducible across workers and seeds.
+        score = 4 * metric_hits + 2 * region_hits
+        ranked.append((score, card["id"], card))
+    ranked.sort(key=lambda x: (-x[0], x[1]))
+    selected = [dict(card, retrieval_score=score) for score, _, card in ranked[:limit] if score > 0]
+    if selected:
+        return selected
+    return [dict(card, retrieval_score=0) for _, _, card in ranked[:limit]]
+
+
+def render_cards(cards):
+    """Render retrieved cards for the iterate prompt without hidden state."""
+    if not cards:
+        return "(no retrieved cards; use only the interface, PDK and observed simulation evidence)"
+    return "\n".join(f"- [{c['id']}] {c['formula']}. Action: {c['action']} (source={c['source']} v{c['version']})"
+                     for c in cards)

@@ -69,6 +69,9 @@ ITERATE = """# Task — iteration {it} (LLM calls left: {calls_left}, simulation
 ## Result of the current program
 {diagnosis}
 
+## Retrieved quantitative knowledge cards
+{cards}
+
 ## History (most recent last)
 {history}
 

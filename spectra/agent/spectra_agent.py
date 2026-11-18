@@ -8,10 +8,10 @@ from dataclasses import dataclass
 import numpy as np
 
 from ..opt.sizing import Var
-from ..sim.evaluate import NOMINAL, PVT, cond_name, spec_key
+from ..sim.evaluate import NOMINAL, PVT, cond_name, spec_key, violation
 from . import diagnose, llm
 from .common import Ctx, task_texts
-from .knowledge import KNOWLEDGE
+from .knowledge import KNOWLEDGE, render_cards, retrieve_cards
 from .prompts import DSL_DOC, ITERATE, PLAN, ROBUST_NOTE, SYSTEM_SPECTRA
 from .sandbox import run_program
 
@@ -68,6 +68,8 @@ class Spectra:
         self.program = None
         self.params_spec = {}
         self.params = {}
+        self.program_stats = {}
+        self.last_analysis = None
         self.history = []
         self.status = "running"
         self.final_netlist = None
@@ -87,6 +89,7 @@ class Spectra:
         if not out.get("ok"):
             return None, out.get("error", "program failed")
         r = out["results"][0]
+        self.program_stats = dict(r.get("program_stats") or {})
         if not r["ok"]:
             return None, r["error"]
         return r, None
@@ -163,6 +166,7 @@ class Spectra:
     def sensitivities(self, ev0, failing):
         if not failing or not self.params_spec:
             return {}
+        specs = {s["metric"]: s for s in self.task.get("specs", [])}
         names = list(self.params_spec)[: self.cfg.sens_max_params]
         ps = []
         for k in names:
@@ -185,6 +189,7 @@ class Spectra:
                 continue
             m1 = list(ev.per_cond.values())[0]
             d = {}
+            dv = {}
             for met in failing:
                 a, b = m0.get(met), m1.get(met)
                 if a is None or b is None:
@@ -194,6 +199,13 @@ class Spectra:
                     d[met] = b - a
                 elif a != 0:
                     d[met] = 100 * (b / a - 1)
+                spec = specs.get(met)
+                if spec is not None:
+                    dv[met] = violation(spec, b) - violation(spec, a)
+            # Keep legacy numeric entries for sensitivity_text while exposing
+            # an exact normalized-violation derivative to diagnose.analyze.
+            if dv:
+                d["_violation"] = dv
             sens[k] = d
         return sens
 
@@ -292,14 +304,16 @@ class Spectra:
         if self.final_netlist is None:
             self.final_netlist = ctx.best.get("netlist")
         return {"status": self.status, "final_netlist": self.final_netlist, "program": self.program,
-                "params": self.params, **ctx.summary(), "events": ctx.events}
+                "params": self.params, "program_stats": self.program_stats,
+                **ctx.summary(), "events": ctx.events}
 
     # ------------------------------------------------------------------ main loop
     def run(self):
         ctx, task, cfg = self.ctx, self.task, self.cfg
         t = task_texts(task)
         fam = task["family"]
-        t["knowledge"] = KNOWLEDGE[fam] if cfg.use_knowledge else "(none provided)"
+        t["knowledge"] = KNOWLEDGE[fam] if cfg.use_knowledge else (
+            "(no family-specific cards; use only the interface, PDK and observed simulation evidence)")
         prompt = PLAN.format(**t,
                              dsl=(DSL_DOC if cfg.use_intent else NO_INTENT_DSL), metric_names=METRIC_NAMES[fam])
         text = ctx.ask(prompt, SYSTEM_SPECTRA, "plan")
@@ -312,7 +326,7 @@ class Spectra:
         last_score = None
         while ctx.calls_left() > 0 and ctx.sims_left() > 0:
             it += 1
-            diag, ev, r = None, None, None
+            diag, ev, r, analysis = None, None, None, None
             if not self.program:
                 diag = "No ```python design program was found in your reply. Reply with a complete program."
             else:
@@ -333,25 +347,37 @@ class Spectra:
                         if evP is None:
                             break
                         diag = "Nominal (TT) specs PASS but the design fails at PVT corners.\n" + self.pvt_report(evP)
+                        analysis = diagnose.analyze(task, evP, r.get("pred"))
                         if evP and self.cfg.use_diag:
                             rt, _ = diagnose.region_table(ev)
                             diag += "\n\nNominal operating points:\n" + rt
                     elif ev.status != "ok":
-                        diag = diagnose.report(task, ev)
+                        analysis = diagnose.analyze(task, ev, r.get("pred"))
+                        diag = diagnose.render_analysis(analysis)
                     else:
                         failing = [s["metric"] for s in task["specs"]
                                    if not ev.checks[cond_name(NOMINAL)][spec_key(s)][1]]
                         if cfg.use_diag:
                             sens = self.sensitivities(ev, failing) if ev.score < 4 and ctx.sims_left() > 20 else {}
-                            diag = diagnose.report(task, ev, r.get("pred"), sens)
+                            analysis = diagnose.analyze(task, ev, r.get("pred"), sens)
+                            diag = diagnose.render_analysis(analysis)
                         else:
+                            analysis = diagnose.analyze(task, ev, r.get("pred"), None)
                             diag = diagnose.spec_table(task, ev, None)
+            self.last_analysis = analysis
+            cards = retrieve_cards(task, analysis) if cfg.use_knowledge and analysis else []
+            cards_text = render_cards(cards)
+            if analysis is not None:
+                ctx.log("diagnosis", schema=analysis.get("schema"), condition=analysis.get("condition"),
+                        failing=analysis.get("failing", []), attribution=analysis.get("attribution", []),
+                        cards=[c.get("id") for c in cards])
             score = ev.score if (ev is not None and ev.status == "ok") else None
             hist_line = f"iter {it}: score={'n/a' if score is None else f'{score:.3f}'}"
             if ctx.calls_left() <= 0:
                 break
             prompt = ITERATE.format(task_id="", it=it, calls_left=ctx.calls_left(), sims_left=ctx.sims_left(),
                                     nl_spec=task["nl_spec"], program=self.program or "(none)", diagnosis=diag,
+                                    cards=cards_text,
                                     history="\n".join(self.history[-6:]) or "(first iteration)",
                                     dsl=(DSL_DOC if cfg.use_intent else NO_INTENT_DSL),
                                     robust_note=(ROBUST_NOTE if task.get("robust") else ""))
@@ -361,7 +387,8 @@ class Spectra:
             act = llm.extract_json(text) or {}
             new_prog = llm.extract_block(text, "python")
             a = str(act.get("action", "edit" if new_prog else ("refine" if act.get("params") or act.get("bounds") else "edit"))).lower()
-            ctx.log("action", it=it, action=a, has_program=bool(new_prog), reason=str(act.get("reason", ""))[:200])
+            ctx.log("action", it=it, action=a, has_program=bool(new_prog), refine_allowed=cfg.use_refine,
+                    reason=str(act.get("reason", ""))[:200])
             if a == "declare_infeasible":
                 self.status = "declared_infeasible"
                 ctx.log("declare_infeasible", reason=act.get("reason"))
@@ -375,6 +402,14 @@ class Spectra:
                 conds = self.active if task.get("robust") else [NOMINAL]
                 best = self.refine(conds, min(max(cfg.refine_chunk, 16 * len(conds)), ctx.sims_left()), bounds=bounds)
                 self.history.append(hist_line + f" -> refine (best {best[0]:.3f})" if best else hist_line + " -> refine (no result)")
+            elif a == "refine" and not cfg.use_refine:
+                # Keep the no-refinement arm semantically distinct from an
+                # edit.  A model-selected refine action is observed, logged,
+                # and skipped instead of silently changing the program path.
+                if new_prog:
+                    self.program, self.params = new_prog, {}
+                ctx.log("refine_skipped", it=it, has_program=bool(new_prog))
+                self.history.append(hist_line + " -> refine (disabled)")
             else:
                 if new_prog:
                     self.program, self.params = new_prog, {}
@@ -384,4 +419,5 @@ class Spectra:
         if self.final_netlist is None:
             self.final_netlist = ctx.best.get("netlist")
         return {"status": self.status, "final_netlist": self.final_netlist, "program": self.program,
-                "params": self.params, **ctx.summary(), "events": ctx.events}
+                "params": self.params, "program_stats": self.program_stats,
+                **ctx.summary(), "events": ctx.events}

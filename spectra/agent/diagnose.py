@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import math
 
-from ..sim.evaluate import region_report, spec_key
+from ..sim.evaluate import region_report, spec_key, violation
 
 UNITS = {"ugbw": "Hz", "f3db": "Hz", "gbw": "Hz", "power": "W", "power_avg": "W", "slew": "V/s", "settle": "s",
          "noise_1k": "V/rtHz", "in_noise_1m": "A/rtHz", "pm": "deg", "gain_db": "dB", "cmrr_db": "dB",
@@ -169,6 +169,88 @@ def root_causes(task, ev, flags, cond=None):
         hyp.append("Wrong/incomplete decision: check output polarity, reset of internal nodes, and that the latch fully "
                    "regenerates within half a clock period (stronger latch/tail devices).")
     return hyp
+
+
+def analyze(task, ev, pred=None, sens=None, cond=None, max_items=8):
+    """Return a structured, deterministic diagnosis for one evaluation.
+
+    The previous API exposed only prose.  This record keeps the same evidence
+    but makes attribution and downstream ablation metrics auditable.  The
+    ``sens`` mapping remains backward compatible with ``sensitivity_text`` and
+    may additionally contain a private ``_violation`` mapping produced by the
+    agent's finite-difference probe.
+    """
+    cond = cond or next(iter(ev.checks), None)
+    if ev.status != "ok":
+        return {"schema": "spectra-diagnosis/v2", "status": ev.status, "condition": cond,
+                "failing": [], "regions": {}, "flags": [], "attribution": [],
+                "hypotheses": list(ev.errors[:max_items])}
+    metrics = ev.per_cond.get(cond, {}) if cond else {}
+    checks = ev.checks.get(cond, {}) if cond else {}
+    specs = {s["metric"]: s for s in task.get("specs", [])}
+    failing = []
+    for s in task.get("specs", []):
+        v, ok, vio = checks.get(spec_key(s), (metrics.get(s["metric"]), False, 2.0))
+        if not ok:
+            failing.append({"metric": s["metric"], "value": v, "target": s["value"],
+                            "op": s["op"], "violation": float(vio)})
+    regions = region_report(ev.ops)
+    flags = [{"device": d, **r} for d, r in regions.items() if r["region"] != "saturation"]
+    attribution = []
+    for param, details in (sens or {}).items():
+        if not isinstance(details, dict) or param.startswith("_"):
+            continue
+        vd = details.get("_violation", {})
+        for fail in failing:
+            metric = fail["metric"]
+            raw = details.get(metric)
+            if raw is None and metric not in vd:
+                continue
+            delta = vd.get(metric)
+            if delta is None:
+                # Legacy callers provide only a raw one-sided delta.  Keep the
+                # direction explicit and mark the normalized value unavailable.
+                delta = None
+            attribution.append({"param": param, "metric": metric,
+                                "delta": raw, "d_violation": delta,
+                                "direction": ("improves" if delta is not None and delta < 0 else
+                                               "worsens" if delta is not None and delta > 0 else "unknown")})
+    attribution.sort(key=lambda x: (x["d_violation"] is None, x["d_violation"] if x["d_violation"] is not None else 0.0))
+    flags_for_hyp = [(x["device"], x) for x in flags]
+    hypotheses = root_causes(task, ev, flags_for_hyp, cond)
+    return {"schema": "spectra-diagnosis/v2", "status": ev.status, "condition": cond,
+            "score": float(ev.score), "failing": failing, "regions": regions, "flags": flags,
+            "attribution": attribution[:max_items], "hypotheses": hypotheses[:max_items]}
+
+
+def render_analysis(analysis):
+    """Render :func:`analyze` output into the compact feedback text expected by LLMs."""
+    if not analysis:
+        return "(no diagnosis)"
+    if analysis.get("status") != "ok":
+        lines = [f"Evaluation status: {analysis.get('status', 'unknown')}"]
+        lines.extend(f"- {e}" for e in analysis.get("hypotheses", [])[:8])
+        return "\n".join(lines)
+    lines = ["Causal diagnosis (structured evidence):"]
+    fails = analysis.get("failing", [])
+    if fails:
+        lines.append("Failing margins: " + "; ".join(
+            f"{x['metric']} {x['op']} {fmt(x['target'])}, value={fmt(x['value'])}, violation={x['violation']:.3f}"
+            for x in fails))
+    else:
+        lines.append("No failing specs in this condition.")
+    attrs = analysis.get("attribution", [])
+    if attrs:
+        lines.append("Parameter attribution: " + "; ".join(
+            f"{x['param']}→{x['metric']} ({x['direction']}, d_vio={fmt(x['d_violation'])})" for x in attrs[:8]))
+    flags = analysis.get("flags", [])
+    if flags:
+        lines.append("Operating-region flags: " + "; ".join(
+            f"{x['device']}={x['region']} (Vds-Vdsat={fmt(x['vds_margin'])})" for x in flags[:8]))
+    hyps = analysis.get("hypotheses", [])
+    if hyps:
+        lines.append("Root-cause hypotheses:\n" + "\n".join(f"- {h}" for h in hyps[:8]))
+    return "\n".join(lines)
 
 
 def report(task, ev, pred=None, sens=None, cond=None, max_hyp=8):
