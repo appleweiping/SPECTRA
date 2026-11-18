@@ -175,7 +175,11 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
             net = refined
             ctx.log("spectra_refine_trace", budget=refine_budget, returned_best=True,
                     fallback=True)
-    return _finish(ctx, net or ctx.best.get("netlist"))
+    # A robust tail evaluation may use only the three search corners after the
+    # 45-corner blocks no longer fit.  Never let that tail replace the best
+    # full-grid candidate that was actually scored against the verifier.
+    final_net = ctx.best.get("netlist") if robust else (net or ctx.best.get("netlist"))
+    return _finish(ctx, final_net)
 
 
 def _evaluate(ctx, build, x, conds=None):
