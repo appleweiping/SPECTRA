@@ -49,6 +49,8 @@ def main(exp="E2g_mech", subset="data/bench/component_mech_tasks.jsonl", seeds=(
         tt = [bool(v.get("tt_pass")) for v in verifies]
         robust = [(t, r) for t, _, r in obs if t.get("robust")]
         pvt = [bool(r.get("verify", {}).get("pvt_pass")) for _, r in robust if "pvt_pass" in r.get("verify", {})]
+        pvt_scores = [float(r.get("verify", {}).get("pvt_score")) for _, r in robust
+                      if isinstance(r.get("verify", {}).get("pvt_score"), (int, float))]
         scores = [float(v["tt_score"]) for v in verifies if isinstance(v.get("tt_score"), (int,float))]
         sims = [float(r.get("sims", 0) or 0) for _, _, r in obs]
         calls = [float(r.get("calls", 0) or 0) for _, _, r in obs]
@@ -63,6 +65,9 @@ def main(exp="E2g_mech", subset="data/bench/component_mech_tasks.jsonl", seeds=(
             "method": method, "observed": len(obs), "expected": expected, "missing": expected-len(obs),
             "tt_success": mean(tt), "tt_ci95": ci(tt), "pvt_observed": len(pvt), "pvt_success": mean(pvt), "pvt_ci95": ci(pvt),
             "mean_violation_score": mean(scores), "median_violation_score": median(scores) if scores else None,
+            "mean_pvt_violation_score": mean(pvt_scores),
+            "median_pvt_violation_score": median(pvt_scores) if pvt_scores else None,
+            "pvt_violation_observed": len(pvt_scores),
             "mean_simulation_units": mean(sims), "mean_llm_calls": mean(calls), "mean_wall_seconds": mean(walls),
             "intent_fraction_mean": mean([float(s.get("intent_fraction")) for s in stats if isinstance(s.get("intent_fraction"),(int,float))]),
             "intent_compliant_rate": mean([bool(s.get("intent_compliant")) for s in stats]) if stats else None,
@@ -89,13 +94,13 @@ def main(exp="E2g_mech", subset="data/bench/component_mech_tasks.jsonl", seeds=(
            "tasks":len(tasks), "seeds":list(seeds), "methods":list(METHODS), "rows":rows, "paired":paired,
            "interpretation":"Rows keep missing runs and mixed effects visible. Mechanism fields are observed event logs, not post-hoc labels."}
     (ROOT / "results/component_mechanism_matrix.json").write_text(json.dumps(out, indent=2) + "\n")
-    lines=["# Component mechanism ablation", "", f"Experiment `{exp}` uses {len(tasks)} tasks across six domains, three seeds and a common GPT-6.1-sol budget.", "", "| Arm | Observed/expected | TT success | PVT success | Mean violation | Mean sims | Mean calls | Intent fraction | Repair probes | Accepted probes | Refine traces | Card events |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    lines=["# Component mechanism ablation", "", f"Experiment `{exp}` uses {len(tasks)} tasks across six domains, three seeds and a common GPT-6.1-sol budget.", "", "| Arm | Observed/expected | TT success | PVT success | Mean TT violation | Mean PVT violation | Mean sims | Mean calls | Intent fraction | Repair probes | Accepted probes | Refine traces | Card events |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for r in rows:
         tt = "--" if r["tt_success"] is None else f"{r['tt_success']:.3f}"
         pvt = "--" if r["pvt_success"] is None else f"{r['pvt_success']:.3f}"
         fmt = lambda x: "--" if x is None else f"{x:.2f}"
         accepted = "--" if r["repair_probe_accept_rate"] is None else f"{r['repair_probe_accept_rate']:.3f}"
-        lines.append(f"| {r['method']} | {r['observed']}/{r['expected']} | {tt} | {pvt} | {fmt(r['mean_violation_score'])} | {fmt(r['mean_simulation_units'])} | {fmt(r['mean_llm_calls'])} | {fmt(r['intent_fraction_mean'])} | {r['repair_probe_events']} | {accepted} | {r['refine_trace_events']} | {r['card_events']} |")
+        lines.append(f"| {r['method']} | {r['observed']}/{r['expected']} | {tt} | {pvt} | {fmt(r['mean_violation_score'])} | {fmt(r['mean_pvt_violation_score'])} | {fmt(r['mean_simulation_units'])} | {fmt(r['mean_llm_calls'])} | {fmt(r['intent_fraction_mean'])} | {r['repair_probe_events']} | {accepted} | {r['refine_trace_events']} | {r['card_events']} |")
     lines += ["", "Paired comparisons", "", "| Ablation arm | Common runs | TT wins by full arm | TT losses by full arm | Mean score delta |", "|---|---:|---:|---:|---:|"]
     for m, p in paired.items():
         lines.append(f"| {m} | {p['n']} | {p['tt_wins']} | {p['tt_losses']} | {p['mean_delta_score_with_minus_without'] if p['mean_delta_score_with_minus_without'] is not None else '--'} |")
