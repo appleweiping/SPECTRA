@@ -514,7 +514,7 @@ Numbers are as reported by each paper's authors. Model names (for example "GPT-5
 - **Content:** **50 transistor-level tasks contributed by 17 chip designers.** Open-source SKY130 plus ngspice; an **isolated verifier** runs specification-based electrical tests. Example task: "across 30 PVT conditions and 20 mismatch samples".
 - **Scale of evaluation:** **15 agent configurations × 2,250 two-hour attempts.**
 - **Results:**
-  - **Full-spec pass 8.0–78.0%.** "Claude Fable 5" is best at 78.0%, followed by Claude Opus 5, "GPT5.6 Sol" and GPT-5.5.
+  - **Full-spec pass 8.0–78.0%.** The survey records a range of closed-model results. Those historical model names are literature context only and are excluded from the GPT-6.1-sol experiment chain.
   - Most failures pass legality checks but **fail electrical acceptance**.
   - A task-matched reference topology adds +18.7 points for DeepSeek V4 Pro. General skill documents help little.
 - **Repo:** <https://github.com/Arcadia-1/analog-design-bench>.
