@@ -69,11 +69,15 @@ def _ask_params(ctx, task, vars_, role, context=""):
     return _clip(params if isinstance(params, dict) else {}, vars_)
 
 
-def _evaluate(ctx, build, x, conds=(NOMINAL,)):
+def _evaluate(ctx, build, x, conds=None):
     try:
         net = build(x)
     except Exception:
         return None, None, 60.0
+    if conds is None:
+        conds = [NOMINAL]
+        if ctx.task.get("robust"):
+            conds = [NOMINAL, {"corner": "ss", "temp": 125, "vdd": 1.8}, {"corner": "ff", "temp": -40, "vdd": 1.8}]
     ev = ctx.evaluate(net, list(conds))
     score = ev.score if ev.status == "ok" and math.isfinite(ev.score) else 50.0
     return ev, net, score
