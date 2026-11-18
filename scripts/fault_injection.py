@@ -14,7 +14,7 @@ from pathlib import Path
 from spectra.paths import ROOT
 from spectra.bench.templates import T
 from spectra.sim.netlist import parse
-from spectra.sim.evaluate import evaluate, region_report, spec_key
+from spectra.sim.evaluate import evaluate, region_report, spec_key, violation
 from spectra.agent import diagnose, llm
 
 OUT = ROOT / "results" / "raw" / "E4"
@@ -60,6 +60,7 @@ def element_sensitivity(task, ckt, failing):
     """d(failing metrics)/d(+20% element size) for every element (one sim each)."""
     base = evaluate(task, ckt.to_text())
     m0 = base.per_cond.get("tt_27C_1.8V", {})
+    specs = {s["metric"]: s for s in task.get("specs", [])}
     jobs = []
     for d in ckt.devices:
         import copy
@@ -80,11 +81,16 @@ def element_sensitivity(task, ckt, failing):
             continue
         m1 = ev.per_cond["tt_27C_1.8V"]
         d = {}
+        dv = {}
         for met in failing:
             a, b = m0.get(met), m1.get(met)
             if a is None or b is None:
                 continue
             d[met] = (b - a) if (met.endswith("_db") or met in ("pm", "vout_dc", "swing")) else (100 * (b / a - 1) if a else 0)
+            if met in specs:
+                dv[met] = violation(specs[met], b) - violation(specs[met], a)
+        if dv:
+            d["_violation"] = dv
         sens[nm] = d
     return sens
 
@@ -98,6 +104,8 @@ def rule_rank(ev, sens, failing, ckt):
             score[d] = score.get(d, 0) + 2
     for nm, dd in sens.items():
         for met, v in dd.items():
+            if met.startswith("_"):
+                continue
             score[nm] = score.get(nm, 0) + min(5, abs(v) / 5)
     return [k for k, _ in sorted(score.items(), key=lambda kv: -kv[1])]
 
@@ -156,11 +164,13 @@ def main(n_per_template=6, seed=0, model="gpt-6.1-sol"):
         sens = element_sensitivity(t, ckt, failing)
         rule = rule_rank(ev, sens, failing, ckt)
         raw_ev = diagnose.spec_table(t, ev, None)
-        rep = diagnose.report(t, ev, None, None)
-        st = diagnose.sensitivity_text(sens, failing).replace("intent variables", "element sizes/values").replace("+10%", "+20%")
-        spectra_ev = rep + ("\n\n" + st if st else "")
+        analysis = diagnose.analyze(t, ev, None, sens)
+        spectra_ev = diagnose.render_analysis(analysis)
         res = {"case": key, "task": t["id"], "template": t["ref"]["template"], "truth": name, "class": cls,
-               "failing": failing, "rule": rule[:3]}
+               "failing": failing, "rule": rule[:3], "diagnosis": analysis,
+               "mechanism": {"attribution": analysis.get("attribution", []),
+                             "d_violation": {a["param"]: a["d_vio"] for a in analysis.get("attribution", [])
+                                             if a.get("d_vio") is not None}}}
         for arm, evid in (("raw", raw_ev), ("spectra", spectra_ev)):
             r = llm.call(PROMPT.format(nl=t["nl_spec"], net=ckt.to_text(), evidence=evid),
                          "You are an expert analog IC designer debugging a circuit.", model=model,

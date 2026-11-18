@@ -266,7 +266,11 @@ class Spectra:
             return False, None
         if evP.passed:
             return True, evP
-        self.last_analysis = (diagnose.analyze(self.task, evP) if self.cfg.use_diag
+        failing = [s["metric"] for s in self.task.get("specs", [])
+                   if any(not evP.checks.get(cond_name(c), {}).get(spec_key(s), (None, False, 2.0))[1]
+                          for c in PVT)]
+        sens = self.sensitivities(evP, failing) if self.cfg.use_diag and failing and ctx.sims_left() > 20 else None
+        self.last_analysis = (diagnose.analyze(self.task, evP, sens=sens) if self.cfg.use_diag
                               else diagnose.failure_summary(self.task, evP))
         if not self.cfg.use_refine or self.cfg.pvt_strategy == "nominal_only":
             return False, evP
