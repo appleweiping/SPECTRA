@@ -127,6 +127,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     if ev is not None and ev.passed:
         if robust:
             _update_robust_best(ctx, ev, net, score)
+            return _finish(ctx, ctx.best.get("netlist"))
         else:
             ctx.best = {"score": score, "netlist": net, "passed": True}
         return _finish(ctx, net)
@@ -158,6 +159,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         if ev is not None and ev.passed and (not robust or eval_conds is robust_conds):
             if robust:
                 _update_robust_best(ctx, ev, net, score)
+                return _finish(ctx, ctx.best.get("netlist"))
             else:
                 ctx.best = {"score": score, "netlist": net, "passed": True}
             return _finish(ctx, net)
