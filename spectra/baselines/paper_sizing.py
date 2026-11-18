@@ -78,6 +78,22 @@ def _ask_params(ctx, task, vars_, role, context="", system=SYSTEM):
     return _clip(params if isinstance(params, dict) else {}, vars_)
 
 
+def _safe_ask_params(ctx, task, vars_, role, context="", system=SYSTEM):
+    """Keep a transient gateway failure inside the fixed-budget run.
+
+    The strict row records the failed attempt and falls back to the deterministic
+    midpoint so the SPECTRA refinement stage can still consume the remaining
+    simulator budget. This preserves a completed, auditable row instead of
+    converting an infrastructure timeout into a missing task.
+    """
+    try:
+        return _ask_params(ctx, task, vars_, role, context, system), False
+    except llm.LLMError as exc:
+        ctx.calls += 1
+        ctx.log("llm_failure_fallback", error=str(exc)[:240], role=role)
+        return _midpoint(vars_), True
+
+
 def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     """Run SPECTRA's diagnosis/knowledge/refinement loop on the frozen topology.
 
@@ -88,7 +104,11 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     ctx = Ctx(task=task, model=model, seed=seed, method="spectra")
     ctx.budget = budget or Budget()
     vars_, build = _vars(task), _template(task)
-    x = _ask_params(ctx, task, vars_, "SPECTRA intent planner", system=SYSTEM_SPECTRA_FIXED)
+    initial_cards = retrieve_cards(task, None)
+    initial_context = "Family knowledge cards:\n" + render_cards(initial_cards)
+    x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA intent planner",
+                                     initial_context, SYSTEM_SPECTRA_FIXED)
+    refinement_done = False
     ev, net, score = _evaluate(ctx, build, x)
     ctx.log("spectra_plan", score=score, passed=bool(ev and ev.passed), topology="frozen")
     if ev is not None and ev.passed:
@@ -98,7 +118,7 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     # Keep the same 12-call cap. Each revision receives a structured diagnosis and
     # versioned family cards, then the remaining simulation budget is used by the
     # active-set trust-region refinement implemented by the SPECTRA adapter.
-    while ctx.calls_left() > 1 and ctx.sims_left() > 0:
+    while not llm_failed and ctx.calls_left() > 1 and ctx.sims_left() > 0:
         analysis = diagnose.analyze(task, ev) if ev is not None and ev.status == "ok" else None
         cards = retrieve_cards(task, analysis) if analysis else []
         context = ""
@@ -107,8 +127,8 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         if cards:
             context += "\nKnowledge cards:\n" + render_cards(cards)
         context += "\nCurrent parameters:\n" + json.dumps(x, sort_keys=True)
-        x = _ask_params(ctx, task, vars_, "SPECTRA diagnosis-guided revision", context,
-                        system=SYSTEM_SPECTRA_FIXED)
+        x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA diagnosis-guided revision", context,
+                                         SYSTEM_SPECTRA_FIXED)
         ev, net, score = _evaluate(ctx, build, x)
         ctx.log("spectra_revision", score=score, passed=bool(ev and ev.passed),
                 diagnosis=analysis.get("schema") if analysis else None,
@@ -117,16 +137,25 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
             ctx.best = {"score": score, "netlist": net, "passed": True}
             return _finish(ctx, net)
         # Reserve a bounded refinement tranche after enough evidence has accumulated.
-        if ctx.calls >= 3 and ctx.sims_left() >= 24:
-            refine_budget = min(80, ctx.sims_left())
+        if ctx.calls >= 1 and ctx.sims_left() >= 24:
+            refine_budget = min(120, ctx.sims_left())
             refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
                              tag="spectra_active_set_refine")
+            refinement_done = True
             if refined:
                 net = refined
                 ctx.log("spectra_refine_trace", budget=refine_budget,
                          returned_best=True)
                 ctx.best = {"score": score, "netlist": net, "passed": False}
             break
+    if llm_failed and not refinement_done and ctx.sims_left() >= 24:
+        refine_budget = min(120, ctx.sims_left())
+        refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
+                         tag="spectra_fallback_refine")
+        if refined:
+            net = refined
+            ctx.log("spectra_refine_trace", budget=refine_budget, returned_best=True,
+                    fallback=True)
     return _finish(ctx, net or ctx.best.get("netlist"))
 
 
