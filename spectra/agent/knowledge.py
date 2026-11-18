@@ -225,6 +225,9 @@ def render_cards(cards):
     """Render retrieved cards for the iterate prompt without hidden state."""
     if not cards:
         return "(no retrieved cards; use only the interface, PDK and observed simulation evidence)"
-    return "\n".join(f"- [{c['id']}] {c['formula']}. Action: {c['action']} "
-                     f"(source={c['source']} v{c['version']} sha256={c['sha256'][:12]})"
-                     for c in cards)
+    lines = []
+    for c in cards:
+        digest = str(c.get("sha256", "unhashed"))[:12]
+        lines.append(f"- [{c['id']}] {c['formula']}. Action: {c['action']} "
+                     f"(source={c.get('source', 'unknown')} v{c.get('version', '?')} sha256={digest})")
+    return "\n".join(lines)
