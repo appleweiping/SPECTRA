@@ -47,8 +47,8 @@ The final matched three-seed extension is stored in
 `work/remote_archive/siz7g_final_bundle.tar.gz` with SHA-256
 `8a360f800f0460e3bcfed188ead3d77dca4c6e6bf56832aa39c90d3eb1348a5a`. It contains the 288-cell seed-0 rerun,
 the 576-cell seed-1/2 rerun, the 108-cell staged PVT sensitivity track, and the complete legacy component
-mechanism evidence. The final source checkout is synchronized to GitHub `main` at commit
-`12f33cbf6209a674d3d35bc50bd72782c85ac470`. The eight-row primary aggregate has 864/864 observed cells.
+mechanism evidence. The final source checkout is synchronized to GitHub `main`; the exact handoff commit is recorded
+by `git rev-parse HEAD` in the delivery verification. The eight-row primary aggregate has 864/864 observed cells.
 The primary SIZ7g files were generated from source commit `017536507bbf283ba5cfffbbc9f6d098bdd01250`.
 SPECTRA reaches 0.806 TT, 0.194 PVT, 0.1180 mean TT violation and 0.5648 mean PVT violation. The post-fix staged
 variant was generated from source commit `3347b38c19efe60dfbaa5bd71c7fe898207ea199` and reaches
@@ -56,3 +56,8 @@ variant was generated from source commit `3347b38c19efe60dfbaa5bd71c7fe898207ea1
 The post-fix archive is `work/remote_archive/siz7g_final_postfix_bundle.tar.gz` with SHA-256
 `56695cd111867bff21df3847832e87610e9c20d0cc50f66ba310c217e6e4f6db`. These results are scoped to the frozen
 fixed-topology benchmark and are not a universal SOTA claim.
+
+The repository-wide expansion audit archive is `work/remote_archive/siz11g_external_expansion_audit.tar.gz` with
+SHA-256 `dbec58bf6ed7386179efa1fee71f857dc439b69dcadc2a5830184b4c30d8d8f5`. It contains the 48-cell preflight,
+the 122-cell partial run, and the two infrastructure-failure archives. None of these partial records enter the
+primary ranking.
