@@ -211,6 +211,50 @@ def search(method, budget, seed, evaluate, low, high):
     return best_x, best_score, first
 
 
+def search_robust_spectra(budget, seed, evaluate, low, high, conditions):
+    """Use the same simulation cap for a three-corner screening objective."""
+
+    candidate_budget = budget // len(conditions)
+    rng = np.random.default_rng(seed)
+    best_x = low + 0.5 * (high - low)
+    best_score = float("inf")
+    first = 0
+    evaluations = 0
+
+    def visit(x, candidate_index):
+        nonlocal best_x, best_score, first, evaluations
+        scores = []
+        for condition in conditions:
+            scores.append(score(evaluate(x, condition)))
+        evaluations += len(conditions)
+        current = float(sum(scores) / len(scores))
+        if current == 0.0 and first == 0:
+            first = evaluations
+        if current < best_score:
+            best_score, best_x = current, np.asarray(x, dtype=float).copy()
+        return current
+
+    coverage = min(max(8, 2 * len(low)), max(1, candidate_budget // 3))
+    for index, unit in enumerate(rng.random((coverage, len(low))), 1):
+        visit(low + unit * (high - low), index)
+    es = None
+    if coverage < candidate_budget:
+        import cma
+        es = cma.CMAEvolutionStrategy([0.5] * len(low), 0.25,
+                                       {"bounds": [0, 1], "seed": seed + 2000, "verbose": -9})
+    index = coverage
+    while index < candidate_budget:
+        points = es.ask()[:candidate_budget - index]
+        scores = []
+        for point in points:
+            x = low + np.clip(point, 0.0, 1.0) * (high - low)
+            scores.append(visit(x, index + 1))
+            index += 1
+        if scores:
+            es.tell(points[:len(scores)], scores)
+    return best_x, best_score, first
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, required=True)
@@ -220,6 +264,7 @@ def main():
     parser.add_argument("--budget", type=int, default=300)
     parser.add_argument("--seeds", default="0,1,2")
     parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
+    parser.add_argument("--search-profile", choices=("nominal", "spectra_robust"), default="nominal")
     parser.add_argument("--pvt-limit", type=int, default=None, help="Limit PVT conditions for capability smoke tests")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -264,9 +309,21 @@ def main():
                 write_vars(design_file, names, defaults, x)
                 return run(template, args.topology, "tt", 27.0, 1.8, args.simulator, work)[0]
 
-            search_method = "spectra" if method == "spectra" else "random"
+            def evaluate_condition(x, condition):
+                write_vars(design_file, names, defaults, x)
+                return run(template, args.topology, condition.corner, condition.temperature_c,
+                           condition.supply_v, args.simulator, work)[0]
+
             start = time.perf_counter()
-            best_x, best_score, first = search(search_method, args.budget, seed, evaluate_nominal, low, high)
+            robust_conditions = tuple(next(condition for condition in pvt if condition.name == name)
+                                      for name in ("tt_27C_1.8V", "ss_-40C_1.62V", "ff_125C_1.98V"))
+            if method == "spectra" and args.search_profile == "spectra_robust":
+                best_x, best_score, first = search_robust_spectra(
+                    args.budget, seed, evaluate_condition, low, high, robust_conditions
+                )
+            else:
+                search_method = "spectra" if method == "spectra" else "random"
+                best_x, best_score, first = search(search_method, args.budget, seed, evaluate_nominal, low, high)
             write_vars(design_file, names, defaults, best_x)
             corner_metrics = {}
             for condition in pvt:
@@ -278,6 +335,7 @@ def main():
             rows.append({
                 "task": args.topology, "method": method, "seed": seed, "pdk": "sky130",
                 "simulator": Path(args.simulator).name, "simulations": args.budget, "llm_calls": 12,
+                "search_profile": args.search_profile,
                 "first_pass_simulations": first, "wall_seconds": time.perf_counter() - start,
                 "tt_pass": best_score == 0.0, "tt_violation": best_score, "pvt": pvt_summary,
                 "parameters": dict(zip(names, best_x.tolist())),
