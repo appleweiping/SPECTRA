@@ -31,8 +31,10 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   276/276 cells with three seeds. These results are benchmark-scoped and do not establish universal analog-sizing SOTA.
 * **Cross-domain public benchmark track** (`docs/CROSS_DOMAIN_PROTOCOL.md`, `data/bench/cross_domain_manifest.json`):
   the frozen extension targets AnalogGym AMP/LDO, the 31-circuit public suite, ATLAS dual-PDK tasks and Analog
-  Design Bench. The current codebase has not yet completed the cross-PDK and cross-simulator runs, so no domain-level
-  SOTA claim is made from the existing SKY130/ngspice evidence.
+  Design Bench. Server receipts and a three-PDK TT-only adapter run are archived in
+  `results/cross_domain_capability_receipt_v2.json` and `results/public_suite_3pdk_tt_v2.md`. The source configs do
+  not expose a common PVT evaluator, and the server has no second simulator, so no domain-level SOTA claim is made
+  from this evidence.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.
