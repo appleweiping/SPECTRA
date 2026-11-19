@@ -78,6 +78,15 @@ def write_vars(path, names, defaults, x):
     path.write_text(".PARAM " + " ".join(f"{n}={fmt(n, values[n]) if isinstance(values[n], (int, float)) else values[n]}" for n in ordered) + "\n", encoding="utf-8")
 
 
+def ensure_symlink(link: Path, target: Path, *, directory: bool = False) -> None:
+    """Create a link and repair a stale link left by an interrupted run."""
+
+    if link.is_symlink() and not link.exists():
+        link.unlink()
+    if not link.exists():
+        link.symlink_to(target, target_is_directory=directory)
+
+
 def prepare(template, topology, corner, temperature, supply, output):
     text = template.replace("HoiLee_AFFC_Pin_3", topology)
     text = re.sub(r"\.include \../mosfet_model/sky130_pdk/libs\.tech/ngspice/corners/[^\s]+", f".include ../mosfet_model/sky130_pdk/libs.tech/ngspice/corners/{corner}.spice", text)
@@ -166,6 +175,7 @@ def main():
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--topology", default="HoiLee_AFFC_Pin_3")
     parser.add_argument("--simulator", default="ngspice")
+    parser.add_argument("--pdk-root", type=Path, required=True)
     parser.add_argument("--budget", type=int, default=300)
     parser.add_argument("--seeds", default="0,1,2")
     parser.add_argument("--output", type=Path, required=True)
@@ -183,22 +193,20 @@ def main():
     pvt = make_pvt_grid()
     root = args.output.parent / f"_{args.output.stem}_work"
     root.mkdir(parents=True, exist_ok=True)
-    source_pdk = args.source_root.parent / "PDK" / "sky130_pdk"
+    source_pdk = args.pdk_root.resolve()
+    if not source_pdk.exists():
+        raise SystemExit(f"PDK root does not exist: {source_pdk}")
 
     rows = []
     for seed in (int(item) for item in args.seeds.split(",") if item.strip()):
         for method in ("spectra", "anaflow_cleanroom"):
             work = root / f"s{seed}_{method}"
             work.mkdir(exist_ok=True)
-            spice_link = work / "spice_netlist"
-            if not spice_link.exists():
-                spice_link.symlink_to(amp / "spice_netlist", target_is_directory=True)
+            ensure_symlink(work / "spice_netlist", amp / "spice_netlist", directory=True)
             design_dir = work / "design_variables"
             design_dir.mkdir(exist_ok=True)
             (work / "mosfet_model").mkdir(exist_ok=True)
-            pdk_link = work / "mosfet_model" / "sky130_pdk"
-            if not pdk_link.exists():
-                pdk_link.symlink_to(source_pdk, target_is_directory=True)
+            ensure_symlink(work / "mosfet_model" / "sky130_pdk", source_pdk, directory=True)
             design_file = design_dir / args.topology
 
             def evaluate_nominal(x):
