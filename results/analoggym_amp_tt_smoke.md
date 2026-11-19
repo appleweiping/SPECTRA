@@ -22,4 +22,6 @@ This receipt records one reproducible public AnalogGym testbench execution on th
 
 The source testbench completed with return code 0 under ngspice-42. The receipt explicitly sets `ranking_eligible=false`, `sizing=false`, and `pvt=false`.
 
+The batch log also contains a later `phase_in_deg = failed` line after the first numeric AC measurement. The receipt preserves the first numeric occurrence for traceability and remains ineligible for sizing or PVT ranking.
+
 Full machine-readable provenance is in [`analoggym_amp_tt_smoke.json`](analoggym_amp_tt_smoke.json).

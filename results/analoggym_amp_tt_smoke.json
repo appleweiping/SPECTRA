@@ -5,6 +5,11 @@
     "path": "/root/autodl-tmp/analoggym_amp_tt_smoke.log",
     "sha256": "2310c77da48cd39b8b60a370c22a6b5e5015c192c1de8a6f191625f9d654171c"
   },
+  "measurement_notes": {
+    "detail": "The batch log contains a later phase_in_deg=failed line after the first numeric AC measurement. This smoke receipt preserves the first numeric values and remains ineligible for sizing/PVT ranking.",
+    "later_failed_measurement_present": true,
+    "parser": "first numeric occurrence per named .meas output"
+  },
   "metrics": {
     "dcgain_db": 90.07545,
     "gain_bandwidth_product_hz": 838366.0,
