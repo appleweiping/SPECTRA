@@ -25,6 +25,8 @@ def _records(root: Path, exp: str, method: str | None = None):
             record = json.loads(path.read_text())
         except (OSError, json.JSONDecodeError):
             continue
+        record["task"] = record.get("task") or path.parent.name
+        record["seed"] = record.get("seed")
         record["_path"] = str(path)
         out.append(record)
     return out
