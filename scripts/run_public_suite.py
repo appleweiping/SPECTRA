@@ -131,12 +131,18 @@ def main() -> None:
     args = parser.parse_args()
     seeds = [int(value) for value in args.seeds.split(",") if value.strip()]
     rows = []
+    pdk_by_config = {
+        "ptm180nm_opamp": "ptm180",
+        "gh_autockt_opamp": "bptm45",
+        "bjt_ce_amp": "bjt_public",
+    }
     for config in args.config:
         bench = _load_benchmark(args.source_root, config)
         for seed in seeds:
             for runner in (_spectra, _random):
                 result = runner(bench, seed, args.budget)
-                result.update({"config": config, "task": bench.name, "pdk": config.split("/")[1],
+                result.update({"config": config, "task": bench.name,
+                               "pdk": pdk_by_config.get(bench.name, "source_declared"),
                                "simulator": os.environ.get("SPECTRA_PUBLIC_SIMULATOR", "ngspice"),
                                "pvt_status": "unavailable_source_has_no_corner_evaluator",
                                "pvt_pass": None})
