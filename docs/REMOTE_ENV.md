@@ -8,7 +8,7 @@ Recorded 2026-11-16/17 from the westc server. Secrets are intentionally excluded
 | Project checkout | `/root/autodl-tmp/spectra-analog-agent` |
 | Working storage | `/root/autodl-tmp` (the `/autodl-fs/data` mount is nearly full; `/autodl-pub/data` is read-only on this instance) |
 | Hardware | 2 × NVIDIA GeForce RTX 4090 D, 24,564 MiB each; 32 CPU cores; 124 GB RAM |
-| Simulator | ngspice-42 built from the official `ngspice-42.tar.gz` source; SHA-256 `737fe3846ab2333a250dfadf1ed6ebe1860af1d8a5ff5e7803c772cc4256e50a`; install prefix `/root/autodl-tmp/ngspice-42-install` |
+| Simulators | Legacy ngspice-42 remains archived at `/root/autodl-tmp/ngspice-42-install`. The public cross-domain runs use official ngspice-44.2, binary SHA-256 `8bd71b6fcdf47033623a2e7eaf38f97b657031df27d400f486b6928e9bc25fe4`, prefix `/root/autodl-tmp/sim-build/ngspice-44.2-install`, and Xyce 7.10 serial, binary SHA-256 `5abf2b7d1dba7c582c37dd64a3773bebf8e76402d7e4898057016965f8cfae79`, prefix `/root/autodl-tmp/sim-build/xyce-7.10-serial-install` |
 | Python | 3.12.3 from `/root/miniconda3/bin/python` |
 | Packages | numpy 2.4.6, scipy 1.18.1, cma 4.6.0, optuna 5.1.0, matplotlib 3.11.0, openai 3.51.0 |
 | Git | 2.34.1; checkout verified at the same commit as GitHub `main` |
@@ -61,3 +61,9 @@ The repository-wide expansion audit archive is `work/remote_archive/siz11g_exter
 SHA-256 `dbec58bf6ed7386179efa1fee71f857dc439b69dcadc2a5830184b4c30d8d8f5`. It contains the 48-cell preflight,
 the 122-cell partial run, and the two infrastructure-failure archives. None of these partial records enter the
 primary ranking.
+
+The public cross-domain protocol keeps the AnalogGym, AMPICBench, opensource-analog-circuits and ATLAS source
+receipts under `results/cross_domain_capability_receipt_v2.*`. The AnalogGym HoiLee amplifier smoke has a complete
+45-condition verifier under ngspice. The ATLAS GF180 capability receipt is `results/atlas_gf180_ngspice44_capability.*`.
+It records a successful ngspice-44.2 execution over all 18 shipped GF180 corner netlists at budget 50 and zero
+feasible designs, so it is retained as capability evidence and excluded from matched ranking.
