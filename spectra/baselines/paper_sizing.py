@@ -439,7 +439,7 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
     # Reserve a fixed tranche for independent full-grid candidate verification.
     # The search budget is rounded down to whole three-corner evaluations.
     reserve = top_k * len(PVT)
-    search_budget = 3 * max(0, (ctx.sims_left() - reserve) // len(search_conds))
+    search_budget = len(search_conds) * max(0, (ctx.sims_left() - reserve) // len(search_conds))
     if search_budget > 0:
         best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
         starts = best_seed["params"] if best_seed else _midpoint(vars_)
