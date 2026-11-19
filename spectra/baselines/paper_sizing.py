@@ -125,8 +125,13 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
                                      initial_context, SYSTEM_SPECTRA_FIXED)
     refinement_done = False
     robust = bool(task.get("robust"))
-    if robust and os.environ.get("SPECTRA_PVT_STRATEGY", "fullgrid") == "staged":
+    pvt_strategy = os.environ.get("SPECTRA_PVT_STRATEGY", "fullgrid")
+    if robust and pvt_strategy == "staged":
         return _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed)
+    if robust and pvt_strategy == "hybrid":
+        return _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed)
+    if robust and os.environ.get("SPECTRA_PVT_STRATEGY", "fullgrid") == "hybrid":
+        return _run_spectra_hybrid(task, seed, ctx, vars_, build, x, llm_failed)
     # Robust tasks use the same 300 condition-evaluation budget as every other
     # strict row, but spend it on the actual 45-corner objective.  The old path
     # stopped as soon as TT passed, which made a nominally good design consume
@@ -281,6 +286,118 @@ def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
                  strategy="staged")
     final_net = ctx.best.get("netlist") or staged_best.get("netlist")
     return _finish(ctx, final_net)
+
+
+def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
+    """Use corner search for coverage, then verify several candidates on full PVT.
+
+    The strict default spends most of its 300-unit robust budget on 45-corner
+    evaluations.  This opt-in variant reserves three full-grid evaluations for
+    final selection and uses the remaining units for a reproducible three-corner
+    TPE search.  The verifier-facing incumbent is still selected only through
+    ``_update_robust_best`` on the complete PVT grid.
+    """
+    from ..sim.evaluate import PVT
+
+    search_conds = [NOMINAL, {"corner": "ss", "temp": 125, "vdd": 1.8},
+                    {"corner": "ff", "temp": -40, "vdd": 1.8}]
+    seed_candidates = []
+
+    def add_seed(ev, net, score, params):
+        if ev is not None and ev.status == "ok" and net:
+            seed_candidates.append({
+                "rank": (0 if ev.passed else 1, float(score)),
+                "score": float(score), "netlist": net, "params": dict(params),
+                "passed": bool(ev.passed),
+            })
+
+    ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
+    add_seed(ev, net, score, x)
+    ctx.log("spectra_hybrid_plan", score=score, passed=bool(ev and ev.passed), search_corners=3)
+
+    # Spend two calls on diagnosis-guided seeds, matching the staged variant.
+    revisions = 0
+    while not llm_failed and ctx.calls_left() > 1 and revisions < 2:
+        if ctx.sims_left() < len(search_conds):
+            break
+        analysis = diagnose.analyze(task, ev) if ev is not None and ev.status == "ok" else None
+        cards = retrieve_cards(task, analysis) if analysis else []
+        context = ""
+        if analysis:
+            context += "Structured diagnosis:\n" + diagnose.render_analysis(analysis)
+        if cards:
+            context += "\nKnowledge cards:\n" + render_cards(cards)
+        context += "\nCurrent parameters:\n" + json.dumps(x, sort_keys=True)
+        x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA hybrid diagnosis revision",
+                                         context, SYSTEM_SPECTRA_FIXED)
+        ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
+        add_seed(ev, net, score, x)
+        ctx.log("spectra_hybrid_revision", score=score, passed=bool(ev and ev.passed),
+                diagnosis=analysis.get("schema") if analysis else None,
+                cards=[c.get("id") for c in cards])
+        revisions += 1
+
+    # Reserve 3 * 45 units for independent full-grid candidate verification.
+    # The search budget is rounded down to whole three-corner evaluations.
+    reserve = 3 * len(PVT)
+    search_budget = 3 * max(0, (ctx.sims_left() - reserve) // len(search_conds))
+    if search_budget > 0:
+        seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
+        starts = seed["params"] if seed else _midpoint(vars_)
+        seed_candidates.extend(_corner_tpe_candidates(
+            ctx, build, vars_, seed + 313, starts, search_budget, search_conds, keep=6))
+    ctx.log("spectra_hybrid_search", budget=search_budget, candidates=len(seed_candidates),
+            reserved_fullgrid=reserve)
+
+    # Deduplicate by normalized parameter values and verify the best three
+    # corner candidates against the same full-grid objective as the verifier.
+    unique = {}
+    for candidate in sorted(seed_candidates, key=lambda c: c["rank"]):
+        key = tuple(round(float(candidate["params"].get(v.name, 0.0)), 12) for v in vars_)
+        unique.setdefault(key, candidate)
+    candidates = list(unique.values())[:3]
+    for candidate in candidates:
+        if ctx.sims_left() < len(PVT):
+            break
+        ev_full, net_full, score_full = _evaluate(ctx, build, candidate["params"], conds=PVT)
+        _update_robust_best(ctx, ev_full, net_full, score_full)
+        ctx.log("spectra_hybrid_fullgrid", score=score_full,
+                passed=bool(ev_full and ev_full.passed),
+                corner_score=candidate["score"])
+
+    final_net = ctx.best.get("netlist")
+    if final_net is None and candidates:
+        final_net = candidates[0]["netlist"]
+    return _finish(ctx, final_net)
+
+
+def _corner_tpe_candidates(ctx, build, vars_, seed, x0, budget, conds, keep=6):
+    """Return top corner-search candidates without early stopping on a proxy pass."""
+    import optuna
+
+    optuna.logging.set_verbosity(optuna.logging.WARNING)
+    budget = min(int(budget), ctx.sims_left())
+    budget -= budget % len(conds)
+    if budget <= 0 or not vars_:
+        return []
+    study = optuna.create_study(direction="minimize", sampler=optuna.samplers.TPESampler(
+        seed=seed, n_startup_trials=min(12, max(4, budget // len(conds) // 5)), multivariate=True))
+    study.enqueue_trial({v.name: min(v.hi, max(v.lo, x0[v.name])) for v in vars_})
+    candidates = []
+    while budget >= len(conds) and ctx.sims_left() >= len(conds):
+        trial = study.ask()
+        x = {v.name: trial.suggest_float(v.name, v.lo, v.hi, log=v.log) for v in vars_}
+        ev, net, score = _evaluate(ctx, build, x, conds=conds)
+        study.tell(trial, score)
+        rank = (0 if ev is not None and ev.passed else 1, float(score))
+        if ev is not None and ev.status == "ok" and net:
+            candidates.append({"rank": rank, "score": float(score), "netlist": net,
+                               "params": dict(x), "passed": bool(ev.passed)})
+        ctx.log("paper_search", algorithm="spectra_hybrid_corner_tpe", score=score,
+                passed=bool(ev and ev.passed))
+        budget -= len(conds)
+    candidates.sort(key=lambda c: c["rank"])
+    return candidates[:keep]
 
 
 def _params_from_netlist(task, vars_, staged_best):
