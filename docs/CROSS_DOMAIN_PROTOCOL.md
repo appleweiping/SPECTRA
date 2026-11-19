@@ -33,6 +33,15 @@ and no Xyce, Spectre or HSPICE executable. Its `ranking_eligible` field is
 false because no matched SPECTRA/AnaFlow performance cells are implied by a
 capability scan.
 
+The follow-up receipt `results/cross_domain_capability_receipt_v2.json` adds
+the AnalogGym checkout and records its immutable source commit. A three-PDK
+TT-only adapter run is archived in
+`results/public_suite_3pdk_tt_v2.md` and
+`results/public_suite_3pdk_tt_v2.json`. It uses 300 simulations per cell and
+seeds 0, 1 and 2 for SPECTRA and the clean-room AnaFlow adapter. The run is
+not ranking-eligible because the public configs do not expose a common PVT
+evaluator and the clean-room adapter is not the published AnaFlow code.
+
 ## Capability audit before a run
 
 Run the receipt generator on the server before scheduling a matrix. It records
