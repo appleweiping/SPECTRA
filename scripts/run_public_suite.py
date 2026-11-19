@@ -94,7 +94,7 @@ def _spectra(bench, seed: int, budget: int) -> dict[str, Any]:
     remaining = budget - evaluations
     es = cma.CMAEvolutionStrategy([0.5] * bench.dim, 0.25,
                                    {"bounds": [0, 1], "seed": seed + 1001,
-                                    "popsize": max(6, min(16, 4 + int(3 * math.log(max(2, bench.dim)))),
+                                    "popsize": max(6, min(16, 4 + int(3 * math.log(max(2, bench.dim))))),
                                     "verbose": -9})
     while evaluations < budget and not es.stop():
         points = es.ask()
