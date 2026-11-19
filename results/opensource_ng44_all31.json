@@ -1,0 +1,406 @@
+{
+  "schema": "opensource-analog-circuits-ng44-all31/v1",
+  "simulator": "ngspice-44.2",
+  "count": 32,
+  "cases": [
+    {
+      "label": "alfio_raffc",
+      "config": "circuits/alfio_raffc/config.json",
+      "dimensions": 29,
+      "metrics": {
+        "gain": -15.37084
+      },
+      "sim_success": true,
+      "elapsed": 9.809585809707642,
+      "objective": 2001.2561806666668
+    },
+    {
+      "label": "amp_nmcf",
+      "config": "circuits/amp_nmcf/config.json",
+      "dimensions": 24,
+      "metrics": {
+        "gain": 146.8572,
+        "ugf": 1945218.0,
+        "pm": -0.9789051
+      },
+      "sim_success": true,
+      "elapsed": 11.248083353042603,
+      "objective": 1.016315085
+    },
+    {
+      "label": "bjt_ce_amp",
+      "config": "circuits/bjt_ce_amp/config.json",
+      "dimensions": 5,
+      "metrics": {
+        "vout": 11.37014
+      },
+      "sim_success": true,
+      "elapsed": 0.015359640121459961,
+      "objective": 0.0
+    },
+    {
+      "label": "chargepump",
+      "config": "circuits/chargepump/config.json",
+      "dimensions": 7,
+      "metrics": {
+        "vout": 4.0
+      },
+      "sim_success": true,
+      "elapsed": 0.06050515174865723,
+      "objective": 0.0
+    },
+    {
+      "label": "fan_smc",
+      "config": "circuits/fan_smc/config.json",
+      "dimensions": 25,
+      "metrics": {
+        "gain": 69.92846,
+        "ugf": 2079152.0,
+        "pm": 80.96045
+      },
+      "sim_success": true,
+      "elapsed": 10.344640016555786,
+      "objective": 0.0
+    },
+    {
+      "label": "gh_autockt_opamp",
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "dimensions": 10,
+      "metrics": {
+        "gain": -4.00557
+      },
+      "sim_success": true,
+      "elapsed": 0.01788926124572754,
+      "objective": 2001.0667595
+    },
+    {
+      "label": "hoilee_affc",
+      "config": "circuits/hoilee_affc/config.json",
+      "dimensions": 35,
+      "metrics": {
+        "gain": 90.07545,
+        "ugf": 838366.0,
+        "pm": 8.05217
+      },
+      "sim_success": true,
+      "elapsed": 15.039063930511475,
+      "objective": 1.0274311666666667
+    },
+    {
+      "label": "ldo_1",
+      "config": "circuits/ldo_1/config.json",
+      "dimensions": 20,
+      "metrics": {
+        "vout": -5.76844,
+        "dcgain": -221.6666
+      },
+      "sim_success": true,
+      "elapsed": 8.828332901000977,
+      "objective": 2019.078545
+    },
+    {
+      "label": "ldo_2",
+      "config": "circuits/ldo_2/config.json",
+      "dimensions": 57,
+      "metrics": {
+        "vout": -8.19305,
+        "dcgain": -145.3305
+      },
+      "sim_success": true,
+      "elapsed": 22.242239236831665,
+      "objective": 2022.0193625
+    },
+    {
+      "label": "ldo_folded_cascode",
+      "config": "circuits/ldo_folded_cascode/config.json",
+      "dimensions": 23,
+      "metrics": {
+        "vout": -5.34276,
+        "dcgain": -22.19706
+      },
+      "sim_success": true,
+      "elapsed": 10.408239126205444,
+      "objective": 2013.2404465
+    },
+    {
+      "label": "ldo_simple",
+      "config": "circuits/ldo_simple/config.json",
+      "dimensions": 16,
+      "metrics": {
+        "vout": -5.38226,
+        "dcgain": 4.604528,
+        "ugf": 4464807.0
+      },
+      "sim_success": true,
+      "elapsed": 9.822539567947388,
+      "objective": 1012.6494068
+    },
+    {
+      "label": "ldo_tb",
+      "config": "circuits/ldo_tb/config.json",
+      "dimensions": 21,
+      "metrics": {
+        "vout": -5.369015,
+        "dcgain": -84.97421
+      },
+      "sim_success": true,
+      "elapsed": 13.962534666061401,
+      "objective": 2014.86238525
+    },
+    {
+      "label": "leung_dfcfc1",
+      "config": "circuits/leung_dfcfc1/config.json",
+      "dimensions": 32,
+      "metrics": {
+        "gain": 122.8072,
+        "ugf": 2208670.0,
+        "pm": -38.175
+      },
+      "sim_success": true,
+      "elapsed": 16.87494397163391,
+      "objective": 1.63625
+    },
+    {
+      "label": "leung_dfcfc2",
+      "config": "circuits/leung_dfcfc2/config.json",
+      "dimensions": 29,
+      "metrics": {
+        "gain": 108.4195,
+        "ugf": 1103100.0,
+        "pm": 57.7447
+      },
+      "sim_success": true,
+      "elapsed": 16.84241771697998,
+      "objective": 0.03758833333333331
+    },
+    {
+      "label": "leung_nmcf",
+      "config": "circuits/leung_nmcf/config.json",
+      "dimensions": 26,
+      "metrics": {
+        "gain": 96.63039,
+        "ugf": 929546.0,
+        "pm": -67.6501
+      },
+      "sim_success": true,
+      "elapsed": 15.103761196136475,
+      "objective": 2.197955666666666
+    },
+    {
+      "label": "leung_nmcnr",
+      "config": "circuits/leung_nmcnr/config.json",
+      "dimensions": 24,
+      "metrics": {
+        "gain": 122.3965,
+        "ugf": 718480.0,
+        "pm": -57.5334
+      },
+      "sim_success": true,
+      "elapsed": 17.758380651474,
+      "objective": 2.24041
+    },
+    {
+      "label": "ota_iitb",
+      "config": "circuits/ota_iitb/config.json",
+      "dimensions": 13,
+      "metrics": {
+        "gain": -10.7487
+      },
+      "sim_success": true,
+      "elapsed": 0.014800310134887695,
+      "objective": 2001.2687175
+    },
+    {
+      "label": "peng_acbc",
+      "config": "circuits/peng_acbc/config.json",
+      "dimensions": 35,
+      "metrics": {
+        "gain": 94.16164,
+        "ugf": 688006.0,
+        "pm": 62.0208
+      },
+      "sim_success": true,
+      "elapsed": 15.40376329421997,
+      "objective": 0.311994
+    },
+    {
+      "label": "peng_iac",
+      "config": "circuits/peng_iac/config.json",
+      "dimensions": 33,
+      "metrics": {
+        "gain": 113.9545,
+        "ugf": 1076140.0,
+        "pm": 1.91066
+      },
+      "sim_success": true,
+      "elapsed": 11.733547925949097,
+      "objective": 0.9681556666666666
+    },
+    {
+      "label": "peng_tcfc",
+      "config": "circuits/peng_tcfc/config.json",
+      "dimensions": 26,
+      "metrics": {
+        "gain": 117.6412,
+        "ugf": 2466360.0,
+        "pm": -19.176
+      },
+      "sim_success": true,
+      "elapsed": 16.070667028427124,
+      "objective": 1.3196
+    },
+    {
+      "label": "ptm180nm_opamp",
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "dimensions": 19,
+      "metrics": {
+        "gain": 51.27259,
+        "ugf": 29657341.04153038,
+        "pm": 180.75884438555795
+      },
+      "sim_success": true,
+      "elapsed": 0.01122426986694336,
+      "objective": 0.1454568333333333
+    },
+    {
+      "label": "ptm180nm_opamp_multi_tb",
+      "config": "circuits/ptm180nm_opamp_multi_tb/config.json",
+      "dimensions": 19,
+      "metrics": {
+        "gain_db": 51.27259,
+        "gbw_hz": 29657340.0,
+        "pm_deg": 43.47858,
+        "psrr_db": 24.84275,
+        "cmrr_db": 72.56621,
+        "power_w": 0.0002336544,
+        "vos_mv": 2.1651015077618037
+      },
+      "sim_success": true,
+      "elapsed": 0.025053977966308594,
+      "objective": 0.5576960000000001
+    },
+    {
+      "label": "qu2017_azc",
+      "config": "circuits/qu2017_azc/config.json",
+      "dimensions": 40,
+      "metrics": {
+        "gain": 97.93844,
+        "ugf": 2024770.0,
+        "pm": 61.9407
+      },
+      "sim_success": true,
+      "elapsed": 18.806148290634155,
+      "objective": 0.0
+    },
+    {
+      "label": "ramos_pfc",
+      "config": "circuits/ramos_pfc/config.json",
+      "dimensions": 26,
+      "metrics": {
+        "gain": 135.2971,
+        "ugf": 1808660.0,
+        "pm": -24.0777
+      },
+      "sim_success": true,
+      "elapsed": 17.75161647796631,
+      "objective": 1.401295
+    },
+    {
+      "label": "sau_cfcc",
+      "config": "circuits/sau_cfcc/config.json",
+      "dimensions": 31,
+      "metrics": {
+        "gain": 99.64227,
+        "ugf": 5845760.0,
+        "pm": 12.6839
+      },
+      "sim_success": true,
+      "elapsed": 11.000251770019531,
+      "objective": 0.7886016666666666
+    },
+    {
+      "label": "sky130_bgr",
+      "config": "circuits/sky130_bgr/config.json",
+      "dimensions": 15,
+      "metrics": {
+        "vref": 0.7383172
+      },
+      "sim_success": true,
+      "elapsed": 6.62918758392334,
+      "objective": 0.0
+    },
+    {
+      "label": "sky130_ldo",
+      "config": "circuits/sky130_ldo/config.json",
+      "dimensions": 4,
+      "metrics": {
+        "vout": 2.0
+      },
+      "sim_success": true,
+      "elapsed": 7.302812576293945,
+      "objective": 0.3333333333333333
+    },
+    {
+      "label": "sky130_lp_opamp",
+      "config": "circuits/sky130_lp_opamp/config.json",
+      "dimensions": 6,
+      "metrics": {
+        "gain": 72.76753,
+        "ugf": 843977807.1855339,
+        "pm": 179.85514974070907
+      },
+      "sim_success": true,
+      "elapsed": 7.278099298477173,
+      "objective": 0.0
+    },
+    {
+      "label": "sky130_por",
+      "config": "circuits/sky130_por/config.json",
+      "dimensions": 4,
+      "metrics": {
+        "trip_point": 1.0
+      },
+      "sim_success": true,
+      "elapsed": 7.562487363815308,
+      "objective": 0.0
+    },
+    {
+      "label": "sky130_vco",
+      "config": "circuits/sky130_vco/config.json",
+      "dimensions": 7,
+      "metrics": {
+        "ymax": 1.893425,
+        "ymin": 0.02789856
+      },
+      "sim_success": true,
+      "elapsed": 7.296989440917969,
+      "objective": 0.0
+    },
+    {
+      "label": "song_dacfc",
+      "config": "circuits/song_dacfc/config.json",
+      "dimensions": 35,
+      "metrics": {
+        "gain": 90.26387,
+        "ugf": 1160510.0,
+        "pm": 89.0149
+      },
+      "sim_success": true,
+      "elapsed": 15.294839859008789,
+      "objective": 0.0
+    },
+    {
+      "label": "yan_az",
+      "config": "circuits/yan_az/config.json",
+      "dimensions": 38,
+      "metrics": {
+        "gain": 149.6349,
+        "ugf": 2797650.0,
+        "pm": -96.3583
+      },
+      "sim_success": true,
+      "elapsed": 21.29327917098999,
+      "objective": 2.6059716666666666
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "opensource-analog-circuits-xyce-smoke/v1",
+  "simulator": "Xyce-7.10",
+  "cases": [
+    {
+      "label": "ptm180",
+      "success": false,
+      "metrics": {},
+      "elapsed": 0.024935007095336914
+    },
+    {
+      "label": "sky130",
+      "success": true,
+      "metrics": {},
+      "elapsed": 1.0296175479888916
+    },
+    {
+      "label": "bjt",
+      "success": true,
+      "metrics": {},
+      "elapsed": 0.03235650062561035
+    }
+  ]
+}

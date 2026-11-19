@@ -1,0 +1,50 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 1,
+  "pvt_mode": "source",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "C1": 8.118314520104854e-08,
+        "R1": 111300.37871702824,
+        "R2": 14504.636963259352,
+        "R3": 6441.596127196337,
+        "R4": 1448.649447137244
+      },
+      "pdk": "bjt",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "vout": 14.00306
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.0,
+        "median_normalized_violation": 0.0,
+        "pvt_success": true
+      },
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/bjt_ce_amp/circuit.cir",
+      "task": "bjt_ce_amp",
+      "track_id": "opensource_31_v2",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 10.990037824958563
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}

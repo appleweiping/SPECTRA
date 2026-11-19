@@ -41,7 +41,7 @@
       "corners": "source-declared corners, mapped only where metric semantics match",
       "seeds": [0, 1, 2],
       "budget": {"simulations": 300, "llm_calls": 12},
-      "status": "planned"
+      "status": "server_matched_rerun_in_progress; default-capability-32-of-32-receipt-complete"
     },
     {
       "id": "ampicbench_public",
@@ -55,7 +55,7 @@
       "corners": "source-declared corners, mapped only where metric semantics match",
       "seeds": [0, 1, 2],
       "budget": {"simulations": 300, "llm_calls": 12},
-      "status": "planned_source_audit_complete"
+      "status": "server-pvt-capability-rerun-in_progress; source-audit-complete"
     },
     {
       "id": "sganalog_tapeout",

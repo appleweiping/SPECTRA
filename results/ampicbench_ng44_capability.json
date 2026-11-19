@@ -1,0 +1,174 @@
+{
+  "schema": "ampicbench-ng44-capability/v2",
+  "simulator": "ngspice-44.2",
+  "count": 9,
+  "results": [
+    {
+      "deck": "Bias_Circuits/sim_Bias_gen/sim_Bias_gen.cir",
+      "returncode": 0,
+      "elapsed": 7.527458906173706,
+      "fatal": false,
+      "metrics_lines": [],
+      "error_tail": [
+        "      vdsat               0.11151             0.0925779",
+        "         gm           0.000238606           0.000332888",
+        "        gds           2.37945e-05           5.67865e-06",
+        "",
+        "Note: Simulation executed from .control section ",
+        "",
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        ""
+      ]
+    },
+    {
+      "deck": "Bias_Circuits/sim_Cascode_bias/sim_Cascode_bias.cir",
+      "returncode": 0,
+      "elapsed": 7.768965244293213,
+      "fatal": false,
+      "metrics_lines": [],
+      "error_tail": [
+        "",
+        "Using SPARSE 1.3 as Direct Linear Solver",
+        " Reference value :  1.11600e+00",
+        "No. of Data Rows : 51",
+        "Note: Simulation executed from .control section ",
+        "",
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        ""
+      ]
+    },
+    {
+      "deck": "Opamps/sim_Diffamp1/sim_Diffamp1.cir",
+      "returncode": 0,
+      "elapsed": 7.470043420791626,
+      "fatal": false,
+      "metrics_lines": [
+        "vout_gain_db        =  2.957614e+01"
+      ],
+      "error_tail": [
+        "No. of Data Rows : 401",
+        "vout_gain_db        =  2.957614e+01",
+        "vout_ugf            =  4.910752e+07",
+        "vout_ph_ugf         =  -9.305374e+01",
+        "Note: Simulation executed from .control section ",
+        "",
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        ""
+      ]
+    },
+    {
+      "deck": "Opamps/sim_FC_Amp/sim_FC_Amp.cir",
+      "returncode": 0,
+      "elapsed": 8.387181282043457,
+      "fatal": false,
+      "metrics_lines": [
+        "vout_gain_db        =  4.339136e+01"
+      ],
+      "error_tail": [
+        "Note: Simulation executed from .control section ",
+        "",
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        "",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed"
+      ]
+    },
+    {
+      "deck": "Opamps/sim_Opamp1_stb/sim_Opamp1_stb.cir",
+      "returncode": 0,
+      "elapsed": 7.159517765045166,
+      "fatal": false,
+      "metrics_lines": [
+        "dcgain_db           =  6.057448e+01"
+      ],
+      "error_tail": [
+        "pm_raw              =  -1.107933e+02",
+        "dcgain_db           =  6.057448e+01",
+        "f180                =  3.960095e+08",
+        "gm_db               =  -2.007197e+01",
+        "Note: Simulation executed from .control section ",
+        "",
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        ""
+      ]
+    },
+    {
+      "deck": "Opamps/sim_Opamp_2stg_Diff_ClassA_STB/sim_Opamp_2stg_Diff_ClassA_STB.cir",
+      "returncode": 0,
+      "elapsed": 6.429581642150879,
+      "fatal": false,
+      "metrics_lines": [
+        "dcgain_db           =  6.061002e+01"
+      ],
+      "error_tail": [
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        "",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed"
+      ]
+    },
+    {
+      "deck": "Opamps/sim_Opamp_2stg_FC_ClassA_STB/sim_Opamp_2stg_FC_ClassA_STB.cir",
+      "returncode": 0,
+      "elapsed": 7.153818845748901,
+      "fatal": false,
+      "metrics_lines": [
+        "dcgain_db           =  7.394394e+01"
+      ],
+      "error_tail": [
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        "",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed"
+      ]
+    },
+    {
+      "deck": "Opamps/sim_Opamp_2stg_Telescopic_ClassA_STB/sim_Opamp_2stg_Telescopic_ClassA_STB.cir",
+      "returncode": 0,
+      "elapsed": 6.418116092681885,
+      "fatal": false,
+      "metrics_lines": [
+        "dcgain_db           =  8.190821e+01"
+      ],
+      "error_tail": [
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        "",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed"
+      ]
+    },
+    {
+      "deck": "Opamps/sim_Telescopic_Amp/sim_Telescopic_Amp.cir",
+      "returncode": 0,
+      "elapsed": 7.439687967300415,
+      "fatal": false,
+      "metrics_lines": [
+        "vout_gain_db        =  5.132808e+01"
+      ],
+      "error_tail": [
+        "Note: Simulation executed from .control section ",
+        "",
+        "Warning: m=xx on .subckt line will override multiplier m hierarchy!",
+        "",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed",
+        "Note: Starting dynamic gmin stepping",
+        "Note: Dynamic gmin stepping completed"
+      ]
+    }
+  ]
+}

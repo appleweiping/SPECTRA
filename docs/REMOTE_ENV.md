@@ -75,3 +75,12 @@ Leung_NMCF_Pin_3 on ngspice-44.2, with three seeds, 300 nominal simulations, 12 
 per method-topology cell. The ATLAS GF180 track covers three seeds for SPECTRA and the clean-room AnaFlow adapter
 under ngspice-44.2 with 300 simulations, 12 calls and all 17 conditions present in the shipped public YAML. The
 strict shard receipts retain every condition and reject non-finite violations.
+
+The public-source expansion is executed only on this server. The immutable source checkouts are
+`jialinlu/opensource-analog-circuits` and `AMPICLab/AMPICBench`. The former has a 32-config ngspice-44.2
+capability receipt, and the latter has 9 source decks with per-corner replay receipts. PTM180 and embedded-BJT
+source configs use the strict 300-simulation/12-call adapter with seeds 0/1/2, but their source metric contracts
+are TT-only and therefore remain outside PVT ranking. The SKY130 low-power op-amp matched PVT shards are running
+with the same budget and the canonical 45-condition verifier. Xyce native execution of the public-source decks is
+kept as a diagnostic because the source decks need a simulator-specific analysis translator and parser before a
+fair ranking can be claimed.

@@ -1,0 +1,107 @@
+{
+  "receipts": [
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 9.40121307146425,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 10.980435518858334,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "file": "public_v2_bjt_merged.json",
+      "pvt_conditions": 1,
+      "ranking_eligible": false,
+      "track": "bjt_ce_amp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.011506296296296297,
+          "mean_tt_violation": 0.011506296296296297,
+          "mean_wall_seconds": 11.32131552339221,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 0.6666666666666666
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.01786038888888889,
+          "mean_tt_violation": 0.01786038888888889,
+          "mean_wall_seconds": 12.764555956237018,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 0.6666666666666666
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "file": "public_v2_ptm180_merged.json",
+      "pvt_conditions": 1,
+      "ranking_eligible": false,
+      "track": "ptm180nm_opamp"
+    }
+  ],
+  "rows": [
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 9.40121307146425,
+      "method": "anaflow_cleanroom",
+      "pvt_success": 1.0,
+      "receipt": "public_v2_bjt_merged.json",
+      "tier": "TT-only capability",
+      "track": "bjt_ce_amp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 10.980435518858334,
+      "method": "spectra",
+      "pvt_success": 1.0,
+      "receipt": "public_v2_bjt_merged.json",
+      "tier": "TT-only capability",
+      "track": "bjt_ce_amp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.011506296296296297,
+      "mean_tt_violation": 0.011506296296296297,
+      "mean_wall_seconds": 11.32131552339221,
+      "method": "anaflow_cleanroom",
+      "pvt_success": 0.6666666666666666,
+      "receipt": "public_v2_ptm180_merged.json",
+      "tier": "TT-only capability",
+      "track": "ptm180nm_opamp",
+      "tt_success": 0.6666666666666666
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.01786038888888889,
+      "mean_tt_violation": 0.01786038888888889,
+      "mean_wall_seconds": 12.764555956237018,
+      "method": "spectra",
+      "pvt_success": 0.6666666666666666,
+      "receipt": "public_v2_ptm180_merged.json",
+      "tier": "TT-only capability",
+      "track": "ptm180nm_opamp",
+      "tt_success": 0.6666666666666666
+    }
+  ],
+  "schema": "spectra-public-v2-summary/v1"
+}
