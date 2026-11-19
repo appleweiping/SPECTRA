@@ -17,9 +17,10 @@ def _tasks(path: Path):
     return {json.loads(line)["id"]: json.loads(line) for line in path.read_text().splitlines() if line.strip()}
 
 
-def _records(root: Path, exp: str):
+def _records(root: Path, exp: str, method: str | None = None):
     out = []
-    for path in (root / "results" / "raw" / exp).glob("*/*/s*.json"):
+    directories = (root / "results" / "raw" / exp).glob(f"{method}*/*/s*.json") if method else (root / "results" / "raw" / exp).glob("*/*/s*.json")
+    for path in directories:
         try:
             record = json.loads(path.read_text())
         except (OSError, json.JSONDecodeError):
@@ -43,9 +44,9 @@ def _metric(record, name):
     return float(value) if isinstance(value, (int, float)) else None
 
 
-def aggregate(exp: str, subset: str, root: Path):
+def aggregate(exp: str, subset: str, root: Path, method: str | None = None):
     tasks = _tasks(root / subset)
-    records = [r for r in _records(root, exp) if r.get("task") in tasks]
+    records = [r for r in _records(root, exp, method) if r.get("task") in tasks]
     groups = defaultdict(list)
     for record in records:
         groups[record.get("task")].append(record)
@@ -88,9 +89,10 @@ def main():
     parser.add_argument("--exp", required=True)
     parser.add_argument("--subset", default="data/bench/paper_sizing_tasks.jsonl")
     parser.add_argument("--root", default=".")
+    parser.add_argument("--method", default=None)
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
-    result = aggregate(args.exp, args.subset, Path(args.root).resolve())
+    result = aggregate(args.exp, args.subset, Path(args.root).resolve(), args.method)
     Path(args.out).write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({k: v for k, v in result.items() if k != "rows"}, indent=2))
 
