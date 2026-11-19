@@ -67,3 +67,10 @@ receipts under `results/cross_domain_capability_receipt_v2.*`. The AnalogGym Hoi
 45-condition verifier under ngspice. The ATLAS GF180 capability receipt is `results/atlas_gf180_ngspice44_capability.*`.
 It records a successful ngspice-44.2 execution over all 18 shipped GF180 corner netlists at budget 50 and zero
 feasible designs, so it is retained as capability evidence and excluded from matched ranking.
+
+The completed matched public PVT additions are archived in `results/analoggym_cross_topology_summary.md` and
+`results/atlas_gf180_matched_summary.md`. AnalogGym covers HoiLee_AFFC_Pin_3 on ngspice-44.2 and Xyce-7.10 plus
+Leung_NMCF_Pin_3 on ngspice-44.2, with three seeds, 300 nominal simulations, 12 calls and 45 verifier conditions
+per method-topology cell. The ATLAS GF180 track covers three seeds for SPECTRA and the clean-room AnaFlow adapter
+under ngspice-44.2 with 300 simulations, 12 calls and all 17 conditions present in the shipped public YAML. The
+strict shard receipts retain every condition and reject non-finite violations.

@@ -1,0 +1,279 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 17,
+  "ranking_eligible": true,
+  "rows": [
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "cc": 2.166418227726608e-12,
+        "wn1": 5.577074018506041e-05,
+        "wn3": 5.1863249375299776e-05,
+        "wn4": 5.2433727545069245e-05,
+        "wn5": 9.3671795586361e-05,
+        "wp1": 1.0348679226292969e-05,
+        "wp3": 7.770584347602513e-05
+      },
+      "pdk": "gf180mcu",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt",
+            "metrics": {
+              "gain_min": 523.1799999999773,
+              "ibias_max": 0.00036532172,
+              "phm_min": 40.22587735398088,
+              "t_settle_max": 3.044720000000003e-06,
+              "ugbw_min": 20245117.92713839,
+              "vswing_min": 0.6904086
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.05492811846116424,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ff_3.0_m40",
+            "metrics": {
+              "gain_min": 503.2659999999898,
+              "ibias_max": 0.00025244033,
+              "phm_min": 18.65191769050864,
+              "t_settle_max": 2.0917999999999924e-06,
+              "ugbw_min": 17406506.44220647,
+              "vswing_min": 0.49294165
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.13646823050797766,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ss_3.0_m40",
+            "metrics": {
+              "gain_min": 12.387699999999935,
+              "ibias_max": 0.00018905389,
+              "phm_min": 68.98626324187894,
+              "t_settle_max": 3.429199999999984e-06,
+              "ugbw_min": 3508571.565366081,
+              "vswing_min": 0.003960697000000001
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.34655306523306045,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_fs_3.0_m40",
+            "metrics": {
+              "gain_min": 516.2850000000094,
+              "ibias_max": 0.00028741867,
+              "phm_min": 31.080960216873734,
+              "t_settle_max": 3.890940000000003e-06,
+              "ugbw_min": 20918872.327936437,
+              "vswing_min": 1.01193818
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.08033066606423962,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_sf_3.0_m40",
+            "metrics": {
+              "gain_min": 613.0889999999984,
+              "ibias_max": 0.00020879767,
+              "phm_min": 30.95506297808933,
+              "t_settle_max": 2.981929999999988e-06,
+              "ugbw_min": 12271264.455179451,
+              "vswing_min": 0.25602431000000003
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.1524157918232564,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ff_3.6_m40",
+            "metrics": {
+              "gain_min": 38.0800000000291,
+              "ibias_max": 0.0005511717,
+              "phm_min": 67.45931065460272,
+              "t_settle_max": 2.235039999999984e-06,
+              "ugbw_min": 15999400.522453811,
+              "vswing_min": 0.01471990000000023
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.22639612342397983,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ss_3.6_m40",
+            "metrics": {
+              "gain_min": 610.8799999999787,
+              "ibias_max": 0.00037188675,
+              "phm_min": 44.16011774931286,
+              "t_settle_max": 3.8242099999999835e-06,
+              "ugbw_min": 20426318.895714518,
+              "vswing_min": 0.6265744
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.04399967291857539,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_fs_3.6_m40",
+            "metrics": {
+              "gain_min": 540.0499999999905,
+              "ibias_max": 0.00033312035,
+              "phm_min": 28.57547202367229,
+              "t_settle_max": 2.293250000000004e-06,
+              "ugbw_min": 24732939.528865743,
+              "vswing_min": 1.0483503
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.08729035548979919,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_sf_3.6_m40",
+            "metrics": {
+              "gain_min": 422.51000000001926,
+              "ibias_max": 0.0004122057,
+              "phm_min": 56.900304904530586,
+              "t_settle_max": 2.934219999999998e-06,
+              "ugbw_min": 17310715.121257223,
+              "vswing_min": 0.11186810000000014
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.062376288143604824,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ff_3.0_125",
+            "metrics": {
+              "gain_min": 373.6899999999811,
+              "ibias_max": 0.00037356781,
+              "phm_min": 42.35259886387652,
+              "t_settle_max": 2.645620000000002e-06,
+              "ugbw_min": 17453299.336149637,
+              "vswing_min": 0.2556881999999998
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.07762836424354048,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ss_3.0_125",
+            "metrics": {
+              "gain_min": 292.2299999999815,
+              "ibias_max": 0.00031358449,
+              "phm_min": 54.54507352491859,
+              "t_settle_max": 3.4242399999999894e-06,
+              "ugbw_min": 9934662.871747697,
+              "vswing_min": 0.02751059999999983
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.1487619496106723,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_fs_3.0_125",
+            "metrics": {
+              "gain_min": 6.869999999992142,
+              "ibias_max": 0.00037404184,
+              "phm_min": 87.3563733573578,
+              "t_settle_max": 3.1233400000000005e-06,
+              "ugbw_min": 3986549.185234121,
+              "vswing_min": 0.010451699999999953
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.34455347345638665,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_sf_3.0_125",
+            "metrics": {
+              "gain_min": 561.8600000000015,
+              "ibias_max": 0.00027927426,
+              "phm_min": 33.34695170304434,
+              "t_settle_max": 3.6599199999999966e-06,
+              "ugbw_min": 14721901.422036462,
+              "vswing_min": 1.0900383
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.1180204000856841,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ff_3.6_125",
+            "metrics": {
+              "gain_min": 454.0900000000058,
+              "ibias_max": 0.00036534601,
+              "phm_min": 32.15670680814142,
+              "t_settle_max": 2.6155099999999962e-06,
+              "ugbw_min": 18893914.925780963,
+              "vswing_min": 0.8871642000000002
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.08655985670698803,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_ss_3.6_125",
+            "metrics": {
+              "gain_min": 8.449999999982062,
+              "ibias_max": 0.00036646783,
+              "phm_min": 86.31043592244465,
+              "t_settle_max": 2.5817999999999826e-06,
+              "ugbw_min": 3672403.9975238345,
+              "vswing_min": 0.01086929999999997
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.3462239722428669,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_fs_3.6_125",
+            "metrics": {
+              "gain_min": 34.48999999999804,
+              "ibias_max": 0.00043927997,
+              "phm_min": 62.42900726343842,
+              "t_settle_max": 2.6169400000000014e-06,
+              "ugbw_min": 10839355.043767482,
+              "vswing_min": 0.01862319999999995
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.2707403968574943,
+            "pass": false
+          },
+          {
+            "condition": "two_stage_opamp_cont_gf180_tran_sf_3.6_125",
+            "metrics": {
+              "gain_min": 6.070000000013549,
+              "ibias_max": 0.00036481199,
+              "phm_min": 92.22539450910338,
+              "t_settle_max": 6.823680000000006e-06,
+              "ugbw_min": 3061592.3116816725,
+              "vswing_min": 0.008842399999999806
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.35297424579375636,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 17,
+        "mean_normalized_violation": 0.17271888065076743,
+        "median_normalized_violation": 0.13646823050797766,
+        "pvt_success": false
+      },
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "ATLAS public GF180 YAML and shipped corner netlists",
+      "task": "two_stage_opamp_gf180",
+      "tt_pass": false,
+      "tt_violation": 0.058046383717162676,
+      "wall_seconds": 56.55479735787958
+    }
+  ],
+  "schema": "spectra-atlas-gf180-matched/v1"
+}
