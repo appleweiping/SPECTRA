@@ -100,7 +100,7 @@ def parse_metrics(log_text: str, config: dict[str, Any]) -> dict[str, float]:
     metrics: dict[str, float] = {}
     for line in log_text.splitlines():
         for name, pattern in patterns.items():
-            match = re.search(pattern, line)
+            match = re.search(pattern, line, flags=re.IGNORECASE)
             if match:
                 try:
                     metrics[name] = float(match.group(1))
