@@ -127,7 +127,18 @@ def run_netlist(simulator: str, netlist: Path, cwd: Path, timeout: int = 180) ->
     try:
         proc = subprocess.run([simulator, "-b", str(netlist)], cwd=str(cwd), capture_output=True,
                               text=True, timeout=timeout)
-        return {}, proc.returncode, time.perf_counter() - started, proc.stdout + "\n" + proc.stderr
+        output = proc.stdout + "\n" + proc.stderr
+        # Xyce writes .measure results beside the input deck instead of stdout.
+        # Include those files in the same parser stream while preserving the
+        # original simulator log for auditability.
+        for suffix in (".mt0", ".prn"):
+            artifact = Path(f"{netlist}{suffix}")
+            if artifact.exists():
+                try:
+                    output += "\n" + artifact.read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    pass
+        return {}, proc.returncode, time.perf_counter() - started, output
     except (OSError, subprocess.SubprocessError) as exc:
         return {}, None, time.perf_counter() - started, f"{type(exc).__name__}: {exc}"
 
