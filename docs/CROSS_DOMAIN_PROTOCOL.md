@@ -42,6 +42,11 @@ seeds 0, 1 and 2 for SPECTRA and the clean-room AnaFlow adapter. The run is
 not ranking-eligible because the public configs do not expose a common PVT
 evaluator and the clean-room adapter is not the published AnaFlow code.
 
+`results/analoggym_amp_tt_smoke.md` records a separate AnalogGym SKY130
+testbench smoke with immutable source, PDK and simulator hashes. It verifies
+the public netlist can execute under ngspice-42, while explicitly excluding
+sizing, PVT and ranking claims.
+
 ## Capability audit before a run
 
 Run the receipt generator on the server before scheduling a matrix. It records
