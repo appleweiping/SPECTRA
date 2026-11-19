@@ -439,7 +439,22 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
     # Reserve a fixed tranche for independent full-grid candidate verification.
     # The search budget is rounded down to whole three-corner evaluations.
     reserve = top_k * len(PVT)
-    if corner_mode == "union":
+    if corner_mode == "skew":
+        lowv_conds = [NOMINAL, {"corner": "ss", "temp": -40, "vdd": 1.62},
+                      {"corner": "sf", "temp": -40, "vdd": 1.62}]
+        remaining = max(0, ctx.sims_left() - reserve)
+        lowv_budget = min(12, remaining)
+        nominal_budget = 3 * max(0, (remaining - lowv_budget) // 3)
+        search_budget = nominal_budget + lowv_budget
+        if nominal_budget > 0:
+            best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
+            starts = best_seed["params"] if best_seed else _midpoint(vars_)
+            seed_candidates.extend(_corner_tpe_candidates(
+                ctx, build, vars_, seed + 313, starts, nominal_budget, search_conds, keep=6))
+        if lowv_budget >= len(lowv_conds):
+            seed_candidates.extend(_corner_tpe_candidates(
+                ctx, build, vars_, seed + 619, starts, lowv_budget, lowv_conds, keep=6))
+    elif corner_mode == "union":
         lowv_conds = [NOMINAL, {"corner": "ss", "temp": -40, "vdd": 1.62},
                       {"corner": "sf", "temp": -40, "vdd": 1.62}]
         per_budget = 3 * max(0, (ctx.sims_left() - reserve) // 6)
