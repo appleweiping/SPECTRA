@@ -340,8 +340,8 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
     reserve = 3 * len(PVT)
     search_budget = 3 * max(0, (ctx.sims_left() - reserve) // len(search_conds))
     if search_budget > 0:
-        seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
-        starts = seed["params"] if seed else _midpoint(vars_)
+        best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
+        starts = best_seed["params"] if best_seed else _midpoint(vars_)
         seed_candidates.extend(_corner_tpe_candidates(
             ctx, build, vars_, seed + 313, starts, search_budget, search_conds, keep=6))
     ctx.log("spectra_hybrid_search", budget=search_budget, candidates=len(seed_candidates),
