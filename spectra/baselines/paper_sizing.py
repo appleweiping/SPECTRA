@@ -128,6 +128,8 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
     pvt_strategy = os.environ.get("SPECTRA_PVT_STRATEGY", "fullgrid")
     if robust and pvt_strategy == "staged":
         return _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed)
+    if robust and pvt_strategy == "racing":
+        return _run_spectra_racing(task, model, seed, ctx, vars_, build, x, llm_failed)
     if robust and pvt_strategy == "hybrid":
         return _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed)
     # Robust tasks use the same 300 condition-evaluation budget as every other
@@ -284,6 +286,94 @@ def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
                  strategy="staged")
     final_net = ctx.best.get("netlist") or staged_best.get("netlist")
     return _finish(ctx, final_net)
+
+
+def _run_spectra_racing(task, model, seed, ctx, vars_, build, x, llm_failed):
+    """Screen many candidates on three corners, then verify the best on all PVT corners."""
+    from ..sim.evaluate import PVT
+    search_conds = [NOMINAL, {"corner": "ss", "temp": 125, "vdd": 1.8},
+                    {"corner": "ff", "temp": -40, "vdd": 1.8}]
+    pool_target = max(8, min(48, int(os.environ.get("SPECTRA_PVT_POOL", "30"))))
+    top_k = max(1, min(6, int(os.environ.get("SPECTRA_PVT_TOPK", "4"))))
+    screened = []
+    ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
+    if ev is not None and ev.status == "ok" and net:
+        screened.append((score, dict(x), net))
+    ctx.log("spectra_racing_plan", score=score, screened=len(screened),
+            search_corners=len(search_conds), pool_target=pool_target, top_k=top_k)
+    revisions = 0
+    while not llm_failed and ctx.calls_left() > 1 and revisions < 2 and ctx.sims_left() >= len(search_conds):
+        analysis = diagnose.analyze(task, ev) if ev is not None and ev.status == "ok" else None
+        cards = retrieve_cards(task, analysis) if analysis else []
+        context = ""
+        if analysis:
+            context += "Structured diagnosis:\n" + diagnose.render_analysis(analysis)
+        if cards:
+            context += "\nKnowledge cards:\n" + render_cards(cards)
+        context += "\nCurrent parameters:\n" + json.dumps(x, sort_keys=True)
+        x, llm_failed = _safe_ask_params(ctx, task, vars_, "SPECTRA racing diagnosis revision",
+                                          context, SYSTEM_SPECTRA_FIXED)
+        ev, net, score = _evaluate(ctx, build, x, conds=search_conds)
+        if ev is not None and ev.status == "ok" and net:
+            screened.append((score, dict(x), net))
+        ctx.log("spectra_racing_revision", score=score, screened=len(screened),
+                diagnosis=analysis.get("schema") if analysis else None,
+                cards=[c.get("id") for c in cards])
+        revisions += 1
+    remaining = max(0, ctx.sims_left() // len(search_conds))
+    screened.extend(_screen_cmaes(ctx, build, vars_, seed + 197, x, search_conds,
+                                  min(pool_target, remaining)))
+    screened.sort(key=lambda item: float(item[0]))
+    unique, seen = [], set()
+    for item in screened:
+        key = tuple(round(float(item[1].get(v.name, 0.0)), 12) for v in vars_)
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    candidates = unique[:top_k]
+    for screened_score, params, _ in candidates[:ctx.sims_left() // len(PVT)]:
+        ev_full, net_full, score_full = _evaluate(ctx, build, params, conds=PVT)
+        _update_robust_best(ctx, ev_full, net_full, score_full)
+        ctx.log("spectra_racing_fullgrid", score=score_full,
+                passed=bool(ev_full and ev_full.passed), screened_score=float(screened_score),
+                candidates=len(candidates))
+        if ev_full is not None and ev_full.passed:
+            return _finish(ctx, ctx.best.get("netlist"))
+    if not ctx.best.get("netlist") and screened:
+        ctx.best = {"score": float("inf"), "netlist": screened[0][2], "passed": False,
+                    "robust_rank": (1, float("inf")), "robust_tt_pass": False}
+    return _finish(ctx, ctx.best.get("netlist"))
+
+
+def _screen_cmaes(ctx, build, vars_, seed, x0, conds, budget):
+    """Return screened candidates without mutating the robust incumbent."""
+    import cma
+    if budget <= 0 or not vars_:
+        return []
+    u0 = [v.to_unit(float(x0.get(v.name, _midpoint([v])[v.name]))) for v in vars_]
+    popsize = max(4, min(8, budget))
+    es = cma.CMAEvolutionStrategy(u0, 0.25, {"bounds": [0, 1], "seed": seed,
+                                               "verbose": -9, "popsize": popsize})
+    out = []
+    while len(out) < budget and ctx.sims_left() >= len(conds) and not es.stop():
+        solutions = es.ask()
+        take = min(len(solutions), budget - len(out), ctx.sims_left() // len(conds))
+        if take <= 0:
+            break
+        scores = []
+        for unit in solutions[:take]:
+            params = {v.name: v.from_unit(float(u)) for v, u in zip(vars_, unit)}
+            ev, net, score = _evaluate(ctx, build, params, conds=conds)
+            scores.append(score)
+            if ev is not None and ev.status == "ok" and net:
+                out.append((score, params, net))
+            ctx.log("paper_search", algorithm="spectra_pvt_racing_screen", score=score,
+                    passed=bool(ev and ev.passed))
+        if len(scores) >= int(getattr(getattr(es, "sp", None), "mu", 3)):
+            es.tell(solutions[:len(scores)], scores)
+        else:
+            break
+    return out
 
 
 def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
