@@ -31,4 +31,4 @@ The legacy E1/EXT7g direct, Gen+TPE, SPECTRA-min, optimizer-control and template
 
 ## Current evidence
 
-The three-seed aggregate is in `results/paper_sizing_multiseed.json` and `results/paper_sizing_multiseed.md`. SPECTRA has TT success 0.806 and PVT success 0.194. AnaFlow has TT success 0.870 and PVT success 0.306. The staged SPECTRA sensitivity has the lowest reported PVT violation in its separate sensitivity track, but it does not lead TT or PVT success. These values support a scoped fixed-topology comparison and do not establish whole-domain SOTA.
+The three-seed aggregate is in `results/paper_sizing_multiseed.json` and `results/paper_sizing_multiseed.md`. The frozen full-grid SPECTRA row has TT success 0.806 and PVT success 0.194. AnaFlow has TT success 0.870 and PVT success 0.306. The matched hybrid sensitivity improves SPECTRA to TT 0.889 and PVT 0.306, tying AnaFlow on PVT, while racing lowers PVT violation without increasing PVT success. The complete 92-task expansion reports SPECTRA TT 0.761 and PVT 0.123 versus AnaFlow TT 0.801 and PVT 0.228. These values support a scoped fixed-topology comparison and do not establish whole-domain SOTA.
