@@ -28,10 +28,23 @@ def parse_params(path: Path):
         if name not in defaults:
             names.append(name)
         try:
-            defaults[name] = float(raw.rstrip("unp"))
+            defaults[name] = parse_spice_number(raw)
         except ValueError:
             defaults[name] = raw
     return names, defaults
+
+
+def parse_spice_number(raw: str) -> float:
+    """Parse the engineering suffixes used by AnalogGym parameter files."""
+
+    match = re.fullmatch(r"([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)([unpnumkKMG]?)", raw)
+    if not match:
+        raise ValueError(raw)
+    multipliers = {
+        "": 1.0, "n": 1e-9, "p": 1e-12, "u": 1e-6,
+        "m": 1e-3, "k": 1e3, "K": 1e3, "M": 1e6, "G": 1e9,
+    }
+    return float(match.group(1)) * multipliers[match.group(2)]
 
 
 def bounds(names):
@@ -90,9 +103,11 @@ def metrics(log):
 
 
 def run(template, topology, corner, temperature, supply, simulator, work):
-    netlist = prepare(template, topology, corner, temperature, supply, work / f"{corner}_{temperature:g}_{supply:g}.cir")
+    testbench = work / "amp_spice_testbench"
+    testbench.mkdir(parents=True, exist_ok=True)
+    netlist = prepare(template, topology, corner, temperature, supply, testbench / "TB_Amplifier_ACDC.cir")
     try:
-        proc = subprocess.run([simulator, "-b", str(netlist)], cwd=str(work), capture_output=True, text=True, timeout=180)
+        proc = subprocess.run([simulator, "-b", netlist.name], cwd=str(testbench), capture_output=True, text=True, timeout=180)
         text = proc.stdout + "\n" + proc.stderr
         return metrics(text), proc.returncode
     except (OSError, subprocess.SubprocessError) as exc:
@@ -168,23 +183,23 @@ def main():
     pvt = make_pvt_grid()
     root = args.output.parent / f"_{args.output.stem}_work"
     root.mkdir(parents=True, exist_ok=True)
-    for name, target in (("spice_netlist", amp / "spice_netlist"), ("design_variables", amp / "design_variables")):
-        link = root / name
-        if not link.exists():
-            link.symlink_to(target, target_is_directory=True)
-    mos = root / "mosfet_model"
-    mos.mkdir(exist_ok=True)
-    pdk_link = mos / "sky130_pdk"
     source_pdk = args.source_root.parent / "PDK" / "sky130_pdk"
-    if not pdk_link.exists():
-        pdk_link.symlink_to(source_pdk, target_is_directory=True)
 
     rows = []
     for seed in (int(item) for item in args.seeds.split(",") if item.strip()):
         for method in ("spectra", "anaflow_cleanroom"):
             work = root / f"s{seed}_{method}"
             work.mkdir(exist_ok=True)
-            design_file = work / args.topology
+            spice_link = work / "spice_netlist"
+            if not spice_link.exists():
+                spice_link.symlink_to(amp / "spice_netlist", target_is_directory=True)
+            design_dir = work / "design_variables"
+            design_dir.mkdir(exist_ok=True)
+            (work / "mosfet_model").mkdir(exist_ok=True)
+            pdk_link = work / "mosfet_model" / "sky130_pdk"
+            if not pdk_link.exists():
+                pdk_link.symlink_to(source_pdk, target_is_directory=True)
+            design_file = design_dir / args.topology
 
             def evaluate_nominal(x):
                 write_vars(design_file, names, defaults, x)
