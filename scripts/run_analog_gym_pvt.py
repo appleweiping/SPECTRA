@@ -153,7 +153,7 @@ def search(method, budget, seed, evaluate, low, high):
                 x = low + np.clip(point, 0.0, 1.0) * (high - low)
                 scores.append(visit(x, index + 1))
                 index += 1
-            if scores:
+            if len(scores) >= 2:
                 es.tell(points, scores)
     else:
         for index in range(1, budget + 1):
