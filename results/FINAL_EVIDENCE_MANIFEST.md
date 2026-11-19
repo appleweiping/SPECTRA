@@ -6,7 +6,7 @@ The strict sizing evidence was generated on the westc server and retained there 
 
 | Item | Value |
 |---|---|
-| Final source checkout | Verified by `git rev-parse HEAD` on local E:, server and GitHub at handoff |
+| Final source checkout | Verified by `git rev-parse HEAD` on local E:, server and GitHub after the unified-policy run |
 | Primary run source | `017536507bbf283ba5cfffbbc9f6d098bdd01250` |
 | Post-fix staged run source | `3347b38c19efe60dfbaa5bd71c7fe898207ea199` |
 | Server checkout | `/root/autodl-tmp/spectra-analog-agent` |
@@ -24,5 +24,7 @@ search objective used by the external clean-room adapters. The verifier and repo
 component track remains a mixed-effect ablation and is not converted into an all-components-win claim. The
 post-fix staged rerun replaced the earlier pre-fix staged sensitivity result in the tracked summary.
 
-The 92-task expansion is recorded in `results/EXTERNAL_EXPANSION_AUDIT.md` and is excluded from ranking because
-its full run was intentionally stopped after 122 cells.
+The complete 92-task expansion is recorded in `results/EXTERNAL_EXPANSION_AUDIT.md`. It contains 2,208/2,208
+external-primary cells across eight rows, 12 families and three seeds. The SPECTRA family-policy candidate covers
+276/276 additional cells. The unified union-top-k4 candidate is being evaluated on the same 92-task matrix before
+the final ranking is frozen.

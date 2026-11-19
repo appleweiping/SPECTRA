@@ -1,0 +1,26 @@
+{
+  "experiment": "SIZ7g_SPECTRA_HYBRID_UNION_TOPK4_ROBUST",
+  "subset": "data/bench/paper_sizing_tasks.jsonl",
+  "cells_observed": 108,
+  "cells_expected": 108,
+  "task_count": 36,
+  "family_count": 6,
+  "seeds": [0, 1, 2],
+  "budget": {"sims": 300, "llm_calls": 12},
+  "verifier_corners": 45,
+  "tt_success": 0.9166666666666666,
+  "pvt_success": 0.3333333333333333,
+  "mean_tt_violation": 0.012840821534545263,
+  "mean_pvt_violation": 0.2819828941772368,
+  "crashes": 0,
+  "anaflow": {
+    "cells": 108,
+    "tt_success": 0.8703703703703703,
+    "pvt_success": 0.3055555555555556,
+    "mean_tt_violation": 0.0381,
+    "mean_pvt_violation": 0.6667,
+    "crashes": 2
+  },
+  "policy": "hybrid union of nominal and low-voltage screens, top-k=4 full-grid candidates",
+  "selection_note": "post-hoc exploratory candidate after matched sensitivity tracks"
+}
