@@ -162,9 +162,9 @@ def main() -> None:
         "model": "gpt-6.1-sol",
         "budget": args.budget,
         "llm_calls": 12,
-        "pvt_conditions": 18,
+        "pvt_conditions": len(rows[0]["pvt"]["conditions"]) if rows else 0,
         "rows": rows,
-        "ranking_eligible": bool(rows) and all(row["pvt"]["conditions_observed"] == 18 for row in rows),
+        "ranking_eligible": bool(rows) and all(row["pvt"]["conditions_observed"] == len(rows[0]["pvt"]["conditions"]) for row in rows),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
