@@ -26,8 +26,13 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   These are track-scoped measurements and do not establish universal analog-sizing SOTA.
   The primary-row contract, metric definitions, statistical scope and exclusions are fixed in
   `docs/MAIN_COMPARISON_PROTOCOL.md`.
-  A 92-task, 12-family external-only expansion is documented in `results/EXTERNAL_EXPANSION_AUDIT.md`; its
-  48-cell preflight passed, while the full run was stopped after 122 cells and excluded from ranking.
+  A 92-task, 12-family external-only expansion is documented in `results/EXTERNAL_EXPANSION_AUDIT.md`; the complete
+  external matrix contains 2,208/2,208 cells. The family-policy and union-top-k4 SPECTRA candidates each contain
+  276/276 cells with three seeds. These results are benchmark-scoped and do not establish universal analog-sizing SOTA.
+* **Cross-domain public benchmark track** (`docs/CROSS_DOMAIN_PROTOCOL.md`, `data/bench/cross_domain_manifest.json`):
+  the frozen extension targets AnalogGym AMP/LDO, the 31-circuit public suite, ATLAS dual-PDK tasks and Analog
+  Design Bench. The current codebase has not yet completed the cross-PDK and cross-simulator runs, so no domain-level
+  SOTA claim is made from the existing SKY130/ngspice evidence.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.

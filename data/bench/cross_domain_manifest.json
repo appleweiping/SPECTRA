@@ -1,0 +1,73 @@
+{
+  "schema": "spectra-cross-domain/v1",
+  "model": "gpt-6.1-sol",
+  "metrics": [
+    "tt_success",
+    "pvt_success",
+    "mean_normalized_violation",
+    "median_normalized_violation",
+    "simulations_to_first_pass",
+    "simulations",
+    "llm_calls",
+    "wall_seconds",
+    "tokens_in",
+    "tokens_out",
+    "cost_usd",
+    "crash_rate"
+  ],
+  "tracks": [
+    {
+      "id": "analoggym_amp_ldo",
+      "source": "CODA-Team/AnalogGym",
+      "source_url": "https://github.com/CODA-Team/AnalogGym",
+      "paper_url": "https://arxiv.org/abs/2409.08534",
+      "pdks": ["sky130"],
+      "simulators": ["ngspice-42"],
+      "families": ["amplifier", "ldo"],
+      "topology_policy": "public source topology digest",
+      "corners": "source 21-corner robust subset where available",
+      "seeds": [0, 1, 2],
+      "budget": {"simulations": 300, "llm_calls": 12},
+      "status": "planned"
+    },
+    {
+      "id": "opensource_31",
+      "source": "jialinlu/opensource-analog-circuits",
+      "source_url": "https://github.com/jialinlu/opensource-analog-circuits",
+      "pdks": ["ptm45", "ptm180", "sky130", "bjt_public"],
+      "simulators": ["ngspice-42"],
+      "families": ["opamp", "ldo", "bandgap", "por", "vco", "bjt_amp"],
+      "topology_policy": "public source topology digest",
+      "corners": "source-declared corners, mapped only where metric semantics match",
+      "seeds": [0, 1, 2],
+      "budget": {"simulations": 300, "llm_calls": 12},
+      "status": "planned"
+    },
+    {
+      "id": "atlas_dual_pdk",
+      "source": "youngmin0oh/atlas",
+      "source_url": "https://github.com/youngmin0oh/atlas",
+      "pdks": ["sky130", "gf180mcu"],
+      "simulators": ["ngspice"],
+      "families": ["public_atlas_circuits"],
+      "topology_policy": "ATLAS benchmark topology digest",
+      "corners": "ATLAS source protocol plus matched PVT verifier",
+      "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "budget": {"simulations": 500, "llm_calls": 12},
+      "status": "planned"
+    },
+    {
+      "id": "analog_design_bench",
+      "source": "Arcadia-2026/analog-design-bench",
+      "source_url": "https://huggingface.co/datasets/Arcadia-2026/analog-design-bench",
+      "pdks": ["sky130"],
+      "simulators": ["ngspice"],
+      "families": ["amplifier", "filter", "power", "reference", "rf", "high_speed", "data_converter", "sampling"],
+      "topology_policy": "public verifier topology digest",
+      "corners": "task-declared verifier corners",
+      "seeds": [0, 1, 2],
+      "budget": {"simulations": 300, "llm_calls": 12},
+      "status": "planned"
+    }
+  ]
+}

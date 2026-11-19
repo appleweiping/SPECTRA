@@ -1,0 +1,42 @@
+# Cross-domain evaluation protocol
+
+This protocol extends the fixed-topology SKY130 study to public circuit sources while keeping the comparison auditable. It is frozen before the next server run. A track is included in the primary cross-domain table only when the task source, topology digest, PDK, simulator version, corner set, verifier, model, seeds and budget are recorded for every cell.
+
+## Acceptance table
+
+| ID | Requirement | Passing evidence | Current status |
+|---|---|---|---|
+| XPDK-1 | At least three public PDK/model groups | SKY130, GF180MCU and PTM45/PTM180 or PTM90/PTM130/PTM180, with immutable model receipts | Planned. The current repository executes SKY130 only |
+| XTOPO-1 | Cross-topology public coverage | AnalogGym/AnalogGym-Opt, AMPICBench, opensource-analog-circuits, Analog Design Bench and ATLAS task manifests with non-template topology digests | Planned. The existing 92 tasks are fixed SPECTRA templates |
+| XSIM-1 | Cross-simulator validation | At least two independently versioned simulators with the same netlist, models, corners and metric parser. Spectre/HSPICE rows require a reproducible licensed environment | Not met. The server currently has ngspice-42 and no Xyce/Spectre/HSPICE executable |
+| XSEED-1 | Multi-seed protocol | Three or more seeds per task-method cell, with seed listed in raw evidence | Pass on existing SIZ7g/SIZ11g tracks |
+| XMET-1 | Metric parity | TT success, all-corner PVT success, mean and median normalized violation, simulations-to-first-pass, calls, wall time, token/cost and crash rate | Partial. Existing tracks have the first four core metrics and efficiency fields, but cross-domain parsers are not yet unified |
+| XSTAT-1 | Statistical testing | Task-cluster bootstrap confidence intervals, paired sign/Wilcoxon tests and Holm correction across external rows | Pass on existing external track. Must be rerun for each cross-domain family |
+| XANA-1 | AnaFlow comparability | AnaFlow clean-room adapter runs on the same public task, PDK, simulator, budget, seed and verifier | Not met outside the current fixed-topology adapter |
+| XSOTA-1 | Domain-level claim | Every preregistered main endpoint beats AnaFlow on every declared PDK/topology/simulator stratum, with confidence intervals and no hidden exclusions | Not met. Current evidence supports benchmark-scoped SOTA only |
+
+## Frozen matrix
+
+The next primary matrix has four public tracks.
+
+1. `analoggym_amp_ldo` uses the open SKY130/ngspice AMP and LDO subset from AnalogGym-Opt. It keeps the source testbenches and design-variable bounds, and reports TT plus the source 21-corner robust subset.
+2. `opensource_31` uses the 31-circuit suite without copying its unlicensed harness. The adapter records source files and PDK/model provenance, and separates PTM45, PTM180, SKY130 and BJT strata rather than pooling incompatible metrics.
+3. `atlas_dual_pdk` uses the public ATLAS benchmark circuits under SKY130 and GF180MCU where the repository provides both model paths. The budget is 500 simulator evaluations, 10 seeds and the ATLAS baseline family. The 500/10 setting is an external reference protocol and is kept separate from the existing 300/3 SIZ7g protocol.
+4. `analog_design_bench` uses the public 50-task verifier split. Its task-level success and normalized violation are reported separately from transistor-sizing PVT rows when the task does not expose a common PVT grid.
+
+The primary cross-domain comparison uses the intersection of tasks with identical electrical metrics. Rows with missing PDK or simulator support remain capability-audit entries and do not enter the ranking. Crashes and budget exhaustion remain in denominators.
+
+## Common metrics and budgets
+
+Every comparable cell records `task_id`, `source_commit`, `topology_digest`, `pdk_id`, `simulator_id`, `simulator_version`, `seed`, `llm_calls`, `simulations`, `first_pass_simulations`, `wall_seconds`, `tokens_in`, `tokens_out`, `cost_usd`, `tt_pass`, `pvt_pass`, `tt_violation_mean`, `tt_violation_median`, `pvt_violation_mean`, `pvt_violation_median`, `crash` and `failure_taxonomy`. Normalized violation is the mean positive spec residual after each metric is divided by its task-specific tolerance. PVT success means every declared corner passes.
+
+AnaFlow is a clean-room adapter in this repository. Its paper reports two PTM45/ngspice op-amp demonstrations and sample-efficiency fields, not a cross-domain TT/PVT table. A domain-level claim therefore requires a matched AnaFlow adapter run on every public stratum.
+
+## Public sources
+
+- AnalogGym, ICCAD 2024, https://arxiv.org/abs/2409.08534 and https://github.com/CODA-Team/AnalogGym
+- AMPICBench, https://github.com/AMPICLab/AMPICBench
+- Open-Source Analog Circuit Sizing Benchmark Suite, https://github.com/jialinlu/opensource-analog-circuits
+- ATLAS, https://github.com/youngmin0oh/atlas
+- Analog Design Bench, https://huggingface.co/datasets/Arcadia-2026/analog-design-bench
+- AnaFlow, ICCAD 2025, https://arxiv.org/abs/2511.03697
