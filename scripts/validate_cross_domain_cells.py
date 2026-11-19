@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -47,7 +48,7 @@ def validate(rows: list[dict[str, Any]], *, budget: dict[str, int], pvt_conditio
         if not isinstance(pvt.get("pvt_success"), bool):
             row_errors.append(f"{prefix}: pvt_success is unavailable")
         for metric in ("mean_normalized_violation", "median_normalized_violation"):
-            if not isinstance(pvt.get(metric), (int, float)):
+            if not isinstance(pvt.get(metric), (int, float)) or not math.isfinite(float(pvt.get(metric))):
                 row_errors.append(f"{prefix}: missing {metric}")
         errors.extend(row_errors)
         if not row_errors:
