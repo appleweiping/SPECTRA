@@ -15,3 +15,5 @@ The complete `SIZ11g_SPECTRA_FAMILY_EXT_V1` run covers 92 tasks, 12 families, th
 | SPECTRA family-policy | 276/276 | 0.804 | 0.263 | 0.0698 | 0.3822 | 0 |
 
 On this complete 92-task/12-family external benchmark, the family-policy row exceeds AnaFlow on both TT and PVT success. It is the best measured row on both success endpoints in this matrix. The evidence supports benchmark-scoped SOTA for the stated SIZ11g protocol. It does not prove performance on arbitrary unseen topologies, PDKs, simulators or mismatch protocols.
+
+Raw archive SHA-256 `34CA9EB5509EB38056B41E8B7FEECCF477C7C0BC4444CD2CFFFDE131C94501E9` for `work/remote_archive/SIZ11g_SPECTRA_FAMILY_EXT_V1.tar.gz`.
