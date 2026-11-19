@@ -63,8 +63,9 @@ the 122-cell partial run, and the two infrastructure-failure archives. None of t
 primary ranking.
 
 The public cross-domain protocol keeps the AnalogGym, AMPICBench, opensource-analog-circuits and ATLAS source
-receipts under `results/cross_domain_capability_receipt_v2.*`. The AnalogGym HoiLee amplifier smoke has a complete
-45-condition verifier under ngspice. The ATLAS GF180 capability receipt is `results/atlas_gf180_ngspice44_capability.*`.
+receipts under `results/cross_domain_capability_receipt_v2.*`. The AnalogGym HoiLee and Leung amplifier tracks have
+complete 45-condition verifiers under ngspice-44.2 and matched Xyce-7.10 reruns. The ATLAS GF180 capability receipt
+is `results/atlas_gf180_ngspice44_capability.*`.
 It records a successful ngspice-44.2 execution over all 18 shipped GF180 corner netlists at budget 50 and zero
 feasible designs, so it is retained as capability evidence and excluded from matched ranking.
 
