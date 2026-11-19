@@ -315,9 +315,9 @@ def main():
                            condition.supply_v, args.simulator, work)[0]
 
             start = time.perf_counter()
-            robust_conditions = tuple(next(condition for condition in pvt if condition.name == name)
-                                      for name in ("tt_27C_1.8V", "ss_-40C_1.62V", "ff_125C_1.98V"))
             if method == "spectra" and args.search_profile == "spectra_robust":
+                robust_conditions = tuple(next(condition for condition in pvt if condition.name == name)
+                                          for name in ("tt_27C_1.8V", "ss_-40C_1.62V", "ff_125C_1.98V"))
                 best_x, best_score, first = search_robust_spectra(
                     args.budget, seed, evaluate_condition, low, high, robust_conditions
                 )
