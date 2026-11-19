@@ -20,9 +20,10 @@ The 300-unit cap is the common resource constraint. The external clean-room adap
 The aggregate keeps every task-seed cell. Confidence intervals use task-clustered bootstrap resampling, so the three seeds for one task are not treated as independent tasks. SPECTRA-versus-external paired TT tests use exact sign tests with Holm correction across the seven external rows. The three-seed result is a matched-budget snapshot. It does not support a universal analog-sizing SOTA claim.
 
 The repository-wide expansion uses `data/bench/all_sizing_tasks.jsonl`, which exposes the same sizing schema for 92
-tasks across 12 circuit families. Its preflight completed 48 cells without crashes. The full expansion was stopped
-after 122 completed cells because robust simulator evaluations made the remaining run several hours. The audit and
-archive are recorded in `results/EXTERNAL_EXPANSION_AUDIT.md`, and no partial expansion cell enters the primary claim.
+tasks across 12 circuit families. The complete server run materialized 2,208/2,208 cells across the eight
+external-primary rows. Aggregate metrics and the raw archive SHA are recorded in
+`results/external_expansion_92_summary.md` and `results/EXTERNAL_EXPANSION_AUDIT.md`. The expansion provides broad
+coverage and failure analysis, while its measured SPECTRA row remains below AnaFlow.
 
 ## Excluded from the primary ranking
 
