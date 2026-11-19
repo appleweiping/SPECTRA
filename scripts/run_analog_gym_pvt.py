@@ -180,6 +180,7 @@ def main():
     parser.add_argument("--pdk-root", type=Path, required=True)
     parser.add_argument("--budget", type=int, default=300)
     parser.add_argument("--seeds", default="0,1,2")
+    parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -199,9 +200,13 @@ def main():
     if not source_pdk.exists():
         raise SystemExit(f"PDK root does not exist: {source_pdk}")
 
+    methods = tuple(item.strip() for item in args.methods.split(",") if item.strip())
+    unknown_methods = set(methods).difference({"spectra", "anaflow_cleanroom"})
+    if unknown_methods:
+        raise SystemExit(f"unknown methods: {sorted(unknown_methods)}")
     rows = []
     for seed in (int(item) for item in args.seeds.split(",") if item.strip()):
-        for method in ("spectra", "anaflow_cleanroom"):
+        for method in methods:
             work = root / f"s{seed}_{method}"
             work.mkdir(exist_ok=True)
             ensure_symlink(work / "spice_netlist", amp / "spice_netlist", directory=True)
