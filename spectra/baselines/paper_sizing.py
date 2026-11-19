@@ -19,6 +19,20 @@ from ..bench.templates import T
 from ..opt.sizing import Var
 from ..sim.evaluate import NOMINAL
 
+
+def _pvt_popsize():
+    """Return the bounded CMA-ES population used by robust sizing.
+
+    A five-point population gives the full-grid objective one additional
+    candidate per generation while staying inside the frozen 300-unit budget.
+    The environment override is only for smoke tests and preregistered
+    ablations.  The benchmark default is fixed and recorded in the event log.
+    """
+    try:
+        return max(3, min(8, int(os.environ.get("SPECTRA_PVT_POPSIZE", "5"))))
+    except (TypeError, ValueError):
+        return 5
+
 PAPER_META = {
     "spectra": {"paper": "SPECTRA (ours)", "venue": "this work", "repo": "local framework"},
     "analogcoder": {"paper": "AnalogCoder", "venue": "AAAI-25", "repo": "https://github.com/laiyao1/AnalogCoder"},
@@ -170,15 +184,17 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         # For robust tasks the refinement is charged against the full PVT grid so
         # that a local move cannot improve only the three search corners.
         if robust and ctx.calls >= 2 and ctx.sims_left() >= 4 * len(robust_conds):
-            refine_budget = min(4 * len(robust_conds), ctx.sims_left())
+            popsize = _pvt_popsize()
+            refine_budget = min(popsize * len(robust_conds), ctx.sims_left())
             refined = _cmaes(ctx, build, vars_, seed + 71, x0=x, budget=refine_budget,
                              tag="spectra_pvt_fullgrid_refine", conds=robust_conds,
-                             popsize=4)
+                             popsize=popsize)
             refinement_done = True
             if refined:
                 net = refined
                 ctx.log("spectra_refine_trace", budget=refine_budget,
-                         returned_best=True, objective="full_pvt_worst_violation")
+                         returned_best=True, objective="full_pvt_worst_violation",
+                         popsize=popsize)
             break
         if not robust and ctx.calls >= 1 and ctx.sims_left() >= 24:
             refine_budget = min(240, ctx.sims_left())
@@ -255,9 +271,14 @@ def _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed):
     if ctx.sims_left() >= len(PVT) and staged_best.get("netlist"):
         ev_full, net_full, score_full = _evaluate(ctx, build, staged_best.get("params", _midpoint(vars_)), conds=PVT)
         _update_robust_best(ctx, ev_full, net_full, score_full)
-    if ctx.sims_left() >= 4 * len(PVT) and ctx.best.get("netlist"):
+    popsize = _pvt_popsize()
+    if ctx.sims_left() >= popsize * len(PVT) and ctx.best.get("netlist"):
         _cmaes(ctx, build, vars_, seed + 197, x0=_params_from_netlist(task, vars_, staged_best),
-               budget=4 * len(PVT), tag="spectra_pvt_staged_refine", conds=PVT, popsize=4, sigma=0.08)
+               budget=popsize * len(PVT), tag="spectra_pvt_staged_refine", conds=PVT,
+               popsize=popsize, sigma=0.08)
+        ctx.log("spectra_refine_trace", budget=popsize * len(PVT),
+                 returned_best=True, objective="full_pvt_worst_violation", popsize=popsize,
+                 strategy="staged")
     final_net = ctx.best.get("netlist") or staged_best.get("netlist")
     return _finish(ctx, final_net)
 
