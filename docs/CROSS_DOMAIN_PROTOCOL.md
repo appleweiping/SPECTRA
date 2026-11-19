@@ -26,6 +26,13 @@ The next primary matrix has four public tracks.
 
 The primary cross-domain comparison uses the intersection of tasks with identical electrical metrics. Rows with missing PDK or simulator support remain capability-audit entries and do not enter the ranking. Crashes and budget exhaustion remain in denominators.
 
+The first server capability receipt is archived at
+`results/cross_domain_capability_receipt.json`. It found the public source
+trees for `opensource_31` and `atlas_dual_pdk`, the bundled ngspice-42 binary,
+and no Xyce, Spectre or HSPICE executable. Its `ranking_eligible` field is
+false because no matched SPECTRA/AnaFlow performance cells are implied by a
+capability scan.
+
 ## Capability audit before a run
 
 Run the receipt generator on the server before scheduling a matrix. It records
