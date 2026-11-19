@@ -1,0 +1,70 @@
+{
+  "schema": "opensource-analog-circuits-ng44-smoke/v1",
+  "simulator": "ngspice-44.2",
+  "cases": [
+    {
+      "label": "ptm180",
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "dimensions": 19,
+      "metrics": {
+        "gain": 51.27259,
+        "ugf": 29657341.04153038,
+        "pm": 180.75884438555795
+      },
+      "sim_success": true,
+      "elapsed": 0.02627396583557129,
+      "objective": 0.1454568333333333
+    },
+    {
+      "label": "sky130",
+      "config": "circuits/sky130_lp_opamp/config.json",
+      "dimensions": 6,
+      "metrics": {
+        "gain": 72.76753,
+        "ugf": 843977807.1855339,
+        "pm": 179.85514974070907
+      },
+      "sim_success": true,
+      "elapsed": 7.184061527252197,
+      "objective": 0.0
+    },
+    {
+      "label": "bjt",
+      "config": "circuits/bjt_ce_amp/config.json",
+      "dimensions": 5,
+      "metrics": {
+        "vout": 11.37014
+      },
+      "sim_success": true,
+      "elapsed": 0.02582859992980957,
+      "objective": 0.0
+    },
+    {
+      "label": "ldo_sky130",
+      "config": "circuits/ldo_simple/config.json",
+      "dimensions": 16,
+      "metrics": {
+        "vout": -5.38226,
+        "dcgain": 4.604528,
+        "ugf": 4464807.0
+      },
+      "sim_success": true,
+      "elapsed": 10.750173807144165,
+      "objective": 1012.6494068
+    },
+    {
+      "label": "asap7",
+      "config": "circuits/ldo_1/config_asap7.json",
+      "dimensions": 8,
+      "metrics": {
+        "vout": 0.4887919,
+        "dcgain": 71.65426,
+        "ugf": 321619100.0,
+        "pm": 0.9435799
+      },
+      "sim_success": true,
+      "elapsed": 26.933634042739868,
+      "objective": 0.9790315577777777
+    }
+  ]
+}
