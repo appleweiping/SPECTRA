@@ -1,0 +1,870 @@
+{
+  "budget": 300,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 45,
+  "ranking_eligible": false,
+  "ranking_reason": "Requires matched public AnaFlow rows and a completed multi-topology matrix.",
+  "rows": [
+    {
+      "first_pass_simulations": 30,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "CAPACITOR_0": 8.063037089896934,
+        "CAPACITOR_1": 16.264113446146638,
+        "CURRENT_0_BIAS": 1.3308956552023364e-05,
+        "MOSFET_0_8_L_BIASCM_PMOS": 1.5413103308204619,
+        "MOSFET_0_8_M_BIASCM_PMOS": 4.203491165119095,
+        "MOSFET_0_8_W_BIASCM_PMOS": 2.1029195506825404,
+        "MOSFET_10_1_L_gm2_PMOS": 4.516771444849119,
+        "MOSFET_10_1_M_gm2_PMOS": 47.86440916598982,
+        "MOSFET_10_1_W_gm2_PMOS": 2.1171667924709157,
+        "MOSFET_11_1_L_gmf2_PMOS": 1.1912234500573382,
+        "MOSFET_11_1_M_gmf2_PMOS": 22.20070355272651,
+        "MOSFET_11_1_W_gmf2_PMOS": 6.1769108974225455,
+        "MOSFET_17_7_L_BIASCM_NMOS": 2.11303277953793,
+        "MOSFET_17_7_M_BIASCM_NMOS": 5.313064793282679,
+        "MOSFET_17_7_W_BIASCM_NMOS": 1.932020418014575,
+        "MOSFET_21_2_L_LOAD2_NMOS": 0.7009316832644288,
+        "MOSFET_21_2_M_LOAD2_NMOS": 31.522407410916482,
+        "MOSFET_21_2_W_LOAD2_NMOS": 5.18080655872797,
+        "MOSFET_23_1_L_gm3_NMOS": 4.950421823108642,
+        "MOSFET_23_1_M_gm3_NMOS": 48.21130975044109,
+        "MOSFET_23_1_W_gm3_NMOS": 9.884601979486712,
+        "MOSFET_8_2_L_gm1_PMOS": 1.605062368568423,
+        "MOSFET_8_2_M_gm1_PMOS": 30.34527688779767,
+        "MOSFET_8_2_W_gm1_PMOS": 4.64075686528045
+      },
+      "pdk": "sky130",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.5089,
+              "gbw_hz": 1290200.0,
+              "phase_in_deg": -38.74994928476666,
+              "phase_in_rad": -0.6763142,
+              "phase_margin_deg": 141.25005071523333
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 130.6804,
+              "gbw_hz": 1201320.0,
+              "phase_in_deg": -35.58896404734172,
+              "phase_in_rad": -0.6211446,
+              "phase_margin_deg": 144.41103595265827
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.2917,
+              "gbw_hz": 1479790.0,
+              "phase_in_deg": -38.61447341410798,
+              "phase_in_rad": -0.6739497,
+              "phase_margin_deg": 141.38552658589202
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 148.088,
+              "gbw_hz": 1526960.0,
+              "phase_in_deg": -39.387101271263944,
+              "phase_in_rad": -0.6874346,
+              "phase_margin_deg": 140.61289872873607
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 138.4145,
+              "gbw_hz": 1201240.0,
+              "phase_in_deg": -37.31879238577709,
+              "phase_in_rad": -0.6513358,
+              "phase_margin_deg": 142.6812076142229
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 147.0294,
+              "gbw_hz": 1307250.0,
+              "phase_in_deg": -38.90193779908102,
+              "phase_in_rad": -0.6789669,
+              "phase_margin_deg": 141.09806220091897
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 141.938,
+              "gbw_hz": 1070610.0,
+              "phase_in_deg": -37.65897461748011,
+              "phase_in_rad": -0.6572731,
+              "phase_margin_deg": 142.3410253825199
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.0899,
+              "gbw_hz": 1087040.0,
+              "phase_in_deg": -37.86968557621742,
+              "phase_in_rad": -0.6609507,
+              "phase_margin_deg": 142.13031442378258
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.0873,
+              "gbw_hz": 1094340.0,
+              "phase_in_deg": -37.907105449817415,
+              "phase_in_rad": -0.6616038,
+              "phase_margin_deg": 142.0928945501826
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 134.4808,
+              "gbw_hz": 1326370.0,
+              "phase_in_deg": -35.95429912625099,
+              "phase_in_rad": -0.6275209,
+              "phase_margin_deg": 144.045700873749
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.8389,
+              "gbw_hz": 1538860.0,
+              "phase_in_deg": -38.18433107899146,
+              "phase_in_rad": -0.6664423,
+              "phase_margin_deg": 141.81566892100852
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 148.1581,
+              "gbw_hz": 1565300.0,
+              "phase_in_deg": -38.65410490479717,
+              "phase_in_rad": -0.6746414,
+              "phase_margin_deg": 141.34589509520282
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 140.9379,
+              "gbw_hz": 1260760.0,
+              "phase_in_deg": -37.43466737026434,
+              "phase_in_rad": -0.6533582,
+              "phase_margin_deg": 142.56533262973565
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.7576,
+              "gbw_hz": 1326470.0,
+              "phase_in_deg": -38.134506669126885,
+              "phase_in_rad": -0.6655727,
+              "phase_margin_deg": 141.8654933308731
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 146.9257,
+              "gbw_hz": 1339250.0,
+              "phase_in_deg": -38.22362452458154,
+              "phase_in_rad": -0.6671281,
+              "phase_margin_deg": 141.77637547541846
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 142.1909,
+              "gbw_hz": 1089270.0,
+              "phase_in_deg": -37.440288086234574,
+              "phase_in_rad": -0.6534563,
+              "phase_margin_deg": 142.55971191376543
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 143.836,
+              "gbw_hz": 1100880.0,
+              "phase_in_deg": -37.56716386038835,
+              "phase_in_rad": -0.6556707,
+              "phase_margin_deg": 142.43283613961165
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.7443,
+              "gbw_hz": 1107550.0,
+              "phase_in_deg": -37.59271777805118,
+              "phase_in_rad": -0.6561167,
+              "phase_margin_deg": 142.40728222194883
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 126.4517,
+              "gbw_hz": 1064890.0,
+              "phase_in_deg": -34.75662252877722,
+              "phase_in_rad": -0.6066175,
+              "phase_margin_deg": 145.24337747122277
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 141.8605,
+              "gbw_hz": 1394420.0,
+              "phase_in_deg": -39.19117262364101,
+              "phase_in_rad": -0.684015,
+              "phase_margin_deg": 140.80882737635898
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 147.8884,
+              "gbw_hz": 1478670.0,
+              "phase_in_deg": -40.29494716807078,
+              "phase_in_rad": -0.7032795,
+              "phase_margin_deg": 139.7050528319292
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 135.4813,
+              "gbw_hz": 1125540.0,
+              "phase_in_deg": -37.36156941476155,
+              "phase_in_rad": -0.6520824,
+              "phase_margin_deg": 142.63843058523844
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.9238,
+              "gbw_hz": 1247130.0,
+              "phase_in_deg": -39.33997549261443,
+              "phase_in_rad": -0.6866121,
+              "phase_margin_deg": 140.66002450738557
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 147.1495,
+              "gbw_hz": 1269190.0,
+              "phase_in_deg": -39.70757948439241,
+              "phase_in_rad": -0.693028,
+              "phase_margin_deg": 140.2924205156076
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 141.2843,
+              "gbw_hz": 1044260.0,
+              "phase_in_deg": -37.85158010989129,
+              "phase_in_rad": -0.6606347,
+              "phase_margin_deg": 142.1484198901087
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.3927,
+              "gbw_hz": 1070630.0,
+              "phase_in_deg": -38.20931776843712,
+              "phase_in_rad": -0.6668784,
+              "phase_margin_deg": 141.79068223156287
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.5226,
+              "gbw_hz": 1078960.0,
+              "phase_in_deg": -38.26692294515957,
+              "phase_in_rad": -0.6678838,
+              "phase_margin_deg": 141.73307705484044
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 124.4088,
+              "gbw_hz": 1019000.0,
+              "phase_in_deg": -34.62008668619754,
+              "phase_in_rad": -0.6042345,
+              "phase_margin_deg": 145.37991331380246
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 139.9155,
+              "gbw_hz": 1364900.0,
+              "phase_in_deg": -39.49245102105464,
+              "phase_in_rad": -0.6892733,
+              "phase_margin_deg": 140.50754897894535
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 146.6316,
+              "gbw_hz": 1464930.0,
+              "phase_in_deg": -40.68605388860503,
+              "phase_in_rad": -0.7101056,
+              "phase_margin_deg": 139.31394611139496
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 133.3851,
+              "gbw_hz": 1096080.0,
+              "phase_in_deg": -37.39606720360638,
+              "phase_in_rad": -0.6526845,
+              "phase_margin_deg": 142.60393279639362
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 143.3288,
+              "gbw_hz": 1233750.0,
+              "phase_in_deg": -39.51339835804463,
+              "phase_in_rad": -0.6896389,
+              "phase_margin_deg": 140.48660164195536
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.9576,
+              "gbw_hz": 1257910.0,
+              "phase_in_deg": -40.04294887061634,
+              "phase_in_rad": -0.6988813,
+              "phase_margin_deg": 139.95705112938367
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 139.6447,
+              "gbw_hz": 1033730.0,
+              "phase_in_deg": -37.98700441434841,
+              "phase_in_rad": -0.6629983,
+              "phase_margin_deg": 142.0129955856516
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 143.3468,
+              "gbw_hz": 1068020.0,
+              "phase_in_deg": -38.458044476881355,
+              "phase_in_rad": -0.6712195,
+              "phase_margin_deg": 141.54195552311865
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.5575,
+              "gbw_hz": 1077290.0,
+              "phase_in_deg": -38.53361188048116,
+              "phase_in_rad": -0.6725384,
+              "phase_margin_deg": 141.46638811951885
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 136.6278,
+              "gbw_hz": 1355200.0,
+              "phase_in_deg": -36.23191436672572,
+              "phase_in_rad": -0.6323662,
+              "phase_margin_deg": 143.76808563327427
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 147.3259,
+              "gbw_hz": 1541460.0,
+              "phase_in_deg": -38.25616279776701,
+              "phase_in_rad": -0.667696,
+              "phase_margin_deg": 141.74383720223298
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 149.3152,
+              "gbw_hz": 1563180.0,
+              "phase_in_deg": -38.64097271213278,
+              "phase_in_rad": -0.6744122,
+              "phase_margin_deg": 141.3590272878672
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 142.8496,
+              "gbw_hz": 1274580.0,
+              "phase_in_deg": -37.43740037894712,
+              "phase_in_rad": -0.6534059,
+              "phase_margin_deg": 142.56259962105287
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 146.9941,
+              "gbw_hz": 1327190.0,
+              "phase_in_deg": -38.019525498800036,
+              "phase_in_rad": -0.6635659,
+              "phase_margin_deg": 141.98047450119998
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 148.07,
+              "gbw_hz": 1338680.0,
+              "phase_in_deg": -38.09111084572368,
+              "phase_in_rad": -0.6648153,
+              "phase_margin_deg": 141.90888915427632
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 143.2822,
+              "gbw_hz": 1087590.0,
+              "phase_in_deg": -37.233771178557625,
+              "phase_in_rad": -0.6498519,
+              "phase_margin_deg": 142.76622882144238
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 144.8271,
+              "gbw_hz": 1097910.0,
+              "phase_in_deg": -37.33281266302394,
+              "phase_in_rad": -0.6515805,
+              "phase_margin_deg": 142.66718733697607
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.0,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 145.7103,
+              "gbw_hz": 1104260.0,
+              "phase_in_deg": -37.35081499694695,
+              "phase_in_rad": -0.6518947,
+              "phase_margin_deg": 142.64918500305305
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.0,
+        "median_normalized_violation": 0.0,
+        "pvt_success": true
+      },
+      "search_profile": "spectra_robust",
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "Leung_NMCF_Pin_3",
+      "topology_sha256": "491db2935527afdcd7475f58e693733e55a5ae846f06bdb958149049ef351dcc",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "variables_sha256": "7f8b3f52dbc831d5a1d0f3b95a44919ddb727422efa811a4c5d00574d653bb93",
+      "wall_seconds": 2992.9587037861347
+    }
+  ],
+  "schema": "spectra-analoggym-pvt/v1"
+}
