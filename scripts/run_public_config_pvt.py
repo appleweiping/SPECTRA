@@ -17,6 +17,7 @@ import os
 import re
 import subprocess
 import sys
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -91,6 +92,12 @@ def inject_condition(text: str, corner: str, temperature: float, supply: float, 
 def parse_metrics(log_text: str, config: dict[str, Any]) -> dict[str, float]:
     parser_type = config.get("metrics_parser_type", "regex")
     patterns = config.get("metrics_patterns", {})
+    if parser_type == "ac_data":
+        from benchmark.ngspice_benchmark import parse_ac_metrics
+        return parse_ac_metrics(log_text, patterns)
+    if parser_type == "multi_tb_meas":
+        from benchmark.ngspice_benchmark import parse_multi_tb_meas
+        return parse_multi_tb_meas(log_text, patterns)
     metrics: dict[str, float] = {}
     for line in log_text.splitlines():
         for name, pattern in patterns.items():
@@ -99,14 +106,6 @@ def parse_metrics(log_text: str, config: dict[str, Any]) -> dict[str, float]:
                 try:
                     metrics[name] = float(match.group(1))
                 except (IndexError, ValueError):
-                    pass
-    if parser_type in {"ac_data", "multi_tb_meas"}:
-        for name in config.get("specs", {}):
-            match = re.search(rf"\b{re.escape(name)}\s*=\s*([-+0-9.eE]+)", log_text, flags=re.IGNORECASE)
-            if match:
-                try:
-                    metrics[name] = float(match.group(1))
-                except ValueError:
                     pass
     return metrics
 
@@ -151,6 +150,7 @@ def main() -> None:
     parser.add_argument("--pvt-limit", type=int, default=None,
                         help="truncate the verifier grid for capability smoke tests")
     args = parser.parse_args()
+    sys.path.insert(0, str(args.source_root.resolve()))
     config, circuit = read_config(args.config.resolve())
     source_text = circuit.read_text(encoding="utf-8")
     names = list(config.get("design_vars", {}))
