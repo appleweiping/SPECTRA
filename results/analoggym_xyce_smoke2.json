@@ -1,0 +1,86 @@
+{
+  "budget": 1,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 1,
+  "ranking_eligible": false,
+  "ranking_reason": "Requires matched public AnaFlow rows and a completed multi-topology matrix.",
+  "rows": [
+    {
+      "first_pass_simulations": 0,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "CAPACITOR_0": 20.964955186557262,
+        "CAPACITOR_1": 12.27872129539401,
+        "CURRENT_0_BIAS": 4.917798645649925e-06,
+        "MOSFET_0_8_L_BIASCM_PMOS": 3.3663275929465444,
+        "MOSFET_0_8_M_BIASCM_PMOS": 14.219548974429646,
+        "MOSFET_0_8_W_BIASCM_PMOS": 0.8892484773938496,
+        "MOSFET_11_1_L_gm2_PMOS": 0.5743743598783809,
+        "MOSFET_11_1_M_gm2_PMOS": 40.85024172081335,
+        "MOSFET_11_1_W_gm2_PMOS": 9.171177984138357,
+        "MOSFET_12_1_L_gmf2_PMOS": 3.2298609909523095,
+        "MOSFET_12_1_M_gmf2_PMOS": 36.745331488215925,
+        "MOSFET_12_1_W_gmf2_PMOS": 5.664437418921517,
+        "MOSFET_17_7_L_BIASCM_NMOS": 4.707825907044957,
+        "MOSFET_17_7_M_BIASCM_NMOS": 40.97682415195508,
+        "MOSFET_17_7_W_BIASCM_NMOS": 0.5260157516164069,
+        "MOSFET_18_7_L_BIASCM_NMOS": 4.358319244644062,
+        "MOSFET_18_7_M_BIASCM_NMOS": 2.645693189967753,
+        "MOSFET_18_7_W_BIASCM_NMOS": 7.431726741084469,
+        "MOSFET_22_2_L_LOAD2_NMOS": 1.2904502927115156,
+        "MOSFET_22_2_M_LOAD2_NMOS": 43.29576719514444,
+        "MOSFET_22_2_W_LOAD2_NMOS": 5.643881592366371,
+        "MOSFET_25_1_L_gm3_NMOS": 1.8487035074182314,
+        "MOSFET_25_1_M_gm3_NMOS": 21.711673838685265,
+        "MOSFET_25_1_W_gm3_NMOS": 0.7690368758818982,
+        "MOSFET_59_2_L_HSBCM_PMOS": 1.0592747442480377,
+        "MOSFET_59_2_M_HSBCM_PMOS": 33.860596319987884,
+        "MOSFET_59_2_W_HSBCM_PMOS": 6.648300359955376,
+        "MOSFET_60_2_L_gma_NMOS": 3.2692330016656426,
+        "MOSFET_60_2_M_gma_NMOS": 19.80020015883229,
+        "MOSFET_60_2_W_gma_NMOS": 9.973494389997505,
+        "MOSFET_9_2_L_gm1_PMOS": 4.913759024493036,
+        "MOSFET_9_2_M_gm1_PMOS": 34.59155723955404,
+        "MOSFET_9_2_W_gm1_PMOS": 6.679363124544254
+      },
+      "pdk": "sky130",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metric_violation": {
+              "dcgain_db": 0.0,
+              "gbw_hz": 0.7259947,
+              "phase_margin_deg": 0.0
+            },
+            "metrics": {
+              "dcgain_db": 120.3353,
+              "gbw_hz": 274005.3,
+              "phase_in_deg": 9469.315,
+              "phase_in_rad": 165.2711,
+              "phase_margin_deg": 9649.315
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.24199823333333334,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.24199823333333334,
+        "median_normalized_violation": 0.24199823333333334,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 1,
+      "simulator": "Xyce",
+      "task": "HoiLee_AFFC_Pin_3",
+      "topology_sha256": "1f8dabf2ee2c04f7edd6d45d6fb5fa9ce9d773dc0a82d56a133211586df0ee28",
+      "tt_pass": false,
+      "tt_violation": 0.24199823333333334,
+      "variables_sha256": "a05db27bea2139a8891eb61e814a9843b14f6a8d0c5f474b435c379f9bdb6d84",
+      "wall_seconds": 7.034400866366923
+    }
+  ],
+  "schema": "spectra-analoggym-pvt/v1"
+}

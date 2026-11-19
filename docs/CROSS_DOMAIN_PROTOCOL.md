@@ -8,7 +8,7 @@ This protocol extends the fixed-topology SKY130 study to public circuit sources 
 |---|---|---|---|
 | XPDK-1 | At least three public PDK/model groups | SKY130, GF180MCU and PTM45/PTM180 or PTM90/PTM130/PTM180, with immutable model receipts | Planned. The current repository executes SKY130 only |
 | XTOPO-1 | Cross-topology public coverage | AnalogGym/AnalogGym-Opt, AMPICBench, opensource-analog-circuits, Analog Design Bench and ATLAS task manifests with non-template topology digests | Planned. The existing 92 tasks are fixed SPECTRA templates |
-| XSIM-1 | Cross-simulator validation | At least two independently versioned simulators with the same netlist, models, corners and metric parser. Spectre/HSPICE rows require a reproducible licensed environment | Not met. The server currently has ngspice-42 and no Xyce/Spectre/HSPICE executable |
+| XSIM-1 | Cross-simulator validation | At least two independently versioned simulators with the same netlist, models, corners and metric parser. Spectre/HSPICE rows require a reproducible licensed environment | Partial. Server now has official ngspice-44.2 and Xyce 7.10 serial builds. The Xyce translator passes an AnalogGym BSIM4 AC smoke, while the full matched 300-evaluation, 45-condition, three-seed matrix remains in progress |
 | XSEED-1 | Multi-seed protocol | Three or more seeds per task-method cell, with seed listed in raw evidence | Pass on existing SIZ7g/SIZ11g tracks |
 | XMET-1 | Metric parity | TT success, all-corner PVT success, mean and median normalized violation, simulations-to-first-pass, calls, wall time, token/cost and crash rate | Partial. Existing tracks have the first four core metrics and efficiency fields, but cross-domain parsers are not yet unified |
 | XSTAT-1 | Statistical testing | Task-cluster bootstrap confidence intervals, paired sign/Wilcoxon tests and Holm correction across external rows | Pass on existing external track. Must be rerun for each cross-domain family |
@@ -52,6 +52,13 @@ The ATLAS GF180 capability check is archived in
 prepared on the server, but the ATLAS netlist emitted an undefined
 `par_vth=$`/`var_vth` model expression under ngspice-42. ATLAS specifies
 ngspice 44.2, so this failed cell is excluded from the ranking.
+
+The cross-simulator capability receipt is archived in
+`results/cross_simulator_capability_receipt.json`. It records the official
+ngspice-44.2 binary and Xyce 7.10 serial binary hashes, their source-build
+provenance, and the one-cell Xyce AnalogGym smoke. The smoke is deliberately
+not ranking-eligible because it does not satisfy the frozen budget, PVT-grid,
+and multi-seed requirements.
 
 ## Capability audit before a run
 

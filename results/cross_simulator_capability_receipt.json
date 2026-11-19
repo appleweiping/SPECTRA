@@ -1,0 +1,33 @@
+{
+  "schema": "spectra-cross-simulator-capability/v1",
+  "track": "analoggym_amp_pvt",
+  "source": "AnalogGym",
+  "source_commit": "0a9d1390ade361e2b4a2d33181e22367edbb8afc",
+  "pdk": "sky130 bundled AnalogGym PDK",
+  "simulators": [
+    {
+      "id": "ngspice",
+      "version": "42 existing smoke, 44.2 official source build",
+      "binary_sha256": "8bd71b6fcdf47033623a2e7eaf38f97b657031df27d400f486b6928e9bc25fe4",
+      "status": "available"
+    },
+    {
+      "id": "Xyce",
+      "version": "7.10.0-opensource",
+      "binary_sha256": "5abf2b7d1dba7c582c37dd64a3773bebf8e76402d7e4898057016965f8cfae79",
+      "status": "available",
+      "adapter": "explicit AC translation removes ngspice control block and DC-only measures, normalizes AC source syntax"
+    }
+  ],
+  "smoke": {
+    "result": "results/analoggym_xyce_smoke2.json",
+    "budget": 1,
+    "pvt_conditions": 1,
+    "seed": 0,
+    "method": "spectra",
+    "return_code": 0,
+    "ranking_eligible": false
+  },
+  "ranking_eligible": false,
+  "ranking_reason": "Capability smoke is not the preregistered 300-evaluation, 45-condition, three-seed matched matrix"
+}
