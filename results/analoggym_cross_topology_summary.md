@@ -10,8 +10,10 @@ The completed ngspice-44.2 track covers two source-native AnalogGym SKY130 topol
 | HoiLee_AFFC_Pin_3 | Xyce-7.10 | AnaFlow clean-room | 3 | 1.0000 | 0.3333 | 0.084900 |
 | Leung_NMCF_Pin_3 | ngspice-44.2 | SPECTRA | 3 | 1.0000 | 0.3333 | 0.015552 |
 | Leung_NMCF_Pin_3 | ngspice-44.2 | AnaFlow clean-room | 3 | 1.0000 | 0.3333 | 0.015552 |
+| Leung_NMCF_Pin_3 | Xyce-7.10 | SPECTRA | 3 | 1.0000 | 0.6667 | 0.136422 |
+| Leung_NMCF_Pin_3 | Xyce-7.10 | AnaFlow clean-room | 3 | 0.6667 | 0.3333 | 2.418563 |
 
-All six rows are complete matched cells with finite violations. The public cross-topology evidence establishes reproducibility across two AnalogGym topologies and two simulator implementations on HoiLee. Every quality endpoint is tied between SPECTRA and the clean-room adapter. These rows do not establish universal AnaFlow superiority or domain-level SOTA.
+All eight rows are complete matched cells with finite violations. The public cross-topology evidence establishes reproducibility across two AnalogGym topologies and two simulator implementations. On HoiLee, every quality endpoint is tied between SPECTRA and the clean-room adapter. On Leung, SPECTRA leads both TT and PVT success on Xyce, while the ngspice row is tied. These rows do not establish universal AnaFlow superiority or domain-level SOTA.
 
 ## PVT-aware sensitivity
 
