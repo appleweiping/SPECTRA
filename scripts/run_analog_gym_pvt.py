@@ -122,7 +122,8 @@ def prepare_xyce(template, topology, corner, temperature, supply, output):
     translated = "".join(lines)
     translated = translated.replace(".end\n", ".AC DEC 10 0.1 1G\n.PRINT AC VDB(opout) VP(opout)\n.END\n")
     translated = re.sub(r"(?im)^\.temp\s+[^\n]+\n", "", translated)
-    translated = f".temp {temperature:g}\n" + translated
+    first_line, separator, remainder = translated.partition("\n")
+    translated = f"{first_line}{separator}.temp {temperature:g}\n{remainder}"
     output.write_text(translated, encoding="utf-8")
     return output
 
