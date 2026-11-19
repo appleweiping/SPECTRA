@@ -98,14 +98,16 @@ def prepare(template, topology, corner, temperature, supply, output):
 
 def metrics(log):
     values = {}
-    mapping = {"dcgain": "dcgain_db", "gain_bandwidth_product": "gbw_hz", "phase_in_deg": "phase_in_deg"}
+    mapping = {"dcgain": "dcgain_db", "gain_bandwidth_product": "gbw_hz", "phase_in_deg": "phase_in_deg", "phase_in_rad": "phase_in_rad"}
     for line in log.splitlines():
-        match = re.search(r"\b(dcgain|gain_bandwidth_product|phase_in_deg)\s*=\s*([^\s]+)", line, re.I)
+        match = re.search(r"\b(dcgain|gain_bandwidth_product|phase_in_deg|phase_in_rad)\s*=\s*([^\s]+)", line, re.I)
         if match:
             try:
                 values[mapping[match.group(1).lower()]] = float(match.group(2))
             except ValueError:
                 values[mapping[match.group(1).lower()]] = None
+    if values.get("phase_in_deg") is None and values.get("phase_in_rad") is not None:
+        values["phase_in_deg"] = math.degrees(values["phase_in_rad"])
     if values.get("phase_in_deg") is not None:
         values["phase_margin_deg"] = 180.0 + values["phase_in_deg"]
     return values
