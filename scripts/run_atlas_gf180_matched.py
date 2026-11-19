@@ -124,6 +124,8 @@ def main() -> None:
     parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    args.output = args.output.resolve()
+    os.chdir(args.source_root)
 
     methods = tuple(value.strip() for value in args.methods.split(",") if value.strip())
     rows = []
