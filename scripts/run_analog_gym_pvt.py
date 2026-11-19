@@ -214,6 +214,7 @@ def main():
     parser.add_argument("--budget", type=int, default=300)
     parser.add_argument("--seeds", default="0,1,2")
     parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
+    parser.add_argument("--pvt-limit", type=int, default=None, help="Limit PVT conditions for capability smoke tests")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -227,6 +228,10 @@ def main():
     low, high = bounds(names)
     template = template_path.read_text(encoding="utf-8")
     pvt = make_pvt_grid()
+    if args.pvt_limit is not None:
+        if args.pvt_limit < 1:
+            raise SystemExit("--pvt-limit must be positive")
+        pvt = pvt[:args.pvt_limit]
     root = args.output.parent / f"_{args.output.stem}_work"
     root.mkdir(parents=True, exist_ok=True)
     source_pdk = args.pdk_root.resolve()
