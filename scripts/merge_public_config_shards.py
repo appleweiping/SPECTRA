@@ -87,7 +87,8 @@ def main() -> None:
               "expected_seeds": sorted(int(seed) for seed in args.seeds.split(",") if seed.strip()),
               "expected_methods": sorted(method.strip() for method in args.methods.split(",") if method.strip()),
               "rows": rows, "aggregate": aggregate, "complete": not errors,
-              "ranking_eligible": not errors, "errors": errors}
+              "ranking_eligible": not errors and args.pvt_conditions > 1, "errors": errors,
+              "ranking_reason": "TT-only capability receipts are retained but excluded from ranking" if args.pvt_conditions <= 1 else None}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if errors:

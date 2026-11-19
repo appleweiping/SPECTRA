@@ -16,13 +16,18 @@ import math
 import os
 import re
 import subprocess
+import sys
 import time
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 
-from spectra.bench.cross_domain import make_pvt_grid
+try:
+    from spectra.bench.cross_domain import make_pvt_grid
+except ModuleNotFoundError:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from spectra.bench.cross_domain import make_pvt_grid
 
 
 def parse_spice_number(raw: str) -> float:
@@ -141,6 +146,10 @@ def main() -> None:
     parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--nominal-supply", type=float, default=1.8)
+    parser.add_argument("--pvt-mode", choices=("canonical", "source"), default="canonical",
+                        help="canonical uses the 45-condition grid; source falls back to TT-only when no .lib corner exists")
+    parser.add_argument("--pvt-limit", type=int, default=None,
+                        help="truncate the verifier grid for capability smoke tests")
     args = parser.parse_args()
     config, circuit = read_config(args.config.resolve())
     source_text = circuit.read_text(encoding="utf-8")
@@ -148,7 +157,16 @@ def main() -> None:
     bounds = np.asarray([[float(config["design_vars"][name][1]), float(config["design_vars"][name][2])] for name in names])
     defaults = np.asarray([float(config["design_vars"][name][0]) for name in names])
     specs = config.get("specs", {})
-    pvt = make_pvt_grid()
+    has_corner_selector = bool(re.search(r"^\s*\.lib\s+[^\n]+\b(?:tt|ff|ss|sf|fs)\s*$",
+                                         source_text, flags=re.IGNORECASE | re.MULTILINE))
+    if args.pvt_mode == "source" and not has_corner_selector:
+        pvt = make_pvt_grid()[:1]
+    else:
+        pvt = make_pvt_grid()
+    if args.pvt_limit is not None:
+        if args.pvt_limit < 1:
+            raise SystemExit("--pvt-limit must be positive")
+        pvt = pvt[:args.pvt_limit]
     methods = tuple(item.strip() for item in args.methods.split(",") if item.strip())
     rows: list[dict[str, Any]] = []
     root = args.output.resolve().parent / f"_{args.output.stem}_work"
@@ -231,7 +249,8 @@ def main() -> None:
                          "parameters": dict(zip(names, values.tolist())),
                          "source": str(circuit), "wall_seconds": time.perf_counter() - started})
     payload = {"schema": "spectra-public-config-pvt/v1", "model": "gpt-6.1-sol", "budget": args.budget,
-               "llm_calls": 12, "pvt_conditions": len(pvt), "rows": rows, "ranking_eligible": False}
+               "llm_calls": 12, "pvt_conditions": len(pvt), "pvt_mode": args.pvt_mode,
+               "rows": rows, "ranking_eligible": False if len(pvt) <= 1 else False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
