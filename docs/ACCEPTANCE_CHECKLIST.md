@@ -33,6 +33,7 @@ This checklist turns the project handoff and the ICCAD contract into checks that
 | XPDK-1 | Cross-PDK public benchmark | At least three public PDK/model groups with immutable receipts and three or more circuit families per group | NOT MET (current executable backend is SKY130 only. The frozen expansion targets PTM45/PTM180, GF180MCU and public SKY130 tracks) |
 | XTOPO-1 | Cross-topology public benchmark | Public AnalogGym, AMPICBench, opensource-analog-circuits, ATLAS and Analog Design Bench topology digests | NOT MET (the existing 92-task matrix uses fixed SPECTRA template topologies) |
 | XSIM-1 | Cross-simulator parity | Two independently versioned simulators with matched netlists, corners and metric parser | NOT MET (server evidence currently covers ngspice-42 only. No Xyce, Spectre or HSPICE executable is installed) |
+| XTT-1 | Public multi-PDK TT adapter | Three public model groups, seeds 0/1/2 and exactly 300 simulations per method-task cell | PARTIAL (`results/public_suite_3pdk_tt_v2.*` covers PTM180, BPTM45 and embedded BJT. It is TT-only, the BJT row has one scalar metric, and no cell is PVT-ranking eligible) |
 | XANA-1 | Cross-domain AnaFlow row | AnaFlow adapter runs on every public PDK/topology/simulator stratum under the same budget and verifier | NOT MET |
 | XSOTA-1 | Domain-level SOTA | All preregistered TT/PVT success and violation endpoints beat AnaFlow across every declared public stratum | NOT MET (current evidence supports benchmark-scoped SOTA only) |
 
