@@ -10,11 +10,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import shutil
 import subprocess
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from statistics import median
 from typing import Any, Iterable, Mapping
 
 
@@ -35,6 +37,86 @@ class CrossDomainTask:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+@dataclass(frozen=True)
+class PvtCondition:
+    """One immutable process, temperature and supply operating condition."""
+
+    corner: str
+    temperature_c: float
+    supply_v: float
+
+    @property
+    def name(self) -> str:
+        return f"{self.corner}_{self.temperature_c:g}C_{self.supply_v:g}V"
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "corner": self.corner,
+            "temperature_c": self.temperature_c,
+            "supply_v": self.supply_v,
+            "name": self.name,
+        }
+
+
+def make_pvt_grid(
+    corners: Iterable[str] = ("tt", "ff", "ss", "sf", "fs"),
+    temperatures_c: Iterable[float] = (-40.0, 27.0, 125.0),
+    supplies_v: Iterable[float] = (1.62, 1.8, 1.98),
+) -> tuple[PvtCondition, ...]:
+    """Create a deterministic PVT grid with nominal TT first."""
+
+    values = [PvtCondition(c, float(t), float(v))
+              for c in corners for t in temperatures_c for v in supplies_v]
+    nominal = PvtCondition("tt", 27.0, 1.8)
+    return tuple([nominal] + [value for value in values if value != nominal])
+
+
+def aggregate_pvt(
+    metrics_by_condition: Mapping[str, Mapping[str, float]],
+    specs: Mapping[str, Mapping[str, float] | tuple[str, float]],
+) -> dict[str, Any]:
+    """Aggregate a corner-complete result without hiding crashes or omissions."""
+
+    condition_rows: list[dict[str, Any]] = []
+    all_values: list[float] = []
+    for condition, metrics in metrics_by_condition.items():
+        per_metric = positive_normalized_violation(metrics, specs)
+        finite = [value for value in per_metric.values() if value != float("inf")]
+        missing = [name for name, value in per_metric.items() if value == float("inf")]
+        violation = float("inf") if missing else (sum(finite) / max(1, len(finite)))
+        condition_rows.append({
+            "condition": condition,
+            "metrics": dict(metrics),
+            "metric_violation": per_metric,
+            "normalized_violation": violation,
+            "pass": not missing and violation == 0.0,
+            "missing_metrics": missing,
+        })
+        if math.isfinite(violation):
+            all_values.append(violation)
+    pvt_pass = bool(condition_rows) and all(row["pass"] for row in condition_rows)
+    return {
+        "conditions_observed": len(condition_rows),
+        "pvt_success": pvt_pass,
+        "mean_normalized_violation": float("inf") if len(all_values) != len(condition_rows) else sum(all_values) / len(all_values),
+        "median_normalized_violation": float("inf") if len(all_values) != len(condition_rows) else float(median(all_values)),
+        "conditions": condition_rows,
+    }
+
+
+def validate_budget(record: Mapping[str, Any], simulations: int, llm_calls: int) -> list[str]:
+    """Return budget violations for a cell.  Exact caps are required for ranking."""
+
+    errors: list[str] = []
+    observed_simulations = record.get("simulations")
+    observed_calls = record.get("llm_calls")
+    if observed_simulations != simulations:
+        errors.append(f"simulations={observed_simulations!r}, expected {simulations}")
+    if observed_calls != llm_calls:
+        errors.append(f"llm_calls={observed_calls!r}, expected {llm_calls}")
+    return errors
 
 
 def sha256_file(path: str | os.PathLike[str]) -> str:

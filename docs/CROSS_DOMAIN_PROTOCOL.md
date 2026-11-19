@@ -73,6 +73,13 @@ python3 -m py_compile spectra/bench/cross_domain.py scripts/cross_domain_capabil
 
 Every comparable cell records `task_id`, `source_commit`, `topology_digest`, `pdk_id`, `simulator_id`, `simulator_version`, `seed`, `llm_calls`, `simulations`, `first_pass_simulations`, `wall_seconds`, `tokens_in`, `tokens_out`, `cost_usd`, `tt_pass`, `pvt_pass`, `tt_violation_mean`, `tt_violation_median`, `pvt_violation_mean`, `pvt_violation_median`, `crash` and `failure_taxonomy`. Normalized violation is the mean positive spec residual after each metric is divided by its task-specific tolerance. PVT success means every declared corner passes.
 
+The shared contract is implemented in `spectra/bench/cross_domain.py`. It
+creates the canonical 45-condition PVT grid, aggregates per-corner metrics and
+rejects missing values as infinite violation. Before ranking a result table,
+run `scripts/validate_cross_domain_cells.py`. The validator requires exact
+simulation and call budgets, unique task-method-seed cells, a complete PVT
+grid and finite mean/median violation fields.
+
 AnaFlow is a clean-room adapter in this repository. Its paper reports two PTM45/ngspice op-amp demonstrations and sample-efficiency fields, not a cross-domain TT/PVT table. A domain-level claim therefore requires a matched AnaFlow adapter run on every public stratum.
 
 ## Public sources
