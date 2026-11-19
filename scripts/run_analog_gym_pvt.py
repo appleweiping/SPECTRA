@@ -120,6 +120,11 @@ def prepare_xyce(template, topology, corner, temperature, supply, output):
             continue
         lines.append(line.replace("ac=1", "AC 1").replace("AC=1", "AC 1"))
     translated = "".join(lines)
+    translated = re.sub(
+        r"(?im)^\\.meas\\s+ac\\s+phase_in_deg\\s+param=.*$",
+        ".meas ac phase_in_deg find vp(opout) when vdb(opout)=0",
+        translated,
+    )
     translated = translated.replace(".end\n", ".AC DEC 10 0.1 1G\n.PRINT AC VDB(opout) VP(opout)\n.END\n")
     translated = re.sub(r"(?im)^\.temp\s+[^\n]+\n", "", translated)
     first_line, separator, remainder = translated.partition("\n")
