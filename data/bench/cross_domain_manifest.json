@@ -34,14 +34,14 @@
       "id": "opensource_31",
       "source": "jialinlu/opensource-analog-circuits",
       "source_url": "https://github.com/jialinlu/opensource-analog-circuits",
-      "pdks": ["ptm45", "ptm180", "sky130", "bjt_public"],
+      "pdks": ["ptm45", "ptm180", "sky130", "bjt_public", "asap7"],
       "simulators": ["ngspice-44.2", "Xyce-7.10"],
       "families": ["opamp", "ldo", "bandgap", "por", "vco", "bjt_amp"],
       "topology_policy": "public source topology digest",
       "corners": "source-declared corners, mapped only where metric semantics match",
       "seeds": [0, 1, 2],
       "budget": {"simulations": 300, "llm_calls": 12},
-      "status": "server_matched_rerun_in_progress; default-capability-32-of-32-receipt-complete"
+      "status": "server_matched_rerun_in_progress; PTM180/BJT TT-only merged; SKY130 LP and ASAP7/SKY130 LDO PVT shards running; default-capability-32-of-32-receipt-complete"
     },
     {
       "id": "ampicbench_public",
