@@ -87,6 +87,18 @@ run `scripts/validate_cross_domain_cells.py`. The validator requires exact
 simulation and call budgets, unique task-method-seed cells, a complete PVT
 grid and finite mean/median violation fields.
 
+The sharded AnalogGym jobs are merged only by
+`scripts/merge_analoggym_shards.py`. The merger requires all six cells in the
+three-seed by two-method matrix and refuses duplicate cells, wrong budgets,
+missing corners, or non-finite violations.
+
+```bash
+python scripts/merge_analoggym_shards.py \
+  --input results/analoggym_pvt_s*_spectra.json \
+          results/analoggym_pvt_s*_anaflow_cleanroom.json \
+  --output results/analoggym_pvt_merged.json
+```
+
 AnaFlow is a clean-room adapter in this repository. Its paper reports two PTM45/ngspice op-amp demonstrations and sample-efficiency fields, not a cross-domain TT/PVT table. A domain-level claim therefore requires a matched AnaFlow adapter run on every public stratum.
 
 ## Public sources
