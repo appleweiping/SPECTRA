@@ -130,8 +130,6 @@ def run_spectra(task, model="gpt-6.1-sol", seed=0, budget=None):
         return _run_spectra_staged(task, model, seed, ctx, vars_, build, x, llm_failed)
     if robust and pvt_strategy == "hybrid":
         return _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed)
-    if robust and os.environ.get("SPECTRA_PVT_STRATEGY", "fullgrid") == "hybrid":
-        return _run_spectra_hybrid(task, seed, ctx, vars_, build, x, llm_failed)
     # Robust tasks use the same 300 condition-evaluation budget as every other
     # strict row, but spend it on the actual 45-corner objective.  The old path
     # stopped as soon as TT passed, which made a nominally good design consume
