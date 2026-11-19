@@ -23,15 +23,15 @@ from ..sim.evaluate import NOMINAL
 def _pvt_popsize():
     """Return the bounded CMA-ES population used by robust sizing.
 
-    A five-point population gives the full-grid objective one additional
-    candidate per generation while staying inside the frozen 300-unit budget.
-    The environment override is only for smoke tests and preregistered
-    ablations.  The benchmark default is fixed and recorded in the event log.
+    The benchmark default remains the preregistered four-point population.
+    The environment override is reserved for smoke tests and preregistered
+    ablations so an exploratory population cannot silently change the primary
+    evidence.
     """
     try:
-        return max(3, min(8, int(os.environ.get("SPECTRA_PVT_POPSIZE", "5"))))
+        return max(3, min(8, int(os.environ.get("SPECTRA_PVT_POPSIZE", "4"))))
     except (TypeError, ValueError):
-        return 5
+        return 4
 
 PAPER_META = {
     "spectra": {"paper": "SPECTRA (ours)", "venue": "this work", "repo": "local framework"},
