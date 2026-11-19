@@ -1,0 +1,1471 @@
+{
+  "experiment": "SIZ11g_SPECTRA_UNION_TOPK4_EXT_V1",
+  "subset": "all_sizing_tasks.jsonl",
+  "cells_observed": 276,
+  "cells_expected": 276,
+  "task_count": 92,
+  "family_count": 12,
+  "tt_success": 0.8260869565217391,
+  "pvt_success": 0.21052631578947367,
+  "mean_tt_violation": 0.05943937452674658,
+  "mean_pvt_violation": 0.2930748540667673,
+  "crashes": 0,
+  "rows": [
+    {
+      "task": "opamp-00",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-01",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-02",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-03",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-04",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-05",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-06",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.07645838771215148
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-07",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.10191824288689068,
+        0.19078818438594336,
+        0.014590560595639138
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-08",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.004110769683131385,
+        0.054933201429835904,
+        0.08667676312187163
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-09",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.01658523527080887,
+        0.006734066839274836,
+        0.10044345767525618
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-10",
+      "family": "opamp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.003159197021959213,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-11",
+      "family": "opamp",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 1,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.4261442386344195,
+        0.37201521204398463,
+        0.0
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-12",
+      "family": "opamp",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        3.291152201032813,
+        1.8322672848803727,
+        0.10311251100997224
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-13",
+      "family": "opamp",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.199349726459982,
+        0.004481195267497395,
+        0.025279513529022513
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "opamp-14",
+      "family": "opamp",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 1,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.015831438098019717,
+        0.0385198453076563,
+        0.0
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "amp-00",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-01",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-02",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-03",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-04",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.168435134928761,
+        0.1169309767109174,
+        0.21410651114523035
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-05",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 1,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.030578526814028523,
+        0.2564852564016814
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-06",
+      "family": "amp",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "amp-07",
+      "family": "amp",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.2619808381495265,
+        0.008930927081332094,
+        0.22512509654262008
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "tia-00",
+      "family": "tia",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "tia-01",
+      "family": "tia",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "tia-02",
+      "family": "tia",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "tia-03",
+      "family": "tia",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "tia-04",
+      "family": "tia",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "tia-05",
+      "family": "tia",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.027713312366571024,
+        0.05579067051439061,
+        0.03133266664671181
+      ],
+      "pvt_violation": [
+        0.3983651069599599,
+        0.11733487983207021,
+        0.09236634254792751
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-00",
+      "family": "cmirror",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-01",
+      "family": "cmirror",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-02",
+      "family": "cmirror",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-03",
+      "family": "cmirror",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-04",
+      "family": "cmirror",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-05",
+      "family": "cmirror",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 1,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.7417760293423615,
+        0.10803163705238446
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-06",
+      "family": "cmirror",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 3,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "cmirror-07",
+      "family": "cmirror",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 3,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-00",
+      "family": "ldo",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-01",
+      "family": "ldo",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-02",
+      "family": "ldo",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.10336199332230277,
+        0.3530881620471723,
+        0.23535429347132364
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-03",
+      "family": "ldo",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-04",
+      "family": "ldo",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-05",
+      "family": "ldo",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.17178012619352712,
+        0.2789824872900515,
+        0.04058953748080993
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-06",
+      "family": "ldo",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.08992629601937917,
+        1.2954032392552048,
+        0.26245562611649753
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "ldo-07",
+      "family": "ldo",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.2811386387546898,
+        0.15431040250052613,
+        0.02671550488330522
+      ],
+      "pvt_violation": [
+        0.5281987356790544,
+        0.45617082364144057,
+        0.18825641758440576
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "ref-00",
+      "family": "ref",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ref-01",
+      "family": "ref",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ref-02",
+      "family": "ref",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ref-03",
+      "family": "ref",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "ref-04",
+      "family": "ref",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.11916359379765801,
+        0.6193630298048364,
+        0.07557585407065609
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "ref-05",
+      "family": "ref",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        1.0,
+        1.0,
+        0.010557718076728362
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "comparator-00",
+      "family": "comparator",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "comparator-01",
+      "family": "comparator",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "comparator-02",
+      "family": "comparator",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "comparator-03",
+      "family": "comparator",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.022587034552200663
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "comparator-04",
+      "family": "comparator",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "comparator-05",
+      "family": "comparator",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.20329735021937256,
+        2.011038420752199,
+        0.1189638585138749
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "latch-00",
+      "family": "latch",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "latch-01",
+      "family": "latch",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "latch-02",
+      "family": "latch",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "latch-03",
+      "family": "latch",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "latch-04",
+      "family": "latch",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "latch-05",
+      "family": "latch",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.07905857031317436,
+        0.2012601578020337,
+        0.001501559404806851
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "vco-00",
+      "family": "vco",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "vco-01",
+      "family": "vco",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "vco-02",
+      "family": "vco",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "vco-03",
+      "family": "vco",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "vco-04",
+      "family": "vco",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "vco-05",
+      "family": "vco",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "vco-06",
+      "family": "vco",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.38798290837121746,
+        0.00785354533145655,
+        0.0643582162162162
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "vco-07",
+      "family": "vco",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 2,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.0,
+        0.0,
+        0.059924158681818274
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "filter-00",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-01",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.016092742050557024
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-02",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-03",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.010568460038503083
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-04",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.4067493786042271,
+        0.2151450353066147,
+        0.23613514425126325
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-05",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        2.0,
+        2.0,
+        0.40896176722604327
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-06",
+      "family": "filter",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.5067748333333332
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "filter-07",
+      "family": "filter",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 2,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.006630642765843927,
+        0.0,
+        0.0
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "schmitt-00",
+      "family": "schmitt",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "schmitt-01",
+      "family": "schmitt",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "schmitt-02",
+      "family": "schmitt",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "schmitt-03",
+      "family": "schmitt",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [
+        0.08005452500000004,
+        0.056715751388888846,
+        0.01455432083333316
+      ],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-00",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-01",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-02",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-03",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.06659052206577991
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-04",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-05",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 0,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.3053234189023405,
+        0.04763597775803604,
+        0.04807528370451323
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-06",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-07",
+      "family": "opamp_app",
+      "robust": false,
+      "cells": 3,
+      "tt_success": 3,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pvt_violation": [],
+      "crashes": 0
+    },
+    {
+      "task": "opamp_app-08",
+      "family": "opamp_app",
+      "robust": true,
+      "cells": 3,
+      "tt_success": 2,
+      "pvt_success": 0,
+      "tt_violation": [
+        0.0,
+        0.061727837099133355,
+        0.0
+      ],
+      "pvt_violation": [
+        0.10494206216778032,
+        0.16172783669199034,
+        0.08807510592869122
+      ],
+      "crashes": 0
+    }
+  ]
+}

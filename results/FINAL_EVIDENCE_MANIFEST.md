@@ -18,6 +18,9 @@ The strict sizing evidence was generated on the westc server and retained there 
 | Verifier | 45-corner PVT grid |
 | Primary SPECTRA | TT 0.806, PVT 0.194, TT violation 0.1180, PVT violation 0.5648 |
 | Staged SPECTRA sensitivity, post-fix | TT 0.815, PVT 0.222, TT violation 0.1071, PVT violation 0.5009 |
+| 36-task union-top-k4 candidate | 108/108 cells, TT 0.9167, PVT 0.3333, TT violation 0.0128, PVT violation 0.2820 |
+| 92-task union-top-k4 candidate | 276/276 cells, TT 0.8261, PVT 0.2105, TT violation 0.0594, PVT violation 0.2931 |
+| 92-task family-policy candidate | 276/276 cells, TT 0.8043, PVT 0.2632, TT violation 0.0698, PVT violation 0.3822 |
 
 The primary protocol records SPECTRA's full-grid PVT-aware search objective and the preregistered three-corner
 search objective used by the external clean-room adapters. The verifier and reported budget are shared. The
@@ -26,5 +29,10 @@ post-fix staged rerun replaced the earlier pre-fix staged sensitivity result in 
 
 The complete 92-task expansion is recorded in `results/EXTERNAL_EXPANSION_AUDIT.md`. It contains 2,208/2,208
 external-primary cells across eight rows, 12 families and three seeds. The SPECTRA family-policy candidate covers
-276/276 additional cells. The unified union-top-k4 candidate is being evaluated on the same 92-task matrix before
-the final ranking is frozen.
+276/276 additional cells, and the identical union-top-k4 candidate covers another 276/276 cells. The latter archive
+is `work/remote_archive/SIZ11g_SPECTRA_UNION_TOPK4_EXT_V1.tar.gz` with SHA-256
+`3B38D3683E3840A72364BAA63452EF78B90CAF12FDADE6FB9C20FD9ED7201D6A`.
+
+The independent audit of the union archive found 276 unique task-seed cells, 92 tasks, 12 families, 57 robust
+cells, zero crashes, maximum 297 simulation units and maximum three LLM calls per cell. Its status counts were 85
+success and 191 budget-exhausted records, with budget-exhausted cells retained in the denominator.
