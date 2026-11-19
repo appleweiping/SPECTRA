@@ -425,9 +425,10 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
                 cards=[c.get("id") for c in cards])
         revisions += 1
 
-    # Reserve 3 * 45 units for independent full-grid candidate verification.
+    top_k = max(1, min(5, int(os.environ.get("SPECTRA_HYBRID_TOPK", "3"))))
+    # Reserve a fixed tranche for independent full-grid candidate verification.
     # The search budget is rounded down to whole three-corner evaluations.
-    reserve = 3 * len(PVT)
+    reserve = top_k * len(PVT)
     search_budget = 3 * max(0, (ctx.sims_left() - reserve) // len(search_conds))
     if search_budget > 0:
         best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
@@ -443,7 +444,7 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
     for candidate in sorted(seed_candidates, key=lambda c: c["rank"]):
         key = tuple(round(float(candidate["params"].get(v.name, 0.0)), 12) for v in vars_)
         unique.setdefault(key, candidate)
-    candidates = list(unique.values())[:3]
+    candidates = list(unique.values())[:top_k]
     for candidate in candidates:
         if ctx.sims_left() < len(PVT):
             break
