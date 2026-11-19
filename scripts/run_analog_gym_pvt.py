@@ -203,7 +203,7 @@ def search(method, budget, seed, evaluate, low, high):
                 x = low + np.clip(point, 0.0, 1.0) * (high - low)
                 scores.append(visit(x, index + 1))
                 index += 1
-            if len(scores) >= 2:
+            if len(scores) >= getattr(es.sp, "mu", 2):
                 es.tell(points, scores)
     else:
         for index in range(1, budget + 1):
@@ -250,7 +250,7 @@ def search_robust_spectra(budget, seed, evaluate, low, high, conditions):
             x = low + np.clip(point, 0.0, 1.0) * (high - low)
             scores.append(visit(x, index + 1))
             index += 1
-        if scores:
+        if len(scores) >= getattr(es.sp, "mu", 2):
             es.tell(points[:len(scores)], scores)
     return best_x, best_score, first
 
