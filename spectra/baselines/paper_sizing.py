@@ -439,12 +439,25 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
     # Reserve a fixed tranche for independent full-grid candidate verification.
     # The search budget is rounded down to whole three-corner evaluations.
     reserve = top_k * len(PVT)
-    search_budget = len(search_conds) * max(0, (ctx.sims_left() - reserve) // len(search_conds))
-    if search_budget > 0:
-        best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
-        starts = best_seed["params"] if best_seed else _midpoint(vars_)
-        seed_candidates.extend(_corner_tpe_candidates(
-            ctx, build, vars_, seed + 313, starts, search_budget, search_conds, keep=6))
+    if corner_mode == "union":
+        lowv_conds = [NOMINAL, {"corner": "ss", "temp": -40, "vdd": 1.62},
+                      {"corner": "sf", "temp": -40, "vdd": 1.62}]
+        per_budget = 3 * max(0, (ctx.sims_left() - reserve) // 6)
+        search_budget = 2 * per_budget
+        if per_budget > 0:
+            best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
+            starts = best_seed["params"] if best_seed else _midpoint(vars_)
+            seed_candidates.extend(_corner_tpe_candidates(
+                ctx, build, vars_, seed + 313, starts, per_budget, search_conds, keep=6))
+            seed_candidates.extend(_corner_tpe_candidates(
+                ctx, build, vars_, seed + 619, starts, per_budget, lowv_conds, keep=6))
+    else:
+        search_budget = len(search_conds) * max(0, (ctx.sims_left() - reserve) // len(search_conds))
+        if search_budget > 0:
+            best_seed = min(seed_candidates, key=lambda c: c["rank"]) if seed_candidates else None
+            starts = best_seed["params"] if best_seed else _midpoint(vars_)
+            seed_candidates.extend(_corner_tpe_candidates(
+                ctx, build, vars_, seed + 313, starts, search_budget, search_conds, keep=6))
     ctx.log("spectra_hybrid_search", budget=search_budget, candidates=len(seed_candidates),
             reserved_fullgrid=reserve)
 
