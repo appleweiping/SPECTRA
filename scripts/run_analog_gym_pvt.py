@@ -96,6 +96,37 @@ def prepare(template, topology, corner, temperature, supply, output):
     return output
 
 
+def prepare_xyce(template, topology, corner, temperature, supply, output):
+    """Translate the AnalogGym ngspice control block to an explicit Xyce AC run."""
+
+    text = template.replace("HoiLee_AFFC_Pin_3", topology)
+    text = re.sub(r"\.include \.\./mosfet_model/sky130_pdk/libs\.tech/ngspice/corners/[^\s]+",
+                  f".include ../mosfet_model/sky130_pdk/libs.tech/ngspice/corners/{corner}.spice", text)
+    text = re.sub(r"\.PARAM supply_voltage\s*=\s*[^\s]+", f".PARAM supply_voltage = {supply:g}", text)
+    lines = []
+    in_control = False
+    for line in text.splitlines(True):
+        stripped = line.strip().lower()
+        if stripped == ".control":
+            in_control = True
+            continue
+        if in_control and stripped == ".endc":
+            in_control = False
+            continue
+        if in_control:
+            continue
+        fields = stripped.split()
+        if len(fields) >= 2 and fields[0] in {".measure", ".meas"} and fields[1] == "dc":
+            continue
+        lines.append(line.replace("ac=1", "AC 1").replace("AC=1", "AC 1"))
+    translated = "".join(lines)
+    translated = translated.replace(".end\n", ".AC DEC 10 0.1 1G\n.PRINT AC VDB(opout) VP(opout)\n.END\n")
+    translated = re.sub(r"(?im)^\.temp\s+[^\n]+\n", "", translated)
+    translated = f".temp {temperature:g}\n" + translated
+    output.write_text(translated, encoding="utf-8")
+    return output
+
+
 def metrics(log):
     values = {}
     mapping = {"dcgain": "dcgain_db", "gain_bandwidth_product": "gbw_hz", "phase_in_deg": "phase_in_deg", "phase_in_rad": "phase_in_rad"}
@@ -116,7 +147,9 @@ def metrics(log):
 def run(template, topology, corner, temperature, supply, simulator, work):
     testbench = work / "amp_spice_testbench"
     testbench.mkdir(parents=True, exist_ok=True)
-    netlist = prepare(template, topology, corner, temperature, supply, testbench / "TB_Amplifier_ACDC.cir")
+    simulator_name = Path(simulator).name.lower()
+    prepare_fn = prepare_xyce if simulator_name.startswith("xyce") else prepare
+    netlist = prepare_fn(template, topology, corner, temperature, supply, testbench / "TB_Amplifier_ACDC.cir")
     try:
         proc = subprocess.run([simulator, "-b", netlist.name], cwd=str(testbench), capture_output=True, text=True, timeout=180)
         text = proc.stdout + "\n" + proc.stderr
