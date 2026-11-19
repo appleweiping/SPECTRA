@@ -14,6 +14,12 @@ pages. A preprint is labelled as a preprint until a proceedings page or DOI is a
 | [Long-Horizon Analog Design Bench, arXiv:2609.33356](https://arxiv.org/abs/2609.33356) | Uses 50 tasks from 17 designers, 15 agent configurations, three rollouts and 2,250 two-hour attempts. Reports full-specification pass rate, reliability, coverage, runtime, model iterations, tool calls, wait time, recovered candidates, tokens and cost. | A benchmark must preserve task-level outcomes and resource accounting. Pass rate alone is insufficient. |
 | [PVTSizing 2.0, arXiv:2611.22328](https://arxiv.org/abs/2611.22328) | Evaluates four circuit benchmarks and 40 runs, reporting runtime/sample-count trade-offs and a knowledge-injection study. | PVT-aware sizing needs corner closure, sample efficiency and runtime, with a separate knowledge intervention. |
 | [AnalogScout, arXiv:2610.37319](https://arxiv.org/abs/2610.37319) | Targets simulation-efficient PVT-aware sizing and identifies all-corner simulation as the dominant cost. | SPECTRA must report corner allocation, independent PVT verification and simulation savings. |
+| [AMPICBench, 2026 repository](https://github.com/AMPICLab/AMPICBench) | Provides source-native Sky130 ngspice netlists with per-corner operating-region data for sizing, simulation and layout tools. | Add source-native topology receipts and separate sizing, simulation and layout evaluation layers. |
+| [SGAnalog, 2026 repository](https://github.com/Li-Yueting/SGAnalog) | Uses commit-pinned open-source silicon tapeouts, graph-deduplicated circuits and runnable ngspice testbenches. | Add provenance-pinned held-out designs and leakage-aware post-cutoff splits when the task is topology generation or sizing from real tapeouts. |
+| [AnalogGym-Opt, IEEE TCAD 2026 code](https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt) | Provides a GRPO/R-GNN multi-objective sizing infrastructure on AnalogGym with optional PVT verification and Pareto tracking. | Include learned optimizer and Pareto-front baselines, with identical simulator and budget caps. |
+| [Open-source Analog Circuit Sizing Benchmark](https://github.com/jialinlu/opensource-analog-circuits) | Provides 31 circuits, ngspice wrappers, 12 PVT corners and a separate 200/500-sample mismatch-yield protocol. | Keep PVT and mismatch as distinct axes and use an independent validation seed for yield. |
+| [PARADIGM-Analog-EDA](https://github.com/Kevin-Pal/PARADIGM-Analog-EDA) | Reuses topology-specific Pareto databases to warm-start topology selection and sizing. | Add database reuse and cold-start transfer controls to distinguish retrieval from optimizer skill. |
+| [BAIcO](https://github.com/nunocclourenco/BAIcO) and [ACOB](https://github.com/Quizas605/ACOB-Analog-Circuit-Optimization-Benchmark) | Open optimization frameworks expose simulator wrappers, task configs and reproducible black-box baselines. | Preserve classical GA/BO/RL controls and simulator-failure denominators in the same manifest. |
 | [ATLAS, ICCAD 2026 code and paper metadata](https://github.com/youngmin0oh/atlas) | Public topology-aware Bayesian optimization with Mapper/TDA, ngspice, GF180MCU and SKY130. The repository exposes fixed optimizer defaults and documents reproducibility defects corrected after the paper experiments. | Cross-PDK receipts and versioned optimizer configuration are required. A result must distinguish paper reproduction from a clean-room adapter. |
 | [AnaFlow, arXiv:2511.03697](https://arxiv.org/abs/2511.03697) | Agentic, explainable, sample-efficient sizing demonstrated on two circuits, with adaptive simulation and reasoning history. | AnaFlow is a meaningful matched comparator, but an adapter must not be called an official reproduction when source code is unavailable. |
 | [Analog Canvas](https://github.com/cascode-ai/analog-canvas) | 2,500+ commits, deterministic SPICE/Spectre import/export, typed Agent transaction model, ERC, simulator service and auditable acceptance artifacts. | Framework quality includes deterministic artifacts, typed interfaces, reproducible simulator runs and provenance, beyond an optimizer loop. |
@@ -21,6 +27,12 @@ pages. A preprint is labelled as a preprint until a proceedings page or DOI is a
 
 The 2026 arXiv entries above are time-stamped snapshots found on 2026-11-19. They are
 included as emerging references and are not silently upgraded to peer-reviewed status.
+
+The new repository snapshots were checked out under `work/reference_sources/` on E: for
+source inspection only. They were not added as vendored project dependencies and no local
+simulator or model run was started. The audit focuses on benchmark manifests, evaluation
+scripts, simulator wrappers, provenance rules and ablation contracts rather than treating
+repository size as evidence of scientific quality.
 
 ## Derived SPECTRA quality contract
 
@@ -79,6 +91,19 @@ The paper contract includes the following additional studies.
 * Knowledge and prompt provenance, leakage checks, and held-out task evaluation.
 * Reproducibility audit with source commit, binary hash, PDK identity, raw shards and a strict
   merger that rejects missing, duplicate or non-finite cells.
+
+### Universal-coverage extension
+
+“All analog circuits, all PDKs and all simulators” is an open-ended population, so it cannot
+be established by a finite benchmark as a literal theorem. The reproducible extension contract
+therefore uses a coverage matrix with explicit strata rather than silently extrapolating one
+PDK or simulator. A universal-style claim requires, at minimum, source-native tasks from
+AnalogGym/AMPICBench, the 31-circuit open-source suite, SGAnalog tapeout-derived circuits,
+ATLAS GF180/SKY130 tasks, and Analog Design Bench; at least three PDK/model groups; ngspice,
+Xyce and one licensed Spectre/Virtuoso path when a licensed server is available; three seeds;
+nominal plus all source-defined PVT corners; independent mismatch validation; and matched
+classical, learned, LLM-agent and database-reuse baselines. Every unsupported stratum must be
+reported as unmeasured, with no universal SOTA extrapolation.
 
 ## SPECTRA implementation mapping
 
