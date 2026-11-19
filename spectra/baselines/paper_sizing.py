@@ -387,9 +387,15 @@ def _run_spectra_hybrid(task, model, seed, ctx, vars_, build, x, llm_failed):
     """
     from ..sim.evaluate import PVT
 
-    if os.environ.get("SPECTRA_HYBRID_CORNERS", "nominal") == "lowv":
+    corner_mode = os.environ.get("SPECTRA_HYBRID_CORNERS", "nominal")
+    if corner_mode == "lowv":
         search_conds = [NOMINAL, {"corner": "ss", "temp": -40, "vdd": 1.62},
                         {"corner": "sf", "temp": -40, "vdd": 1.62}]
+    elif corner_mode == "dual":
+        search_conds = [NOMINAL, {"corner": "ss", "temp": -40, "vdd": 1.62},
+                        {"corner": "sf", "temp": -40, "vdd": 1.62},
+                        {"corner": "ss", "temp": 125, "vdd": 1.8},
+                        {"corner": "ff", "temp": -40, "vdd": 1.8}]
     else:
         search_conds = [NOMINAL, {"corner": "ss", "temp": 125, "vdd": 1.8},
                         {"corner": "ff", "temp": -40, "vdd": 1.8}]
