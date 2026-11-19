@@ -1,0 +1,19 @@
+{
+  "schema": "spectra-atlas-pdk-capability/v1",
+  "track": "atlas_dual_pdk",
+  "circuit": "two_stage_opamp_gf180",
+  "source_commit": "dd23c5ba7beb598909be593e4a84c81dab92cc69",
+  "pdk_root": "/root/autodl-tmp/pdks/atlas_root",
+  "pdk_receipts": {
+    "gf180_model_source": "google/gf180mcu-pdk",
+    "sky130_model_source": "CODA-Team/AnalogGym/PDK/sky130_pdk.zip"
+  },
+  "simulator": "ngspice-42",
+  "budget": 5,
+  "seed": 0,
+  "returncode": 1,
+  "ranking_eligible": false,
+  "pvt": false,
+  "reason": "GF180 model netlist emits par_vth=$ and var_vth undefined under ngspice-42; ATLAS README specifies ngspice 44.2. No successful ATLAS dual-PDK cell was counted.",
+  "raw_log_sha256": "f2a28df9ebefea98017de21167b501568d1b5a27f282c537aee070b3d9c8ca01"
+}

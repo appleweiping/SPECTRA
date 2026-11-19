@@ -47,6 +47,12 @@ testbench smoke with immutable source, PDK and simulator hashes. It verifies
 the public netlist can execute under ngspice-42, while explicitly excluding
 sizing, PVT and ranking claims.
 
+The ATLAS GF180 capability check is archived in
+`results/atlas_gf180_ngspice42_capability.md`. The public GF180 model tree was
+prepared on the server, but the ATLAS netlist emitted an undefined
+`par_vth=$`/`var_vth` model expression under ngspice-42. ATLAS specifies
+ngspice 44.2, so this failed cell is excluded from the ranking.
+
 ## Capability audit before a run
 
 Run the receipt generator on the server before scheduling a matrix. It records
