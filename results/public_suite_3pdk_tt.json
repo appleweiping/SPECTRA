@@ -1,0 +1,692 @@
+{
+  "budget": 300,
+  "model": "gpt-6.1-sol",
+  "ranking_eligible": false,
+  "ranking_reason": "TT-only public config results. PVT is unavailable for these source configs and no AnaFlow paper row is implied.",
+  "rows": [
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.025878190994262695,
+          "_sim_success": true,
+          "gain": 54.47933,
+          "pm": 179.7522263013716,
+          "ugf": 113864210.40368137
+        },
+        "tt_pass": false,
+        "violation": 0.030670388888888903,
+        "x": [
+          0.8936977322014307,
+          0.5363339368829334,
+          0.6108988164863718,
+          0.8421514963302493,
+          0.9392854185038761,
+          0.24514331497016711,
+          0.23405858265363735,
+          0.39738567664855257,
+          0.5639396019691709,
+          0.01647950920470796,
+          0.921647033517591,
+          0.08073652641583151,
+          0.2506300186222497,
+          0.3664590547054876,
+          0.3500580376741984,
+          0.5394240247799431,
+          0.2726231916260943,
+          0.20106719747105806,
+          0.15131352292042224
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "first_pass": null,
+      "method": "spectra_public_adapter",
+      "pdk": "ptm180nm_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "ptm180nm_opamp",
+      "wall_seconds": 12.349395299796015
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.027031898498535156,
+          "_sim_success": true,
+          "gain": 70.85205,
+          "pm": 179.57107750319187,
+          "ugf": 77814705.42288756
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.01767815477892576,
+          0.9770881902934424,
+          0.5598966484713847,
+          0.9436302549394999,
+          0.9019702516776364,
+          0.7468690884199227,
+          0.7727363537141391,
+          0.7939788263828674,
+          0.15457589039255493,
+          0.3292003569215103,
+          0.7385385032062252,
+          0.6028672728739752,
+          0.02274553377704258,
+          0.9689237126738387,
+          0.9999169555475961,
+          0.12344219759714625,
+          0.46020819597613927,
+          0.13637270593356543,
+          0.4139478648682211
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "first_pass": 287,
+      "method": "anaflow_cleanroom",
+      "pdk": "ptm180nm_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "ptm180nm_opamp",
+      "wall_seconds": 14.32732798717916
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.02544260025024414,
+          "_sim_success": true,
+          "gain": 63.84229,
+          "pm": 179.9628363167577,
+          "ugf": 39194238.69357415
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.6139358849476636,
+          0.12814481296951885,
+          0.5900606569582151,
+          0.5859970483710063,
+          0.7536463947619295,
+          0.15354712858725214,
+          0.030760314521723855,
+          0.531071151640705,
+          0.4966997187377794,
+          0.1335106089025084,
+          0.39420560109021013,
+          0.15069091640025972,
+          0.8662206215655045,
+          0.6965765251498335,
+          0.9668271211528234,
+          0.8108141122993825,
+          0.0006705754339826128,
+          0.1876163911936578,
+          0.1606592513904171
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "first_pass": 190,
+      "method": "spectra_public_adapter",
+      "pdk": "ptm180nm_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "ptm180nm_opamp",
+      "wall_seconds": 13.59451083932072
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.02350020408630371,
+          "_sim_success": true,
+          "gain": 53.7866,
+          "pm": 180.98180748302664,
+          "ugf": 30692851.10243821
+        },
+        "tt_pass": false,
+        "violation": 0.03451888888888889,
+        "x": [
+          0.4434965486529795,
+          0.293139703811096,
+          0.9102584846087232,
+          0.39418352628146835,
+          0.8956621808161226,
+          0.5665005108051067,
+          0.8469154678831501,
+          0.6656082493669545,
+          0.4692428342605274,
+          0.7163119857224545,
+          0.7254649388716485,
+          0.8693750319158191,
+          0.460803334283726,
+          0.5296219336694757,
+          0.7642379384989474,
+          0.5147658444584566,
+          0.6203610325736882,
+          0.23545630927070604,
+          0.9760989383750353
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "first_pass": null,
+      "method": "anaflow_cleanroom",
+      "pdk": "ptm180nm_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "ptm180nm_opamp",
+      "wall_seconds": 13.168516892008483
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.02448725700378418,
+          "_sim_success": true,
+          "gain": 61.33616,
+          "pm": 181.38118083901333,
+          "ugf": 7469107.254699811
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.9647618088753547,
+          0.2266260633591367,
+          0.6890271371485683,
+          0.5550966788978652,
+          0.04201178906868608,
+          0.2961499997837337,
+          0.9271669354015911,
+          0.7845648574299998,
+          0.012831093530388249,
+          0.2966263296627448,
+          0.009805349046563827,
+          0.8274669429780779,
+          0.11036759230906301,
+          0.057455178774819426,
+          0.9818833431950986,
+          0.44586987941521383,
+          0.318392999063676,
+          0.04901338956309209,
+          0.38959528429882206
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "first_pass": 5,
+      "method": "spectra_public_adapter",
+      "pdk": "ptm180nm_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "ptm180nm_opamp",
+      "wall_seconds": 11.482007716782391
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.02038884162902832,
+          "_sim_success": true,
+          "gain": 61.33616,
+          "pm": 181.38118083901333,
+          "ugf": 7469107.254699811
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.9647618088753547,
+          0.2266260633591367,
+          0.6890271371485683,
+          0.5550966788978652,
+          0.04201178906868608,
+          0.2961499997837337,
+          0.9271669354015911,
+          0.7845648574299998,
+          0.012831093530388249,
+          0.2966263296627448,
+          0.009805349046563827,
+          0.8274669429780779,
+          0.11036759230906301,
+          0.057455178774819426,
+          0.9818833431950986,
+          0.44586987941521383,
+          0.318392999063676,
+          0.04901338956309209,
+          0.38959528429882206
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/ptm180nm_opamp/config.json",
+      "first_pass": 5,
+      "method": "anaflow_cleanroom",
+      "pdk": "ptm180nm_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "ptm180nm_opamp",
+      "wall_seconds": 13.862617153208703
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.021105527877807617,
+          "_sim_success": true,
+          "gain": 20.18108,
+          "pm": 177.91429287470572,
+          "ugf": 3442913.187080279
+        },
+        "tt_pass": false,
+        "violation": 0.22121622222222223,
+        "x": [
+          0.0032665581381908343,
+          0.9080439748669977,
+          0.9896088498099065,
+          0.9983028823251853,
+          0.9798952611901037,
+          0.0009021986091840839,
+          0.0024122646669540054,
+          0.01133743587646635,
+          0.027142105091040543,
+          0.7951044797008124
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "first_pass": null,
+      "method": "spectra_public_adapter",
+      "pdk": "gh_autockt_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "gh_autockt_opamp",
+      "wall_seconds": 7.279127163346857
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.018420696258544922,
+          "_sim_success": true,
+          "gain": 8.996194,
+          "pm": 178.5076773722671,
+          "ugf": 1965894.645673017
+        },
+        "tt_pass": false,
+        "violation": 0.2833544777777778,
+        "x": [
+          0.012146526113612555,
+          0.7129936309379207,
+          0.7167506805637281,
+          0.6460450235663548,
+          0.6113386842752012,
+          0.07371643262453753,
+          0.24640596905097556,
+          0.5743780480979319,
+          0.3941867660288976,
+          0.992023228581445
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "first_pass": null,
+      "method": "anaflow_cleanroom",
+      "pdk": "gh_autockt_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "gh_autockt_opamp",
+      "wall_seconds": 7.097640112042427
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.022004127502441406,
+          "_sim_success": true,
+          "gain": 19.50763,
+          "pm": 177.75702229819223,
+          "ugf": 2488715.5747489813
+        },
+        "tt_pass": false,
+        "violation": 0.22495761111111112,
+        "x": [
+          0.0003804357405967624,
+          0.8634932551183452,
+          0.9425022258930301,
+          0.9950142751236631,
+          0.9797131915510809,
+          0.006147384250520273,
+          0.1384792849912067,
+          0.03545832139248893,
+          0.91934868859402,
+          0.9508592493779503
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "first_pass": null,
+      "method": "spectra_public_adapter",
+      "pdk": "gh_autockt_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "gh_autockt_opamp",
+      "wall_seconds": 7.457144793123007
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.014164447784423828,
+          "_sim_success": true,
+          "gain": 6.786664,
+          "pm": 178.61699653914656,
+          "ugf": 1241427.0541035386
+        },
+        "tt_pass": false,
+        "violation": 0.29562964444444445,
+        "x": [
+          0.15052483042117748,
+          0.48221238819933654,
+          0.8947158621961735,
+          0.4227169069454373,
+          0.5895020620840481,
+          0.0244906774933632,
+          0.6734598871529389,
+          0.9190886196338225,
+          0.8268253295567211,
+          0.8855202667099468
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "first_pass": null,
+      "method": "anaflow_cleanroom",
+      "pdk": "gh_autockt_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "gh_autockt_opamp",
+      "wall_seconds": 7.108677126001567
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.015841007232666016,
+          "_sim_success": true,
+          "gain": 18.7726,
+          "pm": 178.048042358422,
+          "ugf": 1484538.4791000958
+        },
+        "tt_pass": false,
+        "violation": 0.22904111111111114,
+        "x": [
+          4.674907596123617e-06,
+          0.7049842049152548,
+          0.9993377388064433,
+          0.9961102207351512,
+          0.8179554514407946,
+          0.0005515840733440419,
+          0.6382572064495716,
+          0.045029473209603696,
+          0.5993119307484747,
+          0.5509331394395038
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "first_pass": null,
+      "method": "spectra_public_adapter",
+      "pdk": "gh_autockt_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "gh_autockt_opamp",
+      "wall_seconds": 7.278791625984013
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.011922359466552734,
+          "_sim_success": true,
+          "gain": 12.13794,
+          "pm": 178.35670653938584,
+          "ugf": 1217552.8103573297
+        },
+        "tt_pass": false,
+        "violation": 0.26590033333333335,
+        "x": [
+          0.08646130462589585,
+          0.4690053132236388,
+          0.5160471348206301,
+          0.9510695625624785,
+          0.703152678593953,
+          0.007080996281563112,
+          0.038255082522192896,
+          0.0063311021464596,
+          0.547500707285765,
+          0.5749874464048453
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/gh_autockt_opamp/config.json",
+      "first_pass": null,
+      "method": "anaflow_cleanroom",
+      "pdk": "gh_autockt_opamp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "gh_autockt_opamp",
+      "wall_seconds": 7.210720378905535
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.037928104400634766,
+          "_sim_success": true,
+          "vout": 15.3344
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.6369616873214543,
+          0.2697867137638703,
+          0.04097352393619469,
+          0.016527635528529094,
+          0.8132702392002724
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/bjt_ce_amp/config.json",
+      "first_pass": 1,
+      "method": "spectra_public_adapter",
+      "pdk": "bjt_ce_amp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 0,
+      "simulations": 42,
+      "simulator": "ngspice",
+      "task": "bjt_ce_amp",
+      "wall_seconds": 1.4178066817112267
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.03627347946166992,
+          "_sim_success": true,
+          "vout": 15.3344
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.6369616873214543,
+          0.2697867137638703,
+          0.04097352393619469,
+          0.016527635528529094,
+          0.8132702392002724
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/bjt_ce_amp/config.json",
+      "first_pass": 1,
+      "method": "anaflow_cleanroom",
+      "pdk": "bjt_ce_amp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "bjt_ce_amp",
+      "wall_seconds": 10.473831889219582
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.01941514015197754,
+          "_sim_success": true,
+          "vout": 14.00306
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.5118216247002567,
+          0.9504636963259353,
+          0.14415961271963373,
+          0.9486494471372439,
+          0.31183145201048545
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/bjt_ce_amp/config.json",
+      "first_pass": 1,
+      "method": "spectra_public_adapter",
+      "pdk": "bjt_ce_amp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 1,
+      "simulations": 34,
+      "simulator": "ngspice",
+      "task": "bjt_ce_amp",
+      "wall_seconds": 1.1336049330420792
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.0335698127746582,
+          "_sim_success": true,
+          "vout": 14.00306
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.5118216247002567,
+          0.9504636963259353,
+          0.14415961271963373,
+          0.9486494471372439,
+          0.31183145201048545
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/bjt_ce_amp/config.json",
+      "first_pass": 1,
+      "method": "anaflow_cleanroom",
+      "pdk": "bjt_ce_amp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "bjt_ce_amp",
+      "wall_seconds": 10.064224885776639
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.03490400314331055,
+          "_sim_success": true,
+          "vout": 17.30782
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.7285605268117946,
+          0.18790107336660344,
+          0.05514662733306819,
+          0.2749693679060381,
+          0.6574330148755926
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/bjt_ce_amp/config.json",
+      "first_pass": 2,
+      "method": "spectra_public_adapter",
+      "pdk": "bjt_ce_amp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 2,
+      "simulations": 26,
+      "simulator": "ngspice",
+      "task": "bjt_ce_amp",
+      "wall_seconds": 1.0117016499862075
+    },
+    {
+      "best": {
+        "metrics": {
+          "_elapsed": 0.018076181411743164,
+          "_sim_success": true,
+          "vout": 17.30782
+        },
+        "tt_pass": true,
+        "violation": 0.0,
+        "x": [
+          0.7285605268117946,
+          0.18790107336660344,
+          0.05514662733306819,
+          0.2749693679060381,
+          0.6574330148755926
+        ]
+      },
+      "budget": 300,
+      "config": "circuits/bjt_ce_amp/config.json",
+      "first_pass": 2,
+      "method": "anaflow_cleanroom",
+      "pdk": "bjt_ce_amp",
+      "pvt_pass": null,
+      "pvt_status": "unavailable_source_has_no_corner_evaluator",
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "task": "bjt_ce_amp",
+      "wall_seconds": 10.439252045936882
+    }
+  ],
+  "schema": "spectra-public-suite/v1",
+  "seeds": [
+    0,
+    1,
+    2
+  ]
+}

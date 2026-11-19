@@ -96,8 +96,16 @@ def _spectra(bench, seed: int, budget: int) -> dict[str, Any]:
                                    {"bounds": [0, 1], "seed": seed + 1001,
                                     "popsize": max(6, min(16, 4 + int(3 * math.log(max(2, bench.dim))))),
                                     "verbose": -9})
-    while evaluations < budget and not es.stop():
-        points = es.ask()
+    while evaluations < budget:
+        # Keep the simulator denominator fixed.  CMA-ES can declare its own
+        # convergence early, in which case the remaining slots are filled by
+        # seeded random points under the same budget.
+        if es.stop():
+            points = rng.random((min(remaining, 8), bench.dim)).tolist()
+            use_cma = False
+        else:
+            points = es.ask()
+            use_cma = True
         points = [np.clip(point, 0.0, 1.0) for point in points[:remaining]]
         scores = []
         for x in points:
@@ -106,7 +114,7 @@ def _spectra(bench, seed: int, budget: int) -> dict[str, Any]:
             record(x, vio, metrics)
             if evaluations >= budget:
                 break
-        if scores:
+        if scores and use_cma:
             es.tell(points[:len(scores)], scores)
         remaining = budget - evaluations
     return {"method": "spectra_public_adapter", "seed": seed, "budget": budget, "best": best,
