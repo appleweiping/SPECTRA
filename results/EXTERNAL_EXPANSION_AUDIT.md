@@ -1,14 +1,9 @@
 # External benchmark expansion audit
 
-The repository-wide task file was converted to the same public fixed-topology sizing schema for all 92 tasks,
-covering 12 circuit families. A server preflight completed 48 cells across two op-amp tasks, eight external-primary
-rows and three seeds with zero crashes.
+The repository-wide task file uses the same public fixed-topology sizing schema for all 92 tasks and 12 circuit families. The server run `SIZ11g_EXT_FINAL_V3` completed 92 tasks × 8 external-primary rows × 3 seeds, for 2,208/2,208 materialized cells. Every cell used the 300 simulation-unit and 12-call caps, and the independent verifier uses 45 PVT corners on robust tasks.
 
-The full 92-task × 8-row × 3-seed run was started on the server with the same 300 simulation-unit and 12-call caps.
-It produced 122 completed cells before being stopped because robust ngspice evaluations made the projected run time
-several hours. These partial cells are archived and excluded from all ranking and SOTA claims. A first launch with
-an unset API environment produced only infrastructure failures and was also archived separately.
+The complete aggregate is recorded in `results/external_expansion_92_summary.md` and `.json`. SPECTRA reaches TT success 0.761 and robust PVT success 0.123. AnaFlow reaches TT success 0.801 and robust PVT success 0.228. Crash cells are retained in denominators and raw evidence rather than removed from the comparison.
 
-The completed and statistically analyzed external-primary result remains the preregistered 36-task, six-domain,
-three-seed track in `results/external_primary_sota.md`. The expansion audit is retained to make the scope boundary
-reproducible rather than silently treating an incomplete repository-wide run as evidence.
+The earlier no-schema launch, missing-API launch and 122-cell partial run remain archived under `results/raw_archive/`. They are excluded from the complete ranking. The complete expansion improves coverage to the requested 92-task/12-family scope, but its measured result does not establish a universal SOTA claim.
+
+The raw archive is `work/remote_archive/SIZ11g_EXT_FINAL_V3.tar.gz` with SHA-256 `F123BA263ABB08BF7705038482E50FC62F7C344943528B09E1811EC23B5CDEEA`.

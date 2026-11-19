@@ -1,0 +1,87 @@
+{
+  "schema": "spectra-expansion-92/v1",
+  "experiment": "SIZ11g_EXT_FINAL_V3",
+  "tasks": 92,
+  "families": 12,
+  "seeds": 3,
+  "cells_per_method": 276,
+  "budget": {
+    "simulation_units": 300,
+    "llm_calls": 12
+  },
+  "verifier_corners": 45,
+  "rows": {
+    "spectra": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.7608695652173914,
+      "pvt_success": 0.12280701754385964,
+      "mean_tt_violation": 0.09715206935220284,
+      "mean_pvt_violation": 0.5931355296886566,
+      "crashes": 0
+    },
+    "analogcoder": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.391304347826087,
+      "pvt_success": 0.17543859649122806,
+      "mean_tt_violation": 0.5414692318285952,
+      "mean_pvt_violation": 1.0012932478803331,
+      "crashes": 4
+    },
+    "ado_llm": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.5652173913043478,
+      "pvt_success": 0.10526315789473684,
+      "mean_tt_violation": 0.08571722192606089,
+      "mean_pvt_violation": 0.4295722170328922,
+      "crashes": 7
+    },
+    "anaflow": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.8007246376811594,
+      "pvt_success": 0.22807017543859648,
+      "mean_tt_violation": 0.052665366409975066,
+      "mean_pvt_violation": 0.6053373393469226,
+      "crashes": 2
+    },
+    "artisan": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.7282608695652174,
+      "pvt_success": 0.08771929824561403,
+      "mean_tt_violation": 0.14857093757045817,
+      "mean_pvt_violation": 0.8738341928903121,
+      "crashes": 4
+    },
+    "autosizer": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.6811594202898551,
+      "pvt_success": 0.08771929824561403,
+      "mean_tt_violation": 0.049027565485363765,
+      "mean_pvt_violation": 0.7285006449458072,
+      "crashes": 4
+    },
+    "atlas": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.2753623188405797,
+      "pvt_success": 0.07017543859649122,
+      "mean_tt_violation": 0.5231628930788798,
+      "mean_pvt_violation": 0.493366209760763,
+      "crashes": 10
+    },
+    "glova": {
+      "cells_observed": 276,
+      "cells_expected": 276,
+      "tt_success": 0.23550724637681159,
+      "pvt_success": 0.03508771929824561,
+      "mean_tt_violation": 0.44877710134271276,
+      "mean_pvt_violation": 0.14730030417910078,
+      "crashes": 3
+    }
+  }
+}
