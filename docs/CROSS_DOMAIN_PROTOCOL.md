@@ -26,6 +26,22 @@ The next primary matrix has four public tracks.
 
 The primary cross-domain comparison uses the intersection of tasks with identical electrical metrics. Rows with missing PDK or simulator support remain capability-audit entries and do not enter the ranking. Crashes and budget exhaustion remain in denominators.
 
+## Capability audit before a run
+
+Run the receipt generator on the server before scheduling a matrix. It records
+the manifest digest, source-tree digests, repository commits and detected
+simulator versions. A receipt is not a result table and its
+`ranking_eligible` field is always false.
+
+```bash
+python3 scripts/cross_domain_capability_audit.py \
+  --manifest data/bench/cross_domain_manifest.json \
+  --source-root opensource_31=/root/autodl-tmp/bench_sources/opensource-analog-circuits \
+  --source-root atlas_dual_pdk=/root/autodl-tmp/bench_sources/atlas \
+  --output results/cross_domain_capability_receipt.json
+python3 -m py_compile spectra/bench/cross_domain.py scripts/cross_domain_capability_audit.py
+```
+
 ## Common metrics and budgets
 
 Every comparable cell records `task_id`, `source_commit`, `topology_digest`, `pdk_id`, `simulator_id`, `simulator_version`, `seed`, `llm_calls`, `simulations`, `first_pass_simulations`, `wall_seconds`, `tokens_in`, `tokens_out`, `cost_usd`, `tt_pass`, `pvt_pass`, `tt_violation_mean`, `tt_violation_median`, `pvt_violation_mean`, `pvt_violation_median`, `crash` and `failure_taxonomy`. Normalized violation is the mean positive spec residual after each metric is divided by its task-specific tolerance. PVT success means every declared corner passes.
