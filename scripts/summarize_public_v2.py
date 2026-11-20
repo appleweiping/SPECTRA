@@ -43,6 +43,7 @@ def aggregate_from_rows(rows: list[dict]) -> dict[str, dict[str, object]]:
         count = max(1, len(method_rows))
         pvt_values = [row.get("pvt", {}).get("mean_normalized_violation") for row in method_rows]
         wall_values = [row.get("wall_seconds") for row in method_rows]
+        first_pass_values = [row.get("first_pass_simulations") for row in method_rows]
         output[method] = {
             "cells": len(method_rows),
             "tt_success": sum(bool(row.get("tt_pass")) for row in method_rows) / count,
@@ -50,6 +51,7 @@ def aggregate_from_rows(rows: list[dict]) -> dict[str, dict[str, object]]:
             "mean_tt_violation": sum(float(row.get("tt_violation", float("nan"))) for row in method_rows) / count,
             "mean_pvt_violation": sum(float(v) for v in pvt_values if finite(v)) / max(1, sum(finite(v) for v in pvt_values)),
             "mean_wall_seconds": sum(float(v) for v in wall_values if finite(v)) / max(1, sum(finite(v) for v in wall_values)),
+            "mean_simulations_to_first_pass": sum(float(v) for v in first_pass_values if finite(v)) / max(1, sum(finite(v) for v in first_pass_values)),
         }
     return output
 
@@ -59,7 +61,7 @@ def main() -> None:
     parser.add_argument("--input", nargs="*", default=[
         "results/public_v5_*_merged.json",
         "results/public_v3_*_merged.json",
-        "results/public_x1_v2_*_merged.json",
+        "results/public_x1_v3_*_merged.json",
     ])
     parser.add_argument("--output", type=Path, default=Path("results/public_v2_summary.md"))
     parser.add_argument("--json-output", type=Path, default=None)
@@ -108,8 +110,8 @@ def main() -> None:
         "",
         "## Method metrics",
         "",
-        "| Receipt | Method | Cells | TT success | PVT success | Mean TT violation | Mean PVT violation | Mean wall seconds | Tier |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---|",
+        "| Receipt | Method | Cells | TT success | PVT success | Mean TT violation | Mean PVT violation | Mean first-pass simulations | Mean wall seconds | Tier |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     exported: list[dict] = []
     for record in records:
@@ -126,7 +128,7 @@ def main() -> None:
             lines.append(
                 f"| `{record['file']}` | `{method}` | {values.get('cells', 'NA')} | {fmt(values.get('tt_success'))} | "
                 f"{fmt(values.get('pvt_success'))} | {fmt(values.get('mean_tt_violation'))} | {fmt(values.get('mean_pvt_violation'))} | "
-                f"{fmt(values.get('mean_wall_seconds'), 2)} | {tier} |"
+                f"{fmt(values.get('mean_simulations_to_first_pass'), 2)} | {fmt(values.get('mean_wall_seconds'), 2)} | {tier} |"
             )
 
     lines += [

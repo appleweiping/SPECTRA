@@ -3,6 +3,7 @@
     "anaflow_cleanroom": {
       "cells": 3,
       "mean_pvt_violation": 0.8000000000000002,
+      "mean_simulations_to_first_pass": 2.0,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 1009.9852588501138,
       "pvt_success": 0.0,
@@ -11,6 +12,7 @@
     "spectra": {
       "cells": 3,
       "mean_pvt_violation": 0.8000000000000002,
+      "mean_simulations_to_first_pass": 2.0,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 960.6527432675163,
       "pvt_success": 0.0,

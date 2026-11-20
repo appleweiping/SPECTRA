@@ -80,6 +80,7 @@ def main() -> None:
             "pvt_success": sum(bool(row.get("pvt", {}).get("pvt_success")) for row in method_rows) / max(1, count),
             "mean_tt_violation": sum(float(row["tt_violation"]) for row in method_rows) / max(1, count),
             "mean_pvt_violation": sum(float(row["pvt"]["mean_normalized_violation"]) for row in method_rows) / max(1, count),
+            "mean_simulations_to_first_pass": sum(float(row["first_pass_simulations"]) for row in method_rows if finite(row.get("first_pass_simulations"))) / max(1, sum(finite(row.get("first_pass_simulations")) for row in method_rows)),
             "mean_wall_seconds": sum(float(row.get("wall_seconds", 0.0)) for row in method_rows) / max(1, count),
         }
     result = {"schema": "spectra-public-config-shards/v1", "budget": args.budget,

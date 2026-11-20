@@ -10,20 +10,20 @@ Each cell uses 300 simulator evaluations and 12 LLM calls. A receipt with one so
 | `public_v3_asap7_ldo_merged.json` | `ldo_1_asap7` | 45 | yes | yes | 0 |
 | `public_v5_bjt_merged.json` | `bjt_ce_amp` | 1 | yes | no | 0 |
 | `public_v5_ptm180_merged.json` | `ptm180nm_opamp` | 1 | yes | no | 0 |
-| `public_x1_v2_bjt_merged.json` | `bjt_ce_amp` | 1 | yes | no | 0 |
+| `public_x1_v3_bjt_merged.json` | `bjt_ce_amp` | 1 | yes | no | 0 |
 
 ## Method metrics
 
-| Receipt | Method | Cells | TT success | PVT success | Mean TT violation | Mean PVT violation | Mean wall seconds | Tier |
-|---|---|---:|---:|---:|---:|---:|---:|---|
-| `public_v3_asap7_ldo_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 0.0000 | 0.0000 | 0.8000 | 1009.99 | PVT ranking |
-| `public_v3_asap7_ldo_merged.json` | `spectra` | 3 | 1.0000 | 0.0000 | 0.0000 | 0.8000 | 960.65 | PVT ranking |
-| `public_v5_bjt_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 12.45 | TT-only capability |
-| `public_v5_bjt_merged.json` | `spectra` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 14.90 | TT-only capability |
-| `public_v5_ptm180_merged.json` | `anaflow_cleanroom` | 3 | 0.6667 | 0.6667 | 0.0115 | 0.0115 | 13.41 | TT-only capability |
-| `public_v5_ptm180_merged.json` | `spectra` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 15.02 | TT-only capability |
-| `public_x1_v2_bjt_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 23.13 | TT-only capability |
-| `public_x1_v2_bjt_merged.json` | `spectra` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 27.34 | TT-only capability |
+| Receipt | Method | Cells | TT success | PVT success | Mean TT violation | Mean PVT violation | Mean first-pass simulations | Mean wall seconds | Tier |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---|
+| `public_v3_asap7_ldo_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 0.0000 | 0.0000 | 0.8000 | 2.00 | 1009.99 | PVT ranking |
+| `public_v3_asap7_ldo_merged.json` | `spectra` | 3 | 1.0000 | 0.0000 | 0.0000 | 0.8000 | 2.00 | 960.65 | PVT ranking |
+| `public_v5_bjt_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 1.33 | 12.45 | TT-only capability |
+| `public_v5_bjt_merged.json` | `spectra` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 1.33 | 14.90 | TT-only capability |
+| `public_v5_ptm180_merged.json` | `anaflow_cleanroom` | 3 | 0.6667 | 0.6667 | 0.0115 | 0.0115 | 146.00 | 13.41 | TT-only capability |
+| `public_v5_ptm180_merged.json` | `spectra` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 80.67 | 15.02 | TT-only capability |
+| `public_x1_v3_bjt_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 1.00 | 8.75 | TT-only capability |
+| `public_x1_v3_bjt_merged.json` | `spectra` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 1.00 | 10.55 | TT-only capability |
 
 ## Interpretation contract
 

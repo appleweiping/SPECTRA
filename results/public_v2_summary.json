@@ -5,6 +5,7 @@
         "anaflow_cleanroom": {
           "cells": 3,
           "mean_pvt_violation": 0.8000000000000002,
+          "mean_simulations_to_first_pass": 2.0,
           "mean_tt_violation": 0.0,
           "mean_wall_seconds": 1009.9852588501138,
           "pvt_success": 0.0,
@@ -13,6 +14,7 @@
         "spectra": {
           "cells": 3,
           "mean_pvt_violation": 0.8000000000000002,
+          "mean_simulations_to_first_pass": 2.0,
           "mean_tt_violation": 0.0,
           "mean_wall_seconds": 960.6527432675163,
           "pvt_success": 0.0,
@@ -31,6 +33,7 @@
         "anaflow_cleanroom": {
           "cells": 3,
           "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.3333333333333333,
           "mean_tt_violation": 0.0,
           "mean_wall_seconds": 12.449300416590026,
           "pvt_success": 1.0,
@@ -39,6 +42,7 @@
         "spectra": {
           "cells": 3,
           "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.3333333333333333,
           "mean_tt_violation": 0.0,
           "mean_wall_seconds": 14.89668622581909,
           "pvt_success": 1.0,
@@ -57,6 +61,7 @@
         "anaflow_cleanroom": {
           "cells": 3,
           "mean_pvt_violation": 0.011506296296296297,
+          "mean_simulations_to_first_pass": 146.0,
           "mean_tt_violation": 0.011506296296296297,
           "mean_wall_seconds": 13.409676096402109,
           "pvt_success": 0.6666666666666666,
@@ -65,6 +70,7 @@
         "spectra": {
           "cells": 3,
           "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 80.66666666666667,
           "mean_tt_violation": 0.0,
           "mean_wall_seconds": 15.024332974261293,
           "pvt_success": 1.0,
@@ -83,23 +89,25 @@
         "anaflow_cleanroom": {
           "cells": 3,
           "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.0,
           "mean_tt_violation": 0.0,
-          "mean_wall_seconds": 23.128010864990454,
+          "mean_wall_seconds": 8.748223786397526,
           "pvt_success": 1.0,
           "tt_success": 1.0
         },
         "spectra": {
           "cells": 3,
           "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.0,
           "mean_tt_violation": 0.0,
-          "mean_wall_seconds": 27.342458918845903,
+          "mean_wall_seconds": 10.554972501161197,
           "pvt_success": 1.0,
           "tt_success": 1.0
         }
       },
       "complete": true,
       "errors": [],
-      "file": "public_x1_v2_bjt_merged.json",
+      "file": "public_x1_v3_bjt_merged.json",
       "pvt_conditions": 1,
       "ranking_eligible": false,
       "track": "bjt_ce_amp"
@@ -109,6 +117,7 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.8000000000000002,
+      "mean_simulations_to_first_pass": 2.0,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 1009.9852588501138,
       "method": "anaflow_cleanroom",
@@ -121,6 +130,7 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.8000000000000002,
+      "mean_simulations_to_first_pass": 2.0,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 960.6527432675163,
       "method": "spectra",
@@ -133,6 +143,7 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.3333333333333333,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 12.449300416590026,
       "method": "anaflow_cleanroom",
@@ -145,6 +156,7 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.3333333333333333,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 14.89668622581909,
       "method": "spectra",
@@ -157,6 +169,7 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.011506296296296297,
+      "mean_simulations_to_first_pass": 146.0,
       "mean_tt_violation": 0.011506296296296297,
       "mean_wall_seconds": 13.409676096402109,
       "method": "anaflow_cleanroom",
@@ -169,6 +182,7 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 80.66666666666667,
       "mean_tt_violation": 0.0,
       "mean_wall_seconds": 15.024332974261293,
       "method": "spectra",
@@ -181,11 +195,12 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.0,
       "mean_tt_violation": 0.0,
-      "mean_wall_seconds": 23.128010864990454,
+      "mean_wall_seconds": 8.748223786397526,
       "method": "anaflow_cleanroom",
       "pvt_success": 1.0,
-      "receipt": "public_x1_v2_bjt_merged.json",
+      "receipt": "public_x1_v3_bjt_merged.json",
       "tier": "TT-only capability",
       "track": "bjt_ce_amp",
       "tt_success": 1.0
@@ -193,11 +208,12 @@
     {
       "cells": 3,
       "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.0,
       "mean_tt_violation": 0.0,
-      "mean_wall_seconds": 27.342458918845903,
+      "mean_wall_seconds": 10.554972501161197,
       "method": "spectra",
       "pvt_success": 1.0,
-      "receipt": "public_x1_v2_bjt_merged.json",
+      "receipt": "public_x1_v3_bjt_merged.json",
       "tier": "TT-only capability",
       "track": "bjt_ce_amp",
       "tt_success": 1.0

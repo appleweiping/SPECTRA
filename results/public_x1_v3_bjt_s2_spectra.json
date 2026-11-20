@@ -1,0 +1,50 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 1,
+  "pvt_mode": "source",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "C1": 1.1001005259656539e-07,
+        "R1": 83777.3347674248,
+        "R2": 7984.911434141233,
+        "R3": 13142.257405942804,
+        "R4": 591.9159421350969
+      },
+      "pdk": "bjt",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "vout": 20.00165
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.0,
+        "median_normalized_violation": 0.0,
+        "pvt_success": true
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "Xyce",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/bjt_ce_amp/circuit.cir",
+      "task": "bjt_ce_amp",
+      "track_id": "opensource_bjt_xyce_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 10.890649635344744
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}
