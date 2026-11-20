@@ -192,6 +192,12 @@ python scripts/run_public_config_pvt.py --source-root /root/autodl-tmp/bench_sou
 python scripts/merge_public_config_shards.py --input results/TRACK_s*_spectra.json results/TRACK_s*_anaflow_cleanroom.json --output results/TRACK_merged.json
 ~~~
 
+The config-driven runner also accepts `--search-profile spectra_staged` for a
+pre-registered sensitivity arm. Under the 300-unit cap it uses 50 nominal
+warm-start evaluations and 50 candidates evaluated on five fixed screening
+corners. Keep this output in a separate sensitivity receipt and compare it to
+the matched AnaFlow row without replacing the frozen primary result.
+
 For the AnalogGym sensitivity audit, `scripts/run_analog_gym_pvt.py` accepts
 `--search-profile spectra_staged`. This is a fixed 50-nominal/50-five-corner
 screening schedule under the same 300-unit cap, with the five corners and the

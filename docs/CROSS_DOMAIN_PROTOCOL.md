@@ -108,6 +108,17 @@ python scripts/merge_analoggym_shards.py \
 
 AnaFlow is a clean-room adapter in this repository. Its paper reports two PTM45/ngspice op-amp demonstrations and sample-efficiency fields, not a cross-domain TT/PVT table. A domain-level claim therefore requires a matched AnaFlow adapter run on every public stratum.
 
+### Staged PVT sensitivity for config-driven public cells
+
+`run_public_config_pvt.py` exposes `--search-profile spectra_staged` as a
+pre-registered sensitivity policy for source configurations with a canonical
+45-condition grid. With budget 300, it spends 50 nominal evaluations on a
+warm start and 50 candidates across five fixed corners
+(`tt_27C_1.8V`, `ss_-40C_1.62V`, `ss_125C_1.98V`, `ff_-40C_1.98V`, and
+`ff_125C_1.62V`). The output records the profile and screening list. It is
+kept separate from the frozen primary receipt, and it cannot convert a tie or
+missing external row into an XSOTA-1 pass.
+
 ## Public sources
 
 - AnalogGym, ICCAD 2024, https://arxiv.org/abs/2409.08534 and https://github.com/CODA-Team/AnalogGym
