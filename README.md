@@ -204,6 +204,14 @@ screening schedule under the same 300-unit cap, with the five corners and the
 independent 45-condition verifier recorded in each receipt. It is a sensitivity
 arm until the complete matched multi-seed rerun is finished.
 
+The same profile was exercised against the public-config runner on the
+source-native `hoilee_affc` SKY130 configuration. The six-unit server smoke
+completed its search phase and prepared 44/45 verifier decks before the
+`fs_125C_1.62V` ngspice process exceeded the operator timeout at 519 seconds.
+`results/public_config_staged_smoke_timeout.{json,md}` records the timeout,
+source and runner commits, screening corners, and ranking exclusion. It has no
+AnaFlow counterpart and is excluded from the public ranking and XSOTA audit.
+
 SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. The three failures are the sz016 std-cell include path on the analog-only PDK, and are preserved rather than scored as successes. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
 
 Analog Design Bench v2 is handled by `scripts/audit_analog_design_bench.py`. The server-side

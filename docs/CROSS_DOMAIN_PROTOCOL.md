@@ -118,6 +118,11 @@ warm start and 50 candidates across five fixed corners
 `ff_125C_1.62V`). The output records the profile and screening list. It is
 kept separate from the frozen primary receipt, and it cannot convert a tie or
 missing external row into an XSOTA-1 pass.
+The source-native `hoilee_affc` server smoke completed the search phase and
+prepared 44/45 verifier decks before the `fs_125C_1.62V` ngspice process
+exceeded the operator timeout. The timeout receipt is
+`results/public_config_staged_smoke_timeout.{json,md}`. It has no matched
+AnaFlow cell and remains outside all ranking and XSOTA aggregates.
 
 ## Public sources
 

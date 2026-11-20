@@ -1,0 +1,26 @@
+# Public config staged smoke
+
+- **schema**: `spectra-public-config-staged-smoke/v1`
+- **status**: `timeout`
+- **source_commit**: `e8308aa273c1a6737a5dee89178c4d48270ff87e`
+- **runner_commit**: `e9f9bcaa48af71f29ebdb6a39d2cc94d963ab66c`
+- **track_id**: `hoilee_affc_staged_smoke`
+- **source_root**: `/root/autodl-tmp/bench_sources/opensource-analog-circuits`
+- **config**: `/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/hoilee_affc/config.json`
+- **topology**: `hoilee_affc`
+- **pdk**: `sky130`
+- **simulator**: `ngspice-44.2`
+- **budget**: `6`
+- **llm_calls**: `12`
+- **seed**: `0`
+- **methods**: `['spectra']`
+- **search_profile**: `spectra_staged`
+- **screening_conditions**: `['tt_27C_1.8V', 'ss_-40C_1.62V', 'ss_125C_1.98V', 'ff_-40C_1.98V', 'ff_125C_1.62V']`
+- **verifier_conditions**: `45`
+- **completed_verifier_conditions**: `44`
+- **timeout_condition**: `fs_125C_1.62V`
+- **elapsed_seconds**: `519`
+- **work_dir**: `/tmp/_hoilee_staged_smoke_work/s0_spectra`
+- **ranking_eligible**: `False`
+- **ranking_blocker**: `Smoke was terminated after ngspice failed to complete one verifier condition. It has no matched AnaFlow cell and is excluded from all ranking and XSOTA audits.`
+- **note**: `The staged profile implementation was exercised on the public hoilee_affc config. The 6-unit smoke completed its search phase and 44/45 verifier deck preparations before the fs_125C_1.62V ngspice process exceeded the operator timeout.`
