@@ -1,0 +1,286 @@
+{
+  "benchmark": "SGAnalog",
+  "boundary": "Xyce AC translator compatibility probe only; no SIZ7g score, model ranking, or universal SOTA claim",
+  "ranking_eligible": false,
+  "schema": "sganalog-xyce-ac-probe/v1",
+  "source_commit": "ebd7e694b79cbe8475c42bd41cf4620c5d537a0f",
+  "status_counts": {
+    "failed": 17
+  },
+  "task_count": 17,
+  "tasks": [
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Jay13ch__ttsky_jay13ch__xschem__tb_icell/tb_icell.cir",
+      "deck_sha256": "5dcdcb46befda8081b2e2945811d42eb76bd5fe476076c285baf5cf3baeada17",
+      "dut": "icell",
+      "probe": {
+        "log_sha256": "f294929bf7f0467d0037660fa20f48f75e4ff35e751a492f6917a77c401fe4ed",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz000.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist warning in file sz000.xyce.cir at or near line 16\n Unrecognized .OPTIONS package or parameter SAVECURRENTS will be ignored\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.022,
+        "status": "failed",
+        "translated_sha256": "c8592fbbf3825dcdb5a34d6b3c5a0e955cfdfd4ebfd6070295891f207baf7f01"
+      },
+      "task_id": "sz000"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/KolosKoblasz__tt07-mixer__xschem__analog_inv_tb/analog_inv_tb.cir",
+      "deck_sha256": "5faca7db164b2fea72bcd024df654d9175b3f279cecee3793c62aade3ea8b192",
+      "dut": "analog_inv",
+      "probe": {
+        "log_sha256": "ec9d34695fc1ade706afab9ed49b03930a9da5afe648b23bcd23eacb51722cd6",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz001.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0212,
+        "status": "failed",
+        "translated_sha256": "64b55226065de4537c44152368f04c08a8ec20bb74733bb5fbf999e565bbf328"
+      },
+      "task_id": "sz001"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/KolosKoblasz__tt07-mixer__xschem__diff_amp_tb/diff_amp_tb.cir",
+      "deck_sha256": "da702dc76aa8fcd13b1e45fa87ce1274c5d8f97c819b00382b5d8ddeb809ed05",
+      "dut": "diff_amp",
+      "probe": {
+        "log_sha256": "682ce1818fabb79df2c4994e779865e8b99a35edfa6d8f72f5920f1681a939f4",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz002.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.015,
+        "status": "failed",
+        "translated_sha256": "228b036349e523cae299eae5f91775ac346cd59262fd773631bd9fa8d665a276"
+      },
+      "task_id": "sz002"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Rajkamal0842__tt_um_rajkamal_analog__xschem__tb_BG/tb_BG.cir",
+      "deck_sha256": "4e5511b07986b75a802f5fe6d6360957bb77ee178c6f10ef39cffec847a24ebe",
+      "dut": "BG",
+      "probe": {
+        "log_sha256": "afae26da832e8319f63cb3ff4f8bec512ad8549b8c4775d6de23daabd6d6e1c0",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz003.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0221,
+        "status": "failed",
+        "translated_sha256": "17762f70fc1a29b3366a8f802dedfc7aa333dd0744cb575f43a30a1a80c8c17e"
+      },
+      "task_id": "sz003"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Rajkamal0842__tt_um_rajkamal_analog__xschem__tb_amp/tb_amp.cir",
+      "deck_sha256": "27903e46c0baeec101e1315c50a4026d15a480ae85345886d10d4f31c5033762",
+      "dut": "amp",
+      "probe": {
+        "log_sha256": "2cf1701c928f9014c0767994f497c6180d111d57210b98ff1f3e0f9f53837163",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz004.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0234,
+        "status": "failed",
+        "translated_sha256": "7ba1f5fc4240560305977e0d6e3c97880f58aba7c6e416b7ef9c13c0ff2dffb6"
+      },
+      "task_id": "sz004"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Sud-ana__TT08__xschem__ota5t_1_delete_TB/ota5t_1_delete_TB.cir",
+      "deck_sha256": "16a5e70de0823a69afaff20e3ebf35aff125fbde3215568942784f000d772bf6",
+      "dut": "ota5t_1",
+      "probe": {
+        "log_sha256": "fa6192ada7bfe7ba7dd14193486801a798f9431e63c68d975dd6d0c2c7e1e027",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz005.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist warning in file sz005.xyce.cir at or near line 17\n Unrecognized .OPTIONS package or parameter SAVECURRENTS will be ignored\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0218,
+        "status": "failed",
+        "translated_sha256": "e6ecb28e64118961effbe12c2ed545fa9b0ed7d33daa8ca4618a0ad5bf856ab0"
+      },
+      "task_id": "sz005"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/algofoogle__ttsky25a-vga-matrix-dac__xschem__tb_icell/tb_icell.cir",
+      "deck_sha256": "71771e62db40d1be418280420040d211d2d018d66ec5bbc2210f707cb6eced7c",
+      "dut": "icell",
+      "probe": {
+        "log_sha256": "47bc4fb4422b498e35fdd165710231582470fcf1144cf759debc1883be9ede6b",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz006.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist warning in file sz006.xyce.cir at or near line 16\n Unrecognized .OPTIONS package or parameter SAVECURRENTS will be ignored\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0224,
+        "status": "failed",
+        "translated_sha256": "7d2dbc013a6caa88dd9ddf87b4c661741bf15e323582e1ceb2d5a68b130a669f"
+      },
+      "task_id": "sz006"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/algofoogle__ttsky25b-analog-vga-dacs__xschem__tb_icell/tb_icell.cir",
+      "deck_sha256": "7a014ccd7e1faff2c312c80c1d723b2532a778cc8f6e69d0b8e042900a6cf3b4",
+      "dut": "icell",
+      "probe": {
+        "log_sha256": "1d244ec4e44eac09708bc690da2261ff52225d4de10918e4fa23cf9633fe9d7b",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz007.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist warning in file sz007.xyce.cir at or near line 16\n Unrecognized .OPTIONS package or parameter SAVECURRENTS will be ignored\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.016,
+        "status": "failed",
+        "translated_sha256": "5b7aa9869123e753fd74e633c3269f03cfa91a0a3dd89941ca1f051013727e32"
+      },
+      "task_id": "sz007"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/devinatkin__tt07-dual-oscillator__xschem__current_source_tb/current_source_tb.cir",
+      "deck_sha256": "0f5462c857606484c8cda5536058ea4ca998140180bc84559fce9a3b51836805",
+      "dut": "current_source",
+      "probe": {
+        "log_sha256": "a44eaf830ae9bf7f54a27f444d511c86c507cb6fae20b8567ed5deb5ecb6277e",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz008.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0222,
+        "status": "failed",
+        "translated_sha256": "14658d3e5c7327163a2b5bc5e9227e46d0d51a8dfb71710f0b879cc20d2ac8fc"
+      },
+      "task_id": "sz008"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/devinatkin__tt07-dual-oscillator__xschem__inverter_tb/inverter_tb.cir",
+      "deck_sha256": "70b05ad12516e6fc465b50e5987914ba3e12163790d3a3412f6a9dc745b2e1a8",
+      "dut": "inverter",
+      "probe": {
+        "log_sha256": "197c962338742736998c9e5c868a69245a4c203109daff66c53274083d01d2cb",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz009.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0211,
+        "status": "failed",
+        "translated_sha256": "52014686318e6f89c8b43f36c498c8415a637ab8a80036db54a851dafb5d8552"
+      },
+      "task_id": "sz009"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/htfab__tt07-fprn__xschem__tb_pass_gate/tb_pass_gate.cir",
+      "deck_sha256": "f5d2b112871e5cc517ed6ab361ad8e28c5a981b312264fde85117208a82caa2f",
+      "dut": "pass_gate",
+      "probe": {
+        "log_sha256": "3e5c71516fe34e48cc1e550590ed795bec57be1aeda9aae56d461c074d36e2f7",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz010.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0214,
+        "status": "failed",
+        "translated_sha256": "e46724b35f79fe31dbe4e0e123639f695d7bec813f405932a8bb904c2e272f1e"
+      },
+      "task_id": "sz010"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/mattvenn__tt07-twin-tee-opamp-osc__xschem__tb_twin_tee/tb_twin_tee.cir",
+      "deck_sha256": "a0289ab990f26d38783e77d5340bfe9d1d0772caad7daebf82bd535bfc561d28",
+      "dut": "twin_tee",
+      "probe": {
+        "log_sha256": "b2fae7ca923f4c8c50960225c69a74cec067ace90462cd0ad7ae47d52e874e0b",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz011.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0229,
+        "status": "failed",
+        "translated_sha256": "21018e1c4e9b2f96791216c5d41a3cea94b3b30f22ea4b963bc0505a165d847e"
+      },
+      "task_id": "sz011"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/mattvenn__tt08-analog-r2r-dac-3v3__xschem__tb_dac_drive/tb_dac_drive.cir",
+      "deck_sha256": "d8bbc56606628633879d4014133c6c87e8ffe1b8aebed955c378e6589ac5bc02",
+      "dut": "dac_drive",
+      "probe": {
+        "log_sha256": "c51a688067468b59046b5ea186f2b971203f391295ea2e619b1627137bfe89a9",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz012.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0178,
+        "status": "failed",
+        "translated_sha256": "d5aacfd186ce6b00e2b54001facc2922fc10264530f15e8565611d8fa580f2b3"
+      },
+      "task_id": "sz012"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/urish__tt10-sonos-flash-party__xschem__charge_pump_tb/charge_pump_tb.cir",
+      "deck_sha256": "e3c8645860c5de1e347dae7973263a92e1967c752abc433ec0a720ad32cd5a7b",
+      "dut": "charge_pump",
+      "probe": {
+        "log_sha256": "5b23ddc964bf2c1f2b6fc6d36724dc1a0b882917a9350b6c042ac7388abaa2e6",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz013.xyce.cir\n\n***** Reading and parsing netlist...\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n*** Xyce Abort ***\n\nIn .func/.param line for function: mismatch_factor*MC_MM_SWITCH*AGAUSS,\n expression must be enclosed by curly braces\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0213,
+        "status": "failed",
+        "translated_sha256": "977027150eaee3f5cf5190682e5e3143f067ac6007f97c6739bbe2bac55524ec"
+      },
+      "task_id": "sz013"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/zchris9__ttsky26b-ramp-adc__xschem__bias_tb/bias_tb.cir",
+      "deck_sha256": "f1608c8d86e11b9e50aaea379d8d3ceedd2df894307e2130df64c026337dfd70",
+      "dut": "bias",
+      "probe": {
+        "log_sha256": "e1302a82b543d024ac53d1090bb6ef6f2309dfe556e6113b52dfdd973fc40035",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz014.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist error in file sz014.xyce.cir at or near line 7\n Unrecognized field in .SAVE line\nNetlist warning in file sz014.xyce.cir at or near line 7\n .SAVE line not handled properly, statement skipped\nNetlist error: Could not find include file\n $PDK_ROOT/sky130A/libs.tech/ngspice/sky130.lib.spice\nNetlist error in file sz014.xyce.cir at or near line 13\n Unrecognized field in .SAVE line\nNetlist warning in file sz014.xyce.cir at or near line 13\n .SAVE line not handled properly, statement skipped\nSimulation aborted due to error.  There are 0 MSG_FATAL errors and 3 MSG_ERROR\n errors\n*** Xyce Abort ***\n\nSimulation aborted due to error.  There are 0 MSG_FATAL errors and 3 MSG_ERROR\n errors\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0105,
+        "status": "failed",
+        "translated_sha256": "3f807212561bd876e8403d6df11789e704477533767caa0f9e63b9c5c7d0c676"
+      },
+      "task_id": "sz014"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/zchris9__ttsky26b-ramp-adc__xschem__mux_tb/mux_tb.cir",
+      "deck_sha256": "c5346f703dfd6368d3a9c6caa92c3e9b033d17ba37fa01133641d7277fc17ff4",
+      "dut": "mux",
+      "probe": {
+        "log_sha256": "7f89592e4db67b1712e1f906169c68d08d557c39a5563575fb063b23eac0020f",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz015.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist error in file sz015.xyce.cir at or near line 7\n Unrecognized field in .SAVE line\nNetlist warning in file sz015.xyce.cir at or near line 7\n .SAVE line not handled properly, statement skipped\nNetlist error: Could not find include file\n $PDK_ROOT/sky130A/libs.tech/ngspice/sky130.lib.spice\nNetlist error in file sz015.xyce.cir at or near line 17\n Unrecognized field in .SAVE line\nNetlist warning in file sz015.xyce.cir at or near line 17\n .SAVE line not handled properly, statement skipped\nSimulation aborted due to error.  There are 0 MSG_FATAL errors and 3 MSG_ERROR\n errors\n*** Xyce Abort ***\n\nSimulation aborted due to error.  There are 0 MSG_FATAL errors and 3 MSG_ERROR\n errors\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.0089,
+        "status": "failed",
+        "translated_sha256": "a7f0405f89c234073d27c888d4dd805cf5af1b7f3e62c376cc5528834ffd7afe"
+      },
+      "task_id": "sz015"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/zchris9__ttsky26b-ramp-adc__xschem__sh_tb/sh_tb.cir",
+      "deck_sha256": "cb5d84a795517d63ab0e77ba04de70ecc57ecd7ebb58f1499e2242710a1d58c0",
+      "dut": "sh",
+      "probe": {
+        "log_sha256": "1e17eac44068dc4e335387457218630f1fbfa54d2eb61ed518251630a580d4f2",
+        "log_tail": "\n*****\n***** Welcome to the Xyce(TM) Parallel Electronic Simulator\n*****\n***** This is version Xyce Release 7.10.0-opensource\n***** Date: Sat Nov 21 05:47:59 CST 2026\n\n\n***** Executing netlist sz016.xyce.cir\n\n***** Reading and parsing netlist...\nNetlist error in file sz016.xyce.cir at or near line 7\n Unrecognized field in .SAVE line\nNetlist warning in file sz016.xyce.cir at or near line 7\n .SAVE line not handled properly, statement skipped\nNetlist error: Could not find include file\n $PDK_ROOT/sky130A/libs.tech/ngspice/sky130.lib.spice\nNetlist error: Could not find include file\n $PDK_ROOT/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice\nNetlist error in file sz016.xyce.cir at or near line 18\n Unrecognized field in .SAVE line\nNetlist warning in file sz016.xyce.cir at or near line 18\n .SAVE line not handled properly, statement skipped\nSimulation aborted due to error.  There are 0 MSG_FATAL errors and 4 MSG_ERROR\n errors\n*** Xyce Abort ***\n\nSimulation aborted due to error.  There are 0 MSG_FATAL errors and 4 MSG_ERROR\n errors\n\n\n*** Xyce Abort ***\n",
+        "metrics": {},
+        "returncode": 1,
+        "seconds": 0.008,
+        "status": "failed",
+        "translated_sha256": "be42626b77cd76eafdf04442c23692fadb06e593ca71be01963d8e81c0cdbc5c"
+      },
+      "task_id": "sz016"
+    }
+  ],
+  "xyce": "/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce"
+}
