@@ -21,7 +21,7 @@ The next primary matrix has four public tracks.
 
 1. `analoggym_amp_ldo` uses the open SKY130/ngspice AMP and LDO subset from AnalogGym-Opt. It keeps the source testbenches and design-variable bounds, and reports TT plus the source 21-corner robust subset.
 2. `opensource_31` uses the 31-circuit suite without copying its unlicensed harness. The adapter records source files and PDK/model provenance, and separates PTM45, PTM180, SKY130 and BJT strata rather than pooling incompatible metrics.
-3. `atlas_dual_pdk` uses the public ATLAS benchmark circuits under SKY130 and GF180MCU where the repository provides both model paths. The budget is 500 simulator evaluations, 10 seeds and the ATLAS baseline family. The 500/10 setting is an external reference protocol and is kept separate from the existing 300/3 SIZ7g protocol.
+3. `atlas_dual_pdk` uses the public ATLAS benchmark circuits under SKY130 and GF180MCU where the repository provides both model paths. The original ATLAS paper protocol uses 500 simulator evaluations and 10 seeds. The matched SPECTRA/AnaFlow receipt uses the shared 300-simulation, 12-call, seeds-0/1/2 SIZ7g contract, while the 500/10 setting remains an external reference and is never mixed into the unified ranking.
 4. `analog_design_bench` uses the public 50-task verifier split. Its task-level success and normalized violation are reported separately from transistor-sizing PVT rows when the task does not expose a common PVT grid.
 
 The primary cross-domain comparison uses the intersection of tasks with identical electrical metrics. Rows with missing PDK or simulator support remain capability-audit entries and do not enter the ranking. Crashes and budget exhaustion remain in denominators.
