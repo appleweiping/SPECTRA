@@ -44,7 +44,8 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
 * **Top-conference literature contract** (`docs/TOPCONF_LITERATURE_AUDIT.md`): a source-linked audit of AnalogGym,
   AutoSizer, AgenticSizing, Long-Horizon Analog Design Bench, PVTSizing 2.0, AnalogScout, ATLAS, AnaFlow,
   Analog Canvas and Virtuoso Bridge Lite. It fixes the benchmark, baseline, component, metric, robustness,
-  efficiency and provenance requirements used by the handoff.
+  efficiency and provenance requirements used by the handoff. The 2026 read-level ledger in
+  `docs/refs/READ_STATUS_2026.md` distinguishes full-paper/code inspection from abstract-only leads.
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.
