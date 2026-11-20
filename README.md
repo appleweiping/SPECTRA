@@ -135,7 +135,7 @@ python scripts/run_public_config_pvt.py --source-root /root/autodl-tmp/bench_sou
 python scripts/merge_public_config_shards.py --input results/TRACK_s*_spectra.json results/TRACK_s*_anaflow_cleanroom.json --output results/TRACK_merged.json
 ~~~
 
-SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
+SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. The three failures are the sz016 std-cell include path on the analog-only PDK, and are preserved rather than scored as successes. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
 
 The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
 
@@ -176,3 +176,15 @@ work/reference_sources source-only inspections of requested projects
 ### Three-way synchronization
 
 The maintained copies are E:/CodexProjects/spectra-analog-agent, /root/autodl-tmp/spectra-analog-agent on the server, and GitHub appleweiping/SPECTRA. Release checks compare tracked commit hashes across all three copies. Raw evidence is retained on the server and copied into results/ only after schema validation and SHA-256 recording. The synchronization procedure does not use C: or D: for experiment data.
+
+### SGAnalog native harness
+
+~~~bash
+source /root/autodl-tmp/spectra-gpt.env
+python scripts/run_sganalog_native.py \
+  --sg-root /root/autodl-tmp/bench_sources/SGAnalog \
+  --generate-model gpt-6.1-sol --model-seeds 0,1,2 \
+  --output results/sganalog_native_gpt61_multiseed.json
+~~~
+
+The command is intended for the server. It uses the pinned SGAnalog task list, native ngspice, isolated task/seed work directories, retryable GPT requests, response digests, and raw simulator logs. The output is a direct SGAnalog Task 2 audit rather than a SPECTRA optimization result and therefore remains a separate capability tier.
