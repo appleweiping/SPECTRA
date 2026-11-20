@@ -33,7 +33,7 @@ server receipts use ngspice-44.2 and Xyce-7.10 where the corresponding track sup
 * **Cross-domain public benchmark track** (`docs/CROSS_DOMAIN_PROTOCOL.md`, `data/bench/cross_domain_manifest.json`):
   the frozen extension targets AnalogGym, AMPICBench, the 31-circuit public suite, SGAnalog tapeout-derived tasks,
   ATLAS dual-PDK tasks, Analog Design Bench, LOADBench and AnalogPortBench. Server receipts and a three-PDK TT-only adapter run are archived in
-  `results/cross_domain_capability_receipt_v2.json` and `results/public_suite_3pdk_tt_v2.md`. AnalogGym and GF180
+  `results/cross_domain_capability_receipt_v6.json` and `results/public_suite_3pdk_tt_v2.md`. AnalogGym and GF180
   now have matched ngspice-44.2/Xyce-7.10 and strict PVT receipts. The server-only public-source expansion adds
   32/32 opensource configs, 9 AMPICBench decks across source corners, a 3-seed PTM180/BJT TT adapter, a matched
   Xyce BJT receipt, and 3-seed 45-condition ASAP7 LDO, SKY130 LP-opamp and SKY130 LDO receipts. The measured-scope
