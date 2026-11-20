@@ -180,6 +180,12 @@ def main() -> None:
     parser.add_argument("--budget", type=int, default=300)
     parser.add_argument("--seeds", default="0,1,2")
     parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
+    parser.add_argument(
+        "--search-profile",
+        choices=("nominal", "spectra_staged"),
+        default="nominal",
+        help="SPECTRA policy. spectra_staged uses 50 nominal and 50 five-corner candidates under budget=300.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--nominal-supply", type=float, default=1.8)
     parser.add_argument("--pvt-mode", choices=("canonical", "source"), default="canonical",
@@ -237,7 +243,55 @@ def main() -> None:
                     first_pass = evaluations
                 return score
 
-            if method == "spectra":
+            if method == "spectra" and args.search_profile == "spectra_staged":
+                screening_names = (
+                    "tt_27C_1.8V",
+                    "ss_-40C_1.62V",
+                    "ss_125C_1.98V",
+                    "ff_-40C_1.98V",
+                    "ff_125C_1.62V",
+                )
+                if args.budget % (len(screening_names) + 1) != 0:
+                    raise SystemExit("spectra_staged requires budget divisible by six")
+                candidate_budget = max(1, args.budget // (len(screening_names) + 1))
+                nominal_budget = args.budget - candidate_budget * len(screening_names)
+                for unit in rng.random((nominal_budget, len(names))):
+                    evaluate(bounds[:, 0] + unit * (bounds[:, 1] - bounds[:, 0]))
+                warm_unit = np.clip(
+                    (best - bounds[:, 0]) / (bounds[:, 1] - bounds[:, 0]),
+                    0.0,
+                    1.0,
+                )
+                screen_best = np.asarray(best, dtype=float).copy()
+                screen_score = float("inf")
+
+                def screen(values: np.ndarray) -> float:
+                    nonlocal screen_best, screen_score
+                    scores = [evaluate(values, name) for name in screening_names]
+                    current = float(max(scores))
+                    if current < screen_score:
+                        screen_score = current
+                        screen_best = np.asarray(values, dtype=float).copy()
+                    return current
+
+                es = cma.CMAEvolutionStrategy(
+                    warm_unit.tolist(),
+                    0.25,
+                    {"bounds": [0, 1], "seed": seed + 9000, "verbose": -9},
+                )
+                screened = 0
+                while screened < candidate_budget:
+                    points = es.ask()[: candidate_budget - screened]
+                    scores = []
+                    for point in points:
+                        values = bounds[:, 0] + np.clip(point, 0.0, 1.0) * (bounds[:, 1] - bounds[:, 0])
+                        scores.append(screen(values))
+                        screened += 1
+                    if len(scores) >= getattr(es.sp, "mu", 2):
+                        es.tell(points[: len(scores)], scores)
+                best = screen_best
+                best_score = screen_score
+            elif method == "spectra":
                 import cma
                 coverage = min(max(8, 2 * len(names)), max(1, args.budget // 3))
                 for unit in rng.random((coverage, len(names))):
@@ -284,16 +338,23 @@ def main() -> None:
                            "mean_normalized_violation": float(sum(finite) / len(finite)) if len(finite) == len(condition_rows) else float("inf"),
                            "median_normalized_violation": float(np.median(finite)) if len(finite) == len(condition_rows) else float("inf"),
                            "conditions": condition_rows}
+            tt_row = next((item for item in condition_rows if item["condition"] == "tt_27C_1.8V"), None)
+            tt_violation = float(tt_row["normalized_violation"]) if tt_row else float("inf")
             rows.append({"track_id": args.track_id, "task": config["name"], "method": method, "seed": seed,
                          "pdk": args.pdk, "simulator": Path(args.simulator).name, "simulations": args.budget,
-                         "llm_calls": 12, "first_pass_simulations": first_pass, "tt_violation": best_score,
-                         "tt_pass": best_score == 0.0, "pvt": pvt_summary,
+                         "llm_calls": 12, "first_pass_simulations": first_pass, "tt_violation": tt_violation,
+                         "search_profile": args.search_profile,
+                         "screening_conditions": list(screening_names)
+                         if method == "spectra" and args.search_profile == "spectra_staged"
+                         else ["tt_27C_1.8V"],
+                         "tt_pass": tt_violation == 0.0, "pvt": pvt_summary,
                          "parameters": dict(zip(names, values.tolist())),
                          "source": str(circuit), "wall_seconds": time.perf_counter() - started})
     protocol_complete = (args.budget == 300 and len(pvt) == 45 and len(methods) == 2
                          and len(tuple(int(item) for item in args.seeds.split(",") if item.strip())) == 3)
     payload = {"schema": "spectra-public-config-pvt/v1", "model": "gpt-6.1-sol", "budget": args.budget,
                "llm_calls": 12, "pvt_conditions": len(pvt), "pvt_mode": args.pvt_mode,
+               "search_profile": args.search_profile,
                "rows": rows, "ranking_eligible": protocol_complete,
                "ranking_reason": "matched 300/12/3, two methods and 45-condition verifier"
                if protocol_complete else "capability or smoke run: requires budget=300, seeds=3, methods=2, pvt_conditions=45"}
