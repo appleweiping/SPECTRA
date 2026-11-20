@@ -219,6 +219,17 @@ completed its search phase and prepared 44/45 verifier decks before the
 source and runner commits, screening corners, and ranking exclusion. It has no
 AnaFlow counterpart and is excluded from the public ranking and XSOTA audit.
 
+The robust AnalogGym strata now have complete matched clean-room AnaFlow rows.
+HoiLee and Leung each contain six method-seed cells, three seeds per method,
+300 simulator evaluations, 12 calls, and all 45 verifier conditions. HoiLee
+ties AnaFlow on the four electrical endpoints while using more wall time.
+Leung raises PVT success from `0.333` to `0.667` and reduces mean PVT violation
+from `0.015552` to `0.002469`, with TT success tied and wall time higher. The
+merged receipts and cell-level summaries are
+`results/analoggym_pvt_robust_merged.{json,md}` and
+`results/analoggym_leung_pvt_robust_merged.{json,md}`. These rows are included
+in the literal XSOTA audit and remain a benchmark-scoped result.
+
 SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. The three failures are the sz016 std-cell include path on the analog-only PDK, and are preserved rather than scored as successes. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
 
 Analog Design Bench v2 is handled by `scripts/audit_analog_design_bench.py`. The server-side
