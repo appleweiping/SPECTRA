@@ -31,7 +31,7 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   276/276 cells with three seeds. These results are benchmark-scoped and do not establish universal analog-sizing SOTA.
 * **Cross-domain public benchmark track** (`docs/CROSS_DOMAIN_PROTOCOL.md`, `data/bench/cross_domain_manifest.json`):
   the frozen extension targets AnalogGym, AMPICBench, the 31-circuit public suite, SGAnalog tapeout-derived tasks,
-  ATLAS dual-PDK tasks and Analog Design Bench. Server receipts and a three-PDK TT-only adapter run are archived in
+  ATLAS dual-PDK tasks, Analog Design Bench, LOADBench and AnalogPortBench. Server receipts and a three-PDK TT-only adapter run are archived in
   `results/cross_domain_capability_receipt_v2.json` and `results/public_suite_3pdk_tt_v2.md`. AnalogGym and GF180
   now have matched ngspice-44.2/Xyce-7.10 and strict PVT receipts. The server-only public-source expansion adds
   32/32 opensource configs, 9 AMPICBench decks across source corners, a 3-seed PTM180/BJT TT adapter, a matched
