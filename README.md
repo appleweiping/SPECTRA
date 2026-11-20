@@ -93,6 +93,7 @@ The common matched budget is 300 simulator evaluations, 12 LLM calls, and seeds 
 | open-source BJT | public BJT model | ngspice-44.2 and Xyce-7.10 | CE amplifier | 1 | TT capability |
 | AMPICBench | SKY130A | ngspice-44.2 | nine source decks, 135 source-corner runs | 15 per deck | capability |
 | SGAnalog | SKY130A | native ngspice-44.2 harness; pinned ngspice-45.2 source protocol | 17 tapeout-derived sizing tasks | source-defined | tapeout sizing |
+| Analog Design Bench v2 | SKY130 | source manifest audit; isolated verifier is external to the source repository | 50 designer-contributed tasks | task-defined PVT/mismatch | capability audit |
 
 The PTM45 receipt is results/public_v7_ptm45_merged.json and its readable audit is results/public_v7_ptm45_merged.md. The full Xyce SKY130 LP runner receipt is results/opensource_xyce_sky130_lp_sizing.json and the strict merged receipt is results/public_v8_sky130_lp_xyce_merged.json. Together they contain six method-seed rows with 45 parsed conditions. The source deck has no matched process-corner library, so TT success and TT violation are reported while PVT success remains inapplicable. The receipt predates automatic sibling-deck translation, while direct translated SKY130 and PTM180 decks have independent Xyce artifacts and parser checks. The corrected adapter preserves the SPICE title line before inserting temperature control, and the raw failed pre-fix shards remain archived.
 
@@ -129,6 +130,9 @@ python scripts/summarize_public_scope.py
 python scripts/summarize_public_v2.py
 python scripts/validate_cross_domain_cells.py
 python scripts/smoke_contracts.py
+python scripts/audit_analog_design_bench.py \
+  --source-root /root/autodl-tmp/bench_sources/analog-design-bench \
+  --output results/analog_design_bench_v2_source_audit.json
 ~~~
 
 For a public source cell, run both methods with the same seed, simulator, and budget, then merge only after all six seed-method cells are present.
@@ -139,6 +143,12 @@ python scripts/merge_public_config_shards.py --input results/TRACK_s*_spectra.js
 ~~~
 
 SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. The three failures are the sz016 std-cell include path on the analog-only PDK, and are preserved rather than scored as successes. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
+
+Analog Design Bench v2 is handled by `scripts/audit_analog_design_bench.py`. The server-side
+source audit records the frozen 50-task manifest, instruction hashes, task-declared metrics,
+PVT/mismatch flags, and the pinned source commit. Its isolated verifier and submitted circuit
+artifacts are external to the cloned repository, so the resulting receipt is capability-only.
+It is not converted into a 300/12 SIZ7g score and does not supply a fabricated pass rate.
 
 The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
 
