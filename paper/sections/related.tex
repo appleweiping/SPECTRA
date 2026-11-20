@@ -34,6 +34,10 @@ topology itself.
 \textbf{Benchmarks.}
 The Long-Horizon Analog Design Bench~\cite{adbench2026longhorizon} shows that frontier coding agents fail mostly on
 electrical closure, and AnalogPortBench~\cite{rajabi2026analogportbench} introduces infeasible-spec controls.
-SPECTRA-Bench is, to our knowledge, the first open benchmark that combines topology-plus-sizing tasks across
+SPECTRA-Bench is an open benchmark that combines topology-plus-sizing tasks across
 twelve circuit families with quantitative multi-spec targets, feasibility certificates, 45-condition PVT and
-mismatch verification on a real PDK, and simulation/token accounting.
+mismatch verification on a real PDK, and simulation/token accounting. We position this as a
+benchmark contribution within the released scope. It is not a claim that SPECTRA-Bench is the
+first or complete benchmark for all analog-design tasks. The repository separately audits
+AnalogGym, AMPICBench, AnalogPortBench and other public suites, while source-only or
+capability-only tracks are not merged into the primary ranking.

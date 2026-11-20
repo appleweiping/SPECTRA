@@ -1,0 +1,44 @@
+\subsection{Matched External Framework Track and Claim Scope}
+\label{sec:external}
+
+The repository also contains a preregistered fixed-topology track that makes the
+external-framework comparison explicit. It uses the same task text, PDK/model
+profile, simulator, independent verifier, 300 simulation-unit cap, 12-call cap,
+and seeds 0--2 for every row. The seven paper-backed rows are AnalogCoder
+\cite{lai2025analogcoder}, ADO-LLM \cite{yin2024adollm}, AnaFlow
+\cite{ahmadzadeh2025anaflow}, Artisan \cite{chen2024artisan}, AutoSizer
+\cite{yu2026autosizer}, and GLOVA \cite{kim2025glova}, together with an ATLAS
+row. The ATLAS row is a manifest-backed clean-room adapter for the public ATLAS
+repository and is not presented as an official reproduction because no
+paper-level citation or official implementation is bundled in this checkout.
+The complete task, framework identity, and implementation-status manifests are
+in \path{data/bench/paper_sizing_tasks.jsonl} and
+\path{data/bench/paper_sizing_manifest.json}.
+
+This track is broader than the legacy E1g table above and is reported as a
+separate repository-level artifact. Its primary aggregate, raw shards, and
+strict merger are \path{results/paper_sizing_multiseed.json},
+\path{results/paper_sizing_multiseed.md}, and
+\path{scripts/audit_xsota_gate.py}. The frozen SIZ7g SPECTRA row does not
+strictly beat the matched AnaFlow row on all four preregistered endpoints, so
+the literal XSOTA-1 gate remains not met. We retain the tie and negative
+endpoint cells rather than selecting a favorable subset.
+
+The public AnalogGym staged policy is a separate sensitivity arm. It is
+pre-registered as 50 nominal warm-start evaluations followed by 50 candidates
+screened on five fixed corners, with an independent 45-condition verifier.
+The complete HoiLee and Leung three-seed receipts are
+\path{results/analoggym_pvt_staged_comparison.md} and
+\path{results/analoggym_leung_pvt_staged_comparison.md}. Those results
+improve PVT success and normalized violation on the two declared topologies,
+while TT success ties and wall time is higher. They are therefore sensitivity
+evidence, not a replacement for the frozen primary row and not a universal
+analog-sizing SOTA claim.
+
+Public cross-PDK and cross-simulator tracks are reported only when their source
+contract supplies comparable metrics. ATLAS/GF180, SKY130, ASAP7, PTM and BJT
+receipts are kept in the public-scope tables. AnalogPortBench, SGAnalog,
+Analog Design Bench and LOADBench contribute source-native or capability
+receipts where a common SPECTRA/AnaFlow transfer protocol is not available.
+Those rows document coverage and reproducibility boundaries and are not silently
+converted into ranking cells.
