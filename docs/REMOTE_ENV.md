@@ -89,3 +89,9 @@ zero TT/PVT endpoint passes. SPECTRA lowers mean TT/PVT violation to 1.7172/1.72
 AnaFlow, while wall time is effectively tied. The public BJT adapter also completes a matched Xyce-7.10 TT-only
 track by parsing Xyce `.mt0` artifacts. Xyce native execution of the public SKY130 AC deck remains diagnostic
 because it emits no comparable AC metric table.
+
+The PTM45 source-native receipt `results/public_v7_ptm45_merged.json` adds the `gh_autockt_opamp` topology with
+the public BPTM 45 nm BSIM4 model under ngspice-44.2. It uses three seeds, two methods, 300 simulations and 12
+calls per cell. The source deck has no process-corner selector, so the adapter records one TT condition and marks
+the receipt capability-only. SPECTRA has lower normalized TT violation on all three seeds (mean 0.2298 versus
+0.2816 for the clean-room AnaFlow adapter), while neither method meets the complete gain/UGF/phase-margin target.
