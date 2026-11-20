@@ -2,6 +2,38 @@
   "model_file": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib",
   "model_sha256": "03d505847c880d233b341be115a1e5460edf4d8e9b3e8a7df791a52fa4455d67",
   "osdi_dir": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/osdi",
+  "osdi_inventory": [
+    {
+      "name": "cap_cmomf.osdi",
+      "sha256": "b911aef6bff4c64e115ea93760a301b40422b6759b20dfed89ad0f8077cc3681",
+      "size_bytes": 16656
+    },
+    {
+      "name": "cap_cmomi.osdi",
+      "sha256": "9f00ba0b8e176e21e9aa5f5afa2c85602f7f83bef7b88facd505b33947c93cdd",
+      "size_bytes": 25280
+    },
+    {
+      "name": "mosvar.osdi",
+      "sha256": "040bcb0cb6ba6c16f6c2369de38c943f118443240e1e6812b093c7802469ad5c",
+      "size_bytes": 105840
+    },
+    {
+      "name": "psp103.osdi",
+      "sha256": "bb109c4482e2ec5fa04a981e8740b65019c0631803f47e2188a8c21cabeb112e",
+      "size_bytes": 792232
+    },
+    {
+      "name": "psp103_nqs.osdi",
+      "sha256": "1a31b138f05e5dfc8dcb3bc5935b57bad5982ba462a4e91fa2279ebbbf1ba7f9",
+      "size_bytes": 1191008
+    },
+    {
+      "name": "r3_cmc.osdi",
+      "sha256": "82945d7b67eb40f8b537db99b160aa27121b6cc99e51c846f2d98923b6f688cd",
+      "size_bytes": 121472
+    }
+  ],
   "pdk": "ihp-sg13g2",
   "ranking_eligible": false,
   "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell.",
@@ -9,7 +41,7 @@
   "simulator": "ngspice-44.2",
   "smoke": {
     "attempted": "op",
-    "elapsed_seconds": 0.7,
+    "elapsed_seconds": 0.372,
     "error": null,
     "netlist": "pmos_nmos_op.cir",
     "return_code": 0,
