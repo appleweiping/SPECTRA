@@ -74,7 +74,13 @@ def main() -> None:
             continue
         payload = json.loads(path.read_text(encoding="utf-8"))
         rows = payload.get("rows", [])
-        values = payload.get("aggregate") or aggregate(rows)
+        computed = aggregate(rows)
+        values = json.loads(json.dumps(payload.get("aggregate") or computed))
+        for method, computed_values in computed.items():
+            values.setdefault(method, {}).update({
+                key: value for key, value in computed_values.items()
+                if key not in values.get(method, {})
+            })
         records.append({
             "receipt": filename,
             "track": track,
