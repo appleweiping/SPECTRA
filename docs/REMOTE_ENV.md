@@ -76,6 +76,13 @@ per method-topology cell. The ATLAS GF180 track covers three seeds for SPECTRA a
 under ngspice-44.2 with 300 simulations, 12 calls and all 17 conditions present in the shipped public YAML. The
 strict shard receipts retain every condition and reject non-finite violations.
 
+The pre-registered staged PVT search path was smoke-tested on the same server with
+the HoiLee SKY130 deck. `results/analoggym_staged_smoke2.json` records seed 0,
+ngspice-44.2, six search units and an independent 45-condition verifier. The
+smoke has finite measurements but no TT/PVT pass at the intentionally tiny
+budget, and is excluded from ranking until the full 300-unit, three-seed,
+matched rerun is complete.
+
 The public-source expansion is executed only on this server. The immutable source checkouts are
 `jialinlu/opensource-analog-circuits` and `AMPICLab/AMPICBench`. The former has a 32-config ngspice-44.2
 capability receipt, and the latter has 9 source decks with per-corner replay receipts. PTM180 and embedded-BJT
