@@ -207,7 +207,8 @@ def simulator_capabilities(
                     creationflags=_creationflags(),
                 )
                 output = (proc.stdout + "\n" + proc.stderr).strip().splitlines()
-                entry["version"] = output[0][:240] if output else None
+                meaningful = [line.strip() for line in output if line.strip(" *\t")]
+                entry["version"] = meaningful[0][:240] if meaningful else None
             except (OSError, subprocess.SubprocessError) as exc:
                 entry["probe_error"] = type(exc).__name__
         result[name] = entry
