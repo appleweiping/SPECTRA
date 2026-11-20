@@ -1,0 +1,23 @@
+{
+  "schema": "spectra-secondary-server-capability/v1",
+  "host": "connect.westb.seetacloud.com",
+  "port": 20320,
+  "hostname": "autodl-container-dd3c4c8409-d40f8aea",
+  "storage": {
+    "root": "overlay 30G total, 4.5G used, 26G available",
+    "autodl_tmp": "/dev/md127 1.1T total, 742G used, 309G available"
+  },
+  "simulators": {
+    "ngspice": {"available": false},
+    "xyce": {"available": false},
+    "spectre": {"available": false},
+    "hspice": {"available": false},
+    "finesim": {"available": false},
+    "ultrasim": {"available": false},
+    "aps": {"available": false}
+  },
+  "pdk_roots_found": [],
+  "experiment_started": false,
+  "ranking_eligible": false,
+  "audit_boundary": "read-only inventory; no simulator, PDK, model, or benchmark files were created on this host"
+}
