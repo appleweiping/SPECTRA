@@ -57,7 +57,7 @@ server receipts use ngspice-44.2 and Xyce-7.10 where the corresponding track sup
   efficiency and provenance requirements used by the handoff. The 2026 read-level ledger in
   `docs/refs/READ_STATUS_2026.md` distinguishes full-paper/code inspection from abstract-only leads. The
   companion `docs/refs/LIT_SURVEY_2026_ADDENDUM.md` records the latest AutoSizer, AgenticSizing, AnalogScout,
-  PVTSizing 2.0, AnalogGym-Opt, NEMESIS2.0, AnalogAgent and Long-Horizon benchmark evidence.
+  PVTSizing 2.0, CRAFT, GFlow-SAEA, AnalogGym-Opt, NEMESIS2.0, AnalogAgent and Long-Horizon benchmark evidence.
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.

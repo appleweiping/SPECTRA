@@ -27,6 +27,9 @@ use LLMs to guide or replace black-box sizing; RL and BO sizers such as AutoCkt~
 GCN-RL~\cite{wang2020gcnrl} remain strong references, and AnalogGym~\cite{li2024analoggym} provides open SKY130
 sizing testbenches. PVT-aware LLM sizing is recent and limited to fixed topologies: AnalogScout~\cite{long2026analogscout}
 (3 OTAs, 9 corners, mismatch yield) and OPERA~\cite{saxena2026opera} (6 op-amps, expert-taught, post-layout corners).
+CRAFT~\cite{park2026craft} instead uses a pre-computed lookup-table service for reasoning-time device queries and
+independent HSPICE verification on four commercial-28-nm circuits. Its no-SPICE analytical loop and TT-only contract
+are complementary to SPECTRA's simulator-in-the-loop, open-PDK PVT protocol.
 OPERA and AnalogScout also use $g_m/I_D$ reasoning~\cite{jespers2017gmid}; SPECTRA differs in letting the LLM write
 an executable sizing \emph{program} whose self-predictions are checked against simulation, and in choosing the
 topology itself.
