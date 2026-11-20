@@ -71,7 +71,14 @@ def task_inventory(root: Path) -> dict[str, Any]:
     }
 
 
-def golden_summary(path: Path | None) -> dict[str, Any]:
+def golden_summary(
+    path: Path | None,
+    *,
+    status_override: str | None = None,
+    completed_jobs: int | None = None,
+    total_jobs: int | None = None,
+    timeout_seconds: int | None = None,
+) -> dict[str, Any]:
     if path is None:
         return {
             "attached": False,
@@ -111,9 +118,9 @@ def golden_summary(path: Path | None) -> dict[str, Any]:
     for row in rows:
         if isinstance(row, dict):
             issue_counts.update(str(issue) for issue in row.get("issues", []))
-    return {
+    summary = {
         "attached": True,
-        "status": "complete" if rows else "empty",
+        "status": status_override or ("complete" if rows else "empty"),
         "path": str(path),
         "sha256": sha256(path),
         "golden_rows": len(rows),
@@ -124,9 +131,24 @@ def golden_summary(path: Path | None) -> dict[str, Any]:
         "ranking_eligible": False,
         "boundary": "golden source audit only; no SPECTRA or AnaFlow answer cells",
     }
+    if completed_jobs is not None:
+        summary["completed_jobs"] = completed_jobs
+    if total_jobs is not None:
+        summary["total_jobs"] = total_jobs
+    if timeout_seconds is not None:
+        summary["timeout_seconds"] = timeout_seconds
+    return summary
 
 
-def build_receipt(root: Path, golden_path: Path | None) -> dict[str, Any]:
+def build_receipt(
+    root: Path,
+    golden_path: Path | None,
+    *,
+    golden_status: str | None = None,
+    completed_jobs: int | None = None,
+    total_jobs: int | None = None,
+    timeout_seconds: int | None = None,
+) -> dict[str, Any]:
     inventory = task_inventory(root)
     license_path = root / "LICENSE"
     expected = {
@@ -139,7 +161,13 @@ def build_receipt(root: Path, golden_path: Path | None) -> dict[str, Any]:
             "sha256": sha256(license_path) if license_path.is_file() else None,
         },
         "inventory": inventory,
-        "golden_audit": golden_summary(golden_path),
+        "golden_audit": golden_summary(
+            golden_path,
+            status_override=golden_status,
+            completed_jobs=completed_jobs,
+            total_jobs=total_jobs,
+            timeout_seconds=timeout_seconds,
+        ),
         "protocol": {
             "task_total": 54,
             "feasible_tiers": ["T1", "T2", "T3"],
@@ -179,7 +207,8 @@ def markdown(receipt: dict[str, Any]) -> str:
         f"- Tasks: {inv['prompt_files']} ({inv['tier_counts']})",
         f"- Circuits with 0.18um sources: {inv['source_180n_count']}/{inv['circuit_count']}",
         f"- Golden netlists: {inv['golden_netlist_count']}",
-        f"- Golden audit: `{gold['status']}` ({gold.get('golden_rows', 0)} rows)",
+        f"- Golden audit: `{gold['status']}` ({gold.get('golden_rows', 0)} rows; "
+        f"jobs {gold.get('completed_jobs', 'n/a')}/{gold.get('total_jobs', 'n/a')})",
         f"- Ranking eligible: `{receipt['ranking_eligible']}`",
         "",
         "The source tree defines 54 tasks, including four infeasible T4 tasks.",
@@ -193,9 +222,24 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--golden-json", type=Path)
+    parser.add_argument(
+        "--golden-status",
+        choices=("not_run", "complete", "partial_timeout", "failed"),
+        help="override status when the upstream audit exited with a timeout or error",
+    )
+    parser.add_argument("--completed-jobs", type=int)
+    parser.add_argument("--total-jobs", type=int)
+    parser.add_argument("--timeout-seconds", type=int)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    receipt = build_receipt(args.source_root.resolve(), args.golden_json.resolve() if args.golden_json else None)
+    receipt = build_receipt(
+        args.source_root.resolve(),
+        args.golden_json.resolve() if args.golden_json else None,
+        golden_status=args.golden_status,
+        completed_jobs=args.completed_jobs,
+        total_jobs=args.total_jobs,
+        timeout_seconds=args.timeout_seconds,
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     args.output.with_suffix(".md").write_text(markdown(receipt), encoding="utf-8")
