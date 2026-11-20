@@ -65,10 +65,22 @@ def main() -> None:
                                            capture_output=True, text=True, timeout=args.timeout)
                 output = completed.stdout + "\n" + completed.stderr
                 parsed = [line for line in output.splitlines() if re.search(r"=\s*[-+0-9.eE]+", line)]
+                artifact_metrics: list[str] = []
+                for artifact_name in ("stb_meas.txt", "op_nodes.txt", "op_devices.txt"):
+                    artifact = work_root / artifact_name
+                    if artifact.exists():
+                        try:
+                            artifact_metrics.extend(
+                                line for line in artifact.read_text(encoding="utf-8", errors="replace").splitlines()
+                                if re.search(r"=\s*[-+0-9.eE]+", line)
+                            )
+                        except OSError:
+                            pass
                 condition_rows.append({"condition": condition, "returncode": completed.returncode,
                                        "elapsed": time.perf_counter() - started,
                                        "fatal": "fatal error" in output.lower(),
-                                       "metrics_lines": parsed[-20:], "error_tail": output.splitlines()[-12:]})
+                                       "metrics_lines": (parsed + artifact_metrics)[-40:],
+                                       "error_tail": output.splitlines()[-12:]})
             except (OSError, subprocess.SubprocessError) as exc:
                 condition_rows.append({"condition": condition, "error": f"{type(exc).__name__}: {exc}",
                                        "elapsed": time.perf_counter() - started, "metrics_lines": []})
