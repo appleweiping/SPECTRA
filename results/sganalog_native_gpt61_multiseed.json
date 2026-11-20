@@ -1,12 +1,21 @@
 {
   "protocol": {
+    "actual_direct_run": {
+      "budget_compliance": "direct_sganalog_task2_artifact_protocol_not_siz7g_optimization",
+      "llm_calls_per_cell": 1,
+      "simulations_per_cell": 2
+    },
     "benchmark": "SGAnalog",
     "benchmark_commit": "ebd7e694b79cbe8475c42bd41cf4620c5d537a0f",
     "budget": {
       "llm_calls": 12,
       "simulations": 300
     },
-    "budget_status": "server_generated_model",
+    "budget_status": "server_generated_model_direct_task2",
+    "declared_budget": {
+      "llm_calls": 12,
+      "simulations": 300
+    },
     "docker_replacement": "native ngspice invocation with generated SPICE decks",
     "metrics": [
       "convergence",
