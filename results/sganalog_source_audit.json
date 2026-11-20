@@ -1,0 +1,212 @@
+{
+  "benchmark": "SGAnalog",
+  "boundary": "source audit only; native Task 2 rows require run_sganalog_native.py and are not SIZ7g cells",
+  "class_counts": {
+    "adc": 1,
+    "dac": 4,
+    "opamp": 3,
+    "oscillator": 1,
+    "passive": 4,
+    "power": 4
+  },
+  "complete": true,
+  "deck_count": 17,
+  "errors": [],
+  "expected_task_count": 17,
+  "ranking_eligible": false,
+  "schema": "sganalog-source-audit/v1",
+  "source_commit": "ebd7e694b79cbe8475c42bd41cf4620c5d537a0f",
+  "task_count": 17,
+  "task_count_matches_expected": true,
+  "task_file": "/root/autodl-tmp/bench_sources/SGAnalog/eval/sizing/tasks.jsonl",
+  "task_file_sha256": "b60bb262e20081f718aaf70d0fed7c32878a6694a166c2b9f92494a8ee7ac352",
+  "tasks": [
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Jay13ch__ttsky_jay13ch__xschem__tb_icell/tb_icell.cir",
+      "deck_sha256": "5dcdcb46befda8081b2e2945811d42eb76bd5fe476076c285baf5cf3baeada17",
+      "dut": "icell",
+      "klass": "dac",
+      "n_devices": 8,
+      "reference_devices": 8,
+      "repo": "Jay13ch__ttsky_jay13ch",
+      "task_id": "sz000"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/KolosKoblasz__tt07-mixer__xschem__analog_inv_tb/analog_inv_tb.cir",
+      "deck_sha256": "5faca7db164b2fea72bcd024df654d9175b3f279cecee3793c62aade3ea8b192",
+      "dut": "analog_inv",
+      "klass": "passive",
+      "n_devices": 2,
+      "reference_devices": 2,
+      "repo": "KolosKoblasz__tt07-mixer",
+      "task_id": "sz001"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/KolosKoblasz__tt07-mixer__xschem__diff_amp_tb/diff_amp_tb.cir",
+      "deck_sha256": "da702dc76aa8fcd13b1e45fa87ce1274c5d8f97c819b00382b5d8ddeb809ed05",
+      "dut": "diff_amp",
+      "klass": "opamp",
+      "n_devices": 7,
+      "reference_devices": 7,
+      "repo": "KolosKoblasz__tt07-mixer",
+      "task_id": "sz002"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Rajkamal0842__tt_um_rajkamal_analog__xschem__tb_BG/tb_BG.cir",
+      "deck_sha256": "4e5511b07986b75a802f5fe6d6360957bb77ee178c6f10ef39cffec847a24ebe",
+      "dut": "BG",
+      "klass": "power",
+      "n_devices": 9,
+      "reference_devices": 9,
+      "repo": "Rajkamal0842__tt_um_rajkamal_analog",
+      "task_id": "sz003"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Rajkamal0842__tt_um_rajkamal_analog__xschem__tb_amp/tb_amp.cir",
+      "deck_sha256": "27903e46c0baeec101e1315c50a4026d15a480ae85345886d10d4f31c5033762",
+      "dut": "amp",
+      "klass": "opamp",
+      "n_devices": 5,
+      "reference_devices": 5,
+      "repo": "Rajkamal0842__tt_um_rajkamal_analog",
+      "task_id": "sz004"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/Sud-ana__TT08__xschem__ota5t_1_delete_TB/ota5t_1_delete_TB.cir",
+      "deck_sha256": "16a5e70de0823a69afaff20e3ebf35aff125fbde3215568942784f000d772bf6",
+      "dut": "ota5t_1",
+      "klass": "opamp",
+      "n_devices": 7,
+      "reference_devices": 7,
+      "repo": "Sud-ana__TT08",
+      "task_id": "sz005"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/algofoogle__ttsky25a-vga-matrix-dac__xschem__tb_icell/tb_icell.cir",
+      "deck_sha256": "71771e62db40d1be418280420040d211d2d018d66ec5bbc2210f707cb6eced7c",
+      "dut": "icell",
+      "klass": "dac",
+      "n_devices": 8,
+      "reference_devices": 8,
+      "repo": "algofoogle__ttsky25a-vga-matrix-dac",
+      "task_id": "sz006"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/algofoogle__ttsky25b-analog-vga-dacs__xschem__tb_icell/tb_icell.cir",
+      "deck_sha256": "7a014ccd7e1faff2c312c80c1d723b2532a778cc8f6e69d0b8e042900a6cf3b4",
+      "dut": "icell",
+      "klass": "dac",
+      "n_devices": 8,
+      "reference_devices": 8,
+      "repo": "algofoogle__ttsky25b-analog-vga-dacs",
+      "task_id": "sz007"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/devinatkin__tt07-dual-oscillator__xschem__current_source_tb/current_source_tb.cir",
+      "deck_sha256": "0f5462c857606484c8cda5536058ea4ca998140180bc84559fce9a3b51836805",
+      "dut": "current_source",
+      "klass": "power",
+      "n_devices": 2,
+      "reference_devices": 2,
+      "repo": "devinatkin__tt07-dual-oscillator",
+      "task_id": "sz008"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/devinatkin__tt07-dual-oscillator__xschem__inverter_tb/inverter_tb.cir",
+      "deck_sha256": "70b05ad12516e6fc465b50e5987914ba3e12163790d3a3412f6a9dc745b2e1a8",
+      "dut": "inverter",
+      "klass": "passive",
+      "n_devices": 4,
+      "reference_devices": 4,
+      "repo": "devinatkin__tt07-dual-oscillator",
+      "task_id": "sz009"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/htfab__tt07-fprn__xschem__tb_pass_gate/tb_pass_gate.cir",
+      "deck_sha256": "f5d2b112871e5cc517ed6ab361ad8e28c5a981b312264fde85117208a82caa2f",
+      "dut": "pass_gate",
+      "klass": "passive",
+      "n_devices": 2,
+      "reference_devices": 2,
+      "repo": "htfab__tt07-fprn",
+      "task_id": "sz010"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/mattvenn__tt07-twin-tee-opamp-osc__xschem__tb_twin_tee/tb_twin_tee.cir",
+      "deck_sha256": "a0289ab990f26d38783e77d5340bfe9d1d0772caad7daebf82bd535bfc561d28",
+      "dut": "twin_tee",
+      "klass": "oscillator",
+      "n_devices": 7,
+      "reference_devices": 7,
+      "repo": "mattvenn__tt07-twin-tee-opamp-osc",
+      "task_id": "sz011"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/mattvenn__tt08-analog-r2r-dac-3v3__xschem__tb_dac_drive/tb_dac_drive.cir",
+      "deck_sha256": "d8bbc56606628633879d4014133c6c87e8ffe1b8aebed955c378e6589ac5bc02",
+      "dut": "dac_drive",
+      "klass": "dac",
+      "n_devices": 10,
+      "reference_devices": 10,
+      "repo": "mattvenn__tt08-analog-r2r-dac-3v3",
+      "task_id": "sz012"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/urish__tt10-sonos-flash-party__xschem__charge_pump_tb/charge_pump_tb.cir",
+      "deck_sha256": "e3c8645860c5de1e347dae7973263a92e1967c752abc433ec0a720ad32cd5a7b",
+      "dut": "charge_pump",
+      "klass": "power",
+      "n_devices": 14,
+      "reference_devices": 14,
+      "repo": "urish__tt10-sonos-flash-party",
+      "task_id": "sz013"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/zchris9__ttsky26b-ramp-adc__xschem__bias_tb/bias_tb.cir",
+      "deck_sha256": "f1608c8d86e11b9e50aaea379d8d3ceedd2df894307e2130df64c026337dfd70",
+      "dut": "bias",
+      "klass": "power",
+      "n_devices": 2,
+      "reference_devices": 2,
+      "repo": "zchris9__ttsky26b-ramp-adc",
+      "task_id": "sz014"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/zchris9__ttsky26b-ramp-adc__xschem__mux_tb/mux_tb.cir",
+      "deck_sha256": "c5346f703dfd6368d3a9c6caa92c3e9b033d17ba37fa01133641d7277fc17ff4",
+      "dut": "mux",
+      "klass": "passive",
+      "n_devices": 6,
+      "reference_devices": 6,
+      "repo": "zchris9__ttsky26b-ramp-adc",
+      "task_id": "sz015"
+    },
+    {
+      "deck_exists": true,
+      "deck_relpath": "circuits/zchris9__ttsky26b-ramp-adc__xschem__sh_tb/sh_tb.cir",
+      "deck_sha256": "cb5d84a795517d63ab0e77ba04de70ecc57ecd7ebb58f1499e2242710a1d58c0",
+      "dut": "sh",
+      "klass": "adc",
+      "n_devices": 7,
+      "reference_devices": 7,
+      "repo": "zchris9__ttsky26b-ramp-adc",
+      "task_id": "sz016"
+    }
+  ]
+}
