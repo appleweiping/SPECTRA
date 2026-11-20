@@ -90,6 +90,12 @@ AnaFlow, while wall time is effectively tied. The public BJT adapter also comple
 track by parsing Xyce `.mt0` artifacts. Xyce native execution of the public SKY130 AC deck remains diagnostic
 because it emits no comparable AC metric table.
 
+The corrected capability inventory is `results/cross_domain_capability_receipt_v4.json` with SHA-256
+`3bc712159284057dfdf8ecfc6960d49ea0884e3459d5d336eb8113f570802d1c`. It covers all eight registered
+source tracks, including LOADBench and AnalogPortBench, and records their source commits and tree
+digests. It probes the isolated server binaries by absolute path, finding ngspice-44.2 and Xyce-7.10.
+Spectre and HSPICE are absent on this server, so no licensed-simulator result is inferred.
+
 The PTM45 source-native receipt `results/public_v7_ptm45_merged.json` adds the `gh_autockt_opamp` topology with
 the public BPTM 45 nm BSIM4 model under ngspice-44.2. It uses three seeds, two methods, 300 simulations and 12
 calls per cell. The source deck has no process-corner selector, so the adapter records one TT condition and marks

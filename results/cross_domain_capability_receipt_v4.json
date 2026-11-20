@@ -1,0 +1,197 @@
+{
+  "manifest": "/root/autodl-tmp/spectra-analog-agent/data/bench/cross_domain_manifest.json",
+  "manifest_sha256": "2c2ce82b3338f6b227f76792655a4bb9979abe13a9a21cdf20b916d640d97013",
+  "ranking_eligible": false,
+  "ranking_reason": "Capability receipt only. A matched cell still requires task digest, PDK/model digest, corners, verifier, seed and budget evidence.",
+  "schema": "spectra-cross-domain-capability/v1",
+  "simulators": {
+    "hspice": {
+      "available": false,
+      "binary": null,
+      "version": null
+    },
+    "ngspice": {
+      "available": true,
+      "binary": "/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice",
+      "version": "******"
+    },
+    "spectre": {
+      "available": false,
+      "binary": null,
+      "version": null
+    },
+    "xyce": {
+      "available": true,
+      "binary": "/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce",
+      "version": "Xyce Release 7.10.0-opensource"
+    }
+  },
+  "tracks": [
+    {
+      "declared_families": [
+        "amplifier",
+        "ldo"
+      ],
+      "declared_pdks": [
+        "sky130"
+      ],
+      "declared_simulators": [
+        "ngspice-44.2",
+        "Xyce-7.10"
+      ],
+      "id": "analoggym_amp_ldo",
+      "source_available": true,
+      "source_commit": "0a9d1390ade361e2b4a2d33181e22367edbb8afc",
+      "source_file_count": 227,
+      "source_root": "/root/autodl-tmp/bench_sources/AnalogGym",
+      "source_tree_sha256": "6c76ec64e682aff821b940ceac05c3650b6cb6f34bc8ac4e755d3c234f18e477"
+    },
+    {
+      "declared_families": [
+        "opamp",
+        "ldo",
+        "bandgap",
+        "por",
+        "vco",
+        "bjt_amp"
+      ],
+      "declared_pdks": [
+        "ptm45",
+        "ptm180",
+        "sky130",
+        "bjt_public",
+        "asap7"
+      ],
+      "declared_simulators": [
+        "ngspice-44.2",
+        "Xyce-7.10"
+      ],
+      "id": "opensource_31",
+      "source_available": true,
+      "source_commit": "e8308aa273c1a6737a5dee89178c4d48270ff87e",
+      "source_file_count": 3405,
+      "source_root": "/root/autodl-tmp/bench_sources/opensource-analog-circuits",
+      "source_tree_sha256": "bb69b68017cc58481c547dd09522f207c55925e096a34e78ccf1ec0efbccf30f"
+    },
+    {
+      "declared_families": [
+        "bias",
+        "opamp",
+        "current_mirror",
+        "filter",
+        "reference"
+      ],
+      "declared_pdks": [
+        "sky130"
+      ],
+      "declared_simulators": [
+        "ngspice-44.2",
+        "Xyce-7.10"
+      ],
+      "id": "ampicbench_public",
+      "source_available": true,
+      "source_commit": "4ba5fc7a9b082df144225672e33d58a8e162af96",
+      "source_file_count": 257,
+      "source_root": "/root/autodl-tmp/bench_sources/AMPICBench",
+      "source_tree_sha256": "81357faf3f4378c70a80759933f74704e0b3ead2c2f9c167edba5edc899d4f6e"
+    },
+    {
+      "declared_families": [
+        "tapeout_analog_mixed_signal"
+      ],
+      "declared_pdks": [
+        "sky130"
+      ],
+      "declared_simulators": [
+        "ngspice-44.2 (native harness)",
+        "ngspice-45.2 (upstream source protocol)"
+      ],
+      "id": "sganalog_tapeout",
+      "source_available": true,
+      "source_commit": "ebd7e694b79cbe8475c42bd41cf4620c5d537a0f",
+      "source_file_count": 6731,
+      "source_root": "/root/autodl-tmp/bench_sources/SGAnalog",
+      "source_tree_sha256": "51896777fa3eb1e9a13873429627f98304dd28a1dc3f015ab3855248060ef085"
+    },
+    {
+      "declared_families": [
+        "public_atlas_circuits"
+      ],
+      "declared_pdks": [
+        "sky130",
+        "gf180mcu"
+      ],
+      "declared_simulators": [
+        "ngspice-44.2"
+      ],
+      "id": "atlas_dual_pdk",
+      "source_available": true,
+      "source_commit": "dd23c5ba7beb598909be593e4a84c81dab92cc69",
+      "source_file_count": 101,
+      "source_root": "/root/autodl-tmp/bench_sources/atlas",
+      "source_tree_sha256": "0ea3dc17e055f0c0db346ad44b49898b6cb166da483ddeabc9755c9e9d987d4e"
+    },
+    {
+      "declared_families": [
+        "amplifier",
+        "filter",
+        "power",
+        "reference",
+        "rf",
+        "high_speed",
+        "data_converter",
+        "sampling"
+      ],
+      "declared_pdks": [
+        "sky130"
+      ],
+      "declared_simulators": [
+        "ngspice"
+      ],
+      "id": "analog_design_bench",
+      "source_available": true,
+      "source_commit": "972f7cd7c95381134387b250edf18f3bd23bdd25",
+      "source_file_count": 996,
+      "source_root": "/root/autodl-tmp/bench_sources/analog-design-bench",
+      "source_tree_sha256": "be4d732d2235648d8751db1b237dacafa8eb88547d6a470d000dd5a69102c739"
+    },
+    {
+      "declared_families": [
+        "opamp"
+      ],
+      "declared_pdks": [
+        "sky130"
+      ],
+      "declared_simulators": [
+        "ngspice-44.2 (source-defined)"
+      ],
+      "id": "loadbench_ml",
+      "source_available": true,
+      "source_commit": "03cc45620afbbbee19652d83d625f26f3368d951",
+      "source_file_count": 9,
+      "source_root": "/root/autodl-tmp/bench_sources/LOADBench-Scripts",
+      "source_tree_sha256": "958b53be8356494e1b8b961e2bc6838872eb1e0cf62abdd27e889295f701eb7a"
+    },
+    {
+      "declared_families": [
+        "opamp",
+        "ldo",
+        "reference",
+        "data_converter"
+      ],
+      "declared_pdks": [
+        "gf180mcu",
+        "sky130"
+      ],
+      "declared_simulators": [
+        "ngspice"
+      ],
+      "id": "analog_port_bench",
+      "source_available": true,
+      "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
+      "source_file_count": 5760,
+      "source_root": "/root/autodl-tmp/bench_sources/AnalogPortBench",
+      "source_tree_sha256": "aded69f8edbca2c3bd0d1b6de49512d6f28a09fa883fb13775241ca264d1a1bb"
+    }
+  ]
+}

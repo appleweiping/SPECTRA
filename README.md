@@ -133,6 +133,19 @@ python scripts/summarize_public_v2.py
 python scripts/validate_cross_domain_cells.py
 python scripts/smoke_contracts.py
 python scripts/audit_xsota_gate.py
+python scripts/cross_domain_capability_audit.py \
+  --manifest data/bench/cross_domain_manifest.json \
+  --source-root analoggym_amp_ldo=/root/autodl-tmp/bench_sources/AnalogGym \
+  --source-root opensource_31=/root/autodl-tmp/bench_sources/opensource-analog-circuits \
+  --source-root ampicbench_public=/root/autodl-tmp/bench_sources/AMPICBench \
+  --source-root sganalog_tapeout=/root/autodl-tmp/bench_sources/SGAnalog \
+  --source-root atlas_dual_pdk=/root/autodl-tmp/bench_sources/atlas \
+  --source-root analog_design_bench=/root/autodl-tmp/bench_sources/analog-design-bench \
+  --source-root loadbench_ml=/root/autodl-tmp/bench_sources/LOADBench-Scripts \
+  --source-root analog_port_bench=/root/autodl-tmp/bench_sources/AnalogPortBench \
+  --simulator ngspice=/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
+  --simulator xyce=/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce \
+  --output results/cross_domain_capability_receipt_v4.json
 python scripts/audit_analog_design_bench.py \
   --source-root /root/autodl-tmp/bench_sources/analog-design-bench \
   --output results/analog_design_bench_v2_source_audit.json
