@@ -1,0 +1,637 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 45,
+  "pvt_mode": "canonical",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "L_M1": 3.567380537690081,
+        "L_M3": 1.3486009081857555,
+        "L_M5": 0.8617141946665715,
+        "L_M6": 0.17036602976533657,
+        "M_CL": 50.0,
+        "M_Cfb": 17.91398922026731,
+        "M_M1": 2.493490084812688,
+        "M_M3": 2.6040914127515316,
+        "M_M5": 4.218219062280832,
+        "M_M6": 52.93144609896128,
+        "M_Rfb": 1.8390601136617692,
+        "Vb": 0.728255197659816,
+        "W_M1": 1.2181526317343798,
+        "W_M3": 86.69206985334496,
+        "W_M5": 72.47921276752115,
+        "W_M6": 98.77463803315845
+      },
+      "pdk": "sky130",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 36.2518,
+              "ugf": 3398337.0,
+              "vout": -5.34986
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7358912499999999,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "metrics": {
+              "dcgain": 35.91962,
+              "ugf": 3574570.0,
+              "vout": -5.34538
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.736847375,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "metrics": {
+              "dcgain": 36.13522,
+              "ugf": 3162096.0,
+              "vout": -5.35595
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.738142375,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "metrics": {
+              "dcgain": 24.29708,
+              "ugf": 2215832.0,
+              "vout": -5.32151
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.80352075,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "metrics": {
+              "dcgain": 41.36063,
+              "ugf": 3902611.0,
+              "vout": -5.37049
+            },
+            "missing_metrics": [
+              "pm"
+            ],
+            "normalized_violation": 1.7176225,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 1.74640485,
+        "median_normalized_violation": 1.736847375,
+        "pvt_success": false
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_simple/circuit.cir",
+      "task": "ldo_simple",
+      "track_id": "opensource_31_v4",
+      "tt_pass": false,
+      "tt_violation": 1.7358912499999999,
+      "wall_seconds": 3404.689996710047
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}
