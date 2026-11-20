@@ -106,7 +106,7 @@ The common matched budget is 300 simulator evaluations, 12 LLM calls, and seeds 
 | Analog Design Bench v2 | SKY130 | source manifest audit; isolated verifier is external to the source repository | 50 designer-contributed tasks | task-defined PVT/mismatch | capability audit |
 | LOADBench | SKY130 | public evaluation scripts audited at pinned commit; dataset and netlists not downloaded | >100 op-amp topologies, six ML tasks | source-defined | capability audit |
 | AnalogPortBench | GF180→SKY130 transfer | source code audited; no SPECTRA transfer run | 54 porting tasks over 10 circuits, including infeasible specifications | five-corner source reference | capability audit |
-| IHP SG13G2 Open PDK | SG13G2 130 nm BiCMOS | ngspice-44.2 source audit; PSP103 runtime unavailable on server | 7,267 observed PDK files (7,290 tracked entries), MOS/HBT/passive model inventory | no common sizing task | capability audit |
+| IHP SG13G2 Open PDK | SG13G2 130 nm BiCMOS | ngspice-44.2 with server-built OpenVAF OSDI models | 7,267 observed PDK files (7,290 tracked entries), MOS/HBT/passive model inventory, native OP smoke | no common sizing task | capability audit |
 
 The PTM45 receipt is results/public_v7_ptm45_merged.json and its readable audit is results/public_v7_ptm45_merged.md. The full Xyce SKY130 LP runner receipt is results/opensource_xyce_sky130_lp_sizing.json and the strict merged receipt is results/public_v8_sky130_lp_xyce_merged.json. Together they contain six method-seed rows with 45 parsed conditions. The source deck has no matched process-corner library, so TT success and TT violation are reported while PVT success remains inapplicable. The receipt predates automatic sibling-deck translation, while direct translated SKY130 and PTM180 decks have independent Xyce artifacts and parser checks. The corrected adapter preserves the SPICE title line before inserting temperature control, and the raw failed pre-fix shards remain archived.
 
@@ -245,13 +245,37 @@ summary in `results/analog_port_bench_source_smoke.md`. The smoke passes the
 source evaluator checks while remaining explicitly ranking-ineligible because
 it uses a bundled golden reference and has no matched transfer verifier.
 
-The IHP SG13G2 audit is also capability-only. The server checkout pins the
+The IHP SG13G2 audit is capability-only. The server checkout pins the
 IHP Open PDK at commit `e73adb4045731ddec21634146d536380057f6a26` and finds
-the MOS/HBT/passive model sources, but the isolated ngspice-44.2 installation
-does not have a PSP103 OSDI plugin. The native one-netlist smoke therefore
-returns `Unknown model type psp103va` and is retained in
-`results/ihp_sg13g2_capability_receipt.{json,md}`. No SIZ7g or XSOTA-1 score
-is inferred until the model runtime and a matched independent verifier exist.
+the MOS/HBT/passive model sources. We compiled PSP103, PSP103-NQS, R3-CMC,
+MOSVAR, CMOMI and CMOMF with the OpenVAF 0.3-compatible binary and loaded the
+six OSDI artifacts into ngspice-44.2 through a reproducible temporary
+`.spiceinit`. The native one-netlist operating-point smoke returned code `0`
+with finite output voltage and supply current. Model artifact hashes and the
+raw output are retained in `results/ihp_sg13g2_capability_receipt.{json,md}`
+and `results/ihp_sg13g2_native_smoke.stdout`. This is runtime capability
+evidence, not a sizing result. No SIZ7g or XSOTA-1 score is inferred because
+the PDK source has no common sizing task, independent verifier, or matched
+AnaFlow cell.
+
+The server-side capability audit can be reproduced without writing experiment
+artifacts to the local machine. From the pinned IHP checkout, compile the
+Verilog-A models with the OpenVAF 0.3-compatible binary, then pass the generated
+OSDI directory to the audit. The audit excludes generated `osdi/` binaries from
+the source-tree digest, writes its temporary `.spiceinit` under the server work
+directory, and records every OSDI SHA-256 in the receipt.
+
+~~~bash
+cd /root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/verilog-a
+PATH=/root/autodl-tmp/tools/openvaf-osdi03:$PATH ./openvaf-compile-va.sh --compile-model-generic
+cd /root/autodl-tmp/spectra-analog-agent
+/root/miniconda3/bin/python scripts/audit_ihp_sg13g2.py \
+  --pdk-root /root/autodl-tmp/bench_sources/IHP-Open-PDK \
+  --simulator /root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
+  --osdi-dir /root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/osdi \
+  --work-root results/_ihp_sg13g2_smoke_repro_osdi \
+  --output results/ihp_sg13g2_capability_receipt.json
+~~~
 
 The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
 
