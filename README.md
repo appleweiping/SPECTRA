@@ -234,10 +234,12 @@ specifications. The pinned source inspection is documented in `docs/refs/REPO_AN
 Because the public transfer evaluator and task artifacts are not part of the SPECTRA checkout,
 this track remains outside the matched SIZ7g and XSOTA-1 aggregates until a server-side adapter
 and independent verifier receipt exist. The source evaluator's five-corner golden replay is
-attached only as benchmark-integrity evidence. The current server attempt completed 243 of 250
+attached only as benchmark-integrity evidence. The initial server attempt completed 243 of 250
 jobs before the upstream 900-second per-job timeout classified eight high-cost corners as unresolved.
-That timeout receipt is retained explicitly and is not treated as a complete golden pass. It is not
-a SPECTRA or AnaFlow answer result. A reproducible one-task source-native
+Those eight jobs were rerun with the same evaluator and fixed corner names. The recovery receipt
+`results/analogport_golden_recovery_receipt.{json,md}` records 250/250 completed jobs and eight
+of eight recovered corners passing. The replay is still not a SPECTRA or AnaFlow answer result.
+A reproducible one-task source-native
 smoke harness is available as `scripts/run_analog_port_bench_smoke.py` and
 was run on the server for `ota_tele_1v8` under SKY130/ngspice-44.2. Its
 receipt is `results/analog_port_bench_source_smoke.json` with a readable

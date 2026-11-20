@@ -72,10 +72,12 @@ an efficiency lead. The receipts are
 from the frozen eight-row primary matrix.
 
 AnalogPortBench has a complete source inventory and a real source-native smoke
-receipt. Its 250-job golden replay completed 243 jobs before eight high-cost
-corners hit the upstream 900-second timeout. The timeout and live-artifact
-counts are retained in `results/golden_attempt_timeout_receipt.json` and
-`results/analog_port_bench_source_audit.json`. The smoke passes 9/9 source
+receipt. Its initial 250-job golden replay completed 243 jobs before eight high-cost
+corners hit the upstream 900-second timeout. The eight jobs were rerun with the
+same evaluator and fixed corners, completing 250/250 with 8/8 recovered corners
+passing. The initial timeout and complete recovery receipts are retained in
+`results/golden_attempt_timeout_receipt.json` and
+`results/analogport_golden_recovery_receipt.{json,md}`. The smoke passes 9/9 source
 checks but uses a bundled golden reference, so it is capability evidence rather
 than a SPECTRA/AnaFlow ranking cell.
 
