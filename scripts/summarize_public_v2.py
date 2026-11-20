@@ -62,6 +62,7 @@ def main() -> None:
         "results/public_v5_*_merged.json",
         "results/public_v3_*_merged.json",
         "results/public_x1_v3_*_merged.json",
+        "results/public_v2_sky130_lp_merged.json",
     ])
     parser.add_argument("--output", type=Path, default=Path("results/public_v2_summary.md"))
     parser.add_argument("--json-output", type=Path, default=None)

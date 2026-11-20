@@ -1,0 +1,537 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 45,
+  "pvt_mode": "canonical",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "L_0": 0.5684808436607272,
+        "L_1": 0.38489335688193516,
+        "M_0": 0.5409735239361947,
+        "M_1": 0.5165276355285291,
+        "W_0": 85.3625655480177,
+        "W_1": 14.127555772777217
+      },
+      "pdk": "sky130",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 50.43292,
+              "pm": 180.41795868120366,
+              "ugf": 439885336.11672133
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "gain": 43.12884,
+              "pm": 180.73127858096248,
+              "ugf": 303225532.94501114
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "gain": 50.43292,
+              "pm": 180.41795868120366,
+              "ugf": 439885336.11672133
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "gain": 55.53546,
+              "pm": 180.23911878638071,
+              "ugf": 619767523.1789058
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "gain": 43.12884,
+              "pm": 180.73127858096248,
+              "ugf": 303225532.94501114
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "gain": 55.53546,
+              "pm": 180.23911878638071,
+              "ugf": 619767523.1789058
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "gain": 43.12884,
+              "pm": 180.73127858096248,
+              "ugf": 303225532.94501114
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "gain": 50.43292,
+              "pm": 180.41795868120366,
+              "ugf": 439885336.11672133
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "gain": 55.53546,
+              "pm": 180.23911878638071,
+              "ugf": 619767523.1789058
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "metrics": {
+              "gain": 44.24809,
+              "pm": 180.64104574860391,
+              "ugf": 354376815.4530618
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "metrics": {
+              "gain": 51.69141,
+              "pm": 180.35038534355542,
+              "ugf": 525458567.8948777
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "metrics": {
+              "gain": 55.42907,
+              "pm": 180.2200570131324,
+              "ugf": 696534575.8120027
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "metrics": {
+              "gain": 44.24809,
+              "pm": 180.64104574860391,
+              "ugf": 354376815.4530618
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "metrics": {
+              "gain": 51.69141,
+              "pm": 180.35038534355542,
+              "ugf": 525458567.8948777
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "metrics": {
+              "gain": 55.42907,
+              "pm": 180.2200570131324,
+              "ugf": 696534575.8120027
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "metrics": {
+              "gain": 44.24809,
+              "pm": 180.64104574860391,
+              "ugf": 354376815.4530618
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "metrics": {
+              "gain": 51.69141,
+              "pm": 180.35038534355542,
+              "ugf": 525458567.8948777
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "metrics": {
+              "gain": 55.42907,
+              "pm": 180.2200570131324,
+              "ugf": 696534575.8120027
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "metrics": {
+              "gain": 42.6416,
+              "pm": 180.79576570654874,
+              "ugf": 264724381.77689624
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "metrics": {
+              "gain": 49.48365,
+              "pm": 180.4797564470743,
+              "ugf": 377707509.34995127
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "metrics": {
+              "gain": 55.62583,
+              "pm": 180.25939499244632,
+              "ugf": 547086311.8261205
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "metrics": {
+              "gain": 42.6416,
+              "pm": 180.79576570654874,
+              "ugf": 264724381.77689624
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "metrics": {
+              "gain": 49.48365,
+              "pm": 180.4797564470743,
+              "ugf": 377707509.34995127
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "metrics": {
+              "gain": 55.62583,
+              "pm": 180.25939499244632,
+              "ugf": 547086311.8261205
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "metrics": {
+              "gain": 42.6416,
+              "pm": 180.79576570654874,
+              "ugf": 264724381.77689624
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "metrics": {
+              "gain": 49.48365,
+              "pm": 180.4797564470743,
+              "ugf": 377707509.34995127
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "metrics": {
+              "gain": 55.62583,
+              "pm": 180.25939499244632,
+              "ugf": 547086311.8261205
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "metrics": {
+              "gain": 48.78008,
+              "pm": 180.47044505787312,
+              "ugf": 385899055.4878803
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "metrics": {
+              "gain": 55.06148,
+              "pm": 180.25908667457745,
+              "ugf": 554326518.1108589
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "metrics": {
+              "gain": 57.38967,
+              "pm": 180.19330685346858,
+              "ugf": 651056417.6070793
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "metrics": {
+              "gain": 48.78008,
+              "pm": 180.47044505787312,
+              "ugf": 385899055.4878803
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "metrics": {
+              "gain": 55.06148,
+              "pm": 180.25908667457745,
+              "ugf": 554326518.1108589
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "metrics": {
+              "gain": 57.38967,
+              "pm": 180.19330685346858,
+              "ugf": 651056417.6070793
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "metrics": {
+              "gain": 48.78008,
+              "pm": 180.47044505787312,
+              "ugf": 385899055.4878803
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "metrics": {
+              "gain": 55.06148,
+              "pm": 180.25908667457745,
+              "ugf": 554326518.1108589
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "metrics": {
+              "gain": 57.38967,
+              "pm": 180.19330685346858,
+              "ugf": 651056417.6070793
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "metrics": {
+              "gain": 39.23715,
+              "pm": 180.92678734394786,
+              "ugf": 245736865.56039503
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.006357083333333335,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "metrics": {
+              "gain": 45.13856,
+              "pm": 180.6354221808037,
+              "ugf": 347998177.19820887
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "metrics": {
+              "gain": 52.62133,
+              "pm": 180.3378372610619,
+              "ugf": 528691279.0005379
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "metrics": {
+              "gain": 39.23715,
+              "pm": 180.92678734394786,
+              "ugf": 245736865.56039503
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.006357083333333335,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "metrics": {
+              "gain": 45.13856,
+              "pm": 180.6354221808037,
+              "ugf": 347998177.19820887
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "metrics": {
+              "gain": 52.62133,
+              "pm": 180.3378372610619,
+              "ugf": 528691279.0005379
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "metrics": {
+              "gain": 39.23715,
+              "pm": 180.92678734394786,
+              "ugf": 245736865.56039503
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.006357083333333335,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "metrics": {
+              "gain": 45.13856,
+              "pm": 180.6354221808037,
+              "ugf": 347998177.19820887
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "metrics": {
+              "gain": 52.62133,
+              "pm": 180.3378372610619,
+              "ugf": 528691279.0005379
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.0004238055555555557,
+        "median_normalized_violation": 0.0,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir",
+      "task": "sky130_lp_opamp",
+      "track_id": "opensource_31_v2",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 3295.981785991695
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}

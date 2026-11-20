@@ -7,6 +7,7 @@ Each cell uses 300 simulator evaluations and 12 LLM calls. A receipt with one so
 
 | Receipt | Task | PVT conditions | Complete | PVT ranking eligible | Audit errors |
 |---|---|---:|:---:|:---:|---:|
+| `public_v2_sky130_lp_merged.json` | `sky130_lp_opamp` | 45 | yes | yes | 0 |
 | `public_v3_asap7_ldo_merged.json` | `ldo_1_asap7` | 45 | yes | yes | 0 |
 | `public_v5_bjt_merged.json` | `bjt_ce_amp` | 1 | yes | no | 0 |
 | `public_v5_ptm180_merged.json` | `ptm180nm_opamp` | 1 | yes | no | 0 |
@@ -16,6 +17,8 @@ Each cell uses 300 simulator evaluations and 12 LLM calls. A receipt with one so
 
 | Receipt | Method | Cells | TT success | PVT success | Mean TT violation | Mean PVT violation | Mean first-pass simulations | Mean wall seconds | Tier |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|
+| `public_v2_sky130_lp_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 0.3333 | 0.0000 | 0.0890 | 1.00 | 3319.47 | PVT ranking |
+| `public_v2_sky130_lp_merged.json` | `spectra` | 3 | 1.0000 | 0.3333 | 0.0000 | 0.0890 | 1.00 | 3317.36 | PVT ranking |
 | `public_v3_asap7_ldo_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 0.0000 | 0.0000 | 0.8000 | 2.00 | 1009.99 | PVT ranking |
 | `public_v3_asap7_ldo_merged.json` | `spectra` | 3 | 1.0000 | 0.0000 | 0.0000 | 0.8000 | 2.00 | 960.65 | PVT ranking |
 | `public_v5_bjt_merged.json` | `anaflow_cleanroom` | 3 | 1.0000 | 1.0000 | 0.0000 | 0.0000 | 1.33 | 12.45 | TT-only capability |

@@ -4,6 +4,34 @@
       "aggregate": {
         "anaflow_cleanroom": {
           "cells": 3,
+          "mean_pvt_violation": 0.0890301574074074,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 3319.4681380991824,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0890301574074074,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 3317.3624100893117,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "file": "public_v2_sky130_lp_merged.json",
+      "pvt_conditions": 45,
+      "ranking_eligible": true,
+      "track": "sky130_lp_opamp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
           "mean_pvt_violation": 0.8000000000000002,
           "mean_simulations_to_first_pass": 2.0,
           "mean_tt_violation": 0.0,
@@ -114,6 +142,32 @@
     }
   ],
   "rows": [
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0890301574074074,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 3319.4681380991824,
+      "method": "anaflow_cleanroom",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "public_v2_sky130_lp_merged.json",
+      "tier": "PVT ranking",
+      "track": "sky130_lp_opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0890301574074074,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 3317.3624100893117,
+      "method": "spectra",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "public_v2_sky130_lp_merged.json",
+      "tier": "PVT ranking",
+      "track": "sky130_lp_opamp",
+      "tt_success": 1.0
+    },
     {
       "cells": 3,
       "mean_pvt_violation": 0.8000000000000002,
