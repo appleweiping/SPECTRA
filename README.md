@@ -155,6 +155,10 @@ python scripts/audit_sganalog_source.py \
 python scripts/audit_loadbench_scripts.py \
   --source-root /root/autodl-tmp/bench_sources/LOADBench-Scripts \
   --output results/loadbench_scripts_source_audit.json
+python scripts/audit_analog_port_bench.py \
+  --source-root /root/autodl-tmp/bench_sources/AnalogPortBench \
+  --golden-json /root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/results/golden_audit.json \
+  --output results/analog_port_bench_source_audit.json
 python scripts/test_xyce_ac_translator.py
 ~~~
 
@@ -191,7 +195,8 @@ cover ten source circuits, five source corners, feasible transfers, and delibera
 specifications. The pinned source inspection is documented in `docs/refs/REPO_ANALYSIS.md`.
 Because the public transfer evaluator and task artifacts are not part of the SPECTRA checkout,
 this track remains outside the matched SIZ7g and XSOTA-1 aggregates until a server-side adapter
-and independent verifier receipt exist.
+and independent verifier receipt exist. The source evaluator's five-corner golden audit is
+attached only as benchmark-integrity evidence. It is not a SPECTRA or AnaFlow answer result.
 
 The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
 
