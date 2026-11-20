@@ -188,3 +188,4 @@ python scripts/run_sganalog_native.py \
 ~~~
 
 The command is intended for the server. It uses the pinned SGAnalog task list, native ngspice, isolated task/seed work directories, retryable GPT requests, response digests, and raw simulator logs. The output is a direct SGAnalog Task 2 audit rather than a SPECTRA optimization result and therefore remains a separate capability tier.
+Each direct task-seed cell uses one GPT request plus two native deck executions. The declared 300-simulation and 12-call SIZ7g budget is recorded as a reference contract, not claimed for this direct Task 2 receipt, so these 51 rows are excluded from the SIZ7g ranking aggregate.
