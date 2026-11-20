@@ -55,7 +55,7 @@
       "corners": "source-declared corners, mapped only where metric semantics match",
       "seeds": [0, 1, 2],
       "budget": {"simulations": 300, "llm_calls": 12},
-      "status": "server-pvt-capability-rerun-in_progress; source-audit-complete"
+      "status": "server-pvt-capability-complete-135-of-135; source-audit-complete; ranking-adapter-pending"
     },
     {
       "id": "sganalog_tapeout",
