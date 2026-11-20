@@ -38,7 +38,16 @@ server receipts use ngspice-44.2 and Xyce-7.10 where the corresponding track sup
   32/32 opensource configs, 9 AMPICBench decks across source corners, a 3-seed PTM180/BJT TT adapter, a matched
   Xyce BJT receipt, and 3-seed 45-condition ASAP7 LDO, SKY130 LP-opamp and SKY130 LDO receipts. The measured-scope
   table is `results/public_scope_sota_summary.md`. The universal-coverage contract and unmeasured strata are
-  recorded in `docs/TOPCONF_LITERATURE_AUDIT.md`.
+  recorded in `docs/TOPCONF_LITERATURE_AUDIT.md`. The complete pre-registered
+  `spectra_staged` sensitivity now covers both AnalogGym amplifier topologies,
+  three seeds, 300 units and 45 verifier conditions. It reaches TT/PVT
+  `1.000/1.000` on HoiLee and `1.000/0.667` on Leung, compared with the
+  matched clean-room AnaFlow rows at `1.000/0.667` and `1.000/0.333`.
+  The two topology receipts and endpoint comparisons are
+  `results/analoggym_pvt_staged_comparison.{json,md}` and
+  `results/analoggym_leung_pvt_staged_comparison.{json,md}`. This is a
+  benchmark-scoped sensitivity arm with TT ties, so it remains outside the
+  frozen primary row and the literal XSOTA-1 gate.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.

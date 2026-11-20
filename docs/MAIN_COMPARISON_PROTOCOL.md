@@ -23,9 +23,12 @@ evaluations on a SPECTRA warm start, then evaluates 50 candidates on five fixed
 screening corners (`tt_27C_1.8V`, `ss_-40C_1.62V`, `ss_125C_1.98V`,
 `ff_-40C_1.98V`, and `ff_125C_1.62V`). The stage-two objective is the maximum
 normalized violation across those corners. The 45-condition verifier remains
-independent. This arm is not part of the primary row until all declared
-topologies, seeds and matched external rows have been rerun from the same
-implementation commit.
+independent. The complete two-topology AnalogGym sensitivity is recorded in
+`results/analoggym_pvt_staged_comparison.{json,md}` and
+`results/analoggym_leung_pvt_staged_comparison.{json,md}`. It covers six
+SPECTRA cells under the 300-unit/12-call contract. It remains outside the
+primary row because the staged arm is a separate sensitivity policy and its
+TT endpoint ties the matched AnaFlow rows.
 
 ## Statistical reporting
 
