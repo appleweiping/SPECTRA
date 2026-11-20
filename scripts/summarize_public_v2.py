@@ -57,7 +57,7 @@ def aggregate_from_rows(rows: list[dict]) -> dict[str, dict[str, object]]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", nargs="*", default=[
-        "results/public_v2_*_merged.json",
+        "results/public_v5_*_merged.json",
         "results/public_v3_*_merged.json",
         "results/public_x1_v2_*_merged.json",
     ])

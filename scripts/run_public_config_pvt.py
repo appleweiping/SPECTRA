@@ -215,7 +215,12 @@ def main() -> None:
                 coverage = min(max(8, 2 * len(names)), max(1, args.budget // 3))
                 for unit in rng.random((coverage, len(names))):
                     evaluate(bounds[:, 0] + unit * (bounds[:, 1] - bounds[:, 0]))
-                es = cma.CMAEvolutionStrategy([0.5] * len(names), 0.25,
+                # Start the refinement distribution at the best design-intent
+                # probe rather than a fixed center. This preserves the exact
+                # simulation cap while making the refinement exploit the
+                # diagnostic coverage phase on narrow feasible regions.
+                best_unit = np.clip((best - bounds[:, 0]) / (bounds[:, 1] - bounds[:, 0]), 0.0, 1.0)
+                es = cma.CMAEvolutionStrategy(best_unit.tolist(), 0.25,
                                                {"bounds": [0, 1], "seed": seed + 9000, "verbose": -9})
                 while evaluations < args.budget:
                     points = es.ask()[:args.budget - evaluations]

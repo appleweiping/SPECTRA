@@ -1,0 +1,66 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 1,
+  "pvt_mode": "source",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": 5,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "CL": 2.7450669478154603,
+        "Cc": 1.636785998127352,
+        "Ib": 8.89595284298822,
+        "L1": 0.18461919367093976,
+        "L2": 0.28678547867858817,
+        "L3": 0.18352992565676296,
+        "L4": 0.4778880994721081,
+        "L5": 0.21973233323126268,
+        "L6": 0.20068386435893498,
+        "L7": 0.5334780035502356,
+        "L8": 0.681026313178954,
+        "W1": 14.647618088753546,
+        "W2": 7.266260633591367,
+        "W3": 23.780542742971367,
+        "W4": 21.101933577957304,
+        "W5": 8.13017683603029,
+        "W6": 31.84599999134935,
+        "W7": 28.543338708031822,
+        "W8": 6.422824287149999
+      },
+      "pdk": "ptm180",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 61.33616,
+              "pm": 181.38118083901333,
+              "ugf": 7469107.254699811
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.0,
+        "median_normalized_violation": 0.0,
+        "pvt_success": true
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ptm180nm_opamp/circuit.cir",
+      "task": "ptm180nm_opamp",
+      "track_id": "opensource_31_v5",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 13.40268563432619
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}
