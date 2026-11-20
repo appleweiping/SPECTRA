@@ -158,7 +158,7 @@ python scripts/cross_domain_capability_audit.py \
   --source-root analog_port_bench=/root/autodl-tmp/bench_sources/AnalogPortBench \
   --simulator ngspice=/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
   --simulator xyce=/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce \
-  --output results/cross_domain_capability_receipt_v5.json
+  --output results/cross_domain_capability_receipt_v6.json
 python scripts/audit_analog_design_bench.py \
   --source-root /root/autodl-tmp/bench_sources/analog-design-bench \
   --output results/analog_design_bench_v2_source_audit.json
@@ -272,7 +272,7 @@ be audited without relying on prose. The current snapshot is as follows.
 | Gate | Current state | Evidence and interpretation |
 |---|---|---|
 | `XSOTA-MEASURED-1` | PASS for measured scope | `results/public_scope_sota_summary.md` compares every complete merged receipt under its declared contract. |
-| `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v5.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
+| `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v6.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
 | `XPORT-1` | PASS for source inventory, PARTIAL for golden replay | `results/analog_port_bench_source_audit.json` records the complete 54-task inventory. The server replay attempted all 250 golden corner jobs, completed 243, and records eight high-cost timeout jobs in `results/golden_attempt_timeout_receipt.json`. It is not a SPECTRA ranking row. |
 | `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. The latest diagnostics show 9/9 comparable strata non-inferior, only 1/9 strict on all endpoints, and 7 strata with 14 zero-floor ties. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
 
