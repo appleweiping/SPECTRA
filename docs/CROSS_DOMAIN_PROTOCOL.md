@@ -133,4 +133,5 @@ AnaFlow cell and remains outside all ranking and XSOTA aggregates.
 - Analog Design Bench, https://huggingface.co/datasets/Arcadia-2026/analog-design-bench
 - LOADBench scripts, https://github.com/FilipeAz/LOADBench-Scripts
 - AnalogPortBench, https://github.com/saeidrajabii/AnalogPortBench
+- IHP Open PDK SG13G2, https://github.com/IHP-GmbH/IHP-Open-PDK
 - AnaFlow, ICCAD 2025, https://arxiv.org/abs/2511.03697
