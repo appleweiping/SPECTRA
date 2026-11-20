@@ -205,6 +205,63 @@
       "pvt_declared_tasks": 38,
       "mismatch_declared_tasks": 36,
       "receipt": "results/analog_design_bench_v2_source_audit.json"
+    },
+    {
+      "id": "loadbench_ml",
+      "source": "FilipeAz/LOADBench-Scripts",
+      "source_url": "https://github.com/FilipeAz/LOADBench-Scripts",
+      "paper_url": "https://arxiv.org/abs/2610.21591",
+      "pdks": [
+        "sky130"
+      ],
+      "simulators": [
+        "ngspice-44.2 (source-defined)"
+      ],
+      "families": [
+        "opamp"
+      ],
+      "topology_policy": "LOADBench held-out topology list and structural matcher",
+      "corners": "source-defined dataset testbenches",
+      "seeds": [],
+      "budget": {
+        "simulations": null,
+        "llm_calls": null
+      },
+      "status": "source_scripts_audit_complete_dataset_not_downloaded_capability_only",
+      "source_commit": "03cc45620afbbbee19652d83d625f26f3368d951",
+      "task_count": 6,
+      "receipt": "results/loadbench_scripts_source_audit.json",
+      "license_status": "no-license-file-in-script-repository"
+    },
+    {
+      "id": "analog_port_bench",
+      "source": "saeidrajabii/AnalogPortBench",
+      "source_url": "https://github.com/saeidrajabii/AnalogPortBench",
+      "paper_url": "https://arxiv.org/abs/2610.33088",
+      "pdks": [
+        "gf180mcu",
+        "sky130"
+      ],
+      "simulators": [
+        "ngspice"
+      ],
+      "families": [
+        "opamp",
+        "ldo",
+        "reference",
+        "data_converter"
+      ],
+      "topology_policy": "source-netlist to target-PDK transfer with feasible and infeasible tasks",
+      "corners": "five-corner source reference",
+      "seeds": [],
+      "budget": {
+        "simulations": null,
+        "llm_calls": null
+      },
+      "status": "source_code_audit_complete_no_spectra_run_capability_only",
+      "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
+      "task_count": 54,
+      "receipt": null
     }
   ]
 }

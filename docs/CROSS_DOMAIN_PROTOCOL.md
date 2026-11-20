@@ -115,4 +115,6 @@ AnaFlow is a clean-room adapter in this repository. Its paper reports two PTM45/
 - Open-Source Analog Circuit Sizing Benchmark Suite, https://github.com/jialinlu/opensource-analog-circuits
 - ATLAS, https://github.com/youngmin0oh/atlas
 - Analog Design Bench, https://huggingface.co/datasets/Arcadia-2026/analog-design-bench
+- LOADBench scripts, https://github.com/FilipeAz/LOADBench-Scripts
+- AnalogPortBench, https://github.com/saeidrajabii/AnalogPortBench
 - AnaFlow, ICCAD 2025, https://arxiv.org/abs/2511.03697
