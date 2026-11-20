@@ -1,0 +1,1934 @@
+{
+  "declared_protocol": {
+    "common_siz7g": false,
+    "independent_verifier": "required but not present in cloned source",
+    "pvt_and_mismatch": "task-defined",
+    "source_native": true
+  },
+  "defaults": {
+    "environment": {
+      "build_timeout_sec": 1800.0,
+      "cpus": 8,
+      "memory_mb": 4096,
+      "network_mode": "no-network",
+      "storage_mb": 10240
+    },
+    "schema_version": 1,
+    "verifier": {
+      "environment": {
+        "build_timeout_sec": 1800.0,
+        "cpus": 8,
+        "memory_mb": 4096,
+        "network_mode": "no-network",
+        "storage_mb": 10240
+      },
+      "environment_mode": "separate"
+    }
+  },
+  "defaults_sha256": "992007ad15795ba9503f5c7ade89df1bfc3af8d9a435086f234dbae40718f319",
+  "manifest_sha256": "96cfb02071157ab544bdf283188a3405561f81a01e82f3a8eb48e157fb15ddef",
+  "ranking_blocker": "isolated verifier and submitted circuit artifacts are external to this git source; no matched SPECTRA/AnaFlow cells were run",
+  "ranking_status": "capability_only_source_audit",
+  "release_id": "analog-design-bench-v2",
+  "schema": "analog-design-bench-source-audit/v1",
+  "source_commit": "972f7cd7c95381134387b250edf18f3bd23bdd25",
+  "source_url": "https://github.com/Arcadia-1/analog-design-bench",
+  "summary": {
+    "manifest_slots": 50,
+    "mismatch_tasks": 36,
+    "pvt_tasks": 38,
+    "task_count": 50,
+    "task_files": 50
+  },
+  "tasks": [
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Quanrong Zhuang"
+        }
+      ],
+      "declared_task_id": "sky130-class-d-halfbridge-eff95-tt",
+      "description": "Implement a half-bridge class-D power amplifier targeting > 95% peak efficiency and > 30 mW output power across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 3704,
+      "instruction_sha256": "10d4b1ba09b11a1c3b0ed579ea2ce46cec5a603ade999f0d8228472200c963eb",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "class-d",
+        "half-bridge",
+        "power-amplifier",
+        "efficiency",
+        "tt"
+      ],
+      "metric_flags": [
+        "frequency",
+        "power"
+      ],
+      "name": "analog-arena/sky130-class-d-halfbridge-eff95-tt",
+      "task_id": "sky130-class-d-halfbridge-eff95-tt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "d203d67dc7ff0c83cfdbc7607b24cd0d36b6077a678b86948ec788c3bd92c46d"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Mingtao Zhan"
+        }
+      ],
+      "declared_task_id": "sky130-programmable-icc-iptat-current-mirror-pvt",
+      "description": "Implement a programmable ICC/IPTAT NMOS current mirror targeting 1.00 mA nominal output current and \u2264 8% output-current error across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 8251,
+      "instruction_sha256": "ab4cafc68fc1accd53af0c34a50df94f112caba2b7f5bb4e76cd956f5e772519",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "current-mirror",
+        "current-reference",
+        "iptat",
+        "programmable",
+        "pvt"
+      ],
+      "metric_flags": [
+        "dc",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-programmable-icc-iptat-current-mirror-pvt",
+      "task_id": "sky130-programmable-icc-iptat-current-mirror-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "90e9a7138a3a8c192af6ab43e6b62a615f23ef3207db446535d208569effd576"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-gmr-degen-amp-constant-gm-pvt",
+      "description": "Implement a source-degenerated GM-R differential amplifier targeting 1.98\u20132.02 V/V gain and > 60 MHz bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4207,
+      "instruction_sha256": "fa1fe0ec10f36eba2428a9423c74fd3a2196a2f2022d963b9862ef681d39bda6",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "differential-amplifier",
+        "gm-r",
+        "process-corners"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-gmr-degen-amp-constant-gm-pvt",
+      "task_id": "sky130-gmr-degen-amp-constant-gm-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "0015ee92b297111195a1f30ec72a7d0b19c21bbd43927af75102b3d173c69b50"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60",
+      "description": "Implement a source-degenerated GM-R differential amplifier targeting 1.98\u20132.02 V/V gain and > 70 MHz bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 3940,
+      "instruction_sha256": "6752e915edc6be7915fb715f3a2784cc2fc0ffafa59f63dc691559927cc20eab",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "differential-amplifier",
+        "gm-r",
+        "process-corners"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60",
+      "task_id": "sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "f70051b8b3d5ad80d37a4941e6abbf551f33cad408715c1f3eadb3aab939d0fa"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Quanrong Zhuang"
+        }
+      ],
+      "declared_task_id": "sky130-bootstrap-driver-pt",
+      "description": "Implement an all-NMOS half-bridge bootstrap gate driver with a designable off-chip bootstrap capacitor, targeting 3\u20137 ns dead time and < 3.5 mW driver power across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 7734,
+      "instruction_sha256": "631a7fc36f62a17aba86ea23517841397acd00cc16433b7ae9f0076e84ac3919",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "bootstrap",
+        "half-bridge",
+        "gate-driver",
+        "level-shifter",
+        "dead-time",
+        "process-corner",
+        "temperature"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "power",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-bootstrap-driver-pt",
+      "task_id": "sky130-bootstrap-driver-pt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "36ad8b83f6c2c6588fae39ff178c254dc16e185ed9d7215b6d09af0b6f3cd114"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Kezhuo Liu"
+        }
+      ],
+      "declared_task_id": "sky130-ring-amp-3stage-gain8-400uw",
+      "description": "Implement a three-stage switched-capacitor ring amplifier targeting 7.2\u20138.8 V/V closed-loop gain and \u2264 50 ns settling time across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 5553,
+      "instruction_sha256": "844892f973b9a07b4a7c29ae72631a4ae0ea369195962a1b1a7716d3f6907345",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "ring-amplifier",
+        "three-stage",
+        "switched-capacitor",
+        "closed-loop"
+      ],
+      "metric_flags": [
+        "ac",
+        "power",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-ring-amp-3stage-gain8-400uw",
+      "task_id": "sky130-ring-amp-3stage-gain8-400uw",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "c9117d9ddbeb64eae40bc83e3ad77e506c19339efc7629cf6e3f183623ac451d"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Jing Wang"
+        }
+      ],
+      "declared_task_id": "sky130-ldo-ota5-robust-pvt-mc",
+      "description": "Implement a PMOS-pass LDO targeting 1.20 V output within \u00b120 mV and \u2264 250 mV dropout across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 5627,
+      "instruction_sha256": "82ded59f9133b766ef8f22c34f763f0ec02012b18bf171855f07a770f3264984",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "ldo",
+        "pvt",
+        "monte-carlo"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-ldo-ota5-robust-pvt-mc",
+      "task_id": "sky130-ldo-ota5-robust-pvt-mc",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "02c3e29e2139feec32fb8fd673fa42c85480129c669f68043269eca8312d3558"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-buf-ppsf-bs-gain1-sfdr90",
+      "description": "Implement a differential push-pull source-follower buffer targeting > 0.99 V/V gain through 40 MHz and > 90 dB SFDR at 1 MHz across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 5603,
+      "instruction_sha256": "e3c9449d5d4f5e8905c1c4214ee5a62dad9aec48c7f97e88eb8d83cbfb7b580f",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "buffer",
+        "source-follower",
+        "input-impedance",
+        "sfdr",
+        "process-corners"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-buf-ppsf-bs-gain1-sfdr90",
+      "task_id": "sky130-buf-ppsf-bs-gain1-sfdr90",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "a744ef1ca38393cc0083f4dc66573a1739eea9814aed7888fb23434f1ac273c9"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-cml-divider-div2-range1gto10g",
+      "description": "Implement a static CML divide-by-2 frequency divider targeting 1\u201310 GHz input operation and \u2265 200 mVpp differential output swing across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 5687,
+      "instruction_sha256": "d17a1f50fcedbe2e248f078c8afd1185ff3627b86c5c1e76ff9f822df62b9499",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "cml",
+        "frequency-divider",
+        "divider",
+        "high-speed"
+      ],
+      "metric_flags": [
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-cml-divider-div2-range1gto10g",
+      "task_id": "sky130-cml-divider-div2-range1gto10g",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "f51455b81364b6a53782cf24c109e96b72e3c2c185def6d8f924d1ce5666b8cf"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt",
+      "description": "Implement an optical-receiver transimpedance amplifier targeting > 8 k\u03a9 transimpedance and > 750 MHz bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 4500,
+      "instruction_sha256": "42818a16fd043bbe9f1a0c54e8f001fdb8818cce9d69f28259a86b8b0baa5ec6",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "tia",
+        "transimpedance-amplifier",
+        "optical-receiver",
+        "process-corners"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "spectral"
+      ],
+      "name": "analog-arena/sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt",
+      "task_id": "sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "15d61c6de0bcccefc464ae8aad34e7bd557d5b936d2de933e25c409d82f19e9e"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Jing Wang"
+        }
+      ],
+      "declared_task_id": "sky130-bandgap-reference-pvt",
+      "description": "Implement a high-impedance first-order bandgap core targeting 1.18\u20131.26 V output and \u2264 50 ppm/\u00b0C temperature coefficient across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4780,
+      "instruction_sha256": "ea480378d993047e6ec6863c7bfd4a26545c40cfbda841cbac8c8e2241d87448",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "bandgap",
+        "reference",
+        "bjt",
+        "pvt",
+        "noise",
+        "monte-carlo",
+        "line-transient"
+      ],
+      "metric_flags": [
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-bandgap-reference-pvt",
+      "task_id": "sky130-bandgap-reference-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "4f7a571e3661c386e672643a010cc8a4477398b895a981b224a82a2a22329a1d"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Jing Wang"
+        }
+      ],
+      "declared_task_id": "sky130-beta-multiplier-reference-pvt-mc",
+      "description": "Implement a self-starting beta-multiplier current reference targeting 40 \u00b5A nominal output current and \u2264 8% compliance variation across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3619,
+      "instruction_sha256": "4c3801f9c329449f7348eb346f0cd42b5174ffb82899648e9e071d014a10086c",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "beta-multiplier",
+        "current-reference",
+        "pvt",
+        "monte-carlo"
+      ],
+      "metric_flags": [
+        "dc",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-beta-multiplier-reference-pvt-mc",
+      "task_id": "sky130-beta-multiplier-reference-pvt-mc",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "372539df7d8f590fb028acdc4332de704b81406e0647d5977af78c965befcf87"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Kezhuo Liu"
+        }
+      ],
+      "declared_task_id": "sky130-constant-gm-stable-gain-amplifier-pvt",
+      "description": "Implement a gain-stable differential amplifier targeting 3.0\u20134.0 V/V differential gain and \u2265 30 MHz bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4805,
+      "instruction_sha256": "8143c670ea621f928d0a6d94aaee3e6bbe0f762aae544da0d447dde0f4ff0e37",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "differential-amplifier",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-constant-gm-stable-gain-amplifier-pvt",
+      "task_id": "sky130-constant-gm-stable-gain-amplifier-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "7f43f22ffc33e516f1d226d51d7dd43ffb3c1d4460318e8f5e6419ba4734eaf6"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Ying Haochi"
+        }
+      ],
+      "declared_task_id": "sky130-low-power-oscillator-2mhz-pvt",
+      "description": "Implement a low-power oscillator targeting 1.8\u20132.2 MHz output frequency and \u2264 20 \u00b5W nominal total power across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 3565,
+      "instruction_sha256": "61ffac62a5cb67fed1d256aa7d87b7fab917bde4170f7c2a519c7b80aed54e4a",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "oscillator",
+        "clock",
+        "low-power"
+      ],
+      "metric_flags": [
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-low-power-oscillator-2mhz-pvt",
+      "task_id": "sky130-low-power-oscillator-2mhz-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "5e1b604be6a7861561ab73d74539bb3db30f3ae984301ffaaf465fe4d822274c"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Ying Haochi"
+        }
+      ],
+      "declared_task_id": "sky130-unregulated-charge-pump-10mhz-pvt",
+      "description": "Implement an unregulated charge pump targeting 2.2\u20132.8 V enabled output and \u2264 5 mVpp output ripple across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 4022,
+      "instruction_sha256": "5f45d06c1155835cc70327fb706ad1558af5be204f08d6078a4b2bdf4b642370",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "charge-pump",
+        "dc-dc",
+        "low-power"
+      ],
+      "metric_flags": [
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-unregulated-charge-pump-10mhz-pvt",
+      "task_id": "sky130-unregulated-charge-pump-10mhz-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "6f63535964af961ae34b69ae570720ad7bb9f87f95ef7a85349d55bb25d7e8c0"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yihan Wang"
+        }
+      ],
+      "declared_task_id": "sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt",
+      "description": "Implement a two-stage Miller op amp targeting \u2265 60 dB open-loop gain and \u2265 200 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 3653,
+      "instruction_sha256": "50086a4661d2bf518276c78b3537f14ab86052519e087b54bd2b4f7ec1ef042c",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "two-stage",
+        "miller",
+        "op-amp",
+        "gain-60db",
+        "ugb-200mhz",
+        "pm-60deg",
+        "noise-50uv",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt",
+      "task_id": "sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "6ad1d4e35536f43f8fa7db79f7f51cc9a8bef7cb2b1122025ac41893d0ba54eb"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Lihan Cui"
+        }
+      ],
+      "declared_task_id": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
+      "description": "Implement an NMOS-pass LDO targeting 0.35\u20130.45 V regulated output and > 45\u00b0 phase margin across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3922,
+      "instruction_sha256": "c190b7776a4a60661944288eeff7be30eae722d06958ba48eadeda7a4924c903",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "ldo",
+        "nmos-pass",
+        "pvt",
+        "monte-carlo"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "mismatch",
+        "power",
+        "pvt"
+      ],
+      "name": "analog-arena/sky130-nmos-pass-ldo-0p4v-pvt-mc",
+      "task_id": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "33f81ea46d6dc0cf945eb2921ab0fcb517f754c31c80e8e10ae6176f03cc70c9"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Ying Haochi"
+        }
+      ],
+      "declared_task_id": "sky130-regulated-charge-pump-10mhz-pvt",
+      "description": "Implement a regulated charge pump targeting output within 5% of 1.3\u00d7VDD and \u2264 5 mVpp output ripple across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 4300,
+      "instruction_sha256": "bc3439c7be34081e3dbb247d1c9841aae0b943d3018366514aba51b4f977db91",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "charge-pump",
+        "regulated",
+        "dc-dc",
+        "low-power"
+      ],
+      "metric_flags": [
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-regulated-charge-pump-10mhz-pvt",
+      "task_id": "sky130-regulated-charge-pump-10mhz-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "41ec412c4e708fe9af51edd8c714ce8547768b1b0d37d35b1b6f4929e88e8a5c"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Jing Wang"
+        }
+      ],
+      "declared_task_id": "sky130-switched-capacitor-2to1-converter-pvt",
+      "description": "Implement a two-phase switched-capacitor 2:1 converter targeting a 0.42\u20130.51 heavy-load conversion ratio and \u2265 70% heavy-load efficiency across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4249,
+      "instruction_sha256": "be5ef51fac04af7390f6354cdf3ca1a624a3d55923065fab0bff2b09f2a1511d",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "power",
+        "switched-capacitor",
+        "dc-dc",
+        "pvt"
+      ],
+      "metric_flags": [
+        "frequency",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-switched-capacitor-2to1-converter-pvt",
+      "task_id": "sky130-switched-capacitor-2to1-converter-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "c59cb57655ee75e9ad95494b82df677970163eb21e4d706e6f8a97b87228d4ee"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Ying Haochi"
+        }
+      ],
+      "declared_task_id": "sky130-analog-input-mux-8to1-pvt",
+      "description": "Implement an 8-to-1 analog multiplexer targeting \u22120.001\u20130.001 dB selected-input gain and \u2264 \u221280 dB unselected-input gain across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 3945,
+      "instruction_sha256": "f907fb0936b717f2c5a90f4f3f14524c39e1bcc9e510a84e8ddef8ff52d091bc",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "multiplexer",
+        "transmission-gate",
+        "low-power"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-analog-input-mux-8to1-pvt",
+      "task_id": "sky130-analog-input-mux-8to1-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "d60b970453cf84e0a4f2b854202c0e2d51d9e98d1d3534a93291c61047dacba3"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Ying Haochi"
+        }
+      ],
+      "declared_task_id": "sky130-high-psrr-bandgap-reference-pvt",
+      "description": "Implement a high-PSRR bandgap reference targeting 1.05\u20131.35 V output and \u2264 50 ppm/\u00b0C temperature drift across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 4102,
+      "instruction_sha256": "268fd3c65a9b627443c7f1c1520a81bc5405eca4b0581a456f9298067fb6a9d2",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "bandgap",
+        "reference",
+        "psrr"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-high-psrr-bandgap-reference-pvt",
+      "task_id": "sky130-high-psrr-bandgap-reference-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "48325775a2742fa5c9ccdd058e61af31817547771ff66a76bc72a9134741283b"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Siyu Huang"
+        }
+      ],
+      "declared_task_id": "sky130-bootstrap-sampler-fft",
+      "description": "Implement a differential bootstrap sampler gate driver targeting \u2265 72 dB sampled SDR and \u2264 500 \u00b5W supply power across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 2969,
+      "instruction_sha256": "a6b3e786c0b6bb46e3e319fe08e2f47f91a984e9220844ff0b62f136b5f20c43",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "bootstrap",
+        "sampler",
+        "fft",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "power"
+      ],
+      "name": "analog-arena/sky130-bootstrap-sampler-fft",
+      "task_id": "sky130-bootstrap-sampler-fft",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "d45ee7b965355fa2632aa3ff86f3eb5f93a4616f5bb6bc9ec9d58d20be0c84e2"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Siyu Huang"
+        }
+      ],
+      "declared_task_id": "sky130-cmos-switched-resistor-dac-5bit-pvt",
+      "description": "Implement a 5-bit switched-resistor DAC targeting \u2264 0.25 LSB INL and \u2264 0.25 LSB DNL across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3877,
+      "instruction_sha256": "61e634fc1d80fdd90715822e5145dd0230bd1134bdc777f7d788cf031f5d57aa",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "resistor-dac",
+        "dac",
+        "inl",
+        "dnl",
+        "pvt"
+      ],
+      "metric_flags": [
+        "dc",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-cmos-switched-resistor-dac-5bit-pvt",
+      "task_id": "sky130-cmos-switched-resistor-dac-5bit-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "a3c7b461f87941c7f69f89519976ceddb90adbc0c29703e517945e52606516fd"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Liqun Feng"
+        }
+      ],
+      "declared_task_id": "sky130-current-starved-ring-vco-pvt",
+      "description": "Implement a current-starved ring VCO targeting \u2265 30 MHz/V minimum tuning gain and \u2264 200 \u00b5W supply power across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 3081,
+      "instruction_sha256": "2ba99b7751f3b451d6b9d3321f4a5c473c3531a5cb5e36dc60a4b59efdaf02c0",
+      "keywords": [],
+      "metric_flags": [
+        "frequency",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-current-starved-ring-vco-pvt",
+      "task_id": "sky130-current-starved-ring-vco-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "b07ac70a017a2f2bec6e05dff38ac24c8677161522f97a2b27517e18ca68665c"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Siyu Huang"
+        }
+      ],
+      "declared_task_id": "sky130-complementary-folded-cascode-ab-opamp-pvt",
+      "description": "Implement a complementary rail-to-rail Class-AB operational amplifier targeting \u2265 90 dB open-loop gain and \u2265 1 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 7958,
+      "instruction_sha256": "611125a5f7243c9898b79246892954124ee065bc0fcd9bd596e7643979d4c4ba",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "opamp",
+        "rail-to-rail",
+        "folded-cascode",
+        "class-ab",
+        "miller",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-complementary-folded-cascode-ab-opamp-pvt",
+      "task_id": "sky130-complementary-folded-cascode-ab-opamp-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "66473e7fe77da8bbbe2e42f9485cdadfec3d66f0666d8cc9048d9cc053160f17"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Siyu Huang"
+        }
+      ],
+      "declared_task_id": "sky130-fully-differential-ota-c-biquad-pvt",
+      "description": "Implement a fully differential OTA-C biquad targeting a 1.80\u20132.20 MHz center frequency and a 0.65\u20130.75 quality factor across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 5393,
+      "instruction_sha256": "9b8bd1d53ddd149346bca31aa923d2cad5538cf0b53bda0f6f2655dd058a20cd",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "gm-c",
+        "biquad",
+        "filter",
+        "cmfb",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt"
+      ],
+      "name": "analog-arena/sky130-fully-differential-ota-c-biquad-pvt",
+      "task_id": "sky130-fully-differential-ota-c-biquad-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "23e815aa4c1efc5a61b1b8426083836a728a708fc47cd72c35e3e18d4cf7d8ef"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Kezhuo Liu"
+        }
+      ],
+      "declared_task_id": "sky130-flash-adc-4bit-50msps",
+      "description": "Implement a fully differential flash ADC targeting 4-bit resolution and 50 MS/s sample rate across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 6344,
+      "instruction_sha256": "f2a1fdd5ffd2bbbe8341514eac568c6f3e5184d7411d5693e67d145b8943bc25",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "adc",
+        "flash"
+      ],
+      "metric_flags": [
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "spectral"
+      ],
+      "name": "analog-arena/sky130-flash-adc-4bit-50msps",
+      "task_id": "sky130-flash-adc-4bit-50msps",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "6b2230ac1d25ca66dfcef9a9368af37c0d3eb1a68e02eaedac2e1ddca22f735f"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Siyu Huang"
+        }
+      ],
+      "declared_task_id": "sky130-fct-residue-amplifier-900msps",
+      "description": "Implement a fully differential floating charge-transfer residue amplifier targeting 5.5\u20136.5 V/V sampled gain and \u2265 60 dB SFDR across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 8044,
+      "instruction_sha256": "33168954d69a707ddaea574fe948b6d893fc892161b2b84f3ac81f2d1c0c5c50",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "sampled-data",
+        "fct",
+        "residue-amplifier",
+        "fft"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-fct-residue-amplifier-900msps",
+      "task_id": "sky130-fct-residue-amplifier-900msps",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "8c5f203525f6fa35786b279978db9d1eb333c639a403499ee540a1880b565c81"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yihan Wang"
+        }
+      ],
+      "declared_task_id": "sky130-ahuja-compensated-two-stage-load-range-pvt",
+      "description": "Implement an Ahuja-compensated two-stage OTA targeting \u2265 58 dB low-frequency gain and \u2265 6.5 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3634,
+      "instruction_sha256": "8b59cac6f96958246141df4fe20dba53b8e9f44c449cffcdf1b73e4fcb3beacb",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "two-stage",
+        "ahuja-compensation",
+        "load-range",
+        "settling",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-ahuja-compensated-two-stage-load-range-pvt",
+      "task_id": "sky130-ahuja-compensated-two-stage-load-range-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "bd876d0a38b203cdb09ce53e352f76f1a7491ef597977daf8bb9de6d499b6a7a"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Zhishuai Zhang"
+        }
+      ],
+      "declared_task_id": "sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch",
+      "description": "Implement a 2.4 GHz Gilbert-cell mixer targeting \u2265 3 dB conversion gain and \u2264 \u221245 dB LO-to-IF isolation across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4742,
+      "instruction_sha256": "fa114781fddc2f1fe2b0e9b4ef279310ec2cf1f8140b060c69bba66328ec397b",
+      "keywords": [],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "spectral"
+      ],
+      "name": "analog-arena/sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch",
+      "task_id": "sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "3011e37e92d46b62069ca430c10c2b0338298524bd9d5d0b4523850cedb5e6eb"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Siqi Liu"
+        }
+      ],
+      "declared_task_id": "sky130-bottom-plate-sampler-pvt",
+      "description": "Implement a differential bottom-plate sample-and-hold targeting \u2264 5 mV acquisition error and \u2265 80 dB sampled SFDR across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 5631,
+      "instruction_sha256": "1686d3bbd46643d1af27d7b0d65b6cbd9bff43084c3c8a188a0df64fa4c443b9",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "bottom-plate",
+        "sampler",
+        "sample-and-hold",
+        "sfdr",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "power",
+        "pvt",
+        "spectral"
+      ],
+      "name": "analog-arena/sky130-bottom-plate-sampler-pvt",
+      "task_id": "sky130-bottom-plate-sampler-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "556c7e136778d034a004ef575ba829350f0111efd73e3715426e47bfd57d0e50"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Mingtao Zhan"
+        }
+      ],
+      "declared_task_id": "sky130-cml-tx-driver-28g-nrz-pvt",
+      "description": "Implement a fully differential CML transmitter driver targeting 28 Gb/s NRZ operation and \u2265 320 mV eye height across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 10465,
+      "instruction_sha256": "25c710d223aaf78bea2ef36f59ab2fcce64415a498e6f3a692d853ef63cdbc07",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "cml",
+        "serdes",
+        "tx-driver",
+        "t-coil",
+        "28g",
+        "nrz",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-cml-tx-driver-28g-nrz-pvt",
+      "task_id": "sky130-cml-tx-driver-28g-nrz-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "5329d7d64059fa0832cf0ee911c9f6f1dbd80808a208e5cedb3e58be7a3d420c"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc",
+      "description": "Implement a fully differential gain-1 sampling-feedback OTA targeting \u2264 40 ns settling time and \u2264 300 \u00b5Vrms output noise across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4067,
+      "instruction_sha256": "d9cbd369cdf71c0ddeb267c656d7a864092413614db10a1291a62ac1eab901dd",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "fully-differential",
+        "ota",
+        "sampling-feedback",
+        "cmfb",
+        "pvt",
+        "monte-carlo"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc",
+      "task_id": "sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "472a638967a260c726c5d095d16ec08e750abb29c84cfc7d88a5857981eb4533"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc",
+      "description": "Implement a fully differential gain-8 sampling-feedback OTA targeting \u2264 10 ns settling time and \u2264 1 mVrms output noise across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4096,
+      "instruction_sha256": "e79721438bb8c9b076074aa72cbcbf624b8d2e8af803d0a1c811a01b585b4fa9",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "fully-differential",
+        "ota",
+        "sampling-feedback",
+        "cmfb",
+        "pvt",
+        "monte-carlo"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc",
+      "task_id": "sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "5037b188aebd120323a3fa9facc884c18509bf2200d5f67629da26a05b4c3668"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt",
+      "description": "Implement a fully differential two-stage Miller op amp targeting \u2265 60 dB differential gain and \u2265 100 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4039,
+      "instruction_sha256": "83d3fda8d23b9427f12503b2df8790ff44ade25fd14bd0beeca71324029e8cf7",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "design",
+        "fully-differential",
+        "two-stage",
+        "opamp",
+        "cmfb",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt",
+      "task_id": "sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "7fd7e0b5c90f7470ca8d5c2e544ed792b29729f896d315b9cdddd8beee7cf3d6"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yilin Xu"
+        }
+      ],
+      "declared_task_id": "sky130-telescopic-cascode-ota-pvt-fix",
+      "description": "Implement a fully differential telescopic-cascode OTA targeting > 60 dB differential gain and > 50 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 6291,
+      "instruction_sha256": "34d3f42923fef89154c68f4f161b2d98d7bcb091e43a5fb05d5308c85583b805",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "fix",
+        "fully-differential",
+        "telescopic-cascode",
+        "ota",
+        "cmfb",
+        "sizing",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-telescopic-cascode-ota-pvt-fix",
+      "task_id": "sky130-telescopic-cascode-ota-pvt-fix",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "9ae64c0c1ba479d43bd20264a9ef78a9221e5f38ab179f01c5dada2424b6e006"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-three-stage-nested-miller-ota-pvt",
+      "description": "Implement a three-stage nested-Miller amplifier targeting \u2265 110 dB low-frequency gain and \u2265 0.4 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 4184,
+      "instruction_sha256": "d81413ddb9706472c31ac0b5c6bd0cfc589be5d2183e3d1fb4b2b8b8b6e26ad7",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "three-stage",
+        "nested-miller",
+        "large-load",
+        "micro-power",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-three-stage-nested-miller-ota-pvt",
+      "task_id": "sky130-three-stage-nested-miller-ota-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "f7f2dda5c946535ac1054ed91e006d353a9633d91e524ea08f432ef342ac920a"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yihan Wang"
+        }
+      ],
+      "declared_task_id": "sky130-capless-ldo-1v0-20ma-pvt",
+      "description": "Implement a fully integrated external-capacitor-free LDO targeting 1.0 V output within \u00b130 mV and \u2264 100 \u00b5A no-load current across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 6467,
+      "instruction_sha256": "3988efc5b2b6b083521e7f73ed64f6a640065a756fc28138069b17a5af3f9391",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "ldo",
+        "external-capacitor-free",
+        "fully-integrated",
+        "psr",
+        "load-step",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-capless-ldo-1v0-20ma-pvt",
+      "task_id": "sky130-capless-ldo-1v0-20ma-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "be85a03f96380c3ee18ece5655c97b9ab60f6c8ceb5a799567d86ba2cab42692"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yihan Wang"
+        }
+      ],
+      "declared_task_id": "sky130-low-power-line-driver-pvt",
+      "description": "Implement a low-power line driver targeting \u2265 0.5 MHz unity-gain bandwidth and \u2264 3% THD at 20 kHz across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3471,
+      "instruction_sha256": "c04871b3823ef50209b20f95de4098322bda754be013644c5c79dca1ad9a8831",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "low-power",
+        "line-driver",
+        "thd",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "power",
+        "pvt"
+      ],
+      "name": "analog-arena/sky130-low-power-line-driver-pvt",
+      "task_id": "sky130-low-power-line-driver-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "a4eeabe10c9d9801ee6f27aa6adbec9d8b3608f91a4e568d092d3c24f855c110"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Kezhuo Liu"
+        }
+      ],
+      "declared_task_id": "sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40",
+      "description": "Implement a first-order 1-bit delta-sigma ADC targeting \u2265 40 dB SNDR at OSR 32 and \u2265 6 dB/octave noise-shaping improvement across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 7668,
+      "instruction_sha256": "4d90aa8ab198731c56d219c0da6c6243b14ec3bb276ee5c3af1a6d6766fcd0c2",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "sigma-delta",
+        "noise-shaping",
+        "adc",
+        "switched-capacitor",
+        "1-bit",
+        "strongarm"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40",
+      "task_id": "sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "e20356a083e8e5c820aec6708fa8fd58b9579be0fdb63fe813c76d97aba1db3f"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yihan Wang"
+        }
+      ],
+      "declared_task_id": "sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt",
+      "description": "Implement a current-biased two-stage Miller op amp targeting \u2265 70 dB loop gain and \u2265 20 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3457,
+      "instruction_sha256": "51b70d38693e2d3e1a7703c99a8913fbf5e28595a5a48596d9eedab0464a4830",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "op-amp",
+        "two-stage",
+        "miller",
+        "gain-70db",
+        "ugb-20mhz",
+        "pm-60deg",
+        "noise-50uv",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt",
+      "task_id": "sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "01bc3085d45f26425529cbab76e4d88beb1b03aa8b7852a6091a39a141e30c6f"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-sar-adc-6bit-async",
+      "description": "Implement a fully differential asynchronous SAR ADC targeting 6-bit resolution and 100 MS/s sample rate across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 4951,
+      "instruction_sha256": "8dbfd00f3e918d3d7e8b090c0a6354bc0097394804f901ee35bd1dda40335142",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "adc",
+        "sar",
+        "asynchronous"
+      ],
+      "metric_flags": [
+        "dc",
+        "mismatch",
+        "noise",
+        "power",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-sar-adc-6bit-async",
+      "task_id": "sky130-sar-adc-6bit-async",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "d0587d6d4400a0ddcb1e9be9af62aeb758cefb1999d96aa2ec0184515fce570b"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yan Xu"
+        }
+      ],
+      "declared_task_id": "sky130-inductive-lna-2p4ghz-gain12-nf2-pvt",
+      "description": "Implement an inductively degenerated 2.4 GHz LNA targeting \u2265 12 dB transducer gain and \u2264 2.0 dB noise figure across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 3182,
+      "instruction_sha256": "1566f17f08c8c25b4e0ec27a156f2b89426d1f24cba7273c496a480d72ac5a3a",
+      "keywords": [],
+      "metric_flags": [
+        "ac",
+        "frequency",
+        "noise",
+        "power",
+        "pvt"
+      ],
+      "name": "analog-arena/sky130-inductive-lna-2p4ghz-gain12-nf2-pvt",
+      "task_id": "sky130-inductive-lna-2p4ghz-gain12-nf2-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "10dbd8b6db6241e84625136b3fb107d9a459e1951173156e73900f8d048724f2"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Suyang Song"
+        }
+      ],
+      "declared_task_id": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "description": "Implement a current-biased five-transistor OTA targeting \u2265 40 dB loop gain and \u2265 100 MHz unity-gain bandwidth across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": false,
+      "instruction_bytes": 3305,
+      "instruction_sha256": "365e6c5979db9aaff71ab926d452592aec6ca7d78d875b78ae7ce5816996354e",
+      "keywords": [],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "noise",
+        "power",
+        "pvt"
+      ],
+      "name": "analog-arena/sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "task_id": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "93c5d2a8c621da16aea222ed586c5abb38a1ac3b1b9184ef2b3c990f8dcbd516"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiongjie Zhang"
+        }
+      ],
+      "declared_task_id": "sky130-transistor-divide-by-2",
+      "description": "Implement a transistor-level divide-by-two flip-flop targeting 500 MHz output frequency and \u2264 400 ps rising clock-to-output delay across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": false,
+      "has_verifier_block": false,
+      "instruction_bytes": 2497,
+      "instruction_sha256": "f00a086568dca8f106d67387c5803a93bbf5073786842a2014556cdf53f8b6fa",
+      "keywords": [],
+      "metric_flags": [
+        "frequency"
+      ],
+      "name": "analog-arena/sky130-transistor-divide-by-2",
+      "task_id": "sky130-transistor-divide-by-2",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "664872796ae3f822f2edf1783016f119dee3b59f3802e25c0f48d34d82d20c63"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Shixuan Wang"
+        }
+      ],
+      "declared_task_id": "sky130-flash-adc-3bit-pvt",
+      "description": "Implement a 3-bit flash ADC targeting \u2264 0.3 LSB static linearity error and 0 dynamic sample errors across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 7553,
+      "instruction_sha256": "481144b7c7698eb899eb40fb67052d3bee15b52311ca9df4be4d24a3c6bf396d",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "adc",
+        "flash",
+        "comparator",
+        "encoder",
+        "pvt"
+      ],
+      "metric_flags": [
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-flash-adc-3bit-pvt",
+      "task_id": "sky130-flash-adc-3bit-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "ba478de3283249979bd98a72cf085e10a5cc2d5c9cc050c66bea5622ce6ceb34"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Kezhuo Liu"
+        }
+      ],
+      "declared_task_id": "sky130-pll-charge-pump-pvt",
+      "description": "Implement a PLL charge pump targeting \u2264 5% branch-current error and \u2264 2% UP/DN mismatch across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 4154,
+      "instruction_sha256": "73c82ff5f5e427367f342edd585b24ff780d79fd0e64ceb1b772f514c26f9ead",
+      "keywords": [],
+      "metric_flags": [
+        "dc",
+        "mismatch",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-pll-charge-pump-pvt",
+      "task_id": "sky130-pll-charge-pump-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "60978fb2186535e01bb4d811083511cec49a76c4e3378d7fca0a6eb01067202f"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Xiyu He"
+        }
+      ],
+      "declared_task_id": "sky130-sar-adc-4bit-async",
+      "description": "Implement a 4-bit asynchronous SAR ADC targeting > 24 dB SNDR and > 3.90-bit normalized ENOB across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": false,
+      "has_verifier_block": true,
+      "instruction_bytes": 5148,
+      "instruction_sha256": "9120e2feafc8a129e8fc4c8aa6246e2b1c9d0b95b2dfe75db02b90346772bad2",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "adc",
+        "sar",
+        "asynchronous"
+      ],
+      "metric_flags": [
+        "dc",
+        "mismatch",
+        "noise",
+        "power",
+        "spectral",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-sar-adc-4bit-async",
+      "task_id": "sky130-sar-adc-4bit-async",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "fafdde6d940b5498df2e3b483f50318b9a9b44b535cf2ebc062753abcaa9dbf9"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yan Xu"
+        }
+      ],
+      "declared_task_id": "sky130-lc-vco-2ghz-pvt",
+      "description": "Implement a differential LC VCO targeting \u2265 1.25 tuning ratio and \u2264 2.4 mW average power across the specified operating conditions.",
+      "has_mismatch": false,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 4752,
+      "instruction_sha256": "baaebc24e651404ac38f2a57505611aa1e6dd326984e4f2147b9a08c528e1f3a",
+      "keywords": [
+        "analog",
+        "rf",
+        "ngspice",
+        "sky130",
+        "vco",
+        "lc-oscillator",
+        "varactor",
+        "pvt"
+      ],
+      "metric_flags": [
+        "frequency",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-lc-vco-2ghz-pvt",
+      "task_id": "sky130-lc-vco-2ghz-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "da65288ef1d70796846980097882f9398a997a9b11a937bd3ac749ab8fb250f5"
+    },
+    {
+      "artifact_paths": [
+        "/app/circuit.spi"
+      ],
+      "authors": [
+        {
+          "name": "Yilin Xu"
+        }
+      ],
+      "declared_task_id": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt",
+      "description": "Implement a gain-boosted folded-cascode OTA targeting \u2265 130 dB DC gain and \u2265 200 MHz UGB across the specified operating conditions.",
+      "has_mismatch": true,
+      "has_pvt": true,
+      "has_verifier_block": true,
+      "instruction_bytes": 4645,
+      "instruction_sha256": "de00f61f4be627b331a362ea326c319e9e8e78eb287e421939e0632db65e0052",
+      "keywords": [
+        "analog",
+        "ngspice",
+        "sky130",
+        "folded-cascode",
+        "ota",
+        "gain-130db",
+        "ugb-200mhz",
+        "pm-60deg",
+        "noise-50uv",
+        "pvt"
+      ],
+      "metric_flags": [
+        "ac",
+        "dc",
+        "frequency",
+        "mismatch",
+        "noise",
+        "power",
+        "pvt",
+        "transient"
+      ],
+      "name": "analog-arena/sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt",
+      "task_id": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt",
+      "task_schema_version": "1.3",
+      "task_toml_sha256": "79b086e5b6bba7398e86653f0a590a833b80ec16921c1e43edcac73a5068008c"
+    }
+  ]
+}
