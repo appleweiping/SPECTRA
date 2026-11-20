@@ -121,6 +121,9 @@ The primary electrical endpoints are TT success, all-corner PVT success, mean no
 ### Server-only execution
 
 All simulator and model runs use the remote server. The local E: checkout is reserved for source review, report generation, and synchronization.
+The westc host is the active experiment server. The user-provided westb host was checked read-only and
+contains no detected simulator or PDK installation, so no experiment is assigned there. Its capability
+boundary is recorded in `results/westb_capability_receipt.json`.
 
 ~~~bash
 ssh -p 39737 root@connect.westc.seetacloud.com

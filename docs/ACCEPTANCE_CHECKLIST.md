@@ -6,6 +6,7 @@ This checklist turns the project handoff and the ICCAD contract into checks that
 |---|---|---|---|
 | ENV-1 | No local C/D experiments | Worktree and caches under `E:\CodexProjects`; no simulator/LLM run on the workstation | PASS (E-only source, cache and PDF build; remote-only experiments) |
 | ENV-2 | Server storage and simulator | westc `/root/autodl-tmp/spectra-analog-agent`, isolated ngspice-44.2 and Xyce-7.10 binaries with build hashes, GPU/CPU inventory recorded | PASS (see `docs/REMOTE_ENV.md` and `results/atlas_gf180_ngspice44_capability.json`) |
+| ENV-3 | Secondary server capability boundary | User-provided westb host is checked without starting experiments, and simulator/PDK availability is recorded | PASS for read-only inventory (`results/westb_capability_receipt.json`: host reachable, no ngspice/Xyce/Spectre/HSPICE or PDK roots found, no experiment started) |
 | SYNC-1 | Three-way synchronization | Same tracked source commit on local E:, server, and GitHub; raw evidence retained separately | PASS (final handoff `git rev-parse HEAD` verification; server untracked raw results are intentionally preserved for audit) |
 | CODE-1 | GPT-only experiment backend | `spectra/agent/llm.py` uses OpenAI client, rejects Claude aliases, preserves cache/usage schema | PASS (offline fake-client smoke; 2026-11-17 server GPT-6.1-sol catalog + `OK.` smoke) |
 | CODE-2 | GPT ARIS reviewer | `tools/aris_review.py` uses fresh GPT call and read-only context manifest; no `claude -p` invocation | PASS (compile/help smoke; paid review pending) |
