@@ -16,3 +16,5 @@ SPECTRA/AnaFlow transfer ranking result.
 The source tree defines 54 tasks, including four infeasible T4 tasks.
 The source evaluator and golden references validate benchmark integrity
 under ngspice/SKY130. They do not evaluate SPECTRA or AnaFlow answers.
+The attached row counts are source-provided reference counts only.
+They are not a completed replay of the current server attempt.

@@ -4,6 +4,7 @@
     "attached": true,
     "boundary": "golden source audit only; no SPECTRA or AnaFlow answer cells",
     "completed_jobs": 243,
+    "current_attempt_rows": 0,
     "golden_all_corner_pass_rows": 50,
     "golden_complete_corner_rows": 50,
     "golden_issue_counts": {
@@ -42,6 +43,8 @@
     "golden_rows": 50,
     "path": "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/results/golden_audit.json",
     "ranking_eligible": false,
+    "reference_note": "Rows are from the source-provided golden_audit.json and are not the current timed-out attempt.",
+    "reference_only": true,
     "sha256": "dbdcb98c589517e7d127921b46fac8cb702382f6eeaa931b85b932e93abf8dde",
     "status": "partial_timeout",
     "timeout_seconds": 900,
