@@ -136,6 +136,63 @@ quit
     }
 
 
+def run_xyce_smoke(
+    pdk_root: Path, xyce: Path, work_root: Path, timeout: int
+) -> dict:
+    """Probe whether Xyce can consume the source PDK's ngspice deck.
+
+    Xyce does not load ngspice OSDI model plugins. The probe is retained as a
+    simulator-coverage boundary and never contributes a sizing score.
+    """
+
+    model_file = pdk_root / "ihp-sg13g2" / "libs.tech" / "ngspice" / "models" / "cornerMOSlv.lib"
+    netlist = work_root / "pmos_nmos_op_xyce.cir"
+    stdout_path = work_root / "pmos_nmos_op_xyce.stdout"
+    netlist.write_text(
+        """IHP SG13G2 Xyce capability smoke
+.lib {model} mos_tt
+VDD vdd 0 1.2
+VG in 0 0.7
+RLOAD vdd out 10k
+XMN out in 0 0 sg13_lv_nmos w=2u l=0.5u
+.OP
+.PRINT OP V(out) I(VDD)
+.END
+""".format(model=model_file),
+        encoding="utf-8",
+    )
+    started = time.monotonic()
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    try:
+        proc = subprocess.run(
+            [str(xyce), str(netlist)],
+            cwd=str(work_root),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            creationflags=flags,
+        )
+        output = proc.stdout + proc.stderr
+        rc = proc.returncode
+        status = "pass" if rc == 0 else "pdk_deck_unsupported"
+        error = None if rc == 0 else "Xyce could not resolve the SG13_LV_NMOS source device"
+    except subprocess.TimeoutExpired as exc:
+        output = (exc.stdout or "") + (exc.stderr or "")
+        rc = None
+        status = "timeout"
+        error = "Xyce smoke exceeded timeout"
+    stdout_path.write_text(output, encoding="utf-8")
+    return {
+        "netlist": netlist.name,
+        "attempted": "op",
+        "return_code": rc,
+        "elapsed_seconds": round(time.monotonic() - started, 3),
+        "status": status,
+        "error": error,
+        "stdout": stdout_path.name,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pdk-root", type=Path, required=True)
@@ -147,6 +204,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional directory of compiled OSDI models. The audit writes a local .spiceinit.",
+    )
+    parser.add_argument(
+        "--xyce",
+        type=Path,
+        default=None,
+        help="Optional Xyce binary for a source-deck compatibility probe.",
     )
     parser.add_argument("--timeout", type=int, default=60)
     args = parser.parse_args()
@@ -161,6 +224,16 @@ def main() -> int:
         args.work_root.resolve(),
         args.timeout,
         args.osdi_dir.resolve() if args.osdi_dir else None,
+    )
+    xyce_smoke = (
+        run_xyce_smoke(
+            pdk_root,
+            args.xyce.resolve(),
+            args.work_root.resolve(),
+            args.timeout,
+        )
+        if args.xyce
+        else None
     )
     receipt = {
         "schema": "spectra-ihp-sg13g2-capability/v1",
@@ -178,6 +251,10 @@ def main() -> int:
         "ranking_eligible": False,
         "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell.",
         "smoke": smoke,
+        "xyce": {
+            "binary": str(args.xyce.resolve()) if args.xyce else None,
+            "smoke": xyce_smoke,
+        },
     }
     if smoke["status"] != "pass":
         receipt["status"] = "source_audit_pass_" + smoke["status"]
