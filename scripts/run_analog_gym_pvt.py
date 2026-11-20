@@ -255,6 +255,60 @@ def search_robust_spectra(budget, seed, evaluate, low, high, conditions):
     return best_x, best_score, first
 
 
+def search_staged_spectra(budget, seed, evaluate_nominal, evaluate_condition, low, high, conditions):
+    """Use a fixed nominal warm start followed by worst-corner screening.
+
+    The split is deterministic and budget preserving.  For the 300-unit
+    contract and five screening corners this evaluates 50 nominal candidates
+    and 50 five-corner candidates.  The second stage minimizes the maximum
+    normalized violation, which keeps one easy corner from masking a failing
+    corner.  The corner list is fixed before the run and is recorded in the
+    receipt by the caller.
+    """
+
+    n_conditions = len(conditions)
+    if n_conditions == 0:
+        raise ValueError("staged PVT search needs at least one screening condition")
+    candidate_budget = max(1, budget // (n_conditions + 1))
+    nominal_budget = budget - candidate_budget * n_conditions
+    best_x, _, first_nominal = search("spectra", nominal_budget, seed,
+                                     evaluate_nominal, low, high)
+    best_unit = np.clip((best_x - low) / (high - low), 0.0, 1.0)
+    best_score = float("inf")
+    first = first_nominal
+    evaluations = 0
+
+    def visit(x, index):
+        nonlocal best_x, best_score, first
+        scores = [score(evaluate_condition(x, condition)) for condition in conditions]
+        current = float(max(scores))
+        if current < best_score:
+            best_score = current
+            best_x = np.asarray(x, dtype=float).copy()
+        if current == 0.0 and first == 0:
+            first = nominal_budget + index * n_conditions
+        return current
+
+    rng = np.random.default_rng(seed + 3000)
+    coverage = min(max(4, 2 * len(low)), candidate_budget // 3)
+    for index, unit in enumerate(rng.random((coverage, len(low))), 1):
+        visit(low + unit * (high - low), index)
+    import cma
+    es = cma.CMAEvolutionStrategy(best_unit.tolist(), 0.18,
+                                   {"bounds": [0, 1], "seed": seed + 3000, "verbose": -9})
+    index = coverage
+    while index < candidate_budget:
+        points = es.ask()[:candidate_budget - index]
+        scores = []
+        for point in points:
+            x = low + np.clip(point, 0.0, 1.0) * (high - low)
+            scores.append(visit(x, index + 1))
+            index += 1
+        if len(scores) >= getattr(es.sp, "mu", 2):
+            es.tell(points[:len(scores)], scores)
+    return best_x, best_score, first
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, required=True)
@@ -264,7 +318,7 @@ def main():
     parser.add_argument("--budget", type=int, default=300)
     parser.add_argument("--seeds", default="0,1,2")
     parser.add_argument("--methods", default="spectra,anaflow_cleanroom")
-    parser.add_argument("--search-profile", choices=("nominal", "spectra_robust"), default="nominal")
+    parser.add_argument("--search-profile", choices=("nominal", "spectra_robust", "spectra_staged"), default="nominal")
     parser.add_argument("--pvt-limit", type=int, default=None, help="Limit PVT conditions for capability smoke tests")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -321,6 +375,14 @@ def main():
                 best_x, best_score, first = search_robust_spectra(
                     args.budget, seed, evaluate_condition, low, high, robust_conditions
                 )
+            elif method == "spectra" and args.search_profile == "spectra_staged":
+                staged_conditions = tuple(next(condition for condition in pvt if condition.name == name)
+                                          for name in ("tt_27C_1.8V", "ss_-40C_1.62V", "ss_125C_1.98V",
+                                                       "ff_-40C_1.98V", "ff_125C_1.62V"))
+                best_x, best_score, first = search_staged_spectra(
+                    args.budget, seed, evaluate_nominal, evaluate_condition,
+                    low, high, staged_conditions
+                )
             else:
                 search_method = "spectra" if method == "spectra" else "random"
                 best_x, best_score, first = search(search_method, args.budget, seed, evaluate_nominal, low, high)
@@ -336,6 +398,11 @@ def main():
                 "task": args.topology, "method": method, "seed": seed, "pdk": "sky130",
                 "simulator": Path(args.simulator).name, "simulations": args.budget, "llm_calls": 12,
                 "search_profile": args.search_profile,
+                "screening_conditions": ([condition.name for condition in robust_conditions]
+                                         if method == "spectra" and args.search_profile == "spectra_robust"
+                                         else [condition.name for condition in staged_conditions]
+                                         if method == "spectra" and args.search_profile == "spectra_staged"
+                                         else ["tt_27C_1.8V"]),
                 "first_pass_simulations": first, "wall_seconds": time.perf_counter() - start,
                 "tt_pass": best_score == 0.0, "tt_violation": best_score, "pvt": pvt_summary,
                 "parameters": dict(zip(names, best_x.tolist())),

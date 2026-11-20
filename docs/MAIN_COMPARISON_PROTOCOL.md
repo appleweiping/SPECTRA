@@ -15,6 +15,18 @@ venues, source links, official-code availability and clean-room adaptations are 
 
 The 300-unit cap is the common resource constraint. The external clean-room adapters use the preregistered three-corner search objective. The native SPECTRA robust adapter uses a 45-corner PVT-aware search objective. This search-grid difference is recorded in the result schema and is a protocol caveat, while the independent 45-corner verifier and total condition-evaluation cap remain shared.
 
+## Pre-registered PVT-staged sensitivity
+
+The public AnalogGym runner also exposes `search-profile=spectra_staged` as a
+pre-registered sensitivity arm. Under the same 300-unit cap it spends 50 nominal
+evaluations on a SPECTRA warm start, then evaluates 50 candidates on five fixed
+screening corners (`tt_27C_1.8V`, `ss_-40C_1.62V`, `ss_125C_1.98V`,
+`ff_-40C_1.98V`, and `ff_125C_1.62V`). The stage-two objective is the maximum
+normalized violation across those corners. The 45-condition verifier remains
+independent. This arm is not part of the primary row until all declared
+topologies, seeds and matched external rows have been rerun from the same
+implementation commit.
+
 ## Statistical reporting
 
 The aggregate keeps every task-seed cell. Confidence intervals use task-clustered bootstrap resampling, so the three seeds for one task are not treated as independent tasks. SPECTRA-versus-external paired TT tests use exact sign tests with Holm correction across the seven external rows. The three-seed result is a matched-budget snapshot. It does not support a universal analog-sizing SOTA claim.

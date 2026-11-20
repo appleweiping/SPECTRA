@@ -152,6 +152,12 @@ python scripts/run_public_config_pvt.py --source-root /root/autodl-tmp/bench_sou
 python scripts/merge_public_config_shards.py --input results/TRACK_s*_spectra.json results/TRACK_s*_anaflow_cleanroom.json --output results/TRACK_merged.json
 ~~~
 
+For the AnalogGym sensitivity audit, `scripts/run_analog_gym_pvt.py` accepts
+`--search-profile spectra_staged`. This is a fixed 50-nominal/50-five-corner
+screening schedule under the same 300-unit cap, with the five corners and the
+independent 45-condition verifier recorded in each receipt. It is a sensitivity
+arm until the complete matched multi-seed rerun is finished.
+
 SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. The three failures are the sz016 std-cell include path on the analog-only PDK, and are preserved rather than scored as successes. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
 
 Analog Design Bench v2 is handled by `scripts/audit_analog_design_bench.py`. The server-side
