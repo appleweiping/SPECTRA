@@ -97,6 +97,20 @@ def golden_summary(path: Path | None) -> dict[str, Any]:
         }
     rows = payload.values() if isinstance(payload, dict) else []
     rows = list(rows)
+    complete_corner_rows = [
+        row for row in rows
+        if isinstance(row, dict)
+        and isinstance(row.get("corners_pass"), dict)
+        and len(row["corners_pass"]) == 5
+    ]
+    all_corner_pass = [
+        row for row in complete_corner_rows
+        if all(bool(value) for value in row["corners_pass"].values())
+    ]
+    issue_counts: Counter[str] = Counter()
+    for row in rows:
+        if isinstance(row, dict):
+            issue_counts.update(str(issue) for issue in row.get("issues", []))
     return {
         "attached": True,
         "status": "complete" if rows else "empty",
@@ -104,6 +118,9 @@ def golden_summary(path: Path | None) -> dict[str, Any]:
         "sha256": sha256(path),
         "golden_rows": len(rows),
         "golden_pass_rows": sum(bool(row.get("pass")) for row in rows if isinstance(row, dict)),
+        "golden_all_corner_pass_rows": len(all_corner_pass),
+        "golden_complete_corner_rows": len(complete_corner_rows),
+        "golden_issue_counts": dict(issue_counts),
         "ranking_eligible": False,
         "boundary": "golden source audit only; no SPECTRA or AnaFlow answer cells",
     }
