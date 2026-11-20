@@ -172,7 +172,7 @@ python scripts/audit_loadbench_scripts.py \
 python scripts/audit_analog_port_bench.py \
   --source-root /root/autodl-tmp/bench_sources/AnalogPortBench \
   --golden-json /root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/results/golden_audit.json \
-  --golden-status complete_recovery --completed-jobs 250 --total-jobs 250 \
+  --golden-status complete --completed-jobs 250 --total-jobs 250 \
   --timeout-seconds 900 \
   --build-root /root/autodl-tmp/bench_sources/AnalogPortBench/build \
   --output results/analog_port_bench_source_audit.json
