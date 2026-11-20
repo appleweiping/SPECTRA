@@ -243,6 +243,8 @@ def main() -> None:
                     first_pass = evaluations
                 return score
 
+            if method == "spectra":
+                import cma
             if method == "spectra" and args.search_profile == "spectra_staged":
                 screening_names = (
                     "tt_27C_1.8V",
@@ -292,7 +294,6 @@ def main() -> None:
                 best = screen_best
                 best_score = screen_score
             elif method == "spectra":
-                import cma
                 coverage = min(max(8, 2 * len(names)), max(1, args.budget // 3))
                 for unit in rng.random((coverage, len(names))):
                     evaluate(bounds[:, 0] + unit * (bounds[:, 1] - bounds[:, 0]))
