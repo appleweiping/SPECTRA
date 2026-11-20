@@ -1,0 +1,287 @@
+{
+  "budget": 300,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 1,
+  "pvt_mode": "source",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "cc": 4.250309836741135,
+        "cload": 14.944485029436837,
+        "ibias": 15.520334259628111,
+        "vcm": 0.7622769493081503,
+        "wn1": 0.2826853183597623,
+        "wn3": 0.7499973059571963,
+        "wn4": 0.7496272157418833,
+        "wn5": 0.25340483695750854,
+        "wp1": 0.257240542232411,
+        "wp3": 0.7371721266714346
+      },
+      "pdk": "ptm45_bsim4",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 18.90953,
+              "pm": 178.02327018230739,
+              "ugf": 1055251.2310062281
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.22828038888888888,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.22828038888888888,
+        "median_normalized_violation": 0.22828038888888888,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/circuit.cir",
+      "task": "gh_autockt_opamp",
+      "track_id": "public_v7_ptm45_gh_autockt_opamp_ng44",
+      "tt_pass": false,
+      "tt_violation": 0.22828038888888888,
+      "wall_seconds": 7.728618019726127
+    },
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "cc": 2.2392179071529266,
+        "cload": 8.941867660288976,
+        "ibias": 32.23134144293796,
+        "vcm": 0.8952139371488668,
+        "wn1": 0.6064968154689603,
+        "wn3": 0.6083753402818641,
+        "wn4": 0.5556693421376007,
+        "wn5": 0.28685821631226877,
+        "wp1": 0.2560732630568063,
+        "wp3": 0.5730225117831774
+      },
+      "pdk": "ptm45_bsim4",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 8.996194,
+              "pm": 178.5076773722671,
+              "ugf": 1965894.645673017
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.2833544777777778,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.2833544777777778,
+        "median_normalized_violation": 0.2833544777777778,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/circuit.cir",
+      "task": "gh_autockt_opamp",
+      "track_id": "public_v7_ptm45_gh_autockt_opamp_ng44",
+      "tt_pass": false,
+      "tt_violation": 0.2833544777777778,
+      "wall_seconds": 6.024593833833933
+    },
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "cc": 1.5015647743156628,
+        "cload": 11.290720540294664,
+        "ibias": 15.133251961877301,
+        "vcm": 0.8976703865696589,
+        "wn1": 0.25027734140485797,
+        "wn3": 0.7405147609781155,
+        "wn4": 0.7292762797264634,
+        "wn5": 0.25001866684441704,
+        "wp1": 0.25061518825400975,
+        "wp3": 0.7478779856141663
+      },
+      "pdk": "ptm45_bsim4",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 19.8923,
+              "pm": 177.75563443723973,
+              "ugf": 2995819.588222413
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.22282055555555558,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.22282055555555558,
+        "median_normalized_violation": 0.22282055555555558,
+        "pvt_success": false
+      },
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/circuit.cir",
+      "task": "gh_autockt_opamp",
+      "track_id": "public_v7_ptm45_gh_autockt_opamp_ng44",
+      "tt_pass": false,
+      "tt_violation": 0.22282055555555558,
+      "wall_seconds": 5.981839193962514
+    },
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "cc": 3.5203796614588168,
+        "cload": 13.268253295567211,
+        "ibias": 42.57265858901468,
+        "vcm": 0.8313121600259679,
+        "wn1": 0.49110619409966827,
+        "wn3": 0.6973579310980867,
+        "wn4": 0.544751031042024,
+        "wn5": 0.2622453387466816,
+        "wp1": 0.32526241521058874,
+        "wp3": 0.46135845347271864
+      },
+      "pdk": "ptm45_bsim4",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 6.786664,
+              "pm": 178.61699653914656,
+              "ugf": 1241427.0541035386
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.29562964444444445,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.29562964444444445,
+        "median_normalized_violation": 0.29562964444444445,
+        "pvt_success": false
+      },
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/circuit.cir",
+      "task": "gh_autockt_opamp",
+      "track_id": "public_v7_ptm45_gh_autockt_opamp_ng44",
+      "tt_pass": false,
+      "tt_violation": 0.29562964444444445,
+      "wall_seconds": 6.127969861961901
+    },
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "cc": 2.4440818591390885,
+        "cload": 9.457302388815553,
+        "ibias": 27.096200509394848,
+        "vcm": 0.5844723977430348,
+        "wn1": 0.3834249807323022,
+        "wn3": 0.7499138660641333,
+        "wn4": 0.7433056471690356,
+        "wn5": 0.25038574232308874,
+        "wp1": 0.25062197506032613,
+        "wp3": 0.7378185566766837
+      },
+      "pdk": "ptm45_bsim4",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 17.09023,
+              "pm": 178.11915300175883,
+              "ugf": 2269891.7368092146
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.23838761111111115,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.23838761111111115,
+        "median_normalized_violation": 0.23838761111111115,
+        "pvt_success": false
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/circuit.cir",
+      "task": "gh_autockt_opamp",
+      "track_id": "public_v7_ptm45_gh_autockt_opamp_ng44",
+      "tt_pass": false,
+      "tt_violation": 0.23838761111111115,
+      "wall_seconds": 6.308267643209547
+    },
+    {
+      "first_pass_simulations": null,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "cc": 1.6147652475665786,
+        "cload": 10.47500707285765,
+        "ibias": 15.189933064393788,
+        "vcm": 0.6449924678429071,
+        "wn1": 0.4845026566118194,
+        "wn3": 0.5080235674103151,
+        "wn4": 0.6015763392969765,
+        "wn5": 0.25354049814078156,
+        "wp1": 0.2932306523129479,
+        "wp3": 0.7255347812812393
+      },
+      "pdk": "ptm45_bsim4",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "gain": 12.13794,
+              "pm": 178.35670653938584,
+              "ugf": 1217552.8103573297
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.26590033333333335,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 1,
+        "mean_normalized_violation": 0.26590033333333335,
+        "median_normalized_violation": 0.26590033333333335,
+        "pvt_success": false
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/circuit.cir",
+      "task": "gh_autockt_opamp",
+      "track_id": "public_v7_ptm45_gh_autockt_opamp_ng44",
+      "tt_pass": false,
+      "tt_violation": 0.26590033333333335,
+      "wall_seconds": 6.267099029384553
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}

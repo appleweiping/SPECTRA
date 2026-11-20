@@ -41,7 +41,7 @@
       "corners": "source-declared corners, mapped only where metric semantics match",
       "seeds": [0, 1, 2],
       "budget": {"simulations": 300, "llm_calls": 12},
-      "status": "server_matched_complete_for_declared_public_strata; PTM180/BJT TT-only merged; Xyce BJT merged; SKY130 LP tuned 45-condition merged; ASAP7 LDO 45-condition merged; SKY130 LDO 45-condition merged; default-capability-32-of-32-receipt-complete"
+      "status": "server_matched_complete_for_declared_public_strata; PTM45 gh_autockt_opamp TT-only merged; PTM180/BJT TT-only merged; Xyce BJT merged; SKY130 LP tuned 45-condition merged; ASAP7 LDO 45-condition merged; SKY130 LDO 45-condition merged; default-capability-32-of-32-receipt-complete"
     },
     {
       "id": "ampicbench_public",
