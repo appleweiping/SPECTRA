@@ -1,18 +1,19 @@
 {
   "model_file": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib",
   "model_sha256": "03d505847c880d233b341be115a1e5460edf4d8e9b3e8a7df791a52fa4455d67",
+  "osdi_dir": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/osdi",
   "pdk": "ihp-sg13g2",
   "ranking_eligible": false,
-  "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell. Native smoke did not complete a valid device simulation.",
+  "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell.",
   "schema": "spectra-ihp-sg13g2-capability/v1",
   "simulator": "ngspice-44.2",
   "smoke": {
     "attempted": "op",
-    "elapsed_seconds": 0.129,
-    "error": "Unknown model type psp103va / could not find a valid modelname",
+    "elapsed_seconds": 0.7,
+    "error": null,
     "netlist": "pmos_nmos_op.cir",
-    "return_code": 1,
-    "status": "model_runtime_blocked",
+    "return_code": 0,
+    "status": "pass",
     "stdout": "pmos_nmos_op.stdout"
   },
   "source": "IHP-GmbH/IHP-Open-PDK",
@@ -20,5 +21,5 @@
   "source_file_count": 7267,
   "source_tree_filelist_sha256": "728d11eb1dd0915e55789ebe414985e10c241b4ae0ff484e66aa49b24ff546f2",
   "source_url": "https://github.com/IHP-GmbH/IHP-Open-PDK",
-  "status": "source_audit_pass_model_runtime_blocked"
+  "status": "source_audit_and_native_smoke_pass"
 }

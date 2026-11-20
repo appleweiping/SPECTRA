@@ -24,6 +24,19 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def osdi_inventory(osdi_dir: Path | None) -> list[dict] | None:
+    if osdi_dir is None:
+        return None
+    return [
+        {
+            "name": path.name,
+            "size_bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(osdi_dir.glob("*.osdi"))
+    ]
+
+
 def git_value(root: Path, *args: str) -> str | None:
     try:
         return subprocess.check_output(
@@ -161,6 +174,7 @@ def main() -> int:
         "model_sha256": sha256_file(model_file) if model_file.exists() else None,
         "simulator": "ngspice-44.2",
         "osdi_dir": str(args.osdi_dir.resolve()) if args.osdi_dir else None,
+        "osdi_inventory": osdi_inventory(args.osdi_dir.resolve() if args.osdi_dir else None),
         "ranking_eligible": False,
         "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell.",
         "smoke": smoke,
