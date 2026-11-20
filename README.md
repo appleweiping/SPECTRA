@@ -48,6 +48,12 @@ server receipts use ngspice-44.2 and Xyce-7.10 where the corresponding track sup
   `results/analoggym_leung_pvt_staged_comparison.{json,md}`. This is a
   benchmark-scoped sensitivity arm with TT ties, so it remains outside the
   frozen primary row and the literal XSOTA-1 gate.
+  The matched robust AnaFlow sensitivity is also complete for both topologies.
+  `results/analoggym_pvt_robust_merged.{json,md}` contains six finite cells and
+  ties SPECTRA on all aggregate endpoints. `results/analoggym_leung_pvt_robust_merged.{json,md}`
+  gives SPECTRA PVT success `0.667` versus `0.333` and mean PVT violation
+  `0.002469` versus `0.015552`, with higher wall time. These matched sensitivity
+  comparisons remain separate from the frozen primary SIZ7g row.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.
