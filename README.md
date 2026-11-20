@@ -42,10 +42,12 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.
 * **Top-conference literature contract** (`docs/TOPCONF_LITERATURE_AUDIT.md`): a source-linked audit of AnalogGym,
-  AutoSizer, AgenticSizing, Long-Horizon Analog Design Bench, PVTSizing 2.0, AnalogScout, ATLAS, AnaFlow,
-  Analog Canvas and Virtuoso Bridge Lite. It fixes the benchmark, baseline, component, metric, robustness,
+  AnalogAgent, AutoSizer, NEMESIS2.0, AgenticSizing, Long-Horizon Analog Design Bench, PVTSizing 2.0,
+  AnalogScout, ATLAS, AnaFlow, Analog Canvas and Virtuoso Bridge Lite. It fixes the benchmark, baseline, component, metric, robustness,
   efficiency and provenance requirements used by the handoff. The 2026 read-level ledger in
-  `docs/refs/READ_STATUS_2026.md` distinguishes full-paper/code inspection from abstract-only leads.
+  `docs/refs/READ_STATUS_2026.md` distinguishes full-paper/code inspection from abstract-only leads. The
+  companion `docs/refs/LIT_SURVEY_2026_ADDENDUM.md` records the latest AutoSizer, AgenticSizing, AnalogScout,
+  PVTSizing 2.0, AnalogGym-Opt, NEMESIS2.0, AnalogAgent and Long-Horizon benchmark evidence.
 
 Research process follows ARIS (Auto-claude-code-research-in-sleep): `RESEARCH_BRIEF.md` → `idea-stage/` →
 `refine-logs/` → `EXPERIMENT_LOG.md` → `review-stage/` → `paper/`; reviewer traces in `.aris/traces/`.
