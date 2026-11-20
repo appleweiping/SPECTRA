@@ -99,3 +99,16 @@ the receipt capability-only. SPECTRA has lower normalized TT violation on all th
 ## SGAnalog GPT-6.1-sol multiseed receipt
 
 The server-native SGAnalog harness evaluated the pinned upstream commit ebd7e694b79cbe8475c42bd41cf4620c5d537a0f over all 17 sizing tasks and seeds 0, 1, and 2. The receipt is results/sganalog_native_gpt61_multiseed.json with SHA-256 c65669892817800ad3575be671b6a80c9318be839f6ae0bb45c24394f7c053d5. Native ngspice-44.2 produced 51 model rows, 48 converged and 3 failed. Per-seed sizing fidelity means are 0.8538, 0.8463, and 0.8485. Raw reference/model decks remain under /root/autodl-tmp/spectra-analog-agent/results/_sganalog_native_work on the server. The track is a source-testbench-relative capability audit and is not pooled into the SIZ7g 45-condition ranking.
+
+The SGAnalog source-completeness receipt is `results/sganalog_source_audit.json` with SHA-256
+`14fae2daa69351cc83c8dab4d7cf98b0b9bdf167ed14eb702a84cfb7313acaca`.
+It verifies 17 unique task records, 17 resolved decks, reference-device counts and zero manifest errors
+at the same upstream commit. The Xyce parser regression is an offline synthetic check in
+`scripts/test_xyce_ac_translator.py` and does not substitute for a native SGAnalog Xyce run.
+
+The LOADBench evaluation-script receipt is `results/loadbench_scripts_source_audit.json` with SHA-256
+`04b653dd59582260ee3e2dca219a4a2218915a64db94773a32f5b94a740e71b0`.
+It pins commit `03cc45620afbbbee19652d83d625f26f3368d951`, records that the script repository has no
+license file, and passes synthetic top-k/MFHR and inverse-sizing metric smoke checks in the server
+TempoRAC environment. The large released dataset and netlists were not downloaded, so this is a
+capability/provenance audit and not a SIZ7g or XSOTA-1 result.
