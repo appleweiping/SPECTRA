@@ -206,7 +206,13 @@ and independent verifier receipt exist. The source evaluator's five-corner golde
 attached only as benchmark-integrity evidence. The current server attempt completed 243 of 250
 jobs before the upstream 900-second per-job timeout classified eight high-cost corners as unresolved.
 That timeout receipt is retained explicitly and is not treated as a complete golden pass. It is not
-a SPECTRA or AnaFlow answer result.
+a SPECTRA or AnaFlow answer result. A reproducible one-task source-native
+smoke harness is available as `scripts/run_analog_port_bench_smoke.py` and
+was run on the server for `ota_tele_1v8` under SKY130/ngspice-44.2. Its
+receipt is `results/analog_port_bench_source_smoke.json` with a readable
+summary in `results/analog_port_bench_source_smoke.md`. The smoke passes the
+source evaluator checks while remaining explicitly ranking-ineligible because
+it uses a bundled golden reference and has no matched transfer verifier.
 
 The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
 
