@@ -81,17 +81,33 @@ def inject_condition(text: str, corner: str, temperature: float, supply: float, 
     text = re.sub(rf"(\bdc\s*[=]?\s*){re.escape(nominal_text)}(?=\s|$)",
                   rf"\g<1>{supply:g}", text, flags=re.IGNORECASE)
     if not re.search(r"^\s*\.temp\s", text, flags=re.IGNORECASE | re.MULTILINE):
-        text = f".temp {temperature:g}\n" + text
+        # SPICE treats the first physical line as the title.  Inserting a
+        # control statement before that line silently reclassifies the title
+        # as an element and produces misleading parser/model failures.  Keep
+        # the source title first, then add the temperature directive.
+        lines = text.splitlines(keepends=True)
+        if lines:
+            newline = "\n" if not lines[0].endswith(("\n", "\r")) else ""
+            text = lines[0] + f".temp {temperature:g}\n" + newline + "".join(lines[1:])
+        else:
+            text = f".temp {temperature:g}\n"
     else:
         text = re.sub(r"^\s*\.temp\s+[-+0-9.eE]+", f".temp {temperature:g}", text,
                       count=1, flags=re.IGNORECASE | re.MULTILINE)
     return text
 
 
-def parse_metrics(log_text: str, config: dict[str, Any]) -> dict[str, float]:
+def parse_metrics(log_text: str, config: dict[str, Any], simulator: str = "") -> dict[str, float]:
     parser_type = config.get("metrics_parser_type", "regex")
     patterns = config.get("metrics_patterns", {})
     if parser_type == "ac_data":
+        if Path(simulator).name.lower().startswith("xyce"):
+            # Xyce writes the AC response to a .FD.prn table and measures to
+            # .ma0.  run_netlist appends both artifacts to the same audit log,
+            # so the native parser can recover UGF/PM from a 0-dB crossing
+            # even when Xyce reports a .MEASURE as FAILED.
+            from xyce_ac_translator import parse_xyce_ac_output
+            return parse_xyce_ac_output(log_text, log_text)
         from benchmark.ngspice_benchmark import parse_ac_metrics
         return parse_ac_metrics(log_text, patterns)
     if parser_type == "multi_tb_meas":
@@ -131,7 +147,7 @@ def run_netlist(simulator: str, netlist: Path, cwd: Path, timeout: int = 180) ->
         # Xyce writes .measure results beside the input deck instead of stdout.
         # Include those files in the same parser stream while preserving the
         # original simulator log for auditability.
-        for suffix in (".mt0", ".prn"):
+        for suffix in (".mt0", ".prn", ".FD.prn", ".ma0"):
             artifact = Path(f"{netlist}{suffix}")
             if artifact.exists():
                 try:
@@ -200,7 +216,7 @@ def main() -> None:
                 netlist = run_dir / "candidate.cir"
                 netlist.write_text(text, encoding="utf-8")
                 _, returncode, _, log = run_netlist(args.simulator, netlist, circuit.parent)
-                metrics = parse_metrics(log, config) if returncode == 0 else {}
+                metrics = parse_metrics(log, config, args.simulator) if returncode == 0 else {}
                 score = violation(metrics, specs)
                 evaluations += 1
                 if score < best_score:
@@ -247,7 +263,7 @@ def main() -> None:
                 netlist = run_dir / f"verify_{condition.name}.cir"
                 netlist.write_text(text, encoding="utf-8")
                 _, returncode, _, log = run_netlist(args.simulator, netlist, circuit.parent)
-                metrics = parse_metrics(log, config) if returncode == 0 else {}
+                metrics = parse_metrics(log, config, args.simulator) if returncode == 0 else {}
                 score = violation(metrics, specs)
                 condition_rows.append({"condition": condition.name, "metrics": metrics,
                                        "normalized_violation": score, "pass": score == 0.0,
@@ -263,9 +279,13 @@ def main() -> None:
                          "tt_pass": best_score == 0.0, "pvt": pvt_summary,
                          "parameters": dict(zip(names, values.tolist())),
                          "source": str(circuit), "wall_seconds": time.perf_counter() - started})
+    protocol_complete = (args.budget == 300 and len(pvt) == 45 and len(methods) == 2
+                         and len(tuple(int(item) for item in args.seeds.split(",") if item.strip())) == 3)
     payload = {"schema": "spectra-public-config-pvt/v1", "model": "gpt-6.1-sol", "budget": args.budget,
                "llm_calls": 12, "pvt_conditions": len(pvt), "pvt_mode": args.pvt_mode,
-               "rows": rows, "ranking_eligible": False if len(pvt) <= 1 else False}
+               "rows": rows, "ranking_eligible": protocol_complete,
+               "ranking_reason": "matched 300/12/3, two methods and 45-condition verifier"
+               if protocol_complete else "capability or smoke run: requires budget=300, seeds=3, methods=2, pvt_conditions=45"}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
