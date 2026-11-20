@@ -35,8 +35,9 @@ PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWate
   `results/cross_domain_capability_receipt_v2.json` and `results/public_suite_3pdk_tt_v2.md`. AnalogGym and GF180
   now have matched ngspice-44.2/Xyce-7.10 and strict PVT receipts. The server-only public-source expansion adds
   32/32 opensource configs, 9 AMPICBench decks across source corners, a 3-seed PTM180/BJT TT adapter, a matched
-  Xyce BJT receipt, and a 3-seed ASAP7 LDO 45-condition receipt. The universal-coverage contract and unmeasured
-  strata are recorded in `docs/TOPCONF_LITERATURE_AUDIT.md`.
+  Xyce BJT receipt, and 3-seed 45-condition ASAP7 LDO, SKY130 LP-opamp and SKY130 LDO receipts. The measured-scope
+  table is `results/public_scope_sota_summary.md`. The universal-coverage contract and unmeasured strata are
+  recorded in `docs/TOPCONF_LITERATURE_AUDIT.md`.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.

@@ -80,9 +80,12 @@ The public-source expansion is executed only on this server. The immutable sourc
 `jialinlu/opensource-analog-circuits` and `AMPICLab/AMPICBench`. The former has a 32-config ngspice-44.2
 capability receipt, and the latter has 9 source decks with per-corner replay receipts. PTM180 and embedded-BJT
 source configs use the strict 300-simulation/12-call adapter with seeds 0/1/2, but their source metric contracts
-are TT-only and therefore remain outside PVT ranking. The SKY130 low-power op-amp matched PVT shards are running
-with the same budget and the canonical 45-condition verifier. The ASAP7 LDO track has completed all six cells under
-the 45-condition verifier. Both methods pass TT on all three seeds but fail the PVT endpoint with mean violation
-0.8, while SPECTRA uses 960.65 wall seconds per cell versus 1009.99 for the clean-room AnaFlow adapter. The public
-BJT adapter also completes a matched Xyce-7.10 TT-only track by parsing Xyce `.mt0` artifacts. Xyce native execution
-of the public SKY130 AC deck remains diagnostic because it emits no comparable AC metric table.
+are TT-only and therefore remain outside PVT ranking. The ASAP7 LDO track completed all six cells under the
+45-condition verifier. Both methods pass TT on all three seeds but fail the PVT endpoint with mean violation 0.8,
+while SPECTRA uses 960.65 wall seconds per cell versus 1009.99 for the clean-room AnaFlow adapter. The tuned SKY130
+LP track completed all six cells with TT success 1.0, PVT success 0.3333 and mean PVT violation 0.0890 for both
+methods, with SPECTRA wall time 2619.77 seconds versus 2620.81. The SKY130 LDO track completed all six cells with
+zero TT/PVT endpoint passes. SPECTRA lowers mean TT/PVT violation to 1.7172/1.7262 versus 1.7363/1.7449 for
+AnaFlow, while wall time is effectively tied. The public BJT adapter also completes a matched Xyce-7.10 TT-only
+track by parsing Xyce `.mt0` artifacts. Xyce native execution of the public SKY130 AC deck remains diagnostic
+because it emits no comparable AC metric table.

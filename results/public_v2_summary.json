@@ -4,34 +4,6 @@
       "aggregate": {
         "anaflow_cleanroom": {
           "cells": 3,
-          "mean_pvt_violation": 0.0890301574074074,
-          "mean_simulations_to_first_pass": 1.0,
-          "mean_tt_violation": 0.0,
-          "mean_wall_seconds": 3319.4681380991824,
-          "pvt_success": 0.3333333333333333,
-          "tt_success": 1.0
-        },
-        "spectra": {
-          "cells": 3,
-          "mean_pvt_violation": 0.0890301574074074,
-          "mean_simulations_to_first_pass": 1.0,
-          "mean_tt_violation": 0.0,
-          "mean_wall_seconds": 3317.3624100893117,
-          "pvt_success": 0.3333333333333333,
-          "tt_success": 1.0
-        }
-      },
-      "complete": true,
-      "errors": [],
-      "file": "public_v2_sky130_lp_merged.json",
-      "pvt_conditions": 45,
-      "ranking_eligible": true,
-      "track": "sky130_lp_opamp"
-    },
-    {
-      "aggregate": {
-        "anaflow_cleanroom": {
-          "cells": 3,
           "mean_pvt_violation": 0.8000000000000002,
           "mean_simulations_to_first_pass": 2.0,
           "mean_tt_violation": 0.0,
@@ -55,6 +27,34 @@
       "pvt_conditions": 45,
       "ranking_eligible": true,
       "track": "ldo_1_asap7"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 1.7448524333333335,
+          "mean_simulations_to_first_pass": 0.0,
+          "mean_tt_violation": 1.7363446875,
+          "mean_wall_seconds": 3402.9592638307563,
+          "pvt_success": 0.0,
+          "tt_success": 0.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 1.7262187333333332,
+          "mean_simulations_to_first_pass": 0.0,
+          "mean_tt_violation": 1.7172124999999998,
+          "mean_wall_seconds": 3404.201920081085,
+          "pvt_success": 0.0,
+          "tt_success": 0.0
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "file": "public_v4_ldo_simple_merged.json",
+      "pvt_conditions": 45,
+      "ranking_eligible": true,
+      "track": "ldo_simple"
     },
     {
       "aggregate": {
@@ -116,6 +116,34 @@
       "aggregate": {
         "anaflow_cleanroom": {
           "cells": 3,
+          "mean_pvt_violation": 0.0890301574074074,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 2620.810208527837,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0890301574074074,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 2619.7663304874054,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "file": "public_v6_sky130_lp_merged.json",
+      "pvt_conditions": 45,
+      "ranking_eligible": true,
+      "track": "sky130_lp_opamp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
           "mean_pvt_violation": 0.0,
           "mean_simulations_to_first_pass": 1.0,
           "mean_tt_violation": 0.0,
@@ -144,32 +172,6 @@
   "rows": [
     {
       "cells": 3,
-      "mean_pvt_violation": 0.0890301574074074,
-      "mean_simulations_to_first_pass": 1.0,
-      "mean_tt_violation": 0.0,
-      "mean_wall_seconds": 3319.4681380991824,
-      "method": "anaflow_cleanroom",
-      "pvt_success": 0.3333333333333333,
-      "receipt": "public_v2_sky130_lp_merged.json",
-      "tier": "PVT ranking",
-      "track": "sky130_lp_opamp",
-      "tt_success": 1.0
-    },
-    {
-      "cells": 3,
-      "mean_pvt_violation": 0.0890301574074074,
-      "mean_simulations_to_first_pass": 1.0,
-      "mean_tt_violation": 0.0,
-      "mean_wall_seconds": 3317.3624100893117,
-      "method": "spectra",
-      "pvt_success": 0.3333333333333333,
-      "receipt": "public_v2_sky130_lp_merged.json",
-      "tier": "PVT ranking",
-      "track": "sky130_lp_opamp",
-      "tt_success": 1.0
-    },
-    {
-      "cells": 3,
       "mean_pvt_violation": 0.8000000000000002,
       "mean_simulations_to_first_pass": 2.0,
       "mean_tt_violation": 0.0,
@@ -193,6 +195,32 @@
       "tier": "PVT ranking",
       "track": "ldo_1_asap7",
       "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 1.7448524333333335,
+      "mean_simulations_to_first_pass": 0.0,
+      "mean_tt_violation": 1.7363446875,
+      "mean_wall_seconds": 3402.9592638307563,
+      "method": "anaflow_cleanroom",
+      "pvt_success": 0.0,
+      "receipt": "public_v4_ldo_simple_merged.json",
+      "tier": "PVT ranking",
+      "track": "ldo_simple",
+      "tt_success": 0.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 1.7262187333333332,
+      "mean_simulations_to_first_pass": 0.0,
+      "mean_tt_violation": 1.7172124999999998,
+      "mean_wall_seconds": 3404.201920081085,
+      "method": "spectra",
+      "pvt_success": 0.0,
+      "receipt": "public_v4_ldo_simple_merged.json",
+      "tier": "PVT ranking",
+      "track": "ldo_simple",
+      "tt_success": 0.0
     },
     {
       "cells": 3,
@@ -244,6 +272,32 @@
       "receipt": "public_v5_ptm180_merged.json",
       "tier": "TT-only capability",
       "track": "ptm180nm_opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0890301574074074,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 2620.810208527837,
+      "method": "anaflow_cleanroom",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "public_v6_sky130_lp_merged.json",
+      "tier": "PVT ranking",
+      "track": "sky130_lp_opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0890301574074074,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 2619.7663304874054,
+      "method": "spectra",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "public_v6_sky130_lp_merged.json",
+      "tier": "PVT ranking",
+      "track": "sky130_lp_opamp",
       "tt_success": 1.0
     },
     {
