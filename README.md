@@ -105,7 +105,7 @@ The common matched budget is 300 simulator evaluations, 12 LLM calls, and seeds 
 | SGAnalog | SKY130A | native ngspice-44.2 harness; pinned ngspice-45.2 source protocol | 17 tapeout-derived sizing tasks | source-defined | tapeout sizing |
 | Analog Design Bench v2 | SKY130 | source manifest audit; isolated verifier is external to the source repository | 50 designer-contributed tasks | task-defined PVT/mismatch | capability audit |
 | LOADBench | SKY130 | public evaluation scripts audited at pinned commit; dataset and netlists not downloaded | >100 op-amp topologies, six ML tasks | source-defined | capability audit |
-| AnalogPortBench | GF180→SKY130 transfer | source code audited; no SPECTRA transfer run | 54 porting tasks over 10 circuits, including infeasible specifications | five-corner source reference | capability audit |
+| AnalogPortBench | GF180→SKY130 transfer | source code audited; complete bundled golden-integrity replay; no SPECTRA transfer run | 54 porting tasks over 10 circuits, including infeasible specifications | five-corner source reference | capability audit |
 | IHP SG13G2 Open PDK | SG13G2 130 nm BiCMOS | ngspice-44.2 with server-built OpenVAF OSDI models | 7,267 observed PDK files (7,290 tracked entries), MOS/HBT/passive model inventory, native OP smoke | no common sizing task | capability audit |
 
 The PTM45 receipt is results/public_v7_ptm45_merged.json and its readable audit is results/public_v7_ptm45_merged.md. The full Xyce SKY130 LP runner receipt is results/opensource_xyce_sky130_lp_sizing.json and the strict merged receipt is results/public_v8_sky130_lp_xyce_merged.json. Together they contain six method-seed rows with 45 parsed conditions. The source deck has no matched process-corner library, so TT success and TT violation are reported while PVT success remains inapplicable. The receipt predates automatic sibling-deck translation, while direct translated SKY130 and PTM180 decks have independent Xyce artifacts and parser checks. The corrected adapter preserves the SPICE title line before inserting temperature control, and the raw failed pre-fix shards remain archived.
@@ -172,7 +172,7 @@ python scripts/audit_loadbench_scripts.py \
 python scripts/audit_analog_port_bench.py \
   --source-root /root/autodl-tmp/bench_sources/AnalogPortBench \
   --golden-json /root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/results/golden_audit.json \
-  --golden-status partial_timeout --completed-jobs 243 --total-jobs 250 \
+  --golden-status complete_recovery --completed-jobs 250 --total-jobs 250 \
   --timeout-seconds 900 \
   --build-root /root/autodl-tmp/bench_sources/AnalogPortBench/build \
   --output results/analog_port_bench_source_audit.json
@@ -311,7 +311,7 @@ be audited without relying on prose. The current snapshot is as follows.
 |---|---|---|
 | `XSOTA-MEASURED-1` | PASS for measured scope | `results/public_scope_sota_summary.md` compares every complete merged receipt under its declared contract. |
 | `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v6.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
-| `XPORT-1` | PASS for source inventory, PARTIAL for golden replay | `results/analog_port_bench_source_audit.json` records the complete 54-task inventory. The server replay attempted all 250 golden corner jobs, completed 243, and records eight high-cost timeout jobs in `results/golden_attempt_timeout_receipt.json`. It is not a SPECTRA ranking row. |
+| `XPORT-1` | PASS for source inventory and golden-integrity replay | `results/analog_port_bench_source_audit.json` records the complete 54-task inventory. The server replay completed all 250 golden corner jobs, including recovery of the eight high-cost timeout jobs, in `results/analogport_golden_recovery_receipt.json`. It is not a SPECTRA ranking row. |
 | `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. The latest diagnostics show 9/9 comparable strata non-inferior, only 1/9 strict on all endpoints, and 7 strata with 14 zero-floor ties. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
 
 This table is deliberately generated from receipts rather than optimistic
