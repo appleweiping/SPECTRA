@@ -1,5 +1,5 @@
 {
-  "comparable_strata": 11,
+  "comparable_strata": 13,
   "diagnostic_summary": {
     "comparable_non_inferior_all_endpoints": 11,
     "comparable_strict_positive_all_endpoints": 1,
@@ -7,7 +7,7 @@
     "zero_floor_tie_endpoints": 18
   },
   "gate": "XSOTA-1",
-  "receipts_observed": 19,
+  "receipts_observed": 21,
   "root": "results",
   "schema": "spectra-xsota-gate-audit/v1",
   "strata": [
@@ -157,6 +157,53 @@
     {
       "comparison": {
         "anaflow": {
+          "mean_pvt_violation": 2.4185633672427986,
+          "mean_tt_violation": 0.0021816913580246827,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 0.6666666666666666
+        },
+        "non_inferior_all_endpoints": false,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": false,
+          "pvt_success": true,
+          "tt_success": true
+        },
+        "spectra": {
+          "mean_pvt_violation": 0.03508955703703704,
+          "mean_tt_violation": 0.035259422222222225,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 0.6666666666666666
+        },
+        "strict_all_endpoints": false,
+        "strict_endpoint_leads": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": false,
+          "pvt_success": false,
+          "tt_success": false
+        },
+        "strict_positive_lead_count": 1,
+        "strict_positive_leads": [
+          "mean_pvt_violation"
+        ],
+        "zero_floor_tie_count": 0,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": false,
+          "pvt_success": false,
+          "tt_success": false
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "pvt_conditions": 45,
+      "ranking_eligible": true,
+      "receipt": "analoggym_leung_xyce_robust_merged.json",
+      "tier": "strict-pvt-comparison"
+    },
+    {
+      "comparison": {
+        "anaflow": {
           "mean_pvt_violation": 0.00034574814814814815,
           "mean_tt_violation": 0.0,
           "pvt_success": 0.6666666666666666,
@@ -287,6 +334,53 @@
       "pvt_conditions": 45,
       "ranking_eligible": true,
       "receipt": "analoggym_xyce_merged.json",
+      "tier": "strict-pvt-comparison"
+    },
+    {
+      "comparison": {
+        "anaflow": {
+          "mean_pvt_violation": 0.08490032197530865,
+          "mean_tt_violation": 0.0,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "non_inferior_all_endpoints": false,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": false,
+          "pvt_success": true,
+          "tt_success": false
+        },
+        "spectra": {
+          "mean_pvt_violation": 0.07782327127572015,
+          "mean_tt_violation": 0.04766404320987654,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 0.3333333333333333
+        },
+        "strict_all_endpoints": false,
+        "strict_endpoint_leads": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": false,
+          "pvt_success": false,
+          "tt_success": false
+        },
+        "strict_positive_lead_count": 1,
+        "strict_positive_leads": [
+          "mean_pvt_violation"
+        ],
+        "zero_floor_tie_count": 0,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": false,
+          "pvt_success": false,
+          "tt_success": false
+        }
+      },
+      "complete": true,
+      "errors": [],
+      "pvt_conditions": 45,
+      "ranking_eligible": true,
+      "receipt": "analoggym_xyce_robust_merged.json",
       "tier": "strict-pvt-comparison"
     },
     {

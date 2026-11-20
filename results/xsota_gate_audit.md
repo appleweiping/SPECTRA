@@ -3,16 +3,18 @@
 SPECTRA must strictly beat matched AnaFlow on TT success, PVT success, mean TT violation, and mean PVT violation in every declared public stratum
 
 Strict gate: **NOT MET**
-Comparable strata: 11; uncovered receipts: 8.
+Comparable strata: 13; uncovered receipts: 8.
 
 | Receipt | Tier | TT lead | PVT lead | TT violation lead | PVT violation lead | Non-inferior | Zero-floor ties | All endpoints |
 |---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `analoggym_leung_pvt_merged.json` | strict-pvt-comparison | no | no | no | no | yes | tt_success, mean_tt_violation | no |
 | `analoggym_leung_pvt_robust_merged.json` | strict-pvt-comparison | no | yes | no | yes | yes | tt_success, mean_tt_violation | no |
 | `analoggym_leung_xyce_merged.json` | strict-pvt-comparison | yes | yes | yes | yes | yes | none | yes |
+| `analoggym_leung_xyce_robust_merged.json` | strict-pvt-comparison | no | no | no | yes | no | none | no |
 | `analoggym_pvt_merged.json` | strict-pvt-comparison | no | no | no | no | yes | tt_success, mean_tt_violation | no |
 | `analoggym_pvt_robust_merged.json` | strict-pvt-comparison | no | no | no | no | yes | tt_success, mean_tt_violation | no |
 | `analoggym_xyce_merged.json` | strict-pvt-comparison | no | no | no | no | yes | tt_success, mean_tt_violation | no |
+| `analoggym_xyce_robust_merged.json` | strict-pvt-comparison | no | no | no | yes | no | none | no |
 | `atlas_gf180_matched_merged.json` | uncovered | no | no | no | no | no | none | no |
 | `public_v2_bjt_merged.json` | uncovered | no | no | no | no | no | none | no |
 | `public_v2_ptm180_merged.json` | uncovered | no | no | no | no | no | none | no |

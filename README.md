@@ -54,6 +54,15 @@ server receipts use ngspice-44.2 and Xyce-7.10 where the corresponding track sup
   gives SPECTRA PVT success `0.667` versus `0.333` and mean PVT violation
   `0.002469` versus `0.015552`, with higher wall time. These matched sensitivity
   comparisons remain separate from the frozen primary SIZ7g row.
+  A separate Xyce-7.10 robust sensitivity now covers both topologies with the
+  same three seeds, 300 simulations, 12 calls, and 45-condition verifier.
+  The complete receipts are `results/analoggym_xyce_robust_merged.{json,md}`
+  and `results/analoggym_leung_xyce_robust_merged.{json,md}`. On HoiLee,
+  SPECTRA has TT/PVT success `0.333/0.333` and mean PVT violation `0.077823`
+  versus AnaFlow `1.000/0.333` and `0.084900`. On Leung, SPECTRA has
+  `0.667/0.333` and `0.035090` versus AnaFlow `0.667/0.333` and `2.418563`.
+  The Xyce sensitivity is finite and ranking-eligible, while its ties and
+  negative TT endpoint remain visible in the literal XSOTA-1 audit.
 * **Component mechanism track** (`data/bench/component_mech_manifest.json`): six circuit domains, five matched
   SPECTRA arms and three seeds record structured diagnosis attribution, intent provenance, active-set refinement
   traces and versioned knowledge-card retrieval alongside TT/PVT success and efficiency metrics.
@@ -100,6 +109,7 @@ The common matched budget is 300 simulator evaluations, 12 LLM calls, and seeds 
 | AnalogGym HoiLee | SKY130 | ngspice-44.2 | public amplifier topology | 45 | matched PVT |
 | AnalogGym Leung | SKY130 | ngspice-44.2 | public LDO/topology | 45 | matched PVT |
 | AnalogGym HoiLee/Leung | SKY130 | Xyce-7.10 | translated public decks | 45 where parser-equivalent | matched PVT |
+| AnalogGym HoiLee/Leung robust sensitivity | SKY130 | Xyce-7.10 | `spectra_robust` SPECTRA with nominal clean-room AnaFlow | 45 | matched sensitivity |
 | open-source LP opamp | SKY130 | Xyce-7.10 | full Xyce AC/45-condition receipt; translator validated separately | 45 | matched PVT |
 | ATLAS | GF180MCU | ngspice-44.2 | public ATLAS task digest | 17 source conditions | matched PVT |
 | open-source LP and LDO | SKY130 | ngspice-44.2 | source-native configurations | 45 | matched PVT |
@@ -230,6 +240,16 @@ merged receipts and cell-level summaries are
 `results/analoggym_leung_pvt_robust_merged.{json,md}`. These rows are included
 in the literal XSOTA audit and remain a benchmark-scoped result.
 
+The same robust search was then replayed on Xyce-7.10 without changing the
+frozen ngspice primary row. Six SPECTRA robust cells were completed, each with
+300 simulations and 45/45 finite PVT measurements. The existing same-budget
+Xyce AnaFlow rows were merged without rewriting their raw evidence. The HoiLee
+Xyce receipt records SPECTRA TT/PVT `0.333/0.333` and AnaFlow `1.000/0.333`,
+while the Leung receipt records `0.667/0.333` for both methods. Mean PVT
+violation is `0.077823` versus `0.084900` on HoiLee and `0.035090` versus
+`2.418563` on Leung. These are cross-simulator sensitivity results, not a
+universal SOTA claim.
+
 SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. The three failures are the sz016 std-cell include path on the analog-only PDK, and are preserved rather than scored as successes. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
 
 Analog Design Bench v2 is handled by `scripts/audit_analog_design_bench.py`. The server-side
@@ -329,7 +349,7 @@ be audited without relying on prose. The current snapshot is as follows.
 | `XSOTA-MEASURED-1` | PASS for measured scope | `results/public_scope_sota_summary.md` compares every complete merged receipt under its declared contract. |
 | `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v6.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
 | `XPORT-1` | PASS for source inventory and golden-integrity replay | `results/analog_port_bench_source_audit.json` records the complete 54-task inventory. The server replay completed all 250 golden corner jobs, including recovery of the eight high-cost timeout jobs, in `results/analogport_golden_recovery_receipt.json`. It is not a SPECTRA ranking row. |
-| `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. The latest diagnostics show 11/11 comparable strata non-inferior, only 1/11 strict on all endpoints, and 9 strata with 18 zero-floor ties. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
+| `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. The latest diagnostics show 13/13 comparable strata non-inferior, only 1/13 strict on all endpoints, and 9 strata with 18 zero-floor ties. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
 
 This table is deliberately generated from receipts rather than optimistic
 framework names. Updating a gate requires a new immutable server receipt,
