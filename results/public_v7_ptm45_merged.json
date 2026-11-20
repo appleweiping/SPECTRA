@@ -1,10 +1,13 @@
 {
   "budget": 300,
+  "complete": true,
+  "errors": [],
   "llm_calls": 12,
   "model": "gpt-6.1-sol",
   "pvt_conditions": 1,
   "pvt_mode": "source",
   "ranking_eligible": false,
+  "ranking_reason": "TT-only capability receipt is retained but excluded from PVT ranking",
   "rows": [
     {
       "first_pass_simulations": null,

@@ -204,6 +204,74 @@
       "aggregate": {
         "anaflow_cleanroom": {
           "cells": 3,
+          "mean_first_pass": 6.333333333333333,
+          "mean_pvt_violation": 0.2266781159853498,
+          "mean_simulations_to_first_pass": 6.333333333333333,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 359.1715076893258,
+          "pvt_success": 0.0,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_first_pass": 6.333333333333333,
+          "mean_pvt_violation": 0.2266781159853498,
+          "mean_simulations_to_first_pass": 6.333333333333333,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 362.5891912942752,
+          "pvt_success": 0.0,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "public_v8_sky130_lp_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "stored_ranking_eligible": true,
+      "track": "opensource / SKY130 LP opamp tuned"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_first_pass": 6.333333333333333,
+          "mean_pvt_violation": 0.2266781159853498,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 359.1715076893258,
+          "pvt_success": 0.0,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_first_pass": 6.333333333333333,
+          "mean_pvt_violation": 0.2266781159853498,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 362.5891912942752,
+          "pvt_success": 0.0,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "opensource_xyce_sky130_lp_sizing.json",
+      "simulator": "Xyce-7.10",
+      "stored_ranking_eligible": true,
+      "track": "opensource / SKY130 LP opamp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
           "mean_first_pass": 2.0,
           "mean_pvt_violation": 0.8000000000000002,
           "mean_simulations_to_first_pass": 2.0,
@@ -327,7 +395,7 @@
         }
       },
       "budget": 300,
-      "complete": false,
+      "complete": true,
       "errors": [],
       "llm_calls": 12,
       "pdk": "PTM45",
@@ -590,6 +658,68 @@
       "simulator": "ngspice-44.2",
       "tier": "PVT ranking",
       "track": "opensource / SKY130 LP opamp tuned",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_first_pass": 6.333333333333333,
+      "mean_pvt_violation": 0.2266781159853498,
+      "mean_simulations_to_first_pass": 6.333333333333333,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 359.1715076893258,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.0,
+      "receipt": "public_v8_sky130_lp_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "opensource / SKY130 LP opamp tuned",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_first_pass": 6.333333333333333,
+      "mean_pvt_violation": 0.2266781159853498,
+      "mean_simulations_to_first_pass": 6.333333333333333,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 362.5891912942752,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.0,
+      "receipt": "public_v8_sky130_lp_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "opensource / SKY130 LP opamp tuned",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_first_pass": 6.333333333333333,
+      "mean_pvt_violation": 0.2266781159853498,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 359.1715076893258,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.0,
+      "receipt": "opensource_xyce_sky130_lp_sizing.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "opensource / SKY130 LP opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_first_pass": 6.333333333333333,
+      "mean_pvt_violation": 0.2266781159853498,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 362.5891912942752,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.0,
+      "receipt": "opensource_xyce_sky130_lp_sizing.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "opensource / SKY130 LP opamp",
       "tt_success": 1.0
     },
     {

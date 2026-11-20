@@ -22,6 +22,8 @@ TRACKS = [
     ("analoggym_leung_xyce_merged.json", "AnalogGym / Leung", "SKY130", "Xyce-7.10"),
     ("atlas_gf180_matched_merged.json", "ATLAS public task", "GF180MCU", "ngspice-44.2"),
     ("public_v6_sky130_lp_merged.json", "opensource / SKY130 LP opamp tuned", "SKY130", "ngspice-44.2"),
+    ("public_v8_sky130_lp_xyce_merged.json", "opensource / SKY130 LP opamp tuned", "SKY130", "Xyce-7.10"),
+    ("opensource_xyce_sky130_lp_sizing.json", "opensource / SKY130 LP opamp", "SKY130", "Xyce-7.10"),
     ("public_v3_asap7_ldo_merged.json", "opensource / ASAP7 LDO", "ASAP7", "ngspice-44.2"),
     ("public_v4_ldo_simple_merged.json", "opensource / SKY130 LDO", "SKY130", "ngspice-44.2"),
     ("public_v5_ptm180_merged.json", "opensource / PTM180 opamp", "PTM180", "ngspice-44.2"),
@@ -90,9 +92,13 @@ def main() -> None:
             "budget": payload.get("budget"),
             "llm_calls": payload.get("llm_calls"),
             "pvt_conditions": payload.get("pvt_conditions"),
-            "complete": bool(payload.get("complete")),
+            # Older public-config receipts predate the explicit `complete`
+            # field.  Their strict merger already records the same contract
+            # as `ranking_eligible`, so use that field as a compatibility
+            # fallback while retaining one-condition receipts as incomplete.
+            "complete": bool(payload.get("complete", payload.get("ranking_eligible"))),
             "stored_ranking_eligible": bool(payload.get("ranking_eligible")),
-            "protocol_eligible": bool(payload.get("complete")) and not payload.get("errors") and (payload.get("pvt_conditions") or 0) > 1,
+            "protocol_eligible": bool(payload.get("complete", payload.get("ranking_eligible"))) and not payload.get("errors") and (payload.get("pvt_conditions") or 0) > 1,
             "errors": list(payload.get("errors", [])),
             "aggregate": values,
         })
