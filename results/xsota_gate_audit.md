@@ -3,7 +3,7 @@
 SPECTRA must strictly beat matched AnaFlow on TT success, PVT success, mean TT violation, and mean PVT violation in every declared public stratum
 
 Strict gate: **NOT MET**
-Comparable strata: 9; uncovered receipts: 11.
+Comparable strata: 9; uncovered receipts: 10.
 
 | Receipt | Tier | TT lead | PVT lead | TT violation lead | PVT violation lead | Non-inferior | Zero-floor ties | All endpoints |
 |---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -24,7 +24,6 @@ Comparable strata: 9; uncovered receipts: 11.
 | `public_v6_sky130_lp_merged.json` | strict-pvt-comparison | no | no | no | no | yes | tt_success, mean_tt_violation | no |
 | `public_v7_ptm45_merged.json` | uncovered | no | no | no | no | no | none | no |
 | `public_v8_sky130_lp_xyce_merged.json` | strict-pvt-comparison | no | no | no | no | yes | tt_success, mean_tt_violation | no |
-| `public_x1_bjt_merged.json` | uncovered | no | no | no | no | no | none | no |
 | `public_x1_v2_bjt_merged.json` | uncovered | no | no | no | no | no | none | no |
 | `public_x1_v3_bjt_merged.json` | uncovered | no | no | no | no | no | none | no |
 

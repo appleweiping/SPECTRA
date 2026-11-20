@@ -7,7 +7,7 @@
     "zero_floor_tie_endpoints": 14
   },
   "gate": "XSOTA-1",
-  "receipts_observed": 20,
+  "receipts_observed": 19,
   "root": "results",
   "schema": "spectra-xsota-gate-audit/v1",
   "strata": [
@@ -502,15 +502,6 @@
       "pvt_conditions": 1,
       "ranking_eligible": false,
       "reason": "receipt is incomplete or ranking-ineligible",
-      "receipt": "public_x1_bjt_merged.json",
-      "tier": "uncovered"
-    },
-    {
-      "complete": true,
-      "errors": [],
-      "pvt_conditions": 1,
-      "ranking_eligible": false,
-      "reason": "receipt is incomplete or ranking-ineligible",
       "receipt": "public_x1_v2_bjt_merged.json",
       "tier": "uncovered"
     },
@@ -535,9 +526,8 @@
     "public_v5_bjt_merged.json",
     "public_v5_ptm180_merged.json",
     "public_v7_ptm45_merged.json",
-    "public_x1_bjt_merged.json",
     "public_x1_v2_bjt_merged.json",
     "public_x1_v3_bjt_merged.json"
   ],
-  "uncovered_strata": 11
+  "uncovered_strata": 10
 }
