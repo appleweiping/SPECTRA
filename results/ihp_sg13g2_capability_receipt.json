@@ -41,7 +41,7 @@
   "simulator": "ngspice-44.2",
   "smoke": {
     "attempted": "op",
-    "elapsed_seconds": 0.372,
+    "elapsed_seconds": 0.141,
     "error": null,
     "netlist": "pmos_nmos_op.cir",
     "return_code": 0,
@@ -53,5 +53,17 @@
   "source_file_count": 7267,
   "source_tree_filelist_sha256": "728d11eb1dd0915e55789ebe414985e10c241b4ae0ff484e66aa49b24ff546f2",
   "source_url": "https://github.com/IHP-GmbH/IHP-Open-PDK",
-  "status": "source_audit_and_native_smoke_pass"
+  "status": "source_audit_and_native_smoke_pass",
+  "xyce": {
+    "binary": "/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce",
+    "smoke": {
+      "attempted": "op",
+      "elapsed_seconds": 0.021,
+      "error": "Xyce could not resolve the SG13_LV_NMOS source device",
+      "netlist": "pmos_nmos_op_xyce.cir",
+      "return_code": 1,
+      "status": "pdk_deck_unsupported",
+      "stdout": "pmos_nmos_op_xyce.stdout"
+    }
+  }
 }

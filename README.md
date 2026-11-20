@@ -254,7 +254,9 @@ six OSDI artifacts into ngspice-44.2 through a reproducible temporary
 with finite output voltage and supply current. Model artifact hashes and the
 raw output are retained in `results/ihp_sg13g2_capability_receipt.{json,md}`
 and `results/ihp_sg13g2_native_smoke.stdout`. This is runtime capability
-evidence, not a sizing result. No SIZ7g or XSOTA-1 score is inferred because
+evidence, not a sizing result. A matched Xyce-7.10 probe is also retained and
+returns `pdk_deck_unsupported` because the ngspice source deck does not expose
+a Xyce-compatible `SG13_LV_NMOS` definition. No SIZ7g or XSOTA-1 score is inferred because
 the PDK source has no common sizing task, independent verifier, or matched
 AnaFlow cell.
 
@@ -272,6 +274,7 @@ cd /root/autodl-tmp/spectra-analog-agent
 /root/miniconda3/bin/python scripts/audit_ihp_sg13g2.py \
   --pdk-root /root/autodl-tmp/bench_sources/IHP-Open-PDK \
   --simulator /root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
+  --xyce /root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce \
   --osdi-dir /root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/osdi \
   --work-root results/_ihp_sg13g2_smoke_repro_osdi \
   --output results/ihp_sg13g2_capability_receipt.json
