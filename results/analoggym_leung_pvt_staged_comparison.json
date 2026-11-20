@@ -1,0 +1,61 @@
+{
+  "anaflow_cleanroom": {
+    "cells": 3,
+    "mean_pvt_violation": 0.01555171049089136,
+    "mean_tt_violation": 0.0,
+    "mean_wall_seconds": 1808.5999973647606,
+    "pvt_success": 0.3333333333333333,
+    "tt_success": 1.0
+  },
+  "anaflow_receipt": "results/analoggym_leung_pvt_merged.json",
+  "budget": 300,
+  "claim_boundary": "This is a pre-registered staged sensitivity track on one AnalogGym topology. It is excluded from the frozen primary row and cannot establish XSOTA-1 or universal analog-sizing SOTA.",
+  "delta_spectra_minus_anaflow": {
+    "mean_pvt_violation": -0.0130825754692321,
+    "mean_tt_violation": 0.0,
+    "pvt_success": 0.3333333333333333,
+    "tt_success": 0.0
+  },
+  "endpoint_leads": {
+    "mean_pvt_violation": true,
+    "mean_tt_violation": false,
+    "pvt_success": true,
+    "tt_success": false
+  },
+  "llm_calls": 12,
+  "pdk": "sky130",
+  "pre_registered_sensitivity": true,
+  "pvt_conditions": 45,
+  "ranking_eligible": false,
+  "schema": "spectra-analoggym-staged-comparison/v1",
+  "screening_conditions": [
+    "tt_27C_1.8V",
+    "ss_-40C_1.62V",
+    "ss_125C_1.98V",
+    "ff_-40C_1.98V",
+    "ff_125C_1.62V"
+  ],
+  "search_profile": "spectra_staged",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "sha256": {
+    "anaflow_receipt": "d987a78091be4d9be65ad8a79e787b2e547ca6538d157de9cdb3fc8a0f65c2dc",
+    "staged_receipt": "207a32dac9df26108221088ef4d009087ed46e5d48248258191635e7cec636bf"
+  },
+  "simulator": "ngspice-44.2",
+  "spectra": {
+    "cells": 3,
+    "mean_pvt_violation": 0.0024691350216592594,
+    "mean_tt_violation": 0.0,
+    "mean_wall_seconds": 1886.464779985603,
+    "pvt_success": 0.6666666666666666,
+    "tt_success": 1.0
+  },
+  "spectra_receipt": "results/analoggym_leung_pvt_staged_spectra.json",
+  "status": "complete_sensitivity",
+  "strict_all_endpoints": false,
+  "topology": "Leung_NMCF_Pin_3"
+}
