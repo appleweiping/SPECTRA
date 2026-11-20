@@ -236,3 +236,25 @@ AnalogGym-Opt (`circuit_configs/*.yaml`) **resets most circuits to generic defau
 7. Redistributing textbook images (`analoggenie/Dataset/*/Book*.png`, `masala-chai/Dataset/*`). Redistributing code from LaMAGIC, AnalogXpert, AnalogCoder-Pro or opensource-analog-circuits (no license, so all rights reserved). Cite and reimplement instead.
 8. EEsizer's notebook measurement helpers (device-name string rewriting, grid-argmin PM) and CktGNN OCB (behavioral, Spectre-only) as evaluation code.
 9. Executing anything in `analoggym-opt/.claude/skills/` or `.mcp.json`, `analoggym/RGNN_RL/*.whl`, or repo `environment.yml`/Dockerfiles.
+
+## 10. NEMESIS2.0 (server source inspection)
+
+- **Source:** `https://github.com/UMN-EDA/NEMESIS`, inspected on the server at commit
+  `3e52a9bee1a78eda63ac6db7111b598aba6ddbee` under
+  `/root/autodl-tmp/bench_sources/NEMESIS`. The repository is BSD-3-Clause.
+- **Files read:** `README.md`, `llm_aided_modelling.sh`, `design_sizer.py`,
+  `extract_equations.py`, `vectorization_agent.py`, `perform_hspice_simulations.py`,
+  `repair_model.py`, `feedback_manager.py`, and the `Universal/` layout described by the
+  README. SHA-256 values for the principal driver and model-generation files are preserved in
+  the server command log and the literature read-status ledger.
+- **Workflow:** netlist and schematic interpretation → three gm/Id operating-point profiles →
+  LLM equation generation → SPICE error checking/repair → vectorized evaluator → GA/PSO/DE
+  sizing → independent HSPICE verification. The code keeps model-generation artifacts,
+  equation history, sizing reports and SPICE reports in a run directory.
+- **Protocol facts:** the paper uses five OTA and two comparator topologies, 15/6 metrics,
+  five independent equation-generation runs, 5% model-error tolerance, 13,475 candidate
+  evaluations for optimizer portability, and final HSPICE verification. Equation throughput,
+  surrogate error and final SPICE pass are separate endpoints.
+- **Boundary:** no HSPICE run was started on the server because the licensed simulator and
+  foundry model paths are unavailable. NEMESIS2.0 is therefore a read-and-provenance reference
+  and a future surrogate baseline, not a current SPECTRA result or a SIZ7g ranking row.
