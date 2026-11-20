@@ -52,8 +52,8 @@ def git_value(root: Path, *args: str) -> str | None:
         return None
 
 
-def metric_flags(text: str) -> list[str]:
-    lowered = text.lower()
+def metric_flags(text: str, task_id: str = "") -> list[str]:
+    lowered = f"{task_id} {text}".lower()
     return sorted(
         name for name, pattern in METRIC_PATTERNS.items() if re.search(pattern, lowered)
     )
@@ -79,10 +79,10 @@ def inspect_task(root: Path, task_id: str) -> dict[str, object]:
         "authors": task_meta.get("authors", []),
         "keywords": task_meta.get("keywords", []),
         "declared_task_id": metadata.get("task_id"),
-        "metric_flags": metric_flags(instruction_text),
+        "metric_flags": metric_flags(instruction_text, task_id),
         "has_verifier_block": "verifier" in task_data,
-        "has_pvt": bool(re.search(r"\bpvt\b|process,?\s*voltage,?\s*and\s*temperature", instruction_text, re.I)),
-        "has_mismatch": bool(re.search(r"mismatch|monte[- ]?carlo|local variation", instruction_text, re.I)),
+        "has_pvt": bool(re.search(r"\bpvt\b|process,?\s*voltage,?\s*and\s*temperature", f"{task_id} {instruction_text}", re.I)),
+        "has_mismatch": bool(re.search(r"mismatch|monte[- ]?carlo|local variation", f"{task_id} {instruction_text}", re.I)),
     }
 
 
