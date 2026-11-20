@@ -1,0 +1,74 @@
+{
+  "benchmark": "LOADBench",
+  "dataset_downloaded": false,
+  "dataset_policy": "source-only audit; do not download the approximately 40GB release in this workspace",
+  "files": [
+    {
+      "bytes": 10128,
+      "exists": true,
+      "name": "README.md",
+      "role": "protocol and metric definitions",
+      "sha256": "3266ea6d02111d409ac5a0b6277848e9d8d5f0cd91b0402c73a15c8ac2a514a6"
+    },
+    {
+      "bytes": 16298,
+      "exists": true,
+      "name": "struct_matcher.py",
+      "role": "netlist structural matching",
+      "sha256": "a128d330e6e56ed8bc04a5c6c6aec2109ea4e8486e2f9b4852c31d74d2ab482f"
+    },
+    {
+      "bytes": 5262,
+      "exists": true,
+      "name": "circuit_generation_coverage.py",
+      "role": "topology coverage",
+      "sha256": "a9a640a1f6b50c9a354e6ed802ad0c9c1647b1b00a36b7b936cb995b45aede5d"
+    },
+    {
+      "bytes": 6613,
+      "exists": true,
+      "name": "topology_selection_eval.py",
+      "role": "top-k and MFHR",
+      "sha256": "6e12f579b89118e0c8607df413bfbbe3598a9dcffa88c4ce5415871b3af20a2d"
+    },
+    {
+      "bytes": 7493,
+      "exists": true,
+      "name": "optimization_helper.py",
+      "role": "12-D hypervolume ratio",
+      "sha256": "a0f6e23c614df092f3a68b4f8028f4c111bab376fbefa8128ea04ccdc4b1ac02"
+    },
+    {
+      "bytes": 16281,
+      "exists": true,
+      "name": "inverse_sizing.py",
+      "role": "MAPE, outliers, satisfaction and R2",
+      "sha256": "f49da56bb60aa13d14b32c11b3ff7ebb8061905c1c7849400ee5c0c2660694b4"
+    }
+  ],
+  "license_files": [],
+  "license_status": "no-license-file-in-script-repository",
+  "metric_contract": [
+    "top-k accuracy",
+    "mean first-hit rank",
+    "12-D hypervolume ratio against NSGA-II",
+    "MAPE and standard deviation",
+    "outlier rate",
+    "spec-satisfaction rate",
+    "R2",
+    "FoM"
+  ],
+  "ranking_blocker": "dataset, source-native netlists, common SPECTRA/AnaFlow task cells and an independent matched verifier are not present in this checkout",
+  "ranking_status": "capability_only_source_audit",
+  "schema": "loadbench-scripts-source-audit/v1",
+  "smoke": {
+    "checks": [
+      "topology_selection_eval",
+      "inverse_sizing"
+    ],
+    "status": "pass"
+  },
+  "source_commit": "03cc45620afbbbee19652d83d625f26f3368d951",
+  "source_date": "2026-08-03T16:35:26+01:00",
+  "source_url": "https://github.com/FilipeAz/LOADBench-Scripts"
+}
