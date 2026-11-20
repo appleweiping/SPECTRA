@@ -19,8 +19,8 @@ A2. `paper/main.log` has no undefined references/citations/font shapes and no ov
 
 ## Traceability and freshness
 A3. Every result number in every section (abstract, intro, bench, method, experiments, conclusion) is a macro from
-    `paper/numbers.tex` or the receipt-derived `paper/external_numbers.tex`, or a cell of a generated table; the
-    the legacy generator still emits `\AbsMainClaim` for the secondary E1g artifact, while the submitted abstract's
+    `paper/numbers.tex` or the receipt-derived `paper/external_numbers.tex`, or a cell of a generated table. The
+    legacy generator still emits `\AbsMainClaim` for the secondary E1g artifact, while the submitted abstract's
     external SIZ7g values are receipt-derived macros from `results/paper_sizing_multiseed.json`, the Xyce merged
     receipts and `results/xsota_gate_audit.json`.
     Hand-typed numbers are allowed only for constants fixed by construction (45 PVT conditions, budgets, LUT grid, CMA-ES
@@ -33,9 +33,8 @@ A3. Every result number in every section (abstract, intro, bench, method, experi
     - `python -m scripts.spectra_failures E1g` → `results/E1g_spectra_failure_modes.json` (additive amendment after freeze)
     - `python -m scripts.prediction_accuracy E1g spectra` → `results/E1g_spectra_prediction_accuracy.json`
     - `python -m scripts.e4_tests --main E4g --alt '' --main-key main` → `results/E4g_tests.json`
-    - `python scripts/generate_external_numbers.py` → `paper/external_numbers.tex` from `results/paper_sizing_multiseed.json`
-    - `python -m scripts.make_tables` → `paper/tables/{fault,ablation,pvt}.tex`; when `paper/external_numbers.tex` exists, the receipt-derived external `paper/tables/main.tex` is preserved. Set `SPECTRA_FORCE_LEGACY_MAIN=1` only to regenerate the historical E1g table for the secondary audit. `scaling.tex` is removed unless a separately recorded alternate backbone exists
     - `python scripts/generate_external_numbers.py` → `paper/external_numbers.tex` from the frozen SIZ7g, Xyce and SGAnalog receipts
+    - `python -m scripts.make_tables` → `paper/tables/{fault,ablation,pvt}.tex`; when `paper/external_numbers.tex` exists, the receipt-derived external `paper/tables/main.tex` is preserved. Set `SPECTRA_FORCE_LEGACY_MAIN=1` only to regenerate the historical E1g table for the secondary audit. `scaling.tex` is removed unless a separately recorded alternate backbone exists
     - `python -m scripts.bench_stats` → `paper/tables/bench_stats.tex`
     - `python -m scripts.make_figures E1g` → `paper/figs/E1g_{tiers,anytime,anytime2,families}.pdf` (content, not bytes)
     - `python -m scripts.paper_numbers` → `paper/numbers.tex`
