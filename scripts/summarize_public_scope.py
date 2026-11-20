@@ -25,6 +25,7 @@ TRACKS = [
     ("public_v3_asap7_ldo_merged.json", "opensource / ASAP7 LDO", "ASAP7", "ngspice-44.2"),
     ("public_v4_ldo_simple_merged.json", "opensource / SKY130 LDO", "SKY130", "ngspice-44.2"),
     ("public_v5_ptm180_merged.json", "opensource / PTM180 opamp", "PTM180", "ngspice-44.2"),
+    ("public_v7_ptm45_merged.json", "opensource / PTM45 gh_autockt opamp", "PTM45", "ngspice-44.2"),
     ("public_v5_bjt_merged.json", "opensource / BJT CE amplifier", "BJT", "ngspice-44.2"),
     ("public_x1_v3_bjt_merged.json", "opensource / BJT CE amplifier", "BJT", "Xyce-7.10"),
 ]

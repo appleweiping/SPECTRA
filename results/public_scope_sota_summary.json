@@ -309,6 +309,39 @@
       "aggregate": {
         "anaflow_cleanroom": {
           "cells": 3,
+          "mean_first_pass": 0.0,
+          "mean_pvt_violation": 0.28162815185185186,
+          "mean_tt_violation": 0.28162815185185186,
+          "mean_wall_seconds": 6.139887575060129,
+          "pvt_success": 0.0,
+          "tt_success": 0.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_first_pass": 0.0,
+          "mean_pvt_violation": 0.22982951851851854,
+          "mean_tt_violation": 0.22982951851851854,
+          "mean_wall_seconds": 6.6729082856327295,
+          "pvt_success": 0.0,
+          "tt_success": 0.0
+        }
+      },
+      "budget": 300,
+      "complete": false,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "PTM45",
+      "protocol_eligible": false,
+      "pvt_conditions": 1,
+      "receipt": "public_v7_ptm45_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": false,
+      "track": "opensource / PTM45 gh_autockt opamp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
           "mean_first_pass": 1.3333333333333333,
           "mean_pvt_violation": 0.0,
           "mean_simulations_to_first_pass": 1.3333333333333333,
@@ -654,6 +687,36 @@
       "tier": "TT-only capability",
       "track": "opensource / PTM180 opamp",
       "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_first_pass": 0.0,
+      "mean_pvt_violation": 0.28162815185185186,
+      "mean_tt_violation": 0.28162815185185186,
+      "mean_wall_seconds": 6.139887575060129,
+      "method": "anaflow_cleanroom",
+      "pdk": "PTM45",
+      "pvt_success": 0.0,
+      "receipt": "public_v7_ptm45_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "TT-only capability",
+      "track": "opensource / PTM45 gh_autockt opamp",
+      "tt_success": 0.0
+    },
+    {
+      "cells": 3,
+      "mean_first_pass": 0.0,
+      "mean_pvt_violation": 0.22982951851851854,
+      "mean_tt_violation": 0.22982951851851854,
+      "mean_wall_seconds": 6.6729082856327295,
+      "method": "spectra",
+      "pdk": "PTM45",
+      "pvt_success": 0.0,
+      "receipt": "public_v7_ptm45_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "TT-only capability",
+      "track": "opensource / PTM45 gh_autockt opamp",
+      "tt_success": 0.0
     },
     {
       "cells": 3,
