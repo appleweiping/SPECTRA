@@ -199,7 +199,12 @@
         "simulations": 300,
         "llm_calls": 12
       },
-      "status": "planned"
+      "status": "source_audit_complete_50_tasks_capability_only",
+      "source_commit": "972f7cd7c95381134387b250edf18f3bd23bdd25",
+      "task_count": 50,
+      "pvt_declared_tasks": 38,
+      "mismatch_declared_tasks": 36,
+      "receipt": "results/analog_design_bench_v2_source_audit.json"
     }
   ]
 }
