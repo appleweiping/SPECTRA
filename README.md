@@ -67,3 +67,112 @@ Experiment protocol and every deviation: `EXPERIMENT_LOG.md`; acceptance contrac
 - `spectra/bench` — expert templates, family profiles, NL rendering; `scripts/build_bench.py` derives tasks
 - `pdk/sky130` — minimal SKY130 1.8 V FET + PNP models (Apache-2.0, google/skywater-pdk-libs-sky130_fd_pr), mismatch variants
 - `results/` — raw runs, summaries; `paper/` — LaTeX (ACM sigconf, anonymous)
+
+## Extended reproducibility contract
+
+The public expansion follows one strict cell schema. A cell is identified by source task, topology digest, PDK/model profile, simulator version, method, seed, and budget. Its receipt contains the prepared deck digest, corner list, per-corner measurements, normalized violations, first-pass simulation count, LLM call count, wall time, token usage when available, crash state, and failure taxonomy. The merger refuses duplicate cells, missing seeds, wrong budgets, non-finite violations, or incomplete declared corner grids.
+
+The common matched budget is 300 simulator evaluations, 12 LLM calls, and seeds 0, 1, and 2. The nominal result is called TT. A PVT result is ranking-eligible only when the source exposes a compatible multi-condition contract and the independent verifier evaluates every declared condition. Source decks that provide one operating point remain useful capability evidence and are explicitly excluded from PVT ranking.
+
+### Public matrix
+
+| Track | PDK/model | Simulator | Task evidence | Conditions | Tier |
+|---|---|---|---|---:|---|
+| AnalogGym HoiLee | SKY130 | ngspice-44.2 | public amplifier topology | 45 | matched PVT |
+| AnalogGym Leung | SKY130 | ngspice-44.2 | public LDO/topology | 45 | matched PVT |
+| AnalogGym HoiLee/Leung | SKY130 | Xyce-7.10 | translated public decks | 45 where parser-equivalent | matched PVT |
+| open-source LP opamp | SKY130 | Xyce-7.10 | full Xyce AC/45-condition receipt; translator validated separately | 45 | matched PVT |
+| ATLAS | GF180MCU | ngspice-44.2 | public ATLAS task digest | 17 source conditions | matched PVT |
+| open-source LP and LDO | SKY130 | ngspice-44.2 | source-native configurations | 45 | matched PVT |
+| open-source ASAP7 LDO | ASAP7 | ngspice-44.2 | source-native configuration | 45 | matched PVT |
+| open-source PTM180 | PTM180 | ngspice-44.2 | op-amp configuration | 1 | TT capability |
+| open-source BPTM45 | PTM45 BSIM4 | ngspice-44.2 | gh_autockt_opamp | 1 | TT capability |
+| open-source BJT | public BJT model | ngspice-44.2 and Xyce-7.10 | CE amplifier | 1 | TT capability |
+| AMPICBench | SKY130A | ngspice-44.2 | nine source decks, 135 source-corner runs | 15 per deck | capability |
+| SGAnalog | SKY130A | native ngspice-44.2 harness; pinned ngspice-45.2 source protocol | 17 tapeout-derived sizing tasks | source-defined | tapeout sizing |
+
+The PTM45 receipt is results/public_v7_ptm45_merged.json and its readable audit is results/public_v7_ptm45_merged.md. The full Xyce SKY130 LP runner receipt is results/opensource_xyce_sky130_lp_sizing.json and the strict merged receipt is results/public_v8_sky130_lp_xyce_merged.json. Together they contain six method-seed rows with 45 parsed conditions. The source deck has no matched process-corner library, so TT success and TT violation are reported while PVT success remains inapplicable. The receipt predates automatic sibling-deck translation, while direct translated SKY130 and PTM180 decks have independent Xyce artifacts and parser checks. The corrected adapter preserves the SPICE title line before inserting temperature control, and the raw failed pre-fix shards remain archived.
+
+### Framework components
+
+SPECTRA has four independently testable scientific mechanisms.
+
+1. Diagnosis converts simulator evidence into device-level causes and suggested actions.
+2. Intent programs provide a typed intermediate representation between language output and transistor dimensions.
+3. Adaptive refinement promotes worst corners and sensitive variables into bounded CMA-ES search.
+4. Knowledge cards provide versioned, source-linked topology and PDK facts.
+
+The component audit uses matched tasks, seeds, budgets, and verifier. It reports TT/PVT success, mean and median normalized violation, first-pass simulations, calls, wall time, structured events, active-variable traces, and paired confidence intervals. A component is credited only when its predeclared mechanism axis improves the recorded metric. Mixed endpoint effects remain visible.
+
+### External baselines
+
+The main external table has seven paper-backed rows beside SPECTRA: AnalogCoder, ADO-LLM, AnaFlow, Artisan, AutoSizer, ATLAS, and GLOVA. Each row has a paper or official-project citation, implementation-status label, fixed task text, identical parameter bounds, 300/12/3 resource contract, common simulator, common parser, and independent verifier. Clean-room adapters are labelled as such. Internal controls and oracle search are appendix diagnostics and are never counted as external frameworks.
+
+### Metrics
+
+The primary electrical endpoints are TT success, all-corner PVT success, mean normalized violation, median normalized violation, and worst-corner violation. Efficiency and reliability metrics are simulations to first feasible candidate, total simulator evaluations, LLM calls, wall time, tokens and cost when exposed, crash rate, timeout rate, parser failures, convergence failures, legality failures, cross-seed variance, task-cluster bootstrap intervals, paired win/loss/tie counts, and Holm-corrected tests. Mismatch yield is reported separately when a source benchmark provides a train/validation Monte Carlo contract.
+
+### Server-only execution
+
+All simulator and model runs use the remote server. The local E: checkout is reserved for source review, report generation, and synchronization.
+
+~~~bash
+ssh -p 39737 root@connect.westc.seetacloud.com
+cd /root/autodl-tmp/spectra-analog-agent
+source /root/miniconda3/etc/profile.d/conda.sh
+conda activate spectra
+
+python scripts/summarize_public_scope.py
+python scripts/summarize_public_v2.py
+python scripts/validate_cross_domain_cells.py
+python scripts/smoke_contracts.py
+~~~
+
+For a public source cell, run both methods with the same seed, simulator, and budget, then merge only after all six seed-method cells are present.
+
+~~~bash
+python scripts/run_public_config_pvt.py --source-root /root/autodl-tmp/bench_sources/SOURCE_REPO --config /root/autodl-tmp/bench_sources/SOURCE_REPO/circuits/CONFIG/config.json --simulator /root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice --track-id TRACK --pdk PDK --budget 300 --seeds 0,1,2 --methods spectra,anaflow_cleanroom --output results/TRACK_merged.json --pvt-mode canonical
+python scripts/merge_public_config_shards.py --input results/TRACK_s*_spectra.json results/TRACK_s*_anaflow_cleanroom.json --output results/TRACK_merged.json
+~~~
+
+SGAnalog uses the pinned upstream task file eval/sizing/tasks.jsonl and preserves the author testbench. Its complete GPT-6.1-sol receipt is results/sganalog_native_gpt61_multiseed.json with 51 rows, 48 converged and 3 failed retained in the denominator. Xyce runs retain mt0, prn, translated control, and parser receipts. AMPICBench capability evidence retains source-corner artifacts but is not promoted to sizing ranking until a common objective and verifier exist.
+
+The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
+
+~~~bash
+python scripts/xyce_ac_translator.py /root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir \
+  --translated /tmp/sky130_lp_opamp.xyce.cir
+/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce \
+  -b /tmp/sky130_lp_opamp.xyce.cir
+python scripts/xyce_ac_translator.py /tmp/sky130_lp_opamp.xyce.cir --parse
+~~~
+
+The parser reports missing UGF or phase margin when the measured response never crosses 0 dB. Those missing values remain violations in the receipt and are never replaced by an oracle value.
+
+### Audit and claim policy
+
+The source-linked literature contract is docs/TOPCONF_LITERATURE_AUDIT.md. The implementation-level audit of Analog Canvas and Virtuoso Bridge Lite is docs/REFERENCE_CODE_AUDIT.md. The cross-domain protocol and current statuses are docs/CROSS_DOMAIN_PROTOCOL.md and docs/ACCEPTANCE_CHECKLIST.md.
+
+A successful script exit is not acceptance. PASS requires complete immutable evidence. PARTIAL records a useful but narrower result. NOT MET remains explicit when a universal or domain-level claim is unsupported. Capability scans, one-condition TT rows, parser diagnostics, and clean-room adapters are never silently upgraded to universal SOTA.
+
+The finite matrix supports measured-scope conclusions over the listed source, PDK, topology, simulator, metric, and budget strata. A literal claim over every analog circuit, every PDK, and every simulator would require additional source-native tasks and matching metrics. The repository keeps that boundary visible while continuing to expand the measured matrix.
+
+### Repository map
+
+~~~text
+spectra/agent        intent DSL, sandbox, diagnosis, knowledge, agent loop
+spectra/sim          netlist compiler, simulator adapters, PVT verifier
+spectra/bench        task schemas and cross-domain contracts
+spectra/opt          CMA-ES, TPE, Bayesian, and classical search
+scripts              runners, strict mergers, validators, reports
+data/bench           frozen tasks, source manifests, metric schemas
+results              raw shards, merged receipts, summaries, audit logs
+paper                anonymous ACM/ICCAD manuscript and figures
+docs                  protocols, literature, acceptance, remote environment
+pdk/sky130            redistributable model and mismatch profiles
+work/reference_sources source-only inspections of requested projects
+~~~
+
+### Three-way synchronization
+
+The maintained copies are E:/CodexProjects/spectra-analog-agent, /root/autodl-tmp/spectra-analog-agent on the server, and GitHub appleweiping/SPECTRA. Release checks compare tracked commit hashes across all three copies. Raw evidence is retained on the server and copied into results/ only after schema validation and SHA-256 recording. The synchronization procedure does not use C: or D: for experiment data.

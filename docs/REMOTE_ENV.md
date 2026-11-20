@@ -95,3 +95,7 @@ the public BPTM 45 nm BSIM4 model under ngspice-44.2. It uses three seeds, two m
 calls per cell. The source deck has no process-corner selector, so the adapter records one TT condition and marks
 the receipt capability-only. SPECTRA has lower normalized TT violation on all three seeds (mean 0.2298 versus
 0.2816 for the clean-room AnaFlow adapter), while neither method meets the complete gain/UGF/phase-margin target.
+
+## SGAnalog GPT-6.1-sol multiseed receipt
+
+The server-native SGAnalog harness evaluated the pinned upstream commit ebd7e694b79cbe8475c42bd41cf4620c5d537a0f over all 17 sizing tasks and seeds 0, 1, and 2. The receipt is results/sganalog_native_gpt61_multiseed.json with SHA-256 c65669892817800ad3575be671b6a80c9318be839f6ae0bb45c24394f7c053d5. Native ngspice-44.2 produced 51 model rows, 48 converged and 3 failed. Per-seed sizing fidelity means are 0.8538, 0.8463, and 0.8485. Raw reference/model decks remain under /root/autodl-tmp/spectra-analog-agent/results/_sganalog_native_work on the server. The track is a source-testbench-relative capability audit and is not pooled into the SIZ7g 45-condition ranking.

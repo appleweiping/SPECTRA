@@ -1,0 +1,3801 @@
+{
+  "count": 9,
+  "pvt": true,
+  "results": [
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 7.367972272913903,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05                 2e-05",
+            "        vgs              0.422825              0.618645",
+            "        vds              0.422825              0.618645",
+            "        vth              0.371846              0.586883",
+            "      vdsat             0.0895142             0.0672603",
+            "         gm           0.000280407           0.000400098",
+            "        gds           2.57591e-05           6.76552e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 6.703687384724617,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           2.00002e-05",
+            "        vgs              0.171455              0.541742",
+            "        vds              0.171455              0.541742",
+            "        vth              0.033324              0.449288",
+            "      vdsat              0.174683               0.11345",
+            "         gm           0.000181887            0.00028979",
+            "        gds           5.83373e-05           5.63854e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 7.445543713867664,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           2.00005e-05",
+            "        vgs              0.313336              0.584591",
+            "        vds              0.313336              0.584591",
+            "        vth              0.234385              0.531011",
+            "      vdsat               0.12103             0.0864236",
+            "         gm           0.000234398           0.000348618",
+            "        gds           2.74559e-05           6.12013e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 8.40515701007098,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           2.00009e-05",
+            "        vgs              0.374922               0.68435",
+            "        vds              0.374922               0.68435",
+            "        vth                0.3098              0.631386",
+            "      vdsat             0.0976133             0.0792669",
+            "         gm           0.000271838           0.000361062",
+            "        gds           2.66728e-05           5.77649e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 7.3531443970277905,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           1.99999e-05",
+            "        vgs                0.1371               0.62218",
+            "        vds                0.1371               0.62218",
+            "        vth            -0.0287218              0.494117",
+            "      vdsat              0.193785              0.134187",
+            "         gm           0.000160724           0.000258877",
+            "        gds           8.84121e-05           4.59795e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 7.475606921128929,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           2.00001e-05",
+            "        vgs              0.267773              0.656478",
+            "        vds              0.267773              0.656478",
+            "        vth               0.17234              0.575646",
+            "      vdsat              0.131056              0.102043",
+            "         gm           0.000225563           0.000312033",
+            "        gds           3.05627e-05           5.13195e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 7.135933076962829,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05                 2e-05",
+            "        vgs              0.665015              0.608575",
+            "        vds              0.665015              0.608575",
+            "        vth              0.651221              0.577523",
+            "      vdsat              0.071722             0.0668538",
+            "         gm           0.000292253           0.000402187",
+            "        gds           2.09204e-05           6.87557e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 7.318903650622815,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id           2.00003e-05           1.99999e-05",
+            "        vgs              0.395781              0.531338",
+            "        vds              0.395781              0.531338",
+            "        vth              0.312698              0.439854",
+            "      vdsat              0.140744              0.112733",
+            "         gm           0.000209423           0.000291317",
+            "        gds           2.18652e-05            5.7803e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 7.204246369656175,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05                 2e-05",
+            "        vgs              0.550462              0.574373",
+            "        vds              0.550462              0.574373",
+            "        vth               0.51376              0.521622",
+            "      vdsat             0.0987092              0.085899",
+            "         gm           0.000245179           0.000350554",
+            "        gds           2.11016e-05           6.24057e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 7.704772494733334,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           2.00008e-05",
+            "        vgs              0.618275              0.674123",
+            "        vds              0.618275              0.674123",
+            "        vth              0.593564              0.622408",
+            "      vdsat             0.0765604             0.0785199",
+            "         gm           0.000286328           0.000363638",
+            "        gds            2.1502e-05            5.8685e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 7.451542786322534,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05           1.99999e-05",
+            "        vgs              0.352419              0.611072",
+            "        vds              0.352419              0.611072",
+            "        vth              0.255041               0.48509",
+            "      vdsat              0.149021              0.132785",
+            "         gm           0.000204088           0.000261016",
+            "        gds           2.30706e-05           4.70581e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 7.4097963739186525,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id           2.00021e-05                 2e-05",
+            "        vgs              0.505405              0.645873",
+            "        vds              0.505405              0.645873",
+            "        vth              0.456103              0.566649",
+            "      vdsat              0.105002              0.101034",
+            "         gm           0.000239842           0.000314541",
+            "        gds           2.15922e-05           5.22915e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 8.201142405159771,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05                 2e-05",
+            "        vgs              0.521351              0.646283",
+            "        vds              0.521351              0.646283",
+            "        vth              0.485392              0.605636",
+            "      vdsat             0.0817728             0.0721383",
+            "         gm           0.000284707           0.000382932",
+            "        gds            2.3468e-05           6.32047e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 7.397117686923593,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05                 2e-05",
+            "        vgs              0.259416              0.575007",
+            "        vds              0.259416              0.575007",
+            "        vth              0.146869              0.468192",
+            "      vdsat              0.158124              0.121395",
+            "         gm           0.000199661           0.000276744",
+            "        gds           3.05883e-05           5.17286e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 7.534611613024026,
+          "error_tail": [
+            "     device m.xi0.xpm0.msky130_fd m.xi0.xnm0.msky130_fd",
+            "      model xi0.xpm0:sky130_fd_pr xi0.xnm0:sky130_fd_pr",
+            "         id                 2e-05                 2e-05",
+            "        vgs              0.409863              0.614582",
+            "        vds              0.409863              0.614582",
+            "        vth              0.347931              0.549826",
+            "      vdsat               0.11151             0.0925779",
+            "         gm           0.000238606           0.000332888",
+            "        gds           2.37945e-05           5.67865e-06",
+            "",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Bias_Circuits/sim_Bias_gen/sim_Bias_gen.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 7.983173867221922,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 7.734152571298182,
+          "error_tail": [
+            "        vth              0.164847              0.449288",
+            "      vdsat              0.204942              0.113449",
+            "         gm           0.000169822           0.000289788",
+            "        gds           8.88153e-06           5.63849e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 7.566642390098423,
+          "error_tail": [
+            "        vth              0.355924              0.531011",
+            "      vdsat              0.160972             0.0864229",
+            "         gm           0.000204439           0.000348611",
+            "        gds           6.34368e-06           6.12002e-06",
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 7.538328890688717,
+          "error_tail": [
+            "        vth               0.43277              0.631386",
+            "      vdsat              0.136445             0.0792657",
+            "         gm           0.000234931            0.00036105",
+            "        gds           6.61831e-06           5.77631e-06",
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 7.259205222129822,
+          "error_tail": [
+            "        vth              0.111166              0.494117",
+            "      vdsat              0.213537              0.134187",
+            "         gm           0.000161591           0.000258877",
+            "        gds           1.14862e-05           4.59795e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 7.9396359520033,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 7.643323583994061,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 7.784872266929597,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 6.910651304293424,
+          "error_tail": [
+            "        vth              0.606767              0.521622",
+            "      vdsat              0.146416              0.085899",
+            "         gm           0.000219008           0.000350554",
+            "        gds           6.21456e-06           6.24057e-06",
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 7.0063550863415,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 7.6290805214084685,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 7.788920306134969,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 7.255215963348746,
+          "error_tail": [
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 6.913889047224075,
+          "error_tail": [
+            "        vth               0.26699              0.468192",
+            "      vdsat               0.19826              0.121395",
+            "         gm           0.000176696           0.000276743",
+            "        gds           6.52144e-06           5.17285e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 6.766919892746955,
+          "error_tail": [
+            "        vth               0.45821              0.549826",
+            "      vdsat              0.155017             0.0925779",
+            "         gm           0.000210141           0.000332888",
+            "        gds           6.14641e-06           5.67865e-06",
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 51",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 25.000000"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Bias_Circuits/sim_Cascode_bias/sim_Cascode_bias.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 6.37207677680999,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.991379e+01",
+            "vout_ugf            =  5.815587e+07",
+            "vout_ph_ugf         =  -9.296150e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.991379e+01",
+            "vout_ugf            =  5.815587e+07",
+            "vout_ph_ugf         =  -9.296150e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 6.507862177211791,
+          "error_tail": [
+            "        gds           5.67969e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.697934e+01",
+            "vout_ugf            =  4.652167e+07",
+            "vout_ph_ugf         =  -9.310374e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.697934e+01",
+            "vout_ugf            =  4.652167e+07",
+            "vout_ph_ugf         =  -9.310374e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 8.670045192819089,
+          "error_tail": [
+            "        gds           5.97638e-06",
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.972249e+01",
+            "vout_ugf            =  5.328783e+07",
+            "vout_ph_ugf         =  -9.351956e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.972249e+01",
+            "vout_ugf            =  5.328783e+07",
+            "vout_ph_ugf         =  -9.351956e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 7.381359570194036,
+          "error_tail": [
+            "        gds           5.35632e-06",
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.968895e+01",
+            "vout_ugf            =  5.026365e+07",
+            "vout_ph_ugf         =  -9.253938e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.968895e+01",
+            "vout_ugf            =  5.026365e+07",
+            "vout_ph_ugf         =  -9.253938e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 7.597366809379309,
+          "error_tail": [
+            "        gds           4.57093e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.459579e+01",
+            "vout_ugf            =  3.947937e+07",
+            "vout_ph_ugf         =  -9.179784e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.459579e+01",
+            "vout_ugf            =  3.947937e+07",
+            "vout_ph_ugf         =  -9.179784e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 7.777270706836134,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.919414e+01",
+            "vout_ugf            =  4.581335e+07",
+            "vout_ph_ugf         =  -9.296820e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.919414e+01",
+            "vout_ugf            =  4.581335e+07",
+            "vout_ph_ugf         =  -9.296820e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 8.046706816647202,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.933801e+01",
+            "vout_ugf            =  5.535518e+07",
+            "vout_ph_ugf         =  -9.239013e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.933801e+01",
+            "vout_ugf            =  5.535518e+07",
+            "vout_ph_ugf         =  -9.239013e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 7.506662694737315,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.912719e+01",
+            "vout_ugf            =  4.540449e+07",
+            "vout_ph_ugf         =  -9.338279e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.912719e+01",
+            "vout_ugf            =  4.540449e+07",
+            "vout_ph_ugf         =  -9.338279e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 8.095730128698051,
+          "error_tail": [
+            "        gds           5.82201e-06",
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.946142e+01",
+            "vout_ugf            =  5.141894e+07",
+            "vout_ph_ugf         =  -9.306028e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.946142e+01",
+            "vout_ugf            =  5.141894e+07",
+            "vout_ph_ugf         =  -9.306028e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 7.239870196674019,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.923962e+01",
+            "vout_ugf            =  4.798004e+07",
+            "vout_ph_ugf         =  -9.218877e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.923962e+01",
+            "vout_ugf            =  4.798004e+07",
+            "vout_ph_ugf         =  -9.218877e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 7.276916950009763,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.871336e+01",
+            "vout_ugf            =  3.892818e+07",
+            "vout_ph_ugf         =  -9.306931e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.871336e+01",
+            "vout_ugf            =  3.892818e+07",
+            "vout_ph_ugf         =  -9.306931e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 7.153836928773671,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.927630e+01",
+            "vout_ugf            =  4.440423e+07",
+            "vout_ph_ugf         =  -9.279987e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.927630e+01",
+            "vout_ugf            =  4.440423e+07",
+            "vout_ph_ugf         =  -9.279987e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 7.086160861887038,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.958348e+01",
+            "vout_ugf            =  5.324099e+07",
+            "vout_ph_ugf         =  -9.244661e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.958348e+01",
+            "vout_ugf            =  5.324099e+07",
+            "vout_ph_ugf         =  -9.244661e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 7.347085852641612,
+          "error_tail": [
+            "        gds           5.03929e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.841261e+01",
+            "vout_ugf            =  4.306035e+07",
+            "vout_ph_ugf         =  -9.314726e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.841261e+01",
+            "vout_ugf            =  4.306035e+07",
+            "vout_ph_ugf         =  -9.314726e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 7.1155936466529965,
+          "error_tail": [
+            "        gds           5.36374e-06",
+            "",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.957614e+01",
+            "vout_ugf            =  4.910752e+07",
+            "vout_ph_ugf         =  -9.305374e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.957614e+01",
+            "vout_ugf            =  4.910752e+07",
+            "vout_ph_ugf         =  -9.305374e+01"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_Diffamp1/sim_Diffamp1.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 7.07555992109701,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.428142e+01",
+            "vout_ugf            =  9.321243e+07",
+            "vout_ph_ugf         =  -1.078893e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.428142e+01",
+            "vout_ugf            =  9.321243e+07",
+            "vout_ph_ugf         =  -1.078893e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 6.886247411835939,
+          "error_tail": [
+            "        gds           5.30401e-06           5.67969e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.328684e+01",
+            "vout_ugf            =  6.645466e+07",
+            "vout_ph_ugf         =  -1.058609e+02",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.328684e+01",
+            "vout_ugf            =  6.645466e+07",
+            "vout_ph_ugf         =  -1.058609e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 7.383849553763866,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.179944e+01",
+            "vout_ugf            =  8.454879e+07",
+            "vout_ph_ugf         =  -1.100541e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.179944e+01",
+            "vout_ugf            =  8.454879e+07",
+            "vout_ph_ugf         =  -1.100541e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 7.470507116056979,
+          "error_tail": [
+            "        gds           5.12062e-06           5.35632e-06",
+            "",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.229039e+01",
+            "vout_ugf            =  8.147880e+07",
+            "vout_ph_ugf         =  -1.058070e+02",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.229039e+01",
+            "vout_ugf            =  8.147880e+07",
+            "vout_ph_ugf         =  -1.058070e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 7.127175219822675,
+          "error_tail": [
+            "        gds           4.13923e-06           4.57093e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  1.753605e+01",
+            "vout_ugf            =  5.363027e+07",
+            "vout_ph_ugf         =  -9.873161e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  1.753605e+01",
+            "vout_ugf            =  5.363027e+07",
+            "vout_ph_ugf         =  -9.873161e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 7.167437133844942,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  3.815602e+01",
+            "vout_ugf            =  7.335388e+07",
+            "vout_ph_ugf         =  -1.074896e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  3.815602e+01",
+            "vout_ugf            =  7.335388e+07",
+            "vout_ph_ugf         =  -1.074896e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 7.674643161706626,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.425707e+01",
+            "vout_ugf            =  8.929185e+07",
+            "vout_ph_ugf         =  -1.058222e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.425707e+01",
+            "vout_ugf            =  8.929185e+07",
+            "vout_ph_ugf         =  -1.058222e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 6.9778017941862345,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.115849e+01",
+            "vout_ugf            =  7.112984e+07",
+            "vout_ph_ugf         =  -1.098783e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.115849e+01",
+            "vout_ugf            =  7.112984e+07",
+            "vout_ph_ugf         =  -1.098783e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 7.637296676635742,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.463571e+01",
+            "vout_ugf            =  8.241008e+07",
+            "vout_ph_ugf         =  -1.084669e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.463571e+01",
+            "vout_ugf            =  8.241008e+07",
+            "vout_ph_ugf         =  -1.084669e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 7.8011852176859975,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.261987e+01",
+            "vout_ugf            =  7.791182e+07",
+            "vout_ph_ugf         =  -1.048304e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.261987e+01",
+            "vout_ugf            =  7.791182e+07",
+            "vout_ph_ugf         =  -1.048304e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 8.02094024932012,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  3.828499e+01",
+            "vout_ugf            =  6.143204e+07",
+            "vout_ph_ugf         =  -1.083977e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  3.828499e+01",
+            "vout_ugf            =  6.143204e+07",
+            "vout_ph_ugf         =  -1.083977e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 7.813099261838943,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.320996e+01",
+            "vout_ugf            =  7.171008e+07",
+            "vout_ph_ugf         =  -1.072644e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.320996e+01",
+            "vout_ugf            =  7.171008e+07",
+            "vout_ph_ugf         =  -1.072644e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 8.00007468694821,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.367035e+01",
+            "vout_ugf            =  8.596495e+07",
+            "vout_ph_ugf         =  -1.058083e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.367035e+01",
+            "vout_ugf            =  8.596495e+07",
+            "vout_ph_ugf         =  -1.058083e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 7.956502174958587,
+          "error_tail": [
+            "        gds           4.68884e-06           5.03929e-06",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  3.233893e+01",
+            "vout_ugf            =  6.623292e+07",
+            "vout_ph_ugf         =  -1.082570e+02",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  3.233893e+01",
+            "vout_ugf            =  6.623292e+07",
+            "vout_ph_ugf         =  -1.082570e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 7.777443467173725,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.339136e+01",
+            "vout_ugf            =  7.877680e+07",
+            "vout_ph_ugf         =  -1.081889e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.339136e+01",
+            "vout_ugf            =  7.877680e+07",
+            "vout_ph_ugf         =  -1.081889e+02"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_FC_Amp/sim_FC_Amp.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 7.148254374973476,
+          "error_tail": [
+            "pm_raw              =  -1.082128e+02",
+            "dcgain_db           =  6.100467e+01",
+            "f180                =  4.572813e+08",
+            "gm_db               =  -1.867835e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  1.010900e+08",
+            "pm_raw              =  -1.082128e+02",
+            "dcgain_db           =  6.100467e+01",
+            "f180                =  4.572813e+08",
+            "gm_db               =  -1.867835e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 7.702485654968768,
+          "error_tail": [
+            "pm_raw              =  -1.167609e+02",
+            "dcgain_db           =  5.974462e+01",
+            "f180                =  3.233798e+08",
+            "gm_db               =  -1.957295e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  7.052991e+07",
+            "pm_raw              =  -1.167609e+02",
+            "dcgain_db           =  5.974462e+01",
+            "f180                =  3.233798e+08",
+            "gm_db               =  -1.957295e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 8.546794357709587,
+          "error_tail": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 451",
+            "ugf                 =  8.528706e+07",
+            "pm_raw              =  -1.130307e+02",
+            "dcgain_db           =  6.100597e+01",
+            "f180                =  3.852269e+08",
+            "gm_db               =  -1.898342e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  8.528706e+07",
+            "pm_raw              =  -1.130307e+02",
+            "dcgain_db           =  6.100597e+01",
+            "f180                =  3.852269e+08",
+            "gm_db               =  -1.898342e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 6.706177905201912,
+          "error_tail": [
+            "pm_raw              =  -1.070490e+02",
+            "dcgain_db           =  6.042570e+01",
+            "f180                =  4.475304e+08",
+            "gm_db               =  -2.037327e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  8.391275e+07",
+            "pm_raw              =  -1.070490e+02",
+            "dcgain_db           =  6.042570e+01",
+            "f180                =  4.475304e+08",
+            "gm_db               =  -2.037327e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 7.6276464350521564,
+          "error_tail": [
+            "pm_raw              =  -1.154153e+02",
+            "dcgain_db           =  5.836133e+01",
+            "f180                =  3.150171e+08",
+            "gm_db               =  -2.146616e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.992360e+07",
+            "pm_raw              =  -1.154153e+02",
+            "dcgain_db           =  5.836133e+01",
+            "f180                =  3.150171e+08",
+            "gm_db               =  -2.146616e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 7.67195973591879,
+          "error_tail": [
+            "pm_raw              =  -1.119481e+02",
+            "dcgain_db           =  6.039324e+01",
+            "f180                =  3.760184e+08",
+            "gm_db               =  -2.074236e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.192032e+07",
+            "pm_raw              =  -1.119481e+02",
+            "dcgain_db           =  6.039324e+01",
+            "f180                =  3.760184e+08",
+            "gm_db               =  -2.074236e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 7.196355652995408,
+          "error_tail": [
+            "pm_raw              =  -1.045012e+02",
+            "dcgain_db           =  6.011245e+01",
+            "f180                =  5.026393e+08",
+            "gm_db               =  -1.997793e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  9.826980e+07",
+            "pm_raw              =  -1.045012e+02",
+            "dcgain_db           =  6.011245e+01",
+            "f180                =  5.026393e+08",
+            "gm_db               =  -1.997793e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 7.196735241916031,
+          "error_tail": [
+            "pm_raw              =  -1.141810e+02",
+            "dcgain_db           =  6.020558e+01",
+            "f180                =  3.427491e+08",
+            "gm_db               =  -2.013147e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  7.027726e+07",
+            "pm_raw              =  -1.141810e+02",
+            "dcgain_db           =  6.020558e+01",
+            "f180                =  3.427491e+08",
+            "gm_db               =  -2.013147e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 7.776181382127106,
+          "error_tail": [
+            "pm_raw              =  -1.099968e+02",
+            "dcgain_db           =  6.026944e+01",
+            "f180                =  4.142623e+08",
+            "gm_db               =  -1.984889e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  8.428353e+07",
+            "pm_raw              =  -1.099968e+02",
+            "dcgain_db           =  6.026944e+01",
+            "f180                =  4.142623e+08",
+            "gm_db               =  -1.984889e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 6.684074264019728,
+          "error_tail": [
+            "pm_raw              =  -1.044947e+02",
+            "dcgain_db           =  5.974881e+01",
+            "f180                =  4.688934e+08",
+            "gm_db               =  -2.112436e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  8.136917e+07",
+            "pm_raw              =  -1.044947e+02",
+            "dcgain_db           =  5.974881e+01",
+            "f180                =  4.688934e+08",
+            "gm_db               =  -2.112436e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 7.396193661727011,
+          "error_tail": [
+            "pm_raw              =  -1.141041e+02",
+            "dcgain_db           =  5.982557e+01",
+            "f180                =  3.150951e+08",
+            "gm_db               =  -2.133895e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.946379e+07",
+            "pm_raw              =  -1.141041e+02",
+            "dcgain_db           =  5.982557e+01",
+            "f180                =  3.150951e+08",
+            "gm_db               =  -2.133895e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 7.366973417811096,
+          "error_tail": [
+            "pm_raw              =  -1.099919e+02",
+            "dcgain_db           =  5.996444e+01",
+            "f180                =  3.844183e+08",
+            "gm_db               =  -2.100281e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.085122e+07",
+            "pm_raw              =  -1.099919e+02",
+            "dcgain_db           =  5.996444e+01",
+            "f180                =  3.844183e+08",
+            "gm_db               =  -2.100281e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 6.912089922931045,
+          "error_tail": [
+            "pm_raw              =  -1.054193e+02",
+            "dcgain_db           =  6.042596e+01",
+            "f180                =  4.771702e+08",
+            "gm_db               =  -1.999219e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  9.215782e+07",
+            "pm_raw              =  -1.054193e+02",
+            "dcgain_db           =  6.042596e+01",
+            "f180                =  4.771702e+08",
+            "gm_db               =  -1.999219e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 6.895545301027596,
+          "error_tail": [
+            "pm_raw              =  -1.149306e+02",
+            "dcgain_db           =  6.009310e+01",
+            "f180                =  3.281539e+08",
+            "gm_db               =  -2.053681e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  6.575155e+07",
+            "pm_raw              =  -1.149306e+02",
+            "dcgain_db           =  6.009310e+01",
+            "f180                =  3.281539e+08",
+            "gm_db               =  -2.053681e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 8.276961939875036,
+          "error_tail": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 451",
+            "ugf                 =  7.897080e+07",
+            "pm_raw              =  -1.107933e+02",
+            "dcgain_db           =  6.057448e+01",
+            "f180                =  3.960095e+08",
+            "gm_db               =  -2.007197e+01",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.897080e+07",
+            "pm_raw              =  -1.107933e+02",
+            "dcgain_db           =  6.057448e+01",
+            "f180                =  3.960095e+08",
+            "gm_db               =  -2.007197e+01"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_Opamp1_stb/sim_Opamp1_stb.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 7.8926514708437026,
+          "error_tail": [
+            "pm_raw              =  -1.450142e+02",
+            "dcgain_db           =  6.117971e+01",
+            "f180                =  3.479532e+08",
+            "gm_db               =  -1.241789e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  1.527456e+08",
+            "pm_raw              =  -1.450142e+02",
+            "dcgain_db           =  6.117971e+01",
+            "f180                =  3.479532e+08",
+            "gm_db               =  -1.241789e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 7.970053680241108,
+          "error_tail": [
+            "pm_raw              =  -1.531758e+02",
+            "dcgain_db           =  5.787958e+01",
+            "f180                =  1.983973e+08",
+            "gm_db               =  -8.777006e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  1.118762e+08",
+            "pm_raw              =  -1.531758e+02",
+            "dcgain_db           =  5.787958e+01",
+            "f180                =  1.983973e+08",
+            "gm_db               =  -8.777006e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 7.995441381819546,
+          "error_tail": [
+            "pm_raw              =  -1.506724e+02",
+            "dcgain_db           =  6.092841e+01",
+            "f180                =  2.558128e+08",
+            "gm_db               =  -1.011337e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  1.322619e+08",
+            "pm_raw              =  -1.506724e+02",
+            "dcgain_db           =  6.092841e+01",
+            "f180                =  2.558128e+08",
+            "gm_db               =  -1.011337e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 7.20846109604463,
+          "error_tail": [
+            "pm_raw              =  -1.436518e+02",
+            "dcgain_db           =  6.064703e+01",
+            "f180                =  3.225719e+08",
+            "gm_db               =  -1.305097e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  1.358264e+08",
+            "pm_raw              =  -1.436518e+02",
+            "dcgain_db           =  6.064703e+01",
+            "f180                =  3.225719e+08",
+            "gm_db               =  -1.305097e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 8.089250813703984,
+          "error_tail": [
+            "pm_raw              =  -1.500817e+02",
+            "dcgain_db           =  5.509975e+01",
+            "f180                =  1.850472e+08",
+            "gm_db               =  -9.526158e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  9.868320e+07",
+            "pm_raw              =  -1.500817e+02",
+            "dcgain_db           =  5.509975e+01",
+            "f180                =  1.850472e+08",
+            "gm_db               =  -9.526158e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 7.735777385067195,
+          "error_tail": [
+            "pm_raw              =  -1.489961e+02",
+            "dcgain_db           =  6.018907e+01",
+            "f180                =  2.354320e+08",
+            "gm_db               =  -1.056104e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  1.179684e+08",
+            "pm_raw              =  -1.489961e+02",
+            "dcgain_db           =  6.018907e+01",
+            "f180                =  2.354320e+08",
+            "gm_db               =  -1.056104e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 8.951067660935223,
+          "error_tail": [
+            "pm_raw              =  -1.420085e+02",
+            "dcgain_db           =  6.023784e+01",
+            "f180                =  3.838203e+08",
+            "gm_db               =  -1.422780e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  1.499083e+08",
+            "pm_raw              =  -1.420085e+02",
+            "dcgain_db           =  6.023784e+01",
+            "f180                =  3.838203e+08",
+            "gm_db               =  -1.422780e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 23.0614481032826,
+          "error_tail": [
+            "pm_raw              =  -1.521777e+02",
+            "dcgain_db           =  6.021701e+01",
+            "f180                =  2.078896e+08",
+            "gm_db               =  -9.402441e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  1.130242e+08",
+            "pm_raw              =  -1.521777e+02",
+            "dcgain_db           =  6.021701e+01",
+            "f180                =  2.078896e+08",
+            "gm_db               =  -9.402441e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 25.71737861772999,
+          "error_tail": [
+            "pm_raw              =  -1.481644e+02",
+            "dcgain_db           =  6.034465e+01",
+            "f180                =  2.762010e+08",
+            "gm_db               =  -1.141470e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  1.314926e+08",
+            "pm_raw              =  -1.481644e+02",
+            "dcgain_db           =  6.034465e+01",
+            "f180                =  2.762010e+08",
+            "gm_db               =  -1.141470e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 22.369354563299567,
+          "error_tail": [
+            "pm_raw              =  -1.416164e+02",
+            "dcgain_db           =  5.992182e+01",
+            "f180                =  3.375960e+08",
+            "gm_db               =  -1.423062e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  1.317289e+08",
+            "pm_raw              =  -1.416164e+02",
+            "dcgain_db           =  5.992182e+01",
+            "f180                =  3.375960e+08",
+            "gm_db               =  -1.423062e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 24.50532866967842,
+          "error_tail": [
+            "pm_raw              =  -1.512239e+02",
+            "dcgain_db           =  5.972064e+01",
+            "f180                =  1.832191e+08",
+            "gm_db               =  -9.363337e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  9.939466e+07",
+            "pm_raw              =  -1.512239e+02",
+            "dcgain_db           =  5.972064e+01",
+            "f180                =  1.832191e+08",
+            "gm_db               =  -9.363337e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 23.583204274997115,
+          "error_tail": [
+            "pm_raw              =  -1.475294e+02",
+            "dcgain_db           =  6.004500e+01",
+            "f180                =  2.425925e+08",
+            "gm_db               =  -1.130625e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  1.159325e+08",
+            "pm_raw              =  -1.475294e+02",
+            "dcgain_db           =  6.004500e+01",
+            "f180                =  2.425925e+08",
+            "gm_db               =  -1.130625e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 29.708908368833363,
+          "error_tail": [
+            "pm_raw              =  -1.424789e+02",
+            "dcgain_db           =  6.059919e+01",
+            "f180                =  3.591654e+08",
+            "gm_db               =  -1.373147e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  1.443655e+08",
+            "pm_raw              =  -1.424789e+02",
+            "dcgain_db           =  6.059919e+01",
+            "f180                =  3.591654e+08",
+            "gm_db               =  -1.373147e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 24.030805048067123,
+          "error_tail": [
+            "pm_raw              =  -1.520653e+02",
+            "dcgain_db           =  5.952661e+01",
+            "f180                =  1.959726e+08",
+            "gm_db               =  -9.205973e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  1.075141e+08",
+            "pm_raw              =  -1.520653e+02",
+            "dcgain_db           =  5.952661e+01",
+            "f180                =  1.959726e+08",
+            "gm_db               =  -9.205973e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 25.44398611690849,
+          "error_tail": [
+            "pm_raw              =  -1.484899e+02",
+            "dcgain_db           =  6.061002e+01",
+            "f180                =  2.589806e+08",
+            "gm_db               =  -1.102961e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  1.259969e+08",
+            "pm_raw              =  -1.484899e+02",
+            "dcgain_db           =  6.061002e+01",
+            "f180                =  2.589806e+08",
+            "gm_db               =  -1.102961e+01"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_Opamp_2stg_Diff_ClassA_STB/sim_Opamp_2stg_Diff_ClassA_STB.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 26.694573199376464,
+          "error_tail": [
+            "pm_raw              =  -1.445606e+02",
+            "dcgain_db           =  7.528629e+01",
+            "f180                =  1.809390e+08",
+            "gm_db               =  -1.049084e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  8.603454e+07",
+            "pm_raw              =  -1.445606e+02",
+            "dcgain_db           =  7.528629e+01",
+            "f180                =  1.809390e+08",
+            "gm_db               =  -1.049084e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 29.983260952867568,
+          "error_tail": [
+            "pm_raw              =  -1.473758e+02",
+            "dcgain_db           =  5.145806e+01",
+            "f180                =  1.059882e+08",
+            "gm_db               =  -9.049976e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.640392e+07",
+            "pm_raw              =  -1.473758e+02",
+            "dcgain_db           =  5.145806e+01",
+            "f180                =  1.059882e+08",
+            "gm_db               =  -9.049976e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 27.330367419868708,
+          "error_tail": [
+            "pm_raw              =  -1.507311e+02",
+            "dcgain_db           =  7.177094e+01",
+            "f180                =  1.336044e+08",
+            "gm_db               =  -8.362354e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.487344e+07",
+            "pm_raw              =  -1.507311e+02",
+            "dcgain_db           =  7.177094e+01",
+            "f180                =  1.336044e+08",
+            "gm_db               =  -8.362354e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 29.835097561124712,
+          "error_tail": [
+            "pm_raw              =  -1.425012e+02",
+            "dcgain_db           =  7.290852e+01",
+            "f180                =  1.705617e+08",
+            "gm_db               =  -1.132506e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  7.615399e+07",
+            "pm_raw              =  -1.425012e+02",
+            "dcgain_db           =  7.290852e+01",
+            "f180                =  1.705617e+08",
+            "gm_db               =  -1.132506e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 23.606950937770307,
+          "error_tail": [
+            "pm_raw              =  -1.390598e+02",
+            "dcgain_db           =  4.551806e+01",
+            "f180                =  1.030608e+08",
+            "gm_db               =  -1.139794e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  4.545931e+07",
+            "pm_raw              =  -1.390598e+02",
+            "dcgain_db           =  4.551806e+01",
+            "f180                =  1.030608e+08",
+            "gm_db               =  -1.139794e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 24.961474161129445,
+          "error_tail": [
+            "pm_raw              =  -1.479233e+02",
+            "dcgain_db           =  6.735299e+01",
+            "f180                =  1.257913e+08",
+            "gm_db               =  -9.187457e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  6.609929e+07",
+            "pm_raw              =  -1.479233e+02",
+            "dcgain_db           =  6.735299e+01",
+            "f180                =  1.257913e+08",
+            "gm_db               =  -9.187457e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 23.91531890584156,
+          "error_tail": [
+            "pm_raw              =  -1.411234e+02",
+            "dcgain_db           =  7.506628e+01",
+            "f180                =  1.969368e+08",
+            "gm_db               =  -1.189202e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  8.413514e+07",
+            "pm_raw              =  -1.411234e+02",
+            "dcgain_db           =  7.506628e+01",
+            "f180                =  1.969368e+08",
+            "gm_db               =  -1.189202e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 24.115621043834835,
+          "error_tail": [
+            "pm_raw              =  -1.519846e+02",
+            "dcgain_db           =  7.112803e+01",
+            "f180                =  1.084216e+08",
+            "gm_db               =  -7.687146e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  6.358923e+07",
+            "pm_raw              =  -1.519846e+02",
+            "dcgain_db           =  7.112803e+01",
+            "f180                =  1.084216e+08",
+            "gm_db               =  -7.687146e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 27.371949239633977,
+          "error_tail": [
+            "pm_raw              =  -1.479670e+02",
+            "dcgain_db           =  7.533107e+01",
+            "f180                =  1.432626e+08",
+            "gm_db               =  -9.345571e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.461109e+07",
+            "pm_raw              =  -1.479670e+02",
+            "dcgain_db           =  7.533107e+01",
+            "f180                =  1.432626e+08",
+            "gm_db               =  -9.345571e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 25.71438559703529,
+          "error_tail": [
+            "pm_raw              =  -1.403870e+02",
+            "dcgain_db           =  7.322313e+01",
+            "f180                =  1.761272e+08",
+            "gm_db               =  -1.211451e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  7.412686e+07",
+            "pm_raw              =  -1.403870e+02",
+            "dcgain_db           =  7.322313e+01",
+            "f180                =  1.761272e+08",
+            "gm_db               =  -1.211451e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 25.40539803681895,
+          "error_tail": [
+            "pm_raw              =  -1.502924e+02",
+            "dcgain_db           =  6.774254e+01",
+            "f180                =  9.781803e+07",
+            "gm_db               =  -7.969660e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.587627e+07",
+            "pm_raw              =  -1.502924e+02",
+            "dcgain_db           =  6.774254e+01",
+            "f180                =  9.781803e+07",
+            "gm_db               =  -7.969660e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 23.30660902010277,
+          "error_tail": [
+            "pm_raw              =  -1.468596e+02",
+            "dcgain_db           =  7.376244e+01",
+            "f180                =  1.286316e+08",
+            "gm_db               =  -9.522404e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  6.589796e+07",
+            "pm_raw              =  -1.468596e+02",
+            "dcgain_db           =  7.376244e+01",
+            "f180                =  1.286316e+08",
+            "gm_db               =  -9.522404e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 21.296827781014144,
+          "error_tail": [
+            "pm_raw              =  -1.414946e+02",
+            "dcgain_db           =  7.455206e+01",
+            "f180                =  1.868152e+08",
+            "gm_db               =  -1.170037e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  8.095095e+07",
+            "pm_raw              =  -1.414946e+02",
+            "dcgain_db           =  7.455206e+01",
+            "f180                =  1.868152e+08",
+            "gm_db               =  -1.170037e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 21.010210547130555,
+          "error_tail": [
+            "pm_raw              =  -1.502483e+02",
+            "dcgain_db           =  6.079316e+01",
+            "f180                =  1.035825e+08",
+            "gm_db               =  -8.125750e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.874621e+07",
+            "pm_raw              =  -1.502483e+02",
+            "dcgain_db           =  6.079316e+01",
+            "f180                =  1.035825e+08",
+            "gm_db               =  -8.125750e+00"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 24.856743291951716,
+          "error_tail": [
+            "pm_raw              =  -1.480654e+02",
+            "dcgain_db           =  7.394394e+01",
+            "f180                =  1.361673e+08",
+            "gm_db               =  -9.250949e+00",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.133485e+07",
+            "pm_raw              =  -1.480654e+02",
+            "dcgain_db           =  7.394394e+01",
+            "f180                =  1.361673e+08",
+            "gm_db               =  -9.250949e+00"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_Opamp_2stg_FC_ClassA_STB/sim_Opamp_2stg_FC_ClassA_STB.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 24.10752338077873,
+          "error_tail": [
+            "pm_raw              =  -1.282193e+02",
+            "dcgain_db           =  8.374012e+01",
+            "f180                =  2.452752e+08",
+            "gm_db               =  -1.461677e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  8.222328e+07",
+            "pm_raw              =  -1.282193e+02",
+            "dcgain_db           =  8.374012e+01",
+            "f180                =  2.452752e+08",
+            "gm_db               =  -1.461677e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 20.904714389704168,
+          "error_tail": [
+            "pm_raw              =  -1.351823e+02",
+            "dcgain_db           =  5.920480e+01",
+            "f180                =  1.455893e+08",
+            "gm_db               =  -1.205757e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  6.034674e+07",
+            "pm_raw              =  -1.351823e+02",
+            "dcgain_db           =  5.920480e+01",
+            "f180                =  1.455893e+08",
+            "gm_db               =  -1.205757e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 21.53396530309692,
+          "error_tail": [
+            "pm_raw              =  -1.333607e+02",
+            "dcgain_db           =  7.958222e+01",
+            "f180                =  1.852212e+08",
+            "gm_db               =  -1.245124e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  7.347488e+07",
+            "pm_raw              =  -1.333607e+02",
+            "dcgain_db           =  7.958222e+01",
+            "f180                =  1.852212e+08",
+            "gm_db               =  -1.245124e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 22.590196701232344,
+          "error_tail": [
+            "pm_raw              =  -1.267732e+02",
+            "dcgain_db           =  8.287792e+01",
+            "f180                =  2.243522e+08",
+            "gm_db               =  -1.492972e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  7.257467e+07",
+            "pm_raw              =  -1.267732e+02",
+            "dcgain_db           =  8.287792e+01",
+            "f180                =  2.243522e+08",
+            "gm_db               =  -1.492972e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 24.278364325873554,
+          "error_tail": [
+            "pm_raw              =  -1.316027e+02",
+            "dcgain_db           =  5.370874e+01",
+            "f180                =  1.334359e+08",
+            "gm_db               =  -1.309055e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.073939e+07",
+            "pm_raw              =  -1.316027e+02",
+            "dcgain_db           =  5.370874e+01",
+            "f180                =  1.334359e+08",
+            "gm_db               =  -1.309055e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 23.40813609585166,
+          "error_tail": [
+            "pm_raw              =  -1.313174e+02",
+            "dcgain_db           =  7.583664e+01",
+            "f180                =  1.698393e+08",
+            "gm_db               =  -1.281415e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  6.458949e+07",
+            "pm_raw              =  -1.313174e+02",
+            "dcgain_db           =  7.583664e+01",
+            "f180                =  1.698393e+08",
+            "gm_db               =  -1.281415e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 22.387089780997485,
+          "error_tail": [
+            "pm_raw              =  -1.210617e+02",
+            "dcgain_db           =  7.779812e+01",
+            "f180                =  2.619296e+08",
+            "gm_db               =  -1.750992e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  6.842036e+07",
+            "pm_raw              =  -1.210617e+02",
+            "dcgain_db           =  7.779812e+01",
+            "f180                =  2.619296e+08",
+            "gm_db               =  -1.750992e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 25.298823250923306,
+          "error_tail": [
+            "pm_raw              =  -1.337623e+02",
+            "dcgain_db           =  7.832002e+01",
+            "f180                =  1.529832e+08",
+            "gm_db               =  -1.198076e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  6.230148e+07",
+            "pm_raw              =  -1.337623e+02",
+            "dcgain_db           =  7.832002e+01",
+            "f180                =  1.529832e+08",
+            "gm_db               =  -1.198076e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 22.997894200030714,
+          "error_tail": [
+            "pm_raw              =  -1.294828e+02",
+            "dcgain_db           =  8.153855e+01",
+            "f180                =  1.967065e+08",
+            "gm_db               =  -1.386876e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  6.942495e+07",
+            "pm_raw              =  -1.294828e+02",
+            "dcgain_db           =  8.153855e+01",
+            "f180                =  1.967065e+08",
+            "gm_db               =  -1.386876e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 21.20215956028551,
+          "error_tail": [
+            "pm_raw              =  -1.234491e+02",
+            "dcgain_db           =  8.157991e+01",
+            "f180                =  2.309675e+08",
+            "gm_db               =  -1.633429e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  6.653106e+07",
+            "pm_raw              =  -1.234491e+02",
+            "dcgain_db           =  8.157991e+01",
+            "f180                =  2.309675e+08",
+            "gm_db               =  -1.633429e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 18.33022760413587,
+          "error_tail": [
+            "pm_raw              =  -1.323492e+02",
+            "dcgain_db           =  7.575521e+01",
+            "f180                =  1.359891e+08",
+            "gm_db               =  -1.202984e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.435853e+07",
+            "pm_raw              =  -1.323492e+02",
+            "dcgain_db           =  7.575521e+01",
+            "f180                =  1.359891e+08",
+            "gm_db               =  -1.202984e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 17.79228567518294,
+          "error_tail": [
+            "pm_raw              =  -1.290239e+02",
+            "dcgain_db           =  8.195950e+01",
+            "f180                =  1.743398e+08",
+            "gm_db               =  -1.363561e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  6.192293e+07",
+            "pm_raw              =  -1.290239e+02",
+            "dcgain_db           =  8.195950e+01",
+            "f180                =  1.743398e+08",
+            "gm_db               =  -1.363561e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 17.065193394199014,
+          "error_tail": [
+            "pm_raw              =  -1.254740e+02",
+            "dcgain_db           =  8.321914e+01",
+            "f180                =  2.483188e+08",
+            "gm_db               =  -1.571607e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "ugf                 =  7.583320e+07",
+            "pm_raw              =  -1.254740e+02",
+            "dcgain_db           =  8.321914e+01",
+            "f180                =  2.483188e+08",
+            "gm_db               =  -1.571607e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 16.438987883739173,
+          "error_tail": [
+            "pm_raw              =  -1.339359e+02",
+            "dcgain_db           =  6.853645e+01",
+            "f180                =  1.441581e+08",
+            "gm_db               =  -1.188182e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "ugf                 =  5.918457e+07",
+            "pm_raw              =  -1.339359e+02",
+            "dcgain_db           =  6.853645e+01",
+            "f180                =  1.441581e+08",
+            "gm_db               =  -1.188182e+01"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 16.490860923193395,
+          "error_tail": [
+            "pm_raw              =  -1.307811e+02",
+            "dcgain_db           =  8.190821e+01",
+            "f180                =  1.859873e+08",
+            "gm_db               =  -1.324538e+01",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "ugf                 =  6.874839e+07",
+            "pm_raw              =  -1.307811e+02",
+            "dcgain_db           =  8.190821e+01",
+            "f180                =  1.859873e+08",
+            "gm_db               =  -1.324538e+01"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_Opamp_2stg_Telescopic_ClassA_STB/sim_Opamp_2stg_Telescopic_ClassA_STB.cir",
+      "simulations": 15
+    },
+    {
+      "complete": true,
+      "conditions": [
+        {
+          "condition": "ff_-40",
+          "elapsed": 14.958856990095228,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.273062e+01",
+            "vout_ugf            =  1.112580e+08",
+            "vout_ph_ugf         =  -1.040253e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.273062e+01",
+            "vout_ugf            =  1.112580e+08",
+            "vout_ph_ugf         =  -1.040253e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_125",
+          "elapsed": 16.74043290875852,
+          "error_tail": [
+            "        gds           3.43999e-05",
+            "",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "",
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  3.081863e+01",
+            "vout_ugf            =  8.295031e+07",
+            "vout_ph_ugf         =  -1.045306e+02",
+            "Note: Simulation executed from .control section ",
+            ""
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  3.081863e+01",
+            "vout_ugf            =  8.295031e+07",
+            "vout_ph_ugf         =  -1.045306e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ff_27",
+          "elapsed": 18.45269864797592,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.954978e+01",
+            "vout_ugf            =  1.014113e+08",
+            "vout_ph_ugf         =  -1.054001e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.954978e+01",
+            "vout_ugf            =  1.014113e+08",
+            "vout_ph_ugf         =  -1.054001e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_-40",
+          "elapsed": 19.153709136880934,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.228510e+01",
+            "vout_ugf            =  9.711824e+07",
+            "vout_ph_ugf         =  -1.029122e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.228510e+01",
+            "vout_ugf            =  9.711824e+07",
+            "vout_ph_ugf         =  -1.029122e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_125",
+          "elapsed": 15.993031934835017,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  2.517590e+01",
+            "vout_ugf            =  6.796132e+07",
+            "vout_ph_ugf         =  -1.017573e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  2.517590e+01",
+            "vout_ugf            =  6.796132e+07",
+            "vout_ph_ugf         =  -1.017573e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "fs_27",
+          "elapsed": 14.687471836805344,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.649908e+01",
+            "vout_ugf            =  8.782210e+07",
+            "vout_ph_ugf         =  -1.041080e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.649908e+01",
+            "vout_ugf            =  8.782210e+07",
+            "vout_ph_ugf         =  -1.041080e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_-40",
+          "elapsed": 11.80733397603035,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.686859e+01",
+            "vout_ugf            =  8.971663e+07",
+            "vout_ph_ugf         =  -1.006441e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.686859e+01",
+            "vout_ugf            =  8.971663e+07",
+            "vout_ph_ugf         =  -1.006441e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_125",
+          "elapsed": 10.120531002990901,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.823226e+01",
+            "vout_ugf            =  8.533041e+07",
+            "vout_ph_ugf         =  -1.050225e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.823226e+01",
+            "vout_ugf            =  8.533041e+07",
+            "vout_ph_ugf         =  -1.050225e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "sf_27",
+          "elapsed": 8.009617822710425,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.077494e+01",
+            "vout_ugf            =  9.403451e+07",
+            "vout_ph_ugf         =  -1.035215e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.077494e+01",
+            "vout_ugf            =  9.403451e+07",
+            "vout_ph_ugf         =  -1.035215e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_-40",
+          "elapsed": 7.508452333044261,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.096662e+01",
+            "vout_ugf            =  8.786225e+07",
+            "vout_ph_ugf         =  -1.016396e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.096662e+01",
+            "vout_ugf            =  8.786225e+07",
+            "vout_ph_ugf         =  -1.016396e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_125",
+          "elapsed": 8.035386910196394,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  4.612448e+01",
+            "vout_ugf            =  7.376401e+07",
+            "vout_ph_ugf         =  -1.045601e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  4.612448e+01",
+            "vout_ugf            =  7.376401e+07",
+            "vout_ph_ugf         =  -1.045601e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "ss_27",
+          "elapsed": 7.585232861340046,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.138971e+01",
+            "vout_ugf            =  8.345586e+07",
+            "vout_ph_ugf         =  -1.033695e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.138971e+01",
+            "vout_ugf            =  8.345586e+07",
+            "vout_ph_ugf         =  -1.033695e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_-40",
+          "elapsed": 7.198356784880161,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.233779e+01",
+            "vout_ugf            =  1.011399e+08",
+            "vout_ph_ugf         =  -1.025512e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = -40.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.233779e+01",
+            "vout_ugf            =  1.011399e+08",
+            "vout_ph_ugf         =  -1.025512e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_125",
+          "elapsed": 7.578864890150726,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  3.986894e+01",
+            "vout_ugf            =  8.092384e+07",
+            "vout_ph_ugf         =  -1.048113e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 125.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  3.986894e+01",
+            "vout_ugf            =  8.092384e+07",
+            "vout_ph_ugf         =  -1.048113e+02"
+          ],
+          "returncode": 0
+        },
+        {
+          "condition": "tt_27",
+          "elapsed": 8.53583753388375,
+          "error_tail": [
+            "Using SPARSE 1.3 as Direct Linear Solver",
+            "",
+            "No. of Data Rows : 401",
+            "vout_gain_db        =  5.132808e+01",
+            "vout_ugf            =  9.356101e+07",
+            "vout_ph_ugf         =  -1.040604e+02",
+            "Note: Simulation executed from .control section ",
+            "",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed",
+            "Note: Starting dynamic gmin stepping",
+            "Note: Dynamic gmin stepping completed"
+          ],
+          "fatal": false,
+          "metrics_lines": [
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "Doing analysis at TEMP = 27.000000 and TNOM = 27.000000",
+            "vout_gain_db        =  5.132808e+01",
+            "vout_ugf            =  9.356101e+07",
+            "vout_ph_ugf         =  -1.040604e+02"
+          ],
+          "returncode": 0
+        }
+      ],
+      "conditions_observed": 15,
+      "deck": "Opamps/sim_Telescopic_Amp/sim_Telescopic_Amp.cir",
+      "simulations": 15
+    }
+  ],
+  "schema": "ampicbench-capability/v2",
+  "simulator": "/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice",
+  "source_root": "/root/autodl-tmp/bench_sources/AMPICBench"
+}

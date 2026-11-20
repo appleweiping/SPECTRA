@@ -1,0 +1,74 @@
+{
+  "budget": 10,
+  "llm_calls": 12,
+  "model": "gpt-6.1-sol",
+  "pvt_conditions": 2,
+  "pvt_mode": "canonical",
+  "ranking_eligible": false,
+  "rows": [
+    {
+      "first_pass_simulations": 10,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "L_0": 0.6665218888175952,
+        "L_1": 0.4425098626359025,
+        "M_0": 0.8666363363398695,
+        "M_1": 0.6294714399492426,
+        "W_0": 59.32855295620042,
+        "W_1": 12.566922474092166
+      },
+      "pdk": "sky130",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 41.51544,
+              "dcgain_db": 41.51544,
+              "gain": 41.51544,
+              "gain_bandwidth_product": 343846500.0,
+              "gbw_hz": 343846500.0,
+              "phase_margin_deg": 65.66236,
+              "pm": 65.66236,
+              "ugf": 343846500.0
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 32.33682,
+              "dcgain_db": 32.33682,
+              "gain": 32.33682,
+              "gain_bandwidth_product": 136606700.0,
+              "gbw_hz": 136606700.0,
+              "phase_margin_deg": 83.79646,
+              "pm": 83.79646,
+              "ugf": 136606700.0
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.06385983333333331,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 2,
+        "mean_normalized_violation": 0.031929916666666655,
+        "median_normalized_violation": 0.031929916666666655,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 10,
+      "simulator": "Xyce",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir",
+      "task": "sky130_lp_opamp",
+      "track_id": "opensource_xyce_sky130_lp_ac_smoke",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 13.62097653793171
+    }
+  ],
+  "schema": "spectra-public-config-pvt/v1"
+}
