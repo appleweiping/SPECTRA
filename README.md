@@ -130,6 +130,7 @@ python scripts/summarize_public_scope.py
 python scripts/summarize_public_v2.py
 python scripts/validate_cross_domain_cells.py
 python scripts/smoke_contracts.py
+python scripts/audit_xsota_gate.py
 python scripts/audit_analog_design_bench.py \
   --source-root /root/autodl-tmp/bench_sources/analog-design-bench \
   --output results/analog_design_bench_v2_source_audit.json
@@ -161,6 +162,14 @@ python scripts/xyce_ac_translator.py /tmp/sky130_lp_opamp.xyce.cir --parse
 ~~~
 
 The parser reports missing UGF or phase margin when the measured response never crosses 0 dB. Those missing values remain violations in the receipt and are never replaced by an oracle value.
+
+`scripts/audit_xsota_gate.py` is the literal XSOTA-1 checker. It scans every
+`*_merged.json` receipt, retains incomplete and capability-only strata in the
+denominator, and requires strict SPECTRA leads over the matched AnaFlow row on
+TT success, PVT success, mean TT violation, and mean PVT violation. The
+generated `results/xsota_gate_audit.{json,md}` is an auditable gate report,
+not a claim generator. A benchmark-scoped lead cannot turn an uncovered
+stratum or a tie into a domain-level pass.
 
 ### Audit and claim policy
 
