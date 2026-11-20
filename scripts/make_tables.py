@@ -25,6 +25,12 @@ SHORT = {"spectra": "SPECTRA", "spectra_min": "SPECTRA-min", "direct": "AnalogCo
          "spectra_pvt_nominal": "w/o PVT refinement"}
 
 
+def write_tex(path, text):
+    """Write generated LaTeX with stable LF endings on Windows and Linux."""
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(text)
+
+
 def base_method(name):
     return str(name).split("@", 1)[0]
 
@@ -74,7 +80,7 @@ def main_table(exp=None, out="main.tex"):
            "\\begin{tabular}{@{}lcccccccccc@{}}\n\\toprule\n"
            "Method & Success (\\%) [95\\% CI] & T1 & T2 & T3 & Robust & Designer & Calls$^\\star$ & Sims$^\\star$ & kTok & Cost$^\\dagger$ \\\\\n\\midrule\n"
            + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n\\end{table*}\n")
-    (TAB / out).write_text(tex)
+    write_tex(TAB / out, tex)
 
 
 def _cmp():
@@ -121,7 +127,7 @@ def ablation_table(out="ablation.tex"):
            "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lccccc@{}}\n\\toprule\n"
            "Variant & Succ.\\,(\\%) [CI] & W/L & Calls & Sims & Cost$^\\dagger$ \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    (TAB / out).write_text(tex)
+    write_tex(TAB / out, tex)
 
 
 def pvt_table(out="pvt.tex"):
@@ -152,7 +158,7 @@ def pvt_table(out="pvt.tex"):
            "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}lcccc" + ("c" if my else "") + "@{}}\n\\toprule\n"
            "Method & Success (\\%) [CI] & W/L & Sims$^\\star$ & Sims" + ycol + " \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    (TAB / out).write_text(tex)
+    write_tex(TAB / out, tex)
 
 
 def scaling_table(out="scaling.tex"):
@@ -176,7 +182,7 @@ def scaling_table(out="scaling.tex"):
            "\\setlength{\\tabcolsep}{3pt}\n\\begin{tabular}{@{}llccc@{}}\n\\toprule\n"
            "LLM & Method & Success (\\%) [CI] & Calls$^\\star$ & Cost$^\\dagger$ \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    path.write_text(tex)
+    write_tex(path, tex)
 
 
 def fault_table(out="fault.tex"):
@@ -206,14 +212,21 @@ def fault_table(out="fault.tex"):
            "rule-only diagnoser vs.\\ LLM given the netlist and spec table (raw) or the SPECTRA diagnosis.}\n"
            "\\label{tab:fault}\n\\scriptsize\n\\setlength{\\tabcolsep}{2.5pt}\n\\begin{tabular}{@{}" + cols + "@{}}\n\\toprule\n"
            + head + " \\\\\n\\midrule\n" + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n\\end{table}\n")
-    (TAB / out).write_text(tex)
+    write_tex(TAB / out, tex)
     print(tex)
 
 
 
 
 if __name__ == "__main__":
-    main_table(os.environ.get("SPECTRA_MAIN_EXP", "E1g"))
+    # Revision-4 submissions use the receipt-derived eight-row external table
+    # in paper/tables/main.tex. Keep the legacy E1g generator available under
+    # an explicit opt-in so a freshness check cannot silently replace the
+    # primary external table with the historical internal-control table.
+    if (ROOT / "paper" / "external_numbers.tex").exists() and not env_bool("SPECTRA_FORCE_LEGACY_MAIN"):
+        print("preserving receipt-derived external paper/tables/main.tex; set SPECTRA_FORCE_LEGACY_MAIN=1 for the legacy table")
+    else:
+        main_table(os.environ.get("SPECTRA_MAIN_EXP", "E1g"))
     fault_table()
     ablation_table()
     pvt_table()

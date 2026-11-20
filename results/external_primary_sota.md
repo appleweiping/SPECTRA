@@ -23,4 +23,4 @@ This is the primary comparison for the single SPECTRA framework. Legacy SPECTRA-
 
 ## Scope
 
-SPECTRA leads the reported mean PVT-violation endpoint only through the post-fix staged sensitivity track. AnaFlow leads TT and PVT success in the primary matrix. The evidence supports a fixed-topology track result and does not establish universal analog-sizing SOTA across arbitrary topologies, PDKs, simulators or mismatch protocols.
+SPECTRA has the lower mean PVT violation in the primary matrix, while AnaFlow leads TT and PVT success. The post-fix staged sensitivity track is reported separately and is not substituted for the frozen primary row. The evidence supports a fixed-topology track result and does not establish universal analog-sizing SOTA across arbitrary topologies, PDKs, simulators or mismatch protocols.

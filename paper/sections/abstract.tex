@@ -7,6 +7,10 @@ its own performance. A deterministic layer executes and simulates the program an
 the LLM uses it to choose between rewriting the program and handing it to a numerical refiner that searches the
 program's low-dimensional intent space, with adaptive worst-condition selection for robust tasks. We also release
 SPECTRA-Bench: \NTasksTotal{} specification-driven tasks over twelve circuit families, with certified specifications,
-an independently written designer tier, and verification over 45 PVT conditions. With the same LLM, knowledge and
-budgets, SPECTRA \AbsMainClaim{} We also report where the approach does not help: the diagnosis does not by itself
-improve fault localisation, and intent programs mispredict second-order effects such as supply rejection.
+an independently written designer tier, and verification over 45 PVT conditions. On a preregistered external track
+of \SizTasks{} fixed-topology tasks, seven paper-backed framework adapters and three seeds share a 300-simulation,
+12-call budget. SPECTRA reaches TT/PVT success \SizSpectraTT{}/\SizSpectraPVT{} versus
+AnaFlow's \SizAnaFlowTT{}/\SizAnaFlowPVT{} in that frozen matrix. We therefore report a benchmark-scoped
+comparison, together with cross-simulator and capability audits, rather than a universal SOTA claim. The diagnosis
+does not by itself improve fault localisation, and intent programs mispredict second-order effects such as supply
+rejection.

@@ -10,6 +10,11 @@ generality. Reviewer-side checks of this work were performed by models of the sa
 
 \textbf{Conclusion.} Treating the LLM as a designer of \emph{intent} rather than of numbers---writing executable
 $g_m/I_D$ sizing programs that predict their own behaviour---and closing the loop with device-level diagnosis and
-intent-space, worst-corner-aware refinement makes end-to-end analog synthesis reliable where it matters: tight,
-many-specification and PVT-robust tasks. We release SPECTRA, SPECTRA-Bench and all run logs (an anonymised artifact accompanies this submission) to
-make such claims measurable.
+intent-space, worst-corner-aware refinement gives a reproducible end-to-end protocol for tight, many-specification
+and PVT-robust tasks. On the frozen external SIZ7g matrix SPECTRA reaches TT/PVT success
+$\SizSpectraTT{}/\SizSpectraPVT{}$, while AnaFlow reaches $\SizAnaFlowTT{}/\SizAnaFlowPVT{}$.
+The matched Xyce sensitivity shows lower PVT violation on both public topologies but retains a TT deficit on HoiLee,
+and the SGAnalog probe exposes an explicit Xyce model-compatibility boundary. We release SPECTRA, SPECTRA-Bench,
+all run logs and the gate checker so future work can extend the measured strata without conflating capability audits
+with ranking results. The current receipts support a fixed-topology benchmark claim; they do not support a universal
+all-circuit, all-PDK, all-simulator SOTA claim.

@@ -44,8 +44,8 @@ The final matched three-seed aggregate has 108 cells per framework. The external
 `results/external_primary_sota.md`. Primary SPECTRA reaches 0.806 TT, 0.194 PVT,
 0.1180 mean TT violation and 0.5648 mean PVT violation. AnaFlow reaches 0.870 TT, 0.306 PVT and 0.0381 mean TT
 violation. The independently reported post-fix SPECTRA-PVT-staged variant reaches 0.815 TT, 0.222 PVT, 0.1071 mean TT
-violation and 0.5009 mean PVT violation. The staged variant therefore leads the reported PVT-violation endpoint,
-while AnaFlow leads TT and PVT success. The primary external adapters use three search corners, while SPECTRA's
+violation and 0.5009 mean PVT violation. Both SPECTRA rows have lower mean PVT violation than AnaFlow, with the
+staged sensitivity improving that endpoint further, while AnaFlow leads TT and PVT success. The primary external adapters use three search corners, while SPECTRA's
 robust primary and staged variants use their disclosed PVT-aware search objectives under the same 300-unit budget.
 These results support a scoped robustness finding on the matched fixed-topology track. They do not support a universal
 analog-sizing SOTA statement because the benchmark is self-constructed, topology-fixed, mismatch is unavailable for

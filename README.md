@@ -88,6 +88,29 @@ bash scripts/finalize_paper.sh        # regenerate every analysis, table, figure
 ```
 Experiment protocol and every deviation: `EXPERIMENT_LOG.md`; acceptance contract: `paper/PAPER_ACCEPTANCE_CONTRACT.md`.
 
+### Submission build and audit
+
+The submission PDF is built from receipt-derived macros. Run the following on
+the E: checkout after copying only schema-validated server receipts. The first
+generator updates the external SIZ7g numbers, and `make_tables.py` preserves
+the external eight-row table whenever `paper/external_numbers.tex` exists.
+
+~~~powershell
+PYTHONPATH=. python scripts/generate_external_numbers.py
+PYTHONPATH=. python scripts/make_tables.py
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+~~~
+
+The final manuscript is [paper/main.pdf](paper/main.pdf). The corresponding
+contract is `paper/PAPER_ACCEPTANCE_CONTRACT.md`, and the machine-readable
+gate report is `results/xsota_gate_audit.json`. A successful PDF build does not
+change the gate result. The release keeps the measured-scope claim and the
+unmet universal-SOTA gate visible together.
+
 ## Layout
 - `spectra/sim` — ngspice runner, canonical netlist + ERC + SKY130 compiler, testbenches/measurements, LUT API, evaluation
 - `spectra/agent` — SPECTRA (prompts, DSL, sandbox, diagnosis, main loop), LLM wrapper
@@ -381,7 +404,7 @@ work/reference_sources source-only inspections of requested projects
 
 ### Three-way synchronization
 
-The maintained copies are E:/CodexProjects/spectra-analog-agent, /root/autodl-tmp/spectra-analog-agent on the server, and GitHub appleweiping/SPECTRA. Release checks compare tracked commit hashes across all three copies. Raw evidence is retained on the server and copied into results/ only after schema validation and SHA-256 recording. The synchronization procedure does not use C: or D: for experiment data.
+The maintained copies are E:/CodexProjects/spectra-analog-agent, /root/autodl-tmp/spectra-analog-agent on the server, and GitHub appleweiping/SPECTRA. Release checks compare the tracked tree SHA across all three copies. Commit IDs can differ because the server receives an equivalent commit through the local bundle, so the handoff records both commit IDs and the common tree SHA. Raw evidence is retained on the server and copied into results/ only after schema validation and SHA-256 recording. The synchronization procedure does not use C: or D: for experiment data.
 
 ### SGAnalog native harness
 

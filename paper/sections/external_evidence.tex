@@ -31,7 +31,7 @@ screened on five fixed corners, with an independent 45-condition verifier.
 The complete HoiLee and Leung three-seed receipts are
 \path{results/analoggym_pvt_staged_comparison.md} and
 \path{results/analoggym_leung_pvt_staged_comparison.md}. Those results
-improve PVT success and normalized violation on the two declared topologies,
+have higher point estimates for PVT success and lower normalized violation on the two declared topologies,
 while TT success ties and wall time is higher. They are therefore sensitivity
 evidence, not a replacement for the frozen primary row and not a universal
 analog-sizing SOTA claim.
@@ -43,3 +43,26 @@ Analog Design Bench and LOADBench contribute source-native or capability
 receipts where a common SPECTRA/AnaFlow transfer protocol is not available.
 Those rows document coverage and reproducibility boundaries and are not silently
 converted into ranking cells.
+
+\paragraph{Cross-simulator sensitivity.}
+The public Xyce-7.10 track uses the deterministic AC translator in
+\path{scripts/xyce_ac_translator.py} and the same independent 45-condition
+verifier. The matched robust HoiLee row gives SPECTRA TT/PVT success
+$\XyceHoiTT{}/\XyceHoiPVT{}$ versus AnaFlow $\XyceHoiAnaTT{}/\XyceHoiAnaPVT{}$, with mean PVT violation
+$\XyceHoiTTViol{}/\XyceHoiPVTViol{}$ versus $\XyceHoiAnaTTViol{}/\XyceHoiAnaPVTViol{}$. On Leung, SPECTRA and AnaFlow reach
+$\XyceLeungTT{}/\XyceLeungPVT{}$, while SPECTRA has a lower mean PVT violation point estimate
+from $\XyceAnaLeungPVTViol{}$ to $\XyceLeungPVTViol{}$.
+These are complete six-cell-per-topology sensitivity receipts, not a hidden
+replacement for the frozen SIZ7g row. The HoiLee TT deficit and PVT-success
+ties remain visible in the gate audit.
+
+\paragraph{SGAnalog harness boundary.}
+The native SGAnalog harness evaluates all \SGAnalogTasks{} pinned sizing tasks over three
+GPT-6.1-sol seeds with the source testbenches. The separate Xyce AC probe
+translates and attempts all \SGAnalogTasks{} decks, preserving source and translated hashes,
+return codes and log digests in
+\path{results/sganalog_xyce_ac_probe.{json,md}}. All \SGAnalogFailures{} attempts stop at the
+same included mismatch-function expression that Xyce rejects, so this probe
+records a reproducible simulator boundary and contributes no ranking metric.
+The distinction matters because capability coverage alone cannot establish
+cross-simulator sizing superiority.

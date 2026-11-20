@@ -38,8 +38,11 @@ negative result---it does not beat a frontier LLM that simply reads the netlist.
 feasibility certificates, an independently written designer tier, 45-condition PVT and mismatch verification, and
 budget accounting in simulations, LLM calls, tokens and dollars.
 \end{itemize}
-Under identical budgets and the same LLM, SPECTRA reaches \SpectraSucc{} overall success versus \DirectSucc{} for an
-AnalogCoder-style agent and \GenboSucc{} for an AnalogCoder-Pro-style generate-then-optimise agent; on the
-near-frontier and PVT-robust tasks that form our primary endpoint it reaches \SpectraPrim{} versus
-\DirectPrim{} and \GenboPrim{} (Section~\ref{sec:exp}). We also report where the approach does not help: the
-diagnosis does not improve fault localisation by itself, and intent programs mispredict second-order effects.
+Under identical budgets and the same LLM, the preregistered external track compares SPECTRA with seven
+paper-backed framework adapters on \SizTasks{} fixed-topology tasks and three seeds. SPECTRA reaches
+TT/PVT success \SizSpectraTT{}/\SizSpectraPVT{}, while the matched AnaFlow row reaches
+\SizAnaFlowTT{}/\SizAnaFlowPVT{} (Section~\ref{sec:exp}). We retain this result together with the
+cross-simulator sensitivity and capability-only public audits, so the contribution is a reproducible evaluation
+contract and an end-to-end intent/diagnosis framework rather than an unsupported universal SOTA statement. We also
+report where the approach does not help: the diagnosis does not improve fault localisation by itself, and intent
+programs mispredict second-order effects.

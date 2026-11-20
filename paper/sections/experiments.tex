@@ -6,25 +6,19 @@
 \subsection{Main Results}
 \label{sec:main}
 \IfFileExists{tables/main.tex}{\input{tables/main}}{}
-Table~\ref{tab:main} summarises the runs on the \NCommon{} tasks completed by every method. Our primary
-endpoint is success on the \NPrimaryTasks{} near-frontier (T3) and PVT-robust tasks among them (of \NPrimaryAll{} in the benchmark,
-covering \NPrimaryFamilies{} of the twelve families): SPECTRA
-\SpectraPrim{} \SpectraPrimCI{}, AnalogCoder-style \DirectPrim{} \DirectPrimCI{}, Gen+TPE \GenboPrim{}
-\GenboPrimCI{} and SPECTRA-min \SpectraMinPrim{} \SpectraMinPrimCI{} (per-task wins/losses of SPECTRA
-\PrimDirectWL{}, \PrimGenboWL{} and \PrimSpectraMinWL{}; Holm-corrected paired permutation $p$ = \PrimDirectP{},
-\PrimGenboP{}, \PrimSpectraMinP{}). SPECTRA reaches \SpectraSucc{} overall
-success, versus \DirectSucc{} for the AnalogCoder-style agent, \GenboSucc{} for Gen+TPE and \SpectraMinSucc{} for
-SPECTRA-min. Consistent with our pilot, the easier tiers are nearly saturated by every method---a frontier LLM can
-already design a textbook amplifier to loose specifications---and the differences open where specifications are
-close to the frontier: on T3, SPECTRA solves \SpectraTThree{} of runs against \DirectTThree{} (AnalogCoder-style),
-\GenboTThree{} (Gen+TPE) and \SpectraMinTThree{} (SPECTRA-min). The AnalogCoder-style agent fails mostly on specifications that need numerical closure---\FailDirectTop{}---which it
-cannot tune by rewriting widths, while generate-then-optimise baselines fail when the proposed parameterisation or
-topology cannot reach the target (\FailGenboTop{}). \IfFileExists{figs/E1_tiers.pdf}{Fig.~\ref{fig:tiers}
-breaks success down by tier.}{}
-\textbf{Where SPECTRA fails.} \SpectraFailSentence{} Stopping the PVT loop when the worst-case violation stalls is
-an obvious remedy; we did not evaluate it, to avoid tuning the method on the evaluation set.
-\IfFileExists{figs/E1_tiers.pdf}{\begin{figure}[t]\centering\includegraphics[width=\columnwidth]{figs/E1_tiers.pdf}\Description{Grouped bar chart of success rate per difficulty tier for each method.}
-\vspace{-6mm}\caption{Success by tier (95\% cluster-bootstrap CIs over tasks).}\label{fig:tiers}\end{figure}}{}
+Table~\ref{tab:main} is the preregistered external comparison. It contains 36 fixed-topology tasks from six
+circuit domains, three seeds and 108 cells per framework. AnaFlow has the highest TT and PVT success in this
+frozen primary matrix, while GLOVA has the lowest mean PVT violation. SPECTRA has higher point estimates than
+several external rows on success or violation, but does not dominate AnaFlow on the complete endpoint vector. The per-cell wins, losses and
+cluster-bootstrap intervals are retained in \path{results/paper_sizing_multiseed.md}; no row is removed because it
+loses on an endpoint. The older 12-family SPECTRA-Bench experiment is used for component, fault and mismatch
+studies below, and its internal controls are not counted as external framework baselines.
+
+\textbf{Failure and scope.} The frozen SIZ7g row has TT/PVT success of
+\SizSpectraTT{}/\SizSpectraPVT{} versus AnaFlow's \SizAnaFlowTT{}/\SizAnaFlowPVT{}.
+The post-registered staged and union-top-$k$ sensitivity arms have higher point estimates on selected benchmark endpoints, but their
+selection policy is kept separate from the primary row. These measurements establish a reproducible fixed-topology
+comparison and motivate the component analysis; they do not establish universal analog-sizing SOTA.
 
 \subsection{Ablations: What Matters?}
 \label{sec:ablation}
@@ -44,7 +38,7 @@ too-short channel, wrong mirror ratio, collapsed compensation capacitor, starved
 resistor) and keep the \FaultN{} cases that violate at least one specification. Three diagnosers rank the
 corrupted element: a rule-only diagnoser that scores elements by operating-region flags and element-level
 sensitivities (no LLM), and the LLM given either the netlist with the specification table (the feedback used by
-AnalogCoder-style agents) or the netlist with SPECTRA's diagnosis. Table~\ref{tab:fault} shows that the LLM is far better than the rules (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{}
+AnalogCoder-style agents) or the netlist with SPECTRA's diagnosis. Table~\ref{tab:fault} shows a higher raw-LLM top-1 point estimate than the rules (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{}
 top-1), but that SPECTRA's evidence does \emph{not} improve localisation: with GPT-6.1-sol top-1 is \FaultDiagTopOne{}
 with the diagnosis (top-3 \FaultDiagTopThree{}), and the per-class differences go in both directions, with
 the largest ones on the smallest classes. \FaultHaikuSentence{} \FaultHaikuInterp{}

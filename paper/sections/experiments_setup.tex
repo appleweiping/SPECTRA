@@ -30,3 +30,9 @@ about a third of the main-experiment runs and before the remaining ones, because
 saturated. Confidence intervals are 95\%
 cluster bootstraps over tasks; paired comparisons use per-task success rates with an exact sign test and a paired
 permutation test, Holm-corrected across baselines.
+
+The legacy SPECTRA-Bench study above and the external SIZ7g comparison are separate contracts. The legacy tables
+use the frozen ngspice-42 checkout and the 300/600 nominal/robust condition-evaluation budgets described here. The
+external table in Section~\ref{sec:external} uses the server-pinned ngspice-44.2 executable, 36 fixed-topology
+tasks, three seeds, 300 evaluations, 12 calls and an independent 45-condition verifier for every row. We do not
+mix aggregates across these contracts.

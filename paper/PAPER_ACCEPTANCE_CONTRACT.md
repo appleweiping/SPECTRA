@@ -7,6 +7,11 @@ this version.
 Inputs: NARRATIVE_REPORT.md, paper/ (draft), results/, EXPERIMENT_LOG.md.
 Each assertion is checked against the compiled `paper/main.pdf`, its sources and the named files.
 
+Submission revision 4 uses the frozen external SIZ7g matrix as the main comparison. The earlier E1g
+SPECTRA-Bench study remains a secondary mechanism, fault-injection, mismatch and cost study. The two
+tracks are reported separately so that the legacy internal controls cannot be mistaken for the seven
+paper-backed external framework rows.
+
 ## Venue / form
 A1. `acmart` sigconf with `review,anonymous`; body (text, figures, tables) ends on or before page 8, references occupy at
     most one further page; no author names, affiliations, acknowledgements or non-anonymous URLs.
@@ -14,7 +19,10 @@ A2. `paper/main.log` has no undefined references/citations/font shapes and no ov
 
 ## Traceability and freshness
 A3. Every result number in every section (abstract, intro, bench, method, experiments, conclusion) is a macro from
-    `paper/numbers.tex` or a cell of a generated table; the abstract's main claim is the generated macro `\AbsMainClaim`.
+    `paper/numbers.tex` or the receipt-derived `paper/external_numbers.tex`, or a cell of a generated table; the
+    the legacy generator still emits `\AbsMainClaim` for the secondary E1g artifact, while the submitted abstract's
+    external SIZ7g values are receipt-derived macros from `results/paper_sizing_multiseed.json`, the Xyce merged
+    receipts and `results/xsota_gate_audit.json`.
     Hand-typed numbers are allowed only for constants fixed by construction (45 PVT conditions, budgets, LUT grid, CMA-ES
     settings, family count). Freshness: running, in this order, the commands below at check time reproduces exactly the
     listed committed files (no diff):
@@ -25,7 +33,9 @@ A3. Every result number in every section (abstract, intro, bench, method, experi
     - `python -m scripts.spectra_failures E1g` → `results/E1g_spectra_failure_modes.json` (additive amendment after freeze)
     - `python -m scripts.prediction_accuracy E1g spectra` → `results/E1g_spectra_prediction_accuracy.json`
     - `python -m scripts.e4_tests --main E4g --alt '' --main-key main` → `results/E4g_tests.json`
-    - `python -m scripts.make_tables` → `paper/tables/{main,fault,ablation,pvt}.tex`; `scaling.tex` is removed unless a separately recorded alternate backbone exists
+    - `python scripts/generate_external_numbers.py` → `paper/external_numbers.tex` from `results/paper_sizing_multiseed.json`
+    - `python -m scripts.make_tables` → `paper/tables/{fault,ablation,pvt}.tex`; when `paper/external_numbers.tex` exists, the receipt-derived external `paper/tables/main.tex` is preserved. Set `SPECTRA_FORCE_LEGACY_MAIN=1` only to regenerate the historical E1g table for the secondary audit. `scaling.tex` is removed unless a separately recorded alternate backbone exists
+    - `python scripts/generate_external_numbers.py` → `paper/external_numbers.tex` from the frozen SIZ7g, Xyce and SGAnalog receipts
     - `python -m scripts.bench_stats` → `paper/tables/bench_stats.tex`
     - `python -m scripts.make_figures E1g` → `paper/figs/E1g_{tiers,anytime,anytime2,families}.pdf` (content, not bytes)
     - `python -m scripts.paper_numbers` → `paper/numbers.tex`
@@ -40,9 +50,11 @@ A5. Fig. 2 is a verbatim, abridged excerpt (elisions marked `...`) of the *final
     `results/raw/E1g/spectra@gpt-6.1-sol/opamp-09/s0.json`; the caption names the tier, experiment and that it is the run's final program.
 
 ## Headline claims and scope
-A6. The primary endpoint (T3 ∪ robust) is described as fixed at an interim review (after about a third of the E1g runs),
-    never as "pre-registered". The headline reports it with 95% cluster-bootstrap CIs and Holm-corrected paired tests and
-    states the number of common primary tasks out of the 61 primary tasks and the families covered out of 12.
+A6. The main comparative endpoint is the frozen external SIZ7g track: 36 fixed-topology tasks from six domains,
+    three seeds, 108 cells per framework, 300 simulation units, 12 calls and an independent 45-condition verifier.
+    The headline reports TT/PVT success and normalized TT/PVT violation for SPECTRA and seven paper-backed
+    framework adapters, with task-cluster bootstrap intervals and paired wins/losses. The legacy E1g endpoint
+    (T3 union robust over the 12-family SPECTRA-Bench) is secondary and is labelled as such wherever reported.
 A7. Every comparative claim ("SPECTRA beats/outperforms/is more reliable than X") anywhere — abstract, intro,
     experiments, conclusion — is backed by Holm-corrected p < 0.05 on the primary endpoint; otherwise it is a point
     estimate with CI and per-task wins/losses, without "significant", "reliable", "outperforms". `\AbsMainClaim` is
