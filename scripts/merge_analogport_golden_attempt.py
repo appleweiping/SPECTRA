@@ -48,7 +48,10 @@ def read_json_line(path: Path) -> dict[str, Any]:
 
 def load_recovery(path: Path) -> dict[str, Any]:
     if path.suffix == ".stdout":
-        return read_json_line(path)
+        value = read_json_line(path)
+        if value.get("elapsed_seconds") is None and value.get("elapsed") is not None:
+            value["elapsed_seconds"] = value["elapsed"]
+        return value
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict) or "result" not in value:
         raise ValueError(f"Recovery receipt lacks result: {path}")
