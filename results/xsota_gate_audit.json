@@ -1,5 +1,11 @@
 {
   "comparable_strata": 9,
+  "diagnostic_summary": {
+    "comparable_non_inferior_all_endpoints": 9,
+    "comparable_strict_positive_all_endpoints": 1,
+    "strata_with_zero_floor_ties": 7,
+    "zero_floor_tie_endpoints": 14
+  },
   "gate": "XSOTA-1",
   "receipts_observed": 20,
   "root": "results",
@@ -13,6 +19,13 @@
           "pvt_success": 0.3333333333333333,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.01555171049089136,
           "mean_tt_violation": 0.0,
@@ -25,6 +38,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,
@@ -51,6 +73,13 @@
           "pvt_success": 0.3333333333333333,
           "tt_success": 0.6666666666666666
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.13642207185185184,
           "mean_tt_violation": 0.0,
@@ -63,6 +92,20 @@
           "mean_tt_violation": true,
           "pvt_success": true,
           "tt_success": true
+        },
+        "strict_positive_lead_count": 4,
+        "strict_positive_leads": [
+          "tt_success",
+          "pvt_success",
+          "mean_tt_violation",
+          "mean_pvt_violation"
+        ],
+        "zero_floor_tie_count": 0,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": false,
+          "pvt_success": false,
+          "tt_success": false
         }
       },
       "complete": true,
@@ -80,6 +123,13 @@
           "pvt_success": 0.6666666666666666,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.00034574814814814815,
           "mean_tt_violation": 0.0,
@@ -92,6 +142,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,
@@ -118,6 +177,13 @@
           "pvt_success": 0.3333333333333333,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.08490032197530865,
           "mean_tt_violation": 0.0,
@@ -130,6 +196,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,
@@ -174,6 +249,13 @@
           "pvt_success": 0.3333333333333333,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.0890301574074074,
           "mean_tt_violation": 0.0,
@@ -186,6 +268,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,
@@ -203,6 +294,13 @@
           "pvt_success": 0.0,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.8000000000000002,
           "mean_tt_violation": 0.0,
@@ -215,6 +313,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,
@@ -232,6 +339,13 @@
           "pvt_success": 0.0,
           "tt_success": 0.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 1.7262187333333332,
           "mean_tt_violation": 1.7172124999999998,
@@ -242,6 +356,18 @@
         "strict_endpoint_leads": {
           "mean_pvt_violation": true,
           "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": false
+        },
+        "strict_positive_lead_count": 2,
+        "strict_positive_leads": [
+          "mean_tt_violation",
+          "mean_pvt_violation"
+        ],
+        "zero_floor_tie_count": 0,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
         }
@@ -279,6 +405,13 @@
           "pvt_success": 0.3333333333333333,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.0890301574074074,
           "mean_tt_violation": 0.0,
@@ -291,6 +424,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,
@@ -317,6 +459,13 @@
           "pvt_success": 0.0,
           "tt_success": 1.0
         },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
         "spectra": {
           "mean_pvt_violation": 0.2266781159853498,
           "mean_tt_violation": 0.0,
@@ -329,6 +478,15 @@
           "mean_tt_violation": false,
           "pvt_success": false,
           "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
         }
       },
       "complete": true,

@@ -266,7 +266,7 @@ be audited without relying on prose. The current snapshot is as follows.
 | `XSOTA-MEASURED-1` | PASS for measured scope | `results/public_scope_sota_summary.md` compares every complete merged receipt under its declared contract. |
 | `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v5.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
 | `XPORT-1` | PASS for source inventory, PARTIAL for golden replay | `results/analog_port_bench_source_audit.json` records the complete 54-task inventory. The server replay attempted all 250 golden corner jobs, completed 243, and records eight high-cost timeout jobs in `results/golden_attempt_timeout_receipt.json`. It is not a SPECTRA ranking row. |
-| `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
+| `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. The latest diagnostics show 9/9 comparable strata non-inferior, only 1/9 strict on all endpoints, and 7 strata with 14 zero-floor ties. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
 
 This table is deliberately generated from receipts rather than optimistic
 framework names. Updating a gate requires a new immutable server receipt,
