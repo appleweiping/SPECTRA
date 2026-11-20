@@ -140,15 +140,26 @@ def violation(metrics: dict[str, float], specs: dict[str, Any]) -> float:
 
 def run_netlist(simulator: str, netlist: Path, cwd: Path, timeout: int = 180) -> tuple[dict[str, float], int | None, float, str]:
     started = time.perf_counter()
+    execution_netlist = netlist
+    if Path(simulator).name.lower().startswith("xyce"):
+        # Keep the generated candidate deck as an audit artifact and execute a
+        # sibling translated deck. This makes the translator part of the
+        # normal entry point while preserving the source deck verbatim.
+        from xyce_ac_translator import translate_ac_netlist
+        execution_netlist = netlist.with_name(f"{netlist.stem}.xyce.cir")
+        execution_netlist.write_text(
+            translate_ac_netlist(netlist.read_text(encoding="utf-8")),
+            encoding="utf-8",
+        )
     try:
-        proc = subprocess.run([simulator, "-b", str(netlist)], cwd=str(cwd), capture_output=True,
+        proc = subprocess.run([simulator, "-b", str(execution_netlist)], cwd=str(cwd), capture_output=True,
                               text=True, timeout=timeout)
         output = proc.stdout + "\n" + proc.stderr
         # Xyce writes .measure results beside the input deck instead of stdout.
         # Include those files in the same parser stream while preserving the
         # original simulator log for auditability.
         for suffix in (".mt0", ".prn", ".FD.prn", ".ma0"):
-            artifact = Path(f"{netlist}{suffix}")
+            artifact = Path(f"{execution_netlist}{suffix}")
             if artifact.exists():
                 try:
                     output += "\n" + artifact.read_text(encoding="utf-8", errors="replace")
