@@ -112,6 +112,12 @@ It verifies 17 unique task records, 17 resolved decks, reference-device counts a
 at the same upstream commit. The Xyce parser regression is an offline synthetic check in
 `scripts/test_xyce_ac_translator.py` and does not substitute for a native SGAnalog Xyce run.
 
+The pre-registered staged PVT search smoke is `results/analoggym_staged_smoke2.json` with SHA-256
+`49e2c25efcbf1e4c42b8ebe8c43386b80698eca0e7cc1057362774814bb6d6a5`. It ran on the server with
+SKY130/ngspice-44.2, a deliberately small six-unit search budget, and the independent 45-condition
+verifier. All 45 conditions produced finite metrics. The smoke is an implementation check, not a
+ranking result, and the primary row is unchanged.
+
 The LOADBench evaluation-script receipt is `results/loadbench_scripts_source_audit.json` with SHA-256
 `04b653dd59582260ee3e2dca219a4a2218915a64db94773a32f5b94a740e71b0`.
 It pins commit `03cc45620afbbbee19652d83d625f26f3368d951`, records that the script repository has no
