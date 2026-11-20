@@ -36,7 +36,14 @@ def git_value(root: Path, *args: str) -> str | None:
 def source_digest(root: Path) -> tuple[int, str]:
     names = []
     for path in root.rglob("*"):
-        if path.is_file() and ".git" not in path.parts:
+        # OpenVAF writes generated OSDI binaries under libs.tech/ngspice/osdi.
+        # They are runtime artifacts and must not change the pinned source-tree
+        # inventory when the audit is rerun after model compilation.
+        if (
+            path.is_file()
+            and ".git" not in path.parts
+            and "osdi" not in path.relative_to(root).parts
+        ):
             names.append(path.relative_to(root).as_posix())
     names.sort()
     payload = "\0".join(names).encode("utf-8")
