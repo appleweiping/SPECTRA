@@ -1,0 +1,617 @@
+{
+  "records": [
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.00034574814814814815,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 1919.4692712129715,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.00034574814814814815,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 1912.0430290466174,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "analoggym_pvt_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": true,
+      "track": "AnalogGym / HoiLee"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.08490032197530865,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 878.2957193925977,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.08490032197530865,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 848.742071780997,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "analoggym_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "stored_ranking_eligible": true,
+      "track": "AnalogGym / HoiLee"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.01555171049089136,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 1808.5999973647606,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.01555171049089136,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 1142.0574689099255,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "analoggym_leung_pvt_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": true,
+      "track": "AnalogGym / Leung"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 2.4185633672427986,
+          "mean_tt_violation": 0.0021816913580246827,
+          "mean_wall_seconds": 2415.9833442480303,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 0.6666666666666666
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.13642207185185184,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 2463.422339053359,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "analoggym_leung_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "stored_ranking_eligible": true,
+      "track": "AnalogGym / Leung"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.18469743942584338,
+          "mean_tt_violation": 0.06091161134773621,
+          "mean_wall_seconds": 55.62250320877259,
+          "pvt_success": 0.0,
+          "tt_success": 0.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.16514216875842228,
+          "mean_tt_violation": 0.05251121326123768,
+          "mean_wall_seconds": 57.27500604186207,
+          "pvt_success": 0.0,
+          "tt_success": 0.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "GF180MCU",
+      "protocol_eligible": true,
+      "pvt_conditions": 17,
+      "receipt": "atlas_gf180_matched_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": false,
+      "track": "ATLAS public task"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0890301574074074,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 3319.4681380991824,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0890301574074074,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 3317.3624100893117,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "SKY130",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "public_v2_sky130_lp_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": true,
+      "track": "opensource / SKY130 LP opamp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.8000000000000002,
+          "mean_simulations_to_first_pass": 2.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 1009.9852588501138,
+          "pvt_success": 0.0,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.8000000000000002,
+          "mean_simulations_to_first_pass": 2.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 960.6527432675163,
+          "pvt_success": 0.0,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "ASAP7",
+      "protocol_eligible": true,
+      "pvt_conditions": 45,
+      "receipt": "public_v3_asap7_ldo_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": true,
+      "track": "opensource / ASAP7 LDO"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.011506296296296297,
+          "mean_simulations_to_first_pass": 146.0,
+          "mean_tt_violation": 0.011506296296296297,
+          "mean_wall_seconds": 13.409676096402109,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 0.6666666666666666
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 80.66666666666667,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 15.024332974261293,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "PTM180",
+      "protocol_eligible": false,
+      "pvt_conditions": 1,
+      "receipt": "public_v5_ptm180_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": false,
+      "track": "opensource / PTM180 opamp"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.3333333333333333,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 12.449300416590026,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.3333333333333333,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 14.89668622581909,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "BJT",
+      "protocol_eligible": false,
+      "pvt_conditions": 1,
+      "receipt": "public_v5_bjt_merged.json",
+      "simulator": "ngspice-44.2",
+      "stored_ranking_eligible": false,
+      "track": "opensource / BJT CE amplifier"
+    },
+    {
+      "aggregate": {
+        "anaflow_cleanroom": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 8.748223786397526,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        },
+        "spectra": {
+          "cells": 3,
+          "mean_pvt_violation": 0.0,
+          "mean_simulations_to_first_pass": 1.0,
+          "mean_tt_violation": 0.0,
+          "mean_wall_seconds": 10.554972501161197,
+          "pvt_success": 1.0,
+          "tt_success": 1.0
+        }
+      },
+      "budget": 300,
+      "complete": true,
+      "errors": [],
+      "llm_calls": 12,
+      "pdk": "BJT",
+      "protocol_eligible": false,
+      "pvt_conditions": 1,
+      "receipt": "public_x1_v3_bjt_merged.json",
+      "simulator": "Xyce-7.10",
+      "stored_ranking_eligible": false,
+      "track": "opensource / BJT CE amplifier"
+    }
+  ],
+  "rows": [
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.00034574814814814815,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 1919.4692712129715,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.6666666666666666,
+      "receipt": "analoggym_pvt_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / HoiLee",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.00034574814814814815,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 1912.0430290466174,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.6666666666666666,
+      "receipt": "analoggym_pvt_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / HoiLee",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.08490032197530865,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 878.2957193925977,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "analoggym_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / HoiLee",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.08490032197530865,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 848.742071780997,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "analoggym_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / HoiLee",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.01555171049089136,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 1808.5999973647606,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "analoggym_leung_pvt_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / Leung",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.01555171049089136,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 1142.0574689099255,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "analoggym_leung_pvt_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / Leung",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 2.4185633672427986,
+      "mean_tt_violation": 0.0021816913580246827,
+      "mean_wall_seconds": 2415.9833442480303,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "analoggym_leung_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / Leung",
+      "tt_success": 0.6666666666666666
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.13642207185185184,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 2463.422339053359,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.6666666666666666,
+      "receipt": "analoggym_leung_xyce_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "PVT ranking",
+      "track": "AnalogGym / Leung",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.18469743942584338,
+      "mean_tt_violation": 0.06091161134773621,
+      "mean_wall_seconds": 55.62250320877259,
+      "method": "anaflow_cleanroom",
+      "pdk": "GF180MCU",
+      "pvt_success": 0.0,
+      "receipt": "atlas_gf180_matched_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "ATLAS public task",
+      "tt_success": 0.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.16514216875842228,
+      "mean_tt_violation": 0.05251121326123768,
+      "mean_wall_seconds": 57.27500604186207,
+      "method": "spectra",
+      "pdk": "GF180MCU",
+      "pvt_success": 0.0,
+      "receipt": "atlas_gf180_matched_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "ATLAS public task",
+      "tt_success": 0.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0890301574074074,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 3319.4681380991824,
+      "method": "anaflow_cleanroom",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "public_v2_sky130_lp_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "opensource / SKY130 LP opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0890301574074074,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 3317.3624100893117,
+      "method": "spectra",
+      "pdk": "SKY130",
+      "pvt_success": 0.3333333333333333,
+      "receipt": "public_v2_sky130_lp_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "opensource / SKY130 LP opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.8000000000000002,
+      "mean_simulations_to_first_pass": 2.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 1009.9852588501138,
+      "method": "anaflow_cleanroom",
+      "pdk": "ASAP7",
+      "pvt_success": 0.0,
+      "receipt": "public_v3_asap7_ldo_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "opensource / ASAP7 LDO",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.8000000000000002,
+      "mean_simulations_to_first_pass": 2.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 960.6527432675163,
+      "method": "spectra",
+      "pdk": "ASAP7",
+      "pvt_success": 0.0,
+      "receipt": "public_v3_asap7_ldo_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "PVT ranking",
+      "track": "opensource / ASAP7 LDO",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.011506296296296297,
+      "mean_simulations_to_first_pass": 146.0,
+      "mean_tt_violation": 0.011506296296296297,
+      "mean_wall_seconds": 13.409676096402109,
+      "method": "anaflow_cleanroom",
+      "pdk": "PTM180",
+      "pvt_success": 0.6666666666666666,
+      "receipt": "public_v5_ptm180_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "TT-only capability",
+      "track": "opensource / PTM180 opamp",
+      "tt_success": 0.6666666666666666
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 80.66666666666667,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 15.024332974261293,
+      "method": "spectra",
+      "pdk": "PTM180",
+      "pvt_success": 1.0,
+      "receipt": "public_v5_ptm180_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "TT-only capability",
+      "track": "opensource / PTM180 opamp",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.3333333333333333,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 12.449300416590026,
+      "method": "anaflow_cleanroom",
+      "pdk": "BJT",
+      "pvt_success": 1.0,
+      "receipt": "public_v5_bjt_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "TT-only capability",
+      "track": "opensource / BJT CE amplifier",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.3333333333333333,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 14.89668622581909,
+      "method": "spectra",
+      "pdk": "BJT",
+      "pvt_success": 1.0,
+      "receipt": "public_v5_bjt_merged.json",
+      "simulator": "ngspice-44.2",
+      "tier": "TT-only capability",
+      "track": "opensource / BJT CE amplifier",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 8.748223786397526,
+      "method": "anaflow_cleanroom",
+      "pdk": "BJT",
+      "pvt_success": 1.0,
+      "receipt": "public_x1_v3_bjt_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "TT-only capability",
+      "track": "opensource / BJT CE amplifier",
+      "tt_success": 1.0
+    },
+    {
+      "cells": 3,
+      "mean_pvt_violation": 0.0,
+      "mean_simulations_to_first_pass": 1.0,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 10.554972501161197,
+      "method": "spectra",
+      "pdk": "BJT",
+      "pvt_success": 1.0,
+      "receipt": "public_x1_v3_bjt_merged.json",
+      "simulator": "Xyce-7.10",
+      "tier": "TT-only capability",
+      "track": "opensource / BJT CE amplifier",
+      "tt_success": 1.0
+    }
+  ],
+  "schema": "spectra-public-scope-summary/v1"
+}
