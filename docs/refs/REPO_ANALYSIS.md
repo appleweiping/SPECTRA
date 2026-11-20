@@ -277,3 +277,27 @@ AnalogGym-Opt (`circuit_configs/*.yaml`) **resets most circuits to generic defau
 - **Boundary:** the repository provides a cross-PDK transfer harness, not a fixed-topology
   SIZ7g optimizer. No model answer was executed for SPECTRA, so this is a code/provenance
   reference and future transfer track only.
+
+## 12. LOADBench evaluation scripts (server source inspection)
+
+- **Source:** `https://github.com/FilipeAz/LOADBench-Scripts`, inspected on the server at
+  commit `03cc45620afbbbee19652d83d625f26f3368d951` under
+  `/root/autodl-tmp/bench_sources/LOADBench-Scripts`. The checkout contains no
+  `LICENSE` file, so the scripts are not vendored into SPECTRA. The source-only
+  receipt is `results/loadbench_scripts_source_audit.json`.
+- **Files read:** `README.md`, `struct_matcher.py`,
+  `circuit_generation_coverage.py`, `topology_selection_eval.py`,
+  `optimization_helper.py`, and `inverse_sizing.py`. The five public evaluation
+  endpoints are structural topology matching/coverage, top-k and mean first-hit
+  rank, 12-D hypervolume ratio against NSGA-II, and inverse-sizing MAPE,
+  outlier, specification-satisfaction, R² and FoM.
+- **Protocol facts:** the README identifies 15 held-out op-amp names for topology
+  and inverse-sizing tests and fixes a 12-objective physical-space reference
+  point with a `pygmo` FPRAS approximation (`epsilon=delta=0.01`, fixed seed).
+  The source scripts accept CSV/DataFrame inputs and make the metric directions
+  explicit. SPECTRA's audit runs deterministic synthetic one-row checks for
+  top-k/MFHR and inverse sizing only.
+- **Boundary:** the public data release was not downloaded, no LOADBench
+  netlist was simulated, and no SPECTRA or AnaFlow task cell was produced. The
+  audit is a reproducibility/provenance entry and a future data/ML capability
+  track, not a SIZ7g ranking row or XSOTA-1 evidence.
