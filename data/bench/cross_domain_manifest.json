@@ -41,7 +41,7 @@
       "corners": "source-declared corners, mapped only where metric semantics match",
       "seeds": [0, 1, 2],
       "budget": {"simulations": 300, "llm_calls": 12},
-      "status": "server_matched_rerun_in_progress; PTM180/BJT TT-only merged; SKY130 LP and ASAP7/SKY130 LDO PVT shards running; default-capability-32-of-32-receipt-complete"
+      "status": "server_matched_rerun_in_progress; PTM180/BJT TT-only merged; Xyce BJT merged; ASAP7 LDO 45-condition merged; SKY130 LP and SKY130 LDO shards running; default-capability-32-of-32-receipt-complete"
     },
     {
       "id": "ampicbench_public",
