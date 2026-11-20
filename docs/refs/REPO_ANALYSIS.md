@@ -258,3 +258,22 @@ AnalogGym-Opt (`circuit_configs/*.yaml`) **resets most circuits to generic defau
 - **Boundary:** no HSPICE run was started on the server because the licensed simulator and
   foundry model paths are unavailable. NEMESIS2.0 is therefore a read-and-provenance reference
   and a future surrogate baseline, not a current SPECTRA result or a SIZ7g ranking row.
+
+## 11. AnalogPortBench (server source inspection)
+
+- **Source:** `https://github.com/saeidrajabii/AnalogPortBench`, inspected on the server at
+  commit `5dc16f1c01858664f1912a84abfc06fd4c69f6de` under
+  `/root/autodl-tmp/bench_sources/AnalogPortBench`. The repository is MIT-licensed.
+- **Files read:** `README.md`, `benchmark/config.py`, `benchmark/circuits.py`,
+  `benchmark/evaluate.py`, `benchmark/measure.py`, `benchmark/netlist.py`,
+  `benchmark/sim.py`, `benchmark/techs.py`, `benchmark/baseline_v2.py`,
+  `benchmark/naive_port.py`, `benchmark/make_specs.py`, `benchmark/make_scaled_specs.py`,
+  `scripts/setup_env.sh`, `prompts/system.txt`, and representative T1/T2/T3/T4 prompts.
+- **Workflow:** the model receives a 0.18 µm source netlist and target specification, returns a
+  SKY130 netlist, passes interface/netlist checks, then is scored with ngspice DC/AC/step/swing
+  measurements and transistor operating-region checks. Simulation feedback can be returned for
+  up to three attempts. T4 tasks deliberately encode infeasible specifications and score an
+  `INFEASIBLE` declaration separately from a feasible design pass.
+- **Boundary:** the repository provides a cross-PDK transfer harness, not a fixed-topology
+  SIZ7g optimizer. No model answer was executed for SPECTRA, so this is a code/provenance
+  reference and future transfer track only.
