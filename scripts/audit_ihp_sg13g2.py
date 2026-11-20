@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -42,7 +43,13 @@ def source_digest(root: Path) -> tuple[int, str]:
     return len(names), hashlib.sha256(payload).hexdigest()
 
 
-def run_smoke(pdk_root: Path, simulator: Path, work_root: Path, timeout: int) -> dict:
+def run_smoke(
+    pdk_root: Path,
+    simulator: Path,
+    work_root: Path,
+    timeout: int,
+    osdi_dir: Path | None = None,
+) -> dict:
     model_dir = pdk_root / "ihp-sg13g2" / "libs.tech" / "ngspice" / "models"
     model_file = model_dir / "cornerMOSlv.lib"
     netlist = work_root / "pmos_nmos_op.cir"
@@ -65,6 +72,17 @@ quit
 """.format(model=model_file),
         encoding="utf-8",
     )
+    env = None
+    if osdi_dir is not None:
+        osdi_files = sorted(osdi_dir.glob("*.osdi"))
+        if not osdi_files:
+            raise FileNotFoundError(f"No OSDI models found in {osdi_dir}")
+        spiceinit = work_root / ".spiceinit"
+        spiceinit.write_text(
+            "\n".join(f"osdi {path}" for path in osdi_files) + "\n",
+            encoding="utf-8",
+        )
+        env = {**os.environ, "HOME": str(work_root)}
     started = time.monotonic()
     flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
     try:
@@ -75,11 +93,12 @@ quit
             text=True,
             timeout=timeout,
             creationflags=flags,
+            env=env,
         )
         output = proc.stdout + proc.stderr
         rc = proc.returncode
         status = "pass" if rc == 0 else "model_runtime_blocked"
-        error = None if rc == 0 else "Unknown model type psp103va / could not find a valid modelname"
+        error = None if rc == 0 else "ngspice returned a non-zero status"
     except subprocess.TimeoutExpired as exc:
         output = (exc.stdout or "") + (exc.stderr or "")
         rc = None
@@ -103,6 +122,12 @@ def main() -> int:
     parser.add_argument("--simulator", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--work-root", type=Path, required=True)
+    parser.add_argument(
+        "--osdi-dir",
+        type=Path,
+        default=None,
+        help="Optional directory of compiled OSDI models. The audit writes a local .spiceinit.",
+    )
     parser.add_argument("--timeout", type=int, default=60)
     args = parser.parse_args()
 
@@ -110,7 +135,13 @@ def main() -> int:
     args.work_root.mkdir(parents=True, exist_ok=True)
     model_file = pdk_root / "ihp-sg13g2" / "libs.tech" / "ngspice" / "models" / "cornerMOSlv.lib"
     file_count, tree_digest = source_digest(pdk_root)
-    smoke = run_smoke(pdk_root, args.simulator.resolve(), args.work_root.resolve(), args.timeout)
+    smoke = run_smoke(
+        pdk_root,
+        args.simulator.resolve(),
+        args.work_root.resolve(),
+        args.timeout,
+        args.osdi_dir.resolve() if args.osdi_dir else None,
+    )
     receipt = {
         "schema": "spectra-ihp-sg13g2-capability/v1",
         "source": "IHP-GmbH/IHP-Open-PDK",
@@ -122,6 +153,7 @@ def main() -> int:
         "model_file": str(model_file),
         "model_sha256": sha256_file(model_file) if model_file.exists() else None,
         "simulator": "ngspice-44.2",
+        "osdi_dir": str(args.osdi_dir.resolve()) if args.osdi_dir else None,
         "ranking_eligible": False,
         "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell.",
         "smoke": smoke,
