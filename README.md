@@ -1,7 +1,8 @@
 # SPECTRA — Spec-to-Robust Analog Circuit Synthesis with LLM Agents
 
 End-to-end agentic analog circuit generation: natural-language specification → topology → device sizing →
-PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWater SKY130 PDK (ngspice-42).
+PVT-robust (45 conditions) + mismatch-verified SPICE netlist on the open SkyWater SKY130 PDK. The checked-in
+server receipts use ngspice-44.2 and Xyce-7.10 where the corresponding track supports both simulators.
 
 * **SPECTRA agent** (`spectra/agent`): the LLM writes *design-intent programs* that size devices from
   (gm/Id, L, Id) via PDK lookup tables and predict their own performance; a deterministic layer executes, checks
@@ -220,6 +221,22 @@ TT success, PVT success, mean TT violation, and mean PVT violation. The
 generated `results/xsota_gate_audit.{json,md}` is an auditable gate report,
 not a claim generator. A benchmark-scoped lead cannot turn an uncovered
 stratum or a tie into a domain-level pass.
+
+### Acceptance snapshot
+
+The repository records acceptance as evidence-backed states so a checkout can
+be audited without relying on prose. The current snapshot is as follows.
+
+| Gate | Current state | Evidence and interpretation |
+|---|---|---|
+| `XSOTA-MEASURED-1` | PASS for measured scope | `results/public_scope_sota_summary.md` compares every complete merged receipt under its declared contract. |
+| `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v5.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
+| `XPORT-1` | PASS for source/golden integrity | `results/analog_port_bench_source_audit.json` records the 54-task AnalogPortBench inventory and its optional five-corner golden audit. It is not a SPECTRA ranking row. |
+| `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
+
+This table is deliberately generated from receipts rather than optimistic
+framework names. Updating a gate requires a new immutable server receipt,
+schema validation, and synchronized source on E:, the server, and GitHub.
 
 ### Audit and claim policy
 
