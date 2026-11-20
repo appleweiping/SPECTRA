@@ -1,1 +1,24 @@
-{"schema":"spectra-ihp-sg13g2-capability/v1","source":"IHP-GmbH/IHP-Open-PDK","source_url":"https://github.com/IHP-GmbH/IHP-Open-PDK","source_commit":"e73adb4045731ddec21634146d536380057f6a26","source_file_count":7290,"source_tree_filelist_sha256":"d55fc93f430be741f0660674c44cc84870fbf15b58fa1e99a56495157da22786","pdk":"ihp-sg13g2","model_file":"ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib","model_sha256":"03d505847c880d233b341be115a1e5460edf4d8e9b3e8a7df791a52fa4455d67","simulator":"ngspice-44.2","simulator_probe":"****** ** ngspice-44.2 : Circuit level simulation program ** Compiled with KLU Direct Linear Solver ","status":"source_audit_pass_model_runtime_blocked","ranking_eligible":false,"ranking_reason":"No matched sizing task, independent verifier or AnaFlow cell. Native smoke reached the PSP103 model load but ngspice-44.2 lacks a loaded PSP103 OSDI model plugin.","smoke":{"netlist":"pmos_nmos_op.cir","attempted":"op","return_code":1,"error":"Unknown model type psp103va / could not find a valid modelname","work_dir":"/root/autodl-tmp/spectra-analog-agent/results/_ihp_sg13g2_smoke"}}
+{
+  "model_file": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib",
+  "model_sha256": "03d505847c880d233b341be115a1e5460edf4d8e9b3e8a7df791a52fa4455d67",
+  "pdk": "ihp-sg13g2",
+  "ranking_eligible": false,
+  "ranking_reason": "No matched sizing task, independent verifier or AnaFlow cell. Native smoke did not complete a valid device simulation.",
+  "schema": "spectra-ihp-sg13g2-capability/v1",
+  "simulator": "ngspice-44.2",
+  "smoke": {
+    "attempted": "op",
+    "elapsed_seconds": 0.129,
+    "error": "Unknown model type psp103va / could not find a valid modelname",
+    "netlist": "pmos_nmos_op.cir",
+    "return_code": 1,
+    "status": "model_runtime_blocked",
+    "stdout": "pmos_nmos_op.stdout"
+  },
+  "source": "IHP-GmbH/IHP-Open-PDK",
+  "source_commit": "e73adb4045731ddec21634146d536380057f6a26",
+  "source_file_count": 7267,
+  "source_tree_filelist_sha256": "728d11eb1dd0915e55789ebe414985e10c241b4ae0ff484e66aa49b24ff546f2",
+  "source_url": "https://github.com/IHP-GmbH/IHP-Open-PDK",
+  "status": "source_audit_pass_model_runtime_blocked"
+}
