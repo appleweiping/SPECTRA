@@ -6,13 +6,13 @@ This protocol extends the fixed-topology SKY130 study to public circuit sources 
 
 | ID | Requirement | Passing evidence | Current status |
 |---|---|---|---|
-| XPDK-1 | At least three public PDK/model groups | SKY130, GF180MCU and PTM45/PTM180 or PTM90/PTM130/PTM180, with immutable model receipts | Planned. The current repository executes SKY130 only |
-| XTOPO-1 | Cross-topology public coverage | AnalogGym/AnalogGym-Opt, AMPICBench, opensource-analog-circuits, Analog Design Bench and ATLAS task manifests with non-template topology digests | Planned. The existing 92 tasks are fixed SPECTRA templates |
-| XSIM-1 | Cross-simulator validation | At least two independently versioned simulators with the same netlist, models, corners and metric parser. Spectre/HSPICE rows require a reproducible licensed environment | Partial. Server now has official ngspice-44.2 and Xyce 7.10 serial builds. The Xyce translator passes an AnalogGym BSIM4 AC smoke, while the full matched 300-evaluation, 45-condition, three-seed matrix remains in progress |
+| XPDK-1 | At least three public PDK/model groups | SKY130, GF180MCU and PTM45/PTM180 or PTM90/PTM130/PTM180, with immutable model receipts | Partial. Server receipts cover SKY130, GF180MCU, PTM180, BPTM45 and embedded BJT. The matched PVT ranking matrix remains incomplete |
+| XTOPO-1 | Cross-topology public coverage | AnalogGym/AnalogGym-Opt, AMPICBench, opensource-analog-circuits, Analog Design Bench and ATLAS task manifests with non-template topology digests | Partial. AnalogGym, ATLAS, AMPICBench and 32 opensource source configs have topology digests and capability receipts. Only the declared matched subset enters ranking |
+| XSIM-1 | Cross-simulator validation | At least two independently versioned simulators with the same netlist, models, corners and metric parser. Spectre/HSPICE rows require a reproducible licensed environment | Partial. Server has official ngspice-44.2 and Xyce 7.10 serial builds. AnalogGym and BJT tracks have Xyce receipts, while public SKY130/PTM45 AC translation remains a separate diagnostic track |
 | XSEED-1 | Multi-seed protocol | Three or more seeds per task-method cell, with seed listed in raw evidence | Pass on existing SIZ7g/SIZ11g tracks |
 | XMET-1 | Metric parity | TT success, all-corner PVT success, mean and median normalized violation, simulations-to-first-pass, calls, wall time, token/cost and crash rate | Partial. Existing tracks have the first four core metrics and efficiency fields, but cross-domain parsers are not yet unified |
 | XSTAT-1 | Statistical testing | Task-cluster bootstrap confidence intervals, paired sign/Wilcoxon tests and Holm correction across external rows | Pass on existing external track. Must be rerun for each cross-domain family |
-| XANA-1 | AnaFlow comparability | AnaFlow clean-room adapter runs on the same public task, PDK, simulator, budget, seed and verifier | Not met outside the current fixed-topology adapter |
+| XANA-1 | AnaFlow comparability | AnaFlow clean-room adapter runs on the same public task, PDK, simulator, budget, seed and verifier | Partial. Matched adapters exist for AnalogGym, ATLAS GF180, PTM180, BJT, PTM45 and selected SKY130/ASAP7 public tracks. An official AnaFlow implementation is unavailable |
 | XSOTA-1 | Domain-level claim | Every preregistered main endpoint beats AnaFlow on every declared PDK/topology/simulator stratum, with confidence intervals and no hidden exclusions | Not met. Current evidence supports benchmark-scoped SOTA only |
 
 ## Frozen matrix
@@ -41,6 +41,13 @@ TT-only adapter run is archived in
 seeds 0, 1 and 2 for SPECTRA and the clean-room AnaFlow adapter. The run is
 not ranking-eligible because the public configs do not expose a common PVT
 evaluator and the clean-room adapter is not the published AnaFlow code.
+
+The PTM45 source-native matched receipt is archived at
+`results/public_v7_ptm45_merged.json` with a human-readable protocol report in
+`results/public_v7_ptm45_merged.md`. It uses the BPTM 45 nm BSIM4 model and
+ngspice-44.2 under the same 300-simulation, 12-call and three-seed contract.
+The source deck has no process-corner selector, so it is retained as TT-only
+capability evidence and excluded from the multi-corner ranking aggregate.
 
 `results/analoggym_amp_tt_smoke.md` records a separate AnalogGym SKY130
 testbench smoke with immutable source, PDK and simulator hashes. It verifies
