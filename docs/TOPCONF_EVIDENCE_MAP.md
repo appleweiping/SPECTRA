@@ -82,8 +82,8 @@ checks but uses a bundled golden reference, so it is capability evidence rather
 than a SPECTRA/AnaFlow ranking cell.
 
 The literal gate remains `XSOTA-1: NOT MET`. The latest audit is
-`results/xsota_gate_audit.json` with 19 receipts, 9 comparable PVT strata and
-10 uncovered or capability-only strata. The audit requires strict SPECTRA leads
+`results/xsota_gate_audit.json` with 19 receipts, 11 comparable PVT strata and
+8 uncovered or capability-only strata. The audit requires strict SPECTRA leads
 on TT success, PVT success, mean TT violation and mean PVT violation in every
 declared public stratum. No finite subset is extrapolated to all analog circuits,
 all PDKs or all simulators.

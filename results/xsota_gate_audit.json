@@ -1,10 +1,10 @@
 {
-  "comparable_strata": 9,
+  "comparable_strata": 11,
   "diagnostic_summary": {
-    "comparable_non_inferior_all_endpoints": 9,
+    "comparable_non_inferior_all_endpoints": 11,
     "comparable_strict_positive_all_endpoints": 1,
-    "strata_with_zero_floor_ties": 7,
-    "zero_floor_tie_endpoints": 14
+    "strata_with_zero_floor_ties": 9,
+    "zero_floor_tie_endpoints": 18
   },
   "gate": "XSOTA-1",
   "receipts_observed": 19,
@@ -57,13 +57,52 @@
       "tier": "strict-pvt-comparison"
     },
     {
+      "comparison": {
+        "anaflow": {
+          "mean_pvt_violation": 0.01555171049089136,
+          "mean_tt_violation": 0.0,
+          "pvt_success": 0.3333333333333333,
+          "tt_success": 1.0
+        },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
+        "spectra": {
+          "mean_pvt_violation": 0.0024691351822493826,
+          "mean_tt_violation": 0.0,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 1.0
+        },
+        "strict_all_endpoints": false,
+        "strict_endpoint_leads": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": false,
+          "pvt_success": true,
+          "tt_success": false
+        },
+        "strict_positive_lead_count": 2,
+        "strict_positive_leads": [
+          "pvt_success",
+          "mean_pvt_violation"
+        ],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
+        }
+      },
       "complete": true,
       "errors": [],
       "pvt_conditions": 45,
       "ranking_eligible": true,
-      "reason": "matched AnaFlow and SPECTRA aggregates are unavailable",
       "receipt": "analoggym_leung_pvt_robust_merged.json",
-      "tier": "uncovered"
+      "tier": "strict-pvt-comparison"
     },
     {
       "comparison": {
@@ -161,13 +200,49 @@
       "tier": "strict-pvt-comparison"
     },
     {
+      "comparison": {
+        "anaflow": {
+          "mean_pvt_violation": 0.00034574814814814815,
+          "mean_tt_violation": 0.0,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 1.0
+        },
+        "non_inferior_all_endpoints": true,
+        "non_inferior_endpoint_checks": {
+          "mean_pvt_violation": true,
+          "mean_tt_violation": true,
+          "pvt_success": true,
+          "tt_success": true
+        },
+        "spectra": {
+          "mean_pvt_violation": 0.00034574814814814815,
+          "mean_tt_violation": 0.0,
+          "pvt_success": 0.6666666666666666,
+          "tt_success": 1.0
+        },
+        "strict_all_endpoints": false,
+        "strict_endpoint_leads": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": false,
+          "pvt_success": false,
+          "tt_success": false
+        },
+        "strict_positive_lead_count": 0,
+        "strict_positive_leads": [],
+        "zero_floor_tie_count": 2,
+        "zero_floor_ties": {
+          "mean_pvt_violation": false,
+          "mean_tt_violation": true,
+          "pvt_success": false,
+          "tt_success": true
+        }
+      },
       "complete": true,
       "errors": [],
       "pvt_conditions": 45,
       "ranking_eligible": true,
-      "reason": "matched AnaFlow and SPECTRA aggregates are unavailable",
       "receipt": "analoggym_pvt_robust_merged.json",
-      "tier": "uncovered"
+      "tier": "strict-pvt-comparison"
     },
     {
       "comparison": {
@@ -518,8 +593,6 @@
   "strict_definition": "SPECTRA must strictly beat matched AnaFlow on TT success, PVT success, mean TT violation, and mean PVT violation in every declared public stratum",
   "strict_gate_pass": false,
   "uncovered_receipts": [
-    "analoggym_leung_pvt_robust_merged.json",
-    "analoggym_pvt_robust_merged.json",
     "atlas_gf180_matched_merged.json",
     "public_v2_bjt_merged.json",
     "public_v2_ptm180_merged.json",
@@ -529,5 +602,5 @@
     "public_x1_v2_bjt_merged.json",
     "public_x1_v3_bjt_merged.json"
   ],
-  "uncovered_strata": 10
+  "uncovered_strata": 8
 }
