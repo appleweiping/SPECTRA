@@ -145,7 +145,7 @@ python scripts/cross_domain_capability_audit.py \
   --source-root analog_port_bench=/root/autodl-tmp/bench_sources/AnalogPortBench \
   --simulator ngspice=/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
   --simulator xyce=/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce \
-  --output results/cross_domain_capability_receipt_v4.json
+  --output results/cross_domain_capability_receipt_v5.json
 python scripts/audit_analog_design_bench.py \
   --source-root /root/autodl-tmp/bench_sources/analog-design-bench \
   --output results/analog_design_bench_v2_source_audit.json
