@@ -24,12 +24,15 @@ The following entries are the high-priority sizing and benchmark references alre
 | AutoSizer | ICML 2026 | `PDF+CODE` | AMS-SizingBench scale, 300-sample budget, GA/BO/TuRBO/LEDRO/ADO-LLM/EEsizer baselines, self-reflection ablation | Keep its 24-circuit protocol as a calibration row |
 | EEsizer | TCAS-I 2026 | `PDF+CODE` | Six basic circuits, 20-transistor op-amp, PTM 180/130/90, variation experiments and success flags | Preserve PTM and variation axes as capability checks |
 | AgenticSizing | arXiv 2026 | `PDF+CODE` | Eight circuits, 55-transistor/60-variable integrated task, five repeats, Spectre | Add only as a paper-backed reference unless licensed Spectre is available |
+| AnalogAgent | arXiv 2026 | `ABSTRACT/DOI` | 30 AnalogCoder-lineage generation tasks, Pass@k, cumulative success, time-to-first-success, tokens and runtime | Retrieve the full PDF and a verifiable artifact commit before using it as a generation baseline |
 | SAFTAC | NeurIPS 2026 claim/arXiv | `PDF` | Qwen3-8B SFT+GRPO, 8,626 tasks, 10 types, 114 netlists, pass@1 and feedback pass | Code and training data availability still need independent verification |
 | AnalogScout | arXiv 2026 | `PDF` | 9-corner PVT, 500-sample mismatch, 16k simulation budget, confirmation seeds and Holm correction | No public method repository found. Do not call a clean-room row official |
 | Long-Horizon Analog Design Bench | arXiv 2026 | `PDF+REPO` | 50 tasks, 17 designers, 15 configurations, 2,250 two-hour attempts, isolated verifier | Build a compatible source-native capability adapter before ranking |
 | AMPICBench | 2026 repository | `REPO` | Public Sky130 decks and corner artifacts, source provenance | A common sizing objective and independent verifier are still required |
 | SGAnalog | 2026 repository | `REPO` | Commit-pinned tapeout-derived tasks and native harness | Current direct Task 2 receipt is capability-only, not SIZ7g budget-matched |
 | AnalogGym-Opt | TCAD 2026 claim/repository | `REPO` | GRPO/R-GNN optimizer, Pareto tracking and optional PVT | Record implementation provenance separately from paper reproduction |
+| PVTSizing 2.0 | arXiv 2026 | `ABSTRACT/DOI` | Four benchmarks, 40 runs, runtime/sample-count trade-offs and knowledge-injection study | Read the full PDF and locate source code before treating it as an external implementation |
+| NEMESIS2.0 | arXiv 2026 | `ABSTRACT/DOI` | Seven circuits, 700 specification-set tasks, equation/surrogate accuracy and final SPICE verification | Inspect the full PDF and pinned code, then keep surrogate throughput separate from LLM budgets |
 | AnalogVerifier | ICML 2026 | `UNREAD` | Citation and PMLR listing only | Read full paper and inspect code before using its metrics or verifier design |
 | ICCAD 2026 non-LLM sizing papers | ICCAD 2026 | `UNREAD` | Program titles only | Do not cite algorithmic details until PDFs are read |
 | RFChipAgent, Analog-DB | arXiv 2026 | `UNREAD` | Titles and identifiers only | Retrieve PDFs and repositories, then classify scope |

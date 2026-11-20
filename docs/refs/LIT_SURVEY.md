@@ -2,6 +2,11 @@
 
 Compiled 2026-11-16 for an ICCAD submission (SPECTRA: NL spec → topology → sizing → SPICE/PVT verification).
 
+The time-sensitive 2026 additions and their read-level boundary are maintained in
+[`LIT_SURVEY_2026_ADDENDUM.md`](LIT_SURVEY_2026_ADDENDUM.md) and
+[`READ_STATUS_2026.md`](READ_STATUS_2026.md). Those files separate primary-paper/code evidence
+from abstract-only leads and are updated independently of this historical survey.
+
 ## How this was verified
 
 | Tag | Meaning |
