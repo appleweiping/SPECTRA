@@ -162,7 +162,7 @@
           "mean_pvt_violation": 0.0890301574074074,
           "mean_simulations_to_first_pass": 1.0,
           "mean_tt_violation": 0.0,
-          "mean_wall_seconds": 3319.4681380991824,
+          "mean_wall_seconds": 2620.810208527837,
           "pvt_success": 0.3333333333333333,
           "tt_success": 1.0
         },
@@ -171,7 +171,7 @@
           "mean_pvt_violation": 0.0890301574074074,
           "mean_simulations_to_first_pass": 1.0,
           "mean_tt_violation": 0.0,
-          "mean_wall_seconds": 3317.3624100893117,
+          "mean_wall_seconds": 2619.7663304874054,
           "pvt_success": 0.3333333333333333,
           "tt_success": 1.0
         }
@@ -183,10 +183,10 @@
       "pdk": "SKY130",
       "protocol_eligible": true,
       "pvt_conditions": 45,
-      "receipt": "public_v2_sky130_lp_merged.json",
+      "receipt": "public_v6_sky130_lp_merged.json",
       "simulator": "ngspice-44.2",
       "stored_ranking_eligible": true,
-      "track": "opensource / SKY130 LP opamp"
+      "track": "opensource / SKY130 LP opamp tuned"
     },
     {
       "aggregate": {
@@ -500,14 +500,14 @@
       "mean_pvt_violation": 0.0890301574074074,
       "mean_simulations_to_first_pass": 1.0,
       "mean_tt_violation": 0.0,
-      "mean_wall_seconds": 3319.4681380991824,
+      "mean_wall_seconds": 2620.810208527837,
       "method": "anaflow_cleanroom",
       "pdk": "SKY130",
       "pvt_success": 0.3333333333333333,
-      "receipt": "public_v2_sky130_lp_merged.json",
+      "receipt": "public_v6_sky130_lp_merged.json",
       "simulator": "ngspice-44.2",
       "tier": "PVT ranking",
-      "track": "opensource / SKY130 LP opamp",
+      "track": "opensource / SKY130 LP opamp tuned",
       "tt_success": 1.0
     },
     {
@@ -515,14 +515,14 @@
       "mean_pvt_violation": 0.0890301574074074,
       "mean_simulations_to_first_pass": 1.0,
       "mean_tt_violation": 0.0,
-      "mean_wall_seconds": 3317.3624100893117,
+      "mean_wall_seconds": 2619.7663304874054,
       "method": "spectra",
       "pdk": "SKY130",
       "pvt_success": 0.3333333333333333,
-      "receipt": "public_v2_sky130_lp_merged.json",
+      "receipt": "public_v6_sky130_lp_merged.json",
       "simulator": "ngspice-44.2",
       "tier": "PVT ranking",
-      "track": "opensource / SKY130 LP opamp",
+      "track": "opensource / SKY130 LP opamp tuned",
       "tt_success": 1.0
     },
     {

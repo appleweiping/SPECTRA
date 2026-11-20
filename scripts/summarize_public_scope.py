@@ -21,7 +21,6 @@ TRACKS = [
     ("analoggym_leung_pvt_merged.json", "AnalogGym / Leung", "SKY130", "ngspice-44.2"),
     ("analoggym_leung_xyce_merged.json", "AnalogGym / Leung", "SKY130", "Xyce-7.10"),
     ("atlas_gf180_matched_merged.json", "ATLAS public task", "GF180MCU", "ngspice-44.2"),
-    ("public_v2_sky130_lp_merged.json", "opensource / SKY130 LP opamp", "SKY130", "ngspice-44.2"),
     ("public_v6_sky130_lp_merged.json", "opensource / SKY130 LP opamp tuned", "SKY130", "ngspice-44.2"),
     ("public_v3_asap7_ldo_merged.json", "opensource / ASAP7 LDO", "ASAP7", "ngspice-44.2"),
     ("public_v4_ldo_simple_merged.json", "opensource / SKY130 LDO", "SKY130", "ngspice-44.2"),
