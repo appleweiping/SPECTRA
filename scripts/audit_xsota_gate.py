@@ -157,7 +157,11 @@ def main() -> None:
     args = parser.parse_args()
     receipt = audit(args.root)
     args.json_output.parent.mkdir(parents=True, exist_ok=True)
-    args.json_output.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.json_output.write_text(
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
     lines = [
         "# XSOTA-1 gate audit",
@@ -186,7 +190,7 @@ def main() -> None:
         "Uncovered or capability-only receipts remain in this audit and count against the literal gate. A benchmark-scoped lead does not change the gate result.",
     ]
     args.md_output.parent.mkdir(parents=True, exist_ok=True)
-    args.md_output.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    args.md_output.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({key: receipt[key] for key in ("receipts_observed", "comparable_strata", "uncovered_strata", "strict_gate_pass")}, sort_keys=True))
 
 
