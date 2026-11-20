@@ -1,0 +1,3909 @@
+{
+  "aggregate": {
+    "anaflow_cleanroom": {
+      "cells": 3,
+      "mean_pvt_violation": 0.8000000000000002,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 1009.9852588501138,
+      "pvt_success": 0.0,
+      "tt_success": 1.0
+    },
+    "spectra": {
+      "cells": 3,
+      "mean_pvt_violation": 0.8000000000000002,
+      "mean_tt_violation": 0.0,
+      "mean_wall_seconds": 960.6527432675163,
+      "pvt_success": 0.0,
+      "tt_success": 1.0
+    }
+  },
+  "budget": 300,
+  "complete": true,
+  "errors": [],
+  "expected_methods": [
+    "anaflow_cleanroom",
+    "spectra"
+  ],
+  "expected_seeds": [
+    0,
+    1,
+    2
+  ],
+  "llm_calls": 12,
+  "pvt_conditions": 45,
+  "ranking_eligible": true,
+  "ranking_reason": null,
+  "rows": [
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "C_LOAD": 743.0217329347985,
+        "N_M0": 42.21770123928726,
+        "N_M2": 40.37440565166444,
+        "N_M4": 6.458411436171682,
+        "N_M6": 19.966632526846983,
+        "N_M7": 52.79621435201634,
+        "N_M8": 27557.15616377621,
+        "current_0_bias": 3.1118517236824635e-05
+      },
+      "pdk": "asap7",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.8,
+        "median_normalized_violation": 1.0,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "task": "ldo_1_asap7",
+      "track_id": "opensource_31_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 992.8968081111088
+    },
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "C_LOAD": 743.0217329347985,
+        "N_M0": 42.21770123928726,
+        "N_M2": 40.37440565166444,
+        "N_M4": 6.458411436171682,
+        "N_M6": 19.966632526846983,
+        "N_M7": 52.79621435201634,
+        "N_M8": 27557.15616377621,
+        "current_0_bias": 3.1118517236824635e-05
+      },
+      "pdk": "asap7",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 42.93759,
+              "pm": 66.70463,
+              "ugf": 103818500.0,
+              "vout": 0.5151091
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.8,
+        "median_normalized_violation": 1.0,
+        "pvt_success": false
+      },
+      "seed": 0,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "task": "ldo_1_asap7",
+      "track_id": "opensource_31_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 1037.3829373046756
+    },
+    {
+      "first_pass_simulations": 4,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "C_LOAD": 160.0723318472318,
+        "N_M0": 61.69943161982721,
+        "N_M2": 94.97479289282404,
+        "N_M4": 36.473611332846055,
+        "N_M6": 82.453888970889,
+        "N_M7": 13.639120526507611,
+        "N_M8": 29157.91157005171,
+        "current_0_bias": 2.677129210629818e-05
+      },
+      "pdk": "asap7",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.8,
+        "median_normalized_violation": 1.0,
+        "pvt_success": false
+      },
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "task": "ldo_1_asap7",
+      "track_id": "opensource_31_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 1027.22621226497
+    },
+    {
+      "first_pass_simulations": 4,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "C_LOAD": 160.0723318472318,
+        "N_M0": 61.69943161982721,
+        "N_M2": 94.97479289282404,
+        "N_M4": 36.473611332846055,
+        "N_M6": 82.453888970889,
+        "N_M7": 13.639120526507611,
+        "N_M8": 29157.91157005171,
+        "current_0_bias": 2.677129210629818e-05
+      },
+      "pdk": "asap7",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 77.83784,
+              "pm": 52.22188,
+              "ugf": 240855100.0,
+              "vout": 0.4890766
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.8,
+        "median_normalized_violation": 1.0,
+        "pvt_success": false
+      },
+      "seed": 1,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "task": "ldo_1_asap7",
+      "track_id": "opensource_31_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 820.7774596079253
+    },
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "anaflow_cleanroom",
+      "parameters": {
+        "C_LOAD": 102.38929596641478,
+        "N_M0": 19.69672805495898,
+        "N_M2": 43.818937209694795,
+        "N_M4": 52.85354443565682,
+        "N_M6": 38.05982611242326,
+        "N_M7": 40.00603155793924,
+        "N_M8": 22399.69475073025,
+        "current_0_bias": 1.1019251521596965e-05
+      },
+      "pdk": "asap7",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.8,
+        "median_normalized_violation": 1.0,
+        "pvt_success": false
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "task": "ldo_1_asap7",
+      "track_id": "opensource_31_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 1009.8327561742626
+    },
+    {
+      "first_pass_simulations": 1,
+      "llm_calls": 12,
+      "method": "spectra",
+      "parameters": {
+        "C_LOAD": 102.38929596641478,
+        "N_M0": 19.69672805495898,
+        "N_M2": 43.818937209694795,
+        "N_M4": 52.85354443565682,
+        "N_M6": 38.05982611242326,
+        "N_M7": 40.00603155793924,
+        "N_M8": 22399.69475073025,
+        "current_0_bias": 1.1019251521596965e-05
+      },
+      "pdk": "asap7",
+      "pvt": {
+        "conditions": [
+          {
+            "condition": "tt_27C_1.8V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.62V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.8V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_-40C_1.98V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.62V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_27C_1.98V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.62V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.8V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "tt_125C_1.98V",
+            "metrics": {
+              "dcgain": 74.88136,
+              "pm": 60.11629,
+              "ugf": 199251900.0,
+              "vout": 0.4895668
+            },
+            "missing_metrics": [],
+            "normalized_violation": 0.0,
+            "pass": true
+          },
+          {
+            "condition": "ff_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ff_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "ss_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "sf_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_-40C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_27C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.62V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.8V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          },
+          {
+            "condition": "fs_125C_1.98V",
+            "error": "netlist has no .lib corner selector for PVT replacement",
+            "metrics": {},
+            "missing_metrics": [
+              "condition_error",
+              "dcgain",
+              "pm",
+              "ugf",
+              "vout"
+            ],
+            "normalized_violation": 1.0,
+            "pass": false
+          }
+        ],
+        "conditions_observed": 45,
+        "mean_normalized_violation": 0.8,
+        "median_normalized_violation": 1.0,
+        "pvt_success": false
+      },
+      "seed": 2,
+      "simulations": 300,
+      "simulator": "ngspice",
+      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "task": "ldo_1_asap7",
+      "track_id": "opensource_31_v3",
+      "tt_pass": true,
+      "tt_violation": 0.0,
+      "wall_seconds": 1023.797832889948
+    }
+  ],
+  "schema": "spectra-public-config-shards/v1"
+}
