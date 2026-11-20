@@ -180,12 +180,22 @@ def _creationflags() -> int:
     return getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
 
 
-def simulator_capabilities(names: Iterable[str] = ("ngspice", "xyce", "spectre", "hspice")) -> dict[str, dict[str, Any]]:
-    """Probe binaries without treating an unavailable licensed tool as a pass."""
+def simulator_capabilities(
+    names: Iterable[str] = ("ngspice", "xyce", "spectre", "hspice"),
+    paths: Mapping[str, str | os.PathLike[str]] | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Probe binaries without treating an unavailable licensed tool as a pass.
+
+    ``paths`` supports server installations kept outside ``PATH``. Existing
+    callers retain PATH lookup when it is omitted.
+    """
 
     result: dict[str, dict[str, Any]] = {}
     for name in names:
-        binary = shutil.which(name)
+        configured = paths.get(name) if paths else None
+        binary = str(configured) if configured else shutil.which(name)
+        if binary and not Path(binary).is_file():
+            binary = None
         entry: dict[str, Any] = {"binary": binary, "available": binary is not None, "version": None}
         if binary:
             try:

@@ -68,7 +68,11 @@ def _parse_roots(values: list[str]) -> dict[str, Path]:
     return roots
 
 
-def build_receipt(manifest_path: Path, roots: dict[str, Path]) -> dict[str, Any]:
+def build_receipt(
+    manifest_path: Path,
+    roots: dict[str, Path],
+    simulator_paths: dict[str, Path],
+) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
     tracks: list[dict[str, Any]] = []
     for track in manifest["tracks"]:
@@ -94,7 +98,7 @@ def build_receipt(manifest_path: Path, roots: dict[str, Path]) -> dict[str, Any]
         "schema": "spectra-cross-domain-capability/v1",
         "manifest": str(manifest_path),
         "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
-        "simulators": simulator_capabilities(),
+        "simulators": simulator_capabilities(paths=simulator_paths),
         "tracks": tracks,
         "ranking_eligible": False,
         "ranking_reason": "Capability receipt only. A matched cell still requires task digest, PDK/model digest, corners, verifier, seed and budget evidence.",
@@ -105,9 +109,20 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--source-root", action="append", default=[], metavar="TRACK=PATH")
+    parser.add_argument(
+        "--simulator",
+        action="append",
+        default=[],
+        metavar="NAME=PATH",
+        help="probe a simulator binary outside PATH",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    receipt = build_receipt(args.manifest.resolve(), _parse_roots(args.source_root))
+    receipt = build_receipt(
+        args.manifest.resolve(),
+        _parse_roots(args.source_root),
+        _parse_roots(args.simulator),
+    )
     write_receipt(args.output, receipt)
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
