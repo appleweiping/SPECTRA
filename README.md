@@ -199,8 +199,11 @@ cover ten source circuits, five source corners, feasible transfers, and delibera
 specifications. The pinned source inspection is documented in `docs/refs/REPO_ANALYSIS.md`.
 Because the public transfer evaluator and task artifacts are not part of the SPECTRA checkout,
 this track remains outside the matched SIZ7g and XSOTA-1 aggregates until a server-side adapter
-and independent verifier receipt exist. The source evaluator's five-corner golden audit is
-attached only as benchmark-integrity evidence. It is not a SPECTRA or AnaFlow answer result.
+and independent verifier receipt exist. The source evaluator's five-corner golden replay is
+attached only as benchmark-integrity evidence. The current server attempt completed 243 of 250
+jobs before the upstream 900-second per-job timeout classified eight high-cost corners as unresolved.
+That timeout receipt is retained explicitly and is not treated as a complete golden pass. It is not
+a SPECTRA or AnaFlow answer result.
 
 The Xyce AC translator is deterministic and does not alter the source deck in place. It removes ngspice-only control blocks, normalizes `dc=value` and `ac=value` source syntax, braces bare `.param` references required by Xyce, and writes a sibling `.xyce.cir` deck. The parser reads Xyce `.FD.prn` frequency tables and `.ma0` measurements. When a simulator measure reports `FAILED`, it derives the 0 dB crossing by interpolation in log frequency and records the phase convention used for phase margin. A direct audit can be reproduced on the server with the following commands.
 
@@ -231,7 +234,7 @@ be audited without relying on prose. The current snapshot is as follows.
 |---|---|---|
 | `XSOTA-MEASURED-1` | PASS for measured scope | `results/public_scope_sota_summary.md` compares every complete merged receipt under its declared contract. |
 | `XCAP-2` | PASS for capability inventory | `results/cross_domain_capability_receipt_v5.json` pins eight public source roots and the isolated ngspice-44.2/Xyce-7.10 binaries. |
-| `XPORT-1` | PASS for source/golden integrity | `results/analog_port_bench_source_audit.json` records the 54-task AnalogPortBench inventory and its optional five-corner golden audit. It is not a SPECTRA ranking row. |
+| `XPORT-1` | PASS for source inventory, PARTIAL for golden replay | `results/analog_port_bench_source_audit.json` records the complete 54-task inventory. The server replay attempted all 250 golden corner jobs, completed 243, and records eight high-cost timeout jobs in `results/golden_attempt_timeout_receipt.json`. It is not a SPECTRA ranking row. |
 | `XSOTA-1` | NOT MET | `results/xsota_gate_audit.json` retains ties, uncovered strata, TT-only rows, and capability-only rows. A universal claim requires the missing matched electrical cells and strict endpoint leads. |
 
 This table is deliberately generated from receipts rather than optimistic

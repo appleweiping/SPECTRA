@@ -1,0 +1,49 @@
+{
+  "schema": "analog-port-bench/golden-attempt/v1",
+  "status": "partial_timeout",
+  "source_root": "/root/autodl-tmp/bench_sources/AnalogPortBench",
+  "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
+  "simulator": "ngspice-44.2",
+  "upstream_command": "/root/miniconda3/bin/python benchmark/golden/audit_golden.py --procs 8",
+  "per_job_timeout_seconds": 900,
+  "expected_jobs": 250,
+  "completed_result_json": 243,
+  "missing_jobs": [
+    [
+      "ota_tele_ws_1v8",
+      "ff"
+    ],
+    [
+      "ota_tele_ws_1v8",
+      "fs"
+    ],
+    [
+      "ota_tele_ws_1v8",
+      "sf"
+    ],
+    [
+      "ota_tele_ws_hard_1_fast",
+      "ff"
+    ],
+    [
+      "ota_tele_ws_hard_1_fast",
+      "fs"
+    ],
+    [
+      "ota_tele_ws_hard_1_fast",
+      "sf"
+    ],
+    [
+      "ota_tele_ws_hard_1_fast",
+      "ss"
+    ],
+    [
+      "ota_tele_ws_hard_1_fast",
+      "tt"
+    ]
+  ],
+  "missing_count": 8,
+  "ranking_eligible": false,
+  "unmatched_reference_only": true,
+  "note": "The upstream source evaluator timed out in ota_swing_dc.cir for the listed high-cost corners. Existing source golden_audit.json was not attached because it predates this attempt and is not a complete run."
+}

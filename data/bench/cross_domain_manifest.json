@@ -258,10 +258,11 @@
         "simulations": null,
         "llm_calls": null
       },
-      "status": "source_code_audit_complete_golden_audit_in_progress_capability_only",
+      "status": "source_code_audit_complete_golden_audit_partial_timeout_capability_only",
       "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
       "task_count": 54,
-      "receipt": "results/analog_port_bench_source_audit.json"
+      "receipt": "results/analog_port_bench_source_audit.json",
+      "golden_attempt_receipt": "results/golden_attempt_timeout_receipt.json"
     }
   ]
 }
