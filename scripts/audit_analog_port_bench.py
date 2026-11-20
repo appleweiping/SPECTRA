@@ -131,6 +131,16 @@ def golden_summary(
         "ranking_eligible": False,
         "boundary": "golden source audit only; no SPECTRA or AnaFlow answer cells",
     }
+    if status_override in {"partial_timeout", "failed"}:
+        # The JSON bundled by AnalogPortBench predates the current server
+        # attempt. Keep its integrity counts, but make their provenance
+        # explicit so they cannot be read as a completed replay.
+        summary["reference_only"] = True
+        summary["reference_note"] = (
+            "Rows are from the source-provided golden_audit.json and are not "
+            "the current timed-out attempt."
+        )
+        summary["current_attempt_rows"] = 0
     if completed_jobs is not None:
         summary["completed_jobs"] = completed_jobs
     if total_jobs is not None:
@@ -138,6 +148,40 @@ def golden_summary(
     if timeout_seconds is not None:
         summary["timeout_seconds"] = timeout_seconds
     return summary
+
+
+def live_corner_summary(build_root: Path | None) -> dict[str, Any]:
+    """Summarize per-corner result files left by a partial upstream audit."""
+    if build_root is None or not build_root.is_dir():
+        return {"attached": False, "status": "not_available"}
+    corners = {"tt", "ff", "ss", "sf", "fs"}
+    rows: dict[tuple[str, str], dict[str, Any]] = {}
+    for path in build_root.glob("eval/*/audit/*/*/result.json"):
+        corner = path.parent.name
+        if corner not in corners:
+            continue
+        golden = path.parent.parent.name
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        rows[(golden, corner)] = payload
+    by_golden: dict[str, dict[str, Any]] = {}
+    for (golden, corner), payload in rows.items():
+        by_golden.setdefault(golden, {})[corner] = payload
+    complete = [entry for entry in by_golden.values() if len(entry) == 5]
+    all_pass = [
+        entry for entry in complete
+        if all(bool(payload.get("pass")) and not payload.get("errors") for payload in entry.values())
+    ]
+    return {
+        "attached": True,
+        "status": "partial" if rows else "empty",
+        "completed_corner_jobs": len(rows),
+        "completed_golden_designs": len(complete),
+        "all_five_corner_pass_designs": len(all_pass),
+        "golden_names": sorted(by_golden),
+    }
 
 
 def build_receipt(
@@ -148,6 +192,7 @@ def build_receipt(
     completed_jobs: int | None = None,
     total_jobs: int | None = None,
     timeout_seconds: int | None = None,
+    build_root: Path | None = None,
 ) -> dict[str, Any]:
     inventory = task_inventory(root)
     license_path = root / "LICENSE"
@@ -168,6 +213,7 @@ def build_receipt(
             total_jobs=total_jobs,
             timeout_seconds=timeout_seconds,
         ),
+        "live_corner_results": live_corner_summary(build_root),
         "protocol": {
             "task_total": 54,
             "feasible_tiers": ["T1", "T2", "T3"],
@@ -195,6 +241,7 @@ def build_receipt(
 def markdown(receipt: dict[str, Any]) -> str:
     inv = receipt["inventory"]
     gold = receipt["golden_audit"]
+    live = receipt["live_corner_results"]
     lines = [
         "# AnalogPortBench source and golden audit",
         "",
@@ -209,12 +256,19 @@ def markdown(receipt: dict[str, Any]) -> str:
         f"- Golden netlists: {inv['golden_netlist_count']}",
         f"- Golden audit: `{gold['status']}` ({gold.get('golden_rows', 0)} rows; "
         f"jobs {gold.get('completed_jobs', 'n/a')}/{gold.get('total_jobs', 'n/a')})",
+        f"- Live corner artifacts: `{live['status']}` ({live.get('completed_corner_jobs', 0)} jobs; "
+        f"{live.get('completed_golden_designs', 0)} complete designs)",
         f"- Ranking eligible: `{receipt['ranking_eligible']}`",
         "",
         "The source tree defines 54 tasks, including four infeasible T4 tasks.",
         "The source evaluator and golden references validate benchmark integrity",
         "under ngspice/SKY130. They do not evaluate SPECTRA or AnaFlow answers.",
     ]
+    if gold.get("reference_only"):
+        lines.extend([
+            "The attached row counts are source-provided reference counts only.",
+            "They are not a completed replay of the current server attempt.",
+        ])
     return "\n".join(lines) + "\n"
 
 
@@ -230,6 +284,7 @@ def main() -> None:
     parser.add_argument("--completed-jobs", type=int)
     parser.add_argument("--total-jobs", type=int)
     parser.add_argument("--timeout-seconds", type=int)
+    parser.add_argument("--build-root", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     receipt = build_receipt(
@@ -239,6 +294,7 @@ def main() -> None:
         completed_jobs=args.completed_jobs,
         total_jobs=args.total_jobs,
         timeout_seconds=args.timeout_seconds,
+        build_root=args.build_root.resolve() if args.build_root else None,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")

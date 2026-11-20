@@ -9,7 +9,8 @@ SPECTRA/AnaFlow transfer ranking result.
 - Tasks: 54 ({'T1': 10, 'T2': 12, 'T3': 28, 'T4': 4})
 - Circuits with 0.18um sources: 10/10
 - Golden netlists: 50
-- Golden audit: `not_run` (0 rows)
+- Golden audit: `partial_timeout` (50 rows; jobs 243/250)
+- Live corner artifacts: `partial` (242 jobs; 48 complete designs)
 - Ranking eligible: `False`
 
 The source tree defines 54 tasks, including four infeasible T4 tasks.
