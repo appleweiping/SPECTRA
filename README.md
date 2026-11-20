@@ -166,6 +166,13 @@ python scripts/audit_analog_port_bench.py \
   --timeout-seconds 900 \
   --build-root /root/autodl-tmp/bench_sources/AnalogPortBench/build \
   --output results/analog_port_bench_source_audit.json
+python scripts/run_analog_port_bench_smoke.py \
+  --source-root /root/autodl-tmp/bench_sources/AnalogPortBench \
+  --pdk-root /root/autodl-tmp/analogport_pdk \
+  --ngspice /root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
+  --python /root/miniconda3/bin/python3.12 \
+  --circuit ota_tele --golden-name ota_tele_1v8 --tech sky130_lvt \
+  --vdd 1.8 --corner tt --output results/analog_port_bench_source_smoke.json
 python scripts/test_xyce_ac_translator.py
 ~~~
 
