@@ -1,34 +1,33 @@
 \begin{table}[t]
 \centering
-\caption{Cross-simulator, cross-PDK, and silicon-tapeout generalization under identical 300-simulation, 12-call, 3-seed protocols. Viol.\ denotes mean normalized multi-corner violation ($\downarrow$).}
+\caption{Cross-simulator, cross-PDK, and silicon-tapeout transfer under matched 300-simulation, 12-call, 3-seed protocols. Viol.\ reports mean normalized multi-corner violation ($\downarrow$).}
 \label{tab:cross_domain}
-\vspace{-0.5mm}
 \scriptsize
-\setlength{\tabcolsep}{1.9pt}
+\setlength{\tabcolsep}{1.8pt}
 \begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lllcccc@{}}
 \toprule
-Suite / Circuit & PDK & Sim. & Cond. & Method & TT / PVT (\%) & Viol.\ $\downarrow$ \\
+Benchmark / Circuit & PDK & Sim. & Cond. & Method & TT / PVT (\%) & Viol.\ $\downarrow$ \\
 \midrule
-\multirow{2}{*}{AGym HoiLee} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{ng44} & \multirow{2}{*}{45} & AnaFlow & 100 / 66.7 & 0.0003 \\
- & & & & \textbf{SPECTRA-Stg} & \textbf{100 / 100} & \textbf{0.0000} \\
+\multirow{2}{*}{AnalogGym HoiLee} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{ngspice} & \multirow{2}{*}{45} & AnaFlow & 100 / 66.7 & 0.0003 \\
+ & & & & \textbf{SPECTRA (staged)} & \textbf{100 / 100} & \textbf{0.0000} \\
 \midrule
-\multirow{2}{*}{AGym Leung} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{ng44} & \multirow{2}{*}{45} & AnaFlow & 100 / 33.3 & 0.0156 \\
- & & & & \textbf{SPECTRA-Stg} & \textbf{100 / 66.7} & \textbf{0.0025} \\
+\multirow{2}{*}{AnalogGym Leung} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{ngspice} & \multirow{2}{*}{45} & AnaFlow & 100 / 33.3 & 0.0156 \\
+ & & & & \textbf{SPECTRA (staged)} & \textbf{100 / 66.7} & \textbf{0.0025} \\
 \midrule
-\multirow{2}{*}{AGym Leung} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{Xyce} & \multirow{2}{*}{45} & AnaFlow & 66.7 / 33.3 & 2.4186 \\
+\multirow{2}{*}{AnalogGym Leung} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{Xyce} & \multirow{2}{*}{45} & AnaFlow & 66.7 / 33.3 & 2.4186 \\
  & & & & \textbf{SPECTRA} & \textbf{100 / 66.7} & \textbf{0.1364} \\
 \midrule
-\multirow{2}{*}{AGym HoiLee} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{Xyce} & \multirow{2}{*}{45} & AnaFlow & \textbf{100} / 33.3 & 0.0849 \\
- & & & & SPECTRA-Rob & 33.3 / \textbf{33.3} & \textbf{0.0778} \\
+\multirow{2}{*}{AnalogGym HoiLee} & \multirow{2}{*}{SKY130} & \multirow{2}{*}{Xyce} & \multirow{2}{*}{45} & AnaFlow & \textbf{100} / 33.3 & 0.0849 \\
+ & & & & SPECTRA (robust) & 33.3 / \textbf{33.3} & \textbf{0.0778} \\
 \midrule
-\multirow{2}{*}{ATLAS OTA} & \multirow{2}{*}{GF180} & \multirow{2}{*}{ng44} & \multirow{2}{*}{17} & AnaFlow & 0.0 / 0.0 & 0.1847 \\
+\multirow{2}{*}{ATLAS OTA} & \multirow{2}{*}{GF180} & \multirow{2}{*}{ngspice} & \multirow{2}{*}{17} & AnaFlow & 0.0 / 0.0 & 0.1847 \\
  & & & & \textbf{SPECTRA} & 0.0 / 0.0 & \textbf{0.1651} \\
 \midrule
-\multirow{2}{*}{OS OpAmp} & \multirow{2}{*}{PTM180} & \multirow{2}{*}{ng44} & \multirow{2}{*}{1 (TT)} & AnaFlow & 66.7 / -- & 0.0115 \\
+\multirow{2}{*}{Two-Stage OpAmp} & \multirow{2}{*}{PTM180} & \multirow{2}{*}{ngspice} & \multirow{2}{*}{1 (TT)} & AnaFlow & 66.7 / -- & 0.0115 \\
  & & & & \textbf{SPECTRA} & \textbf{100} / -- & \textbf{0.0000} \\
 \midrule
-SGAnalog (17) & SKY130A & ng44 & Native & \textbf{SPECTRA} & \multicolumn{2}{c}{48/51 conv.\ (\SGAnalogFidelity{} fid.)} \\
+SGAnalog (17 tapeouts) & SKY130A & ngspice & Native & \textbf{SPECTRA} & \multicolumn{2}{c}{48/51 conv.\ (\SGAnalogFidelity{} fid.)} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

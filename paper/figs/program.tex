@@ -24,11 +24,7 @@ def design(p, lut, spec):
     sl = min(I_sl1 / Cc, I7 / (CL + Cc))
     return n, {"gain_db": db(A0)+8, "ugbw": f, "pm": pm, "slew": sl}
 \end{lstlisting}
-\vspace{-2mm}
-\caption{Abridged design-intent program written by SPECTRA for a near-frontier (T3) folded-cascode two-stage
-op-amp task (E1, seed 0; lines elided with \texttt{...}). Sizes come from $(g_m/I_D, L, I_D)$ through
-\texttt{lut.size}; the returned predictions are compared against simulation. The agent has folded corrections
-learned from earlier diagnoses back into its model (slew comment, gain offset).}
-\Description{Python code listing of a sizing program with a PARAMS dictionary and a design function.}
+\caption{Abridged executable design-intent program synthesized by \textsc{SPECTRA} on near-frontier 10-specification folded-cascode two-stage op-amp \texttt{opamp-09}. Device widths are resolved deterministically from $(g_m/I_D, L, I_D)$ via \texttt{lut.size}, while analytical self-predictions incorporate closed-loop model refinements (fold-branch slew limit and tracking nulling resistor $R_z$).}
+\Description{Python code listing of an executable gm/Id sizing program with PARAMS bounds and a self-predicting design function.}
 \label{fig:program}
 \end{figure}

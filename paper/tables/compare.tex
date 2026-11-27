@@ -1,25 +1,24 @@
 \begin{table}[t]
 \centering
-\caption{Evaluation settings of LLM-based analog design work (as reported in each paper). Topo.: the agent
-chooses the topology; Q: quantitative multi-specification targets; F: functional pass/fail.}
+\caption{Comparison of specification-driven analog circuit synthesis and sizing frameworks. Topo.: automated topology synthesis; Q: simultaneous quantitative multi-metric targets; F: qualitative functional checks; FoM: scalar figure-of-merit optimization.}
 \label{tab:compare}
 \scriptsize
 \setlength{\tabcolsep}{1.8pt}
 \begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lccccl@{}}
 \toprule
-Work & Tasks & Topo. & Specs & Devices & PVT / mismatch \\
+Framework & Tasks & Topo. & Specs & Device Models & PVT / Mismatch \\
 \midrule
 AnalogCoder~\cite{lai2025analogcoder} & 24 & \checkmark & F & Level-1 & -- \\
 AnalogCoder-Pro~\cite{lai2026analogcoderpro} & 28 & \checkmark & F + FoM & BPTM 45\,nm & -- \\
 AnalogSAGE~\cite{wang2025analogsage} & 10 op-amps & \checkmark & Q & SKY130 & -- \\
 AaLLM~\cite{habib2026aallm} & 24 op-amps & \checkmark & Q & SKY130 & -- \\
 AutoSizer~\cite{yu2026autosizer} & 24 & -- & Q + FoM & SKY130 & -- \\
-AnalogScout~\cite{long2026analogscout} & 3+1 OTAs & -- & Q & SKY130, GF180 & 9 corners, MC \\
+AnalogScout~\cite{long2026analogscout} & 4 OTAs & -- & Q & SKY130, GF180 & 9 corners, MC \\
 OPERA~\cite{saxena2026opera} & 6 op-amps & -- & Q & SKY130 (PEX) & 15 corners \\
-Long-Horizon Bench~\cite{adbench2026longhorizon} & 50 & \checkmark & Q & SKY130 & some: 30 cond., MC \\
+Long-Horizon Bench~\cite{adbench2026longhorizon} & 50 & \checkmark & Q & SKY130 & subset: 30c, MC \\
 \midrule
-\textbf{SPECTRA-Bench} & \NTasksTotal{} (12 fam.) & \checkmark & Q, certified & SKY130 & 45 cond. (robust), MC \\
+\textbf{SPECTRA-Bench (ours)} & \textbf{\NTasksTotal{} (12 fam.)} & \checkmark & \textbf{Q, certified} & \textbf{SKY130} & \textbf{45 corners, MC} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

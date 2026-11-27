@@ -1,8 +1,7 @@
 \begin{table*}[t]
 \centering
-\caption{End-to-end specification-to-netlist synthesis on \textsc{SPECTRA-Bench} (\NPrimaryTasks{} primary near-frontier T3 and 45-corner PVT-robust tasks across \NPrimaryFamilies{} SKY130 circuit families; identical \texttt{GPT-6.1-sol} backbone, shared topology cards, 12-call cap, and 300/600 nominal/robust simulation caps). Success requires independent out-of-loop SPICE verification across all target metrics. W/L denotes per-task wins/losses of \textsc{SPECTRA} against each baseline; $p_{\text{Holm}}$ reports Holm-corrected paired permutation $p$-values on the primary endpoint. Calls$^\star$ and Sims$^\star$ are medians over successful runs; kTok is mean tokens per run ($\times 10^3$).}
+\caption{End-to-end specification-to-netlist synthesis on \textsc{SPECTRA-Bench} (\NPrimaryTasks{} primary near-frontier T3 and 45-corner PVT-robust tasks across \NPrimaryFamilies{} SKY130 circuit families under a shared LLM backbone, identical topology cards, $B_{\text{LLM}}=12$, and $B_{\text{sim}}=300/600$ nominal/robust condition-evaluations). Success requires out-of-loop SPICE verification across all target constraints. Task W/L counts per-task wins/losses of \textsc{SPECTRA} against each baseline; $p_{\text{Holm}}$ reports Holm-corrected paired permutation $p$-values; Calls$^\star$ and Sims$^\star$ are medians over solved runs; kTok denotes mean tokens per run ($\times 10^3$).}
 \label{tab:e1g_main}
-\vspace{-0.5mm}
 \footnotesize
 \setlength{\tabcolsep}{4.8pt}
 \begin{adjustbox}{max width=\textwidth}

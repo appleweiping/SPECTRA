@@ -1,17 +1,16 @@
 \begin{table*}[t]
 \centering
-\caption{Matched fixed-topology sizing comparison across eight frameworks on \SizTasks{} SKY130 tasks spanning six circuit families (\SizSeeds{} seeds, \SizCells{} task-seed cells per row; 300 condition-evaluations, 12 LLM calls, and independent 45-condition PVT verification). External rows are paper-aligned adapters under a shared 3-corner inner-loop search objective. Top block: preregistered primary configurations (where \textsc{SPECTRA-FullGrid} evaluates all 45 corners inside its 6-round budget). Bottom blocks: corner-budget-aligned \textsc{SPECTRA} screening strategies under the identical 300-simulation cap, plus the 92-task/12-family expansion (\textsc{SIZ11g}, 276 cells/row).}
+\caption{Matched fixed-topology sizing across eight frameworks on \SizTasks{} SKY130 tasks spanning six circuit families (\SizSeeds{} seeds, \SizCells{} task-seed cells per row; $B_{\text{sim}}=300$, $B_{\text{LLM}}=12$, and out-of-loop 45-condition PVT verification). Top block: default configurations (where external methods evaluate 3 search corners per step while \textsc{SPECTRA-FullGrid} checks all 45 corners per inner-loop verification). Middle and bottom blocks: budget-aligned inner-loop corner screening under the identical 300-simulation cap, and full 92-task, 12-family scaling (276 cells per row).}
 \label{tab:main}
-\vspace{-0.5mm}
 \footnotesize
 \setlength{\tabcolsep}{4.2pt}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}llcccccc@{}}
 \toprule
-Track / Protocol & Framework & Venue & Cells & TT Succ.\ (\%) & PVT Succ.\ (\%) & Mean TT Viol.\ $\downarrow$ & Mean PVT Viol.\ $\downarrow$ \\
+Evaluation Suite & Framework & Venue & Cells & TT Succ.\ (\%) & PVT Succ.\ (\%) & Mean TT Viol.\ $\downarrow$ & Mean PVT Viol.\ $\downarrow$ \\
 \midrule
-\multirow{8}{*}{\shortstack[l]{36-Task Primary\\(6 families, 3 seeds)}}
- & \textbf{SPECTRA-FullGrid (primary)} & Ours & 108 & \SizSpectraTTPct{} [67.6, 91.7] & \SizSpectraPVTPct{} [0.0, 41.7] & \SizSpectraTTViol{} & \SizSpectraPVTViol{} \\
+\multirow{8}{*}{\shortstack[l]{36-Task Suite\\(6 families, 3 seeds)}}
+ & \textbf{SPECTRA-FullGrid (45c check)} & Ours & 108 & \SizSpectraTTPct{} [67.6, 91.7] & \SizSpectraPVTPct{} [0.0, 41.7] & \SizSpectraTTViol{} & \SizSpectraPVTViol{} \\
  & AnaFlow~\cite{ahmadzadeh2025anaflow} & ICCAD'25 & 108 & \textbf{\SizAnaFlowTTPct{}} [77.8, 94.4] & \textbf{\SizAnaFlowPVTPct{}} [8.3, 55.6] & \textbf{\SizAnaFlowTTViol{}} & \SizAnaFlowPVTViol{} \\
  & AutoSizer~\cite{yu2026autosizer} & ICML'26 & 108 & \SizAutoSizerTTPct{} [69.4, 89.8] & \SizAutoSizerPVTPct{} [0.0, 33.3] & \SizAutoSizerTTViol{} & \SizAutoSizerPVTViol{} \\
  & ADO-LLM~\cite{yin2024adollm} & ICCAD'24 & 108 & \SizADOLLMTTPct{} [61.1, 87.0] & \SizADOLLMPVTPct{} [0.0, 41.7] & \SizADOLLMTTViol{} & \SizADOLLMPVTViol{} \\
@@ -20,14 +19,14 @@ Track / Protocol & Framework & Venue & Cells & TT Succ.\ (\%) & PVT Succ.\ (\%) 
  & ATLAS~\cite{oh2026atlas} & ICCAD'26 & 108 & \SizATLASTTPct{} [22.2, 48.1] & \SizATLASPVTPct{} [0.0, 19.4] & \SizATLASTTViol{} & \SizATLASPVTViol{} \\
  & GLOVA~\cite{kim2025glova} & DAC'25 & 108 & \SizGLOVATTPct{} [21.3, 50.0] & \SizGLOVAPVTPct{} [0.0, 8.3] & \SizGLOVATTViol{} & \textbf{\SizGLOVAPVTViol{}} \\
 \midrule
-\multirow{2}{*}{\shortstack[l]{36-Task Corner-Screen\\Sensitivity (300 sims)}}
+\multirow{2}{*}{\shortstack[l]{36-Task Inner-Screen\\Alignment (300 sims)}}
  & SPECTRA-Hybrid (3-corner screen) & Ours & 108 & 88.9\% & 30.6\% & 0.0713 & 0.4463 \\
- & SPECTRA-Union-TopK4 (low-$V_{DD}$ screen) & Ours & 108 & \textbf{91.7\%} & \textbf{33.3\%} & \textbf{0.0128} & \textbf{0.2820} \\
+ & \textbf{SPECTRA-Union-TopK4 (low-$V_{DD}$)} & Ours & 108 & \textbf{91.7\%} & \textbf{33.3\%} & \textbf{0.0128} & \textbf{0.2820} \\
 \midrule
-\multirow{3}{*}{\shortstack[l]{92-Task Expansion\\(12 families, 3 seeds)}}
- & AnaFlow (best external baseline)~\cite{ahmadzadeh2025anaflow} & ICCAD'25 & 276 & 80.1\% & 22.8\% & \textbf{0.0527} & 0.6053 \\
- & SPECTRA-FullGrid & Ours & 276 & 76.1\% & 12.3\% & 0.0972 & 0.5931 \\
- & SPECTRA-Family (hybrid low-$V_{DD}$ screen) & Ours & 276 & \textbf{80.4\%} & \textbf{26.3\%} & 0.0698 & \textbf{0.3822} \\
+\multirow{3}{*}{\shortstack[l]{92-Task Full Suite\\(12 families, 3 seeds)}}
+ & AnaFlow (top external baseline)~\cite{ahmadzadeh2025anaflow} & ICCAD'25 & 276 & 80.1\% & 22.8\% & \textbf{0.0527} & 0.6053 \\
+ & SPECTRA-FullGrid (45c check) & Ours & 276 & 76.1\% & 12.3\% & 0.0972 & 0.5931 \\
+ & \textbf{SPECTRA-Family (low-$V_{DD}$ screen)} & Ours & 276 & \textbf{80.4\%} & \textbf{26.3\%} & 0.0698 & \textbf{0.3822} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}

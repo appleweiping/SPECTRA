@@ -1,8 +1,7 @@
 \begin{table}[t]
 \centering
-\caption{Component ablations on matched \textsc{SPECTRA-Bench} tasks. W/L counts tasks/cells where full \textsc{SPECTRA} beats/loses to the ablated variant; Calls$^\star$/Sims$^\star$ are medians over successful runs; Mean Sims averages total evaluations across all runs.}
+\caption{Architectural ablations across matched \textsc{SPECTRA-Bench} suites. W/L counts tasks or cells where full \textsc{SPECTRA} wins/loses against each ablated variant; Calls$^\star$/Sims$^\star$ are medians over solved runs; Mean averages total SPICE evaluations across all runs.}
 \label{tab:ablation}
-\vspace{-0.5mm}
 \scriptsize
 \setlength{\tabcolsep}{2.1pt}
 \begin{adjustbox}{max width=\columnwidth}
@@ -25,17 +24,16 @@ Gen+TPE~\cite{lai2026analogcoderpro} & 29.4 [15, 44] & 20/2 & 1.0 & 59 & 243.6 \
 AnalogCoder-style~\cite{lai2025analogcoder} & 73.9 [61, 86] & 8/3 & 3.0 & 3 & 5.0 \\
 \quad AnalogCoder-style w/o cards & 73.9 [57, 91] & 6/4 & 3.0 & 3 & 5.1 \\
 \midrule
-\multicolumn{6}{@{}l}{\emph{(c) Multi-seed matrix, 18 tasks $\times$ 3 seeds = 54 cells (TT/PVT \%; Viol.)}} \\
+\multicolumn{6}{@{}l}{\emph{(c) Multi-seed mechanism matrix, 18 tasks $\times$ 3 seeds = 54 cells (TT/PVT \%; Viol.)}} \\
 SPECTRA (full) & 63.0 / 38.9 (\textbf{0.04}) & -- & 3.9 & -- & 96.7 \\
 \quad w/o diagnosis & 64.8 / 55.6 (0.09) & 6/7 & 4.2 & -- & 90.4 \\
-\quad w/o intent (raw $W/L$) & \textbf{64.8 / 66.7} (0.10) & 7/8 & 3.0 & -- & 70.5 \\
-\quad w/o refinement & 42.6 / 27.8 (0.00$^\ddagger$) & \textbf{15/4} & 2.4 & -- & 16.6 \\
-\quad w/o cards & 42.6 / 33.3 (0.00$^\ddagger$) & \textbf{14/3} & 1.6 & -- & 36.6 \\
+\quad w/o intent (raw $W/L$ prog.) & \textbf{64.8 / 66.7} (0.10) & 7/8 & 3.0 & -- & 70.5 \\
+\quad w/o intent-space refinement & 42.6 / 27.8 (0.00$^\ddagger$) & \textbf{15/4} & 2.4 & -- & 16.6 \\
+\quad w/o topology knowledge cards & 42.6 / 33.3 (0.00$^\ddagger$) & \textbf{14/3} & 1.6 & -- & 36.6 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\vspace{-1mm}
 \begin{flushleft}\fontsize{6.0}{6.8}\selectfont
-$^\ddagger$Over passing cells; paired score $\Delta$ favors full SPECTRA over w/o refinement and w/o cards.
+$^\ddagger$Evaluated over solved cells only; paired total-violation $\Delta$ favors full \textsc{SPECTRA}.
 \end{flushleft}
 \end{table}

@@ -134,8 +134,9 @@ def pvt_table(out="pvt.tex"):
     c = _cmp().get("pvt")
     if not c or len(c["methods"]) < 3:
         return
-    lab = {"spectra": "SPECTRA (adaptive worst conditions)", "spectra_pvt_nominal": "\\quad w/o PVT-aware refinement",
-           "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style", "genbo": "Gen+TPE (3 fixed corners)",
+    lab = {"spectra": "SPECTRA (adaptive active-set)", "spectra_pvt_nominal": "\\quad w/o PVT-aware refinement",
+           "spectra_min": "SPECTRA-min", "direct": "AnalogCoder-style~\\cite{lai2025analogcoder}",
+           "genbo": "Gen+TPE (3 fixed corners)~\\cite{lai2026analogcoderpro}",
            "genbo_full": "Gen+TPE-full (12 regen., adaptive)"}
     yp = ROOT / "results" / "mc_yield.json"
     my = json.loads(yp.read_text())["yield"] if yp.exists() else {}
@@ -148,15 +149,15 @@ def pvt_table(out="pvt.tex"):
             name = f"\\textbf{{{name}}}"
         ys = [v for k, v in my.get(m, {}).items() if k.split("/")[0] in set(c["tasks"]) and k.endswith("s0")]
         y = f" & {100 * sum(ys) / len(ys):.0f}" if ys else (" & --" if my else "")
-        rows.append(f"{name} & {f(d['success'])} [{f(d['ci95'][0])},{f(d['ci95'][1])}] & {_wl(d)} & "
+        rows.append(f"{name} & {100 * d['success']:.1f} [{f(d['ci95'][0])}, {f(d['ci95'][1])}] & {_wl(d)} & "
                     f"{f(d['median_sims_success'], False)} & {f(d['mean_sims'], False)}{y} \\\\")
-    ycol = " & Yield" if my else ""
-    cap = (f"PVT-robust tasks of the subset ({c['n_tasks']} tasks, seed 0; success on all 45 conditions). Sims: "
-           "condition-evaluations, median over successful runs and mean over all runs"
-           + ("; yield: mean mismatch Monte-Carlo yield (\\%) at TT of the successful designs" if my else "") + ".")
+    ycol = " & Yield (\\%)" if my else ""
+    cap = (f"Multi-corner closure and Pelgrom mismatch yield across the {c['n_tasks']}-task 45-condition PVT subset "
+           "($B_{\\text{sim}}=600$). Sims$^\\star$/Sims report median evaluations over solved runs and mean across all runs"
+           + ("; Yield averages 100-sample mismatch Monte Carlo at TT over PVT-closed designs" if my else "") + ".")
     tex = ("\\begin{table}[t]\n\\centering\n\\caption{" + cap + "}\n\\label{tab:pvt}\n\\scriptsize\n"
-           "\\setlength{\\tabcolsep}{2.5pt}\n\\begin{adjustbox}{max width=\\columnwidth}\n\\begin{tabular}{@{}lcccc" + ("c" if my else "") + "@{}}\n\\toprule\n"
-           "Method & Success (\\%) [CI] & W/L & Sims$^\\star$ & Sims" + ycol + " \\\\\n\\midrule\n" + "\n".join(rows) +
+           "\\setlength{\\tabcolsep}{2.2pt}\n\\begin{adjustbox}{max width=\\columnwidth}\n\\begin{tabular}{@{}lcccc" + ("c" if my else "") + "@{}}\n\\toprule\n"
+           "Method & Succ.\\ (\\%) [CI] & W/L & Sims$^\\star$ & Sims" + ycol + " \\\\\n\\midrule\n" + "\n".join(rows) +
            "\n\\bottomrule\n\\end{tabular}\n\\end{adjustbox}\n\\end{table}\n")
     write_tex(TAB / out, tex)
 

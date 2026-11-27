@@ -1,20 +1,20 @@
 \begin{table}[t]
 \centering
-\caption{PVT-robust tasks of the subset (11 tasks, seed 0; success on all 45 conditions). Sims: condition-evaluations, median over successful runs and mean over all runs; yield: mean mismatch Monte-Carlo yield (\%) at TT of the successful designs.}
+\caption{Multi-corner closure and Pelgrom mismatch yield across the 11-task 45-condition PVT subset ($B_{\text{sim}}=600$). Sims$^\star$/Sims report median evaluations over solved runs and mean across all runs; Yield averages 100-sample mismatch Monte Carlo at TT over PVT-closed designs.}
 \label{tab:pvt}
 \scriptsize
-\setlength{\tabcolsep}{2.5pt}
+\setlength{\tabcolsep}{2.2pt}
 \begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
-Method & Success (\%) [CI] & W/L & Sims$^\star$ & Sims & Yield \\
+Method & Succ.\ (\%) [CI] & W/L & Sims$^\star$ & Sims & Yield (\%) \\
 \midrule
-SPECTRA (adaptive worst conditions) & 64 [36,91] & -- & 111 & 268 & 86 \\
-\quad w/o PVT-aware refinement & 64 [36,91] & 1/1 & 56 & 257 & 95 \\
-Gen+TPE-full (12 regen., adaptive) & 64 [36,91] & 2/2 & 48 & 275 & 98 \\
-SPECTRA-min & 45 [18,73] & 2/0 & 46 & 187 & 78 \\
-Gen+TPE (3 fixed corners) & 27 [0,55] & 4/0 & 48 & 327 & 88 \\
-\textbf{AnalogCoder-style} & 73 [45,100] & 1/2 & 70 & 132 & 85 \\
+SPECTRA (adaptive active-set) & 63.6 [36, 91] & -- & 111 & 268 & 86 \\
+\quad w/o PVT-aware refinement & 63.6 [36, 91] & 1/1 & 56 & 257 & 95 \\
+Gen+TPE-full (12 regen., adaptive) & 63.6 [36, 91] & 2/2 & 48 & 275 & 98 \\
+SPECTRA-min & 45.5 [18, 73] & 2/0 & 46 & 187 & 78 \\
+Gen+TPE (3 fixed corners)~\cite{lai2026analogcoderpro} & 27.3 [0, 55] & 4/0 & 48 & 327 & 88 \\
+\textbf{AnalogCoder-style~\cite{lai2025analogcoder}} & 72.7 [45, 100] & 1/2 & 70 & 132 & 85 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
