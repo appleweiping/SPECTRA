@@ -6,7 +6,7 @@ PARAMS = {"gmid1": (19.0, 14.0, 24.0), "L1": (2.0, 1.0, 4.0),
     "Cc": (1.6e-12, 1.2e-12, 2.4e-12), "kz": (3.0, 1.0, 6.0), ...}
 def design(p, lut, spec):
     ...
-    m1 = lut.size("n", p["gmid1"], p["L1"], It / 2, vds=1.0, vsb=0.25)
+    m1 = lut.size("n", p["gmid1"], p["L1"], It/2, vds=1.0, vsb=0.25)
     m7 = lut.size("n", p["gmid7"], p["L7"], I7, vds=0.9)
     Cc = p["Cc"]; Rz = p["kz"] / m7.gm
     n = Netlist("vinp vinn vout vdd vss ibias")
@@ -19,10 +19,10 @@ def design(p, lut, spec):
     A0 = A1 * A2
     gbw = 0.75 * gm1 / (2 * PI * Cc)
     ...
-    # first-stage slew limited by fold-branch current (sim showed ~2*If/Cc) or tail
+    # 1st-stage slew limited by fold-branch (sim: ~2*If/Cc) or tail
     I_sl1 = min(2 * If, It) * 0.8
-    slew = min(I_sl1 / Cc, I7 / (CL + Cc))
-    return n, {"gain_db": db(A0) + 8, "ugbw": f, "pm": pm, "slew": slew, ...}
+    sl = min(I_sl1 / Cc, I7 / (CL + Cc))
+    return n, {"gain_db": db(A0)+8, "ugbw": f, "pm": pm, "slew": sl}
 \end{lstlisting}
 \vspace{-2mm}
 \caption{Abridged design-intent program written by SPECTRA for a near-frontier (T3) folded-cascode two-stage

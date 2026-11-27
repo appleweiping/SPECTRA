@@ -1,0 +1,3 @@
+# Standalone package: shared sections, tables, figures and refs.bib live one level up.
+ensure_path('TEXINPUTS', '..');
+ensure_path('BIBINPUTS', '..');

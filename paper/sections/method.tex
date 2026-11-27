@@ -1,81 +1,61 @@
-\section{SPECTRA Framework}
+\section{SPECTRA Methodology}
 \label{sec:method}
 
-Figure~\ref{fig:overview} summarises SPECTRA. Given a natural-language specification, the LLM writes a
-\emph{design-intent program}; a deterministic tool chain executes, checks and simulates it and returns a
-device-level diagnosis; the LLM then selects one of three repair actions. All numerical search happens in the
-low-dimensional intent space exposed by the program, and robust tasks are closed by PVT-aware refinement.
+\input{figs/overview}
 
-\subsection{Design-Intent Programs}
+\subsection{Problem Formulation and Overview}
+\label{sec:formulation}
+Consider an analog synthesis task $\mathcal{T} = (x_{\text{NL}}, \mathcal{P}_{\text{io}}, \mathcal{B}, \mathcal{S}, \mathcal{C}_{\text{eval}})$, where $x_{\text{NL}}$ is a natural-language specification, $\mathcal{P}_{\text{io}}$ is a fixed subcircuit port interface, $\mathcal{B}$ is a family-specific SPICE testbench suite, $\mathcal{S} = \{(s, \circ_s, \tau_s)\}_{s=1}^{|\mathcal{S}|}$ is a set of quantitative performance constraints with comparator $\circ_s \in \{\ge, \le, \text{range}\}$ and target $\tau_s$, and $\mathcal{C}_{\text{eval}}$ denotes the verification condition set. For nominal tasks, $\mathcal{C}_{\text{eval}} = \{c_{\text{TT}}\}$ at $(27\,^\circ\mathrm{C}, V_{DD}=1.8\,\mathrm{V})$; for robust tasks, $\mathcal{C}_{\text{eval}} = \mathcal{C}_{\text{PVT}}$ spans all $|\mathcal{C}_{\text{PVT}}| = 45$ combinations of $\{\text{TT, FF, SS, SF, FS}\} \times \{-40, 27, 125\,^\circ\mathrm{C}\} \times \{1.62, 1.80, 1.98\,\mathrm{V}\}$. The synthesizer must output a transistor-level SKY130 subcircuit netlist $N^*$ restricted to physical foundry primitives ($1.8\,\mathrm{V}$ BSIM4 nFET/pFET devices, vertical substrate PNPs, temperature-compensated high-resistance poly resistors, and MIM capacitors, with no ideal internal sources) such that every constraint in $\mathcal{S}$ holds simultaneously across all $c \in \mathcal{C}_{\text{eval}}$, subject to hard caps of $B_{\text{LLM}}$ language-model calls and $B_{\text{sim}}$ SPICE condition-evaluations.
+
+Figure~\ref{fig:overview} illustrates the closed-loop architecture of \textsc{SPECTRA}. Rather than mapping $x_{\text{NL}}$ directly to raw SPICE text, \textsc{SPECTRA} decomposes synthesis into four coupled stages: \textbf{(a) Executable Design-Intent Program Synthesis}, where the LLM constructs a low-dimensional Python sizing module coupled to BSIM4 lookup tables and emits analytical self-predictions; \textbf{(b) Static ERC and SPICE Evaluation}, which enforces topological legality at zero simulation cost before running batch \texttt{ngspice} testbenches; \textbf{(c) Four-Channel Device-Level Causal Diagnosis}, which transforms raw operating points and sensitivities into physical root-cause evidence for a hierarchical repair policy; and \textbf{(d) Intent-Space Trust-Region CMA-ES and Adaptive PVT Closure}, which optimizes continuous intent parameters while preserving circuit symmetries and promoting worst-case corners.
+
+\subsection{Executable Design-Intent Programs}
 \label{sec:intent}
 \input{figs/program}
-A design-intent program is a short Python module with two parts. \texttt{PARAMS} declares the intent variables (the prompt asks for 3--12)
-with initial values and bounds (inversion levels $g_m/I_D$, channel lengths, branch currents, compensation
-capacitance, resistor ratios). \texttt{design(p,\,lut,\,spec)} sizes every transistor from intent through a
-characterised lookup table: \texttt{lut.size} maps $(g_m/I_D, L, I_D, V_{DS}, V_{SB})$ to the device and returns the
-width together with $V_{GS}$, $V_{th}$, $V_{dsat}$, $g_m$, $g_{ds}$, capacitances and $f_T$; the function returns
-the netlist \emph{and the program's own prediction of every specified metric} (Fig.~\ref{fig:program}). The LUTs are generated with ngspice
-from the SKY130 BSIM4 models for $\{5$ process corners$\}\times\{-40,27,125\,^\circ\mathrm{C}\}$ on an
-$L\times V_{DS}\times V_{SB}\times V_{GS}$ grid ($11\times10\times5\times181$) at a reference finger width; queries
-interpolate trilinearly in $(\log L, V_{DS}, V_{SB})$ and invert $g_m/I_D$ on the strong-inversion branch, and
-\texttt{lut.at(corner,\,T)} exposes other corners for headroom checks. This mirrors the $g_m/I_D$
-methodology~\cite{jespers2017gmid}: the LLM reasons about \emph{what} each device should do, and widths follow
-deterministically. Programs run in an isolated subprocess; widths are split into fingers of at most
-$5\,\mu$m before compilation to SKY130 instances.
 
-The self-prediction is the key design choice: when prediction and simulation disagree, the discrepancy tells the
-LLM that its \emph{model of the circuit} is wrong, which is more informative than a failing number. Across the
-\NPrograms{} final programs written by the agent in our main experiment, the predictions of first-order quantities
-are close to re-simulation---median error \PredPower{} for power, \PredUGBW{} for UGBW (\PredUGBWwithin{} within
-25\%), \PredGain{} for gain and \PredPM{} for phase margin---while second-order effects are not: CMRR and PSRR are
-off by \PredCMRR{} and \PredPSRR{}, slew rate by \PredSlew{} and settling by \PredSettle{}. These are exactly the
-quantities that simulation-in-the-loop refinement must close.
-
-\subsection{Static Checks}
-Before any simulation, the netlist is parsed into a canonical form and checked by an electrical-rule checker:
-exact port list, dangling nodes, nodes without a DC path to a port (floating gates), illegal body connections
-(SKY130 nFET bulk must be the substrate), substrate-PNP collectors, and device/passive ranges. Errors are returned
-verbatim and cost no simulation.
-
-\subsection{Device-Level Diagnosis}
-\label{sec:diag}
-Raw simulator output is converted into four pieces of evidence:
-(i) a \emph{specification table} with target, simulated and predicted values and a normalised violation;
-(ii) an \emph{operating-point table} classifying every transistor as saturated, at the edge of saturation
-($V_{DS}-V_{dsat}<50$\,mV), triode, weak inversion or off, with $I_D$, $g_m/I_D$, $g_m/g_{ds}$ and the
-$V_{DS}-V_{dsat}$ margin;
-(iii) \emph{prediction--simulation discrepancies} beyond 25\% (6\,dB, 10$^\circ$);
-(iv) when the design is close to feasible, \emph{finite-difference sensitivities} of every failing metric to up to eight intent variables (+10\%
-perturbations, one simulation each, charged to the budget).
-A small rule base (17 rules: four region rules and 13 family-specific ones) turns this evidence into hypotheses that link failing specs to
-devices or nodes, e.g., ``M5 in triode ($V_{DS}=0.14<V_{dsat}=0.21$): tail source starved of headroom'' or
-``output DC at a rail: second-stage currents unbalanced''.
-
-\subsection{Hierarchical Repair Policy}
-After each evaluation the LLM receives the current program, the diagnosis and a six-step history, and selects
-(a) \textsc{Refine}---the structure is right and the specs are missed by moderate margins; it may move the
-initial point and bounds of the search; (b) \textsc{Edit}---rewrite the program (bias network, sizing logic,
-compensation or topology); or (c) \textsc{Declare-Infeasible} with a physical argument (\NDeclaredSpectra{} of SPECTRA's main-experiment runs ended this way). Editing costs an LLM call
-but no search budget; refinement costs simulations but no LLM call.
-
-\subsection{Intent-Space Refinement}
-\textsc{Refine} runs CMA-ES~\cite{hansen2016cma} over the unit-normalised intent variables (log scale when the
-bound ratio exceeds 4), warm-started at the current point with $\sigma_0=0.15$ and population
-$\max(8, 4+\lfloor 3\ln n\rfloor)$, in chunks of 80 simulations. Each candidate is produced by re-executing the
-program, so matching, mirror ratios and bias relations encoded by the LLM are preserved by construction; the
-programs expose a median of \IntentVars{} free intent variables for netlists with \RawVars{} raw sizing variables,
-and every point of the intent space is a coherent bias plan rather than an arbitrary width vector. The objective is the normalised violation
+A design-intent program (Figure~\ref{fig:program}) is a sandboxed Python module comprising a parameter declaration \texttt{PARAMS} and a pure sizing procedure \texttt{design(p, lut, spec)}. \texttt{PARAMS} defines $d$ continuous physical intent variables $p = (p_1, \dots, p_d)$ with initial values and box bounds $[\ell_i, u_i]$---typically $3 \le d \le 12$ degrees of freedom representing transconductance efficiencies $(g_m/I_D)$, channel lengths $L$, branch currents $I_D$, Miller capacitances $C_c$, and zero-nulling ratios $k_z$. Inside \texttt{design}, transistors are sized not by guessing widths, but by querying pre-characterized SKY130 BSIM4 lookup tables~\cite{jespers2017gmid} generated across $\{5\text{ corners}\} \times \{-40, 27, 125\,^\circ\mathrm{C}\}$ on an $L \times V_{DS} \times V_{SB} \times V_{GS}$ tensor ($11 \times 10 \times 5 \times 181$) at reference finger width $W_{\text{ref}} = 5\,\mu\mathrm{m}$. Given $(g_m/I_D, L, I_D, V_{DS}, V_{SB})$, \texttt{lut.size} performs trilinear interpolation in $(\log L, V_{DS}, V_{SB})$, inverts $(g_m/I_D)(V_{GS})$ along the monotone moderate-to-strong inversion branch to obtain normalized current density $J_D^* = I_D / W_{\text{ref}}$, and computes device width deterministically:
 \begin{equation}
-  \mathcal{V}(x)=\max_{c\in\mathcal{C}}\sum_{s\in\mathcal{S}}\min\!\big(2,\,v_s(m_{s,c}(x))\big),
+  W = W_{\text{ref}} \cdot \frac{I_D}{J_D^*\!\big(g_m/I_D,\, L,\, V_{DS},\, V_{SB}\big)},
+  \label{eq:lut_size}
+\end{equation}
+returning a device record $(W, V_{GS}, V_{th}, V_{dsat}, g_m, g_{ds}, C_{gg}, C_{gd}, f_T)$ while splitting total width into fingers of at most $5\,\mu\mathrm{m}$. Cross-corner queries \texttt{lut.at(corner, T)} allow programs to inspect corner headroom analytically. Prior to any SPICE invocation, a canonical parser and electrical-rule checker (ERC) verifies port signatures, DC paths to supply/ground (catching floating gates), legal body ties (enforcing p-substrate nFET bulks and grounded PNP collectors), and PDK geometry limits, returning structural violations at zero simulation cost.
+
+Crucially, \texttt{design} outputs both the compiled netlist $N(p)$ and a dictionary of analytical self-predictions $\hat{m}(p)$ for every constrained metric. Disagreement between $\hat{m}_s(p)$ and SPICE measurement $m_{s,c}(N(p))$ isolates errors in the agent's \emph{analytical circuit model}---such as neglecting cascode output conductance or fold-branch slew limits---providing a sharper structural signal than raw metric failure alone.
+
+\subsection{Four-Channel Device-Level Causal Diagnosis}
+\label{sec:diag}
+For each constraint $s \in \mathcal{S}$ and condition $c$, we define a dimensionless shortfall $v_s(m_{s,c}) \ge 0$ ($v_s = 0$ iff satisfied): for positive scale-invariant quantities (bandwidth, power, slew, settling, noise, regulation), $v_s(m) = \max(0, \log_{10}(\tau_s / m))$ when $\circ_s$ is $\ge$ (and $\log_{10}(m / \tau_s)$ when $\le$); for linear or decibel metrics, $v_s(m) = \max(0, (\tau_s - m)/|\tau_s|)$ (or $(m - \tau_s)/|\tau_s|$); and for interval targets $[\tau_{\text{lo}}, \tau_{\text{hi}}]$, distance outside the interval normalized by $(\tau_{\text{hi}} - \tau_{\text{lo}})$.
+
+When nominal or corner verification fails, \textsc{SPECTRA}'s deterministic analyzer constructs four structured evidence channels:
+(i) a \emph{specification table} contrasting target $\tau_s$, SPICE value $m_{s,c}$, analytical prediction $\hat{m}_s$, and shortfall $v_s$;
+(ii) an \emph{operating-region map} classifying every MOSFET into saturation ($V_{DS} \ge V_{dsat} + 50\,\mathrm{mV}$), edge-of-saturation ($0 \le V_{DS} - V_{dsat} < 50\,\mathrm{mV}$), triode ($V_{DS} < V_{dsat}$), subthreshold ($V_{GS} < V_{th} - 50\,\mathrm{mV}$), or cutoff ($I_D < 1\,\mathrm{nA}$), annotated with $I_D$, $g_m/I_D$, $g_m/g_{ds}$, and overdrive margin $V_{DS} - V_{dsat}$;
+(iii) \emph{model-mismatch alerts} flagging metrics where $|\hat{m}_s / m_{s,c} - 1| > 0.25$ ($>6\,\mathrm{dB}$ for gain/rejection or $>10^\circ$ for phase margin); and
+(iv) \emph{finite-difference intent sensitivities}, computed when total violation is near feasible ($\mathcal{V} < 4$) by perturbing up to eight intent variables by $+10\%$ (charged to $B_{\text{sim}}$) to obtain directional violation derivatives $\Delta_i \mathcal{V} = \mathcal{V}(p + 0.1 p_i e_i) - \mathcal{V}(p)$.
+When directional derivatives exist on nominal tasks, a deterministic trust-region probe tests a single bounded step $p_i \leftarrow \operatorname{clip}(p_i - \operatorname{sign}(\Delta_i \mathcal{V}) \alpha_i (\ell_i, u_i))$ across the top four attributed parameters and retains the candidate strictly if SPICE violation decreases. Finally, 17 domain rules (4 device-region rules and 13 family-specific rules) synthesize root-cause hypotheses linking flagged devices to violated specs (e.g., linking a triode tail sink to collapsed CMRR or rail-pinned DC output to stage current imbalance).
+
+\subsection{Hierarchical Repair and Intent-Space Refinement}
+\label{sec:refine}
+Conditioned on the current program, the four-channel diagnosis, retrieved family knowledge cards, and a rolling six-iteration trace, the LLM selects one of three actions:
+(1) \textsc{Edit}, rewriting the Python topology, biasing scheme, or sizing equations (consuming 1 LLM call and 0 optimization simulations);
+(2) \textsc{Refine}, retaining the program structure while optionally updating parameter initializations or bounds and invoking numerical optimization (consuming simulations and 0 LLM calls); or
+(3) \textsc{Declare-Infeasible}, halting with a physical trade-off justification.
+
+Under \textsc{Refine}, each free parameter $p_i \in [\ell_i, u_i]$ is mapped to a unit coordinate $u_i \in [0, 1]$ (logarithmically when $\ell_i > 0$ and $u_i / \ell_i > 4$, linearly otherwise). When sensitivity attribution identifies parameters with nonzero violation derivatives, search focuses on the top $d_{\text{act}} \le 4$ active knobs; otherwise all $d$ intent parameters remain active. Starting from incumbent $u^{(0)}$ at refinement round $t$, \textsc{SPECTRA} constructs a local trust region $[\max(0, u^{(0)} - r_t), \min(1, u^{(0)} + r_t)]$ with radius $r_t = \min(0.25, 0.08 + 0.02 t)$, evaluates directional coordinate probes at $\pm r_t$, and runs covariance matrix adaptation evolution strategy (CMA-ES)~\cite{hansen2016cma} with step size $\sigma_0 = \min(0.15, r_t/2)$ and population $\lambda = \max(8, 4 + \lfloor 3 \ln d_{\text{act}} \rfloor)$. Every candidate $u$ is evaluated by re-executing \texttt{design(p(u), lut, spec)}, ensuring that current-mirror ratios, differential-pair matching, and zero-nulling equations remain satisfied identically across the entire search trajectory.
+
+\subsection{Optimization Objective, Adaptive PVT Closure, and Execution Protocol}
+\label{sec:opt}
+Both local probes and CMA-ES minimize the capped worst-condition aggregate shortfall over an active condition set $\mathcal{C}$:
+\begin{equation}
+  \mathcal{V}_{\mathcal{C}}(p) = \max_{c \in \mathcal{C}} \sum_{s \in \mathcal{S}} \min\!\Big(2,\, v_s\!\big(m_{s,c}(N(p))\big)\Big),
   \label{eq:viol}
 \end{equation}
-where $v_s$ is the relative (or log-ratio for frequency-, power- and time-like metrics) shortfall of metric $s$ at
-condition $c$, and $\mathcal{C}$ is the active condition set.
+where capping individual metric shortfalls at $2$ prevents a single unconverged or rail-pinned metric from masking progress on remaining specifications.
 
-\subsection{PVT-Aware Refinement}
-For robust tasks, a design that passes at TT is verified on all 45 conditions (5 corners $\times$
-$\{-40,27,125\,^\circ\mathrm{C}\}\times\{1.62,1.8,1.98\,\mathrm{V}\}$). If it fails, the active set
-$\mathcal{C}$ is initialised with TT and the two worst conditions, refinement minimises Eq.~\eqref{eq:viol} over
-$\mathcal{C}$, the result is re-verified, and the two worst new conditions are added (at most six), for up to three
-rounds; persistent failures are returned to the LLM with a per-condition failure table for structural edits
-(e.g., more headroom or a different bias scheme).
+\textbf{Adaptive Worst-Corner PVT Closure.} Evaluating all 45 PVT corners for every CMA-ES candidate would multiply simulation cost by $45\times$. For robust tasks, \textsc{SPECTRA} first closes nominal constraints on $\mathcal{C}_0 = \{c_{\text{TT}}\}$ and then runs a single 45-condition sweep. If all corners pass ($\mathcal{V}_{\mathcal{C}_{\text{PVT}}} = 0$), synthesis terminates. Otherwise, \textsc{SPECTRA} initializes an active corner set $\mathcal{C}_1 = \{c_{\text{TT}}\} \cup \operatorname{Top-2}(\mathcal{C}_{\text{PVT}})$ containing the two highest-violation corners, minimizes Eq.~\eqref{eq:viol} over $\mathcal{C}_1$, re-verifies on $\mathcal{C}_{\text{PVT}}$, and appends up to two newly worst corners per round:
+\begin{equation}
+  \mathcal{C}_{r+1} = \mathcal{C}_r \,\cup\, \operatorname*{Top-2}_{c \in \mathcal{C}_{\text{PVT}} \setminus \mathcal{C}_r} \mathcal{V}_{\{c\}}(p^{(r)}), \quad |\mathcal{C}_{r+1}| \le 6,
+  \label{eq:active_set}
+\end{equation}
+for at most three rounds before returning any persistent corner-violation table to the LLM for structural headroom edits.
+
+\textbf{Training-Free Execution and Independent Verification.} \textsc{SPECTRA} is entirely training-free: LLM weights remain frozen, no task-specific demonstrations or reference circuits exist in prompts or knowledge cards, and every SPICE run---including finite-difference probes, directional steps, CMA-ES populations, and 45-corner sweeps---is strictly debited against $B_{\text{sim}}$. At test termination, final pass/fail status is determined by an independent out-of-loop re-simulation verifier over $\mathcal{C}_{\text{eval}}$ (plus 100-sample Pelgrom mismatch Monte Carlo on PVT-closed designs).

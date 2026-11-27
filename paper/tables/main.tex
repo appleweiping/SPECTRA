@@ -1,24 +1,34 @@
 \begin{table*}[t]
 \centering
-\caption{Primary external SIZ7g comparison on 36 fixed-topology tasks, three seeds and 108 cells per row. Every row receives 300 simulation units, 12 LLM calls and the same independent 45-condition verifier. External rows are paper-aligned clean-room adapters, not claims of official reproduction.}
+\caption{Matched fixed-topology sizing comparison across eight frameworks on \SizTasks{} SKY130 tasks spanning six circuit families (\SizSeeds{} seeds, \SizCells{} task-seed cells per row; 300 condition-evaluations, 12 LLM calls, and independent 45-condition PVT verification). External rows are paper-aligned adapters under a shared 3-corner inner-loop search objective. Top block: preregistered primary configurations (where \textsc{SPECTRA-FullGrid} evaluates all 45 corners inside its 6-round budget). Bottom blocks: corner-budget-aligned \textsc{SPECTRA} screening strategies under the identical 300-simulation cap, plus the 92-task/12-family expansion (\textsc{SIZ11g}, 276 cells/row).}
 \label{tab:main}
-\small
-\begin{tabular}{@{}lrrrr@{}}
+\vspace{-0.5mm}
+\footnotesize
+\setlength{\tabcolsep}{4.2pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llcccccc@{}}
 \toprule
-Framework & TT success & PVT success & Mean TT violation & Mean PVT violation \\
+Track / Protocol & Framework & Venue & Cells & TT Succ.\ (\%) & PVT Succ.\ (\%) & Mean TT Viol.\ $\downarrow$ & Mean PVT Viol.\ $\downarrow$ \\
 \midrule
-\textbf{SPECTRA (ours)} & \SizSpectraTT{} & \SizSpectraPVT{} & \SizSpectraTTViol{} & \SizSpectraPVTViol{} \\
-AnalogCoder~\cite{lai2025analogcoder} & \SizAnalogCoderTT{} & \SizAnalogCoderPVT{} & \SizAnalogCoderTTViol{} & \SizAnalogCoderPVTViol{} \\
-ADO-LLM~\cite{yin2024adollm} & \SizADOLLMTT{} & \SizADOLLMPVT{} & \SizADOLLMTTViol{} & \SizADOLLMPVTViol{} \\
-AnaFlow~\cite{ahmadzadeh2025anaflow} & \textbf{\SizAnaFlowTT{}} & \textbf{\SizAnaFlowPVT{}} & \textbf{\SizAnaFlowTTViol{}} & \SizAnaFlowPVTViol{} \\
-Artisan~\cite{chen2024artisan} & \SizArtisanTT{} & \SizArtisanPVT{} & \SizArtisanTTViol{} & \SizArtisanPVTViol{} \\
-AutoSizer~\cite{yu2026autosizer} & \SizAutoSizerTT{} & \SizAutoSizerPVT{} & \SizAutoSizerTTViol{} & \SizAutoSizerPVTViol{} \\
-ATLAS~\cite{oh2026atlas} & \SizATLASTT{} & \SizATLASPVT{} & \SizATLASTTViol{} & \SizATLASPVTViol{} \\
-GLOVA~\cite{kim2025glova} & \SizGLOVATT{} & \SizGLOVAPVT{} & \SizGLOVATTViol{} & \textbf{\SizGLOVAPVTViol{}} \\
+\multirow{8}{*}{\shortstack[l]{36-Task Primary\\(6 families, 3 seeds)}}
+ & \textbf{SPECTRA-FullGrid (primary)} & Ours & 108 & \SizSpectraTTPct{} [67.6, 91.7] & \SizSpectraPVTPct{} [0.0, 41.7] & \SizSpectraTTViol{} & \SizSpectraPVTViol{} \\
+ & AnaFlow~\cite{ahmadzadeh2025anaflow} & ICCAD'25 & 108 & \textbf{\SizAnaFlowTTPct{}} [77.8, 94.4] & \textbf{\SizAnaFlowPVTPct{}} [8.3, 55.6] & \textbf{\SizAnaFlowTTViol{}} & \SizAnaFlowPVTViol{} \\
+ & AutoSizer~\cite{yu2026autosizer} & ICML'26 & 108 & \SizAutoSizerTTPct{} [69.4, 89.8] & \SizAutoSizerPVTPct{} [0.0, 33.3] & \SizAutoSizerTTViol{} & \SizAutoSizerPVTViol{} \\
+ & ADO-LLM~\cite{yin2024adollm} & ICCAD'24 & 108 & \SizADOLLMTTPct{} [61.1, 87.0] & \SizADOLLMPVTPct{} [0.0, 41.7] & \SizADOLLMTTViol{} & \SizADOLLMPVTViol{} \\
+ & Artisan~\cite{chen2024artisan} & DAC'24 & 108 & \SizArtisanTTPct{} [58.3, 83.3] & \SizArtisanPVTPct{} [0.0, 16.7] & \SizArtisanTTViol{} & \SizArtisanPVTViol{} \\
+ & AnalogCoder~\cite{lai2025analogcoder} & AAAI'25 & 108 & \SizAnalogCoderTTPct{} [32.4, 62.0] & \SizAnalogCoderPVTPct{} [0.0, 50.0] & \SizAnalogCoderTTViol{} & \SizAnalogCoderPVTViol{} \\
+ & ATLAS~\cite{oh2026atlas} & ICCAD'26 & 108 & \SizATLASTTPct{} [22.2, 48.1] & \SizATLASPVTPct{} [0.0, 19.4] & \SizATLASTTViol{} & \SizATLASPVTViol{} \\
+ & GLOVA~\cite{kim2025glova} & DAC'25 & 108 & \SizGLOVATTPct{} [21.3, 50.0] & \SizGLOVAPVTPct{} [0.0, 8.3] & \SizGLOVATTViol{} & \textbf{\SizGLOVAPVTViol{}} \\
+\midrule
+\multirow{2}{*}{\shortstack[l]{36-Task Corner-Screen\\Sensitivity (300 sims)}}
+ & SPECTRA-Hybrid (3-corner screen) & Ours & 108 & 88.9\% & 30.6\% & 0.0713 & 0.4463 \\
+ & SPECTRA-Union-TopK4 (low-$V_{DD}$ screen) & Ours & 108 & \textbf{91.7\%} & \textbf{33.3\%} & \textbf{0.0128} & \textbf{0.2820} \\
+\midrule
+\multirow{3}{*}{\shortstack[l]{92-Task Expansion\\(12 families, 3 seeds)}}
+ & AnaFlow (best external baseline)~\cite{ahmadzadeh2025anaflow} & ICCAD'25 & 276 & 80.1\% & 22.8\% & \textbf{0.0527} & 0.6053 \\
+ & SPECTRA-FullGrid & Ours & 276 & 76.1\% & 12.3\% & 0.0972 & 0.5931 \\
+ & SPECTRA-Family (hybrid low-$V_{DD}$ screen) & Ours & 276 & \textbf{80.4\%} & \textbf{26.3\%} & 0.0698 & \textbf{0.3822} \\
 \bottomrule
 \end{tabular}
-\vspace{-1mm}
-\begin{flushleft}\footnotesize
-Values are aggregate cell means from \path{results/external_primary_sota.md}; higher is better for success and lower is better for violation. The frozen primary row therefore does not support a universal SOTA claim.
-\end{flushleft}
+\end{adjustbox}
 \end{table*}

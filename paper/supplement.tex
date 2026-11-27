@@ -1,0 +1,38 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+\settopmatter{printacmref=false}
+\acmConference[ICCAD '27]{IEEE/ACM International Conference on Computer-Aided Design}{October 2027}{San Jose, CA, USA}
+\acmYear{2027}\copyrightyear{2027}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\hypersetup{pdfinfo={Author={Anonymous Author(s)}, Creator={LaTeX}, Producer={pdfTeX}}}
+\setlength{\emergencystretch}{1.4em}
+
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\input{numbers}
+\input{external_numbers}
+\input{verified_macros}
+
+\begin{document}
+
+\title[Supplementary Material for SPECTRA]{Supplementary Material for SPECTRA: Specification-to-PVT-Closed Transistor-Level Analog Synthesis via Executable Design-Intent Programs}
+\author{Anonymous Author(s)}
+\maketitle
+
+\input{sections/appendix_body}
+
+\clearpage
+\bibliographystyle{ACM-Reference-Format}
+\renewcommand{\bibfont}{\fontsize{6.6}{7.4}\selectfont}
+\setlength{\bibsep}{0.6pt}
+\bibliography{refs}
+
+\end{document}

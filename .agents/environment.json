@@ -1,0 +1,3 @@
+{
+  "install": "sed -i '/case \\$- in/,/esac/d' ~/.bashrc 2>/dev/null || true; PKGS='ngspice texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-science texlive-bibtex-extra texlive-publishers texlive-plain-generic latexmk poppler-utils'; dpkg -s $PKGS >/dev/null 2>&1 || (sudo DEBIAN_FRONTEND=noninteractive apt-get update -y && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $PKGS); python3 -m pip install --no-input --quiet numpy scipy cma optuna matplotlib openai pillow"
+}

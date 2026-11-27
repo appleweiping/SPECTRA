@@ -27,10 +27,19 @@ python3 -m scripts.make_tables
 python3 -m scripts.bench_stats
 python3 -m scripts.make_figures "$MAIN_EXP"
 python3 -m scripts.paper_numbers --main-exp "$MAIN_EXP" --e4-exp "$E4_EXP" --e4-alt-exp "$E4_ALT_EXP" --e4-tests "$E4_TESTS"
+python3 -m scripts.generate_external_numbers
+python3 -m scripts.generate_verified_macros
+python3 scripts/make_diagnostics_fig.py
 python3 -m scripts.write_evidence_manifest --experiments "$MAIN_EXP,$E2_EXP,$E3_EXP,$E4_EXP,$E5_EXP"
-cd paper && latexmk -pdf -interaction=nonstopmode main.tex
-pdfinfo main.pdf | grep Pages
-if grep -Eq "Overfull|undefined" main.log; then
-  echo "LaTeX warnings found in paper/main.log" >&2
-  exit 3
-fi
+
+for dir_tex in "paper:main" "paper:supplement" "paper/iccad2027:spectra_iccad2027" "paper/iccad2027:spectra_iccad2027_supplement" "paper/dac2027:main" "paper/dac2027:supplement" "paper/icml2027:main"; do
+  d="${dir_tex%%:*}"
+  t="${dir_tex##*:}"
+  (cd "$d" && latexmk -pdf -interaction=nonstopmode -silent "$t.tex")
+  echo "$d/$t.pdf -> $(pdfinfo "$d/$t.pdf" | awk '/Pages:/{print $2}') pages"
+  if grep -Eq "Overfull|Undefined" "$d/$t.log"; then
+    echo "LaTeX warnings found in $d/$t.log" >&2
+    exit 3
+  fi
+done
+

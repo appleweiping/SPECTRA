@@ -1,0 +1,142 @@
+% Shared Supplementary Material Content (included by ICCAD/DAC supplement.tex and ICML Appendix)
+
+\section{Theoretical Properties of Design-Intent Parameterization}
+\label{app:theory}
+
+\subsection{Monotone Inversion of Pre-Characterized BSIM4 Lookup Tables}
+For each SKY130 $1.8\,\mathrm{V}$ MOSFET flavor ($\text{dev} \in \{\text{nFET}, \text{pFET}\}$), process corner $c \in \{\text{TT, FF, SS, SF, FS}\}$, and temperature $T \in \{-40, 27, 125\,^\circ\mathrm{C}\}$, \textsc{SPECTRA} pre-computes DC and small-signal operating-point arrays at reference finger width $W_{\text{ref}} = 5\,\mu\mathrm{m}$ over an $11 \times 10 \times 5 \times 181$ grid of channel length $L \in [0.15, 20]\,\mu\mathrm{m}$ (logarithmically spaced), drain-to-source voltage $V_{DS} \in [0.05, 1.80]\,\mathrm{V}$, bulk-to-source reverse bias $V_{SB} \in [0.0, 1.2]\,\mathrm{V}$, and gate-to-source voltage $V_{GS} \in [0.0, 1.80]\,\mathrm{V}$ ($10\,\mathrm{mV}$ step).
+
+\textbf{Proposition 1 (Well-Posed Geometry Mapping).} \emph{Fix device flavor, corner, and temperature, and consider an interpolated slice $(L, V_{DS}, V_{SB})$ obtained by trilinear interpolation over $(\log L, V_{DS}, V_{SB})$. Let $\eta_{\max} = \max_{V_{GS}} (g_m / I_D)(V_{GS})$ denote peak transconductance efficiency near weak inversion, and restrict queries to the moderate-to-strong inversion branch $\mathcal{I} = [V_{GS}(\eta_{\max}), 1.8\,\mathrm{V}]$ where $(g_m / I_D)(V_{GS})$ is strictly decreasing and normalized current density $J_D(V_{GS}) = I_D(V_{GS}) / W_{\text{ref}}$ is strictly increasing. Then for every clamped target $\tilde{\eta} = \operatorname{clip}(\eta, \eta_{\min}, \eta_{\max})$ and branch current $I_D > 0$, there exists a unique bias $V_{GS}^* \in \mathcal{I}$ and unique positive width $W^* = W_{\text{ref}} \cdot I_D / J_D(V_{GS}^*)$ satisfying first-order width scaling.}
+
+\emph{Proof Sketch.} Above deep subthreshold leakage in BSIM4, channel current $I_D(V_{GS})$ is strictly increasing and log-concave in $V_{GS}$, so its logarithmic derivative $\eta(V_{GS}) = \frac{\partial \ln I_D}{\partial V_{GS}} = \frac{g_m}{I_D}$ decreases strictly from the subthreshold slope limit $1/(n U_T) \approx 22\text{--}26\,\mathrm{S/A}$ (nFET) or $16\text{--}19\,\mathrm{S/A}$ (pFET) toward strong-inversion velocity saturation ($\approx 3\text{--}5\,\mathrm{S/A}$). Piece-wise linear inversion on the 181-point $V_{GS}$ grid therefore defines a continuous bijection $\tilde{\eta} \mapsto V_{GS}^* \in \mathcal{I}$, yielding $(W^*, V_{GS}^*, V_{dsat}^*, g_m^*, g_{ds}^*)$. Decomposing $W^*$ into $m = \max(1, \lceil W^* / W_{\text{ref}} \rceil)$ fingers of width $W^* / m \le 5\,\mu\mathrm{m}$ suppresses narrow/wide-width geometry drift between the LUT reference device and the compiled SKY130 subcircuit. \hfill $\square$
+
+\subsection{Manifold Invariance and Capped Minimax Boundedness}
+\textbf{Proposition 2 (Exact Structural Invariance).} \emph{Let $\mathcal{M} \subset \mathbb{R}_{>0}^{D_{\text{raw}}}$ denote the manifold of symmetry-preserving device sizings defined by $k$ algebraic design invariants $g_j(w) = 0$ (differential pair matching $W_1 = W_2, L_1 = L_2$; mirror ratios $W_4 / W_3 = \alpha$; RHP-zero tracking $R_z g_{m7}(w) = k_z$). If a design-intent program parameterizes $w = \Phi(u)$ ($u \in [0,1]^d$, $d < D_{\text{raw}}$) by sharing intent coordinates across matched pairs and computing tracking passives from LUT-queried $g_m^*$, then $\Phi([0,1]^d) \subseteq \mathcal{M}$, whereas isotropic random or TPE sampling in $[0,1]^{D_{\text{raw}}}$ assigns $\mathcal{M}$ zero Lebesgue measure whenever $k \ge 1$.}
+
+Furthermore, because each per-metric shortfall is capped via $\tilde{v}_s = \min(2, v_s(m_{s,c})) \in [0, 2]$, the worst-corner objective $\mathcal{V}_{\mathcal{C}}(p) = \max_{c \in \mathcal{C}} \sum_{s \in \mathcal{S}} \tilde{v}_s(m_{s,c}(N(p)))$ satisfies $0 \le \mathcal{V}_{\mathcal{C}}(p) \le 2|\mathcal{S}|$ for all $p$, with $\mathcal{V}_{\mathcal{C}}(p) = 0$ if and only if every specification $s \in \mathcal{S}$ holds at every condition $c \in \mathcal{C}$. This boundedness prevents singular transient or AC extraction failures on infeasible candidates from destabilizing CMA-ES rank-mu covariance updates.
+
+\section{Closed-Loop Algorithm and Rule Base}
+\label{app:algo}
+
+\textbf{Closed-Loop Synthesis Procedure.} Given specification $\mathcal{T}$, budgets $(B_{\text{LLM}}, B_{\text{sim}})$, and BSIM4 LUTs:
+(1) \emph{Plan}: Query LLM with $x_{\text{NL}}$, $\mathcal{P}_{\text{io}}$, SKY130 PDK sheet, and family topology cards ($1$ call) to synthesize initial Python module $(\texttt{PARAMS}, \texttt{design})$.
+(2) \emph{Execute \& Static Check}: Run \texttt{design}$(p^{(0)}, \text{lut}, \text{spec})$ in an isolated subprocess to emit $(N, \hat{m})$; run canonical parser and ERC ($0$ sims). If ERC fails, pass verbatim errors to the repair loop.
+(3) \emph{Evaluate \& Diagnose}: Simulate $N$ on $c_{\text{TT}}$ ($1$ sim). If nominal constraints pass and $\mathcal{C}_{\text{eval}} = \{c_{\text{TT}}\}$, terminate. If nominal constraints pass on a robust task, invoke \emph{Adaptive PVT Closure} (Step 5). Otherwise, compute four-channel diagnosis $\mathcal{D}$ (including $+10\%$ finite-difference sensitivities on up to $8$ parameters when $\mathcal{V} < 4$ and a $1$-sim directional local probe on nominal tasks) and retrieve targeted knowledge cards.
+(4) \emph{Hierarchical Policy}: Query LLM ($1$ call) with $(N, \mathcal{D}, \text{cards}, \text{history})$ to choose \textsc{Edit} (update Python module), \textsc{Refine} (run trust-region CMA-ES over top $d_{\text{act}} \le 4$ attributed intent variables within radius $r_t = \min(0.25, 0.08 + 0.02 t)$, $0$ calls), or \textsc{Declare-Infeasible}.
+(5) \emph{Adaptive PVT Closure}: Sweep $\mathcal{C}_{\text{PVT}}$ ($45$ sims). If $\mathcal{V}_{\mathcal{C}_{\text{PVT}}} = 0$, return $N$. Otherwise initialize $\mathcal{C}_1 = \{c_{\text{TT}}\} \cup \operatorname{Top-2}(\mathcal{C}_{\text{PVT}})$ and run up to $3$ rounds of trust-region CMA-ES on $\mathcal{C}_r$ followed by $45$-corner re-verification, appending up to two newly worst corners per round ($|\mathcal{C}_r| \le 6$). Return persistent corner failures to Step 4 until budgets expire.
+
+\textbf{Causal Diagnosis Rules and Sandboxed DSL.} The sandboxed Python DSL exposes only \texttt{Netlist} (\texttt{.dev}, \texttt{.M}, \texttt{.Q}, \texttt{.R}, \texttt{.C}), \texttt{lut} (\texttt{.size}, \texttt{.op}, \texttt{.table}, \texttt{.at}), \texttt{par}, \texttt{db}, \texttt{PI}, \texttt{UT}, and \texttt{math}, blocking file I/O, imports, and reflection. The 17 deterministic diagnosis rules combine 4 universal MOSFET operating-region rules (triode $V_{DS} < V_{dsat}$, saturation-edge margin $V_{DS} - V_{dsat} < 50\,\mathrm{mV}$, cutoff $I_D < 1\,\mathrm{nA}$, unintended subthreshold $V_{GS} < V_{th} - 50\,\mathrm{mV}$) with 13 circuit-family rules: rail-pinned DC output ($V_{\text{out,DC}} \notin [0.25, 1.55]\,\mathrm{V}$), phase-margin non-dominant pole crowding, low DC gain $g_m r_o$ bottleneck, bandwidth $g_m / C_L$ shortfall, output-stack swing clipping, tail/output slew limiting, tail-impedance CMRR degradation, LDO load-step ringing and loop-gain regulation, bandgap startup zero-current lockup and PTAT/CTAT slope imbalance, continuous-time comparator polarity inversion, and clocked latch incomplete regeneration.
+
+\section{SPECTRA-Bench Family Testbenches and Verification Details}
+\label{app:bench}
+
+Table~\ref{tab:supp_families} documents all 12 circuit families in \textsc{SPECTRA-Bench}, their port signatures, excitation topologies, and extracted metrics on SkyWater SKY130 ($V_{DD}=1.8\,\mathrm{V}$ nominal). No ideal voltage or current sources are allowed inside \texttt{.subckt dut}; resistors compile to SKY130 high-resistance poly models incorporating PDK temperature coefficients so thermal drift in bandgap references, LDOs, and active filters is physically modeled.
+
+\begin{table*}[ht]
+\centering
+\caption{Complete circuit families, subcircuit port interfaces, and SPICE testbench measurements in \textsc{SPECTRA-Bench}.}
+\label{tab:supp_families}
+\footnotesize
+\setlength{\tabcolsep}{4.0pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llp{88mm}@{}}
+\toprule
+Circuit Family & Subcircuit Ports (\texttt{dut}) & Testbench Excitation and Extracted Metrics \\
+\midrule
+Op-amp / OTA & \texttt{vinp vinn vout vdd vss ibias} & $1\,\mathrm{G}\Omega/1\,\mathrm{F}$ DC-servo open-loop AC ($A_0$, UGBW, PM, CMRR, PSRR, $1\,\mathrm{kHz}$ input noise, static power); unity-gain step (slew rate, $1\%$ settling); $\times 10$ inverting sweep (loaded linear swing). \\
+Voltage Amplifier & \texttt{vin vout vdd vss ibias} & AC sweep around $V_{\text{in,DC}}$ (low-freq.\ gain, $f_{-3\mathrm{dB}}$, GBW, $V_{\text{out,DC}}$, power); $\pm 0.3\,\mathrm{V}$ DC sweep ($\ge 50\%$ gain swing). \\
+Transimpedance (TIA) & \texttt{iin vout vdd vss ibias} & Photodiode capacitance $C_{PD}$ at input; AC transimpedance $Z_T$ ($\mathrm{dB}\Omega$), $f_{-3\mathrm{dB}}$, input noise current at $1\,\mathrm{MHz}$, $V_{\text{out,DC}}$, power. \\
+Current Mirror & \texttt{iin iout vdd vss} & Output voltage sweep $0 \to V_{DD}$ (current accuracy at $V_{\text{nom}}$, $R_{\text{out}}$, $95\%$ compliance voltage, power). \\
+Low-Dropout Reg.\ (LDO) & \texttt{vin vout vref vss ibias} & Load step $I_{\min} \leftrightarrow I_{\max}$ ($100\,\mathrm{ns}$ edges): DC accuracy, load/line reg., $1\,\mathrm{kHz}$ PSRR, $I_Q$, under/overshoot, residual ringing. \\
+Voltage Reference & \texttt{vdd vref vss} & Self-biased (no external $I_{\text{bias}}$): $V_{\text{ref}}$ at $27\,^\circ\mathrm{C}$, box-method TC ($-40..125\,^\circ\mathrm{C}$, $\mathrm{ppm}/^\circ\mathrm{C}$), line reg., PSRR, $10\,\mu\mathrm{s}$ ramp startup, power. \\
+CT Comparator & \texttt{vinp vinn vout vdd vss ibias} & $\pm 10\,\mathrm{mV}$ overdrive step around $V_{CM}$: propagation delay, input offset, polarity correctness, rail levels, power. \\
+Clocked Latch Comp. & \texttt{vinp vinn clk outp outn vdd vss} & StrongARM/double-tail clocked evaluation \& reset phases: decision correctness, clk-to-Q delay, energy/decision. \\
+Ring / Control VCO & \texttt{vctrl vout vdd vss} & Transient oscillation across 3 control voltages: $f_{\min}, f_{\text{mid}}, f_{\max}$, tuning ratio, $K_{VCO}$, peak-to-peak swing, power. \\
+Active Filter & \texttt{vin vout vdd vss ibias} & Low-pass / band-pass biquads \& 3rd-order stages: passband gain, $f_c$ or $(f_0, Q)$, peaking, stopband attenuation, power. \\
+Schmitt Trigger & \texttt{vin vout vdd vss} & $20\,\mu\mathrm{s}$ triangular ramp $0 \to V_{DD} \to 0$: upper threshold $V_{TH+}$, lower threshold $V_{TH-}$, hysteresis $\Delta V_H$, rail swing, power. \\
+Op-Amp Application & \texttt{vin1 vin2 vout vcm vdd vss ibias} & Co-designed amplifier + feedback network: signed gains $a_1, a_2$, closed-loop BW, DC offset from $0.9\,\mathrm{V}$, integrator $f_u$ \& slope. \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+\section{Extended Multi-Framework, Statistical, and Cross-Domain Results}
+\label{app:extended}
+
+Table~\ref{tab:supp_paired} reports exact two-sided sign tests, Holm-corrected $p$-values across all seven external frameworks, and $95\%$ task-clustered bootstrap differences on the 108-cell fixed-topology matrix (\textsc{SIZ7g}). Table~\ref{tab:supp_domain} breaks down TT and 45-corner PVT pass rates across all six circuit domains in \textsc{SIZ7g}. Table~\ref{tab:supp_92} reports the complete 92-task, 12-family external sizing expansion (\textsc{SIZ11g}, $2{,}208$ baseline cells plus $276$-cell policy runs, retaining all simulator/adapter crashes in denominators).
+
+\begin{table}[ht]
+\centering
+\caption{Paired comparisons of \textsc{SPECTRA-FullGrid} vs.\ seven external frameworks on \textsc{SIZ7g} (108 task-seed cells per pair).}
+\label{tab:supp_paired}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+External Framework & W / L / T & Sign $p$ & Holm $p$ & Diff.\ 95\% CI \\
+\midrule
+GLOVA~\cite{kim2025glova} & 52 / 3 / 53 & $1.5\!\times\!10^{-12}$ & $1.1\!\times\!10^{-11}$ & $[+0.30, +0.61]$ \\
+ATLAS~\cite{oh2026atlas} & 57 / 8 / 43 & $3.2\!\times\!10^{-10}$ & $1.9\!\times\!10^{-9}$ & $[+0.27, +0.63]$ \\
+AnalogCoder~\cite{lai2025analogcoder} & 38 / 2 / 68 & $1.5\!\times\!10^{-9}$ & $7.5\!\times\!10^{-9}$ & $[+0.19, +0.48]$ \\
+Artisan~\cite{chen2024artisan} & 22 / 12 / 74 & $0.121$ & $0.486$ & $[-0.06, +0.26]$ \\
+ADO-LLM~\cite{yin2024adollm} & 19 / 13 / 76 & $0.377$ & $0.754$ & $[-0.11, +0.21]$ \\
+AutoSizer~\cite{yu2026autosizer} & 11 / 11 / 86 & $1.000$ & $1.000$ & $[-0.12, +0.12]$ \\
+AnaFlow~\cite{ahmadzadeh2025anaflow} & 7 / 14 / 87 & $0.189$ & $0.568$ & $[-0.18, +0.05]$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Per-domain TT / PVT success (\%) across the six circuit domains in \textsc{SIZ7g} (18 task-seed cells per domain per method).}
+\label{tab:supp_domain}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Framework & Amp & Mirror & Filter & LDO & OpAmp & VCO \\
+\midrule
+SPECTRA-FullGrid & 83 / 0 & \textbf{100 / 100} & \textbf{67} / 33 & 67 / 0 & 67 / 0 & \textbf{100} / 0 \\
+AnaFlow~\cite{ahmadzadeh2025anaflow} & 83 / 0 & \textbf{100 / 100} & 61 / \textbf{100} & \textbf{89} / 0 & 89 / \textbf{17} & \textbf{100} / 0 \\
+AutoSizer~\cite{yu2026autosizer} & \textbf{89} / 0 & 94 / 83 & 39 / 0 & 67 / 0 & \textbf{100} / 0 & 94 / 0 \\
+ADO-LLM~\cite{yin2024adollm} & 72 / 0 & \textbf{100 / 100} & 28 / 0 & \textbf{89} / 0 & 72 / 0 & 89 / 0 \\
+Artisan~\cite{chen2024artisan} & \textbf{89} / 0 & 39 / 17 & 33 / 0 & 83 / 0 & 83 / \textbf{17} & \textbf{100} / 0 \\
+AnalogCoder~\cite{lai2025analogcoder} & 22 / 0 & \textbf{100 / 100} & 22 / \textbf{100} & 0 / 0 & 67 / 0 & 72 / 0 \\
+ATLAS~\cite{oh2026atlas} & 11 / 0 & 39 / 17 & 11 / 0 & 22 / 0 & 61 / 0 & 67 / \textbf{33} \\
+GLOVA~\cite{kim2025glova} & 39 / 0 & 22 / 0 & 0 / 0 & 22 / 0 & 44 / 8 & 83 / 0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Complete 92-task, 12-family external sizing expansion (\textsc{SIZ11g}; 3 seeds, 276 cells/row, 300 simulations, 12 LLM calls).}
+\label{tab:supp_92}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Framework & Cells & TT (\%) & PVT (\%) & TT Viol. & PVT Viol. & Crash \\
+\midrule
+SPECTRA-Family & 276 & 80.4 & \textbf{26.3} & 0.0698 & 0.3822 & \textbf{0} \\
+SPECTRA-UnionK4 & 276 & \textbf{82.6} & 21.1 & 0.0594 & \textbf{0.2931} & \textbf{0} \\
+SPECTRA-FullGrid & 276 & 76.1 & 12.3 & 0.0972 & 0.5931 & \textbf{0} \\
+\midrule
+AnaFlow~\cite{ahmadzadeh2025anaflow} & 276 & 80.1 & 22.8 & 0.0527 & 0.6053 & 2 \\
+Artisan~\cite{chen2024artisan} & 276 & 72.8 & 8.8 & 0.1486 & 0.8738 & 4 \\
+AutoSizer~\cite{yu2026autosizer} & 276 & 68.1 & 8.8 & \textbf{0.0490} & 0.7285 & 4 \\
+ADO-LLM~\cite{yin2024adollm} & 276 & 56.5 & 10.5 & 0.0857 & 0.4296 & 7 \\
+AnalogCoder~\cite{lai2025analogcoder} & 276 & 39.1 & 17.5 & 0.5415 & 1.0013 & 4 \\
+ATLAS~\cite{oh2026atlas} & 276 & 27.5 & 7.0 & 0.5232 & 0.4934 & 10 \\
+GLOVA~\cite{kim2025glova} & 276 & 23.6 & 3.5 & 0.4488 & 0.1473 & 3 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\textbf{Cross-Vendor Backbone Consistency and Public Multi-PDK Coverage.} On an earlier 33-task cross-tier sweep using Claude Opus 5.5 (\textsc{E1}), \textsc{SPECTRA} reached $88.9\%$ overall success ($100\%$ T1, $100\%$ T2, $96.7\%$ T3, $95.2\%$ Designer) versus $85.9\%$ for AnalogCoder-style ($73.3\%$ T3), $80.8\%$ for SPECTRA-min ($83.3\%$ T3), and $59.1\%$ for Gen+TPE ($48.3\%$ T3; primary Holm $p=0.0035$), confirming that near-frontier T3 and PVT tiers drive discrimination across LLM families while T1/T2 saturate. Across public cross-PDK capability checks (3 seeds, 300 simulations), \textsc{SPECTRA} and AnaFlow both achieve $100\%$ TT pass on \texttt{ASAP7} $7\,\mathrm{nm}$ FinFET LDOs, SKY130 LP op-amps, and discrete BJT common-emitter stages (under both \texttt{ngspice-44.2} and \texttt{Xyce-7.10}), while \textsc{SPECTRA} reduces TT violation on \texttt{PTM45} ($0.2298$ vs.\ $0.2816$). On \texttt{SGAnalog}'s \texttt{Xyce} AC compatibility probe, all 17 source decks hit an upstream \texttt{ngspice}-specific mismatch expression unsupported by \texttt{Xyce}, documenting an explicit simulator-syntax boundary separate from sizing performance.

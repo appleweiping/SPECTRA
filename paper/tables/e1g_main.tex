@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{End-to-end specification-to-netlist synthesis on \textsc{SPECTRA-Bench} (\NPrimaryTasks{} primary near-frontier T3 and 45-corner PVT-robust tasks across \NPrimaryFamilies{} SKY130 circuit families; identical \texttt{GPT-6.1-sol} backbone, shared topology cards, 12-call cap, and 300/600 nominal/robust simulation caps). Success requires independent out-of-loop SPICE verification across all target metrics. W/L denotes per-task wins/losses of \textsc{SPECTRA} against each baseline; $p_{\text{Holm}}$ reports Holm-corrected paired permutation $p$-values on the primary endpoint. Calls$^\star$ and Sims$^\star$ are medians over successful runs; kTok is mean tokens per run ($\times 10^3$).}
+\label{tab:e1g_main}
+\vspace{-0.5mm}
+\footnotesize
+\setlength{\tabcolsep}{4.8pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Method & Primary Succ.\ (\%) [95\% CI] & Near-Frontier T3 & PVT-Robust (45c) & Task W/L & $p_{\text{Holm}}$ & Calls$^\star$ & Sims$^\star$ & kTok \\
+\midrule
+\textbf{SPECTRA (ours)} & \textbf{\SpectraPrim{} \SpectraPrimCI{}} & \textbf{\SpectraTThree{}} & \textbf{\SpectraRobust{}} & -- & -- & \SpectraCalls{} & \SpectraSims{} & \EOneSpectraKTok{} \\
+AnalogCoder-style~\cite{lai2025analogcoder} & \DirectPrim{} \DirectPrimCI{} & \DirectTThree{} & \textbf{\DirectRobust{}} & \PrimDirectWL{} & \PrimDirectP{} & \DirectCalls{} & \DirectSims{} & \EOneDirectKTok{} \\
+SPECTRA-min (1-shot plan + intent CMA-ES) & \SpectraMinPrim{} \SpectraMinPrimCI{} & \SpectraMinTThree{} & \SpectraMinRobust{} & \PrimSpectraMinWL{} & $2\!\times\!10^{-5}$ & \SpectraMinCalls{} & \SpectraMinSims{} & \EOneSpectraMinKTok{} \\
+Gen+TPE (AnalogCoder-Pro-style)~\cite{lai2026analogcoderpro} & \GenboPrim{} \GenboPrimCI{} & \GenboTThree{} & \GenboRobust{} & \PrimGenboWL{} & $<\!10^{-4}$ & \GenboCalls{} & \GenboSims{} & \EOneGenboKTok{} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}

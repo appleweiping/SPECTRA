@@ -1,22 +1,24 @@
 \begin{table}[t]
 \centering
-\caption{Fault localisation accuracy (top-1/top-3, \%) by injected fault class: rule-only diagnoser vs.\ LLM given the netlist and spec table (raw) or the SPECTRA diagnosis.}
+\caption{Standalone single-fault localization accuracy (top-1 / top-3, \%) across \FaultN{} corrupted reference circuits spanning seven fault classes: rule-based operating-point \& sensitivity scorer vs.\ \texttt{GPT-6.1-sol} given raw netlist + spec table or full \textsc{SPECTRA} diagnosis.}
 \label{tab:fault}
 \scriptsize
-\setlength{\tabcolsep}{2.5pt}
+\setlength{\tabcolsep}{3.8pt}
+\begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Fault class & $n$ & Rules & GPT-6.1-sol+raw & GPT-6.1-sol+diag. \\
+Injected Fault Class & $n$ & Rules Only & LLM (Raw Spec) & LLM (+Diagnosis) \\
 \midrule
-Undersized $W$ & 41 & 37/51 & 76/93 & 68/93 \\
-Short $L$ & 11 & 18/73 & 73/91 & 73/82 \\
-Mirror ratio & 28 & 32/61 & 86/86 & 82/89 \\
-Comp.\ cap & 3 & 0/0 & 67/67 & 67/67 \\
-Bias starved & 27 & 44/59 & 63/89 & 63/93 \\
-Miswired gate & 44 & 36/68 & 98/100 & 95/100 \\
-Resistor value & 12 & 17/75 & 75/92 & 58/83 \\
+Undersized width $W$ & 41 & 37 / 51 & \textbf{76} / 93 & 68 / 93 \\
+Short channel $L$ & 11 & 18 / 73 & 73 / \textbf{91} & 73 / 82 \\
+Broken mirror ratio & 28 & 32 / 61 & \textbf{86} / 86 & 82 / \textbf{89} \\
+Collapsed $C_c$ & 3 & 0 / 0 & 67 / 67 & 67 / 67 \\
+Starved bias branch & 27 & 44 / 59 & 63 / 89 & 63 / \textbf{93} \\
+Miswired gate node & 44 & 36 / 68 & \textbf{98} / 100 & 95 / 100 \\
+Shifted resistor $R$ & 12 & 17 / 75 & \textbf{75} / \textbf{92} & 58 / 83 \\
 \midrule
-All & 166 & 34/61 & 81/92 & 77/92 \\
+All Fault Cases & 166 & 34 / 61 & \textbf{81} / 92 & 77 / 92 \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{table}

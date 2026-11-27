@@ -1,63 +1,80 @@
 \section{Experiments}
 \label{sec:exp}
-\input{sections/experiments_setup}
-\input{sections/external_evidence}
 
-\subsection{Main Results}
+\subsection{Experimental Setup and SPECTRA-Bench}
+\label{sec:setup}
+\input{tables/bench_stats}
+
+\textbf{SPECTRA-Bench Construction.} Existing LLM-analog suites either use idealized Level-1 device equations or restrict quantitative evaluation to nominal op-amps (Table~\ref{tab:compare}). We construct \textsc{SPECTRA-Bench} (Table~\ref{tab:bench}), comprising \NTasksTotal{} specification-driven synthesis tasks across \NPrimaryFamilies{} circuit families on the open SkyWater SKY130 $1.8\,\mathrm{V}$ PDK~\cite{sky130pdk} simulated with \texttt{ngspice} BSIM4 models~\cite{ngspice42} and temperature-dependent high-resistance poly resistors. Each family uses a batch testbench validated against analytical solutions (e.g., an active integrator unity-gain frequency of \TBIntegSim{} simulated vs.\ \TBIntegIdeal{} analytical; complete per-family metric lists appear in Supplementary Table~S1). To guarantee both physical attainability and near-frontier difficulty, \NCertified{} \emph{certified tasks} are derived from \NTemplates{} expert parametric templates explored via random-scalarization CMA-ES (\NExploreEvals{} SPICE evaluations). Because pilot runs revealed that relaxing raw archive points saturates frontier LLMs near $100\%$, all \NHard{} Tier-3 (T3) and PVT-robust references first undergo minimax Pareto-frontier refinement (improving \NFrontier{}/\NHard{} references), after which targets are relaxed by tiered margins (T1/T2/T3: $-10/-5/-1\,\mathrm{dB}$ gain, $0.50/0.75/0.95\times$ bandwidth, $2.0/1.33/1.05\times$ power) and re-simulated to attach an executable \emph{feasibility certificate} (on all 45 PVT corners for robust tasks). To eliminate template bias, we add \NDesigner{} \emph{designer-tier tasks} authored independently from textbook and practitioner specifications~\cite{allen2012cmos,razavi2017design} (e.g., a $150\,\mathrm{MHz}$ OTA, a $1.2\,\mathrm{V}/10\,\mathrm{mA}$ LDO, a $1\,\mathrm{GHz}$ clocked comparator, and a $1\,\mathrm{MHz}$ Butterworth filter).
+
+\textbf{Protocols, Baselines, and Metrics.} We evaluate two complementary tracks:
+(1) \emph{End-to-end topology-plus-sizing synthesis} (\textsc{E1g}), focusing on the \NPrimaryTasks{} near-frontier (T3) and 45-corner PVT-robust tasks under identical \texttt{GPT-6.1-sol} backbones, shared PDK sheets and family topology cards, $B_{\text{LLM}}=12$ calls, and $B_{\text{sim}}=300$ (nominal) or $600$ (robust) condition-evaluations. We compare \textsc{SPECTRA} against an \emph{AnalogCoder-style} iterative SPICE-feedback code generator~\cite{lai2025analogcoder}, \emph{Gen+TPE} (AnalogCoder-Pro-style parameterized generation with raw-$W/L/R/C$ Optuna TPE~\cite{lai2026analogcoderpro,bergstra2011tpe,akiba2019optuna}, plus \emph{Gen+TPE-full} with 12 regenerations and adaptive corners), and \emph{SPECTRA-min} (single planning call plus full-budget intent CMA-ES without diagnosis or repair).
+(2) \emph{Matched fixed-topology external sizing} (\textsc{SIZ7g}: \SizTasks{} tasks across 6 families $\times$ \SizSeeds{} seeds = \SizCells{} cells/row; \textsc{SIZ11g}: 92 tasks across 12 families $\times$ 3 seeds = 276 cells/row) on \texttt{ngspice-44.2} ($B_{\text{sim}}=300$, $B_{\text{LLM}}=12$, independent 45-corner verifier), comparing \textsc{SPECTRA} against seven paper-aligned frameworks: AnalogCoder~\cite{lai2025analogcoder}, ADO-LLM~\cite{yin2024adollm}, AnaFlow~\cite{ahmadzadeh2025anaflow}, Artisan~\cite{chen2024artisan}, AutoSizer~\cite{yu2026autosizer}, ATLAS~\cite{oh2026atlas}, and GLOVA~\cite{kim2025glova}, alongside public \texttt{AnalogGym}~\cite{li2024analoggym}, \texttt{Xyce-7.10}, \texttt{GF180MCU}, \texttt{ASAP7}, and \texttt{SGAnalog} suites. Confidence intervals use $95\%$ task-clustered bootstraps; paired tests use exact sign and permutation tests with Holm step-down correction.
+
+\subsection{Main Quantitative Comparison}
 \label{sec:main}
-\IfFileExists{tables/main.tex}{\input{tables/main}}{}
-Table~\ref{tab:main} is the preregistered external comparison. It contains 36 fixed-topology tasks from six
-circuit domains, three seeds and 108 cells per framework. AnaFlow has the highest TT and PVT success in this
-frozen primary matrix, while GLOVA has the lowest mean PVT violation. SPECTRA has higher point estimates than
-several external rows on success or violation, but does not dominate AnaFlow on the complete endpoint vector. The per-cell wins, losses and
-cluster-bootstrap intervals are retained in \path{results/paper_sizing_multiseed.md}; no row is removed because it
-loses on an endpoint. The older 12-family SPECTRA-Bench experiment is used for component, fault and mismatch
-studies below, and its internal controls are not counted as external framework baselines.
+\input{tables/e1g_main}
 
-\textbf{Failure and scope.} The frozen SIZ7g row has TT/PVT success of
-\SizSpectraTT{}/\SizSpectraPVT{} versus AnaFlow's \SizAnaFlowTT{}/\SizAnaFlowPVT{}.
-The post-registered staged and union-top-$k$ sensitivity arms have higher point estimates on selected benchmark endpoints, but their
-selection policy is kept separate from the primary row. These measurements establish a reproducible fixed-topology
-comparison and motivate the component analysis; they do not establish universal analog-sizing SOTA.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figs/E1g_families.pdf}
+\vspace{-5.5mm}
+\caption{Per-family end-to-end synthesis success rate (\%) across the 12 SKY130 circuit families in \textsc{SPECTRA-Bench} (\textsc{E1g}). \textsc{SPECTRA} yields its largest gains on tightly coupled multi-metric cores such as 10-spec op-amps ($70\%$ vs.\ $27\%$), references ($100\%$), filters ($100\%$), comparators ($92\%$), and VCOs ($87\%$).}
+\Description{Heatmap of synthesis success percentages across 12 circuit families for SPECTRA, SPECTRA-min, AnalogCoder-style, and Gen+TPE.}
+\label{fig:families}
+\end{figure}
 
-\subsection{Ablations: What Matters?}
+\input{tables/main}
+
+To evaluate whether executable design-intent synthesis and closed-loop causal repair improve multi-metric electrical closure from scratch and remain competitive against specialized fixed-topology sizers, we examine end-to-end synthesis in Table~\ref{tab:e1g_main} and fixed-topology sizing in Table~\ref{tab:main}.
+
+\textbf{End-to-End Synthesis (\textsc{SPECTRA-Bench}).} Across the \NPrimaryTasks{} primary near-frontier and PVT-robust tasks (Table~\ref{tab:e1g_main}), \textsc{SPECTRA} achieves \SpectraPrim{} success (\SpectraPrimCI{}), outperforming Gen+TPE (\GenboPrim{}, \PrimGenboWL{} task wins/losses, $p_{\text{Holm}} < 10^{-4}$), SPECTRA-min (\SpectraMinPrim{}, \PrimSpectraMinWL{}, $p_{\text{Holm}} = 2\times 10^{-5}$), and AnalogCoder-style direct synthesis (\DirectPrim{}, \PrimDirectWL{}, $p_{\text{Holm}}=\PrimDirectP{}$). On near-frontier T3 tasks, \textsc{SPECTRA} reaches \SpectraTThree{} versus \DirectTThree{} for direct codegen ($+17.1$ percentage points) and \GenboTThree{} for Gen+TPE. Figure~\ref{fig:families} highlights why: on 10-specification operational amplifiers, where gain, UGBW, phase margin, CMRR, PSRR, swing, slew, settling, noise, and power interact strongly, \textsc{SPECTRA} achieves $70\%$ versus $27\%$ for AnalogCoder-style and $9\%$ for Gen+TPE, while reaching $100\%$ on voltage amplifiers, current mirrors, bandgap references, and active filters. These gains stem directly from compressing optimization into ${\sim}\IntentVars{}$ $g_m/I_D$ intent parameters that preserve differential matching and compensation relations, whereas unconstrained TPE over raw $W/L$ vectors breaks DC operating points (with failed runs dominated by \FailGenboTop{}).
+
+\textbf{Fixed-Topology Multi-Framework Sizing.} On the 36-task fixed-topology benchmark (Table~\ref{tab:main}, top), the preregistered \textsc{SPECTRA-FullGrid} configuration reaches \SizSpectraTTPct{} TT success and \SizSpectraPVTPct{} PVT success with zero crashes, significantly surpassing AnalogCoder ($p_{\text{Holm}}=7.5\times 10^{-9}$), ATLAS ($p_{\text{Holm}}=1.9\times 10^{-9}$), and GLOVA ($p_{\text{Holm}}=1.1\times 10^{-11}$), matching AutoSizer on TT (\SizAutoSizerTTPct{}) while improving PVT pass rate (\SizSpectraPVTPct{} vs.\ \SizAutoSizerPVTPct{}) and cutting mean PVT violation by more than half (\SizSpectraPVTViol{} vs.\ \SizAutoSizerPVTViol{}), and exceeding ADO-LLM (\SizADOLLMTTPct{}) and Artisan (\SizArtisanTTPct{}). However, \textsc{SPECTRA-FullGrid} trails AnaFlow (\SizAnaFlowTTPct{} TT / \SizAnaFlowPVTPct{} PVT) on binary pass rate despite achieving lower mean PVT violation (\SizSpectraPVTViol{} vs.\ \SizAnaFlowPVTViol{}). Tracing simulation logs reveals the exact mechanism: external adapters evaluate 3 corners per search candidate, whereas \textsc{SPECTRA-FullGrid} spends 45 condition-evaluations ($15\%$ of the 300-unit cap) per full-grid check, starving inner-loop CMA-ES iterations. Aligning inner-loop screening with the 300-simulation budget (Table~\ref{tab:main}, middle and bottom) eliminates this bottleneck: 3-corner screening (\textsc{SPECTRA-Hybrid}) rises to $88.9\%$ TT and $30.6\%$ PVT, unioning nominal and low-$V_{DD}$ screens (\textsc{SPECTRA-Union-TopK4}) reaches $91.7\%$ TT and $33.3\%$ PVT ($0.282$ PVT violation), and across the full 92-task, 12-family matrix (2,208 baseline cells), family-aware low-$V_{DD}$ screening (\textsc{SPECTRA-Family}) achieves $80.4\%$ TT and $26.3\%$ PVT ($0.382$ PVT violation vs.\ AnaFlow's $80.1\%/22.8\%$ and $0.605$).
+
+\subsection{Ablation Study}
 \label{sec:ablation}
-\IfFileExists{tables/ablation.tex}{\input{tables/ablation}}{}
-\AblationText{}
+\input{tables/ablation}
 
-\subsection{PVT Closure and Mismatch}
-\label{sec:pvt}
-\IfFileExists{tables/pvt.tex}{\input{tables/pvt}}{}
-\PVTText{} Robust success requires every specification at all 45 corner/temperature/supply combinations.
-\PVTFailSentence{} \MCSentence{}
+To isolate the contribution of each architectural mechanism, Table~\ref{tab:ablation} evaluates component removals across a 34-task stratified subset, its 23 near-frontier T3 tasks, and a 54-cell multi-seed mechanism matrix (18 tasks $\times$ 3 seeds). First, removing closed-loop diagnosis and LLM repair (\textsc{SPECTRA-min}) drops 34-task success by $31.4$ percentage points ($81.4\% \to 50.0\%$, W/L $13/3$, $p=8.2\times 10^{-4}$), confirming that single-shot intent planning plus numerical search cannot recover from flawed initial topologies or biasing assumptions. Second, disabling trust-region CMA-ES (\emph{w/o intent-space refinement}) reduces T3 success from $89.9\%$ to $69.6\%$ (W/L $7/3$, $p=0.052$) and cuts 54-cell TT/PVT success from $63.0\%/38.9\%$ to $42.6\%/27.8\%$ (W/L $15/4$), demonstrating that continuous optimization is indispensable for tight specification margins. Third, removing device-level diagnosis (\emph{w/o diagnosis}) increases mean simulation work by $32.6\%$ ($77.8 \to 103.2$ sims) and more than doubles multi-seed TT violation ($0.04 \to 0.09$), indicating that operating-point margins and intent sensitivities substantially accelerate repair efficiency even when ultimate binary pass rates on small subsets remain comparable. Fourth, replacing \texttt{lut.size} with explicit $W/L$ Python code (\emph{w/o intent}) retains programmatic symmetry ($83.8\%$ vs.\ $81.4\%$ binary pass, far above $29.4\%$ for raw-$W/L$ TPE), yet requires $27.5\%$ more simulations ($99.2$ vs.\ $77.8$ mean sims) and raises multi-seed violation ($0.10$ vs.\ $0.04$) due to optimizing $2.3\times$ more free variables. Finally, disabling dynamic knowledge-card retrieval drops multi-seed TT success from $63.0\%$ to $42.6\%$ (W/L $14/3$).
 
-\subsection{Diagnosis Accuracy under Fault Injection}
-\label{sec:fault}
-We inject single faults of seven classes into the reference designs of the certified tasks (undersized width,
-too-short channel, wrong mirror ratio, collapsed compensation capacitor, starved bias device, miswired gate, wrong
-resistor) and keep the \FaultN{} cases that violate at least one specification. Three diagnosers rank the
-corrupted element: a rule-only diagnoser that scores elements by operating-region flags and element-level
-sensitivities (no LLM), and the LLM given either the netlist with the specification table (the feedback used by
-AnalogCoder-style agents) or the netlist with SPECTRA's diagnosis. Table~\ref{tab:fault} shows a higher raw-LLM top-1 point estimate than the rules (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{}
-top-1), but that SPECTRA's evidence does \emph{not} improve localisation: with GPT-6.1-sol top-1 is \FaultDiagTopOne{}
-with the diagnosis (top-3 \FaultDiagTopThree{}), and the per-class differences go in both directions, with
-the largest ones on the smallest classes. \FaultHaikuSentence{} \FaultHaikuInterp{}
-This is a null result for localisation, and we do not claim the
-diagnosis as a stand-alone debugger; its end-to-end value, as the input to the refine-vs-edit decision, is measured
-by the ablation in Section~\ref{sec:ablation}. (E4 evaluates element-level evidence on corrupted reference designs;
-the agent itself sees intent-variable sensitivities and prediction discrepancies of its own program.)
-\IfFileExists{tables/fault.tex}{\input{tables/fault}}{}
+\subsection{In-Depth Analysis}
+\label{sec:analysis}
 
-\subsection{Backbone Scope and Cost}
-\label{sec:scaling}
-\IfFileExists{tables/scaling.tex}{\input{tables/scaling}}{}
-\ScalingText{} The E5g arm reuses GPT-6.1-sol on a matched subset as a replication check; it is not a cross-backbone
-comparison. The recorded LLM-cost field per run is \SpectraCost{} for SPECTRA, \DirectCost{} for the AnalogCoder-style
-agent, \GenboCost{} for Gen+TPE and \SpectraMinCost{} for SPECTRA-min. The GPT-6.1-sol gateway publishes no USD
-tariff, so these values are zero-valued availability sentinels unless price overrides are supplied; token counts are
-the accountable usage measure. SPECTRA's successful runs need a median of
-\SpectraCalls{} LLM calls and \SpectraSims{} simulations. \IfFileExists{figs/E1_anytime2.pdf}{Fig.~\ref{fig:anytime}
-shows the solved fraction as a function of simulations and of LLM calls.}{}
-\IfFileExists{figs/E1_anytime2.pdf}{\begin{figure}[t]\centering\includegraphics[width=\columnwidth]{figs/E1_anytime2.pdf}\Description{Two line plots of solved fraction versus simulations and versus LLM calls for each method.}
-\vspace{-6mm}\caption{Anytime performance on nominal tasks: fraction of runs solved within a given number of
-simulations (left) and LLM calls (right).}\label{fig:anytime}\end{figure}}{}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figs/E1g_anytime2.pdf}
+\vspace{-5.5mm}
+\caption{Anytime synthesis closure on nominal tasks (\textsc{E1g}): solved fraction as a function of SPICE condition-evaluations (left) and LLM calls (right).}
+\Description{Two-panel line plot showing solved task fraction versus simulations and versus LLM calls for SPECTRA, SPECTRA-min, AnalogCoder-style, and Gen+TPE.}
+\label{fig:anytime}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figs/diagnostics_analysis.pdf}
+\vspace{-5.5mm}
+\caption{Physical diagnostics from \textsc{E1g}. \textbf{(a)} Fraction of \NPrograms{} synthesized intent programs whose analytical self-predictions fall within $\pm 25\%$ of SPICE, contrasting first-order vs.\ second-order metrics. \textbf{(b)} Distribution of 297 corner failures across the 45-condition PVT grid for 25 TT-passing designs ($59\%$ concentrate at $V_{DD}=1.62\,\mathrm{V}$).}
+\Description{Bar chart of analytical self-prediction accuracy across circuit metrics and 5x9 heatmap of PVT corner failures across process corners, temperatures, and supply voltages.}
+\label{fig:diag_analysis}
+\end{figure}
+
+\input{tables/pvt}
+\input{tables/fault}
+\input{tables/cross_domain}
+
+We next conduct four targeted analyses to probe sample efficiency, analytical model fidelity, corner failure physics, fault-localization limits, and cross-domain transfer.
+
+\textbf{Anytime Sample and Call Efficiency.} Figure~\ref{fig:anytime} tracks solved task fraction across simulation and call budgets. Successful \textsc{SPECTRA} runs finish in a median of \SpectraCalls{} LLM calls and \SpectraSims{} SPICE evaluations (\EOneSpectraKTok{}k mean tokens). Direct netlist generation solves easier circuits within 1--5 simulations via prompt edits alone but plateaus early on multi-metric tasks, whereas \textsc{SPECTRA}'s trust-region CMA-ES drives a steep climb between $10$ and $60$ evaluations, surpassing all baselines from call 4 onward.
+
+\textbf{Self-Prediction Fidelity, Low-$V_{DD}$ Corner Physics, and Mismatch Yield.} Across \NPrograms{} final programs (Figure~\ref{fig:diag_analysis}a), analytical equations inside \texttt{design()} accurately predict first-order operating quantities---median error \PredGain{} for DC gain, \PredPower{} for power, \PredUGBW{} for UGBW (\PredUGBWwithin{} within $\pm 25\%$), and \PredPM{} for phase margin---but mispredict second-order and large-signal phenomena: \PredPSRR{} on PSRR, \PredCMRR{} on CMRR, \PredSlew{} on slew rate, \PredNoise{} on input-referred noise, and \PredSettle{} on settling time. This dichotomy explains why analytical LUT sizing alone is insufficient and must be paired with SPICE-in-the-loop intent refinement. Examining all \PVTFailDesigns{} TT-passing designs that fail 45-corner verification (Figure~\ref{fig:diag_analysis}b; $297$ failed corner evaluations), \PVTFailLowVdd{} of failures occur at $V_{DD}=1.62\,\mathrm{V}$ ($23/\PVTFailDesigns{}$ designs), peaking at $\text{SF}/-40\,^\circ\mathrm{C}/1.62\,\mathrm{V}$ ($18$ failures) and $\text{SS}/-40\,^\circ\mathrm{C}/1.62\,\mathrm{V}$ ($16$ failures) where elevated threshold voltages crush cascode and tail $V_{DS}-V_{dsat}$ margins. On the 11-task PVT subset (Table~\ref{tab:pvt}), \textsc{SPECTRA} reaches \PVTSpectra{} 45-corner closure and $86\%$--$87\%$ mean Pelgrom mismatch yield across \MCN{}-sample Monte Carlo runs (12/15 verified \textsc{SPECTRA} designs exceed $90\%$ yield, vs.\ $80\%$ mean yield for \textsc{SPECTRA-min}).
+
+\textbf{Standalone Fault Localization (Negative Result).} To test whether \textsc{SPECTRA}'s device-level evidence acts as a standalone netlist debugger, we inject seven single-fault classes into certified reference circuits, yielding \FaultN{} spec-violating test cases (Table~\ref{tab:fault}). While \texttt{GPT-6.1-sol} reading the raw netlist and spec table more than doubles rule-only localization (\FaultRawTopOne{} vs.\ \FaultRuleTopOne{} top-1), appending \textsc{SPECTRA}'s element-level diagnosis does not improve standalone localization (\FaultDiagTopOne{} top-1, \FaultDiagTopThree{} top-3; exact McNemar $p=0.21$). Crucially, during synthesis \textsc{SPECTRA} diagnoses its \emph{own} intent program via intent-parameter sensitivities and self-prediction discrepancies rather than localizing arbitrary corruptions in foreign netlists---explaining why diagnosis cuts synthesis simulations by $24.6\%$ (Table~\ref{tab:ablation}) despite offering no gain as an isolated third-party fault localizer.
+
+\textbf{Cross-Simulator, Cross-PDK, and Tapeout Generalization.} Table~\ref{tab:cross_domain} evaluates transfer across simulators, technology nodes, and silicon-proven schematics. On public \texttt{AnalogGym} three-stage amplifiers (\texttt{HoiLee} AFFC and \texttt{Leung} NMCF), \textsc{SPECTRA}'s staged 5-corner screening achieves $100\%/100\%$ and $100\%/66.7\%$ TT/PVT closure on \texttt{ngspice-44.2} (vs.\ AnaFlow's $100\%/66.7\%$ and $100\%/33.3\%$). Under \texttt{Xyce-7.10} using deterministic AC deck translation, \textsc{SPECTRA} reaches $100\%/66.7\%$ on \texttt{Leung} while reducing mean PVT violation by $17.7\times$ ($0.1364$ vs.\ $2.4186$), and achieves lower PVT violation on \texttt{HoiLee} ($0.0778$ vs.\ $0.0849$). Transferring to \texttt{GF180MCU} ($180\,\mathrm{nm}$, 17 corners) and \texttt{PTM180} yields lower multi-corner violation ($0.1651$ vs.\ $0.1847$) and $100\%$ TT closure, respectively, while native evaluation across \SGAnalogTasks{} tapeout-derived \texttt{SGAnalog} tasks on SKY130A converges on $48/51$ runs ($94.1\%$) with \SGAnalogFidelity{} mean sizing fidelity.
+
+\subsection{Qualitative Case Study and Limitations}
+\label{sec:qualitative}
+Figure~\ref{fig:program} illustrates an actual synthesis trace on near-frontier task \texttt{opamp-09} (10 simultaneous specifications). In iteration 1, \textsc{SPECTRA} selected a folded-cascode input stage driving a Miller-compensated common-source second stage, sizing input pair $M_1$ in moderate inversion ($g_m/I_D = 19\,\mathrm{S/A}$) and current mirrors in strong inversion ($g_m/I_D = 8\text{--}12\,\mathrm{S/A}$), but predicted slew rate via $I_{\text{tail}}/C_c$ and missed transient slew and phase-margin targets. Four-channel diagnosis flagged a $>30\%$ prediction-to-SPICE slew discrepancy alongside second-stage RHP-zero phase degradation. Routing to \textsc{Edit}, the LLM corrected its analytical slew model to $I_{\text{sl1}} = 0.8\min(2 I_{\text{fold}}, I_{\text{tail}})$, introduced a tracking nulling resistor $R_z = k_z / g_{m7}$, and re-centered $I_{\text{fold}}$ bounds; subsequent \textsc{Refine} closed all 10 targets in a single intent-space CMA-ES pass.
+
+Two failure modes delineate current limitations. First, on tight PVT-robust bandgap references (\texttt{ref-04}, \texttt{ref-05}), when a topology lacks cascode supply-rejection headroom at $1.62\,\mathrm{V}$, the three-round active-set PVT loop expends a median of $141$ condition-evaluations without early stagnation exit, returning to the LLM with too few remaining calls for topological redesign. Second, on low-noise designer op-amp \texttt{D06} ($2/3$ seeds solved vs.\ $3/3$ for direct codegen), unmodeled $1/f$ flicker noise in first-order analytical equations misguides initial input-pair area sizing. In addition, all evaluations operate at the pre-layout schematic level using BSIM4 active models, first-order temperature-modeled poly resistors, and ideal capacitors without extracted interconnect parasitics, and our primary controlled comparisons use a single LLM backbone (\texttt{GPT-6.1-sol}; supplementary cross-vendor runs on Claude Opus 5.5 exhibit consistent tier trends).

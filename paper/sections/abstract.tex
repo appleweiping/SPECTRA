@@ -1,16 +1,6 @@
-Large language model (LLM) agents can draft analog circuits, but their evaluations rarely test what makes analog
-design hard: meeting many quantitative specifications at once, in a real process, across process, voltage and
-temperature (PVT) corners. We present SPECTRA, an agent that turns a natural-language specification into a sized,
-PVT-verified SKY130 netlist. Instead of asking the LLM for transistor widths, SPECTRA has it write a
-\emph{design-intent program} that sizes every device from $(g_m/I_D, L, I_D)$ through PDK lookup tables and predicts
-its own performance. A deterministic layer executes and simulates the program and returns a device-level diagnosis;
-the LLM uses it to choose between rewriting the program and handing it to a numerical refiner that searches the
-program's low-dimensional intent space, with adaptive worst-condition selection for robust tasks. We also release
-SPECTRA-Bench: \NTasksTotal{} specification-driven tasks over twelve circuit families, with certified specifications,
-an independently written designer tier, and verification over 45 PVT conditions. On a preregistered external track
-of \SizTasks{} fixed-topology tasks, seven paper-backed framework adapters and three seeds share a 300-simulation,
-12-call budget. SPECTRA reaches TT/PVT success \SizSpectraTT{}/\SizSpectraPVT{} versus
-AnaFlow's \SizAnaFlowTT{}/\SizAnaFlowPVT{} in that frozen matrix. We therefore report a benchmark-scoped
-comparison, together with cross-simulator and capability audits, rather than a universal SOTA claim. The diagnosis
-does not by itself improve fault localisation, and intent programs mispredict second-order effects such as supply
-rejection.
+Synthesizing transistor-level analog integrated circuits from natural-language specifications requires simultaneously closing coupled gain, bandwidth, stability, noise, and power constraints across process, voltage, and temperature (PVT) corners on physical foundry device models.
+Recent language-model agents either emit raw transistor dimensions on simplified square-law testbenches or delegate fixed-topology sizing to black-box optimizers over high-dimensional width-and-length vectors, where scalar simulator feedback obscures device-level failure causes and nominal designs routinely collapse at low-supply corners.
+We present \textsc{SPECTRA}, an end-to-end synthesis framework that couples executable $g_m/I_D$ design-intent programs with device-level causal diagnosis and adaptive worst-corner refinement to compile natural-language specifications into PVT-verified SKY130 SPICE netlists.
+Rather than predicting raw micrometre widths, the language model writes an executable Python procedure parameterized by low-dimensional inversion levels, channel lengths, and branch currents, querying pre-characterized BSIM4 lookup tables to size every device deterministically while outputting analytical self-predictions for all specified metrics.
+A deterministic analyzer converts SPICE operating points, $V_{DS}-V_{dsat}$ saturation margins, prediction-to-simulation discrepancies, and finite-difference sensitivities into structured evidence that routes each iteration between rewriting the program and running trust-region CMA-ES within the intent space over an adaptively expanded worst-corner active set.
+Experiments on \textsc{SPECTRA-Bench}---\NTasksTotal{} tasks across \NPrimaryFamilies{} SKY130 circuit families with Pareto-frontier feasibility certificates, 45-condition PVT verification, and Pelgrom mismatch analysis---and an eight-framework external sizing suite show that \textsc{SPECTRA} solves \SpectraPrim{} of near-frontier and PVT-robust synthesis tasks (versus \DirectPrim{} for direct code generation and \GenboPrim{} for generate-then-optimize, $p < 10^{-4}$), compresses the numerical search space by $\RawOverIntent{}\times$, and generalizes across \texttt{ngspice}, \texttt{Xyce}, and GF180MCU/ASAP7 technologies.

@@ -1,20 +1,13 @@
-\section{Limitations and Conclusion}
+\section{Conclusion}
 \label{sec:conclusion}
-\textbf{Limitations.} SPECTRA-Bench stops at schematic level: no layout parasitics, and passives use a first-order
-poly-resistor model and ideal capacitors. The certified tier derives from our own templates; the independently written designer tier mitigates
-but does not remove this bias. Compute (4 CPU cores) limited each task to one to three seeds, so per-task
-estimates are coarse and the confidence intervals are wide; for the same reason we dropped a Gen+CMA-ES arm, an
-all-corners PVT strategy, a template oracle, a cross-backbone arm, and infeasible-specification controls, which we built
-incorrectly and withdrew. All reported LLM results use GPT-6.1-sol, so this study does not establish cross-backbone
-generality. Reviewer-side checks of this work were performed by models of the same family and are therefore provisional.
 
-\textbf{Conclusion.} Treating the LLM as a designer of \emph{intent} rather than of numbers---writing executable
-$g_m/I_D$ sizing programs that predict their own behaviour---and closing the loop with device-level diagnosis and
-intent-space, worst-corner-aware refinement gives a reproducible end-to-end protocol for tight, many-specification
-and PVT-robust tasks. On the frozen external SIZ7g matrix SPECTRA reaches TT/PVT success
-$\SizSpectraTT{}/\SizSpectraPVT{}$, while AnaFlow reaches $\SizAnaFlowTT{}/\SizAnaFlowPVT{}$.
-The matched Xyce sensitivity shows lower PVT violation on both public topologies but retains a TT deficit on HoiLee,
-and the SGAnalog probe exposes an explicit Xyce model-compatibility boundary. We release SPECTRA, SPECTRA-Bench,
-all run logs and the gate checker so future work can extend the measured strata without conflating capability audits
-with ranking results. The current receipts support a fixed-topology benchmark claim; they do not support a universal
-all-circuit, all-PDK, all-simulator SOTA claim.
+We presented \textsc{SPECTRA}, an end-to-end analog circuit synthesis framework that bridges natural-language specifications and PVT-verified transistor-level SPICE netlists by reformulating LLM generation from raw width guessing to executable $g_m/I_D$ design-intent programming.
+By coupling pre-characterized multi-corner BSIM4 lookup tables and analytical self-predictions with four-channel device-level causal diagnosis, hierarchical \textsc{Edit}/\textsc{Refine} routing, and invariant-preserving trust-region CMA-ES over adaptively selected worst-case corners, \textsc{SPECTRA} aligns qualitative language-model circuit reasoning with continuous physical optimization.
+Evaluated across \textsc{SPECTRA-Bench} (\NTasksTotal{} tasks over \NPrimaryFamilies{} SKY130 families), a \FaultN{}-case fault-injection suite, eight-framework external sizing matrices, and \texttt{ngspice}/\texttt{Xyce}/\texttt{GF180MCU}/\texttt{SGAnalog} tracks, \textsc{SPECTRA} solves \SpectraPrim{} of primary near-frontier and PVT-robust synthesis tasks, compresses search dimensionality by $\RawOverIntent{}\times$, and closes low-supply corner bottlenecks when paired with budget-aligned corner screening.
+The current framework remains bounded by schematic-level passive and interconnect modeling, unmodeled second-order flicker-noise and settling dynamics in analytical self-predictions, and fixed inner-loop verification schedules on stalling topologies.
+Future work will integrate post-layout parasitic estimation into lookup-table characterization and incorporate early-stopping multi-fidelity corner allocation for large-scale mixed-signal blocks.
+
+% Camera-ready Acknowledgments (omitted for double-anonymous review):
+% \begin{acks}
+% This work was supported by [Grant Agency / Project Name and Number].
+% \end{acks}

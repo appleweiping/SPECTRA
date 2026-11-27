@@ -1,0 +1,78 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+\settopmatter{printacmref=false}
+\acmConference[ICCAD '27]{IEEE/ACM International Conference on Computer-Aided Design}{October 2027}{San Jose, CA, USA}
+\acmYear{2027}\copyrightyear{2027}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
+% Shared sources live in ../ and are found through TEXINPUTS (see latexmkrc).
+\graphicspath{{../}}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{xspace}
+\usepackage{listings}
+\usepackage{adjustbox}
+\hypersetup{pdfinfo={Author={Anonymous Author(s)}, Creator={LaTeX}, Producer={pdfTeX}}}
+
+\lstdefinestyle{prog}{
+  language=Python,
+  basicstyle=\ttfamily\fontsize{5.5}{6.2}\selectfont,
+  keywordstyle=\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{black!70},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  framerule=0.3pt,
+  rulecolor=\color{black!30},
+  xleftmargin=2pt,
+  xrightmargin=2pt,
+  aboveskip=1.5pt,
+  belowskip=1.5pt
+}
+\setlength{\emergencystretch}{1.4em}
+\setlength{\textfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{5pt plus 2pt minus 2pt}
+\captionsetup{skip=3pt}
+
+\input{numbers}
+\input{external_numbers}
+\input{verified_macros}
+
+\begin{document}
+
+\title[SPECTRA: Spec-to-PVT-Closed Transistor-Level Analog Synthesis]{SPECTRA: Specification-to-PVT-Closed Transistor-Level Analog Synthesis via Executable Design-Intent Programs}
+
+\author{Anonymous Author(s)}
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\ccsdesc[500]{Hardware~Electronic design automation}
+\ccsdesc[500]{Hardware~Analog and mixed-signal circuits}
+\ccsdesc[300]{Computing methodologies~Intelligent agents}
+
+\keywords{analog circuit synthesis, large language model agents, \texorpdfstring{$g_m/I_D$}{gm/ID} design methodology, PVT robustness, SPICE optimization}
+
+\maketitle
+
+\input{sections/intro}
+\input{sections/related}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/conclusion}
+
+\clearpage
+\bibliographystyle{ACM-Reference-Format}
+\renewcommand{\bibfont}{\fontsize{6.2}{6.8}\selectfont}
+\setlength{\bibsep}{0.4pt}
+\interlinepenalty=10000
+\bibliography{../refs}
+
+\end{document}
