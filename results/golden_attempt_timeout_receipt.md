@@ -2,7 +2,7 @@
 
 - **schema**: `analog-port-bench/golden-attempt/v1`
 - **status**: `partial_timeout`
-- **source_root**: `/root/autodl-tmp/bench_sources/AnalogPortBench`
+- **source_root**: `<workspace>/bench_sources/AnalogPortBench`
 - **source_commit**: `5dc16f1c01858664f1912a84abfc06fd4c69f6de`
 - **simulator**: `ngspice-44.2`
 - **upstream_command**: `/root/miniconda3/bin/python benchmark/golden/audit_golden.py --procs 8`

@@ -625,7 +625,7 @@
       "seed": 0,
       "simulations": 300,
       "simulator": "ngspice",
-      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_simple/circuit.cir",
+      "source": "<workspace>/bench_sources/opensource-analog-circuits/circuits/ldo_simple/circuit.cir",
       "task": "ldo_simple",
       "track_id": "opensource_31_v4",
       "tt_pass": false,

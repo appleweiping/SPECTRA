@@ -22,9 +22,9 @@ Reproduction command, run on the declared server only:
 
 ```bash
 /root/miniconda3/bin/python scripts/run_public_config_pvt.py \
-  --source-root /root/autodl-tmp/bench_sources/opensource-analog-circuits \
-  --config /root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/config.json \
-  --simulator /root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice \
+  --source-root <workspace>/bench_sources/opensource-analog-circuits \
+  --config <workspace>/bench_sources/opensource-analog-circuits/circuits/gh_autockt_opamp/config.json \
+  --simulator <workspace>/sim-build/ngspice-44.2-install/bin/ngspice \
   --track-id public_v7_ptm45_gh_autockt_opamp_ng44 --pdk ptm45_bsim4 \
   --budget 300 --seeds 0,1,2 --methods spectra,anaflow_cleanroom \
   --output results/public_v7_ptm45_merged.json --pvt-mode source

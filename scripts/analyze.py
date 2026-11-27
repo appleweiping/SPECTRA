@@ -47,7 +47,7 @@ def load(exp, methods=None, strip_model_suffix=False):
             succ = bool(v.get("pvt_pass")) if meta.get("robust") else bool(v.get("tt_pass"))
             bs, bc = r.get("budget_sims"), r.get("budget_calls")
             if meta.get("robust") and bs is not None and bs > ROBUST_CAP:
-                # 1200-cap runs were archived and re-run natively at 600 (EXPERIMENT_LOG 2026-11-17 04:40)
+                # 1200-cap runs were archived and re-run natively under the 600-sim cap
                 print(f"WARNING: {f} ran under a {bs} cap; excluded", file=sys.stderr)
                 continue
             over = (bs is not None and (r.get("sims") or 0) > bs) or (bc is not None and (r.get("calls") or 0) > bc)

@@ -1,5 +1,5 @@
 {
-  "manifest": "/root/autodl-tmp/spectra-analog-agent/data/bench/cross_domain_manifest.json",
+  "manifest": "<repo_root>/data/bench/cross_domain_manifest.json",
   "manifest_sha256": "c7c7d3e6e1ab60617d2189203ad384e644f34fba0159bb4b827a45cde35c6fb4",
   "ranking_eligible": false,
   "ranking_reason": "Capability receipt only. A matched cell still requires task digest, PDK/model digest, corners, verifier, seed and budget evidence.",
@@ -12,7 +12,7 @@
     },
     "ngspice": {
       "available": true,
-      "binary": "/root/autodl-tmp/ngspice-42-install/bin/ngspice",
+      "binary": "<workspace>/ngspice-42-install/bin/ngspice",
       "version": "******"
     },
     "spectre": {
@@ -42,7 +42,7 @@
       "source_available": false,
       "source_commit": null,
       "source_file_count": 0,
-      "source_root": "/root/autodl-tmp/bench_sources/AnalogGym",
+      "source_root": "<workspace>/bench_sources/AnalogGym",
       "source_tree_sha256": null
     },
     {
@@ -67,7 +67,7 @@
       "source_available": true,
       "source_commit": "e8308aa273c1a6737a5dee89178c4d48270ff87e",
       "source_file_count": 3318,
-      "source_root": "/root/autodl-tmp/bench_sources/opensource-analog-circuits",
+      "source_root": "<workspace>/bench_sources/opensource-analog-circuits",
       "source_tree_sha256": "1bc7d9f31e30fe9be91457426726353bc55dc6e05cd70f894e2d2f8f471d339d"
     },
     {
@@ -85,7 +85,7 @@
       "source_available": true,
       "source_commit": "dd23c5ba7beb598909be593e4a84c81dab92cc69",
       "source_file_count": 83,
-      "source_root": "/root/autodl-tmp/bench_sources/atlas",
+      "source_root": "<workspace>/bench_sources/atlas",
       "source_tree_sha256": "0f469231fb16523a8629725ea5c784e3fce6c40cb030eb9ba76bc3b0cc84a559"
     },
     {
@@ -109,7 +109,7 @@
       "source_available": false,
       "source_commit": null,
       "source_file_count": 0,
-      "source_root": "/root/autodl-tmp/bench_sources/analog-design-bench",
+      "source_root": "<workspace>/bench_sources/analog-design-bench",
       "source_tree_sha256": null
     }
   ]

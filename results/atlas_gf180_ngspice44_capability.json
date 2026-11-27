@@ -2,20 +2,20 @@
   "budget": 50,
   "circuit": "two_stage_opamp_gf180",
   "feasible_count": 0,
-  "pdk_root": "/root/autodl-tmp/pdks/atlas_root",
+  "pdk_root": "<workspace>/pdks/atlas_root",
   "pvt_conditions": 18,
   "ranking_eligible": false,
   "raw_log_sha256": "c43a2dda9f99d066dcd6281b7579e5bae636c8fb9583d6dd4c1f0ec007c549ca",
   "reason": "Capability smoke proves GF180 netlist executes under ngspice44.2 across the shipped 18-corner netlist set. No feasible design was found at budget 50, and no matched AnaFlow row or multi-seed matrix is present.",
   "result_paths": [
-    "/root/autodl-tmp/spectra-analog-agent/results/atlas_gf180_ngspice44_b50_s0/two_stage_opamp_gf180_ATLAS_B50_S0_20261120_033158/results.json"
+    "<repo_root>/results/atlas_gf180_ngspice44_b50_s0/two_stage_opamp_gf180_ATLAS_B50_S0_20261120_033158/results.json"
   ],
   "returncode": 0,
   "schema": "spectra-atlas-pdk-capability/v2",
   "seed": 0,
   "simulator": "ngspice-44.2",
-  "simulator_binary": "/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice",
+  "simulator_binary": "<workspace>/sim-build/ngspice-44.2-install/bin/ngspice",
   "simulator_binary_sha256": "8bd71b6fcdf47033623a2e7eaf38f97b657031df27d400f486b6928e9bc25fe4",
   "source_commit": "dd23c5ba7beb598909be593e4a84c81dab92cc69",
   "track": "atlas_gf180_ngspice44"
-}\n
+}

@@ -229,16 +229,17 @@ def score(task: dict, ref: dict, model: dict, sizes: dict,
     return row
 
 def main() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sg-root", type=Path, default=Path("/root/autodl-tmp/bench_sources/SGAnalog"))
+    ap.add_argument("--sg-root", type=Path, default=Path(os.environ.get("SGANALOG_ROOT", "external/SGAnalog")))
     ap.add_argument("--output", type=Path,
-                    default=Path("/root/autodl-tmp/spectra-analog-agent/results/sganalog_native_receipt.json"))
+                    default=repo_root / "results/sganalog_native_receipt.json")
     ap.add_argument("--models", default="")
     ap.add_argument("--generate-model", default="")
     ap.add_argument("--model-seeds", default="0")
     ap.add_argument("--api-base", default=os.environ.get("OPENAI_BASE_URL", ""))
     ap.add_argument("--api-key", default=os.environ.get("OPENAI_API_KEY", ""))
-    ap.add_argument("--ngspice", default="/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice")
+    ap.add_argument("--ngspice", default=os.environ.get("NGSPICE_BIN", "ngspice"))
     ap.add_argument("--timeout", type=int, default=300)
     args = ap.parse_args()
 

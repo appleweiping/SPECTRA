@@ -7,8 +7,8 @@ Run it on the server before launching a cross-domain matrix, for example::
 
     python3 scripts/cross_domain_capability_audit.py \
       --manifest data/bench/cross_domain_manifest.json \
-      --source-root opensource_31=/root/autodl-tmp/bench_sources/opensource-analog-circuits \
-      --source-root atlas_dual_pdk=/root/autodl-tmp/bench_sources/atlas \
+      --source-root opensource_31=/path/to/bench_sources/opensource-analog-circuits \
+      --source-root atlas_dual_pdk=/path/to/bench_sources/atlas \
       --output results/cross_domain_capability_receipt.json
 """
 

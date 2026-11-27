@@ -63,7 +63,7 @@ Numbers are as reported by each paper's authors. Model names (for example "GPT-5
 - The CFP PDF names no template. The 2026 CFP web page's "Download Paper Template" link points to **ACM's proceedings template** (<https://www.acm.org/publications/proceedings-template>).
 - The 2026 camera-ready page says "Authors must prepare their final manuscript using the latest ACM conference proceedings templates." This follows ICCAD's switch to **ACM Open Access**: an APC of $250 for ACM/SIG members or $350 for non-members, waived for ACM-OA institutions.
 - By contrast, **ICCAD 2025 recommended the IEEE template** (<https://2025.iccad.com/authors/initial-author-information>).
-- ⚠ The project CLAUDE.md says "IEEEtran conference". That was correct for 2025 but not for 2026. For 2027, check the new CFP. Keep the LaTeX portable between `IEEEtran` and `acmart` (`sigconf`).
+- ⚠ Note: IEEEtran `conference` was standard for ICCAD 2025, whereas ICCAD 2026 moved to ACM Open Access (`acmart` `sigconf`). Keep the LaTeX portable between `IEEEtran` and `acmart` (`sigconf`).
 
 **Abstract length:** the CFP sets **no word limit**. The abstract submitted in stage 1 may be revised at paper submission.
 

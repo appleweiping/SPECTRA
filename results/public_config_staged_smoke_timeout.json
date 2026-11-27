@@ -1,7 +1,7 @@
 {
   "budget": 6,
   "completed_verifier_conditions": 44,
-  "config": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/hoilee_affc/config.json",
+  "config": "<workspace>/bench_sources/opensource-analog-circuits/circuits/hoilee_affc/config.json",
   "elapsed_seconds": 519,
   "llm_calls": 12,
   "methods": [
@@ -24,7 +24,7 @@
   "seed": 0,
   "simulator": "ngspice-44.2",
   "source_commit": "e8308aa273c1a6737a5dee89178c4d48270ff87e",
-  "source_root": "/root/autodl-tmp/bench_sources/opensource-analog-circuits",
+  "source_root": "<workspace>/bench_sources/opensource-analog-circuits",
   "status": "timeout",
   "timeout_condition": "fs_125C_1.62V",
   "topology": "hoilee_affc",

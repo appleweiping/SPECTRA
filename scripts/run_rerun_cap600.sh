@@ -1,5 +1,5 @@
 #!/bin/bash
-# Native 600-cap re-runs of robust E2 runs archived from the 1200-cap protocol (see EXPERIMENT_LOG 2026-11-17 04:40).
+# Native 600-cap re-runs of robust E2 runs archived from the 1200-cap protocol.
 # E1 and E5 re-runs are picked up by their own chains (job lists are rebuilt when each step starts).
 cd /home/user/spectra
 export PYTHONPATH=. SPECTRA_GLOBAL_SIM_SLOTS=6 SPECTRA_SIM_CONCURRENCY=4

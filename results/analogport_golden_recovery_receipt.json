@@ -69,7 +69,7 @@
   "simulator": "ngspice-44.2",
   "source_audit_sha256": "3e24a5ee74ddeb23a1da2f026d3c88a01fb5b794e5f4646f013f2ca07f8e7534",
   "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
-  "source_root": "/root/autodl-tmp/bench_sources/AnalogPortBench",
+  "source_root": "<workspace>/bench_sources/AnalogPortBench",
   "status": "complete_recovery",
   "unmatched_reference_only": true,
   "upstream_command": "/root/miniconda3/bin/python benchmark/golden/audit_golden.py --procs 8",

@@ -6,7 +6,7 @@
 ***** Date: Sat Nov 21 03:38:46 CST 2026
 
 
-***** Executing netlist /root/autodl-tmp/spectra-analog-agent/results/_ihp_sg13g2_smoke_repro_osdi/pmos_nmos_op_xyce.cir
+***** Executing netlist <repo_root>/results/_ihp_sg13g2_smoke_repro_osdi/pmos_nmos_op_xyce.cir
 
 ***** Reading and parsing netlist...
 Netlist error: Analysis type OP and print type OP are inconsistent.

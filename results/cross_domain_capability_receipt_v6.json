@@ -1,5 +1,5 @@
 {
-  "manifest": "/root/autodl-tmp/spectra-analog-agent/data/bench/cross_domain_manifest.json",
+  "manifest": "<repo_root>/data/bench/cross_domain_manifest.json",
   "manifest_sha256": "ca98e2bafa60fbcbc29892010d3b5cbae63ac637764c3c16b333e573609d8ef9",
   "ranking_eligible": false,
   "ranking_reason": "Capability receipt only. A matched cell still requires task digest, PDK/model digest, corners, verifier, seed and budget evidence.",
@@ -12,7 +12,7 @@
     },
     "ngspice": {
       "available": true,
-      "binary": "/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice",
+      "binary": "<workspace>/sim-build/ngspice-44.2-install/bin/ngspice",
       "version": "** ngspice-44.2 : Circuit level simulation program"
     },
     "spectre": {
@@ -22,7 +22,7 @@
     },
     "xyce": {
       "available": true,
-      "binary": "/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce",
+      "binary": "<workspace>/sim-build/xyce-7.10-serial-install/bin/Xyce",
       "version": "Xyce Release 7.10.0-opensource"
     }
   },
@@ -43,7 +43,7 @@
       "source_available": true,
       "source_commit": "0a9d1390ade361e2b4a2d33181e22367edbb8afc",
       "source_file_count": 227,
-      "source_root": "/root/autodl-tmp/bench_sources/AnalogGym",
+      "source_root": "<workspace>/bench_sources/AnalogGym",
       "source_tree_sha256": "6c76ec64e682aff821b940ceac05c3650b6cb6f34bc8ac4e755d3c234f18e477"
     },
     {
@@ -70,7 +70,7 @@
       "source_available": true,
       "source_commit": "e8308aa273c1a6737a5dee89178c4d48270ff87e",
       "source_file_count": 3405,
-      "source_root": "/root/autodl-tmp/bench_sources/opensource-analog-circuits",
+      "source_root": "<workspace>/bench_sources/opensource-analog-circuits",
       "source_tree_sha256": "e563eeb35b591077d8adcf42e94abf1dd3c7bafaee75784c4b8c32434e9222ee"
     },
     {
@@ -92,7 +92,7 @@
       "source_available": true,
       "source_commit": "4ba5fc7a9b082df144225672e33d58a8e162af96",
       "source_file_count": 257,
-      "source_root": "/root/autodl-tmp/bench_sources/AMPICBench",
+      "source_root": "<workspace>/bench_sources/AMPICBench",
       "source_tree_sha256": "81357faf3f4378c70a80759933f74704e0b3ead2c2f9c167edba5edc899d4f6e"
     },
     {
@@ -110,7 +110,7 @@
       "source_available": true,
       "source_commit": "ebd7e694b79cbe8475c42bd41cf4620c5d537a0f",
       "source_file_count": 6731,
-      "source_root": "/root/autodl-tmp/bench_sources/SGAnalog",
+      "source_root": "<workspace>/bench_sources/SGAnalog",
       "source_tree_sha256": "51896777fa3eb1e9a13873429627f98304dd28a1dc3f015ab3855248060ef085"
     },
     {
@@ -128,7 +128,7 @@
       "source_available": true,
       "source_commit": "dd23c5ba7beb598909be593e4a84c81dab92cc69",
       "source_file_count": 101,
-      "source_root": "/root/autodl-tmp/bench_sources/atlas",
+      "source_root": "<workspace>/bench_sources/atlas",
       "source_tree_sha256": "0ea3dc17e055f0c0db346ad44b49898b6cb166da483ddeabc9755c9e9d987d4e"
     },
     {
@@ -152,7 +152,7 @@
       "source_available": true,
       "source_commit": "972f7cd7c95381134387b250edf18f3bd23bdd25",
       "source_file_count": 996,
-      "source_root": "/root/autodl-tmp/bench_sources/analog-design-bench",
+      "source_root": "<workspace>/bench_sources/analog-design-bench",
       "source_tree_sha256": "be4d732d2235648d8751db1b237dacafa8eb88547d6a470d000dd5a69102c739"
     },
     {
@@ -169,7 +169,7 @@
       "source_available": true,
       "source_commit": "03cc45620afbbbee19652d83d625f26f3368d951",
       "source_file_count": 9,
-      "source_root": "/root/autodl-tmp/bench_sources/LOADBench-Scripts",
+      "source_root": "<workspace>/bench_sources/LOADBench-Scripts",
       "source_tree_sha256": "958b53be8356494e1b8b961e2bc6838872eb1e0cf62abdd27e889295f701eb7a"
     },
     {
@@ -190,7 +190,7 @@
       "source_available": true,
       "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
       "source_file_count": 8394,
-      "source_root": "/root/autodl-tmp/bench_sources/AnalogPortBench",
+      "source_root": "<workspace>/bench_sources/AnalogPortBench",
       "source_tree_sha256": "195472932e6bc4dd3399c7569c874d35d33f2de3a880e430ec660519507ba91e"
     }
   ]

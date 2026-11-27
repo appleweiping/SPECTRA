@@ -3796,6 +3796,6 @@
     }
   ],
   "schema": "ampicbench-capability/v2",
-  "simulator": "/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice",
-  "source_root": "/root/autodl-tmp/bench_sources/AMPICBench"
+  "simulator": "<workspace>/sim-build/ngspice-44.2-install/bin/ngspice",
+  "source_root": "<workspace>/bench_sources/AMPICBench"
 }

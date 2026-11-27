@@ -1,9 +1,9 @@
 {
   "command": [
     "/root/miniconda3/bin/python3.12",
-    "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/evaluate.py",
+    "<workspace>/bench_sources/AnalogPortBench/benchmark/evaluate.py",
     "ota_tele",
-    "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp",
+    "<workspace>/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp",
     "--tech",
     "sky130_lvt",
     "--vdd",
@@ -13,13 +13,13 @@
     "--label",
     "spectra_source_smoke_ota_tele_tt"
   ],
-  "evaluator": "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/evaluate.py",
+  "evaluator": "<workspace>/bench_sources/AnalogPortBench/benchmark/evaluate.py",
   "netlist": {
-    "path": "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp",
+    "path": "<workspace>/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp",
     "provenance": "source_golden_reference",
     "sha256": "aca88e11857751f9a34f404a15b8438d4a84faa1732c3f83c495061a1cb1967f"
   },
-  "pdk_root": "/root/autodl-tmp/analogport_pdk",
+  "pdk_root": "<workspace>/analogport_pdk",
   "ranking_blocker": "This source-native smoke has no SPECTRA transfer answer, matched AnaFlow answer, or common SIZ7g budget. It is evaluator/PDK integrity evidence only.",
   "ranking_eligible": false,
   "result": {
@@ -305,26 +305,26 @@
       "swing_lo_V": 0.664,
       "ugf_Hz": 58870697.025670126
     },
-    "netlist": "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp",
+    "netlist": "<workspace>/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp",
     "pass": true,
-    "spec": "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/circuits/ota_tele/spec.yaml",
+    "spec": "<workspace>/bench_sources/AnalogPortBench/benchmark/circuits/ota_tele/spec.yaml",
     "tech": "sky130_lvt",
     "vdd": 1.8,
     "warnings": []
   },
-  "result_path": "/root/autodl-tmp/bench_sources/AnalogPortBench/build/eval/ota_tele/spectra_source_smoke_ota_tele_tt/result.json",
+  "result_path": "<workspace>/bench_sources/AnalogPortBench/build/eval/ota_tele/spectra_source_smoke_ota_tele_tt/result.json",
   "returncode": 0,
   "schema": "analog-port-bench/source-native-smoke/v1",
   "simulator": {
-    "path": "/root/autodl-tmp/sim-build/ngspice-44.2-install/bin/ngspice",
+    "path": "<workspace>/sim-build/ngspice-44.2-install/bin/ngspice",
     "version": "******"
   },
   "smoke_type": "source_native_evaluator",
   "source_commit": "5dc16f1c01858664f1912a84abfc06fd4c69f6de",
-  "source_root": "/root/autodl-tmp/bench_sources/AnalogPortBench",
+  "source_root": "<workspace>/bench_sources/AnalogPortBench",
   "status": "completed",
   "stderr_tail": "",
-  "stdout_tail": "== ota_tele  /root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp  [sky130_lvt, VDD=1.8 V, tt]\n   PASS  dc_gain_dB                  70.95  >= 66.84      (180 nm: 69.84)\n   PASS  ugf_Hz                  5.887e+07  >= 4.456e+07  (180 nm: 55700000.0)\n   PASS  pm_deg                       62.4  >= 55         (180 nm: 80.9)\n   PASS  gm_dB                        13.1  >= 10         (180 nm: 37.2)\n   PASS  power_uW                    201.3  <= 267.2      (180 nm: 222.7)\n   PASS  rise_settle_ns              10.76  <= 19.17      (180 nm: 12.78)\n   PASS  fall_settle_ns              16.02  <= 19.42      (180 nm: 12.95)\n   PASS  swing_V                     0.538  >= 0.4288     (180 nm: 0.536)\n   PASS  n_triode                        0  <= 0          (180 nm: 0)\n   triode devices: none\n   overall: PASS\n",
+  "stdout_tail": "== ota_tele  <workspace>/bench_sources/AnalogPortBench/benchmark/golden/ota_tele_1v8.sp  [sky130_lvt, VDD=1.8 V, tt]\n   PASS  dc_gain_dB                  70.95  >= 66.84      (180 nm: 69.84)\n   PASS  ugf_Hz                  5.887e+07  >= 4.456e+07  (180 nm: 55700000.0)\n   PASS  pm_deg                       62.4  >= 55         (180 nm: 80.9)\n   PASS  gm_dB                        13.1  >= 10         (180 nm: 37.2)\n   PASS  power_uW                    201.3  <= 267.2      (180 nm: 222.7)\n   PASS  rise_settle_ns              10.76  <= 19.17      (180 nm: 12.78)\n   PASS  fall_settle_ns              16.02  <= 19.42      (180 nm: 12.95)\n   PASS  swing_V                     0.538  >= 0.4288     (180 nm: 0.536)\n   PASS  n_triode                        0  <= 0          (180 nm: 0)\n   triode devices: none\n   overall: PASS\n",
   "task": {
     "circuit": "ota_tele",
     "corner": "tt",

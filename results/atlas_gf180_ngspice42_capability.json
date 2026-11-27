@@ -3,7 +3,7 @@
   "track": "atlas_dual_pdk",
   "circuit": "two_stage_opamp_gf180",
   "source_commit": "dd23c5ba7beb598909be593e4a84c81dab92cc69",
-  "pdk_root": "/root/autodl-tmp/pdks/atlas_root",
+  "pdk_root": "<workspace>/pdks/atlas_root",
   "pdk_receipts": {
     "gf180_model_source": "google/gf180mcu-pdk",
     "sky130_model_source": "CODA-Team/AnalogGym/PDK/sky130_pdk.zip"

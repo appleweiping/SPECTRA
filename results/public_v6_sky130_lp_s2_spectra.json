@@ -543,7 +543,7 @@
       "seed": 2,
       "simulations": 300,
       "simulator": "ngspice",
-      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir",
+      "source": "<workspace>/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir",
       "task": "sky130_lp_opamp",
       "track_id": "opensource_31_v6",
       "tt_pass": true,

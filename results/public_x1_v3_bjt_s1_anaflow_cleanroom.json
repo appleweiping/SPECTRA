@@ -38,7 +38,7 @@
       "seed": 1,
       "simulations": 300,
       "simulator": "Xyce",
-      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/bjt_ce_amp/circuit.cir",
+      "source": "<workspace>/bench_sources/opensource-analog-circuits/circuits/bjt_ce_amp/circuit.cir",
       "task": "bjt_ce_amp",
       "track_id": "opensource_bjt_xyce_v3",
       "tt_pass": true,

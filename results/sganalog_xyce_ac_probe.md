@@ -3,7 +3,7 @@
 - Source commit: `ebd7e694b79cbe8475c42bd41cf4620c5d537a0f`
 - Tasks probed: **17**
 - Status counts: `{"failed": 17}`
-- Xyce: `/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce`
+- Xyce: `<workspace>/sim-build/xyce-7.10-serial-install/bin/Xyce`
 - Ranking eligibility: **false**
 
 The probe translates each pinned SGAnalog task deck into a sibling Xyce AC deck, executes Xyce with a bounded timeout, and records the source/translated hashes, return code, log digest, and parser output. The source decks depend on the SGAnalog SKY130 model environment. In this run all 17 probes returned an Xyce parser failure from the included mismatch-function expression, so no AC metric is promoted to a sizing result.

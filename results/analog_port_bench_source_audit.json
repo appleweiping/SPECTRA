@@ -41,7 +41,7 @@
     },
     "golden_pass_rows": 0,
     "golden_rows": 50,
-    "path": "/root/autodl-tmp/bench_sources/AnalogPortBench/benchmark/results/golden_audit.json",
+    "path": "<workspace>/bench_sources/AnalogPortBench/benchmark/results/golden_audit.json",
     "ranking_eligible": false,
     "reference_note": "Rows are from the source-provided golden_audit.json and are not the current timed-out attempt.",
     "reference_only": true,
@@ -184,7 +184,7 @@
     }
   },
   "license": {
-    "path": "/root/autodl-tmp/bench_sources/AnalogPortBench/LICENSE",
+    "path": "<workspace>/bench_sources/AnalogPortBench/LICENSE",
     "present": true,
     "sha256": "d6b95b322ce7e119bbf18c0c43452cd88fa3247e5efcb1ac1c48bdffc886af75"
   },

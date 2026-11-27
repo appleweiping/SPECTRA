@@ -1,7 +1,7 @@
 {
-  "model_file": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib",
+  "model_file": "<workspace>/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib",
   "model_sha256": "03d505847c880d233b341be115a1e5460edf4d8e9b3e8a7df791a52fa4455d67",
-  "osdi_dir": "/root/autodl-tmp/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/osdi",
+  "osdi_dir": "<workspace>/bench_sources/IHP-Open-PDK/ihp-sg13g2/libs.tech/ngspice/osdi",
   "osdi_inventory": [
     {
       "name": "cap_cmomf.osdi",
@@ -55,7 +55,7 @@
   "source_url": "https://github.com/IHP-GmbH/IHP-Open-PDK",
   "status": "source_audit_and_native_smoke_pass",
   "xyce": {
-    "binary": "/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce",
+    "binary": "<workspace>/sim-build/xyce-7.10-serial-install/bin/Xyce",
     "smoke": {
       "attempted": "op",
       "elapsed_seconds": 0.021,

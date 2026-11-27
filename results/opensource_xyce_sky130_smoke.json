@@ -62,7 +62,7 @@
       "seed": 0,
       "simulations": 10,
       "simulator": "Xyce",
-      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir",
+      "source": "<workspace>/bench_sources/opensource-analog-circuits/circuits/sky130_lp_opamp/circuit.cir",
       "task": "sky130_lp_opamp",
       "track_id": "opensource_xyce_sky130_lp_ac_smoke",
       "tt_pass": true,

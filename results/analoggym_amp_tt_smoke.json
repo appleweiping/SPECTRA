@@ -1,8 +1,8 @@
 {
   "captured_at_utc": "2026-11-19T16:45:33.532197+00:00",
-  "command": "cd /root/autodl-tmp/bench_sources/AnalogGym/AnalogGym/Amplifier/amp_spice_testbench && /root/autodl-tmp/ngspice-42-install/bin/ngspice -b TB_Amplifier_ACDC.cir",
+  "command": "cd <workspace>/bench_sources/AnalogGym/AnalogGym/Amplifier/amp_spice_testbench && <workspace>/ngspice-42-install/bin/ngspice -b TB_Amplifier_ACDC.cir",
   "log": {
-    "path": "/root/autodl-tmp/analoggym_amp_tt_smoke.log",
+    "path": "<workspace>/analoggym_amp_tt_smoke.log",
     "sha256": "2310c77da48cd39b8b60a370c22a6b5e5015c192c1de8a6f191625f9d654171c"
   },
   "measurement_notes": {
@@ -16,13 +16,13 @@
     "phase_in_deg": 8.05217
   },
   "netlist": {
-    "directory": "/root/autodl-tmp/bench_sources/AnalogGym/AnalogGym/Amplifier/amp_spice_testbench",
+    "directory": "<workspace>/bench_sources/AnalogGym/AnalogGym/Amplifier/amp_spice_testbench",
     "relative_path": "AnalogGym/Amplifier/amp_spice_testbench/TB_Amplifier_ACDC.cir"
   },
   "pdk": {
-    "extracted_root": "/root/autodl-tmp/pdks/analoggym_sky130/sky130_pdk",
+    "extracted_root": "<workspace>/pdks/analoggym_sky130/sky130_pdk",
     "id": "sky130",
-    "zip_path": "/root/autodl-tmp/bench_sources/AnalogGym/PDK/sky130_pdk.zip",
+    "zip_path": "<workspace>/bench_sources/AnalogGym/PDK/sky130_pdk.zip",
     "zip_sha256": "bc46a070e6c8c217e61e97355ed2ab3f029706a99b5053a80860cd98963e1ce8"
   },
   "returncode": 0,
@@ -36,7 +36,7 @@
     "tt_only": true
   },
   "simulator": {
-    "binary": "/root/autodl-tmp/ngspice-42-install/bin/ngspice",
+    "binary": "<workspace>/ngspice-42-install/bin/ngspice",
     "binary_sha256": "0d7d86d9b3e67fb54d35c2a4dec55024e7ea5668ca20a74961360e8f25dcc3b3",
     "id": "ngspice",
     "version_probe": "****** ** ngspice-42 : Circuit level simulation program ** Compiled with Sparse Direct Linear Solver ** The U. C. Berkeley CAD Group ** Copyright 1985-1994, Regents of the University of California. "

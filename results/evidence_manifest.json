@@ -161,7 +161,7 @@
   "observed_models": [
     "gpt-6.1-sol"
   ],
-  "project_root": "/root/autodl-tmp/spectra-analog-agent",
+  "project_root": "<repo_root>",
   "raw_runs": {
     "count": 865,
     "files": [

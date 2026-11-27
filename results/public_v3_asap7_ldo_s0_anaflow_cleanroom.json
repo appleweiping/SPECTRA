@@ -644,7 +644,7 @@
       "seed": 0,
       "simulations": 300,
       "simulator": "ngspice",
-      "source": "/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
+      "source": "<workspace>/bench_sources/opensource-analog-circuits/circuits/ldo_1/tb_asap7.sp",
       "task": "ldo_1_asap7",
       "track_id": "opensource_31_v3",
       "tt_pass": true,

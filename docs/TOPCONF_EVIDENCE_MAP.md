@@ -1,6 +1,6 @@
 # Top-conference evidence map
 
-This map is the handoff contract for the SPECTRA repository. It separates the
+This map documents the empirical evidence structure for the SPECTRA repository. It separates the
 quality expected for a paper from the evidence currently materialized in the
 checkout. A row marked `capability` or `sensitivity` cannot be promoted to the
 frozen primary ranking or to a universal SOTA claim.
@@ -88,11 +88,8 @@ on TT success, PVT success, mean TT violation and mean PVT violation in every
 declared public stratum. No finite subset is extrapolated to all analog circuits,
 all PDKs or all simulators.
 
-## Synchronization and reproducibility
+## Reproducibility
 
-The tracked source is synchronized across local `E:/CodexProjects/spectra-analog-agent`,
-`/root/autodl-tmp/spectra-analog-agent` on westc, and GitHub
-`appleweiping/SPECTRA`. Current synchronized commit and raw-evidence hashes are
-checked before handoff. Simulator and model experiments are executed on the
-server. Local E: is used for source review and evidence synchronization, with no
-C: or D: experiment workspace.
+Benchmark task definitions, simulator versions, and raw-evidence SHA-256 digests
+are recorded in `results/evidence_manifest.json` so all tables, figures, and
+macro values can be regenerated deterministically via `scripts/finalize_paper.sh`.

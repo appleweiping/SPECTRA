@@ -5,8 +5,8 @@
 - **source_commit**: `e8308aa273c1a6737a5dee89178c4d48270ff87e`
 - **runner_commit**: `e9f9bcaa48af71f29ebdb6a39d2cc94d963ab66c`
 - **track_id**: `hoilee_affc_staged_smoke`
-- **source_root**: `/root/autodl-tmp/bench_sources/opensource-analog-circuits`
-- **config**: `/root/autodl-tmp/bench_sources/opensource-analog-circuits/circuits/hoilee_affc/config.json`
+- **source_root**: `<workspace>/bench_sources/opensource-analog-circuits`
+- **config**: `<workspace>/bench_sources/opensource-analog-circuits/circuits/hoilee_affc/config.json`
 - **topology**: `hoilee_affc`
 - **pdk**: `sky130`
 - **simulator**: `ngspice-44.2`

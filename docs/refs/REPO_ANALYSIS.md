@@ -241,7 +241,7 @@ AnalogGym-Opt (`circuit_configs/*.yaml`) **resets most circuits to generic defau
 
 - **Source:** `https://github.com/UMN-EDA/NEMESIS`, inspected on the server at commit
   `3e52a9bee1a78eda63ac6db7111b598aba6ddbee` under
-  `/root/autodl-tmp/bench_sources/NEMESIS`. The repository is BSD-3-Clause.
+  `/path/to/bench_sources/NEMESIS`. The repository is BSD-3-Clause.
 - **Files read:** `README.md`, `llm_aided_modelling.sh`, `design_sizer.py`,
   `extract_equations.py`, `vectorization_agent.py`, `perform_hspice_simulations.py`,
   `repair_model.py`, `feedback_manager.py`, and the `Universal/` layout described by the
@@ -263,7 +263,7 @@ AnalogGym-Opt (`circuit_configs/*.yaml`) **resets most circuits to generic defau
 
 - **Source:** `https://github.com/saeidrajabii/AnalogPortBench`, inspected on the server at
   commit `5dc16f1c01858664f1912a84abfc06fd4c69f6de` under
-  `/root/autodl-tmp/bench_sources/AnalogPortBench`. The repository is MIT-licensed.
+  `/path/to/bench_sources/AnalogPortBench`. The repository is MIT-licensed.
 - **Files read:** `README.md`, `benchmark/config.py`, `benchmark/circuits.py`,
   `benchmark/evaluate.py`, `benchmark/measure.py`, `benchmark/netlist.py`,
   `benchmark/sim.py`, `benchmark/techs.py`, `benchmark/baseline_v2.py`,
@@ -282,7 +282,7 @@ AnalogGym-Opt (`circuit_configs/*.yaml`) **resets most circuits to generic defau
 
 - **Source:** `https://github.com/FilipeAz/LOADBench-Scripts`, inspected on the server at
   commit `03cc45620afbbbee19652d83d625f26f3368d951` under
-  `/root/autodl-tmp/bench_sources/LOADBench-Scripts`. The checkout contains no
+  `/path/to/bench_sources/LOADBench-Scripts`. The checkout contains no
   `LICENSE` file, so the scripts are not vendored into SPECTRA. The source-only
   receipt is `results/loadbench_scripts_source_audit.json`.
 - **Files read:** `README.md`, `struct_matcher.py`,

@@ -18,7 +18,7 @@
   "source_commit": "ebd7e694b79cbe8475c42bd41cf4620c5d537a0f",
   "task_count": 17,
   "task_count_matches_expected": true,
-  "task_file": "/root/autodl-tmp/bench_sources/SGAnalog/eval/sizing/tasks.jsonl",
+  "task_file": "<workspace>/bench_sources/SGAnalog/eval/sizing/tasks.jsonl",
   "task_file_sha256": "b60bb262e20081f718aaf70d0fed7c32878a6694a166c2b9f92494a8ee7ac352",
   "tasks": [
     {

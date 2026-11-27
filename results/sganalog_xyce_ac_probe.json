@@ -282,5 +282,5 @@
       "task_id": "sz016"
     }
   ],
-  "xyce": "/root/autodl-tmp/sim-build/xyce-7.10-serial-install/bin/Xyce"
+  "xyce": "<workspace>/sim-build/xyce-7.10-serial-install/bin/Xyce"
 }
